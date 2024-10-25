@@ -1,4 +1,3 @@
-import { RoutePath } from "@/types/route-path"
 import axios, { AxiosInstance } from "axios"
 
 //** 개발환경용 */
@@ -8,14 +7,11 @@ const API = import.meta.env.VITE_SERVER_URL
 
 //** Axios 인스턴스생성 */
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: baseURL,
+  baseURL: API,
   withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-  },
 })
 
-// 요청 인터셉터: 요청 시 파라미터에 토큰 포함
+// 요청 인터셉터: 요청 시 파라미터에 토큰 포함 및 headers 수정
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = sessionStorage.getItem("authToken")
@@ -26,14 +22,29 @@ axiosInstance.interceptors.request.use(
       }
       // POST, PUT 등의 요청일 경우 요청 본문에 추가
       else if (config.method === "post" || config.method === "put") {
-        config.data = {
-          ...config.data,
-          token,
+        if (config.data instanceof FormData) {
+          config.data.append("token", token)
+        } else {
+          config.data = {
+            ...config.data,
+            token,
+          }
         }
       }
     }
+
+    // 데이터가 FormData일 경우 headers 수정
+    if (config.data instanceof FormData) {
+      // 'Content-Type' 헤더를 삭제하여 브라우저가 자동으로 설정하게 함
+      config.headers["Content-Type"] = "multipart/form-data"
+    } else {
+      // JSON 데이터를 보낼 경우 'Content-Type'을 'application/json'으로 설정
+      config.headers["Content-Type"] = "application/json"
+    }
+
     return config
   },
   (error) => Promise.reject(error)
 )
+
 export default axiosInstance

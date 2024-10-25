@@ -3,11 +3,14 @@ import Button from "@/components/Button"
 import useToast from "@/hooks/useToast"
 import { StepTwoProps } from "@/types/component-types/my-campaigndetail-type"
 import IconNotice from "assets/ico_notice.svg?url"
-import { formatDate } from "@/utils/util"
 import IconNoticeArrow from "assets/ico-notice-arrow.svg?url"
+import { formatDate } from "@/utils/util"
+import { saveReview } from "@/services/review"
 import styled from "styled-components"
+import { ReviewSaveRequest } from "@/types/api-types/review-type"
 
 const StepTwo = ({
+  reviewIdKey,
   thumbnailUrl,
   campaignTitle,
   reward,
@@ -52,7 +55,25 @@ const StepTwo = ({
       })
   }
 
-  const handleButtonClick = () => {}
+  const handleReviewOcrSave = async () => {
+    if (reviewText.trim().length < minChars) {
+      addToast("100자 이상 입력해주세요", "copy", 1000, "copy")
+      return
+    }
+
+    const data: ReviewSaveRequest = {
+      reviewId: Number(reviewIdKey),
+      reviewText: reviewText,
+    }
+
+    try {
+      const response = await saveReview(data)
+      console.log(response)
+      // 필요한 경우 상태 업데이트 또는 페이지 이동
+    } catch (error) {
+      console.error("리뷰 저장 실패: ", error)
+    }
+  }
 
   return (
     <CartTest>
@@ -124,10 +145,10 @@ const StepTwo = ({
             <Count>
               <span>{reviewText.length}</span>&nbsp;/180
             </Count>
+            <Button $variant="copy" onClick={handleCopy}>
+              복사
+            </Button>
           </ReviewTextBox>
-          <Button $variant="copy" onClick={handleCopy}>
-            복사
-          </Button>
         </ReviewContent>
       </ReviewTestContainer>
       {/* 픽스된 bottom 버튼 */}
@@ -136,7 +157,13 @@ const StepTwo = ({
           버튼을 누르면 리뷰 AI 검수가 진행돼요. 검수 완료 후 리뷰를
           등록해주세요!
         </p>
-        <Button $variant="red">리뷰 검수</Button>
+        <Button
+          $variant="red"
+          disabled={reviewText.trim().length < minChars}
+          onClick={handleReviewOcrSave}
+        >
+          리뷰 검수
+        </Button>
       </BottomButtonContainer>
     </CartTest>
   )
@@ -235,9 +262,9 @@ const StepItemInfoTextBox = styled.div`
   }
   p {
     margin-top: 0.6rem;
-    font-size: var(--font-h2-size);
-    font-weight: var(--font-h2-weight);
-    letter-spacing: var(--font-h2-letter-spacing);
+    font-size: var(--font-h4-size);
+    font-weight: var(--font-h4-weight);
+    letter-spacing: var(--font-h4-letter-spacing);
   }
 `
 
@@ -251,8 +278,8 @@ const CardDate = styled.span`
 
 const ReviewTestContainer = styled.div`
   position: relative;
-  min-height: 100vh;
-  padding: 2.3rem 0 2.7rem;
+  min-height: 90vh;
+  padding: 2.3rem 0 0;
   background: var(--whitewood);
 
   &:before {
@@ -313,18 +340,23 @@ const GuideContent = styled.div`
     position: relative;
     padding-left: 1rem;
     font-size: var(--font-bodyM-size);
-    font-weight: var(--font-bodyM-weight);
-    line-height: var(--font-bodyM-line-height);
+    line-height: var(--font-bodyL-line-height);
     letter-spacing: var(--font-bodyM-letter-spacing);
     display: flex;
     align-items: flex-start;
     color: var(--n400-color);
+    p em {
+      font-weight: var(--font-bodyM-weight);
+    }
+  }
+  .guide-list li:not(:last-of-type) {
+    margin-bottom: 0.6rem;
   }
   .guide-list > li::before {
     content: "";
     position: absolute;
     left: 0;
-    margin-top: 0.7rem;
+    margin-top: 0.85rem;
     width: 0.3rem;
     height: 0.3rem;
     border-radius: 50%;
@@ -348,22 +380,20 @@ const ReviewTextBox = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
-  height: 23.9rem;
-  overflow: hidden;
+  height: 23rem;
+  padding: 1.4rem 1.4rem 4.7rem;
   border-radius: 1rem;
-  margin-bottom: 0.5rem;
+  background-color: #fff;
 
   textarea {
     display: block;
-    padding: 1.4rem;
     width: 100%;
     height: 100%;
     outline: 0;
     border: none;
     &::placeholder {
       font-size: var(--font-bodyL-size);
-      font-weight: var(--font-bodyL-weight);
-      line-height:1.4;
+      line-height: 1.4;
       letter-spacing: var(--font-bodyL-letter-spacing);
       color: var(--n200-color);
     }
@@ -402,7 +432,7 @@ const BottomButtonContainer = styled.div`
 const Count = styled.div`
   position: absolute;
   right: 1.6rem;
-  bottom: 1.2rem;
+  bottom: 6rem;
   font-size: 1.4rem;
   color: var(--n200-color);
 

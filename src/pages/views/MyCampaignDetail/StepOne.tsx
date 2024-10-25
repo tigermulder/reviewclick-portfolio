@@ -2,76 +2,126 @@ import styled from "styled-components"
 import Button from "@/components/Button"
 import IconNotice from "assets/ico_notice.svg?url"
 import { StepOneProps } from "@/types/component-types/my-campaigndetail-type"
+import { useState, useRef } from "react"
+import { authReview } from "@/services/review"
+import SampleReviewImage from "assets/pro-sample-review.png"
 
 const StepOne = ({
+  reviewIdKey,
   thumbnailUrl,
   campaignTitle,
   reward,
   isEnded,
   remainingTime,
-  ReviewImage,
-  handleNavigate,
-  handleButton,
-  fileInput,
-  ReceiptOCR,
-}: StepOneProps): JSX.Element => (
-  <>
-    <CartTitle>
-      <p>
-        상품 구매하고 <br />
-        온라인 영수증 인증하기
-      </p>
-    </CartTitle>
-    <CartStepContainer>
-      <StepItem>
-        <StepItemHeader>STEP1. 상품 구매</StepItemHeader>
-        <StepItemInfo>
-          <StepItemInfoThumb>
-            <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-            {isEnded && <DimmedBackground />}
-            <RemainingDays $isEnded={isEnded}>
-              {isEnded ? "종료" : remainingTime}
-            </RemainingDays>
-          </StepItemInfoThumb>
-          <StepItemInfoTextBox>
-            <span>{campaignTitle}</span>
-            <p>{reward}P</p>
-          </StepItemInfoTextBox>
-        </StepItemInfo>
-        <Button $variant="grey" onClick={handleNavigate}>
-          구매하러가기
-        </Button>
-      </StepItem>
-      <StepItem>
-        <StepItemHeader>STEP2. 구매 영수증 인증</StepItemHeader>
-        <StepNotice>
-          구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야 해요!
-        </StepNotice>
-        <figure>
-          {/* 동적 배경 이미지 적용 */}
-          <img src={ReviewImage} alt={"기본 영수증 이미지"} />
-        </figure>
-        <Button $variant="grey" onClick={handleButton}>
-          이미지업로드
-        </Button>
-        {/* 숨겨진 파일 입력 */}
-        <input
-          id="fileInput"
-          type="file"
-          accept="image/*"
-          onChange={ReceiptOCR}
-          ref={fileInput}
-          style={{ display: "none" }}
-        />
-      </StepItem>
-    </CartStepContainer>
-  </>
-)
+  campaignsUrl,
+}: StepOneProps): JSX.Element => {
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [files, setFile] = useState<File | null>(null)
+
+  // 버튼 클릭 시 파일 선택 창 열기
+  const handleButtonClick = () => {
+    fileInputRef.current?.click()
+  }
+  // 영수증 OCR 핸들러
+  const handleReceiptOCR = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.preventDefault()
+    const files = event.currentTarget.files
+    if (files && reviewIdKey) {
+      const file = files[0]
+      setFile(file)
+
+      const formData = new FormData()
+      formData.append("reviewId", reviewIdKey)
+      formData.append("image", file) // 파일 추가
+
+      // FormData 내용 확인
+      formData.forEach((value, key) => {
+        console.log(`${key}:`, value)
+      })
+
+      try {
+        const response = await authReview(formData)
+        if (response.statusCode === 0) {
+          console.log("인증 성공:", response)
+        } else {
+          // handleAuthError(response.statusCode)
+        }
+      } catch (error) {
+        console.error("인증 실패:", error)
+      }
+    } else {
+      console.warn("파일 또는 reviewId가 누락되었습니다.")
+    }
+  }
+
+  // 새 창으로 이동하는 핸들러
+  const handleNavigate = () => {
+    const url = campaignsUrl // 이동하려는 URL
+    window.open(url, "_blank")
+  }
+
+  return (
+    <>
+      <CartTitle>
+        <p>
+          상품 구매하고 <br />
+          온라인 영수증 인증하기
+        </p>
+      </CartTitle>
+      <CartStepContainer>
+        <StepItem>
+          <StepItemHeader>STEP1. 상품 구매</StepItemHeader>
+          <StepItemInfo>
+            <StepItemInfoThumb>
+              <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
+              {isEnded && <DimmedBackground />}
+              <RemainingDays $isEnded={isEnded}>
+                {isEnded ? "종료" : remainingTime}
+              </RemainingDays>
+            </StepItemInfoThumb>
+            <StepItemInfoTextBox>
+              <span>{campaignTitle}</span>
+              <p>{reward}P</p>
+            </StepItemInfoTextBox>
+          </StepItemInfo>
+          <Button $variant="pink" onClick={handleNavigate}>
+            구매하러가기
+          </Button>
+        </StepItem>
+        <StepItem>
+          <StepItemHeader>STEP2. 구매 영수증 인증</StepItemHeader>
+          <StepNotice>
+            구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야
+            해요!
+          </StepNotice>
+          <figure>
+            {/* 동적 배경 이미지 적용 */}
+            <img src={SampleReviewImage} alt={"기본 영수증 이미지"} />
+          </figure>
+          <Button $variant="pink" onClick={handleButtonClick}>
+            이미지업로드
+          </Button>
+          {/* 숨겨진 파일 입력 */}
+          <input
+            id="fileInput"
+            type="file"
+            accept="image/*"
+            onChange={handleReceiptOCR}
+            ref={fileInputRef}
+            style={{ display: "none" }}
+          />
+        </StepItem>
+      </CartStepContainer>
+    </>
+  )
+}
 
 export default StepOne
 
 const CartTitle = styled.div`
-  margin-top: 4.4rem;
+  margin-top: 3.5rem;
   background: var(--white);
 
   p {

@@ -177,7 +177,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           line-height: var(--font-bodyM-line-height);
           letter-spacing: var(--font-bodyM-letter-spacing);
           background-color: var(--n40-color);
-          color: var(--n400-color);
+          color: var(--n500-color);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -194,7 +194,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
             background: url("${IconCopy}") no-repeat center / 100%;
             width: 1.3rem;
             height: 1.3rem;
-            margin-right: 0.4rem;
+            margin-right: 0.2rem;
           }
         `
       default:

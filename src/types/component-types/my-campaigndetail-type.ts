@@ -53,19 +53,17 @@ export const HEADER_TITLES: Record<HeaderStatusType, string> = {
 
 // ** 스텝 1번 */
 export interface StepOneProps {
+  reviewIdKey: string | undefined
   thumbnailUrl: string
   campaignTitle: string | undefined
   reward: number | undefined
   isEnded: boolean
-  ReviewImage: string
   remainingTime: string
-  handleNavigate: () => void
-  handleButton: () => void
-  ReceiptOCR: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>
-  fileInput: React.RefObject<HTMLInputElement>
+  campaignsUrl: string | undefined
 }
 // ** 스텝 2번 */
 export interface StepTwoProps {
+  reviewIdKey: string | undefined
   thumbnailUrl: string
   campaignTitle: string | undefined
   reward: number | undefined
@@ -75,14 +73,6 @@ export interface StepTwoProps {
 }
 // ** 스텝 3번 */
 export interface StepThreeProps {
-  thumbnailUrl: string
-  campaignTitle: string | undefined
-  reward: number | undefined
-  isEnded: boolean
-  ReviewImage: string
-  remainingTime: string
-  handleNavigate: () => void
-  handleButton: () => void
-  ReceiptOCR: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>
-  fileInput: React.RefObject<HTMLInputElement>
+  reviewIdKey: string | undefined
+  campaignsUrl: string | undefined
 }

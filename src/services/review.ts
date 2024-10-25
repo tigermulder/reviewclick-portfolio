@@ -8,11 +8,9 @@ import {
   ReviewJoinResponse,
   ReviewCancelRequest,
   ReviewCancelResponse,
-  ReviewAuthRequest,
   ReviewAuthResponse,
   ReviewSaveRequest,
   ReviewSaveResponse,
-  ReviewConfirmRequest,
   ReviewConfirmResponse,
 } from "types/api-types/review-type"
 
@@ -66,12 +64,7 @@ export const authReview = async (
 ): Promise<ReviewAuthResponse> => {
   const response = await axiosInstance.post<ReviewAuthResponse>(
     "/review/purchase_auth",
-    data,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
+    data
   )
   return response.data
 }
@@ -89,7 +82,7 @@ export const saveReview = async (
 
 //** 리뷰 내용 검토 API */
 export const confirmReview = async (
-  data: ReviewConfirmRequest
+  data: FormData
 ): Promise<ReviewConfirmResponse> => {
   const response = await axiosInstance.post<ReviewConfirmResponse>(
     "/review/confirm",

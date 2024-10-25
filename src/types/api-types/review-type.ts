@@ -119,10 +119,6 @@ export interface ReviewCancelResponse {
 }
 
 //** 리뷰 결제 인증 요청 type */
-export interface ReviewAuthRequest {
-  reviewId: number
-  ocr_data: File
-}
 export interface ReviewAuthResponse {
   statusCode: number
   errorCode?: number
@@ -143,11 +139,6 @@ export interface ReviewSaveResponse {
 }
 
 //** 리뷰 내용 검토 type */
-export interface ReviewConfirmRequest {
-  token: string
-  reviewId: number
-  reviewText: string
-}
 export interface ReviewConfirmResponse {
   statusCode: number
   errorCode?: number
