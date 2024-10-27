@@ -490,6 +490,8 @@ const Background = styled.div<{
   $scale: number
 }>`
   position: fixed;
+  max-width: 768px;
+  min-width: 375px;
   top: 0;
   left: 0;
   background-image: url(${(props) => props.$imageUrl});
@@ -786,6 +788,8 @@ const NoticeBox = styled.ul`
 `
 
 const FooterButtons = styled.div`
+  max-width: 768px;
+  min-width: 375px;
   display: flex;
   align-items: center;
   justify-content: center;

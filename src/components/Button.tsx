@@ -18,13 +18,13 @@ const Button = ({
   onClick,
 }: ButtonProps) => (
   <StyledButton
-    disabled={disabled}
+    disabled={disabled || $variant === "spinner"}
     $variant={$variant}
     type={type}
     onClick={onClick}
     $marginTop={$marginTop}
   >
-    {children}
+    {$variant !== "spinner" && children}
   </StyledButton>
 )
 
@@ -197,8 +197,36 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
             margin-right: 0.2rem;
           }
         `
+        case "spinner":
+        return css`
+          background-color: var(--prim-L20);
+          color: var(--prim-L400);
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          &::after {
+            content: "";
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid var(--prim-L400);
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+          }
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+          `
       default:
         return ""
     }
+    
   }}
 `

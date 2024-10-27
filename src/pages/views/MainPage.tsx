@@ -186,7 +186,7 @@ const CampaignCard = styled.li.attrs<CampaignCardProps>((props) => ({
   width: 100%;
   overflow: hidden;
   background-color: white;
-  cursor: pointer; /* 항상 포인터 커서 */
+  cursor: pointer; 
 `
 
 const CampaignImage = styled.div`

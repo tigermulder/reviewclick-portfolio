@@ -1,3 +1,4 @@
+
 export interface ReviewAuthResponseError {
   statusCode: -1
   errorCode: number
@@ -43,14 +44,6 @@ export const handleAuthError = (response: ReviewAuthResponseError) => {
   }
 }
 
-export type HeaderStatusType = "join" | "purchase" | "confirm" | "upload"
-export const HEADER_TITLES: Record<HeaderStatusType, string> = {
-  join: "상품구매 - 스텝 1",
-  purchase: "상품구매 - 스텝 1",
-  confirm: "리뷰검수 - 스텝 2",
-  upload: "리뷰등록 - 스텝 3",
-}
-
 // ** 스텝 1번 */
 export interface StepOneProps {
   reviewIdKey: string | undefined
@@ -60,6 +53,8 @@ export interface StepOneProps {
   isEnded: boolean
   remainingTime: string
   campaignsUrl: string | undefined
+  goToNextStep: () => void
+  refetchData: () => void
 }
 // ** 스텝 2번 */
 export interface StepTwoProps {
@@ -70,9 +65,14 @@ export interface StepTwoProps {
   isEnded: boolean
   remainingTime: string
   creatTime: string
+  goToNextStep: () => void
+  refetchData: () => void
+  setValidatedReviewText: (text: string) => void;
 }
 // ** 스텝 3번 */
 export interface StepThreeProps {
   reviewIdKey: string | undefined
-  campaignsUrl: string | undefined
+  validatedReviewText: string
+  goToNextStep: () => void
+  refetchData: () => void
 }

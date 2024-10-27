@@ -38,6 +38,7 @@ const AppBar = () => {
         <Link to={RoutePath.MyCart} aria-label="캠페인 찜 장바구니로 이동">
           <HeartIcon aria-label="캠페인 찜 장바구니">
             <IcoAppBarHeart />
+            <HeartText>찜 목록</HeartText>
           </HeartIcon>
         </Link>
       ) : (
@@ -71,8 +72,7 @@ const Header = styled.header`
 `
 
 const Logo = styled.div`
-  min-width: 100px;
-  width: 10rem;
+  min-width: 8.5rem;
   color: var(--revu-color);
 
   a {
@@ -86,7 +86,7 @@ const Logo = styled.div`
 `
 
 const SearchForm = styled.form<{ $isLoggedIn: boolean }>`
-  flex-basis: 51%;
+  flex-basis: 57%;
   height: 100%;
   margin-left: ${({ $isLoggedIn }) =>
     $isLoggedIn ? "3.4rem" : "2.4rem"}; /* 조건에 따라 margin-left 조정 */
@@ -133,8 +133,8 @@ const SearchIcon = styled.div`
 `
 
 const HeartIcon = styled.div`
-  width: 2.2rem;
-  margin-left: 1.6rem;
+  width: 2.4rem;
+  margin-left: 1.2rem;
   color: #d8ddde;
 
   svg {
@@ -157,4 +157,12 @@ const SignUpLink = styled.div`
     text-decoration: none;
     color: inherit;
   }
+`
+
+const HeartText = styled.div`
+  margin-top:0.2rem;
+  text-align: center;
+  color: var(--silver);
+  font-size: 0.8rem;
+  word-wrap: break-word;
 `

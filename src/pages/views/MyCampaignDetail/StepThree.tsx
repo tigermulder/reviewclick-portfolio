@@ -6,16 +6,30 @@ import { useState, useRef } from "react"
 import { confirmReview } from "@/services/review"
 import SampleReviewImage from "assets/pro-sample-text.png"
 import { ReviewAuthResponse } from "@/types/api-types/review-type"
+import Modal from "@/components/Modal";
+import { useNavigate } from "react-router-dom";
 import useToast from "@/hooks/useToast"
+import { RoutePath } from "@/types/route-path"
 
 const StepThree = ({
   reviewIdKey,
-  campaignsUrl,
+  validatedReviewText,
+  goToNextStep,
+  refetchData,
 }: StepThreeProps): JSX.Element => {
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [files, setFile] = useState<File | null>(null);
   const textRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
   const { addToast } = useToast()
+
+  //** 모달 상태 관리 */ 
+  const [isLoadingModalOpen, setLoadingModalOpen] = useState(false);
+  const [isResultModalOpen, setResultModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState<string>("");
+  const [modalContent, setModalContent] = useState<string | React.ReactNode>("");
+  const [modalConfirmText, setModalConfirmText] = useState<string>("확인");
+  const [modalCancelText, setModalCancelText] = useState<string | undefined>(undefined);
 
   // 버튼 클릭 시 파일 선택 창 열기
   const handleButtonClick = () => {
@@ -25,21 +39,63 @@ const StepThree = ({
   const handleReceiptOCR = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const file = event.target.files?.[0]
-    if (file && reviewIdKey) {
-      setSelectedFile(file)
-      const formData = new FormData()
-      formData.append("reviewId", reviewIdKey)
-      formData.append("image", file)
+    event.preventDefault();
+    const files = event.currentTarget.files;
+    if (files && reviewIdKey) {
+      const file = files[0];
+      setFile(file);
+      const formData = new FormData();
+      formData.append("reviewId", reviewIdKey);
+      formData.append("image", file);
+      // 로딩 모달 열기
+      setLoadingModalOpen(true);
       try {
-        const response: ReviewAuthResponse = await confirmReview(formData)
+        // const response: ReviewAuthResponse = await confirmReview(formData)
+        const response = {
+          statusCode: 0, 
+        };
+
         if (response.statusCode === 0) {
-          console.log("인증 성공:", response)
+          setModalTitle("👏 축하드려요!");
+          setModalContent(
+            <>
+              <p>
+                미션 성공으로 포인트가 지급됐어요. <br />
+                포인트 지급 정보는 ‘내정보’ &gt; <br />
+                ‘포인트 적립내역’에서 확인할 수 있어요.
+              </p>
+            </>
+          );
+          setModalConfirmText("리뷰검수하기");
+          setModalCancelText("확인");
+          setResultModalOpen(true);
         } else {
-          // handleAuthError(response.statusCode)
+          setModalTitle("⛔ 앗, 잠깐!");
+          setModalContent(
+            <>
+              <p>
+                리뷰 확인에 실패했어요. <br />
+                이미지 확인 후 다시 시도해주세요.
+              </p>
+            </>
+          );
+          setModalConfirmText("다시시도");
+          setModalCancelText("뒤로가기");
+          setResultModalOpen(true);
         }
       } catch (error) {
-        console.error("인증 실패:", error)
+        setModalTitle("⛔ 앗, 잠깐!");
+        setModalContent(
+          <>
+            <p>
+              리뷰 확인에 실패했어요. <br />
+              이미지 확인 후 다시 시도해주세요.
+            </p>
+          </>
+        );
+        setModalConfirmText("다시시도");
+        setModalCancelText("뒤로가기");
+        setResultModalOpen(true);
       }
     } else {
       // 파일 또는 reviewId가 없는 경우 처리
@@ -60,6 +116,25 @@ const StepThree = ({
     }
   }
 
+  // 모달 확인 버튼 핸들러
+  const handleModalConfirm = async () => {
+    setResultModalOpen(false)
+    if (modalConfirmText === "재인증") {
+      handleButtonClick()
+    } else if (modalConfirmText === "리뷰검수하기") {
+      // 데이터 다시 가져오기
+      await refetchData()
+      // 다음 스텝으로 이동
+      goToNextStep()
+    }
+  }
+
+  // 모달 취소 버튼 핸들러
+  const handleModalCancel = () => {
+    setResultModalOpen(false);
+    navigate(RoutePath.MyPointLog)
+  };
+
   // 새 창으로 이동하는 핸들러
   const handleNavigate = () => {
     const url =
@@ -69,6 +144,33 @@ const StepThree = ({
 
   return (
     <>
+      {/* 로딩 모달 */}
+      <Modal
+        isOpen={isLoadingModalOpen}
+        isLoading={true} onConfirm={function (): void {
+          throw new Error("Function not implemented.");
+        } } onCancel={function (): void {
+          throw new Error("Function not implemented.");
+        } } title={"리뷰를 확인중이에요"}
+        content={
+          <>
+            <p>
+              등록한 실리뷰를 확인하고 있어요.<br /> 
+              문제가 없으면 포인트가 바로 지급돼요.
+            </p>
+          </>
+        } 
+      />
+      {/* 결과 모달 */}
+      <Modal
+        isOpen={isResultModalOpen}
+        onConfirm={handleModalConfirm}
+        onCancel={handleModalCancel}
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
+        cancelText={modalCancelText}
+      />
       <CartTitle>
         <p>
           리뷰 등록하고 <br />
@@ -80,12 +182,7 @@ const StepThree = ({
           <StepItemHeader>STEP1. 리뷰등록</StepItemHeader>
           <StepItemReviewContainer>
             <StepItemReviewBox ref={textRef}>
-              검수 완료된 리뷰가 여기에 Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Harum, dolor? Amet hic rerum non molestiae
-              laborum aspernatur aliquam, cumque ea! 검수 완료된 리뷰가 여기에
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum,
-              dolor? Amet hic rerum non molestiae laborum aspernatur aliquam,
-              cumque ea!
+              {validatedReviewText}
             </StepItemReviewBox>
             <Button $variant="copy" onClick={handleCopy}>
               복사
@@ -195,12 +292,6 @@ const StepItem = styled.li`
 
   figure {
     margin: 0.8rem 0 2rem;
-    width: 100%;
-    height: 227px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
 
     img {
       width: 100%;

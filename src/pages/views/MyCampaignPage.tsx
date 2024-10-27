@@ -81,7 +81,7 @@ const MyCampaignPage = () => {
         <p>
           신청한 캠페인
           <Result>{reviewLength}</Result>
-          <Total>/3</Total>
+          <Total>/{reviewLength}</Total>
         </p>
       </CartCardDesc>
       <MyReviewContainer>

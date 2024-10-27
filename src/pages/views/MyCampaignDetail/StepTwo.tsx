@@ -8,6 +8,9 @@ import { formatDate } from "@/utils/util"
 import { saveReview } from "@/services/review"
 import styled from "styled-components"
 import { ReviewSaveRequest } from "@/types/api-types/review-type"
+import Modal from "@/components/Modal";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "@/types/route-path";
 
 const StepTwo = ({
   reviewIdKey,
@@ -17,17 +20,29 @@ const StepTwo = ({
   isEnded,
   remainingTime,
   creatTime,
+  goToNextStep,
+  refetchData,
+  setValidatedReviewText,
 }: StepTwoProps): JSX.Element => {
   const [isGuideOpen, setIsGuideOpen] = useState<boolean>(true)
   const [reviewText, setReviewText] = useState<string>("")
+  //** 모달 상태 관리 */ 
+  const [isLoadingModalOpen, setLoadingModalOpen] = useState(false);
+  const [isResultModalOpen, setResultModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState<string>("");
+  const [modalContent, setModalContent] = useState<string | React.ReactNode>("");
+  const [modalConfirmText, setModalConfirmText] = useState<string>("확인");
+  const [modalCancelText, setModalCancelText] = useState<string | undefined>(undefined);
   const maxChars = 180
   const minChars = 100
   const { addToast } = useToast()
+  const navigate = useNavigate()
+
+  //** 유의사항 드롭다운 */ 
   const toggleGuide = () => {
     setIsGuideOpen(!isGuideOpen)
   }
-
-  // 리뷰 텍스트 변경 핸들러
+  //** 리뷰 텍스트 변경 핸들러 */ 
   const handleReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value
     if (text.length <= maxChars) {
@@ -36,8 +51,7 @@ const StepTwo = ({
       setReviewText(text.slice(0, maxChars)) // 최대 문자 수 초과 시 자르기
     }
   }
-
-  // 복사 버튼 핸들러
+  //** 복사 버튼 핸들러 */ 
   const handleCopy = () => {
     if (reviewText.trim().length === 0 || reviewText.trim().length < minChars) {
       // 텍스트가 비어있을 경우 토스트 메시지 표시 (옵션)
@@ -55,28 +69,123 @@ const StepTwo = ({
       })
   }
 
+  //** 리뷰검수 OCR */
   const handleReviewOcrSave = async () => {
     if (reviewText.trim().length < minChars) {
-      addToast("100자 이상 입력해주세요", "copy", 1000, "copy")
-      return
+      addToast("100자 이상 입력해주세요", "copy", 1000, "copy");
+      return;
     }
-
+  
     const data: ReviewSaveRequest = {
       reviewId: Number(reviewIdKey),
       reviewText: reviewText,
-    }
-
+    };
+  
+    // 로딩 모달 표시
+    setLoadingModalOpen(true);
+  
     try {
-      const response = await saveReview(data)
-      console.log(response)
-      // 필요한 경우 상태 업데이트 또는 페이지 이동
+      // const response = await saveReview(data);
+      const response = {
+        statusCode: 0, 
+      };
+  
+      // 로딩 모달 닫기
+      setLoadingModalOpen(false);
+      if (response.statusCode === 0) {
+        // 부모 컴포넌트 상태 업데이트
+        setValidatedReviewText(reviewText);
+        setModalTitle("📝 거의 다 왔어요!");
+        setModalContent(
+          <p>
+            리뷰 검수가 완료됐어요. <br /> 
+            리뷰를 등록하러 가볼까요?
+          </p>
+        )
+        setModalConfirmText("등록하러가기");
+        setModalCancelText("아니요");
+        setResultModalOpen(true);
+      } else {
+        // 리뷰 수정 모달 설정
+        setModalTitle("️⛔ 앗, 잠깐!");
+        setModalContent(
+          <p>
+            부정적인 리뷰는<br />
+            포인트 적립에 영향을 줄 수 있어요.<br />
+            긍정적인 사용 경험을 중심으로 수정 후<br />
+            검수를 다시 받아보세요.
+          </p>
+        );
+        setModalConfirmText("닫기");
+        setModalCancelText("작성한 리뷰 수정하기");
+        setResultModalOpen(true);
+      }
+      
     } catch (error) {
-      console.error("리뷰 저장 실패: ", error)
+      // 로딩 모달 닫기
+      setLoadingModalOpen(false);
+      setModalTitle("️⛔ 에러");
+      setModalContent("서버 에러가 발생하였습니다.");
+      setModalConfirmText("재검수하기");
+      setModalCancelText("닫기");
+      setResultModalOpen(true);
     }
-  }
+  };
+  
+
+  //** 모달 확인 버튼 핸들러 */ 
+  const handleModalConfirm = async () => {
+    setResultModalOpen(false);
+  
+    if (modalConfirmText === "등록하러가기") {
+      // 데이터 다시 가져오기
+      await refetchData();
+      // 다음 스텝으로 이동
+      goToNextStep();
+    } else if (modalConfirmText === "닫기") {
+      // 모달 닫기만 수행
+    }
+  };
+  
+  //** 모달 닫기 버튼 핸들러 */ 
+  const handleModalCancel = () => {
+    setResultModalOpen(false);
+    if(modalConfirmText !== "닫기"){
+      navigate(RoutePath.MyCampaign)
+    }
+  };
 
   return (
-    <CartTest>
+    <>
+      {/* 로딩 모달 */}
+      <Modal
+        isOpen={isLoadingModalOpen}
+        isLoading={true} onConfirm={function (): void {
+          throw new Error("Function not implemented.");
+        } } onCancel={function (): void {
+          throw new Error("Function not implemented.");
+        } } title={"AI 검수가 진행중이에요"}
+        content={
+          <>
+            <p>
+              작성한 리뷰에 이상이 없을 경우<br /> 
+              상품 페이지로 이동되며,<br/>
+              작성한 리뷰는 자동으로 복사돼요.
+            </p>
+          </>
+        } 
+      />
+      {/* 결과 모달 */}
+      <Modal
+        isOpen={isResultModalOpen}
+        onConfirm={handleModalConfirm}
+        onCancel={handleModalCancel}
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
+        cancelText={modalCancelText}
+      />
+      <CartTest>
       {/* 상단캠페인 정보 */}
       <CampaignStatus>
         <CampaignTitle>캠페인 정보</CampaignTitle>
@@ -165,7 +274,8 @@ const StepTwo = ({
           리뷰 검수
         </Button>
       </BottomButtonContainer>
-    </CartTest>
+      </CartTest>
+    </>
   )
 }
 
@@ -278,7 +388,7 @@ const CardDate = styled.span`
 
 const ReviewTestContainer = styled.div`
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   padding: 2.3rem 0 0;
   background: var(--whitewood);
 

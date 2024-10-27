@@ -6,4 +6,5 @@ export interface ModalProps {
   content: React.ReactNode
   confirmText?: string
   cancelText?: string
+  isLoading?: boolean
 }

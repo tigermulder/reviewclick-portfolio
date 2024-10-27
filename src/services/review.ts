@@ -85,7 +85,7 @@ export const confirmReview = async (
   data: FormData
 ): Promise<ReviewConfirmResponse> => {
   const response = await axiosInstance.post<ReviewConfirmResponse>(
-    "/review/confirm",
+    "/review/upload",
     data
   )
   return response.data

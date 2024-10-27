@@ -1,7 +1,7 @@
 import useLikeCampaign from "hooks/useLikeCampaign"
 import useToast from "@/hooks/useToast"
 import { LikeButtonProps } from "types/component-types/likebutton-type"
-import IcoHeart from "assets/ico-appbar-heart.svg?react"
+import IcoHeart from "assets/ico-main-heart.svg?react"
 import IcoCampaignHeart from "assets/ico-campaign-detail-heart.svg?react"
 import { useRouter } from "hooks/useRouting"
 import { RoutePath } from "types/route-path"
@@ -114,9 +114,8 @@ const CampaignHeart = styled.div<{ $isLiked: boolean }>`
 
 const HeartText = styled.div`
   text-align: center;
-  color: #e50b14;
-  font-size: 7px;
-  font-family: "SUIT", sans-serif;
-  font-weight: 600;
+  color: var(--revu-color);
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-medium);
   word-wrap: break-word;
 `

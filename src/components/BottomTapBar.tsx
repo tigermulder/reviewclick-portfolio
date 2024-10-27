@@ -31,10 +31,13 @@ const BottomTabBar = () => {
       setActiveTab("alerts")
     } else if (currentPath === "/profile") {
       setActiveTab("profile")
+    } else if (currentPath === "/") {
+      setActiveTab("home")
     }
   }, [currentPath])
 
-  const handleCategoryClick = () => {
+  const handleCategoryClick = (e: React.MouseEvent) => {
+    e.preventDefault()
     setActiveTab("category")
     setIsMenuOpen(true)
   }
@@ -42,8 +45,10 @@ const BottomTabBar = () => {
   const handleTabClick = (
     tabName: string,
     requiresAuth: boolean,
-    path: string
+    path: string,
+    e: React.MouseEvent
   ) => {
+    e.preventDefault()
     setActiveTab(tabName)
     if (requiresAuth && !isLoggedIn) {
       addToast("로그인이 필요합니다.", "warning", 1000, "login")
@@ -55,45 +60,59 @@ const BottomTabBar = () => {
 
   return (
     <Nav className="bottom-tab-bar">
-      <NavItem $active={activeTab === "category"} onClick={handleCategoryClick}>
-        <StyledIcon as={IconCategory} $active={activeTab === "category"} />
-        <NavText $active={activeTab === "category"}>카테고리</NavText>
+      <NavItem $active={activeTab === "category"}>
+        <StyledLink to="#" onClick={handleCategoryClick}>
+          <NavItemContent>
+            <StyledIcon as={IconCategory} $active={activeTab === "category"} />
+            <NavText $active={activeTab === "category"}>카테고리</NavText>
+          </NavItemContent>
+        </StyledLink>
       </NavItem>
-      <NavItem
-        $active={activeTab === "campaign"}
-        onClick={() => handleTabClick("campaign", true, RoutePath.MyCampaign)}
-      >
-        <Link to={RoutePath.MyCampaign}>
-          <StyledIcon as={IconCampaign} $active={activeTab === "campaign"} />
-          <NavText $active={activeTab === "campaign"}>나의 캠페인</NavText>
-        </Link>
+      <NavItem $active={activeTab === "campaign"}>
+        <StyledLink
+          to={RoutePath.MyCampaign}
+          onClick={(e) =>
+            handleTabClick("campaign", true, RoutePath.MyCampaign, e)
+          }
+        >
+          <NavItemContent>
+            <StyledIcon as={IconCampaign} $active={activeTab === "campaign"} />
+            <NavText $active={activeTab === "campaign"}>나의 캠페인</NavText>
+          </NavItemContent>
+        </StyledLink>
       </NavItem>
-      <NavItem
-        $active={activeTab === "home"}
-        onClick={() => handleTabClick("home", false, RoutePath.Home)}
-      >
-        <Link to={RoutePath.Home}>
-          <StyledIcon as={IconHome} $active={activeTab === "home"} />
-          <NavText $active={activeTab === "home"}>Home</NavText>
-        </Link>
+      <NavItem $active={activeTab === "home"}>
+        <StyledLink
+          to={RoutePath.Home}
+          onClick={(e) => handleTabClick("home", false, RoutePath.Home, e)}
+        >
+          <NavItemContent>
+            <StyledIcon as={IconHome} $active={activeTab === "home"} />
+            <NavText $active={activeTab === "home"}>Home</NavText>
+          </NavItemContent>
+        </StyledLink>
       </NavItem>
-      <NavItem
-        $active={activeTab === "alerts"}
-        onClick={() => handleTabClick("alerts", true, "/alerts")}
-      >
-        <Link to="/alerts">
-          <StyledIcon as={IconAlerts} $active={activeTab === "alerts"} />
-          <NavText $active={activeTab === "alerts"}>알림</NavText>
-        </Link>
+      <NavItem $active={activeTab === "alerts"}>
+        <StyledLink
+          to="/alerts"
+          onClick={(e) => handleTabClick("alerts", true, "/alerts", e)}
+        >
+          <NavItemContent>
+            <StyledIcon as={IconAlerts} $active={activeTab === "alerts"} />
+            <NavText $active={activeTab === "alerts"}>알림</NavText>
+          </NavItemContent>
+        </StyledLink>
       </NavItem>
-      <NavItem
-        $active={activeTab === "profile"}
-        onClick={() => handleTabClick("profile", true, "/profile")}
-      >
-        <Link to="/profile">
-          <StyledIcon as={IconProfile} $active={activeTab === "profile"} />
-          <NavText $active={activeTab === "profile"}>내 정보</NavText>
-        </Link>
+      <NavItem $active={activeTab === "profile"}>
+        <StyledLink
+          to="/profile"
+          onClick={(e) => handleTabClick("profile", true, "/profile", e)}
+        >
+          <NavItemContent>
+            <StyledIcon as={IconProfile} $active={activeTab === "profile"} />
+            <NavText $active={activeTab === "profile"}>내 정보</NavText>
+          </NavItemContent>
+        </StyledLink>
       </NavItem>
     </Nav>
   )
@@ -117,24 +136,6 @@ const Nav = styled.nav`
   border-top: 1px solid #ddd;
 `
 
-const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
-  "aria-current": $active ? "page" : undefined,
-}))<{ $active: boolean }>`
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
-`
-
-const StyledIcon = styled.svg.attrs<{ $active: boolean }>(({ $active }) => ({
-  "aria-hidden": true,
-}))<{ $active: boolean }>`
-  width: 24px;
-  height: 24px;
-  margin: 0 auto;
-  color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
-`
-
 const NavItem = styled.div.attrs<{ $active: boolean }>(({ $active }) => ({
   role: "button",
   "aria-pressed": $active,
@@ -142,9 +143,41 @@ const NavItem = styled.div.attrs<{ $active: boolean }>(({ $active }) => ({
   flex-basis: 20%;
   height: 5rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   cursor: pointer;
+`
+
+const StyledLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+`
+
+const NavItemContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const StyledIcon = styled.svg.attrs<{ $active: boolean }>(({ $active }) => ({
+  "aria-hidden": true,
+}))<{ $active: boolean }>`
+  width: 16px;
+  height: 16px;
+  margin-bottom: 0.7rem; // 아이콘과 텍스트 사이 간격
+  color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
+`
+
+const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
+  "aria-current": $active ? "page" : undefined,
+}))<{ $active: boolean }>`
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
 `

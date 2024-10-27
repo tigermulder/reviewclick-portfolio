@@ -1,10 +1,13 @@
-import styled from "styled-components"
-import Button from "@/components/Button"
-import IconNotice from "assets/ico_notice.svg?url"
-import { StepOneProps } from "@/types/component-types/my-campaigndetail-type"
-import { useState, useRef } from "react"
-import { authReview } from "@/services/review"
-import SampleReviewImage from "assets/pro-sample-review.png"
+import styled from "styled-components";
+import Button from "@/components/Button";
+import IconNotice from "assets/ico_notice.svg?url";
+import { StepOneProps } from "@/types/component-types/my-campaigndetail-type";
+import { useState, useRef } from "react";
+import { authReview } from "@/services/review";
+import Modal from "@/components/Modal";
+import SampleReviewImage from "assets/pro-sample-review.png";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "@/types/route-path";
 
 const StepOne = ({
   reviewIdKey,
@@ -14,56 +17,130 @@ const StepOne = ({
   isEnded,
   remainingTime,
   campaignsUrl,
+  goToNextStep,
+  refetchData,
 }: StepOneProps): JSX.Element => {
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const [files, setFile] = useState<File | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [files, setFile] = useState<File | null>(null);
+  const navigate = useNavigate()
 
-  // 버튼 클릭 시 파일 선택 창 열기
+  //** 모달 상태 관리 */ 
+  const [isLoadingModalOpen, setLoadingModalOpen] = useState(false);
+  const [isResultModalOpen, setResultModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState<string>("");
+  const [modalContent, setModalContent] = useState<string | React.ReactNode>("");
+  const [modalConfirmText, setModalConfirmText] = useState<string>("확인");
+  const [modalCancelText, setModalCancelText] = useState<string | undefined>(undefined);
+
+  //** 버튼 클릭 시 파일 선택 창 열기 */ 
   const handleButtonClick = () => {
-    fileInputRef.current?.click()
-  }
-  // 영수증 OCR 핸들러
+    fileInputRef.current?.click();
+  };
+  //** 영수증 OCR 핸들러 */ 
   const handleReceiptOCR = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    event.preventDefault()
-    const files = event.currentTarget.files
+    event.preventDefault();
+    const files = event.currentTarget.files;
     if (files && reviewIdKey) {
-      const file = files[0]
-      setFile(file)
-
-      const formData = new FormData()
-      formData.append("reviewId", reviewIdKey)
-      formData.append("image", file) // 파일 추가
-
-      // FormData 내용 확인
-      formData.forEach((value, key) => {
-        console.log(`${key}:`, value)
-      })
+      const file = files[0];
+      setFile(file);
+      const formData = new FormData();
+      formData.append("reviewId", reviewIdKey);
+      formData.append("image", file);
+      // 로딩 모달 열기
+      setLoadingModalOpen(true);
 
       try {
-        const response = await authReview(formData)
+        // const response = await authReview(formData);
+        const response = {
+          statusCode: 0, 
+        };
+
+        // 로딩 모달 닫기
+        setLoadingModalOpen(false);
         if (response.statusCode === 0) {
-          console.log("인증 성공:", response)
+          // 인증 성공 모달 설정
+          setModalTitle("👏 영수증 인증 완료!");
+          setModalContent("구매 영수증 인증이 완료됐어요. 리뷰 검수를 진행해주세요.");
+          setModalConfirmText("리뷰검수하기");
+          setModalCancelText("닫기");
+          setResultModalOpen(true);
         } else {
-          // handleAuthError(response.statusCode)
+          // 기타 에러 처리 모달 설정
+          setModalTitle("⛔ 인증 실패");
+          setModalContent("구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야 해요!");
+          setModalConfirmText("재인증");
+          setModalCancelText("닫기");
+          setResultModalOpen(true);
         }
       } catch (error) {
-        console.error("인증 실패:", error)
+        // 로딩 모달 닫기
+        setLoadingModalOpen(false);
+        setModalTitle("⛔ 인증 실패");
+        setModalContent("구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야 해요!");
+        setModalConfirmText("재인증");
+        setModalCancelText("닫기");
+        setResultModalOpen(true);
       }
     } else {
-      console.warn("파일 또는 reviewId가 누락되었습니다.")
+      console.warn("파일 또는 reviewId가 누락되었습니다.");
+    }
+  };
+
+  // 모달 확인 버튼 핸들러
+  const handleModalConfirm = async () => {
+    setResultModalOpen(false)
+    if (modalConfirmText === "재인증") {
+      handleButtonClick()
+    } else if (modalConfirmText === "리뷰검수하기") {
+      // 데이터 다시 가져오기
+      await refetchData()
+      // 다음 스텝으로 이동
+      goToNextStep()
     }
   }
 
+  // 모달 취소 버튼 핸들러
+  const handleModalCancel = () => {
+    setResultModalOpen(false);
+    navigate(RoutePath.MyCampaign)
+  };
+
   // 새 창으로 이동하는 핸들러
   const handleNavigate = () => {
-    const url = campaignsUrl // 이동하려는 URL
-    window.open(url, "_blank")
-  }
+    const url = campaignsUrl;
+    window.open(url, "_blank");
+  };
 
   return (
     <>
+      {/* 로딩 모달 */}
+      <Modal
+        isOpen={isLoadingModalOpen}
+        isLoading={true} onConfirm={function (): void {
+          throw new Error("Function not implemented.");
+        } } onCancel={function (): void {
+          throw new Error("Function not implemented.");
+        } } title={"영수증을 확인 중이에요"}
+        content={
+          <>
+            <p>
+              조금만 기다려주세요.<br /> 처리가 곧 끝나요!
+            </p>
+          </>
+        } 
+      />
+      {/* 결과 모달 */}
+      <Modal
+        isOpen={isResultModalOpen}
+        onConfirm={handleModalConfirm}
+        onCancel={handleModalCancel}
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
+        cancelText={modalCancelText}
+      />
       <CartTitle>
         <p>
           상품 구매하고 <br />
@@ -93,11 +170,9 @@ const StepOne = ({
         <StepItem>
           <StepItemHeader>STEP2. 구매 영수증 인증</StepItemHeader>
           <StepNotice>
-            구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야
-            해요!
+            구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야 해요!
           </StepNotice>
           <figure>
-            {/* 동적 배경 이미지 적용 */}
             <img src={SampleReviewImage} alt={"기본 영수증 이미지"} />
           </figure>
           <Button $variant="pink" onClick={handleButtonClick}>
@@ -115,10 +190,10 @@ const StepOne = ({
         </StepItem>
       </CartStepContainer>
     </>
-  )
-}
+  );
+};
 
-export default StepOne
+export default StepOne;
 
 const CartTitle = styled.div`
   margin-top: 3.5rem;
@@ -189,12 +264,6 @@ const StepItem = styled.li`
 
   figure {
     margin: 0.8rem 0 2rem;
-    width: 100%;
-    height: 227px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
 
     img {
       width: 100%;
