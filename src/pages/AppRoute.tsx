@@ -1,15 +1,18 @@
+import { lazy } from "react"
 import { Route, Routes as ReactRouterRoutes } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
-import LoginPage from "./views/LoginPage" // 로그인 페이지
-import JoinPage from "./views/JoinPage"
-import MainPage from "./views/MainPage"
-import CampaignDetailPage from "./views/CampaignDetailPage"
-import CampaignCart from "./views/CampaingnCart"
-import FindIdPage from "./views/FindIdPage"
-import FindPasswordPage from "./views/FindPasswordPage"
-import MyCampaignPage from "./views/MyCampaignPage"
-import MyCampaignDetailLayout from "./views/MyCampaignDetailLayout"
+const LoginPage = lazy(() => import("./views/LoginPage"))
+const JoinPage = lazy(() => import("./views/JoinPage"))
+const MainPage = lazy(() => import("./views/MainPage"))
+const CampaignDetailPage = lazy(() => import("./views/CampaignDetailPage"))
+const CampaignCart = lazy(() => import("./views/CampaingnCart"))
+const FindIdPage = lazy(() => import("./views/FindIdPage"))
+const FindPasswordPage = lazy(() => import("./views/FindPasswordPage"))
+const MyCampaignPage = lazy(() => import("./views/MyCampaignPage"))
+const MyCampaignDetailLayout = lazy(
+  () => import("./views/MyCampaignDetailLayout")
+)
 
 export const AppRoute = () => {
   return (
