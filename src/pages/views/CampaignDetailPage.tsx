@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useSuspenseQuery } from "@tanstack/react-query"
 import { authState } from "@/store/auth-recoil"
 import { useRecoilValue } from "recoil"
 import { getCampaignItem } from "services/campaign"
-import { CampaignItemResponse } from "@/types/api-types/campaign-type"
 import { formatDate, disCountRate } from "@/utils/util"
 import IconNoticeArrow from "assets/ico-notice-arrow.svg?react"
 import IconStar from "assets/ico-star.svg?url"
@@ -93,36 +92,25 @@ const CampaignDetailPage = () => {
     return <div>유효하지 않은 캠페인 ID입니다.</div>
   }
 
-  // 캠페인 상세 데이터
-  const {
-    data: campaignData,
-    isLoading,
-    isError,
-    error,
-  } = useQuery<CampaignItemResponse, Error>({
+  // 캠페인 상세
+  const { data, error, isFetching } = useSuspenseQuery({
     queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignId),
     queryFn: () =>
       getCampaignItem({
         campaignId: Number(campaignId),
       }),
-    enabled: !!campaignId,
     staleTime: 10 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: true,
-    placeholderData: keepPreviousData,
   })
   // 에러 처리
-  if (isError) {
-    return <div>{error?.message || "캠페인 정보를 불러오지 못했습니다."}</div>
+  if (error && isFetching) {
+    throw error
   }
-  // 데이터 없을 때
-  if (!campaignData) {
-    return <div>캠페인 정보를 불러올 수 없습니다.</div>
-  }
-  const campaignDetail = campaignData.campaign
 
+  const campaignDetail = data.campaign
   // D-Day 계산
   const today = new Date()
   const endDate = new Date(campaignDetail.endAt)

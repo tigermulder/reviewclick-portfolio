@@ -50,7 +50,7 @@ const StepOne = ({
       const formData = new FormData()
       formData.append("reviewId", reviewIdKey)
       formData.append("image", file)
-      // 로딩 모달 열기
+      // 로딩 모달 open
       setLoadingModalOpen(true)
 
       try {
@@ -90,6 +90,11 @@ const StepOne = ({
         setModalConfirmText("재인증")
         setModalCancelText("닫기")
         setResultModalOpen(true)
+      } finally {
+        // 파일 입력 초기화
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ""
+        }
       }
     } else {
       console.warn("파일 또는 reviewId가 누락되었습니다.")

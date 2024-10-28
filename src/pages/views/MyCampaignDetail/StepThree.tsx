@@ -5,7 +5,6 @@ import { StepThreeProps } from "@/types/component-types/my-campaigndetail-type"
 import { useState, useRef } from "react"
 import { uploadReview } from "@/services/review"
 import SampleReviewImage from "assets/pro-sample-text.png"
-import { ReviewAuthResponse } from "@/types/api-types/review-type"
 import Modal from "@/components/Modal"
 import { useNavigate } from "react-router-dom"
 import useToast from "@/hooks/useToast"
@@ -33,11 +32,11 @@ const StepThree = ({
     undefined
   )
 
-  // 버튼 클릭 시 파일 선택 창 열기
+  //** 버튼 클릭 시 파일 선택 창 열기 */
   const handleButtonClick = () => {
     fileInputRef.current?.click()
   }
-  // 영수증 OCR 핸들러
+  //** 영수증 OCR 핸들러 */
   const handleReceiptOCR = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -49,14 +48,17 @@ const StepThree = ({
       const formData = new FormData()
       formData.append("reviewId", reviewIdKey)
       formData.append("image", file)
-      // 로딩 모달 열기
+      // 로딩 모달 open
       setLoadingModalOpen(true)
+
       try {
-        const response: ReviewAuthResponse = await uploadReview(formData)
+        const response = await uploadReview(formData)
         // const response = {
         //   statusCode: 0,
         // };
 
+        // 로딩 모달 닫기
+        setLoadingModalOpen(false)
         if (response.statusCode === 0) {
           setModalTitle("👏 축하드려요!")
           setModalContent(
@@ -82,7 +84,7 @@ const StepThree = ({
             </>
           )
           setModalConfirmText("다시시도")
-          setModalCancelText("뒤로가기")
+          setModalCancelText("나의 캠페인 내역")
           setResultModalOpen(true)
         }
       } catch (error) {
@@ -96,11 +98,15 @@ const StepThree = ({
           </>
         )
         setModalConfirmText("다시시도")
-        setModalCancelText("뒤로가기")
+        setModalCancelText("나의 캠페인 내역")
         setResultModalOpen(true)
+      } finally {
+        // 파일 입력 초기화
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ""
+        }
       }
     } else {
-      // 파일 또는 reviewId가 없는 경우 처리
       console.warn("파일 또는 reviewId가 누락되었습니다.")
     }
   }
@@ -108,7 +114,6 @@ const StepThree = ({
   const handleCopy = () => {
     if (textRef.current) {
       const text = textRef.current.innerText
-
       try {
         navigator.clipboard.writeText(text)
         addToast("내용이 복사됐어요.", "copy", 1000, "copy")
@@ -121,7 +126,8 @@ const StepThree = ({
   // 모달 확인 버튼 핸들러
   const handleModalConfirm = async () => {
     setResultModalOpen(false)
-    if (modalConfirmText === "재인증") {
+    if (modalConfirmText === "다시시도") {
+      setLoadingModalOpen(false)
       handleButtonClick()
     } else if (modalConfirmText === "리뷰검수하기") {
       // 데이터 다시 가져오기
@@ -133,8 +139,13 @@ const StepThree = ({
 
   // 모달 취소 버튼 핸들러
   const handleModalCancel = () => {
-    setResultModalOpen(false)
-    navigate(RoutePath.MyPointLog)
+    if (modalCancelText === "나의 캠페인 내역") {
+      setResultModalOpen(false)
+      navigate(RoutePath.MyCampaign)
+    } else {
+      setResultModalOpen(false)
+      navigate(RoutePath.MyPointLog)
+    }
   }
 
   // 새 창으로 이동하는 핸들러

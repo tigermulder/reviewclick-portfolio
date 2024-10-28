@@ -22,6 +22,7 @@ export const getCampaignList = async (
 export const getCampaignItem = async (
   data: CampaignItemRequest
 ): Promise<CampaignItemResponse> => {
+  // await new Promise((resolve) => setTimeout(resolve, 3000))
   const response = await axiosInstance.post<CampaignItemResponse>(
     "/campaign/item",
     data
