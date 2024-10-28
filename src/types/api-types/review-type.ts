@@ -127,11 +127,11 @@ export interface ReviewAuthResponse {
 }
 
 //** 리뷰 저장 요청 type */
-export interface ReviewSaveRequest {
+export interface ReviewConfirmRequest {
   reviewId: number
   reviewText: string
 }
-export interface ReviewSaveResponse {
+export interface ReviewConfirmResponse {
   statusCode: number
   errorCode?: number
   error?: string
@@ -139,7 +139,7 @@ export interface ReviewSaveResponse {
 }
 
 //** 리뷰 내용 검토 type */
-export interface ReviewConfirmResponse {
+export interface ReviewUploadResponse {
   statusCode: number
   errorCode?: number
   error?: string

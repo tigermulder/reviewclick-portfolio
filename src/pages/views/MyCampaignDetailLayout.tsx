@@ -6,7 +6,11 @@ import useScrollToTop from "@/hooks/useScrollToTop"
 import ReuseHeader from "@/components/ReuseHeader"
 import dummyImage from "assets/dummy-image.png"
 import { calculateRemainingTime } from "@/utils/util"
-import { HeaderStatusType, HEADER_TITLES, STEP_STATUS_MAP } from "@/components/StepTitle"
+import {
+  HeaderStatusType,
+  HEADER_TITLES,
+  STEP_STATUS_MAP,
+} from "@/components/StepTitle"
 import StepOne from "./MyCampaignDetail/StepOne"
 import StepTwo from "./MyCampaignDetail/StepTwo"
 import StepThree from "./MyCampaignDetail/StepThree"
@@ -14,17 +18,31 @@ import StepThree from "./MyCampaignDetail/StepThree"
 const MyCampaignDetailLayout = () => {
   const { reviewId } = useParams<{ reviewId: string }>()
   const [currentStep, setCurrentStep] = useState<number>(1)
-  const [validatedReviewText, setValidatedReviewText] = useState<string>("")
+
+  const LOCAL_STORAGE_KEY = `validatedReviewText_${reviewId}`
+  // 초기값을 로컬 스토리지에서 가져오기
+  const [validatedReviewText, setValidatedReviewText] = useState<string>(() => {
+    const storedText = localStorage.getItem(LOCAL_STORAGE_KEY)
+    return storedText || ""
+  })
+
+  useEffect(() => {
+    if (validatedReviewText) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, validatedReviewText)
+    } else {
+      localStorage.removeItem(LOCAL_STORAGE_KEY)
+    }
+  }, [validatedReviewText, LOCAL_STORAGE_KEY])
 
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
   // ** 다음스텝함수 */
   const goToNextStep = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
-  };
+    setCurrentStep((prevStep) => prevStep + 1)
+  }
 
-  //** My리뷰내역Detail fetch */ 
+  //** My리뷰내역Detail fetch */
   const fetchCampaignListItem = async (reviewId: string) => {
     const reviewIdKey = {
       reviewId,
@@ -37,8 +55,8 @@ const MyCampaignDetailLayout = () => {
     queryFn: () => fetchCampaignListItem(reviewId as string),
     enabled: !!reviewId,
     refetchOnWindowFocus: true, // 창이 포커스될 때 데이터 갱신
-    refetchOnMount: true,       // 컴포넌트 마운트 시 데이터 갱신
-    staleTime: 0,               // 데이터가 항상 최신이 아니라고 간주
+    refetchOnMount: true, // 컴포넌트 마운트 시 데이터 갱신
+    staleTime: 0, // 데이터가 항상 최신이 아니라고 간주
   })
   const {
     status,
@@ -63,20 +81,20 @@ const MyCampaignDetailLayout = () => {
 
   //** 상세 스텝 결정 */
   useEffect(() => {
-    if (status === "join" || status === "purchase") {
+    if (status === "join") {
       setCurrentStep(1)
-    } else if (status === "confirm") {
+    } else if (status === "purchase") {
       setCurrentStep(2)
-    } else if (status === "upload") {
+    } else if (status === "confirm" || status === "upload") {
       setCurrentStep(3)
     }
   }, [status])
 
   const currentStatus = STEP_STATUS_MAP[currentStep]
 
-  //** ReuseHeader 제목 */ 
+  //** ReuseHeader 제목 */
   const headerTitle: React.ReactNode =
-    (currentStatus && HEADER_TITLES[currentStatus])
+    currentStatus && HEADER_TITLES[currentStatus]
 
   const renderStepContent = (): JSX.Element | null => {
     switch (currentStep) {
@@ -91,7 +109,7 @@ const MyCampaignDetailLayout = () => {
             remainingTime={remainingTime}
             campaignsUrl={campaignUrl}
             goToNextStep={goToNextStep}
-            refetchData={refetch} 
+            refetchData={refetch}
           />
         )
       case 2:
@@ -105,16 +123,16 @@ const MyCampaignDetailLayout = () => {
             remainingTime={remainingTime}
             creatTime={creatAt}
             goToNextStep={goToNextStep}
-            refetchData={refetch} 
+            refetchData={refetch}
             setValidatedReviewText={setValidatedReviewText}
           />
         )
       case 3:
         return (
-          <StepThree 
-            reviewIdKey={reviewId}             
+          <StepThree
+            reviewIdKey={reviewId}
             goToNextStep={goToNextStep}
-            refetchData={refetch}  
+            refetchData={refetch}
             validatedReviewText={validatedReviewText}
           />
         )

@@ -11,13 +11,15 @@ import StepFailed from "assets/ico_step_failed.svg"
 
 const ProgressStep = ({ status }: ProgressStepProps) => {
   const isMissionFailed = status === "giveup" || status === "timeout"
+  const isReviewFailed = status === "confirm" || status === "upload"
   const fourthStepName = isMissionFailed ? "미션중단" : "지급완료"
+  const threeStepName = isReviewFailed ? "리뷰등록" : "리뷰등록"
   const fourthStepIcon = isMissionFailed ? StepFailed : StepSuccess
 
   const steps = [
-    { name: "상품구매", key: "purchase" },
-    { name: "리뷰검수", key: "confirm" },
-    { name: "리뷰등록", key: "upload" },
+    { name: "상품구매", key: "join" },
+    { name: "리뷰검수", key: "purchase" },
+    { name: threeStepName, key: "confirm" },
     { name: fourthStepName, key: "reward" }, // 4단계는 조건부
   ]
 

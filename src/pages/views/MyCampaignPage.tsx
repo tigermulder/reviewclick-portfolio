@@ -50,12 +50,8 @@ const MyCampaignPage = () => {
   const { data } = useQuery({
     queryKey: ["reviewList"],
     queryFn: fetchCampaignList,
-    refetchInterval: 10 * 60 * 1000, // 10분 마다 리패치
-    staleTime: 10 * 60 * 1000, // 10분 동안 데이터가 신선함
-    gcTime: 11 * 60 * 1000, // 11분 동안 캐시 유지
     refetchOnMount: true,
-    refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
+    staleTime: 0,
   })
   // ** 현재 신청한캠페인 갯수 */
   const reviewLength = data?.totalItems

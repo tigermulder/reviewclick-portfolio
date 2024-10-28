@@ -3,11 +3,11 @@ import Button from "@/components/Button"
 import IconNotice from "assets/ico_notice.svg?url"
 import { StepThreeProps } from "@/types/component-types/my-campaigndetail-type"
 import { useState, useRef } from "react"
-import { confirmReview } from "@/services/review"
+import { uploadReview } from "@/services/review"
 import SampleReviewImage from "assets/pro-sample-text.png"
 import { ReviewAuthResponse } from "@/types/api-types/review-type"
-import Modal from "@/components/Modal";
-import { useNavigate } from "react-router-dom";
+import Modal from "@/components/Modal"
+import { useNavigate } from "react-router-dom"
 import useToast from "@/hooks/useToast"
 import { RoutePath } from "@/types/route-path"
 
@@ -18,18 +18,20 @@ const StepThree = ({
   refetchData,
 }: StepThreeProps): JSX.Element => {
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [files, setFile] = useState<File | null>(null);
+  const [files, setFile] = useState<File | null>(null)
   const textRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const { addToast } = useToast()
 
-  //** 모달 상태 관리 */ 
-  const [isLoadingModalOpen, setLoadingModalOpen] = useState(false);
-  const [isResultModalOpen, setResultModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState<string>("");
-  const [modalContent, setModalContent] = useState<string | React.ReactNode>("");
-  const [modalConfirmText, setModalConfirmText] = useState<string>("확인");
-  const [modalCancelText, setModalCancelText] = useState<string | undefined>(undefined);
+  //** 모달 상태 관리 */
+  const [isLoadingModalOpen, setLoadingModalOpen] = useState(false)
+  const [isResultModalOpen, setResultModalOpen] = useState(false)
+  const [modalTitle, setModalTitle] = useState<string>("")
+  const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
+  const [modalConfirmText, setModalConfirmText] = useState<string>("확인")
+  const [modalCancelText, setModalCancelText] = useState<string | undefined>(
+    undefined
+  )
 
   // 버튼 클릭 시 파일 선택 창 열기
   const handleButtonClick = () => {
@@ -39,24 +41,24 @@ const StepThree = ({
   const handleReceiptOCR = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    event.preventDefault();
-    const files = event.currentTarget.files;
+    event.preventDefault()
+    const files = event.currentTarget.files
     if (files && reviewIdKey) {
-      const file = files[0];
-      setFile(file);
-      const formData = new FormData();
-      formData.append("reviewId", reviewIdKey);
-      formData.append("image", file);
+      const file = files[0]
+      setFile(file)
+      const formData = new FormData()
+      formData.append("reviewId", reviewIdKey)
+      formData.append("image", file)
       // 로딩 모달 열기
-      setLoadingModalOpen(true);
+      setLoadingModalOpen(true)
       try {
-        // const response: ReviewAuthResponse = await confirmReview(formData)
-        const response = {
-          statusCode: 0, 
-        };
+        const response: ReviewAuthResponse = await uploadReview(formData)
+        // const response = {
+        //   statusCode: 0,
+        // };
 
         if (response.statusCode === 0) {
-          setModalTitle("👏 축하드려요!");
+          setModalTitle("👏 축하드려요!")
           setModalContent(
             <>
               <p>
@@ -65,12 +67,12 @@ const StepThree = ({
                 ‘포인트 적립내역’에서 확인할 수 있어요.
               </p>
             </>
-          );
-          setModalConfirmText("리뷰검수하기");
-          setModalCancelText("확인");
-          setResultModalOpen(true);
+          )
+          setModalConfirmText("리뷰검수하기")
+          setModalCancelText("확인")
+          setResultModalOpen(true)
         } else {
-          setModalTitle("⛔ 앗, 잠깐!");
+          setModalTitle("⛔ 앗, 잠깐!")
           setModalContent(
             <>
               <p>
@@ -78,13 +80,13 @@ const StepThree = ({
                 이미지 확인 후 다시 시도해주세요.
               </p>
             </>
-          );
-          setModalConfirmText("다시시도");
-          setModalCancelText("뒤로가기");
-          setResultModalOpen(true);
+          )
+          setModalConfirmText("다시시도")
+          setModalCancelText("뒤로가기")
+          setResultModalOpen(true)
         }
       } catch (error) {
-        setModalTitle("⛔ 앗, 잠깐!");
+        setModalTitle("⛔ 앗, 잠깐!")
         setModalContent(
           <>
             <p>
@@ -92,10 +94,10 @@ const StepThree = ({
               이미지 확인 후 다시 시도해주세요.
             </p>
           </>
-        );
-        setModalConfirmText("다시시도");
-        setModalCancelText("뒤로가기");
-        setResultModalOpen(true);
+        )
+        setModalConfirmText("다시시도")
+        setModalCancelText("뒤로가기")
+        setResultModalOpen(true)
       }
     } else {
       // 파일 또는 reviewId가 없는 경우 처리
@@ -131,9 +133,9 @@ const StepThree = ({
 
   // 모달 취소 버튼 핸들러
   const handleModalCancel = () => {
-    setResultModalOpen(false);
+    setResultModalOpen(false)
     navigate(RoutePath.MyPointLog)
-  };
+  }
 
   // 새 창으로 이동하는 핸들러
   const handleNavigate = () => {
@@ -147,19 +149,23 @@ const StepThree = ({
       {/* 로딩 모달 */}
       <Modal
         isOpen={isLoadingModalOpen}
-        isLoading={true} onConfirm={function (): void {
-          throw new Error("Function not implemented.");
-        } } onCancel={function (): void {
-          throw new Error("Function not implemented.");
-        } } title={"리뷰를 확인중이에요"}
+        isLoading={true}
+        onConfirm={function (): void {
+          throw new Error("Function not implemented.")
+        }}
+        onCancel={function (): void {
+          throw new Error("Function not implemented.")
+        }}
+        title={"리뷰를 확인중이에요"}
         content={
           <>
             <p>
-              등록한 실리뷰를 확인하고 있어요.<br /> 
+              등록한 실리뷰를 확인하고 있어요.
+              <br />
               문제가 없으면 포인트가 바로 지급돼요.
             </p>
           </>
-        } 
+        }
       />
       {/* 결과 모달 */}
       <Modal

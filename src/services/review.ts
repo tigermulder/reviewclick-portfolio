@@ -9,9 +9,9 @@ import {
   ReviewCancelRequest,
   ReviewCancelResponse,
   ReviewAuthResponse,
-  ReviewSaveRequest,
-  ReviewSaveResponse,
+  ReviewConfirmRequest,
   ReviewConfirmResponse,
+  ReviewUploadResponse,
 } from "types/api-types/review-type"
 
 //** 리뷰 참여 리스트 요청 API */
@@ -70,18 +70,18 @@ export const authReview = async (
 }
 
 //** 리뷰 저장 API */
-export const saveReview = async (
-  data: ReviewSaveRequest
-): Promise<ReviewSaveResponse> => {
-  const response = await axiosInstance.post<ReviewSaveResponse>(
-    "/review/save",
+export const confirmReview = async (
+  data: ReviewConfirmRequest
+): Promise<ReviewConfirmResponse> => {
+  const response = await axiosInstance.post<ReviewConfirmResponse>(
+    "/review/confirm",
     data
   )
   return response.data
 }
 
 //** 리뷰 내용 검토 API */
-export const confirmReview = async (
+export const uploadReview = async (
   data: FormData
 ): Promise<ReviewConfirmResponse> => {
   const response = await axiosInstance.post<ReviewConfirmResponse>(
