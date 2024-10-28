@@ -223,7 +223,7 @@ const CartTitle = styled.div`
 
 const CartStepContainer = styled.ul`
   margin: 0 -1.5rem;
-  padding: 4rem 1.5rem 0 2.6rem;
+  padding: 4rem 1.5rem 10rem 2.6rem;
   min-height: 100vh;
   background: var(--whitewood);
 

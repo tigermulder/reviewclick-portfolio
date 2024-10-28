@@ -128,8 +128,17 @@ const StepTwo = ({
     } catch (error) {
       // 로딩 모달 닫기
       setLoadingModalOpen(false)
-      setModalTitle("️⛔ 에러")
-      setModalContent("서버 에러가 발생하였습니다.")
+      setModalTitle("️⛔ 앗, 잠깐!")
+      setModalContent(
+        <p>
+          부정적인 리뷰는
+          <br />
+          포인트 적립에 영향을 줄 수 있어요.
+          <br />
+          긍정적인 사용 경험을 중심으로 수정 후<br />
+          검수를 다시 받아보세요.
+        </p>
+      )
       setModalConfirmText("재검수하기")
       setModalCancelText("닫기")
       setResultModalOpen(true)
@@ -291,7 +300,7 @@ const StepTwo = ({
 export default StepTwo
 
 const CartTest = styled.div`
-  padding: 6rem 0 9.8rem;
+  padding: 6rem 10rem 9.8rem;
 `
 const CampaignStatus = styled.div`
   position: relative;
