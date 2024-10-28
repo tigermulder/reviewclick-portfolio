@@ -226,21 +226,21 @@ const IconItem = styled.div`
 `
 
 const IconClipStyled = styled(IconClip)`
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   object-fit: contain;
 `
 
 const IconMoreStyled = styled(IconMore)`
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   object-fit: contain;
 `
 
 // 카카오톡 아이콘 배경 설정
 const IconKaKaoBackground = styled.div`
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   background: url(${IconKaKaoURL}) #ffe617 no-repeat center / 50%;
   border-radius: 50%;
   display: flex;
