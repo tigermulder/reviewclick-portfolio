@@ -2,6 +2,7 @@ import { lazy } from "react"
 import { Route, Routes as ReactRouterRoutes } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
+import MyPointPage from "./views/MyPointPage"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/JoinPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
@@ -40,6 +41,8 @@ export const AppRoute = () => {
           path="/my_campaign/:reviewId"
           element={<MyCampaignDetailLayout />}
         />
+        {/* 나의 캠페인 페이지 */}
+        <Route path={RoutePath.UserPointLog} element={<MyPointPage />} />
       </Route>
     </ReactRouterRoutes>
   )

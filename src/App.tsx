@@ -21,13 +21,16 @@ function App() {
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
-    isCampaignDetail || isReviewDetail
+    location.pathname === RoutePath.UserPointLog ||
+    isCampaignDetail ||
+    isReviewDetail
   const hideTapBar =
     location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
-    isCampaignDetail || isReviewDetail
+    isCampaignDetail ||
+    isReviewDetail
   const showFooter = location.pathname === RoutePath.Home && !isCampaignDetail
 
   return (

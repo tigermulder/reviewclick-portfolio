@@ -29,7 +29,8 @@ export type RoutePathHook =
   | typeof RoutePath.MyCampaign
   | ReturnType<typeof RoutePath.MyReivewDetail>
   | ReturnType<typeof RoutePath.CampaignDetail>
-  | ReturnType<typeof RoutePath.UserProfile>
+  | typeof RoutePath.UserProfile
+  | typeof RoutePath.UserPointLog
 
 // ** 남은일자계산 */
 export interface RemainingTime {

@@ -93,7 +93,7 @@ const MyCampaignPage = () => {
 
           const handleButtonClick = () => {
             if (button.text === "지급완료") {
-              router.push(RoutePath.MyPointLog)
+              router.push(RoutePath.UserPointLog)
             } else if (button.text === "미션중단") {
               router.push(RoutePath.Notification)
             } else {

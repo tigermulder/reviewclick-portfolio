@@ -144,7 +144,7 @@ const StepThree = ({
       navigate(RoutePath.MyCampaign)
     } else {
       setResultModalOpen(false)
-      navigate(RoutePath.MyPointLog)
+      navigate(RoutePath.UserPointLog)
     }
   }
 

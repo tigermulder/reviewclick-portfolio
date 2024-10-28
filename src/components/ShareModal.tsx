@@ -192,7 +192,7 @@ const ShareHeader = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: 0.1rem solid var(--n20-color);
-  padding: 1.3rem 0;
+  padding: 1.5rem 0;
 `
 
 const CloseButton = styled.button`

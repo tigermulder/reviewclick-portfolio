@@ -94,8 +94,8 @@ const BottomTabBar = () => {
       </NavItem>
       <NavItem $active={activeTab === "alerts"}>
         <StyledLink
-          to="/alerts"
-          onClick={(e) => handleTabClick("alerts", true, "/alerts", e)}
+          to={RoutePath.Alert}
+          onClick={(e) => handleTabClick("alerts", true, RoutePath.Alert, e)}
         >
           <NavItemContent>
             <StyledIcon as={IconAlerts} $active={activeTab === "alerts"} />
@@ -105,8 +105,10 @@ const BottomTabBar = () => {
       </NavItem>
       <NavItem $active={activeTab === "profile"}>
         <StyledLink
-          to="/profile"
-          onClick={(e) => handleTabClick("profile", true, "/profile", e)}
+          to={RoutePath.UserProfile}
+          onClick={(e) =>
+            handleTabClick("profile", true, RoutePath.UserProfile, e)
+          }
         >
           <NavItemContent>
             <StyledIcon as={IconProfile} $active={activeTab === "profile"} />
