@@ -27,10 +27,10 @@ const ShareModal = () => {
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href)
-      addToast("링크가 복사되었습니다.", "info", 1000, "link")
+      addToast("링크가 복사되었습니다.", "copy", 1000, "copy")
     } catch (error) {
       console.error("링크 복사 실패:", error)
-      addToast("링크 복사 실패.", "warning", 1000, "link")
+      addToast("링크 복사 실패.", "warning", 1000, "copy")
     }
   }
 
@@ -226,21 +226,21 @@ const IconItem = styled.div`
 `
 
 const IconClipStyled = styled(IconClip)`
-  width: 58px;
-  height: 58px;
+  width: 4rem;
+  height: 4rem;
   object-fit: contain;
 `
 
 const IconMoreStyled = styled(IconMore)`
-  width: 58px;
-  height: 58px;
+  width: 4rem;
+  height: 4rem;
   object-fit: contain;
 `
 
 // 카카오톡 아이콘 배경 설정
 const IconKaKaoBackground = styled.div`
-  width: 58px;
-  height: 58px;
+  width: 4rem;
+  height: 4rem;
   background: url(${IconKaKaoURL}) #ffe617 no-repeat center / 50%;
   border-radius: 50%;
   display: flex;

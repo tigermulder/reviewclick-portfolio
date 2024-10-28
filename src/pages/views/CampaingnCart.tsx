@@ -3,12 +3,13 @@ import { campaignLikeState } from "@/store/mainpage-recoil"
 import LikeButton from "components/LikeButton"
 import FilterDropDown from "@/components/FilterDropDown"
 import dummyImage from "assets/dummy-image.png"
-import { useNavigate } from "react-router-dom"
+import { Route, useNavigate } from "react-router-dom"
 import useToast from "@/hooks/useToast"
 import { filteredCampaignsSelector } from "@/store/dropdown-recoil"
 import ReuseHeader from "@/components/ReuseHeader"
 import { campaignListState } from "@/store/mainpage-recoil"
 import styled from "styled-components"
+import { RoutePath } from "@/types/route-path"
 
 const CampaignCart = () => {
   const campaignList = useRecoilValue(campaignListState)
@@ -61,7 +62,14 @@ const CampaignCart = () => {
             const isEnded = remainingTime === "캠페인 종료"
 
             return (
-              <CampaignItem key={campaign.campaignId}>
+              <CampaignItem
+                key={campaign.campaignId}
+                onClick={() =>
+                  navigate(
+                    RoutePath.CampaignDetail(String(campaign.campaignId))
+                  )
+                }
+              >
                 <CampaignThumb>
                   <CampaignImage
                     src={campaign.thumbnailUrl || dummyImage}
