@@ -300,7 +300,7 @@ const StepTwo = ({
 export default StepTwo
 
 const CartTest = styled.div`
-  padding: 6rem 10rem 9.8rem;
+  padding: 6rem 0 10rem;
 `
 const CampaignStatus = styled.div`
   position: relative;
