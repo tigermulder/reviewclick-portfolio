@@ -96,7 +96,6 @@ const StepTwo = ({
       setLoadingModalOpen(false)
       if (response.statusCode === 0) {
         // 부모 컴포넌트 상태 업데이트
-        localStorage.setItem("reviewText", reviewText)
         setValidatedReviewText(reviewText)
         setModalTitle("📝 거의 다 왔어요!")
         setModalContent(

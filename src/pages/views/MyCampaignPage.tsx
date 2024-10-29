@@ -13,6 +13,7 @@ import dummyImage from "assets/dummy-image.png"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import { calculateRemainingTime } from "@/utils/util"
 import { RoutePath } from "@/types/route-path"
+import ReuseHeader from "@/components/ReuseHeader"
 import styled from "styled-components"
 
 const MyCampaignPage = () => {
@@ -66,6 +67,7 @@ const MyCampaignPage = () => {
 
   return (
     <>
+      <ReuseHeader title="나의 캠페인" />
       <FilterCalendar
         chips={chips}
         selectedChip={selectedChip}

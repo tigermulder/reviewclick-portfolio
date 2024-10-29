@@ -106,3 +106,15 @@ export const calculateRemainingTime = (
 
   return { remainingTime, isEnded }
 }
+
+// ** 이메일추출 함수 */
+export const extractUsername = (email: string | null): string | null => {
+  if (email === null) {
+    return null
+  }
+  const atIndex = email.indexOf("@")
+  if (atIndex === -1) {
+    return email
+  }
+  return email.substring(0, atIndex)
+}

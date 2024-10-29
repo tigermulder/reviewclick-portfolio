@@ -10,7 +10,7 @@ const MyPointPage = () => {
     <MyPointContainer>
       <ReuseHeader
         title="포인트 적립 내역"
-        onBack={() => navigate(RoutePath.MyCampaign)}
+        onBack={() => navigate(RoutePath.UserProfile)}
       />
       <MyPoinListContainer>
         <li>

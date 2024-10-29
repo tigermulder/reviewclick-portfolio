@@ -30,9 +30,11 @@ const ReuseHeader = ({
 
   return (
     <HeaderContainer>
-      <BackButton onClick={handleBack}>
-        <BackIcon />
-      </BackButton>
+      {onBack && (
+        <BackButton onClick={handleBack}>
+          <BackIcon />
+        </BackButton>
+      )}
       <Title>{title}</Title>
       {/* 스텝이 존재하는 경우 */}
       {steps && steps.length > 0 && (

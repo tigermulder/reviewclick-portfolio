@@ -16,8 +16,10 @@ export interface LoginRequest {
 export interface LoginResponse {
   statusCode: number
   nickname: string
-  phone: string
+  email: string
   token: string
+  spaceName: string
+  fromPartner: boolean
   errorCode?: number // optional
   error?: string // optional
 }

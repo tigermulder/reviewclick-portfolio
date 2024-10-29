@@ -1,5 +1,5 @@
 export const RoutePath = {
-  Home: "/main",
+  Home: "/",
   Login: "/login",
   Join: "/join",
   FindId: "/find_id",
@@ -8,10 +8,11 @@ export const RoutePath = {
   MyCampaign: "/my_campaign",
   Notification: "/notification",
   Alert: "/alert",
-  MyReivewDetail: (reviewId: string) => `/my_campaign/${reviewId}`,
-  CampaignDetail: (campaignId: string) => `/campaign/${campaignId}`,
   UserProfile: "/user",
   UserPointLog: "/user/my_pointLog",
+  UserServiceGuide: "/user/my_ServiceGuide",
+  MyReivewDetail: (reviewId: string) => `/my_campaign/${reviewId}`,
+  CampaignDetail: (campaignId: string) => `/campaign/${campaignId}`,
 } as const
 
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath]

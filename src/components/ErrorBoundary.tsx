@@ -21,10 +21,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   // 에러 메시지 렌더링
   renderErrorMessage(): ReactNode {
     if (this.state.error?.message.includes("Network Error")) {
-      return "네트워크 오류가 발생했습니다. 인터넷 연결을 확인하세요."
+      return "Wi-Fi 또는 셀룰러 데이터 연결을 확인한 후 다시 시도해주세요."
     }
     if (this.state.error?.message.includes("404")) {
-      return "요청한 페이지를 찾을 수 없습니다. 잘못된 URL입니다."
+      return "입력한 주소가 정확한 지 다시 한 번 확인해주세요."
     }
     if (
       this.state.error?.message.includes("502") ||
@@ -47,9 +47,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <ErrorContainer>
-          <ErrorTitle>문제가 발생했습니다.</ErrorTitle>
+          <ErrorTitle>네트워크가 불안정해요</ErrorTitle>
           <ErrorMessage>{this.renderErrorMessage()}</ErrorMessage>
-          <Button onClick={() => window.location.reload()} $variant="red">
+          <Button onClick={() => window.location.reload()} $variant="pink">
             다시 시도하기
           </Button>
         </ErrorContainer>

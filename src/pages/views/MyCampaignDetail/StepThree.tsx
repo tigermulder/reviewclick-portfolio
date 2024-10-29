@@ -15,6 +15,7 @@ const StepThree = ({
   validatedReviewText,
   goToNextStep,
   refetchData,
+  LOCAL_STORAGE_KEY,
 }: StepThreeProps): JSX.Element => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [files, setFile] = useState<File | null>(null)
@@ -73,6 +74,8 @@ const StepThree = ({
           setModalConfirmText("리뷰검수하기")
           setModalCancelText("확인")
           setResultModalOpen(true)
+          // 로컬스토리지 복사텍스트 삭제
+          localStorage.removeItem(LOCAL_STORAGE_KEY)
         } else {
           setModalTitle("⛔ 앗, 잠깐!")
           setModalContent(

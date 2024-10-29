@@ -53,26 +53,23 @@ const ButtonContainer = styled.div`
 const StyledButton = styled.button.attrs<{ $isActive: boolean }>(
   ({ $isActive }) => ({
     style: {
-      backgroundColor: $isActive ? "#E50B14" : "white",
-      color: $isActive ? "white" : "#747474",
+      backgroundColor: $isActive ? "var(--revu-color)" : "white",
+      color: $isActive ? "white" : "var(--n300-color)",
     },
   })
 )<{ $isActive: boolean }>`
-  padding: 6px 12px;
+  padding: 0.5rem 1.1rem;
   border-radius: 999px;
   border: 1px solid #eeeeee;
   font-weight: var(--font-weight-medium);
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ $isActive }) => ($isActive ? "#E50B14" : "#f5f5f5")};
-    border-color: ${({ $isActive }) => ($isActive ? "#E50B14" : "#eeeeee")};
+    background-color: ${({ $isActive }) =>
+      $isActive ? "var(--revu-color)" : "#f5f5f5"};
+    border-color: ${({ $isActive }) =>
+      $isActive ? "var(--revu-color)" : "#eeeeee"};
     font-weight: ${({ $isActive }) =>
       $isActive ? "var(--font-weight-bold)" : "var(--font-weight-medium)"};
-  }
-
-  &:active {
-    background-color: ${({ $isActive }) => ($isActive ? "#C20810" : "#ebebeb")};
-    border-color: ${({ $isActive }) => ($isActive ? "#C20810" : "#eeeeee")};
   }
 `

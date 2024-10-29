@@ -134,6 +134,7 @@ const MyCampaignDetailLayout = () => {
             goToNextStep={goToNextStep}
             refetchData={refetch}
             validatedReviewText={validatedReviewText}
+            LOCAL_STORAGE_KEY={LOCAL_STORAGE_KEY}
           />
         )
       default:

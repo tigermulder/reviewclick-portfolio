@@ -74,9 +74,13 @@ const LoginPage = () => {
     mutationFn: login,
     onSuccess: (data) => {
       const token = data.token
+      const nickname = data.nickname
+      const email = data.email
       if (token) {
         setAuth({ isLoggedIn: true, token }) // Recoil 상태 업데이트
         addToast("로그인이 완료되었습니다.", "check", 1000)
+        localStorage.setItem("nickname", nickname)
+        localStorage.setItem("email", email)
         navigate(RoutePath.Home)
       } else {
         console.error("Token not found in response:", data)

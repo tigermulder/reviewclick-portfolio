@@ -1,4 +1,3 @@
-
 export interface ReviewAuthResponseError {
   statusCode: -1
   errorCode: number
@@ -67,7 +66,7 @@ export interface StepTwoProps {
   creatTime: string
   goToNextStep: () => void
   refetchData: () => void
-  setValidatedReviewText: (text: string) => void;
+  setValidatedReviewText: (text: string) => void
 }
 // ** 스텝 3번 */
 export interface StepThreeProps {
@@ -75,4 +74,5 @@ export interface StepThreeProps {
   validatedReviewText: string
   goToNextStep: () => void
   refetchData: () => void
+  LOCAL_STORAGE_KEY: string
 }

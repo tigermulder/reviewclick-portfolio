@@ -22,6 +22,9 @@ function App() {
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.UserPointLog ||
+    location.pathname === RoutePath.UserProfile ||
+    location.pathname === RoutePath.MyCampaign ||
+    location.pathname === RoutePath.UserServiceGuide ||
     isCampaignDetail ||
     isReviewDetail
   const hideTapBar =

@@ -2,7 +2,6 @@ import { lazy } from "react"
 import { Route, Routes as ReactRouterRoutes } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
-import MyPointPage from "./views/MyPointPage"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/JoinPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
@@ -13,6 +12,11 @@ const FindPasswordPage = lazy(() => import("./views/FindPasswordPage"))
 const MyCampaignPage = lazy(() => import("./views/MyCampaignPage"))
 const MyCampaignDetailLayout = lazy(
   () => import("./views/MyCampaignDetailLayout")
+)
+const MyPage = lazy(() => import("./views/MyPage"))
+const MyPointPage = lazy(() => import("./views/MyPageDetail/MyPointPage"))
+const MyServiceGuidePage = lazy(
+  () => import("./views/MyPageDetail/MypageServicePage")
 )
 
 export const AppRoute = () => {
@@ -36,13 +40,20 @@ export const AppRoute = () => {
         <Route path={RoutePath.MyCart} element={<CampaignCart />} />
         {/* 나의 캠페인 페이지 */}
         <Route path={RoutePath.MyCampaign} element={<MyCampaignPage />} />
-        {/* 나의 캠페인 페이지 */}
+        {/* 나의 캠페인 detail 페이지 */}
         <Route
           path="/my_campaign/:reviewId"
           element={<MyCampaignDetailLayout />}
         />
-        {/* 나의 캠페인 페이지 */}
+        {/* 내 정보 */}
+        <Route path={RoutePath.UserProfile} element={<MyPage />} />
+        {/* 내 정보 포인트 내역 */}
         <Route path={RoutePath.UserPointLog} element={<MyPointPage />} />
+        {/* 내 정보 서비스 이용가이드 */}
+        <Route
+          path={RoutePath.UserServiceGuide}
+          element={<MyServiceGuidePage />}
+        />
       </Route>
     </ReactRouterRoutes>
   )

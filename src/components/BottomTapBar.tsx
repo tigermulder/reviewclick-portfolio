@@ -27,10 +27,10 @@ const BottomTabBar = () => {
       setActiveTab("campaign")
     } else if (currentPath === RoutePath.Home) {
       setActiveTab("home")
-    } else if (currentPath === "/alerts") {
+    } else if (currentPath.startsWith("/alerts/")) {
       setActiveTab("alerts")
-    } else if (currentPath === "/profile") {
-      setActiveTab("profile")
+    } else if (currentPath.startsWith("/user/")) {
+      setActiveTab("user")
     } else if (currentPath === "/") {
       setActiveTab("home")
     }
@@ -103,16 +103,16 @@ const BottomTabBar = () => {
           </NavItemContent>
         </StyledLink>
       </NavItem>
-      <NavItem $active={activeTab === "profile"}>
+      <NavItem $active={activeTab === "user"}>
         <StyledLink
           to={RoutePath.UserProfile}
           onClick={(e) =>
-            handleTabClick("profile", true, RoutePath.UserProfile, e)
+            handleTabClick("user", true, RoutePath.UserProfile, e)
           }
         >
           <NavItemContent>
-            <StyledIcon as={IconProfile} $active={activeTab === "profile"} />
-            <NavText $active={activeTab === "profile"}>내 정보</NavText>
+            <StyledIcon as={IconProfile} $active={activeTab === "user"} />
+            <NavText $active={activeTab === "user"}>내 정보</NavText>
           </NavItemContent>
         </StyledLink>
       </NavItem>

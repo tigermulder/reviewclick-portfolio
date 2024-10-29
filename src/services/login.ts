@@ -16,6 +16,8 @@ export const checkLoginStatus = async (): Promise<LoginCheckResponse> => {
 //** 로그인 처리 API */
 export const login = async (data: LoginRequest): Promise<LoginResponse> => {
   const response = await axiosInstance.post<LoginResponse>("/login", data)
+
+  console.log(response)
   return response.data
 }
 
