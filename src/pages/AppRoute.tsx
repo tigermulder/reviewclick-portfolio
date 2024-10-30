@@ -16,7 +16,7 @@ const MyCampaignDetailLayout = lazy(
 const MyPage = lazy(() => import("./views/MyPage"))
 const MyPointPage = lazy(() => import("./views/MyPageDetail/MyPointPage"))
 const MyServiceGuidePage = lazy(
-  () => import("./views/MyPageDetail/MypageServicePage")
+  () => import("./views/MyPageDetail/MyServicePage")
 )
 
 export const AppRoute = () => {

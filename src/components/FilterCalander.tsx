@@ -1,12 +1,10 @@
 import styled from "styled-components"
-import IconCalendar from "assets/ico_calendar.svg?react"
 import { FilterCalendarBar } from "@/types/component-types/filter-calender"
 
 const FilterCalendar = ({
   chips,
   selectedChip,
   onSelect,
-  onFixedButtonClick,
 }: FilterCalendarBar) => {
   return (
     <FilterChipWrap>
@@ -29,9 +27,6 @@ const FilterCalendar = ({
           </Chip>
         ))}
       </FilterChipBarStyled>
-      <FixedButton onClick={onFixedButtonClick} aria-label="캘린더 버튼">
-        <IconCalendar />
-      </FixedButton>
     </FilterChipWrap>
   )
 }
@@ -41,9 +36,9 @@ export default FilterCalendar
 const FilterChipWrap = styled.div`
   position: fixed;
   width: 100%;
-  top: 4.4rem;
+  top: 5.8rem;
   left: 0;
-  padding: 2.2rem 1rem 0.8rem 1.5rem;
+  padding: 2.2rem 1.5rem 0.8rem;
   height: 6rem;
   background: var(--white);
   display: flex;
@@ -55,7 +50,7 @@ const FilterChipWrap = styled.div`
 
 const FilterChipBarStyled = styled.ul`
   margin-right: 1rem;
-  width: 90%;
+
   background: var(--white);
   display: flex;
   align-items: center;
@@ -86,26 +81,5 @@ const Chip = styled.li<{ selected: boolean }>`
   &:hover {
     background: ${({ selected }) =>
       selected ? "var(--revu-color)" : "var(--whitesmoke)"};
-  }
-`
-
-const FixedButton = styled.button`
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: 0.1rem solid var(--whitesmoke);
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.1s;
-  &:hover {
-    background-color: var(--whitesmoke);
-  }
-  svg {
-    width: 1.1rem;
-    height: 1.2rem;
-    fill: var(--n300-color);
   }
 `

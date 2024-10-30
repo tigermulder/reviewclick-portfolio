@@ -14,10 +14,13 @@ import {
 import StepOne from "./MyCampaignDetail/StepOne"
 import StepTwo from "./MyCampaignDetail/StepTwo"
 import StepThree from "./MyCampaignDetail/StepThree"
+import { useNavigate } from "react-router-dom"
+import { RoutePath } from "@/types/route-path"
 
 const MyCampaignDetailLayout = () => {
   const { reviewId } = useParams<{ reviewId: string }>()
   const [currentStep, setCurrentStep] = useState<number>(1)
+  const navigate = useNavigate()
 
   const LOCAL_STORAGE_KEY = `validatedReviewText_${reviewId}`
   // 초기값을 로컬 스토리지에서 가져오기
@@ -143,7 +146,10 @@ const MyCampaignDetailLayout = () => {
   }
   return (
     <>
-      <ReuseHeader title={headerTitle} />
+      <ReuseHeader
+        title={headerTitle}
+        onBack={() => navigate(RoutePath.MyCampaign)}
+      />
       {/* 스텝마다 다른페이지 */}
       {renderStepContent()}
     </>

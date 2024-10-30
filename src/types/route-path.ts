@@ -21,5 +21,6 @@ export interface ContentProps {
   $isSpecialPage: boolean
   $isCampaignDetail: boolean
   $isMyCampaignPage: boolean
-  $isUserPointLog: boolean
+  $isUserPointLogPage: boolean
+  $UserServiceGuidePage: boolean
 }

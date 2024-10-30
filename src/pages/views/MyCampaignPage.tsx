@@ -13,7 +13,7 @@ import dummyImage from "assets/dummy-image.png"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import { calculateRemainingTime } from "@/utils/util"
 import { RoutePath } from "@/types/route-path"
-import ReuseHeader from "@/components/ReuseHeader"
+import SinglePageHeader from "@/components/SinglePageHeader"
 import styled from "styled-components"
 
 const MyCampaignPage = () => {
@@ -22,14 +22,7 @@ const MyCampaignPage = () => {
   const router = useRouter()
   //** 스크롤 0부터시작 */
   useScrollToTop()
-  const chips = [
-    "전체",
-    "상품구매",
-    "리뷰검수",
-    "리뷰등록",
-    "지급완료",
-    "미션실패",
-  ]
+  const chips = ["전체", "상품구매"]
   const handleSelectChip = (chip: string) => {
     setSelectedChip(chip)
   }
@@ -67,12 +60,11 @@ const MyCampaignPage = () => {
 
   return (
     <>
-      <ReuseHeader title="나의 캠페인" />
+      <SinglePageHeader title="나의 캠페인" />
       <FilterCalendar
         chips={chips}
         selectedChip={selectedChip}
         onSelect={handleSelectChip}
-        onFixedButtonClick={handleFixedButtonClick}
       />
       {/* 다른 컴포넌트들 */}
       <CartCardDesc>

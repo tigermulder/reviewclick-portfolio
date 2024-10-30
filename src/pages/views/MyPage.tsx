@@ -5,7 +5,7 @@ import IconNoticeArrow from "assets/ico-notice-arrow.svg"
 import IconNew from "assets/ico-new.svg"
 import styled from "styled-components"
 import { RoutePath } from "@/types/route-path"
-import ReuseHeader from "@/components/ReuseHeader"
+import SinglePageHeader from "@/components/SinglePageHeader"
 import { extractUsername } from "@/utils/util"
 
 const MyPage = () => {
@@ -19,86 +19,76 @@ const MyPage = () => {
   return (
     <>
       {/* 마이페이지 헤더 타이틀 */}
-      <ReuseHeader title="마이페이지" />
+      <SinglePageHeader title="마이페이지" />
 
-      <Wrap>
-        {/* 타이틀 */}
-        <TitleSection>
-          <h2>
-            안녕하세요,
-            <br />
-            <span>{userNickName}</span> 회원님!
-          </h2>
-          <span>ID : {extractUsername(userEmail)}</span>
-        </TitleSection>
-        {/* /// 타이틀 */}
+      {/* 타이틀 */}
+      <TitleSection>
+        <h2>
+          안녕하세요,
+          <br />
+          <span>{userNickName}</span> 회원님!
+        </h2>
+        <span>ID : {extractUsername(userEmail)}</span>
+      </TitleSection>
+      {/* /// 타이틀 */}
 
-        {/* 하단 링크 */}
-        <Links>
-          <li>
-            <StyledLink to="/edit-info">내 정보 수정</StyledLink>
-          </li>
-          <li>
-            <StyledLink to={RoutePath.UserPointLog}>
-              포인트 적립 내역
-            </StyledLink>
-          </li>
-          <li className="service">
-            <StyledLink to={RoutePath.UserServiceGuide}>
-              서비스 이용가이드
-            </StyledLink>
-          </li>
-          <li>
-            <NoticeContainer>
-              <NoticeHeader onClick={toggleNotice}>
-                <p>유의사항</p>
-                <img
-                  src={IconNoticeArrow}
-                  alt="Toggle Notice"
-                  className={isNoticeOpen ? "" : "active"}
-                />
-              </NoticeHeader>
-              {!isNoticeOpen && (
-                <NoticeContent>
-                  <ul>
-                    <li>
-                      리뷰클릭은 네이버 계정으로만 회원가입 및 로그인이
-                      가능하며, 가입한 네이버 계정과 캠페인 참여 계정이
-                      동일해야합니다.
-                    </li>
-                    <li>
-                      기간 내 구매 및 구매 인증, 리뷰 등록 및 인증이 이루어 지지
-                      않을 경우 참여하신 캠페인은 미션 실패로 간주하며, 포인트는
-                      지급되지 않습니다.
-                    </li>
-                    <li>캠페인 참여 기회는 1일 3회 제공됩니다.</li>
-                    <li>
-                      모든 캠페인은 부정적인 글로 작성되는 경우 미션 진행 및
-                      포인트 지급에 영향을 줄 수 있으니, 긍정적인 경험을
-                      바탕으로 작성하여 주시기 바랍니다.
-                    </li>
-                    <li>
-                      부정 행위나 부적절한 행위가 발각될 경우 포인트는 지급되지
-                      않습니다.
-                    </li>
-                  </ul>
-                </NoticeContent>
-              )}
-            </NoticeContainer>
-          </li>
-        </Links>
-        {/* 하단 링크 */}
-      </Wrap>
+      {/* 하단 링크 */}
+      <Links>
+        <li>
+          <StyledLink to="/edit-info">내 정보 수정</StyledLink>
+        </li>
+        <li>
+          <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>
+        </li>
+        <li className="service">
+          <StyledLink to={RoutePath.UserServiceGuide}>
+            서비스 이용가이드
+          </StyledLink>
+        </li>
+        <li>
+          <NoticeContainer>
+            <NoticeHeader onClick={toggleNotice}>
+              <p>유의사항</p>
+              <img
+                src={IconNoticeArrow}
+                alt="Toggle Notice"
+                className={isNoticeOpen ? "" : "active"}
+              />
+            </NoticeHeader>
+            {!isNoticeOpen && (
+              <NoticeContent>
+                <ul>
+                  <li>
+                    리뷰클릭은 네이버 계정으로만 회원가입 및 로그인이 가능하며,
+                    가입한 네이버 계정과 캠페인 참여 계정이 동일해야합니다.
+                  </li>
+                  <li>
+                    기간 내 구매 및 구매 인증, 리뷰 등록 및 인증이 이루어 지지
+                    않을 경우 참여하신 캠페인은 미션 실패로 간주하며, 포인트는
+                    지급되지 않습니다.
+                  </li>
+                  <li>캠페인 참여 기회는 1일 3회 제공됩니다.</li>
+                  <li>
+                    모든 캠페인은 부정적인 글로 작성되는 경우 미션 진행 및
+                    포인트 지급에 영향을 줄 수 있으니, 긍정적인 경험을 바탕으로
+                    작성하여 주시기 바랍니다.
+                  </li>
+                  <li>
+                    부정 행위나 부적절한 행위가 발각될 경우 포인트는 지급되지
+                    않습니다.
+                  </li>
+                </ul>
+              </NoticeContent>
+            )}
+          </NoticeContainer>
+        </li>
+      </Links>
+      {/* 하단 링크 */}
     </>
   )
 }
 
 export default MyPage
-
-/* 메인 콘텐츠 랩 */
-const Wrap = styled.div`
-  margin-top: 10.4rem;
-`
 
 /* 타이틀 섹션 */
 const TitleSection = styled.div`
