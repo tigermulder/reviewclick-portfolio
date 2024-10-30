@@ -13,6 +13,17 @@
       integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
       crossorigin="anonymous"
     ></script>
+    <script>
+      (function() {
+        const hostname = window.location.hostname;
+        // 'www.revuclick.io'로 시작하는지 확인
+        if (hostname === 'www.revuclick.io') {
+          // 'www.'를 제거한 새로운 URL 생성
+          const newUrl = window.location.href.replace('www.', '');
+          window.location.replace(newUrl);
+        }
+      })();
+    </script>
   </head>
 
   <body>
