@@ -11,6 +11,7 @@ export const RoutePath = {
   UserProfile: "/user",
   UserPointLog: "/user/my_pointLog",
   UserServiceGuide: "/user/my_ServiceGuide",
+  UserEditProfile: "/user/my_EditProfile",
   MyReivewDetail: (reviewId: string) => `/my_campaign/${reviewId}`,
   CampaignDetail: (campaignId: string) => `/campaign/${campaignId}`,
 } as const

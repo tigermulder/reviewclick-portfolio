@@ -9,9 +9,6 @@ export interface LoginCheckResponse {
 export interface LoginRequest {
   email: string
   password: string
-  partner_uid?: string // optional
-  hmac?: string // optional
-  space_code?: string // optional
 }
 export interface LoginResponse {
   statusCode: number

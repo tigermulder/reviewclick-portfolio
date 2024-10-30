@@ -2,36 +2,58 @@ import ReuseHeader from "@/components/ReuseHeader"
 import { useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 import dummyImage from "assets/dummy-image.png"
+import { getRewardList } from "@/services/reward"
 import styled from "styled-components"
+import { useQuery } from "@tanstack/react-query"
+import { formatDate } from "@/utils/util"
 
 const MyPointPage = () => {
   const navigate = useNavigate()
+
+  // ** 리액트쿼리 나의 포인트내역리스트 */
+  const fetchMyRewardList = async ({ queryKey }: { queryKey: string[] }) => {
+    const [_key] = queryKey
+    const requestData = {
+      pageSize: 20,
+      pageIndex: 1,
+    }
+    const response = await getRewardList(requestData)
+    return response
+  }
+  const { data } = useQuery({
+    queryKey: ["RewardList"],
+    queryFn: fetchMyRewardList,
+    refetchOnMount: true,
+    staleTime: 0,
+  })
+  const rewardList = data?.list
+
   return (
     <MyPointContainer>
       <ReuseHeader
         title="포인트 적립 내역"
         onBack={() => navigate(RoutePath.UserProfile)}
       />
-      <MyPoinListContainer>
-        <li>
-          <MyPointCard>지급완료</MyPointCard>
-          <MyPointWrapper>
-            <ReviewCardThumb>
-              <img src={dummyImage} alt="나의캠페인 썸네일" />
-              {/* {isEnded && <DimmedBackground />}
-              <RemainingDays $isEnded={isEnded}>
-                {isEnded ? "종료" : remainingTime}
-              </RemainingDays>
-              {isEnded && <EndedOverlay />} */}
-            </ReviewCardThumb>
-            <ReviewCardInfo>
-              <CardDate>2024.8.5 16:46</CardDate>
-              <CardTitle>[리뷰] 00베이커리 모찌빵 말줄임</CardTitle>
-              <CardPoint>25000P</CardPoint>
-            </ReviewCardInfo>
-          </MyPointWrapper>
-        </li>
-      </MyPoinListContainer>
+      <MyPointListContainer>
+        {rewardList?.map((rewardItem) => {
+          const thumbnailUrl = rewardItem.campaignThumbnailUrl || dummyImage
+          return (
+            <li key={rewardItem.reviewId}>
+              <MyPointCard>지급완료</MyPointCard>
+              <MyPointWrapper>
+                <ReviewCardThumb>
+                  <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
+                </ReviewCardThumb>
+                <ReviewCardInfo>
+                  <CardDate>{formatDate(rewardItem.updatedAt)}</CardDate>
+                  <CardTitle>{rewardItem.campaignTitle}</CardTitle>
+                  <CardPoint>{rewardItem.reward}P</CardPoint>
+                </ReviewCardInfo>
+              </MyPointWrapper>
+            </li>
+          )
+        })}
+      </MyPointListContainer>
     </MyPointContainer>
   )
 }
@@ -42,7 +64,7 @@ const MyPointContainer = styled.div`
   padding: 6rem 0;
 `
 
-const MyPoinListContainer = styled.ul`
+const MyPointListContainer = styled.ul`
   li {
     background: var(--white);
     padding: 1.3rem 2.3rem 1.8rem;
@@ -77,49 +99,6 @@ const ReviewCardThumb = styled.div`
     width: 100%;
     height: 100%;
   }
-`
-
-const DimmedBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-`
-
-interface RemainingDaysProps {
-  $isEnded: boolean
-}
-const RemainingDays = styled.span.attrs<RemainingDaysProps>((props) => ({
-  "aria-label": props.$isEnded ? "캠페인이 종료되었습니다" : "캠페인 남은 일수",
-  "data-is-ended": props.$isEnded,
-}))<RemainingDaysProps>`
-  position: absolute;
-  bottom: ${({ $isEnded }) => ($isEnded ? "50%" : "0.7rem")};
-  left: ${({ $isEnded }) => ($isEnded ? "50%" : "0")};
-  transform: ${({ $isEnded }) => ($isEnded ? "translate(-50%, 50%)" : "none")};
-  background-color: black;
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.2rem;
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  line-height: var(--font-caption-line-height);
-  letter-spacing: var(--font-caption-letter-spacing);
-  z-index: 2;
-`
-
-const EndedOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 1;
-  pointer-events: none;
 `
 
 const ReviewCardInfo = styled.div`

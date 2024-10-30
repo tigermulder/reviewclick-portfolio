@@ -2,10 +2,6 @@
 export interface ReviewListRequest {
   pageSize?: number
   pageIndex?: number
-  order?: string
-  status?: string // optional, e.g., "join/purchase/confirm/upload/reward/giveup/timeout"
-  startAt?: string
-  endAt?: string
 }
 export interface ReviewListResponse {
   statusCode: number

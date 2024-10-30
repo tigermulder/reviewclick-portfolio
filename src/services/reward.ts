@@ -12,5 +12,6 @@ export const getRewardList = async (
     "/reward/list",
     data
   )
+  console.log(response)
   return response.data
 }
