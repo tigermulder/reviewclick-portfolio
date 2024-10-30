@@ -99,7 +99,7 @@ const MainPage = (): JSX.Element => {
     <>
       {/* 카테고리메뉴 */}
       <CategoryMenu />
-
+      <BannerSlider />
       {/* 필터칩 */}
       <FilterBar />
       <CampaignList>
