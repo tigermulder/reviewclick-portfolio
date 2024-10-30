@@ -4,13 +4,13 @@ import { atom } from "recoil"
 export const adDataState = atom<{
   spaceCode: string | null
   partnerId: string | null
-  SecretKey: string | null
+  secretKey: string | null
 }>({
   key: "adDataState",
   default: {
     spaceCode: null,
     partnerId: null,
-    SecretKey: null,
+    secretKey: null,
   },
   effects_UNSTABLE: [
     ({ setSelf, onSet }) => {

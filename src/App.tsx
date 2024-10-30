@@ -18,12 +18,15 @@ function App() {
   const setAdData = useSetRecoilState(adDataState)
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search)
+    const spaceCode = urlParams.get("space_code")
+    const partnerId = urlParams.get("partner_uid")
+    const secretKey = urlParams.get("hmac")
+    console.log(spaceCode, partnerId, secretKey)
     setAdData({
-      spaceCode: urlParams.get("space_code") || "",
-      partnerId: urlParams.get("partner_uid") || "",
-      SecretKey: urlParams.get("hmac") || "",
+      spaceCode: spaceCode || null,
+      partnerId: partnerId || null,
+      secretKey: secretKey || null, // camelCase로 수정
     })
-    console.log(location)
   }, [location.search, setAdData])
   const isCampaignDetail = useMatch("/campaign/:campaignId")
   const isReviewDetail = useMatch("/my_campaign/:reviewId")

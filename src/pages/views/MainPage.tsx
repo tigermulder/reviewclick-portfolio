@@ -99,7 +99,7 @@ const MainPage = (): JSX.Element => {
     <>
       {/* 카테고리메뉴 */}
       <CategoryMenu />
-      <BannerSlider />
+
       {/* 필터칩 */}
       <FilterBar />
       <CampaignList>
@@ -186,7 +186,7 @@ const CampaignCard = styled.li.attrs<CampaignCardProps>((props) => ({
   width: 100%;
   overflow: hidden;
   background-color: white;
-  cursor: pointer; 
+  cursor: pointer;
 `
 
 const CampaignImage = styled.div`
