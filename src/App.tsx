@@ -7,23 +7,24 @@ import ToastMassage from "components/ToastMassage"
 import GlobalCategoryMenu from "components/GlobalCategoryMenu"
 import { RoutePath } from "./types/route-path"
 import { useUserStatus } from "./hooks/useUserStatus"
-import "./global.css"
 import { useSetRecoilState } from "recoil"
 import { adDataState } from "./store/adData-recoil"
 import { useEffect } from "react"
+import "./global.css"
 
 function App() {
   useUserStatus() // 세션유지
-  const location = useLocation();
+  const location = useLocation()
   const setAdData = useSetRecoilState(adDataState)
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
+    const urlParams = new URLSearchParams(location.search)
     setAdData({
-        uid: urlParams.get('uid') || "",
-        cid: urlParams.get('cid') || "",
-        adid: urlParams.get('adid') || "",
-    });
-  }, [location.search, setAdData]);
+      spaceCode: urlParams.get("space_code") || "",
+      partnerId: urlParams.get("partner_uid") || "",
+      SecretKey: urlParams.get("hmac") || "",
+    })
+    console.log(location)
+  }, [location.search, setAdData])
   const isCampaignDetail = useMatch("/campaign/:campaignId")
   const isReviewDetail = useMatch("/my_campaign/:reviewId")
 
