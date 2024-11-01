@@ -11,6 +11,7 @@ const TextField = ({
   $isError,
   $marginBottom,
   $marginTop,
+  $suffixWidth = "31%",
   errorMessage,
   successMessage,
 }: TextFieldProps) => (
@@ -25,13 +26,15 @@ const TextField = ({
         $isError={$isError} // 추가된 부분
       />
       {suffix && (
-        <SuffixContainer>
+        <SuffixContainer $width={$suffixWidth}>
           <Suffix>{suffix}</Suffix>
         </SuffixContainer>
       )}
     </InputWrapper>
     {errorMessage && <ErrorDescription>{errorMessage}</ErrorDescription>}
-    {!errorMessage && successMessage && <SuccessDescription>{successMessage}</SuccessDescription>}
+    {!errorMessage && successMessage && (
+      <SuccessDescription>{successMessage}</SuccessDescription>
+    )}
   </TextFieldContainer>
 )
 
@@ -65,8 +68,8 @@ const StyledInput = styled.input<{ $isError?: boolean }>`
   background: ${({ $isError }) => ($isError ? "var(--prim-L20)" : "inherit")};
 `
 
-const SuffixContainer = styled.div`
-  width: 34.5%;
+const SuffixContainer = styled.div<{ $width: string }>`
+  width: ${({ $width }) => $width};
   height: 100%;
   overflow: hidden;
 `

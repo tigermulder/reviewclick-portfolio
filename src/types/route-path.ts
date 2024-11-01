@@ -4,6 +4,7 @@ export const RoutePath = {
   Join: "/join",
   FindId: "/find_id",
   FindPassword: "/find_password",
+  ResetPassword: "/reset_password",
   MyCart: "/my_cart",
   MyCampaign: "/my_campaign",
   Notification: "/notification",

@@ -7,7 +7,8 @@ export interface TextFieldProps {
   suffix?: string
   $isError?: boolean
   $marginBottom?: string
+  $suffixWidth?: string
   $marginTop?: string
-  errorMessage?: string 
-  successMessage?: string;
+  errorMessage?: string
+  successMessage?: string
 }

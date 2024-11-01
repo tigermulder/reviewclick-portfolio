@@ -4,8 +4,8 @@ import { login } from "services/login"
 import { Link, useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 import { useMutation } from "@tanstack/react-query"
-import { useRecoilState, useSetRecoilState } from "recoil"
-import { toastListState } from "@/store/toast-recoil"
+import { useRecoilState } from "recoil"
+import useToast from "@/hooks/useToast"
 import RevuLogoIcon from "assets/revu_icon.svg?react"
 import RevuTextIcon from "assets/revu_logo.svg?react"
 import TextField from "@/components/TextField"
@@ -18,10 +18,10 @@ const LoginPage = () => {
   const [emailId, setEmailId] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false)
-  const [emailError, setEmailError] = useState<string>("") // 수정된 부분
-  const [passwordError, setPasswordError] = useState<string>("") // 수정된 부분
-  const setToasts = useSetRecoilState(toastListState)
+  const [emailError, setEmailError] = useState<string>("")
+  const [passwordError, setPasswordError] = useState<string>("")
   const [auth, setAuth] = useRecoilState(authState)
+  const { addToast } = useToast()
 
   // 로그인된 사용자가 /login 페이지로 접근하면 메인 페이지로 리다이렉트
   const LoggedIn = auth.isLoggedIn
@@ -29,21 +29,9 @@ const LoginPage = () => {
     const token = sessionStorage.getItem("authToken")
     if (token && LoggedIn) {
       navigate(RoutePath.Home)
-      addToast("로그인된 상태입니다.", "info", 1000)
+      addToast("로그인된 상태입니다.", "info", 1000, "login")
     }
   }, [navigate, LoggedIn])
-
-  // 토스트 메시지를 추가하는 함수
-  const addToast = (
-    message: string,
-    type: "info" | "warning" | "check" | "uncheck",
-    duration = 3000
-  ) => {
-    setToasts((prevToasts) => [
-      ...prevToasts,
-      { id: Date.now().toString(), message, type, duration },
-    ])
-  }
 
   // 유효성 검사 및 에러 메시지 설정
   useEffect(() => {
@@ -78,13 +66,21 @@ const LoginPage = () => {
       const email = data.email
       if (token) {
         setAuth({ isLoggedIn: true, token }) // Recoil 상태 업데이트
-        addToast("로그인이 완료되었습니다.", "check", 1000)
+        addToast("로그인이 완료되었습니다.", "check", 1000, "login")
         localStorage.setItem("nickname", nickname)
         localStorage.setItem("email", email)
-        navigate(RoutePath.Home)
+        const redirect = sessionStorage.getItem("redirectPath")
+        if (redirect) {
+          navigate(redirect)
+        }
       } else {
         console.error("Token not found in response:", data)
-        addToast("로그인에 실패했습니다. 다시 시도해주세요.", "warning", 1000)
+        addToast(
+          "로그인에 실패했습니다. 다시 시도해주세요.",
+          "warning",
+          1000,
+          "login"
+        )
       }
     },
     onError: (error: any) => {
@@ -93,20 +89,25 @@ const LoginPage = () => {
         switch (error.response.data.errorCode) {
           case 1:
           case 2:
-            addToast("아이디 또는 비밀번호가 잘못되었습니다.", "warning", 1000)
+            addToast(
+              "아이디 또는 비밀번호가 잘못되었습니다.",
+              "warning",
+              1000,
+              "login"
+            )
             break
           case 3:
           case 4:
-            addToast("인증 정보가 올바르지 않습니다.", "warning", 1000)
+            addToast("인증 정보가 올바르지 않습니다.", "warning", 1000, "login")
             break
           case 5:
-            addToast("탈퇴한 회원입니다.", "warning", 1000)
+            addToast("탈퇴한 회원입니다.", "warning", 1000, "login")
             break
           default:
-            addToast("오류가 발생했습니다.", "warning", 1000)
+            addToast("오류가 발생했습니다.", "warning", 1000, "login")
         }
       } else {
-        addToast("오류가 발생했습니다.", "warning", 1000)
+        addToast("오류가 발생했습니다.", "warning", 1000, "login")
       }
     },
   })
@@ -116,7 +117,7 @@ const LoginPage = () => {
     const email = checkEmail(emailId)
     const validPassword = checkPassword(password)
     if (!email || !validPassword) {
-      addToast("이메일과 비밀번호를 확인해 주세요.", "warning", 1000)
+      addToast("이메일과 비밀번호를 확인해 주세요.", "warning", 1000, "login")
       return
     }
     const loginData = {
@@ -126,11 +127,8 @@ const LoginPage = () => {
     mutation.mutate(loginData)
   }
 
-  if (mutation.isError) {
-    console.error(
-      "ErrorBoundary에 로그인페이지 status를 던져준다:",
-      mutation.error
-    )
+  //** 에러바운더리에서 감지 */
+  if (mutation.error) {
     throw mutation.error
   }
 

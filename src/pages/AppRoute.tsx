@@ -2,6 +2,7 @@ import { lazy } from "react"
 import { Route, Routes as ReactRouterRoutes } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
+import ResetPasswordPage from "./views/ResetPasswordPage"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/JoinPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
@@ -36,6 +37,8 @@ export const AppRoute = () => {
         <Route path={RoutePath.FindId} element={<FindIdPage />} />
         {/* 비밀번호찾기 페이지 */}
         <Route path={RoutePath.FindPassword} element={<FindPasswordPage />} />
+        {/* 비밀번호리셋 페이지 */}
+        <Route path={RoutePath.ResetPassword} element={<ResetPasswordPage />} />
         {/* 장바구니 페이지 */}
         <Route path={RoutePath.MyCart} element={<CampaignCart />} />
         {/* 나의 캠페인 페이지 */}

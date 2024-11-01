@@ -16,6 +16,7 @@ const FindIdPage = () => {
   const navigate = useNavigate()
   const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null) // 에러 상태
+  const [foundEmail, setFoundEmail] = useState<string | null>(null)
 
   // 버튼 활성화 여부를 동적으로 설정
   useEffect(() => {
@@ -29,30 +30,52 @@ const FindIdPage = () => {
 
       if (response.statusCode === 0) {
         // 성공적으로 이메일을 찾았을 때 로컬스토리지에 저장
-        localStorage.setItem("find_email", response.email)
         localStorage.setItem("nickname", nickname)
-        // 성공 메시지 출력 후 페이지 이동
-        addToast("아이디가 이메일로 발송되었습니다.", "warning", 1000, "UserId")
-        navigate(RoutePath.Login) // 로그인 페이지로 이동
-      } else if (response.statusCode === -1) {
-        // 서버에서 -1 에러코드를 받았을 때 처리
-        addToast(
-          "입력한 정보로 가입된 계정이 없습니다.",
-          "warning",
-          1000,
-          "UserId"
-        )
-        console.error(response)
+        localStorage.setItem("find_email", response.email)
+        setFoundEmail(response.email) // 상태 업데이트하여 결과 화면 표시
       }
     } catch (err) {
-      setError(err as Error)
-      addToast("아이디 찾기 중 오류가 발생했습니다.", "warning", 1000, "UserId")
+      addToast(
+        "입력한 정보로 가입된 계정이 없습니다.",
+        "warning",
+        1000,
+        "UserId"
+      )
     }
   }
 
-  // ErrorBoundary가 포착하도록 에러 던지기
-  if (error) {
-    throw error
+  if (foundEmail) {
+    return (
+      <ResultContainer>
+        <ReuseHeader
+          title="아이디 찾기"
+          onBack={() => navigate(RoutePath.Login)}
+        />
+        <ResultInfo>
+          <em>{localStorage.getItem("nickname")}</em>님의
+          <br />
+          입력하신 정보로 가입된 계정은
+          <br />
+          <span>{foundEmail}</span> 입니다.
+        </ResultInfo>
+        <ButtonContainer>
+          <Button
+            type="button"
+            $variant="grey"
+            onClick={() => navigate(RoutePath.FindPassword)}
+          >
+            비밀번호재설정
+          </Button>
+          <Button
+            type="button"
+            $variant="red"
+            onClick={() => navigate(RoutePath.Login)}
+          >
+            로그인
+          </Button>
+        </ButtonContainer>
+      </ResultContainer>
+    )
   }
 
   return (
@@ -99,7 +122,7 @@ const FindIdPage = () => {
         type="button"
         disabled={!isButtonEnabled}
         $variant="red"
-        onClick={handleFindId} // 버튼 클릭 시 API 호출
+        onClick={handleFindId}
       >
         아이디 찾기
       </Button>
@@ -124,4 +147,34 @@ const Title = styled.h4`
   font-size: var(--font-h3-size);
   font-weight: var(--font-weight-bold);
   line-height: 2.5rem;
+`
+
+const ResultContainer = styled.div`
+  min-height: 100vh;
+  padding: 4.4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const ResultInfo = styled.p`
+  padding: 8.3rem 0;
+  color: var(--primary-color);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  font-size: 1.8rem;
+  text-align: center;
+  em {
+    font-weight: var(--font-weight-bold);
+  }
+  span {
+    color: var(--revu-color);
+  }
+`
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 `

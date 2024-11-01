@@ -50,7 +50,18 @@ export interface FindIdRequest {
   phone: string
 }
 export interface FindIdResponse {
-  success: any
-  statusCode: number
   email: string
+  statusCode: number
+  errorCode: number
+  error: string
+}
+
+// ** User Password 초기화 이메일전송 type */
+export interface ResetPassWordRequest {
+  email: string
+}
+export interface ResetPassWordResponse {
+  statusCode: number
+  errorCode: number
+  error: string
 }

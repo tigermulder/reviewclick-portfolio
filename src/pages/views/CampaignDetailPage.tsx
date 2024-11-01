@@ -43,6 +43,12 @@ const CampaignDetailPage = () => {
   const { addToast } = useToast()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (campaignId) {
+      sessionStorage.setItem("redirectPath", `/campaign/${campaignId}`)
+    }
+  }, [campaignId])
+
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
@@ -220,8 +226,10 @@ const CampaignDetailPage = () => {
   }
   return (
     <>
-      <CampaignDetailBackButton />
-      <CampaignDetailShareButton />
+      {/* 캐시워크때문에 주석처리 */}
+      {/* <CampaignDetailBackButton />
+      <CampaignDetailShareButton /> */}
+      {/* 캐시워크때문에 주석처리 */}
       <ShareModal />
       <DetailHeader>
         <Background $imageUrl={thumbnailUrl} $scale={scale} />
@@ -249,11 +257,8 @@ const CampaignDetailPage = () => {
               <DetailInfo>미션 완료 기간 정보 없음</DetailInfo>
             </li>
             <li>
-              <span>판매가(적립률)</span>
-              <DetailInfo>
-                {campaignDetail.price.toLocaleString()}원(
-                {disCountRate(campaignDetail.reward, campaignDetail.price)}%)
-              </DetailInfo>
+              <span>상품가</span>
+              <DetailInfo>{campaignDetail.price.toLocaleString()}원</DetailInfo>
             </li>
             <li>
               <span>적립포인트</span>
@@ -367,10 +372,10 @@ const CampaignDetailPage = () => {
         </Details>
         <FooterButtons>
           {/* 찜하기 버튼 */}
-          <LikeButton
+          {/* <LikeButton
             categoryId={campaignDetail.categoryId}
             campaignId={campaignDetail.campaignId}
-          />
+          /> */}
           {/* 캠페인 신청하기 버튼 */}
           {renderButton()}
         </FooterButtons>
@@ -451,7 +456,6 @@ const CampaignDetailPage = () => {
 
 export default CampaignDetailPage
 
-// 스타일 컴포넌트 정의
 const Line = styled.div`
   position: relative;
   margin-top: 1.6rem;
@@ -783,10 +787,10 @@ const FooterButtons = styled.div`
   justify-content: center;
   gap: 20px;
   position: fixed;
-  bottom: 0;
+  bottom: 5.9rem;
   left: 0;
   width: 100%;
   background: #fff;
   z-index: 100;
-  padding: 15px 20px;
+  padding: 1.5rem;
 `

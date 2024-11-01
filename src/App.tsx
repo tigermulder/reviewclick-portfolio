@@ -16,6 +16,7 @@ function App() {
   const isReviewDetail = useMatch("/my_campaign/:reviewId")
 
   const hideAppBar =
+    location.pathname === RoutePath.Home ||
     location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.MyCart ||
     location.pathname === RoutePath.Join ||
@@ -25,6 +26,7 @@ function App() {
     location.pathname === RoutePath.UserProfile ||
     location.pathname === RoutePath.MyCampaign ||
     location.pathname === RoutePath.UserServiceGuide ||
+    location.pathname === RoutePath.ResetPassword ||
     isCampaignDetail ||
     isReviewDetail
   const hideTapBar =
@@ -32,7 +34,7 @@ function App() {
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
-    isCampaignDetail ||
+    location.pathname === RoutePath.ResetPassword ||
     isReviewDetail
   const showFooter = location.pathname === RoutePath.Home && !isCampaignDetail
 

@@ -59,15 +59,65 @@ const BottomTabBar = () => {
   }
 
   return (
+    // <Nav className="bottom-tab-bar">
+    //   <NavItem $active={activeTab === "category"}>
+    //     <StyledLink to="#" onClick={handleCategoryClick}>
+    //       <NavItemContent>
+    //         <StyledIcon as={IconCategory} $active={activeTab === "category"} />
+    //         <NavText $active={activeTab === "category"}>카테고리</NavText>
+    //       </NavItemContent>
+    //     </StyledLink>
+    //   </NavItem>
+    //   <NavItem $active={activeTab === "campaign"}>
+    //     <StyledLink
+    //       to={RoutePath.MyCampaign}
+    //       onClick={(e) =>
+    //         handleTabClick("campaign", true, RoutePath.MyCampaign, e)
+    //       }
+    //     >
+    //       <NavItemContent>
+    //         <StyledIcon as={IconCampaign} $active={activeTab === "campaign"} />
+    //         <NavText $active={activeTab === "campaign"}>나의 캠페인</NavText>
+    //       </NavItemContent>
+    //     </StyledLink>
+    //   </NavItem>
+    //   <NavItem $active={activeTab === "home"}>
+    //     <StyledLink
+    //       to={RoutePath.Home}
+    //       onClick={(e) => handleTabClick("home", false, RoutePath.Home, e)}
+    //     >
+    //       <NavItemContent>
+    //         <StyledIcon as={IconHome} $active={activeTab === "home"} />
+    //         <NavText $active={activeTab === "home"}>Home</NavText>
+    //       </NavItemContent>
+    //     </StyledLink>
+    //   </NavItem>
+    //   <NavItem $active={activeTab === "alerts"}>
+    //     <StyledLink
+    //       to={RoutePath.Alert}
+    //       onClick={(e) => handleTabClick("alerts", true, RoutePath.Alert, e)}
+    //     >
+    //       <NavItemContent>
+    //         <StyledIcon as={IconAlerts} $active={activeTab === "alerts"} />
+    //         <NavText $active={activeTab === "alerts"}>알림</NavText>
+    //       </NavItemContent>
+    //     </StyledLink>
+    //   </NavItem>
+    //   <NavItem $active={activeTab === "user"}>
+    //     <StyledLink
+    //       to={RoutePath.UserProfile}
+    //       onClick={(e) =>
+    //         handleTabClick("user", true, RoutePath.UserProfile, e)
+    //       }
+    //     >
+    //       <NavItemContent>
+    //         <StyledIcon as={IconProfile} $active={activeTab === "user"} />
+    //         <NavText $active={activeTab === "user"}>내 정보</NavText>
+    //       </NavItemContent>
+    //     </StyledLink>
+    //   </NavItem>
+    // </Nav>
     <Nav className="bottom-tab-bar">
-      <NavItem $active={activeTab === "category"}>
-        <StyledLink to="#" onClick={handleCategoryClick}>
-          <NavItemContent>
-            <StyledIcon as={IconCategory} $active={activeTab === "category"} />
-            <NavText $active={activeTab === "category"}>카테고리</NavText>
-          </NavItemContent>
-        </StyledLink>
-      </NavItem>
       <NavItem $active={activeTab === "campaign"}>
         <StyledLink
           to={RoutePath.MyCampaign}
@@ -81,28 +131,7 @@ const BottomTabBar = () => {
           </NavItemContent>
         </StyledLink>
       </NavItem>
-      <NavItem $active={activeTab === "home"}>
-        <StyledLink
-          to={RoutePath.Home}
-          onClick={(e) => handleTabClick("home", false, RoutePath.Home, e)}
-        >
-          <NavItemContent>
-            <StyledIcon as={IconHome} $active={activeTab === "home"} />
-            <NavText $active={activeTab === "home"}>Home</NavText>
-          </NavItemContent>
-        </StyledLink>
-      </NavItem>
-      <NavItem $active={activeTab === "alerts"}>
-        <StyledLink
-          to={RoutePath.Alert}
-          onClick={(e) => handleTabClick("alerts", true, RoutePath.Alert, e)}
-        >
-          <NavItemContent>
-            <StyledIcon as={IconAlerts} $active={activeTab === "alerts"} />
-            <NavText $active={activeTab === "alerts"}>알림</NavText>
-          </NavItemContent>
-        </StyledLink>
-      </NavItem>
+
       <NavItem $active={activeTab === "user"}>
         <StyledLink
           to={RoutePath.UserProfile}
@@ -113,6 +142,18 @@ const BottomTabBar = () => {
           <NavItemContent>
             <StyledIcon as={IconProfile} $active={activeTab === "user"} />
             <NavText $active={activeTab === "user"}>내 정보</NavText>
+          </NavItemContent>
+        </StyledLink>
+      </NavItem>
+
+      <NavItem $active={activeTab === "alerts"}>
+        <StyledLink
+          to={RoutePath.Alert}
+          onClick={(e) => handleTabClick("alerts", true, RoutePath.Alert, e)}
+        >
+          <NavItemContent>
+            <StyledIcon as={IconAlerts} $active={activeTab === "alerts"} />
+            <NavText $active={activeTab === "alerts"}>알림</NavText>
           </NavItemContent>
         </StyledLink>
       </NavItem>
