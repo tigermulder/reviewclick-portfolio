@@ -3,6 +3,7 @@ import { Route, Routes as ReactRouterRoutes } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
 import ResetPasswordPage from "./views/ResetPasswordPage"
+import MyAccountDeletionPage from "./views/MyPageDetail/MyAccountDeletionPage"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/JoinPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
@@ -19,6 +20,12 @@ const MyPointPage = lazy(() => import("./views/MyPageDetail/MyPointPage"))
 const MyServiceGuidePage = lazy(
   () => import("./views/MyPageDetail/MyServicePage")
 )
+const TermsOfService = lazy(() => import("./views/TermsOfService"))
+const PrivacyPolicy = lazy(() => import("./views/PrivacyPolicy"))
+const MyEditProfilePage = lazy(
+  () => import("./views/MyPageDetail/MyEditProfilePage")
+)
+const MySettingPage = lazy(() => import("./views/MyPageDetail/MySettingPage"))
 
 export const AppRoute = () => {
   return (
@@ -57,6 +64,25 @@ export const AppRoute = () => {
           path={RoutePath.UserServiceGuide}
           element={<MyServiceGuidePage />}
         />
+        {/* 내 정보 수정 */}
+        <Route
+          path={RoutePath.UserEditProfile}
+          element={<MyEditProfilePage />}
+        />
+        {/* 내 설정 */}
+        <Route
+          path={RoutePath.UserAccountSetting}
+          element={<MySettingPage />}
+        />
+        {/* 회원탈퇴 */}
+        <Route
+          path={RoutePath.UserAccountDeletion}
+          element={<MyAccountDeletionPage />}
+        />
+        {/* 이용약관 */}
+        <Route path={RoutePath.TermsOfService} element={<TermsOfService />} />
+        {/* 개인정보처리방침 */}
+        <Route path={RoutePath.PrivacyPolicy} element={<PrivacyPolicy />} />
       </Route>
     </ReactRouterRoutes>
   )

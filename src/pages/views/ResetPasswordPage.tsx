@@ -1,44 +1,77 @@
-// src/pages/ResetPasswordPage.tsx
-
-import React, { useState, useEffect } from "react"
-import { useSearchParams, useNavigate } from "react-router-dom"
-import axios from "axios"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import ReuseHeader from "@/components/ReuseHeader"
 import TextField from "@/components/TextField"
 import { RoutePath } from "@/types/route-path"
+import Modal from "@/components/Modal"
 import Button from "@/components/Button"
+import { validatePassword } from "@/utils/util"
+import { resetPassword } from "@/services/join"
 
 const ResetPasswordPage = () => {
-  const [searchParams] = useSearchParams()
-  const token = searchParams.get("token")
   const navigate = useNavigate()
-  const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false)
-  const [newPassword, setNewPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [newPasswordError, setNewPasswordError] = useState<string>("")
-  const [confirmPasswordError, setConfirmPasswordError] = useState<string>("")
-  const [error, setError] = useState<string | null>(null)
+  const [password1, setPassword1] = useState("")
+  const [password2, setPassword2] = useState("")
+  const [registerEnabled, setRegisterEnabled] = useState(false)
+  //** 모달 상태 관리 */
+  const [isResultModalOpen, setResultModalOpen] = useState(false)
+  const [modalTitle, setModalTitle] = useState<string>("")
+  const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
+  const [modalConfirmText, setModalConfirmText] = useState<string>("확인")
+  const [modalCancelText, setModalCancelText] = useState<string | undefined>(
+    undefined
+  )
 
+  //** 비밀번호 재설정 활성화 조건 체크 */
   useEffect(() => {
-    if (!token) {
-      setError("Invalid password reset link.")
-    }
-    // Optional: Verify token with backend
-    // verifyToken();
-  }, [token])
+    const buttonEnabled =
+      password1 !== "" &&
+      password2 !== "" &&
+      password1 === password2 &&
+      validatePassword(password1)
+    setRegisterEnabled(buttonEnabled)
+  }, [password1, password2])
 
-  // Optional: Verify token with backend
-  const verifyToken = async () => {
+  //** 비밀번호 재설정 핸들러 */
+  const handleResetPassword = async () => {
     try {
-      const response = await axios.post("/user/password/verify_token", {
-        token,
+      const response = await resetPassword({
+        password: password1,
       })
-      if (response.data.statusCode !== 0) {
-        setError(response.data.error || "Invalid token.")
+
+      if (response.statusCode === 0) {
+        setModalTitle("👏 비밀번호 재설정 완료!")
+        setModalContent(
+          <>
+            비밀번호 재설정이 완료되었습니다
+            <br />
+            로그인 후 이용해주세요.
+          </>
+        )
+        setModalConfirmText("로그인하기")
+        setModalCancelText("로그인")
+        setResultModalOpen(true)
       }
     } catch (err) {
-      setError("Failed to verify token.")
+      setModalTitle("⛔ 비밀번호 재설정 실패")
+      setModalContent(
+        <>
+          비밀번호 재설정에 실패하였습니다
+          <br />
+          다시 시도해주세요.
+        </>
+      )
+      setModalCancelText("확인")
+      setResultModalOpen(true)
+    }
+  }
+
+  // 모달 로그인버튼 핸들러
+  const handleModalConfirm = () => {
+    setResultModalOpen(false)
+    if (modalCancelText === "로그인") {
+      navigate(RoutePath.Login)
     }
   }
 
@@ -50,27 +83,51 @@ const ResetPasswordPage = () => {
       />
       <Label>새로운 비밀번호</Label>
       <TextField
-        type="text"
-        name="email_id"
+        type="password"
+        name="password1"
         placeholder="영문 대/소문자, 숫자, 특수문자 조합하여 8~16자"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-        $isError={newPasswordError !== ""}
-        errorMessage={newPasswordError}
+        value={password1}
+        onChange={(e) => setPassword1(e.target.value)}
+        $isError={password1 !== "" && !validatePassword(password1)}
+        errorMessage={
+          password1 !== "" && !validatePassword(password1)
+            ? "영문 대/소문자, 숫자, 특수문자를 조합하여 8~16자로 입력해 주세요."
+            : undefined
+        }
       />
       <Label>새로운 비밀번호 확인</Label>
       <TextField
         type="password"
-        name="password"
-        placeholder="영문 대/소문자, 숫자, 특수문자 조합하여 8~16자"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        $isError={confirmPasswordError !== ""}
-        errorMessage={confirmPasswordError}
+        name="password2"
+        placeholder="비밀번호 확인"
+        value={password2}
+        onChange={(e) => setPassword2(e.target.value)}
+        $isError={password2 !== "" && password1 !== password2}
+        errorMessage={
+          password2 !== "" && password1 !== password2
+            ? "비밀번호가 일치하지 않습니다."
+            : undefined
+        }
       />
-      <Button type="submit" disabled={!isButtonEnabled} $variant="red">
+      <Button
+        type="button"
+        disabled={!registerEnabled}
+        $variant="red"
+        onClick={handleResetPassword}
+      >
         비밀번호 재설정
       </Button>
+
+      {/* 결과 모달 */}
+      <Modal
+        isOpen={isResultModalOpen}
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
+        cancelText={modalCancelText}
+        onCancel={handleModalConfirm}
+        showRouteLink={true}
+      />
     </Container>
   )
 }
@@ -78,7 +135,7 @@ const ResetPasswordPage = () => {
 export default ResetPasswordPage
 
 const Container = styled.div`
-  padding: 4.4rem 0;
+  padding: 4.6rem 0;
   display: flex;
   flex-direction: column;
 `

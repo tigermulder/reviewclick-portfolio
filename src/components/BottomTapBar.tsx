@@ -173,8 +173,9 @@ const Nav = styled.nav`
   padding: 1.2rem 16px;
   background: var(--white);
   display: flex;
-  justify-content: center;
-  gap: 8px;
+  justify-content: space-evenly;
+  // justify-content: center;
+  // gap: 0.8rem;
   align-items: center;
   border-top: 1px solid #ddd;
 `

@@ -1,7 +1,6 @@
 import { Outlet, useLocation, useMatch } from "react-router-dom"
 import { ContentProps } from "@/types/route-path"
 import { RoutePath } from "@/types/route-path"
-import ErrorBoundary from "components/ErrorBoundary"
 import styled from "styled-components"
 
 const Layout = () => {
@@ -16,6 +15,10 @@ const Layout = () => {
   const isMyCampaignPage = location.pathname === RoutePath.MyCampaign // 나의 캠페인 페이지
   const isUserPointLogPage = location.pathname === RoutePath.UserPointLog // 나의 포인트내역 페이지
   const UserServiceGuidePage = location.pathname === RoutePath.UserServiceGuide // 서비스 이용가이드 페이지
+  const TermsOfServicePage = location.pathname === RoutePath.TermsOfService // 이용약관 페이지
+  const PrivacyPolicyPage = location.pathname === RoutePath.PrivacyPolicy // 개인정보처리방침 페이지
+  const UserAccountDeletionPage =
+    location.pathname === RoutePath.UserAccountDeletion // 회원탈퇴 페이지
   const isSpecialPage =
     isLoginPage ||
     isCampaignDetail ||
@@ -27,19 +30,19 @@ const Layout = () => {
 
   return (
     <>
-      {/* 에러 바운더리 */}
-      <ErrorBoundary>
-        <Content
-          $isSpecialPage={isSpecialPage}
-          $isCampaignDetail={isCampaignDetail}
-          $isMyCampaignPage={isMyCampaignPage}
-          $isUserPointLogPage={isUserPointLogPage}
-          $UserServiceGuidePage={UserServiceGuidePage}
-        >
-          {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
-          <Outlet />
-        </Content>
-      </ErrorBoundary>
+      <Content
+        $isSpecialPage={isSpecialPage}
+        $isCampaignDetail={isCampaignDetail}
+        $isMyCampaignPage={isMyCampaignPage}
+        $isUserPointLogPage={isUserPointLogPage}
+        $UserServiceGuidePage={UserServiceGuidePage}
+        $TermsOfServicePage={TermsOfServicePage}
+        $PrivacyPolicyPage={PrivacyPolicyPage}
+        $UserAccountDeletionPage={UserAccountDeletionPage}
+      >
+        {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
+        <Outlet />
+      </Content>
     </>
   )
 }
@@ -55,6 +58,9 @@ const Content = styled.main<ContentProps>`
     $isCampaignDetail,
     $isUserPointLogPage,
     $UserServiceGuidePage,
+    $TermsOfServicePage,
+    $PrivacyPolicyPage,
+    $UserAccountDeletionPage,
   }) => {
     if ($isMyCampaignPage) {
       return `
@@ -87,6 +93,22 @@ const Content = styled.main<ContentProps>`
       return `
         padding: 4.4rem 0 0;
         background-color: var(--n80-color);
+      `
+    } else if ($TermsOfServicePage) {
+      return `
+        padding: 7rem 1.5rem 4rem;
+        background-color: var(--whitewood);
+      `
+    } else if ($PrivacyPolicyPage) {
+      return `
+        padding: 7rem 1.5rem 4rem;
+        background-color: var(--whitewood);
+      `
+    } else if ($UserAccountDeletionPage) {
+      return `
+        min-height: 100vh; 
+        padding: 4.4rem 1.5rem 4rem;
+        background-color: var(--n20-color);
       `
     } else {
       return `

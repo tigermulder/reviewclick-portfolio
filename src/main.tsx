@@ -5,6 +5,7 @@ import { RecoilRoot } from "recoil"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { BrowserRouter as Router } from "react-router-dom"
 import GlobalLoading from "./components/GlobalLoading"
+import ErrorBoundary from "components/ErrorBoundary"
 import App from "./App"
 
 // QueryClient 인스턴스 생성
@@ -15,7 +16,10 @@ createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<GlobalLoading />}>
         <Router>
-          <App /> {/* // 라우팅 컴포넌트 */}
+          {/* 에러 바운더리 */}
+          <ErrorBoundary>
+            <App /> {/* // 라우팅 컴포넌트 */}
+          </ErrorBoundary>
         </Router>
       </Suspense>
       {/* <ReactQueryDevtools /> */}

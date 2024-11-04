@@ -27,6 +27,11 @@ function App() {
     location.pathname === RoutePath.MyCampaign ||
     location.pathname === RoutePath.UserServiceGuide ||
     location.pathname === RoutePath.ResetPassword ||
+    location.pathname === RoutePath.TermsOfService ||
+    location.pathname === RoutePath.PrivacyPolicy ||
+    location.pathname === RoutePath.UserEditProfile ||
+    location.pathname === RoutePath.UserAccountSetting ||
+    location.pathname === RoutePath.UserAccountDeletion ||
     isCampaignDetail ||
     isReviewDetail
   const hideTapBar =
@@ -35,8 +40,15 @@ function App() {
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.ResetPassword ||
+    location.pathname === RoutePath.TermsOfService ||
+    location.pathname === RoutePath.PrivacyPolicy ||
+    location.pathname === RoutePath.UserEditProfile ||
+    location.pathname === RoutePath.UserAccountSetting ||
+    location.pathname === RoutePath.UserAccountDeletion ||
     isReviewDetail
-  const showFooter = location.pathname === RoutePath.Home && !isCampaignDetail
+  const showFooter =
+    (location.pathname === RoutePath.Home && !isCampaignDetail) ||
+    location.pathname === RoutePath.UserProfile
 
   return (
     <div className="App">

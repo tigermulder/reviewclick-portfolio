@@ -14,6 +14,7 @@ export const modifyUser = async (
     "/user/modify",
     data
   )
+  console.log(response)
   return response.data
 }
 

@@ -57,8 +57,18 @@ export interface FindIdResponse {
 }
 
 // ** User Password 초기화 이메일전송 type */
-export interface ResetPassWordRequest {
+export interface ResetPassWordEmailRequest {
   email: string
+}
+export interface ResetPassWordEmailResponse {
+  statusCode: number
+  errorCode: number
+  error: string
+}
+
+//** User Password Reset 패스워드 초기화 */
+export interface ResetPassWordRequest {
+  password: string
 }
 export interface ResetPassWordResponse {
   statusCode: number

@@ -10,6 +10,8 @@ import {
   JoinResponse,
   FindIdRequest,
   FindIdResponse,
+  ResetPassWordEmailRequest,
+  ResetPassWordEmailResponse,
   ResetPassWordRequest,
   ResetPassWordResponse,
 } from "types/api-types/signup-type"
@@ -64,11 +66,23 @@ export const findId = async (data: FindIdRequest): Promise<FindIdResponse> => {
 
 // ** 비밀번호 초기화 이메일요청 API */
 export const resetPasswordEmail = async (
-  data: ResetPassWordRequest
-): Promise<ResetPassWordResponse> => {
-  const response = await axiosInstance.post<ResetPassWordResponse>(
+  data: ResetPassWordEmailRequest
+): Promise<ResetPassWordEmailResponse> => {
+  const response = await axiosInstance.post<ResetPassWordEmailResponse>(
     "/user/password/send_reset_email",
     data
   )
+  return response.data
+}
+
+//** 비밀번호 초기화 API */
+export const resetPassword = async (
+  data: ResetPassWordRequest
+): Promise<ResetPassWordResponse> => {
+  const response = await axiosInstance.post<ResetPassWordResponse>(
+    "/user/password/reset",
+    data
+  )
+  console.log(response)
   return response.data
 }

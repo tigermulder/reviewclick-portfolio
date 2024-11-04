@@ -1,10 +1,11 @@
 export interface ModalProps {
   isOpen: boolean
-  onConfirm: () => void
+  onConfirm?: () => void
   onCancel: () => void
   title: string | React.ReactNode
   content: React.ReactNode
   confirmText?: string
   cancelText?: string
   isLoading?: boolean
+  showRouteLink?: boolean
 }

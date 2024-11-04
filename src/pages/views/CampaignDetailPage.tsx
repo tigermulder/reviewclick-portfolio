@@ -19,6 +19,8 @@ import styled from "styled-components"
 import { RoutePath } from "@/types/route-path"
 import ContentTab from "@/components/Tab"
 import dummyImage from "assets/dummy-image.png"
+import detailImage from "assets/prd-img.png"
+import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
@@ -280,41 +282,7 @@ const CampaignDetailPage = () => {
             {/* GuideCont를 조건부로 렌더링 */}
             {isGuideOpen && (
               <GuideCont>
-                <p className="tit">캠페인 미션 프로세스</p>
-                <ul className="proc-list">
-                  <li className="proc-item">
-                    <div></div>
-                    <span>캠페인신청</span>
-                  </li>
-                  <li className="proc-item">
-                    <div></div>
-                    <span>상품구매</span>
-                  </li>
-                  <li className="proc-item">
-                    <div></div>
-                    <span>구매 영수증 인증</span>
-                  </li>
-                  <li className="proc-item">
-                    <div></div>
-                    <span>배송완료</span>
-                  </li>
-                  <li className="proc-item">
-                    <div></div>
-                    <span>미션완료</span>
-                  </li>
-                  <li className="proc-item">
-                    <div></div>
-                    <span>포인트지급요청</span>
-                  </li>
-                  <li className="proc-item">
-                    <div></div>
-                    <span>리뷰등록</span>
-                  </li>
-                  <li className="proc-item">
-                    <div></div>
-                    <span>리뷰검수</span>
-                  </li>
-                </ul>
+                <GuideDetail />
               </GuideCont>
             )}
           </div>
@@ -656,56 +624,25 @@ const Main = styled.div`
 `
 
 const ImagePlaceholder = styled.div`
-  height: 355px;
-  background-color: #eee;
+  height: 384px;
+  background-image: url("${detailImage}");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+`
+
+const GuideDetail = styled.div`
+  height: 1528px;
+  background-image: url("${detailGuideImage}");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 `
 
 const GuideCont = styled.div`
   margin-top: 2.2rem;
   border-top: 0.1rem solid var(--n80-color);
   padding: 3rem 0 1.8rem;
-
-  .tit {
-    font-size: var(--font-title-size);
-    font-weight: var(--font-title-weight);
-    line-height: var(--font-title-line-height);
-    letter-spacing: var(--font-title-letter-spacing);
-  }
-
-  .proc-list {
-    margin-top: 1.3rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    column-gap: 1.6rem;
-    row-gap: 1.8rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .proc-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .proc-item > div {
-    border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
-    background: #d9d9d9;
-  }
-
-  .proc-item > span {
-    color: #000;
-    display: block;
-    margin-top: 0.5rem;
-    font-size: var(--font-caption-small-size);
-    font-weight: var(--font-caption-small-weight);
-    line-height: var(--font-caption-small-line-height);
-    letter-spacing: var(--font-caption-small-letter-spacing);
-  }
 `
 
 const ButtonContainer = styled.div`

@@ -35,6 +35,7 @@ const StepTwo = ({
   const [modalCancelText, setModalCancelText] = useState<string | undefined>(
     undefined
   )
+  const [showLinkRouter, setShowLinkRouter] = useState(false)
   const maxChars = 180
   const minChars = 100
   const { addToast } = useToast()
@@ -123,6 +124,7 @@ const StepTwo = ({
         setModalConfirmText("닫기")
         setModalCancelText("작성한 리뷰 수정하기")
         setResultModalOpen(true)
+        setShowLinkRouter(true)
       }
     } catch (error) {
       // 로딩 모달 닫기
@@ -141,6 +143,7 @@ const StepTwo = ({
       setModalConfirmText("재검수하기")
       setModalCancelText("닫기")
       setResultModalOpen(true)
+      setShowLinkRouter(true)
     }
   }
 
@@ -200,6 +203,7 @@ const StepTwo = ({
         content={modalContent}
         confirmText={modalConfirmText}
         cancelText={modalCancelText}
+        showRouteLink={showLinkRouter}
       />
       <CartTest>
         {/* 상단캠페인 정보 */}

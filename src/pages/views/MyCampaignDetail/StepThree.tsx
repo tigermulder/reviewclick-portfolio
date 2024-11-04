@@ -32,6 +32,7 @@ const StepThree = ({
   const [modalCancelText, setModalCancelText] = useState<string | undefined>(
     undefined
   )
+  const [showLinkRouter, setShowLinkRouter] = useState(false)
 
   //** 버튼 클릭 시 파일 선택 창 열기 */
   const handleButtonClick = () => {
@@ -89,6 +90,7 @@ const StepThree = ({
           setModalConfirmText("다시시도")
           setModalCancelText("나의 캠페인 내역")
           setResultModalOpen(true)
+          setShowLinkRouter(true)
         }
       } catch (error) {
         setModalTitle("⛔ 앗, 잠깐!")
@@ -103,6 +105,7 @@ const StepThree = ({
         setModalConfirmText("다시시도")
         setModalCancelText("나의 캠페인 내역")
         setResultModalOpen(true)
+        setShowLinkRouter(true)
       } finally {
         // 파일 입력 초기화
         if (fileInputRef.current) {
@@ -190,6 +193,7 @@ const StepThree = ({
         content={modalContent}
         confirmText={modalConfirmText}
         cancelText={modalCancelText}
+        showRouteLink={showLinkRouter}
       />
       <CartTitle>
         <p>

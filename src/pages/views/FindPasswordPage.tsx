@@ -6,8 +6,9 @@ import Button from "@/components/Button"
 import useToast from "@/hooks/useToast"
 import { RoutePath } from "@/types/route-path"
 import { resetPasswordEmail } from "@/services/join"
-import styled from "styled-components"
 import { checkEmail } from "@/utils/util"
+import EmailImage from "assets/email-confirmation.png"
+import styled from "styled-components"
 
 const FindPasswordPage = () => {
   const [emailId, setEmailId] = useState("")
@@ -56,6 +57,7 @@ const FindPasswordPage = () => {
           onBack={() => navigate(RoutePath.Login)}
         />
         <ResultInfo>
+          <img src={EmailImage} alt="" />
           <ResultInfoTitle>비밀번호 재설정 메일 발송 완료</ResultInfoTitle>
           <p>
             비밀번호 재설정 링크가 포함된 메일이 발송되었습니다. <br />
@@ -140,19 +142,25 @@ const ResultContainer = styled.div`
 `
 
 const ResultInfo = styled.div`
-  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7rem 0 3.4rem;
   text-align: center;
 
+  img {
+    width: 12rem;
+  }
   p {
     font-size: 1.4rem;
     font-weight: var(--font-weight-light);
-    line-height: 1.4;
+    line-height: 1.45;
     color: var(--n400-color);
   }
 `
 
 const ResultInfoTitle = styled.h3`
-  margin-bottom: 1.6rem;
+  margin: 3rem 0 1.6rem;
   color: var(--primary-color);
   font-size: var(--font-h3-size);
   font-weight: var(--font-weight-medium);

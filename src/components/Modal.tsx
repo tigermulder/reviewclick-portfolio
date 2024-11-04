@@ -2,6 +2,8 @@ import { ModalProps } from "@/types/component-types/modal-type"
 import styled from "styled-components"
 import Button from "@/components/Button" // 재사용할 수 있는 Button 컴포넌트
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
+import { RoutePath } from "@/types/route-path"
 
 // 모달 컴포넌트
 const Modal = ({
@@ -13,6 +15,7 @@ const Modal = ({
   confirmText = "확인",
   cancelText,
   isLoading = false,
+  showRouteLink = false,
 }: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
@@ -31,33 +34,42 @@ const Modal = ({
 
   return (
     <Overlay>
-    <ModalContainer>
-      <TextContainer>
-        <ModalHeader>{title}</ModalHeader>
-        <ModalBody>{content}</ModalBody>
-      </TextContainer>
-      {/* 액션 버튼들 */}
-      <ModalFooter>
-        {isLoading ? (
-          // 로딩 중일 때는 스피너 버튼 하나만 노출
-          <Button $variant="spinner" disabled children={undefined} />
-        ) : cancelText === "확인" || cancelText === "작성한 리뷰 수정하기" ? (
-          <Button onClick={onCancel} $variant="red">
-            {cancelText}
-          </Button>
-        ) : (
-          <>
-            <Button onClick={onCancel} $variant="grey">
-              {cancelText || "취소"}
+      <ModalContainer>
+        <TextContainer>
+          <ModalHeader>{title}</ModalHeader>
+          <ModalBody>{content}</ModalBody>
+        </TextContainer>
+        {/* 액션 버튼들 */}
+        <ModalFooter>
+          {isLoading ? (
+            // 로딩 중일 때는 스피너 버튼 하나만 노출
+            <Button $variant="spinner" disabled children={undefined} />
+          ) : cancelText === "확인" ||
+            cancelText === "작성한 리뷰 수정하기" ||
+            cancelText === "로그인" ? (
+            <Button onClick={onCancel} $variant="red">
+              {cancelText}
             </Button>
-            <Button onClick={onConfirm} $variant="red">
-              {confirmText}
-            </Button>
-          </>
+          ) : (
+            <>
+              <Button onClick={onCancel} $variant="grey">
+                {cancelText || "취소"}
+              </Button>
+              {onConfirm && (
+                <Button onClick={onConfirm} $variant="red">
+                  {confirmText}
+                </Button>
+              )}
+            </>
+          )}
+        </ModalFooter>
+        {showRouteLink && (
+          <RouteLink to={RoutePath.Alert}>
+            등록이 안되나요? 1:1 문의하기
+          </RouteLink>
         )}
-      </ModalFooter>
-    </ModalContainer>
-  </Overlay>
+      </ModalContainer>
+    </Overlay>
   )
 }
 
@@ -129,7 +141,16 @@ const ModalBody = styled.div`
 
 const ModalFooter = styled.div`
   display: flex;
-  justify-content: center; /* 버튼이 하나일 때 중앙 정렬 */
+  justify-content: center;
   align-items: center;
   gap: 8px;
+`
+
+const RouteLink = styled(Link)`
+  display: block;
+  margin-top: 1.2rem;
+  text-align: center;
+  color: var(--n200-color);
+  font-size: var(--font-bodyM-size);
+  text-decoration: underline;
 `

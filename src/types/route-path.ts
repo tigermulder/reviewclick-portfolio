@@ -13,8 +13,12 @@ export const RoutePath = {
   UserPointLog: "/user/my_pointLog",
   UserServiceGuide: "/user/my_ServiceGuide",
   UserEditProfile: "/user/my_EditProfile",
+  UserAccountSetting: "/user/my_AccountSetting",
+  UserAccountDeletion: "/user/my_AccountSetting/userDeletion",
   MyReivewDetail: (reviewId: string) => `/my_campaign/${reviewId}`,
   CampaignDetail: (campaignId: string) => `/campaign/${campaignId}`,
+  TermsOfService: "/terms_Service",
+  PrivacyPolicy: "/Privacy_Policy",
 } as const
 
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath]
@@ -25,4 +29,7 @@ export interface ContentProps {
   $isMyCampaignPage: boolean
   $isUserPointLogPage: boolean
   $UserServiceGuidePage: boolean
+  $TermsOfServicePage: boolean
+  $PrivacyPolicyPage: boolean
+  $UserAccountDeletionPage: boolean
 }

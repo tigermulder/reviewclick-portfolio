@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
@@ -187,14 +186,14 @@ const JoinPage = () => {
     setEmailSendMessage("") // 인증 완료 시 메시지 초기화
   }
 
-  // 컴포넌트 언마운트 시 타이머 정리
+  //** 컴포넌트 언마운트 시 타이머 정리 */
   useEffect(() => {
     return () => {
       if (emailTimerRef.current) clearInterval(emailTimerRef.current)
     }
   }, [])
 
-  // 회원가입 버튼 활성화 조건 체크
+  //** 회원가입 버튼 활성화 조건 체크 */
   useEffect(() => {
     const isRegisterEnabled =
       emailConfirmed &&
@@ -358,9 +357,7 @@ const JoinPage = () => {
                       ? "인증 코드를 입력해 주세요."
                       : undefined
                   }
-                  successMessage={
-                    emailVerifyMessage ? "" : emailSendMessage
-                  } // 인증 완료 시 메시지 숨기기
+                  successMessage={emailVerifyMessage ? "" : emailSendMessage} // 인증 완료 시 메시지 숨기기
                 />
                 <TimerText>{formatTime(emailTimer)}</TimerText>
               </div>

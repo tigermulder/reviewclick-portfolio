@@ -200,9 +200,10 @@ const LoginPage = () => {
 export default LoginPage
 
 const Container = styled.div`
-  padding: 6.8rem 0;
+  min-height: 100vh;
   text-align: center;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
 `

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import IconArrowRight from "assets/ico_arr_right.svg"
-import IconNoticeArrow from "assets/ico-notice-arrow.svg"
+import IconArrowRight from "assets/ico_arr_right.svg?url"
+import IconNoticeArrow from "assets/ico-notice-arrow.svg?url"
 import IconNew from "assets/ico-new.svg"
 import styled from "styled-components"
 import { RoutePath } from "@/types/route-path"
@@ -19,7 +19,7 @@ const MyPage = () => {
   return (
     <>
       {/* 마이페이지 헤더 타이틀 */}
-      <SinglePageHeader title="마이페이지" />
+      <SinglePageHeader title="마이페이지" showRouteToggle={true} />
 
       {/* 타이틀 */}
       <TitleSection>
@@ -35,7 +35,7 @@ const MyPage = () => {
       {/* 하단 링크 */}
       <Links>
         <li>
-          <StyledLink to="/edit-info">내 정보 수정</StyledLink>
+          <StyledLink to={RoutePath.UserEditProfile}>내 정보 수정</StyledLink>
         </li>
         <li>
           <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>
@@ -126,11 +126,11 @@ const Links = styled.ul`
       content: "";
       position: absolute;
       top: 50%;
-      right: 1.6rem;
+      right: 0;
       transform: translateY(-50%);
       width: 2.4rem;
       height: 2.4rem;
-      background: url(${IconArrowRight}) no-repeat center / 100%;
+      background: url("${IconArrowRight}") no-repeat center / 100%;
     }
 
     &.service a {
@@ -143,7 +143,7 @@ const Links = styled.ul`
       content: "";
       width: 1.3rem;
       height: 1.3rem;
-      background: url(${IconNew}) no-repeat center / 100%;
+      background: url("${IconNew}") no-repeat center / 100%;
     }
   }
 `
@@ -151,7 +151,7 @@ const Links = styled.ul`
 const StyledLink = styled(Link)`
   position: relative;
   display: block;
-  padding: 2.2rem 1.6rem;
+  padding: 2.2rem 0;
   width: 100%;
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
@@ -183,7 +183,7 @@ const NoticeHeader = styled.div`
 
   img {
     position: absolute;
-    right: 1.6rem;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     width: 2.4rem;

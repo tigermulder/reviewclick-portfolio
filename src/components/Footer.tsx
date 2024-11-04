@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom"
+import { RoutePath } from "@/types/route-path"
+import FooterLogo from "assets/revu_logo.svg?react"
 import styled from "styled-components"
-import FooterLogo from "assets/revu_logo.svg?react" // SVG 파일을 React 컴포넌트로 가져오기
 
 const Footer = () => {
   return (
     <FooterComponent>
       <LinkContainer>
-        <LinkText>이용약관</LinkText>
-        <LinkText>개인정보처리방침</LinkText>
+        <LinkText to={RoutePath.TermsOfService}>이용약관</LinkText>
+        <LinkText to={RoutePath.PrivacyPolicy}>개인정보처리방침</LinkText>
       </LinkContainer>
 
       <CompanyInfo>
@@ -48,7 +50,7 @@ const LinkContainer = styled.div`
   gap: 20.8px;
 `
 
-const LinkText = styled.div`
+const LinkText = styled(Link)`
   color: #788991;
   font-size: 11.44px;
   font-family: "SUIT";
