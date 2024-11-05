@@ -13,7 +13,12 @@ export const login = async (data: LoginRequest): Promise<LoginResponse> => {
 
 //** 로그아웃 처리 API */
 export const logout = async (): Promise<LogoutResponse> => {
-  const response = await axiosInstance.post<LogoutResponse>("/logout")
+  const token = sessionStorage.getItem("authToken")
+  const response = await axiosInstance.get<LogoutResponse>("/logout", {
+    params: {
+      token: token,
+    },
+  })
   return response.data
 }
 

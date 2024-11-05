@@ -23,31 +23,30 @@ const LoginPage = () => {
   const [auth, setAuth] = useRecoilState(authState)
   const { addToast } = useToast()
 
-  // 로그인된 사용자가 /login 페이지로 접근하면 메인 페이지로 리다이렉트
+  //** 로그인된 사용자가 /login 페이지로 접근하면 상세 페이지 리다이렉트 */
   const LoggedIn = auth.isLoggedIn
   useEffect(() => {
     const token = sessionStorage.getItem("authToken")
-    if (token && LoggedIn) {
-      navigate(RoutePath.Home)
+    const redirect = sessionStorage.getItem("redirectPath")
+    if (token && LoggedIn && redirect) {
+      navigate(redirect)
       addToast("로그인된 상태입니다.", "info", 1000, "login")
     }
   }, [navigate, LoggedIn])
 
-  // 유효성 검사 및 에러 메시지 설정
+  //** 유효성 검사 및 에러 메시지 설정 */
   useEffect(() => {
     const emailValidationResult = checkEmail(emailId)
     const passwordValidationResult = checkPassword(password)
     const isEmailValid = emailValidationResult !== false
     const isPasswordValid = passwordValidationResult !== false
     setIsButtonEnabled(isEmailValid && isPasswordValid)
-
     // 이메일 에러 메시지 설정
     if (emailId !== "" && !isEmailValid) {
       setEmailError("아이디가 잘못되었습니다. 아이디를 정확히 입력해주세요.")
     } else {
       setEmailError("")
     }
-
     // 비밀번호 에러 메시지 설정
     if (password !== "" && !isPasswordValid) {
       setPasswordError(
@@ -65,7 +64,7 @@ const LoginPage = () => {
       const nickname = data.nickname
       const email = data.email
       if (token) {
-        setAuth({ isLoggedIn: true, token }) // Recoil 상태 업데이트
+        setAuth({ isLoggedIn: true, token })
         addToast("로그인이 완료되었습니다.", "check", 1000, "login")
         localStorage.setItem("nickname", nickname)
         localStorage.setItem("email", email)
@@ -74,7 +73,6 @@ const LoginPage = () => {
           navigate(redirect)
         }
       } else {
-        console.error("Token not found in response:", data)
         addToast(
           "로그인에 실패했습니다. 다시 시도해주세요.",
           "warning",
@@ -84,52 +82,29 @@ const LoginPage = () => {
       }
     },
     onError: (error: any) => {
-      console.error("로그인 실패:", error)
       if (error?.response?.data?.statusCode === -1) {
-        switch (error.response.data.errorCode) {
-          case 1:
-          case 2:
-            addToast(
-              "아이디 또는 비밀번호가 잘못되었습니다.",
-              "warning",
-              1000,
-              "login"
-            )
-            break
-          case 3:
-          case 4:
-            addToast("인증 정보가 올바르지 않습니다.", "warning", 1000, "login")
-            break
-          case 5:
-            addToast("탈퇴한 회원입니다.", "warning", 1000, "login")
-            break
-          default:
-            addToast("오류가 발생했습니다.", "warning", 1000, "login")
+        if (error.response.data.errorCode === 1) {
+          addToast("없는사용자 입니다.", "warning", 1000, "login")
+        } else if (error.response.data.errorCode === 2) {
+          addToast("패스워드가 맞지않습니다.", "warning", 1000, "login")
+        } else if (error.response.data.errorCode === 5) {
+          addToast("탈퇴한회원입니다.", "warning", 1000, "login")
         }
-      } else {
-        addToast("오류가 발생했습니다.", "warning", 1000, "login")
       }
     },
   })
 
-  // 로그인 함수
+  //** 로그인 핸들러 */
   const handleLogin = () => {
     const email = checkEmail(emailId)
     const validPassword = checkPassword(password)
-    if (!email || !validPassword) {
-      addToast("이메일과 비밀번호를 확인해 주세요.", "warning", 1000, "login")
-      return
+    if (email && validPassword) {
+      const loginData = {
+        email,
+        password: validPassword,
+      }
+      mutation.mutate(loginData)
     }
-    const loginData = {
-      email,
-      password: validPassword,
-    }
-    mutation.mutate(loginData)
-  }
-
-  //** 에러바운더리에서 감지 */
-  if (mutation.error) {
-    throw mutation.error
   }
 
   return (

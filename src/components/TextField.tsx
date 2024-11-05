@@ -23,7 +23,7 @@ const TextField = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        $isError={$isError} // 추가된 부분
+        $isError={$isError}
       />
       {suffix && (
         <SuffixContainer $width={$suffixWidth}>

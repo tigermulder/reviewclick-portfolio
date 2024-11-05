@@ -9,12 +9,15 @@ import Modal from "@/components/Modal"
 import Button from "@/components/Button"
 import { quitUser } from "@/services/user"
 import IconCheckList from "assets/ico_check_list.svg?url"
-import IconChecking from "assets/ico_checking.svg?url"
+import IconChecking from "assets/ico_checking.svg?react"
+import { authState } from "@/store/auth-recoil"
+import { useSetRecoilState } from "recoil"
 import styled from "styled-components"
 
 const MyAccountDeletionPage: React.FC = () => {
   const navigate = useNavigate()
   const { addToast } = useToast()
+  const setAuth = useSetRecoilState(authState)
   const [registerEnabled, setRegisterEnabled] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [feedback, setFeedback] = useState("")
@@ -33,16 +36,31 @@ const MyAccountDeletionPage: React.FC = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      // const response = await quitUser({ feedback })
-      const response = {
-        statusCode: 0,
-      }
+      const response = await quitUser({ reason: feedback })
+      // const response = {
+      //   statusCode: 0,
+      // }
       if (response.statusCode === 0) {
-        setModalTitle("👏 영수증 인증 완료!")
+        addToast("계정이 탈퇴처리 되었습니다.", "info", 1000, "QuitUser")
+        // Recoil 로그인상태 업데이트
+        setAuth({
+          isLoggedIn: false,
+          token: null,
+        })
+        sessionStorage.removeItem("authToken")
+        localStorage.removeItem("email")
+        localStorage.removeItem("nickname")
+        const redirect = sessionStorage.getItem("redirectPath")
+        if (redirect) {
+          navigate(redirect)
+        } else {
+          navigate(RoutePath.Login)
+        }
       } else {
         throw new Error()
       }
     } catch (err) {
+      setResultModalOpen(false)
       addToast(
         "회원 탈퇴에 실패했습니다. 다시 시도해주세요.",
         "warning",
@@ -50,6 +68,26 @@ const MyAccountDeletionPage: React.FC = () => {
         "QuitUser"
       )
     }
+  }
+
+  // 모달 오픈 핸들러
+  const handleModalOpen = () => {
+    setResultModalOpen(true)
+    setModalTitle("정말 탈퇴하시겠어요?")
+    setModalContent(
+      <>
+        탈퇴할 경우 3개월 이내
+        <br />
+        동일 계정으로 재가입이 불가능합니다.
+      </>
+    )
+    setModalConfirmText("탈퇴하기")
+    setModalCancelText("아니요")
+  }
+
+  // 모달 취소 버튼 핸들러
+  const handleModalCancel = () => {
+    setResultModalOpen(false)
   }
 
   return (
@@ -86,7 +124,7 @@ const MyAccountDeletionPage: React.FC = () => {
               onChange={() => setIsChecked(!isChecked)}
             />
             <CheckboxLabel htmlFor="agreement">
-              <Icon src={IconChecking} checked={isChecked} alt="체크 아이콘" />
+              <Icon checked={isChecked} />
               회원탈퇴 유의사항을 확인하였으며 이에 동의합니다.
             </CheckboxLabel>
           </CheckboxWrapper>
@@ -95,7 +133,7 @@ const MyAccountDeletionPage: React.FC = () => {
       <StepReason>
         <Label>떠나시는 이유를 알려주세요.</Label>
         <TextArea
-          placeholder={`서비스 탈퇴 사유에 대해 알려주세요.\n고객님의 소중한 피드백을 담아\n더 나은 서비스로 보답드리도록 하겠습니다.`}
+          placeholder={`서비스 탈퇴 사유에 대해 알려주세요.\n고객님의 소중한 피드백을 담아\n더 나은 서비스로 보답하겠습니다.`}
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}
         />
@@ -104,20 +142,22 @@ const MyAccountDeletionPage: React.FC = () => {
         type="button"
         $variant="red"
         disabled={!registerEnabled}
-        onClick={() => setResultModalOpen(true)}
+        onClick={handleModalOpen}
       >
         탈퇴하기
       </Button>
-
-      {isModalOpen && (
-        <Modal
-          isOpen={isResultModalOpen}
-          onClose={() => setResultModalOpen(false)}
-          onConfirm={handleDeleteAccount}
-        >
-          <ModalContent>정말로 탈퇴하시겠습니까?</ModalContent>
-        </Modal>
-      )}
+      {/* 결과 모달 */}
+      <Modal
+        isOpen={isResultModalOpen}
+        onConfirm={handleDeleteAccount}
+        onCancel={handleModalCancel}
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
+        cancelText={modalCancelText}
+      >
+        <ModalContent>정말로 탈퇴하시겠습니까?</ModalContent>
+      </Modal>
     </Container>
   )
 }
@@ -127,7 +167,7 @@ export default MyAccountDeletionPage
 // Styled Components
 
 const Container = styled.div`
-  padding: 4.4rem 1.6rem;
+  padding: 4.4rem 0;
 `
 
 const UserTitle = styled.h2`
@@ -180,11 +220,12 @@ const CheckboxLabel = styled.label`
   color: var(--n400-color);
 `
 
-const Icon = styled.img<{ checked: boolean }>`
+const Icon = styled(IconChecking)<{ checked: boolean }>`
   width: 1.6rem;
   height: 1.6rem;
   margin-right: 0.9rem;
-  filter: ${({ checked }) => (checked ? "none" : "grayscale(100%)")};
+  color: ${({ checked }) =>
+    checked ? "var(--success-color)" : "var(--n100-color)"};
 `
 
 const StepReason = styled.div`

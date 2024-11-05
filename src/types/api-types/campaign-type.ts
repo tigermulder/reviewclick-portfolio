@@ -32,15 +32,16 @@ export interface Campaign {
   costPartner: number
   reviewKeyword: string | null
   thumbnailUrl: string
-  startAt: string // ISO 형식의 날짜 문자열
-  endAt: string // ISO 형식의 날짜 문자열
+  startAt: string
+  endAt: string
   status: string
   quota: number
   joins: number
   uploads: number
   favorites: number
-  createdAt: string // ISO 형식의 날짜 문자열
-  is_join: number // 1: 참여, 0: 미참여
+  createdAt: string
+  is_join: number
+  is_favorite: number
 }
 
 //** 캠페인 상세 정보 요청 */
@@ -53,7 +54,11 @@ export interface CampaignItemResponse {
   title: string
   statusCode: number
   campaign: Campaign
-  reviews: Review[]
+  reviews: any[]
+  review_status: string | null
+  is_join_enable: number
+  is_join_cancellable: number
+  is_campaign_open: number
 }
 
 export interface Review {

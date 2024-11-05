@@ -90,7 +90,6 @@ const MyPage = () => {
 
 export default MyPage
 
-/* 타이틀 섹션 */
 const TitleSection = styled.div`
   padding: 4.4rem 0 7.7rem;
   text-align: center;

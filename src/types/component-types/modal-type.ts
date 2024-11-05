@@ -8,4 +8,5 @@ export interface ModalProps {
   cancelText?: string
   isLoading?: boolean
   showRouteLink?: boolean
+  children?: React.ReactNode
 }

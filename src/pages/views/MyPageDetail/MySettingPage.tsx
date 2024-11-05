@@ -5,11 +5,14 @@ import IconCheck from "assets/ico_check.svg?url"
 import ReuseHeader from "@/components/ReuseHeader"
 import useToast from "@/hooks/useToast"
 import { logout } from "@/services/login"
+import { authState } from "@/store/auth-recoil"
+import { useSetRecoilState } from "recoil"
 import styled from "styled-components"
 
 const MySettingPage = () => {
   const navigate = useNavigate()
   const { addToast } = useToast()
+  const setAuth = useSetRecoilState(authState)
   const userEmail = localStorage.getItem("email")
 
   //** 로그아웃 핸들러 */
@@ -21,7 +24,20 @@ const MySettingPage = () => {
       // }
       if (response.statusCode === 0) {
         addToast("계정이 로그아웃 되었습니다", "info", 1000, "LogOut")
-        navigate(RoutePath.UserProfile)
+        // Recoil 로그인상태 업데이트
+        setAuth({
+          isLoggedIn: false,
+          token: null,
+        })
+        sessionStorage.removeItem("authToken")
+        localStorage.removeItem("email")
+        localStorage.removeItem("nickname")
+        const redirect = sessionStorage.getItem("redirectPath")
+        if (redirect) {
+          navigate(redirect)
+        } else {
+          navigate(RoutePath.Login)
+        }
       } else {
         throw new Error()
       }

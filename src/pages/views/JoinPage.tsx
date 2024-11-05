@@ -55,13 +55,11 @@ const JoinPage = () => {
   const [emailTimer, setEmailTimer] = useState(0)
   const emailTimerRef = useRef<NodeJS.Timeout | null>(null)
   const { addToast } = useToast()
-
-  // New state variables for success messages
   const [emailCheckMessage, setEmailCheckMessage] = useState<string>("")
   const [emailSendMessage, setEmailSendMessage] = useState<string>("")
   const [emailVerifyMessage, setEmailVerifyMessage] = useState<string>("")
 
-  // 이메일 체크 mutation
+  //** 이메일 체크 mutation */
   const emailCheckMutation = useMutation<
     EmailCheckResponse,
     Error,
@@ -70,14 +68,11 @@ const JoinPage = () => {
     mutationFn: checkEmail,
     onSuccess: (data) => {
       if (data.statusCode === 0) {
-        // 이메일 사용 가능
         setEmailCheckMessage("가입이 가능한 네이버 아이디입니다.")
-        // 이메일 인증 코드 전송
         const email = `${id}@naver.com`
         const sendCodeData: SendEmailCodeRequest = { email }
         sendEmailCodeMutation.mutate(sendCodeData)
       } else {
-        // 이미 가입한 계정
         setEmailCheckMessage("")
         addToast("이미 가입한 계정입니다.", "warning", 1000, "email")
       }
@@ -88,7 +83,7 @@ const JoinPage = () => {
     },
   })
 
-  // 이메일 인증 코드 전송 mutation
+  //** 이메일 인증 코드 전송 mutation */
   const sendEmailCodeMutation = useMutation<
     SendEmailCodeResponse,
     Error,
@@ -116,7 +111,7 @@ const JoinPage = () => {
     },
   })
 
-  // 이메일 인증 코드 확인 mutation
+  //** 이메일 인증 코드 확인 mutation */
   const verifyEmailCodeMutation = useMutation<
     VerifyEmailCodeResponse,
     Error,
@@ -145,7 +140,7 @@ const JoinPage = () => {
     },
   })
 
-  // 회원가입 mutation
+  //** 회원가입 mutation */
   const joinUserMutation = useMutation<JoinResponse, Error, JoinRequest>({
     mutationFn: joinUser,
     onSuccess: (data) => {
@@ -161,7 +156,7 @@ const JoinPage = () => {
     },
   })
 
-  // 이메일 인증 타이머 시작
+  //** 이메일 인증 타이머 시작 */
   const startEmailTimer = () => {
     setEmailTimer(300) // 5분
     if (emailTimerRef.current) clearInterval(emailTimerRef.current)
@@ -170,7 +165,7 @@ const JoinPage = () => {
         if (prev <= 1) {
           if (emailTimerRef.current) clearInterval(emailTimerRef.current)
           setEmailSent(false) // 타이머 종료 시 인증 코드 입력 필드 및 재발송 버튼 사라지도록
-          setEmailSendMessage("") // 타이머 종료 시 메시지 초기화
+          setEmailSendMessage("")
           return 0
         }
         return prev - 1
@@ -178,12 +173,12 @@ const JoinPage = () => {
     }, 1000)
   }
 
-  // 이메일 인증 타이머 초기화
+  //** 이메일 인증 타이머 초기화 */
   const resetEmailTimer = () => {
     if (emailTimerRef.current) clearInterval(emailTimerRef.current)
     setEmailTimer(0)
     setEmailSent(false) // 인증 완료 시 인증 코드 입력 필드 및 재발송 버튼 사라지도록
-    setEmailSendMessage("") // 인증 완료 시 메시지 초기화
+    setEmailSendMessage("")
   }
 
   //** 컴포넌트 언마운트 시 타이머 정리 */
@@ -216,7 +211,7 @@ const JoinPage = () => {
     agreements.essential3,
   ])
 
-  // 이메일 인증 코드 유효성 검사
+  //** 이메일 인증 코드 유효성 검사 */
   useEffect(() => {
     if (emailAuthCode.length === 6 && emailSent && !emailConfirmed) {
       // 인증 코드 확인 요청
@@ -225,7 +220,7 @@ const JoinPage = () => {
     }
   }, [emailAuthCode])
 
-  // 이메일 체크 및 인증 코드 전송 함수
+  //** 이메일 체크 및 인증 코드 전송 함수 */
   const handleEmailAuth = () => {
     if (!validateEmail(id)) {
       addToast(
@@ -241,7 +236,7 @@ const JoinPage = () => {
     emailCheckMutation.mutate(emailCheckData)
   }
 
-  // 재발송 버튼 클릭 시 함수
+  //** 재발송 버튼 클릭 시 함수 */
   const handleResendEmailCode = () => {
     const email = `${id}@naver.com`
     const sendCodeData: SendEmailCodeRequest = { email }
@@ -251,7 +246,7 @@ const JoinPage = () => {
     setEmailSendMessage("인증 코드를 재전송했습니다.")
   }
 
-  // 회원가입 요청 함수
+  //** 회원가입 요청 함수 */
   const handleRegister = () => {
     const email = `${id}@naver.com`
     const joinData: JoinRequest = {
@@ -264,7 +259,7 @@ const JoinPage = () => {
     joinUserMutation.mutate(joinData)
   }
 
-  // 약관 동의 전체 체크박스 변경 함수
+  //** 약관 동의 전체 체크박스 변경 함수 */
   const handleAgreementAllChange = (checked: boolean) => {
     setAgreements({
       all: checked,
@@ -277,16 +272,16 @@ const JoinPage = () => {
     })
   }
 
-  // 약관 동의 개별 체크박스 변경 함수
+  //** 약관 동의 개별 체크박스 변경 함수 */
   const handleAgreementChange = (name: string, checked: boolean) => {
     setAgreements((prev) => ({
       ...prev,
       [name]: checked,
-      all: false, // 전체 동의 해제
+      all: false,
     }))
   }
 
-  // 선택 약관 전체 체크박스 변경 함수
+  //** 선택 약관 전체 체크박스 변경 함수 */
   const handleOptionalAllChange = (checked: boolean) => {
     setAgreements((prev) => ({
       ...prev,
@@ -324,7 +319,8 @@ const JoinPage = () => {
                   ? "올바른 형식의 계정이 아닙니다."
                   : undefined
               }
-              successMessage={emailCheckMessage} // 성공 메시지 추가
+              $suffixWidth="33.5%"
+              successMessage={emailCheckMessage}
             />
           </TextFieldWrapper>
           <ButtonWrapper>
@@ -333,7 +329,7 @@ const JoinPage = () => {
               $variant="red"
               onClick={handleEmailAuth}
               disabled={!validateEmail(id) || emailConfirmed}
-              $marginTop="0" // 인증 버튼에 margin-top이 필요 없다면 '0'으로 설정
+              $marginTop="0"
             >
               {emailConfirmed ? "완료" : "인증"} {/* 버튼 텍스트 변경 */}
             </Button>
@@ -351,7 +347,7 @@ const JoinPage = () => {
                   onChange={(e) => setEmailAuthCode(e.target.value)}
                   $isError={emailAuthCode !== "" && emailAuthCode.length !== 6}
                   $marginBottom="0"
-                  $marginTop="0.8rem" // 인증 코드 입력 필드에 margin-top 적용
+                  $marginTop="0.8rem"
                   errorMessage={
                     emailAuthCode !== "" && emailAuthCode.length !== 6
                       ? "인증 코드를 입력해 주세요."
@@ -368,7 +364,7 @@ const JoinPage = () => {
                 $variant="red"
                 onClick={handleResendEmailCode}
                 disabled={!validateEmail(id) || emailConfirmed}
-                $marginTop="0.8rem" // 재발송 버튼에 margin-top 적용
+                $marginTop="0.8rem"
               >
                 재발송
               </Button>
@@ -564,7 +560,7 @@ const JoinPage = () => {
           $variant="red"
           onClick={handleRegister}
           disabled={!registerEnabled}
-          $marginTop="0" // 필요에 따라 설정
+          $marginTop="0"
         >
           회원가입
         </Button>
@@ -575,14 +571,12 @@ const JoinPage = () => {
 
 export default JoinPage
 
-// 시간 형식 변환 함수
 const formatTime = (seconds: number) => {
   const m = Math.floor(seconds / 60)
   const s = seconds % 60
   return `${m}:${s < 10 ? `0${s}` : s}`
 }
 
-// 스타일 컴포넌트들
 const Signup = styled.div`
   padding: 4.4rem 0 10rem;
 `
@@ -626,25 +620,21 @@ const Info = styled.span`
   letter-spacing: -0.2px;
 `
 
-// Row
 const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
 `
 
-// TextField Wrapper
 const TextFieldWrapper = styled.div`
   flex: 4;
   position: relative;
 `
 
-// Button Wrapper
 const ButtonWrapper = styled.div`
   flex: 1;
 `
 
-// 타이머 텍스트
 const TimerText = styled.span`
   position: absolute;
   right: 1.5rem;
@@ -655,40 +645,33 @@ const TimerText = styled.span`
   color: var(--revu-color);
 `
 
-// 약관 동의 섹션
 const AgreementSection = styled.div`
   margin-top: 5rem;
 `
 
-// 전체 동의
 const AgreementAll = styled.div`
   padding-bottom: 1.2rem;
   border-bottom: 0.1rem solid var(--n40-color);
 `
 
-// 약관 리스트
 const AgreementList = styled.ul`
   margin-top: 1.7rem;
 `
 
-// 체크박스 아이템
 const CheckboxItem = styled.li`
   margin-top: 1.2rem;
 `
 
-// 서브 약관 리스트
 const SubAgreementList = styled.ul`
   margin-left: 2.5rem;
   margin-top: 1rem;
 `
 
-// 체크박스 래퍼
 const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
 `
 
-// 알림 텍스트
 const NoticeText = styled.p`
   margin-top: 2.4rem;
   font-size: var(--font-caption-size);
@@ -698,7 +681,6 @@ const NoticeText = styled.p`
   color: var(--n400-color);
 `
 
-// 회원가입 버튼 래퍼
 const ButtonWrap = styled.div`
   position: fixed;
   bottom: 0;
@@ -707,12 +689,4 @@ const ButtonWrap = styled.div`
   padding: 1.2rem 1.5rem;
   background: var(--white);
   border-top: 0.1rem solid var(--n40-color);
-`
-
-// Success message component (optional if using TextField's SuccessDescription)
-const SuccessMessage = styled.p`
-  color: green;
-  font-size: 12px;
-  margin-top: 0.5rem;
-  text-align: left;
 `

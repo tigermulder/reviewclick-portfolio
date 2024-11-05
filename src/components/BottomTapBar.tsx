@@ -10,7 +10,7 @@ import IconCategory from "assets/ico_tab_01.svg?react"
 import IconCampaign from "assets/ico_tab_02.svg?react"
 import IconHome from "assets/ico_tab_03.svg?react"
 import IconAlerts from "assets/ico_tab_04.svg?react"
-import IconProfile from "assets/ico_tab_05.svg?react"
+import IconProfile from "assets/ico-main.svg?react"
 import styled from "styled-components"
 
 const BottomTabBar = () => {
@@ -140,8 +140,12 @@ const BottomTabBar = () => {
           }
         >
           <NavItemContent>
-            <StyledIcon as={IconProfile} $active={activeTab === "user"} />
-            <NavText $active={activeTab === "user"}>내 정보</NavText>
+            <StyledIcon
+              as={IconProfile}
+              $active={activeTab === "user"}
+              $tabName="user"
+            />
+            {/* <NavText $active={activeTab === "user"}>마이페이지</NavText> */}
           </NavItemContent>
         </StyledLink>
       </NavItem>
@@ -209,12 +213,14 @@ const NavItemContent = styled.div`
   align-items: center;
 `
 
-const StyledIcon = styled.svg.attrs<{ $active: boolean }>(({ $active }) => ({
-  "aria-hidden": true,
-}))<{ $active: boolean }>`
-  width: 16px;
-  height: 16px;
-  margin-bottom: 0.7rem; // 아이콘과 텍스트 사이 간격
+const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
+  ({ $active }) => ({
+    "aria-hidden": true,
+  })
+)<{ $active: boolean; $tabName?: string }>`
+  width: ${({ $tabName }) => ($tabName === "user" ? "4.9rem" : "1.6rem")};
+  height: ${({ $tabName }) => ($tabName === "user" ? "4.9rem" : "1.6rem")};
+  margin-bottom: 0.7rem;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
 `
 

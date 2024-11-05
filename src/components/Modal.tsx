@@ -16,6 +16,7 @@ const Modal = ({
   cancelText,
   isLoading = false,
   showRouteLink = false,
+  children,
 }: ModalProps) => {
   useEffect(() => {
     if (isOpen) {

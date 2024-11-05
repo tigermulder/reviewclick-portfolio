@@ -33,13 +33,12 @@ const CAMPAIGN_ITEM_QUERY_KEY = (campaignId: string | number) => [
 
 const CampaignDetailPage = () => {
   const [selectedTab, setSelectedTab] = useState("info") // 기본선택
-  const [isGuideOpen, setIsGuideOpen] = useState(false) // 가이드 표시 여부 상태 추가
+  const [isGuideOpen, setIsGuideOpen] = useState(false) // 가이드 표시 여부 상태
   const [popUpOffsetY, setPopUpOffsetY] = useState(-62) // PopUp 위치 상태 추가
   const [scale, setScale] = useState(1) // 배경 이미지 확대 상태
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState) // Recoil 모달
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false) // 신청 취소 모달 상태
-  const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태 추가
-  const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태 추가
+  const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태
   const { campaignId } = useParams()
   const { isLoggedIn } = useRecoilValue(authState)
   const { addToast } = useToast()
@@ -54,17 +53,18 @@ const CampaignDetailPage = () => {
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
-  // 가이드 토글 핸들러
+  //** 유의사항 토글버튼 */
   const toggleGuide = () => {
     setIsGuideOpen(true)
   }
 
-  // 탭 설정
+  //** 탭 설정 */
   const singleTab = [{ label: "캠페인 정보", value: "info" }]
   const handleTabSelect = (tabValue: string) => {
     setSelectedTab(tabValue)
   }
 
+  //** 애니메이션 효과 */
   useEffect(() => {
     const handleScroll = () => {
       let scrollPosition = window.scrollY
@@ -83,7 +83,7 @@ const CampaignDetailPage = () => {
         newOffsetY = 0
       }
       setPopUpOffsetY(newOffsetY)
-      // 배경 이미지 확대 효과 적용 (최상단에서)
+      // 배경 이미지 확대 효과 적용 (최상단)
       if (scrollPosition < 0) {
         const scaleFactor = 1 - scrollPosition / 400
         setScale(scaleFactor)
@@ -100,7 +100,7 @@ const CampaignDetailPage = () => {
     return <div>유효하지 않은 캠페인 ID입니다.</div>
   }
 
-  // 캠페인 상세
+  //** 캠페인 상세ITEM */
   const { data, error, isFetching } = useSuspenseQuery({
     queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignId),
     queryFn: () =>
@@ -113,41 +113,34 @@ const CampaignDetailPage = () => {
     refetchOnMount: false,
     refetchOnReconnect: true,
   })
-  // 에러 처리
   if (error && isFetching) {
     throw error
   }
 
   const campaignDetail = data.campaign
-  // D-Day 계산
+  console.log(data)
+  //** 캠페인 신청조건 */
+  const isJoin = data.is_join_enable
+  const isCancellable = data.is_join_cancellable === 1
+  const isOpen = data.review_status === "open"
+
+  //** D-Day 계산 */
   const today = new Date()
   const endDate = new Date(campaignDetail.endAt)
   const diffTime = endDate.getTime() - today.getTime()
   const dDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
-  // 캠페인 신청하기 버튼 클릭 핸들러
+  //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
     if (!isLoggedIn) {
-      // 토스트 메시지 추가
       addToast("로그인이 필요합니다.", "warning", 1000, "login")
       navigate(RoutePath.Login, { replace: true })
-      setErrorCode(null) // 에러 코드 초기화
+      setErrorCode(null)
     } else {
-      // 모달을 띄우기 위한 상태 변경
       setIsModalOpen(true)
     }
   }
-
-  // 모달닫기 로직
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setIsCancelModalOpen(false)
-    if (isApplySuccess) {
-      navigate(`/campaign/${campaignId}`, { replace: true })
-      setErrorCode(null) // 에러 코드 초기화
-    }
-  }
-  // 모달로직
+  // ** 모달에서 캠페인 신청핸들러 [1-2] */
   const handleConfirm = async () => {
     try {
       const data = {
@@ -155,7 +148,6 @@ const CampaignDetailPage = () => {
       }
       const response = await joinReview(data)
 
-      setIsApplySuccess(true)
       setErrorCode(null)
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
@@ -163,7 +155,6 @@ const CampaignDetailPage = () => {
 
         // daily limit 에러 처리
         if (statusCode === -1 && errorCode === 7) {
-          setIsApplySuccess(false)
           setErrorCode(7)
           return
         }
@@ -172,11 +163,31 @@ const CampaignDetailPage = () => {
       setErrorCode(null) // 다른 에러 코드 초기화
     }
   }
-
-  const handleCancel = () => {
-    setIsCancelModalOpen(true) // 신청 취소 모달 열기
+  //** 모달닫기 핸들러 [1-3] */
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setIsCancelModalOpen(false)
+    if (isJoin) {
+      navigate(`/campaign/${campaignId}`, { replace: true })
+      setErrorCode(null)
+    }
   }
-  // 캠페인 신청 취소 핸들러
+  //** 캠페인신청 성공후 핸들러 [1-4] */
+  const handleModalConfirm = () => {
+    if (isJoin) {
+      // 신청 성공 후 '나의 캠페인 내역'으로 라우팅
+      setIsModalOpen(false)
+      navigate(RoutePath.MyCampaign)
+    } else {
+      // 아직 신청을 완료하지 않았을 때는 신청 처리
+      handleConfirm()
+    }
+  }
+  //** 캠페인신청 취소 모달 열기 [2-1] */
+  const handleCancelOpen = () => {
+    setIsCancelModalOpen(true)
+  }
+  //** 캠페인신청 취소 핸들러 [2-2] */
   const handleConfirmCancel = async () => {
     try {
       const data = {
@@ -186,7 +197,6 @@ const CampaignDetailPage = () => {
 
       // 신청 취소 성공 시 처리
       addToast("캠페인 신청이 취소되었습니다.", "check", 2000, "campaign")
-      setIsApplySuccess(false) // 신청 성공 상태를 초기화
       setIsCancelModalOpen(false) // 모달 닫기
     } catch (error) {
       // 취소 실패 시 처리
@@ -198,34 +208,34 @@ const CampaignDetailPage = () => {
       )
     }
   }
-  const handleModalConfirm = () => {
-    if (isApplySuccess) {
-      // 신청 성공 후 '나의 캠페인 내역'으로 라우팅
-      setIsModalOpen(false) // 모달 닫기
-      navigate(RoutePath.MyCampaign)
-    } else {
-      // 아직 신청을 완료하지 않았을 때는 신청 처리
-      handleConfirm()
-    }
-  }
 
   const thumbnailUrl = campaignDetail.thumbnailUrl || dummyImage
   const renderButton = () => {
-    if (isApplySuccess) {
-      // 신청 완료된 상태의 버튼
+    if (isJoin === 1) {
+      if (isCancellable) {
+        // 신청 취소 가능 상태
+        return (
+          <Button onClick={handleCancelOpen} $variant="grey">
+            캠페인 신청 취소하기
+          </Button>
+        )
+      } else {
+        // 신청 불가 상태
+        return <Button $variant="grey">캠페인 신청 불가</Button>
+      }
+    } else if (isJoin === 0) {
+      // 신청 가능 상태
       return (
-        <Button onClick={handleCancel} $variant="grey">
-          캠페인 신청 취소하기
+        <Button onClick={handleApply} $variant="red">
+          캠페인 신청하기
         </Button>
       )
+    } else {
+      // 그 외의 경우 신청 불가
+      return <Button $variant="grey">캠페인 신청 불가</Button>
     }
-    // 신청 전 상태의 버튼
-    return (
-      <Button onClick={handleApply} $variant="red">
-        캠페인 신청하기
-      </Button>
-    )
   }
+
   return (
     <>
       {/* 캐시워크때문에 주석처리 */}
@@ -277,7 +287,6 @@ const CampaignDetailPage = () => {
         />
         <Main>
           <div>
-            {/* 이미지 공간 */}
             <ImagePlaceholder />
             {/* GuideCont를 조건부로 렌더링 */}
             {isGuideOpen && (
@@ -294,7 +303,7 @@ const CampaignDetailPage = () => {
             </ButtonContainer>
           )}
         </Main>
-        {/* 유의사항 섹션 */}
+        {/* 유의사항 */}
         <Details open>
           <Summary>
             <NoticeTitle>※ 유의사항 안내</NoticeTitle>
@@ -355,7 +364,7 @@ const CampaignDetailPage = () => {
         onConfirm={handleModalConfirm}
         onCancel={handleCloseModal}
         title={
-          isApplySuccess ? (
+          isJoin ? (
             "캠페인 신청 완료!"
           ) : errorCode === 7 ? (
             <>하루 신청 한도초과! (1/1)</>
@@ -366,7 +375,7 @@ const CampaignDetailPage = () => {
           )
         }
         content={
-          isApplySuccess ? (
+          isJoin ? (
             <ol>
               <li>
                 캠페인은 <em>선착순으로</em> 진행돼요.
@@ -397,10 +406,8 @@ const CampaignDetailPage = () => {
             </>
           )
         }
-        confirmText={isApplySuccess ? "나의 캠페인 내역" : "신청하기"}
-        cancelText={
-          isApplySuccess ? "더 둘러보기" : errorCode === 7 ? "확인" : "취소"
-        }
+        confirmText={isJoin ? "나의 캠페인 내역" : "신청하기"}
+        cancelText={isJoin ? "더 둘러보기" : errorCode === 7 ? "확인" : "취소"}
       />
       {/* 신청취소 모달 */}
       <Modal
@@ -433,8 +440,8 @@ const Line = styled.div`
     content: "";
     position: absolute;
     top: 0;
-    left: -1.5rem; /* 부모의 좌측 패딩 값 */
-    width: calc(100% + 3rem); /* 좌우 패딩의 합 */
+    left: -1.5rem;
+    width: calc(100% + 3rem);
     height: 0.4rem;
     background-color: var(--n20-color);
   }
