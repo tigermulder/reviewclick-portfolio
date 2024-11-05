@@ -27,11 +27,12 @@ function App() {
     location.pathname === RoutePath.MyCampaign ||
     location.pathname === RoutePath.UserServiceGuide ||
     location.pathname === RoutePath.ResetPassword ||
-    location.pathname === RoutePath.TermsOfService ||
-    location.pathname === RoutePath.PrivacyPolicy ||
     location.pathname === RoutePath.UserEditProfile ||
     location.pathname === RoutePath.UserAccountSetting ||
     location.pathname === RoutePath.UserAccountDeletion ||
+    location.pathname === RoutePath.Alert ||
+    location.pathname === RoutePath.TermsOfService ||
+    location.pathname === RoutePath.PrivacyPolicy ||
     isCampaignDetail ||
     isReviewDetail
   const hideTapBar =

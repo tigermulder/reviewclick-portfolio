@@ -23,8 +23,8 @@ const ContentTab = ({ tabs, selectedTab, onTabSelect }: TabsProps) => {
 
 export default ContentTab
 
-// ** TabsContainer 스타일 */
 const TabsContainer = styled.ul`
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 1.8rem;
@@ -35,7 +35,6 @@ const TabsContainer = styled.ul`
   list-style: none;
 `
 
-// ** TabItem 스타일 */
 const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
   "aria-disabled": disabled,
   tabIndex: disabled ? -1 : 0,
@@ -53,7 +52,6 @@ const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
   &.selected {
     position: relative;
     color: var(--revu-color);
-    font-weight: var(--font-weight-bold);
 
     &:after {
       content: "";
@@ -69,10 +67,5 @@ const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
   &:hover {
     color: ${({ disabled }) =>
       disabled ? "var(--n200-color)" : "var(--revu-color)"};
-  }
-
-  &:focus {
-    outline: ${({ disabled }) =>
-      disabled ? "none" : "2px solid var(--revu-color)"};
   }
 `

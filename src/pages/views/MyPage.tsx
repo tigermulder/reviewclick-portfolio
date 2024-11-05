@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 import IconArrowRight from "assets/ico_arr_right.svg?url"
 import IconNoticeArrow from "assets/ico-notice-arrow.svg?url"
 import IconNew from "assets/ico-new.svg"
-import styled from "styled-components"
 import { RoutePath } from "@/types/route-path"
 import SinglePageHeader from "@/components/SinglePageHeader"
 import { extractUsername } from "@/utils/util"
+import styled from "styled-components"
 
 const MyPage = () => {
   const [isNoticeOpen, setIsNoticeOpen] = useState<boolean>(false)

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import styled from "styled-components"
 import ReuseHeader from "@/components/ReuseHeader"
 import TextField from "@/components/TextField"
@@ -11,6 +11,9 @@ import { resetPassword } from "@/services/join"
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+  const token = queryParams.get("token")
   const [password1, setPassword1] = useState("")
   const [password2, setPassword2] = useState("")
   const [registerEnabled, setRegisterEnabled] = useState(false)
@@ -37,6 +40,7 @@ const ResetPasswordPage = () => {
   const handleResetPassword = async () => {
     try {
       const response = await resetPassword({
+        token,
         password: password1,
       })
 

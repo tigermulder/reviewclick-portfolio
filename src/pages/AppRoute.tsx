@@ -4,6 +4,7 @@ import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
 import ResetPasswordPage from "./views/ResetPasswordPage"
 import MyAccountDeletionPage from "./views/MyPageDetail/MyAccountDeletionPage"
+import AlertHubPage from "./views/AlertHubPage"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/JoinPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
@@ -79,6 +80,8 @@ export const AppRoute = () => {
           path={RoutePath.UserAccountDeletion}
           element={<MyAccountDeletionPage />}
         />
+        {/* 알림허브페이지 */}
+        <Route path={RoutePath.Alert} element={<AlertHubPage />} />
         {/* 이용약관 */}
         <Route path={RoutePath.TermsOfService} element={<TermsOfService />} />
         {/* 개인정보처리방침 */}

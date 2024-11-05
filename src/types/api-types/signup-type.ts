@@ -68,6 +68,7 @@ export interface ResetPassWordEmailResponse {
 
 //** User Password Reset 패스워드 초기화 */
 export interface ResetPassWordRequest {
+  token: string | null
   password: string
 }
 export interface ResetPassWordResponse {

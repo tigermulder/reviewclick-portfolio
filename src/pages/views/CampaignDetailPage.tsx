@@ -118,7 +118,6 @@ const CampaignDetailPage = () => {
   }
 
   const campaignDetail = data.campaign
-  console.log(data)
   //** 캠페인 신청조건 */
   const isJoin = data.is_join_enable
   const isCancellable = data.is_join_cancellable === 1
@@ -194,18 +193,20 @@ const CampaignDetailPage = () => {
         reviewId: campaignDetail.campaignId,
       }
       const response = await cancelReview(data)
-
-      // 신청 취소 성공 시 처리
-      addToast("캠페인 신청이 취소되었습니다.", "check", 2000, "campaign")
-      setIsCancelModalOpen(false) // 모달 닫기
-    } catch (error) {
-      // 취소 실패 시 처리
-      addToast(
-        "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
-        "warning",
-        2000,
-        "campaign"
-      )
+      if (response.statusCode === 0) {
+        const redirect = sessionStorage.getItem("redirectPath")
+        addToast("캠페인 신청이 취소되었습니다.", "check", 1000, "campaign")
+        setIsCancelModalOpen(false)
+        if (redirect) {
+          navigate(redirect)
+        } else {
+          navigate(RoutePath.Login)
+        }
+      } else {
+        throw new Error()
+      }
+    } catch (err) {
+      addToast("캠페인 신청 취소에 실패했습니다.", "warning", 1000, "campaign")
     }
   }
 
@@ -285,7 +286,7 @@ const CampaignDetailPage = () => {
           selectedTab={selectedTab}
           onTabSelect={handleTabSelect}
         />
-        <Main>
+        <div>
           <div>
             <ImagePlaceholder />
             {/* GuideCont를 조건부로 렌더링 */}
@@ -302,7 +303,7 @@ const CampaignDetailPage = () => {
               </Button>
             </ButtonContainer>
           )}
-        </Main>
+        </div>
         {/* 유의사항 */}
         <Details open>
           <Summary>
@@ -626,10 +627,6 @@ const DetailInfo = styled.span`
   color: #000;
 `
 
-const Main = styled.div`
-  padding: 1.4rem 0;
-`
-
 const ImagePlaceholder = styled.div`
   height: 384px;
   background-image: url("${detailImage}");
@@ -649,7 +646,6 @@ const GuideDetail = styled.div`
 const GuideCont = styled.div`
   margin-top: 2.2rem;
   border-top: 0.1rem solid var(--n80-color);
-  padding: 3rem 0 1.8rem;
 `
 
 const ButtonContainer = styled.div`

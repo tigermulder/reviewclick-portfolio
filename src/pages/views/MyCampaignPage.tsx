@@ -22,7 +22,7 @@ const MyCampaignPage = () => {
   const router = useRouter()
   //** 스크롤 0부터시작 */
   useScrollToTop()
-  const chips = ["전체", "상품구매"]
+  const chips = ["전체"]
   const handleSelectChip = (chip: string) => {
     setSelectedChip(chip)
   }
