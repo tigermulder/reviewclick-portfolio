@@ -31,6 +31,7 @@ function App() {
     location.pathname === RoutePath.UserAccountSetting ||
     location.pathname === RoutePath.UserAccountDeletion ||
     location.pathname === RoutePath.Alert ||
+    location.pathname === RoutePath.ContactAdd ||
     location.pathname === RoutePath.TermsOfService ||
     location.pathname === RoutePath.PrivacyPolicy ||
     isCampaignDetail ||
@@ -46,6 +47,7 @@ function App() {
     location.pathname === RoutePath.UserEditProfile ||
     location.pathname === RoutePath.UserAccountSetting ||
     location.pathname === RoutePath.UserAccountDeletion ||
+    location.pathname === RoutePath.ContactAdd ||
     isReviewDetail
   const showFooter =
     (location.pathname === RoutePath.Home && !isCampaignDetail) ||

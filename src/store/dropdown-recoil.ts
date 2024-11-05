@@ -1,17 +1,18 @@
 import { atom, selector } from "recoil"
 import { campaignListState, campaignLikeState } from "./mainpage-recoil"
+import { FilterOption } from "@/types/component-types/filter-dropdown-type"
 import {
-  FilterOption,
-  dropDownOptions,
-} from "@/types/component-types/filter-dropdown-type"
+  cartOptions,
+  contactOptions,
+} from "@/types/component-types/dropdown-type"
 
-// 선택된 필터 상태 아톰
+// 찜하기 필터 상태 아톰
 export const selectedFilterState = atom<FilterOption>({
   key: "selectedFilterState",
-  default: dropDownOptions[0], // 기본값은 "최신순"
+  default: cartOptions[0],
 })
 
-// 필터링된 캠페인 셀렉터
+// 찜하기 필터링된 캠페인 셀렉터
 export const filteredCampaignsSelector = selector({
   key: "filteredCampaignsSelector",
   get: ({ get }) => {
@@ -69,4 +70,10 @@ export const filteredCampaignsSelector = selector({
 
     return filtered
   },
+})
+
+// 문의사항 필터 상태 아톰
+export const selectedContactFilterState = atom<FilterOption>({
+  key: "selectedContactFilterState",
+  default: contactOptions[0],
 })

@@ -17,6 +17,7 @@ const Layout = () => {
   const UserServiceGuidePage = location.pathname === RoutePath.UserServiceGuide // 서비스 이용가이드 페이지
   const TermsOfServicePage = location.pathname === RoutePath.TermsOfService // 이용약관 페이지
   const PrivacyPolicyPage = location.pathname === RoutePath.PrivacyPolicy // 개인정보처리방침 페이지
+  const ContactAddPage = location.pathname === RoutePath.ContactAdd // 문의등록 페이지
   const UserAccountDeletionPage =
     location.pathname === RoutePath.UserAccountDeletion // 회원탈퇴 페이지
   const isSpecialPage =
@@ -39,6 +40,7 @@ const Layout = () => {
         $TermsOfServicePage={TermsOfServicePage}
         $PrivacyPolicyPage={PrivacyPolicyPage}
         $UserAccountDeletionPage={UserAccountDeletionPage}
+        $ContactAddPage={ContactAddPage}
       >
         {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
         <Outlet />
@@ -61,6 +63,7 @@ const Content = styled.main<ContentProps>`
     $TermsOfServicePage,
     $PrivacyPolicyPage,
     $UserAccountDeletionPage,
+    $ContactAddPage,
   }) => {
     if ($isMyCampaignPage) {
       return `
@@ -108,6 +111,12 @@ const Content = styled.main<ContentProps>`
       return `
         min-height: 100vh; 
         padding: 4.4rem 1.5rem 4rem;
+        background-color: var(--n20-color);
+      `
+    } else if ($ContactAddPage) {
+      return `
+        min-height: 100vh; 
+        padding: 7rem 1.5rem 4rem;
         background-color: var(--n20-color);
       `
     } else {

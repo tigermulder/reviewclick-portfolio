@@ -2,6 +2,7 @@ import { useState } from "react"
 import SinglePageHeader from "@/components/SinglePageHeader"
 import ContentTab from "@/components/Tab"
 import useScrollToTop from "@/hooks/useScrollToTop"
+import FaqButton from "@/components/FaqButton"
 import styled from "styled-components"
 
 const AlertHubPage = () => {
@@ -25,6 +26,7 @@ const AlertHubPage = () => {
         selectedTab={selectedTab}
         onTabSelect={handleTabSelect}
       />
+      <FaqButton />
     </>
   )
 }

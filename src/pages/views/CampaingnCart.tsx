@@ -3,18 +3,24 @@ import { campaignLikeState } from "@/store/mainpage-recoil"
 import LikeButton from "components/LikeButton"
 import FilterDropDown from "@/components/FilterDropDown"
 import dummyImage from "assets/dummy-image.png"
-import { Route, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import useToast from "@/hooks/useToast"
-import { filteredCampaignsSelector } from "@/store/dropdown-recoil"
+import {
+  filteredCampaignsSelector,
+  selectedFilterState,
+} from "@/store/dropdown-recoil"
 import ReuseHeader from "@/components/ReuseHeader"
 import { campaignListState } from "@/store/mainpage-recoil"
 import styled from "styled-components"
 import { RoutePath } from "@/types/route-path"
+import { cartOptions } from "@/types/component-types/dropdown-type"
 
 const CampaignCart = () => {
   const campaignList = useRecoilValue(campaignListState)
   const [likedCampaigns, setLikedCampaigns] = useRecoilState(campaignLikeState)
   const filteredCampaigns = useRecoilValue(filteredCampaignsSelector)
+  const [selectedFilter, setSelectedFilter] =
+    useRecoilState(selectedFilterState)
   const navigate = useNavigate()
   const { addToast } = useToast()
 
@@ -27,11 +33,9 @@ const CampaignCart = () => {
     if (updatedLikes[categoryId].length === 0) {
       delete updatedLikes[categoryId]
     }
-    setLikedCampaigns(updatedLikes) // Recoil 상태 업데이트 및 로컬 스토리지 반영
+    setLikedCampaigns(updatedLikes)
     addToast("찜한 목록에서 해제했어요.", "uncheck", 1000, "like")
   }
-
-  console.log(campaignList)
 
   return (
     <Container>
@@ -39,7 +43,11 @@ const CampaignCart = () => {
       {/* 캠페인 리스트 */}
       <CampaignList>
         <FilterContainer>
-          <FilterDropDown />
+          <FilterDropDown
+            options={cartOptions}
+            selectedFilter={selectedFilter}
+            setSelectedFilter={setSelectedFilter}
+          />
         </FilterContainer>
         {filteredCampaigns.length > 0 ? (
           filteredCampaigns.map((campaign) => {

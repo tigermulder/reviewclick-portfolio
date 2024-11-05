@@ -38,6 +38,7 @@ const CampaignDetailPage = () => {
   const [scale, setScale] = useState(1) // 배경 이미지 확대 상태
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState) // Recoil 모달
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false) // 신청 취소 모달 상태
+  const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
   const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태
   const { campaignId } = useParams()
   const { isLoggedIn } = useRecoilValue(authState)
@@ -118,6 +119,7 @@ const CampaignDetailPage = () => {
   }
 
   const campaignDetail = data.campaign
+  console.log(data)
   //** 캠페인 신청조건 */
   const isJoin = data.is_join_enable
   const isCancellable = data.is_join_cancellable === 1
@@ -147,6 +149,7 @@ const CampaignDetailPage = () => {
       }
       const response = await joinReview(data)
 
+      setIsApplySuccess(true)
       setErrorCode(null)
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
@@ -154,6 +157,7 @@ const CampaignDetailPage = () => {
 
         // daily limit 에러 처리
         if (statusCode === -1 && errorCode === 7) {
+          setIsApplySuccess(false)
           setErrorCode(7)
           return
         }
@@ -166,14 +170,14 @@ const CampaignDetailPage = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false)
     setIsCancelModalOpen(false)
-    if (isJoin) {
+    if (isApplySuccess) {
       navigate(`/campaign/${campaignId}`, { replace: true })
       setErrorCode(null)
     }
   }
   //** 캠페인신청 성공후 핸들러 [1-4] */
   const handleModalConfirm = () => {
-    if (isJoin) {
+    if (isApplySuccess) {
       // 신청 성공 후 '나의 캠페인 내역'으로 라우팅
       setIsModalOpen(false)
       navigate(RoutePath.MyCampaign)
@@ -193,20 +197,19 @@ const CampaignDetailPage = () => {
         reviewId: campaignDetail.campaignId,
       }
       const response = await cancelReview(data)
-      if (response.statusCode === 0) {
-        const redirect = sessionStorage.getItem("redirectPath")
-        addToast("캠페인 신청이 취소되었습니다.", "check", 1000, "campaign")
-        setIsCancelModalOpen(false)
-        if (redirect) {
-          navigate(redirect)
-        } else {
-          navigate(RoutePath.Login)
-        }
-      } else {
-        throw new Error()
-      }
-    } catch (err) {
-      addToast("캠페인 신청 취소에 실패했습니다.", "warning", 1000, "campaign")
+
+      // 신청 취소 성공 시 처리
+      addToast("캠페인 신청이 취소되었습니다.", "check", 2000, "campaign")
+      setIsApplySuccess(false) // 신청 성공 상태를 초기화
+      setIsCancelModalOpen(false) // 모달 닫기
+    } catch (error) {
+      // 취소 실패 시 처리
+      addToast(
+        "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
+        "warning",
+        2000,
+        "campaign"
+      )
     }
   }
 
@@ -236,7 +239,6 @@ const CampaignDetailPage = () => {
       return <Button $variant="grey">캠페인 신청 불가</Button>
     }
   }
-
   return (
     <>
       {/* 캐시워크때문에 주석처리 */}
@@ -286,7 +288,7 @@ const CampaignDetailPage = () => {
           selectedTab={selectedTab}
           onTabSelect={handleTabSelect}
         />
-        <div>
+        <Main>
           <div>
             <ImagePlaceholder />
             {/* GuideCont를 조건부로 렌더링 */}
@@ -303,7 +305,7 @@ const CampaignDetailPage = () => {
               </Button>
             </ButtonContainer>
           )}
-        </div>
+        </Main>
         {/* 유의사항 */}
         <Details open>
           <Summary>
@@ -365,7 +367,7 @@ const CampaignDetailPage = () => {
         onConfirm={handleModalConfirm}
         onCancel={handleCloseModal}
         title={
-          isJoin ? (
+          isApplySuccess ? (
             "캠페인 신청 완료!"
           ) : errorCode === 7 ? (
             <>하루 신청 한도초과! (1/1)</>
@@ -376,7 +378,7 @@ const CampaignDetailPage = () => {
           )
         }
         content={
-          isJoin ? (
+          isApplySuccess ? (
             <ol>
               <li>
                 캠페인은 <em>선착순으로</em> 진행돼요.
@@ -407,8 +409,10 @@ const CampaignDetailPage = () => {
             </>
           )
         }
-        confirmText={isJoin ? "나의 캠페인 내역" : "신청하기"}
-        cancelText={isJoin ? "더 둘러보기" : errorCode === 7 ? "확인" : "취소"}
+        confirmText={isApplySuccess ? "나의 캠페인 내역" : "신청하기"}
+        cancelText={
+          isApplySuccess ? "더 둘러보기" : errorCode === 7 ? "확인" : "취소"
+        }
       />
       {/* 신청취소 모달 */}
       <Modal
@@ -627,6 +631,10 @@ const DetailInfo = styled.span`
   color: #000;
 `
 
+const Main = styled.div`
+  padding: 1.4rem 0;
+`
+
 const ImagePlaceholder = styled.div`
   height: 384px;
   background-image: url("${detailImage}");
@@ -646,6 +654,7 @@ const GuideDetail = styled.div`
 const GuideCont = styled.div`
   margin-top: 2.2rem;
   border-top: 0.1rem solid var(--n80-color);
+  padding: 3rem 0 1.8rem;
 `
 
 const ButtonContainer = styled.div`

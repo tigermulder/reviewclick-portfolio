@@ -5,6 +5,7 @@ import Layout from "./Layout"
 import ResetPasswordPage from "./views/ResetPasswordPage"
 import MyAccountDeletionPage from "./views/MyPageDetail/MyAccountDeletionPage"
 import AlertHubPage from "./views/AlertHubPage"
+import ContactSupport from "./views/AlertPageDetail/ContactSupport"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/JoinPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
@@ -82,6 +83,8 @@ export const AppRoute = () => {
         />
         {/* 알림허브페이지 */}
         <Route path={RoutePath.Alert} element={<AlertHubPage />} />
+        {/* 문의등록하기 페이지 */}
+        <Route path={RoutePath.ContactAdd} element={<ContactSupport />} />
         {/* 이용약관 */}
         <Route path={RoutePath.TermsOfService} element={<TermsOfService />} />
         {/* 개인정보처리방침 */}

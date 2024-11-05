@@ -1,40 +1,65 @@
-import { useState } from "react"
-import { dropDownOptions } from "@/types/component-types/filter-dropdown-type"
-import { selectedFilterState } from "@/store/dropdown-recoil"
+import { useEffect, useRef, useState } from "react"
+import {
+  FilterDropDownProps,
+  FilterOption,
+} from "@/types/component-types/filter-dropdown-type"
 import IconDropDown from "assets/ico-dropdown-arrow.svg?react"
-import { useRecoilState } from "recoil"
 import styled from "styled-components"
 
-const FilterDropDown = () => {
+const FilterDropDown = ({
+  options,
+  selectedFilter,
+  setSelectedFilter,
+  buttonWidth = "auto",
+  buttonHeight = "2.8rem",
+  containerWidth = "160px",
+  containerHeight = "3.2rem",
+  containerTop = "40px",
+}: FilterDropDownProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedFilter, setSelectedFilter] =
-    useRecoilState(selectedFilterState)
+  const [dynamicContainerWidth, setDynamicContainerWidth] =
+    useState(containerWidth)
+  const buttonRef = useRef<HTMLDivElement>(null)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
   }
 
-  const handleOptionClick = (option: (typeof dropDownOptions)[0]) => {
+  const handleOptionClick = (option: FilterOption) => {
     setSelectedFilter(option) // 선택된 필터 업데이트
     setIsOpen(false) // 드롭다운 닫기
   }
 
+  useEffect(() => {
+    if (buttonWidth === "100%" && buttonRef.current) {
+      setDynamicContainerWidth(`${buttonRef.current.offsetWidth}px`)
+    } else {
+      setDynamicContainerWidth(containerWidth)
+    }
+  }, [buttonWidth, containerWidth])
+
   return (
     <>
-      {/* 드롭다운을 열기 위한 버튼 - 선택된 옵션에 따라 텍스트가 변경됨 */}
-      <DropdownButton onClick={toggleDropdown}>
+      {/* 드롭다운을 열기 위한 버튼 */}
+      <DropdownButton
+        ref={buttonRef}
+        onClick={toggleDropdown}
+        $width={buttonWidth}
+        $height={buttonHeight}
+      >
         <span>{selectedFilter.label}</span>
         <IconDropDown />
       </DropdownButton>
 
       {/* 드롭다운 메뉴 */}
       {isOpen && (
-        <DropDownContainer>
-          {dropDownOptions.map((option) => (
+        <DropDownContainer $width={dynamicContainerWidth} $top={containerTop}>
+          {options.map((option) => (
             <DropDownItem
               key={option.id}
               $highlighted={option.id === selectedFilter.id}
-              onClick={() => handleOptionClick(option)} // 옵션 클릭 처리
+              onClick={() => handleOptionClick(option)}
+              $height={containerHeight}
             >
               {option.label}
             </DropDownItem>
@@ -47,10 +72,9 @@ const FilterDropDown = () => {
 
 export default FilterDropDown
 
-// 드롭다운 버튼 스타일
-const DropdownButton = styled.div`
-  width: auto;
-  height: 2.8rem;
+const DropdownButton = styled.div<{ $width: string; $height: string }>`
+  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height};
   padding: 0 0.8rem;
   background: white;
   box-shadow: 0px 0px 6px rgba(41, 54, 61, 0.05);
@@ -70,9 +94,9 @@ const DropdownButton = styled.div`
   }
 `
 
-// 드롭다운 메뉴 스타일
-const DropDownContainer = styled.div`
-  width: 160px;
+const DropDownContainer = styled.div<{ $width: string; $top: string }>`
+  width: ${({ $width }) => $width};
+  height: auto;
   padding: 1rem 0.8rem;
   background: white;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.05);
@@ -82,13 +106,14 @@ const DropDownContainer = styled.div`
   flex-direction: column;
   gap: 4px;
   position: absolute;
-  top: 40px;
+  top: ${({ $top }) => $top};
   right: 1.5rem;
+  z-index: 999;
 `
 
-const DropDownItem = styled.div<{ $highlighted?: boolean }>`
+const DropDownItem = styled.div<{ $highlighted?: boolean; $height: string }>`
   width: 100%;
-  height: 3.2rem;
+  height: ${({ $height }) => $height};
   position: relative;
   border-radius: 0.6rem;
   display: flex;

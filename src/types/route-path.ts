@@ -9,6 +9,7 @@ export const RoutePath = {
   MyCampaign: "/my_campaign",
   Notification: "/notification",
   Alert: "/alert",
+  ContactAdd: "/alert/contactAdd",
   UserProfile: "/user",
   UserPointLog: "/user/my_pointLog",
   UserServiceGuide: "/user/my_ServiceGuide",
@@ -32,4 +33,5 @@ export interface ContentProps {
   $TermsOfServicePage: boolean
   $PrivacyPolicyPage: boolean
   $UserAccountDeletionPage: boolean
+  $ContactAddPage: boolean
 }
