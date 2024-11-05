@@ -121,7 +121,7 @@ const TextAreaContainer = styled.div`
 
   textarea {
     display: block;
-    padding: 1rem 1.4rem;
+    padding: 1.4rem;
     width: 100%;
     height: 100%;
     outline: 0;
