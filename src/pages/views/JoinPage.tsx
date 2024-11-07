@@ -8,16 +8,6 @@ import {
   verifyEmailCode,
   joinUser,
 } from "@/services/join"
-import {
-  EmailCheckRequest,
-  EmailCheckResponse,
-  SendEmailCodeRequest,
-  SendEmailCodeResponse,
-  VerifyEmailCodeRequest,
-  VerifyEmailCodeResponse,
-  JoinRequest,
-  JoinResponse,
-} from "types/api-types/signup-type"
 import TextField from "@/components/TextField"
 import Button from "@/components/Button"
 import Checkbox from "@/components/CheckBox"
@@ -41,7 +31,7 @@ const JoinPage = () => {
   const [password1, setPassword1] = useState("")
   const [password2, setPassword2] = useState("")
   const [phone, setPhone] = useState("")
-  const [referrerCode, setReferrerCode] = useState("")
+  // const [referrerCode, setReferrerCode] = useState("")
   const [agreements, setAgreements] = useState({
     all: false,
     essential1: false,
@@ -60,18 +50,17 @@ const JoinPage = () => {
   const [emailVerifyMessage, setEmailVerifyMessage] = useState<string>("")
 
   //** 이메일 체크 mutation */
-  const emailCheckMutation = useMutation<
-    EmailCheckResponse,
-    Error,
-    EmailCheckRequest
-  >({
+  const emailCheckMutation = useMutation({
     mutationFn: checkEmail,
     onSuccess: (data) => {
       if (data.statusCode === 0) {
         setEmailCheckMessage("가입이 가능한 네이버 아이디입니다.")
         const email = `${id}@naver.com`
-        const sendCodeData: SendEmailCodeRequest = { email }
+        const sendCodeData = { email }
         sendEmailCodeMutation.mutate(sendCodeData)
+        setTimeout(() => {
+          setEmailCheckMessage("")
+        }, 500)
       } else {
         setEmailCheckMessage("")
         addToast("이미 가입한 계정입니다.", "warning", 1000, "email")
@@ -84,11 +73,7 @@ const JoinPage = () => {
   })
 
   //** 이메일 인증 코드 전송 mutation */
-  const sendEmailCodeMutation = useMutation<
-    SendEmailCodeResponse,
-    Error,
-    SendEmailCodeRequest
-  >({
+  const sendEmailCodeMutation = useMutation({
     mutationFn: sendEmailCode,
     onSuccess: (data) => {
       if (data.statusCode === 0) {
@@ -112,11 +97,7 @@ const JoinPage = () => {
   })
 
   //** 이메일 인증 코드 확인 mutation */
-  const verifyEmailCodeMutation = useMutation<
-    VerifyEmailCodeResponse,
-    Error,
-    VerifyEmailCodeRequest
-  >({
+  const verifyEmailCodeMutation = useMutation({
     mutationFn: verifyEmailCode,
     onSuccess: (data) => {
       if (data.statusCode === 0) {
@@ -141,7 +122,7 @@ const JoinPage = () => {
   })
 
   //** 회원가입 mutation */
-  const joinUserMutation = useMutation<JoinResponse, Error, JoinRequest>({
+  const joinUserMutation = useMutation({
     mutationFn: joinUser,
     onSuccess: (data) => {
       if (data.statusCode === 0) {
@@ -215,7 +196,7 @@ const JoinPage = () => {
   useEffect(() => {
     if (emailAuthCode.length === 6 && emailSent && !emailConfirmed) {
       // 인증 코드 확인 요청
-      const requestData: VerifyEmailCodeRequest = { code: emailAuthCode }
+      const requestData = { code: emailAuthCode }
       verifyEmailCodeMutation.mutate(requestData)
     }
   }, [emailAuthCode])
@@ -232,14 +213,14 @@ const JoinPage = () => {
       return
     }
     const email = `${id}@naver.com`
-    const emailCheckData: EmailCheckRequest = { email }
+    const emailCheckData = { email }
     emailCheckMutation.mutate(emailCheckData)
   }
 
   //** 재발송 버튼 클릭 시 함수 */
   const handleResendEmailCode = () => {
     const email = `${id}@naver.com`
-    const sendCodeData: SendEmailCodeRequest = { email }
+    const sendCodeData = { email }
     sendEmailCodeMutation.mutate(sendCodeData)
     // 타이머 재시작
     startEmailTimer()
@@ -249,12 +230,11 @@ const JoinPage = () => {
   //** 회원가입 요청 함수 */
   const handleRegister = () => {
     const email = `${id}@naver.com`
-    const joinData: JoinRequest = {
+    const joinData = {
       email,
       password: password1,
       nickname: name,
       phone,
-      partner_uid: referrerCode,
     }
     joinUserMutation.mutate(joinData)
   }
@@ -293,7 +273,10 @@ const JoinPage = () => {
 
   return (
     <Signup>
-      <ReuseHeader title="회원가입" onBack={() => navigate(RoutePath.Login)} />
+      <ReuseHeader
+        title="계정인증(가입)"
+        onBack={() => navigate(RoutePath.Login)}
+      />
       {/* 아이디 입력 및 이메일 인증 */}
       <FormGroup>
         <Label>
@@ -321,6 +304,7 @@ const JoinPage = () => {
               }
               $suffixWidth="33.5%"
               successMessage={emailCheckMessage}
+              disabled={emailSent || emailConfirmed}
             />
           </TextFieldWrapper>
           <ButtonWrapper>
@@ -328,7 +312,7 @@ const JoinPage = () => {
               type="button"
               $variant="red"
               onClick={handleEmailAuth}
-              disabled={!validateEmail(id) || emailConfirmed}
+              disabled={!validateEmail(id) || emailConfirmed || emailSent}
               $marginTop="0"
             >
               {emailConfirmed ? "완료" : "인증"} {/* 버튼 텍스트 변경 */}
@@ -454,7 +438,7 @@ const JoinPage = () => {
         </TextFieldWrapper>
       </FormGroup>
       {/* 추천인 코드 입력 */}
-      <FormGroup>
+      {/* <FormGroup>
         <Label>
           추천인 코드 입력 <Info>(선택)</Info>
         </Label>
@@ -467,7 +451,7 @@ const JoinPage = () => {
             onChange={(e) => setReferrerCode(e.target.value)}
           />
         </TextFieldWrapper>
-      </FormGroup>
+      </FormGroup> */}
       {/* 약관 동의 섹션 */}
       <AgreementSection>
         <AgreementAll>

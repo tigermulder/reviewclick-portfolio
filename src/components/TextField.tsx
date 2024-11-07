@@ -14,9 +14,10 @@ const TextField = ({
   $suffixWidth = "31%",
   errorMessage,
   successMessage,
+  disabled,
 }: TextFieldProps) => (
   <TextFieldContainer $marginBottom={$marginBottom} $marginTop={$marginTop}>
-    <InputWrapper $isError={$isError}>
+    <InputWrapper $isError={$isError} $disabled={disabled}>
       <StyledInput
         type={type}
         name={name}
@@ -24,6 +25,7 @@ const TextField = ({
         value={value}
         onChange={onChange}
         $isError={$isError}
+        disabled={disabled}
       />
       {suffix && (
         <SuffixContainer $width={$suffixWidth}>
@@ -48,11 +50,14 @@ const TextFieldContainer = styled.div<{
   ${({ $marginTop }) => $marginTop && `margin-top: ${$marginTop};`}
 `
 
-const InputWrapper = styled.div<{ $isError?: boolean }>`
+const InputWrapper = styled.div<{ $isError?: boolean; $disabled?: boolean }>`
   display: flex;
   align-items: center;
-  border: 1px solid ${({ $isError }) => ($isError ? "red" : "#ddd")};
-  background: ${({ $isError }) => ($isError ? "var(--prim-L20)" : "inherit")};
+  border: 1px solid
+    ${({ $isError, $disabled }) =>
+      $isError ? "red" : $disabled ? "var(--silver)" : "#ddd"};
+  background: ${({ $isError, $disabled }) =>
+    $isError ? "var(--prim-L20)" : $disabled ? "var(--whitesmoke)" : "inherit"};
   border-radius: 5px;
   transition: border-color 0.2s ease;
   overflow: hidden;

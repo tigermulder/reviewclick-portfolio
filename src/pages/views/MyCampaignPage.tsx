@@ -85,7 +85,7 @@ const MyCampaignPage = () => {
             if (button.text === "지급완료") {
               router.push(RoutePath.UserPointLog)
             } else if (button.text === "미션중단") {
-              router.push(RoutePath.Notification)
+              router.push(RoutePath.MyCampaign)
             } else {
               const detail = RoutePath.MyReivewDetail(`${reviewItem.reviewId}`)
               router.push(detail)

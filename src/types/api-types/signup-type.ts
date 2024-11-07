@@ -34,9 +34,6 @@ export interface JoinRequest {
   password: string
   nickname: string
   phone: string
-  partner_uid?: string // optional
-  hmac?: string // optional
-  space_code?: string // optional
 }
 export interface JoinResponse {
   statusCode: number

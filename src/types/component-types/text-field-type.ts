@@ -11,4 +11,5 @@ export interface TextFieldProps {
   $marginTop?: string
   errorMessage?: string
   successMessage?: string
+  disabled?: boolean
 }
