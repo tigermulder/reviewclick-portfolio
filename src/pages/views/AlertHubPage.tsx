@@ -1,14 +1,14 @@
-import { useState } from "react"
 import SinglePageHeader from "@/components/SinglePageHeader"
 import ContentTab from "@/components/Tab"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import FaqButton from "@/components/FaqButton"
-import styled from "styled-components"
 import NewsContent from "./AlertPageDetail/NewsContent"
 import FaqContent from "./AlertPageDetail/FaqContent"
+import { useRecoilState } from "recoil"
+import { alertSelectedTabState } from "@/store/alerttap-recoil"
 
 const AlertHubPage = () => {
-  const [selectedTab, setSelectedTab] = useState("news") // 기본선택
+  const [selectedTab, setSelectedTab] = useRecoilState(alertSelectedTabState)
   //** 탭 설정 */
   const singleTab = [
     { label: "새소식", value: "news" },
