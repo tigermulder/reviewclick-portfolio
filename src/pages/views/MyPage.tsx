@@ -170,7 +170,7 @@ const NoticeContainer = styled.div`
 
 const NoticeHeader = styled.div`
   position: relative;
-  padding: 2.2rem 1.6rem 1.5rem;
+  padding: 2.2rem 1.6rem;
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);

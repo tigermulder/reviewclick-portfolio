@@ -21,6 +21,9 @@ export interface ReviewItem {
   title: string
   partnerId: number
   partnerUid: number
+  purchase_timeout: string
+  purchaseAt: string
+  review_timeout: string
   spaceId: number
   status:
     | "join"
@@ -32,6 +35,7 @@ export interface ReviewItem {
     | "timeout"
   uploadComplete: number
   createdAt: string
+  joinAt: string
   updatedAt: string
   endAt: string
 }

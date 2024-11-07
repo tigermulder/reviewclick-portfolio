@@ -49,3 +49,7 @@ export interface RemainingTime {
   remainingTime: string
   isEnded: boolean
 }
+
+export interface currentRemainingTime {
+  currTime: string
+}

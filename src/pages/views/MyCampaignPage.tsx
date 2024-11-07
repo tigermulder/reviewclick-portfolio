@@ -14,10 +14,12 @@ import useScrollToTop from "@/hooks/useScrollToTop"
 import { calculateRemainingTime } from "@/utils/util"
 import { RoutePath } from "@/types/route-path"
 import SinglePageHeader from "@/components/SinglePageHeader"
+import { currentCalculateRemainingTime } from "@/utils/util"
 import styled from "styled-components"
 
 const MyCampaignPage = () => {
   const [selectedChip, setSelectedChip] = useState("전체")
+  const [currentTime, setCurrentTime] = useState(new Date())
   const setReivewList = useSetRecoilState(reviewListState)
   const router = useRouter()
   //** 스크롤 0부터시작 */
@@ -26,6 +28,15 @@ const MyCampaignPage = () => {
   const handleSelectChip = (chip: string) => {
     setSelectedChip(chip)
   }
+
+  //** 스텝타이머 */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000) // 매초 업데이트
+
+    return () => clearInterval(timer) // 컴포넌트 언마운트 시 클리어
+  }, [])
 
   //** 리액트쿼리 나의 리뷰리스트 */
   const fetchCampaignList = async ({ queryKey }: { queryKey: string[] }) => {
@@ -72,7 +83,7 @@ const MyCampaignPage = () => {
       </CartCardDesc>
       <MyReviewContainer>
         {reviewList?.map((reviewItem) => {
-          // 남은 시간 계산
+          //** 캠페인 남은 시간 */
           const endAt = reviewItem.endAt
           const { remainingTime, isEnded } = calculateRemainingTime(endAt)
           const thumbnailUrl = reviewItem.thumbnailUrl || dummyImage
@@ -81,7 +92,8 @@ const MyCampaignPage = () => {
             text: "상품구매",
           }
 
-          const handleButtonClick = () => {
+          //** 스텝별 버튼 핸들러 */
+          const handleStepRouting = () => {
             if (button.text === "지급완료") {
               router.push(RoutePath.UserPointLog)
             } else if (button.text === "미션중단") {
@@ -91,6 +103,23 @@ const MyCampaignPage = () => {
               router.push(detail)
             }
           }
+
+          //** 구매전타이머 함수 */
+          const currTime = reviewItem.purchase_timeout
+            ? currentCalculateRemainingTime(
+                reviewItem.purchase_timeout,
+                reviewItem.joinAt,
+                currentTime
+              ).currTime
+            : null
+          //** 리뷰인증후 타이머 */
+          const currDayTime = reviewItem.review_timeout
+            ? currentCalculateRemainingTime(
+                reviewItem.review_timeout,
+                reviewItem.purchaseAt,
+                currentTime
+              ).currTime
+            : null
           return (
             <li key={reviewItem.reviewId}>
               <ReviewCardHeader>
@@ -108,8 +137,9 @@ const MyCampaignPage = () => {
                   <CardPoint>{reviewItem.reward}P</CardPoint>
                 </ReviewCardInfo>
               </ReviewCardHeader>
-              <Button $variant={button.variant} onClick={handleButtonClick}>
-                {button.text}
+              <Button $variant={button.variant} onClick={handleStepRouting}>
+                {button.text} {currTime && <em>{currTime}</em>}
+                {currDayTime && <em>{currDayTime}</em>}
               </Button>
               <ProgressStep status={reviewItem.status} />
             </li>
@@ -150,6 +180,9 @@ const MyReviewContainer = styled.ul`
   li {
     position: relative;
     padding: 2rem 1.5rem;
+    em {
+      margin-left: 0.4rem;
+    }
   }
   li:not(:last-child):after {
     content: "";

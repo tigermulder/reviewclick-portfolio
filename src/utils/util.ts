@@ -1,4 +1,4 @@
-import { RemainingTime } from "@/types/type"
+import { RemainingTime, currentRemainingTime } from "@/types/type"
 
 export const categories = [
   { id: 1, name: "전체" }, // '전체'는 특별하게 처리
@@ -117,4 +117,62 @@ export const extractUsername = (email: string | null): string | null => {
     return email
   }
   return email.substring(0, atIndex)
+}
+
+//** 구매 전 타이머 함수 */
+export const currentCalculateRemainingTime = (
+  purchaseTimeout: string,
+  joinAt: string,
+  currentTime: Date
+): currentRemainingTime => {
+  const timeoutDate = new Date(purchaseTimeout)
+  const joinDate = new Date(joinAt)
+
+  if (timeoutDate < joinDate) {
+    console.warn(
+      `purchaseTimeout (${purchaseTimeout})이 joinAt (${joinAt})보다 이전입니다.`
+    )
+  }
+  const diff = timeoutDate.getTime() - currentTime.getTime()
+
+  if (isNaN(diff) || diff <= 0) {
+    return { currTime: "" }
+  }
+
+  // 밀리초 단위 상수
+  const millisecondsInADay = 1000 * 60 * 60 * 24
+  const millisecondsInAnHour = 1000 * 60 * 60
+  const millisecondsInAMinute = 1000 * 60
+  const millisecondsInASecond = 1000
+
+  // 숫자를 두 자리로 포맷팅하는 함수
+  const pad = (num: number) => num.toString().padStart(2, "0")
+
+  if (diff >= millisecondsInADay) {
+    // 남은 시간이 24시간 이상인 경우
+    const days = Math.floor(diff / millisecondsInADay)
+    const remainingAfterDays = diff % millisecondsInADay
+
+    const hours = Math.floor(remainingAfterDays / millisecondsInAnHour)
+    const minutes = Math.floor(
+      (remainingAfterDays % millisecondsInAnHour) / millisecondsInAMinute
+    )
+    const seconds = Math.floor(
+      (remainingAfterDays % millisecondsInAMinute) / millisecondsInASecond
+    )
+
+    const currTime = `D-${days} (T-${pad(hours)}:${pad(minutes)}:${pad(seconds)})`
+    return { currTime }
+  } else {
+    // 남은 시간이 24시간 미만인 경우
+    const hours = Math.floor(diff / millisecondsInAnHour)
+    const minutes = Math.floor(
+      (diff % millisecondsInAnHour) / millisecondsInAMinute
+    )
+    const seconds = Math.floor(
+      (diff % millisecondsInAMinute) / millisecondsInASecond
+    )
+    const currTime = `(T-${pad(hours)}:${pad(minutes)}:${pad(seconds)})`
+    return { currTime }
+  }
 }
