@@ -18,6 +18,9 @@ export const RoutePath = {
   UserAccountDeletion: "/user/my_AccountSetting/userDeletion",
   MyReivewDetail: (reviewId: string) => `/my_campaign/${reviewId}`,
   CampaignDetail: (campaignId: string) => `/campaign/${campaignId}`,
+  NoticeDetail: (noticeId: string) => `/alert/${noticeId}`,
+  NotificationDetail: (notificationId: string) =>
+    `/alert/notice/${notificationId}`,
   TermsOfService: "/terms_Service",
   PrivacyPolicy: "/Privacy_Policy",
 } as const
@@ -34,4 +37,5 @@ export interface ContentProps {
   $PrivacyPolicyPage: boolean
   $UserAccountDeletionPage: boolean
   $ContactAddPage: boolean
+  $isNoticeDetail: boolean
 }

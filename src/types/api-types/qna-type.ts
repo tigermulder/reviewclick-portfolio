@@ -46,9 +46,9 @@ export interface QnaItemResponse {
 
 //** QnA add 요청type */
 export interface QnaAddRequest {
-  token: string
-  question: string
   qnaCategory: string
+  title: string
+  question: string
 }
 export interface QnaAddResponse {
   statusCode: number

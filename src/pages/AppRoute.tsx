@@ -2,10 +2,6 @@ import { lazy } from "react"
 import { Route, Routes as ReactRouterRoutes } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
-import ResetPasswordPage from "./views/ResetPasswordPage"
-import MyAccountDeletionPage from "./views/MyPageDetail/MyAccountDeletionPage"
-import AlertHubPage from "./views/AlertHubPage"
-import ContactSupport from "./views/AlertPageDetail/ContactSupport"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/JoinPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
@@ -28,6 +24,18 @@ const MyEditProfilePage = lazy(
   () => import("./views/MyPageDetail/MyEditProfilePage")
 )
 const MySettingPage = lazy(() => import("./views/MyPageDetail/MySettingPage"))
+const ResetPasswordPage = lazy(() => import("./views/ResetPasswordPage"))
+const MyAccountDeletionPage = lazy(
+  () => import("./views/MyPageDetail/MyAccountDeletionPage")
+)
+const AlertHubPage = lazy(() => import("./views/AlertHubPage"))
+const ContactSupport = lazy(
+  () => import("./views/AlertPageDetail/ContactSupport")
+)
+const NotificationDetail = lazy(
+  () => import("./views/AlertPageDetail/NotificationDetail")
+)
+const NoticeDetail = lazy(() => import("./views/AlertPageDetail/NoticeDetail"))
 
 export const AppRoute = () => {
   return (
@@ -83,6 +91,10 @@ export const AppRoute = () => {
         />
         {/* 알림허브페이지 */}
         <Route path={RoutePath.Alert} element={<AlertHubPage />} />
+        {/* 알림새소식 detail 페이지 */}
+        <Route path="/alert/:notificationId" element={<NotificationDetail />} />
+        {/* 알림공지사항 detail 페이지 */}
+        <Route path="/alert/notice/:noticeId" element={<NoticeDetail />} />
         {/* 문의등록하기 페이지 */}
         <Route path={RoutePath.ContactAdd} element={<ContactSupport />} />
         {/* 이용약관 */}

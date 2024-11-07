@@ -4,6 +4,8 @@ import ContentTab from "@/components/Tab"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import FaqButton from "@/components/FaqButton"
 import styled from "styled-components"
+import NewsContent from "./AlertPageDetail/NewsContent"
+import FaqContent from "./AlertPageDetail/FaqContent"
 
 const AlertHubPage = () => {
   const [selectedTab, setSelectedTab] = useState("news") // 기본선택
@@ -26,6 +28,12 @@ const AlertHubPage = () => {
         selectedTab={selectedTab}
         onTabSelect={handleTabSelect}
       />
+
+      {/* 선택된 탭에 따라 콘텐츠 렌더링 */}
+      <div>
+        {selectedTab === "news" && <NewsContent />}
+        {selectedTab === "faq" && <FaqContent />}
+      </div>
       <FaqButton />
     </>
   )

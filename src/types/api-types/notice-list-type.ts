@@ -1,10 +1,8 @@
 //** NOTICE 리스트 요청 type */
 export interface NoticeListRequest {
-  token: string
   pageSize: number
   pageIndex: number
-  noticeCategory?: string // optional
-  order?: string // optional, e.g., recent, orderNo
+  noticeCategory?: string
 }
 export interface NoticeListResponse {
   statusCode: number
@@ -13,7 +11,7 @@ export interface NoticeListResponse {
   list: Array<{
     noticeId: number
     noticeCategory: string
-    createAt: string // ISO format
+    createdAt: string
     title: string
     orderNo: number
   }>
@@ -27,7 +25,6 @@ export interface NoticeListResponse {
 
 //** NOTICE 상세 내용 요청 type */
 export interface NoticeItemRequest {
-  token: string
   noticeId: number
 }
 export interface NoticeItemResponse {
@@ -37,8 +34,11 @@ export interface NoticeItemResponse {
   notice: {
     noticeId: number
     noticeCategory: string
-    createAt: string // ISO format
     title: string
     content: string
+    createdAt: string
+    orderNo: number
+    adminUid: number
+    updatedAt: string
   }
 }

@@ -26,10 +26,6 @@ const MyCampaignPage = () => {
   const handleSelectChip = (chip: string) => {
     setSelectedChip(chip)
   }
-  const handleFixedButtonClick = () => {
-    console.log("Fixed Button Clicked")
-    // 추가 동작 구현
-  }
 
   //** 리액트쿼리 나의 리뷰리스트 */
   const fetchCampaignList = async ({ queryKey }: { queryKey: string[] }) => {

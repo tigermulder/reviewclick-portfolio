@@ -71,7 +71,7 @@ const ResetPasswordPage = () => {
     }
   }
 
-  // 모달 로그인버튼 핸들러
+  //** 모달 로그인버튼 핸들러 */
   const handleModalConfirm = () => {
     setResultModalOpen(false)
     if (modalCancelText === "로그인") {

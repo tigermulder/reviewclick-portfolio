@@ -7,6 +7,7 @@ const Layout = () => {
   const location = useLocation() // 현재 경로
   const isCampaignDetail = !!useMatch("/campaign/:campaignId") // 캠페인 상세 경로
   const isReviewDetail = !!useMatch("/my_campaign/:reviewId") // MY캠페인 상세 경로
+  const isNoticeDetail = !!useMatch("/alert/notice/:noticeId") // 공지사항 상세 경로
   const isLoginPage = location.pathname === RoutePath.Login // 로그인 페이지
   const isJoinPage = location.pathname === RoutePath.Join // 회원가입 페이지
   const isFindIdPage = location.pathname === RoutePath.FindId // 아이디찾기 페이지
@@ -41,6 +42,7 @@ const Layout = () => {
         $PrivacyPolicyPage={PrivacyPolicyPage}
         $UserAccountDeletionPage={UserAccountDeletionPage}
         $ContactAddPage={ContactAddPage}
+        $isNoticeDetail={isNoticeDetail}
       >
         {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
         <Outlet />
@@ -64,6 +66,7 @@ const Content = styled.main<ContentProps>`
     $PrivacyPolicyPage,
     $UserAccountDeletionPage,
     $ContactAddPage,
+    $isNoticeDetail,
   }) => {
     if ($isMyCampaignPage) {
       return `
@@ -113,7 +116,7 @@ const Content = styled.main<ContentProps>`
         padding: 4.4rem 1.5rem 4rem;
         background-color: var(--n20-color);
       `
-    } else if ($ContactAddPage) {
+    } else if ($ContactAddPage || $isNoticeDetail) {
       return `
         min-height: 100vh; 
         padding: 7rem 1.5rem 4rem;

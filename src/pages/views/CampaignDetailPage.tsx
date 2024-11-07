@@ -119,7 +119,6 @@ const CampaignDetailPage = () => {
   }
 
   const campaignDetail = data.campaign
-  console.log(data)
   //** 캠페인 신청조건 */
   const isJoin = data.is_join_enable
   const isCancellable = data.is_join_cancellable === 1

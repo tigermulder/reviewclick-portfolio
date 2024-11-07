@@ -25,12 +25,24 @@ export type RoutePathHook =
   | typeof RoutePath.Join
   | typeof RoutePath.FindId
   | typeof RoutePath.FindPassword
+  | typeof RoutePath.ResetPassword
   | typeof RoutePath.MyCart
   | typeof RoutePath.MyCampaign
+  | typeof RoutePath.Notification
+  | typeof RoutePath.Alert
+  | typeof RoutePath.ContactAdd
   | ReturnType<typeof RoutePath.MyReivewDetail>
   | ReturnType<typeof RoutePath.CampaignDetail>
+  | ReturnType<typeof RoutePath.NoticeDetail>
+  | ReturnType<typeof RoutePath.NotificationDetail>
   | typeof RoutePath.UserProfile
   | typeof RoutePath.UserPointLog
+  | typeof RoutePath.UserServiceGuide
+  | typeof RoutePath.UserEditProfile
+  | typeof RoutePath.UserAccountSetting
+  | typeof RoutePath.UserAccountDeletion
+  | typeof RoutePath.TermsOfService
+  | typeof RoutePath.PrivacyPolicy
 
 // ** 남은일자계산 */
 export interface RemainingTime {

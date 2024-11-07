@@ -1,10 +1,8 @@
 //** Notification 리스트 요청 type */
 export interface NotificationListRequest {
-  token: string
   pageSize: number
   pageIndex: number
   notificationCategory?: string // optional
-  order?: string // optional, e.g., recent
 }
 export interface NotificationListResponse {
   statusCode: number
@@ -13,8 +11,10 @@ export interface NotificationListResponse {
   list: Array<{
     notificationId: number
     notificationCategory: string
-    createAt: string // ISO format
+    uid: number
+    createdAt: string
     title: string
+    content: string
   }>
   itemTotal: number
   pageTotal: number

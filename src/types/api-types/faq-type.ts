@@ -1,10 +1,8 @@
 //** FAQ 리스트 요청 type */
 export interface FaqListRequest {
-  token: string
   pageSize: number
   pageIndex: number
-  faqCategory?: string // optional
-  order?: string // optional, e.g., recent, orderNo
+  faqCategory?: string
 }
 export interface FaqListResponse {
   statusCode: number
@@ -13,9 +11,12 @@ export interface FaqListResponse {
   list: Array<{
     faqId: number
     faqCategory: string
-    createAt: string // ISO format
+    createdAt: string
     title: string
+    content: string
     orderNo: number
+    adminUid: number
+    updatedAt: string
   }>
   itemTotal: number
   pageTotal: number
