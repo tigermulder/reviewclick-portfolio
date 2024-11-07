@@ -663,7 +663,7 @@ const GuideCont = styled.div`
 const ButtonContainer = styled.div`
   padding-top: 5rem;
   margin-top: -3rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 32.19%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 22.19%);
 `
 
 const Details = styled.details`
