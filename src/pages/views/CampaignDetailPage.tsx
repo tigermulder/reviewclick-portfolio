@@ -213,6 +213,12 @@ const CampaignDetailPage = () => {
   }
 
   const thumbnailUrl = campaignDetail.thumbnailUrl || dummyImage
+
+  //** 상품구경하기 버튼 핸들러 */
+  const handleViewProduct = () => {
+    const url = campaignDetail.snsUrl || "https://naver.com"
+    window.open(url, "_blank", "noopener,noreferrer")
+  }
   const renderButton = () => {
     if (isJoin === 1) {
       if (isCancellable) {
@@ -260,11 +266,8 @@ const CampaignDetailPage = () => {
         <CampaignContainer>
           <CampaignDetails>
             <li>
-              <span>캠페인 신청기간</span>
-              <DetailInfo>
-                {formatDate(campaignDetail.startAt)} ~{" "}
-                {formatDate(campaignDetail.endAt)}
-              </DetailInfo>
+              <span>신청 마감일</span>
+              <DetailInfo>{formatDate(campaignDetail.endAt)}</DetailInfo>
             </li>
             <li>
               <span>미션완료기간</span>
@@ -280,7 +283,9 @@ const CampaignDetailPage = () => {
             </li>
           </CampaignDetails>
         </CampaignContainer>
-        <Button $variant="arrow">상품구경하기</Button>
+        <Button $variant="arrow" onClick={handleViewProduct}>
+          상품구경하기
+        </Button>
         <Line />
         <ContentTab
           tabs={singleTab}
@@ -568,7 +573,6 @@ const CampaignDetails = styled.ul`
     justify-content: space-between;
     margin-top: 0.4rem;
     font-size: var(--font-bodyL-size);
-    font-weight: var(--font-bodyL-weight);
     line-height: var(--font-bodyL-line-height);
     letter-spacing: var(--font-bodyL-letter-spacing);
 
@@ -612,7 +616,7 @@ const CampaignDetails = styled.ul`
     &:last-child {
       span:first-child,
       span:last-child {
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-bodyM-weight);
       }
     }
 
