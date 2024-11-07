@@ -33,8 +33,8 @@ export type RoutePathHook =
   | typeof RoutePath.ContactAdd
   | ReturnType<typeof RoutePath.MyReivewDetail>
   | ReturnType<typeof RoutePath.CampaignDetail>
-  | ReturnType<typeof RoutePath.NoticeDetail>
   | ReturnType<typeof RoutePath.NotificationDetail>
+  | ReturnType<typeof RoutePath.NoticeDetail>
   | typeof RoutePath.UserProfile
   | typeof RoutePath.UserPointLog
   | typeof RoutePath.UserServiceGuide

@@ -7,6 +7,7 @@ const NotificationDetail = () => {
   return (
     <>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
+      <p>페이지 준비중입니다</p>
     </>
   )
 }

@@ -53,7 +53,7 @@ const FaqContent = () => {
             return (
               <li key={noticeItem.noticeId}>
                 <StyledLink
-                  to={RoutePath.NotificationDetail(`${noticeItem.noticeId}`)}
+                  to={RoutePath.NoticeDetail(`${noticeItem.noticeId}`)}
                 >
                   <NotifyMessage>
                     <IconNew />

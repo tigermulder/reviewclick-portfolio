@@ -92,7 +92,10 @@ export const AppRoute = () => {
         {/* 알림허브페이지 */}
         <Route path={RoutePath.Alert} element={<AlertHubPage />} />
         {/* 알림새소식 detail 페이지 */}
-        <Route path="/alert/:notificationId" element={<NotificationDetail />} />
+        <Route
+          path="/alert/notification/:notificationId"
+          element={<NotificationDetail />}
+        />
         {/* 알림공지사항 detail 페이지 */}
         <Route path="/alert/notice/:noticeId" element={<NoticeDetail />} />
         {/* 문의등록하기 페이지 */}
