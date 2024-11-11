@@ -51,6 +51,8 @@ const CampaignDetailPage = () => {
     }
   }, [campaignCode])
 
+  console.log(campaignCode)
+
   //** 스크롤 0부터시작 */
   useScrollToTop()
 

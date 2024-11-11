@@ -17,7 +17,7 @@ export const RoutePath = {
   UserAccountSetting: "/user/my_AccountSetting",
   UserAccountDeletion: "/user/my_AccountSetting/userDeletion",
   MyReivewDetail: (reviewId: string) => `/my_campaign/${reviewId}`,
-  CampaignDetail: (campaignId: string) => `/campaign/${campaignId}`,
+  CampaignDetail: (campaignCode: string) => `/campaign/${campaignCode}`,
   NoticeDetail: (noticeId: string) => `/alert/notice/${noticeId}`,
   NotificationDetail: (notificationId: string) =>
     `/alert/notification/${notificationId}`,

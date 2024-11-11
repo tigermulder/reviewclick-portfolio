@@ -45,7 +45,10 @@ export const AppRoute = () => {
         {/* main 페이지 */}
         <Route path={RoutePath.Home} element={<MainPage />} />
         {/* 캠페인상세 페이지 */}
-        <Route path="/campaign/:campaignId" element={<CampaignDetailPage />} />
+        <Route
+          path="/campaign/:campaignCode"
+          element={<CampaignDetailPage />}
+        />
         {/* 로그인 페이지 */}
         <Route path={RoutePath.Login} element={<LoginPage />} />
         {/* 회원가입 페이지 */}
