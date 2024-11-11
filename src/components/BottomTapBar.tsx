@@ -51,8 +51,8 @@ const BottomTabBar = () => {
     e.preventDefault()
     setActiveTab(tabName)
     if (requiresAuth && !isLoggedIn) {
-      addToast("로그인이 필요합니다.", "warning", 1000, "login")
-      navigate(RoutePath.Login, { replace: true })
+      addToast("계정인증이 필요합니다.", "warning", 1000, "Join")
+      navigate(RoutePath.Join, { replace: true })
     } else {
       navigate(path, { replace: true })
     }

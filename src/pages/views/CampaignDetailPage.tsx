@@ -40,16 +40,16 @@ const CampaignDetailPage = () => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false) // 신청 취소 모달 상태
   const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
   const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태
-  const { campaignId } = useParams()
+  const { campaignCode } = useParams()
   const { isLoggedIn } = useRecoilValue(authState)
   const { addToast } = useToast()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (campaignId) {
-      sessionStorage.setItem("redirectPath", `/campaign/${campaignId}`)
+    if (campaignCode) {
+      sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
     }
-  }, [campaignId])
+  }, [campaignCode])
 
   //** 스크롤 0부터시작 */
   useScrollToTop()
@@ -97,16 +97,16 @@ const CampaignDetailPage = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  if (!campaignId) {
+  if (!campaignCode) {
     return <div>유효하지 않은 캠페인 ID입니다.</div>
   }
 
   //** 캠페인 상세ITEM */
   const { data, error, isFetching } = useSuspenseQuery({
-    queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignId),
+    queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignCode),
     queryFn: () =>
       getCampaignItem({
-        campaignId: campaignId,
+        campaignCode: campaignCode,
       }),
     staleTime: 10 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
@@ -170,7 +170,7 @@ const CampaignDetailPage = () => {
     setIsModalOpen(false)
     setIsCancelModalOpen(false)
     if (isApplySuccess) {
-      navigate(`/campaign/${campaignId}`, { replace: true })
+      navigate(`/campaign/${campaignCode}`, { replace: true })
       setErrorCode(null)
     }
   }
