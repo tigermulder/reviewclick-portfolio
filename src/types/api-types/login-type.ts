@@ -13,3 +13,13 @@ export interface LoginResponse {
   errorCode?: number // optional
   error?: string // optional
 }
+
+//** 로그인처리 type */
+export interface LoginCheckResponse {
+  statusCode: number
+  logined: number
+  email: string
+  token: string
+  errorCode?: number // optional
+  error?: string // optional
+}

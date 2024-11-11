@@ -24,11 +24,12 @@ import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
+import { logincheck } from "@/services/login"
 
 // React Query 키
-const CAMPAIGN_ITEM_QUERY_KEY = (campaignId: string | string) => [
+const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
   "campaign",
-  campaignId,
+  campaignCode,
 ]
 
 const CampaignDetailPage = () => {
