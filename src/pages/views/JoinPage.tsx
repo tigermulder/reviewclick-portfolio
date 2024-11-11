@@ -109,7 +109,7 @@ const JoinPage = () => {
         setEmailConfirmed(true)
         resetEmailTimer()
         setEmailVerifyMessage("")
-        addToast("이메일 인증이 완료되었습니다.", "check", 1000, "email")
+        addToast("계정인증이 완료되었습니다.", "check", 1200, "email")
         const redirect = sessionStorage.getItem("redirectPath")
         if (redirect) {
           navigate(redirect)
