@@ -46,7 +46,7 @@ export interface Campaign {
 
 //** 캠페인 상세 정보 요청 */
 export interface CampaignItemRequest {
-  campaignId: number
+  campaignId: string
 }
 export interface CampaignItemResponse {
   thumbnailUrl: string

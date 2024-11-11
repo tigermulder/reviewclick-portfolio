@@ -42,7 +42,22 @@ export const formatDate = (dateString: string) => {
     month: "2-digit",
     day: "2-digit",
   }
-  return new Date(dateString).toLocaleDateString("ko-KR", options)
+
+  const date = new Date(dateString)
+
+  if (isNaN(date.getTime())) {
+    console.warn(`유효하지 않은 날짜 문자열: ${dateString}`)
+    return ""
+  }
+
+  let formattedDate = date.toLocaleDateString("ko-KR", options)
+
+  // 마지막 마침표 제거
+  if (formattedDate.endsWith(".")) {
+    formattedDate = formattedDate.slice(0, -1)
+  }
+
+  return formattedDate
 }
 
 // ** 회원가입 유효성 검사 함수 */

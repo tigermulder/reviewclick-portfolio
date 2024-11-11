@@ -26,7 +26,7 @@ import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
 
 // React Query 키
-const CAMPAIGN_ITEM_QUERY_KEY = (campaignId: string | number) => [
+const CAMPAIGN_ITEM_QUERY_KEY = (campaignId: string | string) => [
   "campaign",
   campaignId,
 ]
@@ -106,7 +106,7 @@ const CampaignDetailPage = () => {
     queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignId),
     queryFn: () =>
       getCampaignItem({
-        campaignId: Number(campaignId),
+        campaignId: campaignId,
       }),
     staleTime: 10 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
@@ -133,8 +133,8 @@ const CampaignDetailPage = () => {
   //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
     if (!isLoggedIn) {
-      addToast("로그인이 필요합니다.", "warning", 1000, "login")
-      navigate(RoutePath.Login, { replace: true })
+      addToast("계정인증이 필요합니다.", "warning", 1000, "Join")
+      navigate(RoutePath.Join, { replace: true })
       setErrorCode(null)
     } else {
       setIsModalOpen(true)
@@ -161,7 +161,7 @@ const CampaignDetailPage = () => {
           return
         }
       }
-      addToast("이미신청했습니다.", "warning", 2000, "campain")
+      addToast("이미신청했습니다.", "warning", 2000, "campaign")
       setErrorCode(null) // 다른 에러 코드 초기화
     }
   }
@@ -202,7 +202,6 @@ const CampaignDetailPage = () => {
       setIsApplySuccess(false) // 신청 성공 상태를 초기화
       setIsCancelModalOpen(false) // 모달 닫기
     } catch (error) {
-      // 취소 실패 시 처리
       addToast(
         "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
         "warning",
@@ -214,7 +213,7 @@ const CampaignDetailPage = () => {
 
   const thumbnailUrl = campaignDetail.thumbnailUrl || dummyImage
 
-  //** 상품구경하기 버튼 핸들러 */
+  //** 상품구경하러가기 버튼 핸들러 */
   const handleViewProduct = () => {
     const url = campaignDetail.snsUrl || "https://naver.com"
     window.open(url, "_blank", "noopener,noreferrer")

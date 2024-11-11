@@ -55,6 +55,7 @@ const NewsContent = () => {
 export default NewsContent
 
 const NoticeContainer = styled.ul`
+  min-height: 100vh;
   li {
     position: relative;
     padding: 1.8rem 0;

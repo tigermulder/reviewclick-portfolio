@@ -147,16 +147,3 @@ const StyledLink = styled(Link)`
   display: block;
   width: 100%;
 `
-
-const NoticeContainer = styled.div`
-  position: relative;
-  width: 100%;
-`
-
-const NoticeContent = styled.div`
-  padding: 1.6rem;
-  font-size: 1.4rem;
-  color: var(--gray-01);
-  background: var(--whitewood);
-  border-radius: 1rem;
-`

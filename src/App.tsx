@@ -10,7 +10,7 @@ import { useUserStatus } from "./hooks/useUserStatus"
 import "./global.css"
 
 function App() {
-  useUserStatus() // 세션유지
+  // useUserStatus()
   const location = useLocation()
   const isCampaignDetail = useMatch("/campaign/:campaignId")
   const isReviewDetail = useMatch("/my_campaign/:reviewId")

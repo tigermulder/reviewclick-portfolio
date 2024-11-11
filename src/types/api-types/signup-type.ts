@@ -73,3 +73,17 @@ export interface ResetPassWordResponse {
   errorCode: number
   error: string
 }
+
+export interface CustomError extends Error {
+  status?: number
+  code?: string
+  config?: any
+  response?: {
+    data?: {
+      statusCode?: number
+      errorCode?: number
+    }
+    status?: number
+    [key: string]: any
+  }
+}
