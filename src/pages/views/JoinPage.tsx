@@ -63,7 +63,7 @@ const JoinPage = () => {
         }, 500)
       } else {
         setEmailCheckMessage("")
-        addToast("이미 가입한 계정입니다.", "warning", 1000, "email")
+        addToast("이미 인증한 계정입니다.", "warning", 1000, "email")
       }
     },
     onError: (error: CustomError) => {
@@ -293,10 +293,19 @@ const JoinPage = () => {
     !agreements.essential3 ||
     emailSent ||
     emailConfirmed
-
+  const redirect = sessionStorage.getItem("redirectPath")
   return (
     <Signup>
-      <ReuseHeader title="계정인증" onBack={() => navigate(-1)} />
+      <ReuseHeader
+        title="계정인증"
+        onBack={() => {
+          if (redirect) {
+            navigate(redirect)
+          } else {
+            navigate(RoutePath.MyCampaign)
+          }
+        }}
+      />
       {/* 약관 동의 섹션 */}
       <AgreementSection>
         <AgreementAll>
