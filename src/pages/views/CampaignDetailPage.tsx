@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { keepPreviousData, useSuspenseQuery } from "@tanstack/react-query"
-import { authState } from "@/store/auth-recoil"
 import { useRecoilValue } from "recoil"
 import { getCampaignItem } from "services/campaign"
 import { formatDate, disCountRate } from "@/utils/util"
@@ -41,7 +40,6 @@ const CampaignDetailPage = () => {
   const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
   const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태
   const { campaignCode } = useParams()
-  const { isLoggedIn } = useRecoilValue(authState)
   const { addToast } = useToast()
   const navigate = useNavigate()
 
@@ -122,6 +120,7 @@ const CampaignDetailPage = () => {
 
   //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
+    const isLoggedIn = sessionStorage.getItem("email")
     if (!isLoggedIn) {
       addToast("계정인증이 필요합니다.", "warning", 1000, "Join")
       navigate(RoutePath.Join, { replace: true })
