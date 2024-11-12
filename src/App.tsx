@@ -1,5 +1,5 @@
 import { AppRoute } from "pages/AppRoute"
-import { useLocation, useMatch } from "react-router-dom"
+import { useLocation, useMatch, useParams } from "react-router-dom"
 import AppBar from "components/AppBar"
 import BottomTapBar from "components/BottomTapBar"
 import Footer from "components/Footer"
@@ -14,6 +14,7 @@ import useToast from "./hooks/useToast"
 
 function App() {
   // useUserStatus()
+  const { campaignCode } = useParams()
   const { addToast } = useToast()
   //** 로그인정보 */
   useEffect(() => {
@@ -29,9 +30,14 @@ function App() {
         addToast("로그인 체크 중 오류 발생", "warning", 1000, "Join")
       }
     }
-
     checkLoginStatus()
   }, [])
+
+  useEffect(() => {
+    if (campaignCode) {
+      sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
+    }
+  }, [campaignCode])
   const location = useLocation()
   const isCampaignDetail = useMatch("/campaign/:campaignId")
   const isReviewDetail = useMatch("/my_campaign/:reviewId")

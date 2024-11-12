@@ -45,12 +45,6 @@ const CampaignDetailPage = () => {
   const { addToast } = useToast()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (campaignCode) {
-      sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
-    }
-  }, [campaignCode])
-
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
@@ -237,7 +231,7 @@ const CampaignDetailPage = () => {
         )
       } else {
         //** 참여 중이며 취소가 불가능한 경우 */
-        return <Button $variant="grey">캠페인 참여중</Button>
+        return <Button $variant="disable">캠페인 참여중</Button>
       }
     }
     //** 신청 가능 상태인 경우 */
@@ -249,7 +243,7 @@ const CampaignDetailPage = () => {
       )
     }
     //** 그 외의 경우 신청 불가 */
-    return <Button $variant="grey">캠페인 신청 불가</Button>
+    return <Button $variant="disable">캠페인 신청 불가</Button>
   }
 
   return (

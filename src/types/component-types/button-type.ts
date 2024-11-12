@@ -12,6 +12,7 @@ export interface ButtonProps {
     | "failed"
     | "copy"
     | "spinner"
+    | "disable"
   type?: "button" | "submit" | "reset"
   $marginTop?: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
@@ -29,6 +30,7 @@ export interface StyledButtonProps {
     | "failed"
     | "copy"
     | "spinner"
+    | "disable"
   $marginTop?: string
   disabled?: boolean
 }

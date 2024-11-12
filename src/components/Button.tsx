@@ -83,6 +83,12 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           color: var(--n400-color);
           border: none;
         `
+      case "disable":
+        return css`
+          background-color: var(--white);
+          color: var(--prim-L40);
+          border: 1px solid var(--prim-L40);
+        `
       case "pink":
         return css`
           background-color: var(--prim-L20);
@@ -197,7 +203,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
             margin-right: 0.2rem;
           }
         `
-        case "spinner":
+      case "spinner":
         return css`
           background-color: var(--prim-L20);
           color: var(--prim-L400);
@@ -205,7 +211,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           display: flex;
           align-items: center;
           justify-content: center;
-          
+
           &::after {
             content: "";
             width: 1.5rem;
@@ -223,10 +229,9 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
               transform: rotate(360deg);
             }
           }
-          `
+        `
       default:
         return ""
     }
-    
   }}
 `
