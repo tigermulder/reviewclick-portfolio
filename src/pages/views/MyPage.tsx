@@ -33,9 +33,9 @@ const MyPage = () => {
 
       {/* 하단 링크 */}
       <Links>
-        <li>
+        {/* <li>
           <StyledLink to={RoutePath.UserEditProfile}>내 정보 수정</StyledLink>
-        </li>
+        </li> */}
         <li>
           <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>
         </li>
