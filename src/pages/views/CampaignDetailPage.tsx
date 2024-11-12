@@ -24,7 +24,6 @@ import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
-import { logincheck } from "@/services/login"
 
 // React Query 키
 const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
@@ -66,27 +65,8 @@ const CampaignDetailPage = () => {
     setSelectedTab(tabValue)
   }
 
-  //** 로그인정보 */
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const data = await logincheck()
-        if (data.logined === 1) {
-          localStorage.setItem("email", data.email)
-          localStorage.setItem("authToken", data.token)
-        }
-      } catch (error) {
-        console.error(error)
-        addToast("로그인 체크 중 오류 발생", "warning", 1000, "Join")
-      }
-    }
-
-    checkLoginStatus()
-  }, [navigate])
-
   //** 애니메이션 효과 */
   useEffect(() => {
-    console.log(data)
     const handleScroll = () => {
       let scrollPosition = window.scrollY
       const maxScroll =

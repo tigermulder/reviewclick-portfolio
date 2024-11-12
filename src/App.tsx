@@ -7,10 +7,31 @@ import ToastMassage from "components/ToastMassage"
 import GlobalCategoryMenu from "components/GlobalCategoryMenu"
 import { RoutePath } from "./types/route-path"
 import { useUserStatus } from "./hooks/useUserStatus"
+import { logincheck } from "@/services/login"
 import "./global.css"
+import { useEffect } from "react"
+import useToast from "./hooks/useToast"
 
 function App() {
   // useUserStatus()
+  const { addToast } = useToast()
+  //** 로그인정보 */
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const data = await logincheck()
+        if (data.logined === 1) {
+          localStorage.setItem("email", data.email)
+          localStorage.setItem("authToken", data.token)
+        }
+      } catch (error) {
+        console.error(error)
+        addToast("로그인 체크 중 오류 발생", "warning", 1000, "Join")
+      }
+    }
+
+    checkLoginStatus()
+  }, [])
   const location = useLocation()
   const isCampaignDetail = useMatch("/campaign/:campaignId")
   const isReviewDetail = useMatch("/my_campaign/:reviewId")
