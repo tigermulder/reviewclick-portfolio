@@ -119,10 +119,6 @@ const CampaignDetailPage = () => {
   }
 
   const campaignDetail = data.campaign
-  //** 캠페인 신청조건 */
-  const isJoin = data.is_join_enable
-  const isCancellable = data.is_join_cancellable === 1
-  const isOpen = data.review_status === "open"
 
   //** D-Day 계산 */
   const today = new Date()
@@ -218,31 +214,44 @@ const CampaignDetailPage = () => {
     const url = campaignDetail.snsUrl || "https://naver.com"
     window.open(url, "_blank", "noopener,noreferrer")
   }
+
+  //** 캠페인 신청조건 */
+  const isOpen = data.is_campaign_open
+  const isCancellable = data.is_join_cancellable
+  const isJoin = data.campaign.is_join
+  const isEnable = data.is_join_enable
+
   const renderButton = () => {
+    //** 캠페인이 마감되었거나 정원이 찬 경우 */
+    if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {
+      return <Button $variant="grey">캠페인 신청 불가</Button>
+    }
+    //** 이미 참여 중인 경우 */
     if (isJoin === 1) {
-      if (isCancellable) {
-        // 신청 취소 가능 상태
+      if (isCancellable === 1) {
+        //** 참여 중이며 취소가 가능한 경우 */
         return (
           <Button onClick={handleCancelOpen} $variant="grey">
             캠페인 신청 취소하기
           </Button>
         )
       } else {
-        // 신청 불가 상태
-        return <Button $variant="grey">캠페인 신청 불가</Button>
+        //** 참여 중이며 취소가 불가능한 경우 */
+        return <Button $variant="grey">캠페인 참여중</Button>
       }
-    } else if (isJoin === 0) {
-      // 신청 가능 상태
+    }
+    //** 신청 가능 상태인 경우 */
+    if (isEnable === 1) {
       return (
         <Button onClick={handleApply} $variant="red">
           캠페인 신청하기
         </Button>
       )
-    } else {
-      // 그 외의 경우 신청 불가
-      return <Button $variant="grey">캠페인 신청 불가</Button>
     }
+    //** 그 외의 경우 신청 불가 */
+    return <Button $variant="grey">캠페인 신청 불가</Button>
   }
+
   return (
     <>
       {/* 캐시워크때문에 주석처리 */}
