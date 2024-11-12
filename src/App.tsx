@@ -22,7 +22,7 @@ function App() {
         const data = await logincheck()
         if (data.logined === 1) {
           localStorage.setItem("email", data.email)
-          localStorage.setItem("authToken", data.token)
+          sessionStorage.setItem("authToken", data.token)
         }
       } catch (error) {
         console.error(error)
