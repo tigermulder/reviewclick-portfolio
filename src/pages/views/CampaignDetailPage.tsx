@@ -43,6 +43,12 @@ const CampaignDetailPage = () => {
   const { addToast } = useToast()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (campaignCode) {
+      sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
+    }
+  }, [campaignCode])
+
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
