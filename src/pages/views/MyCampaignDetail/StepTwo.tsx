@@ -243,8 +243,9 @@ const StepTwo = ({
                   </li>
                   <li>
                     <p>
-                      본문 첫 줄에 <em>"협찬"문구를 반드시 추가</em>하여
-                      작성해주세요.
+                      경제적 이해관계(대가성 여부)를 명시하기 위해 본문 첫 줄에
+                      자동으로 <em> &lt;협찬&gt;</em> 문구가 입력되며,
+                      “리뷰어”는 이에 동의합니다.
                     </p>
                   </li>
                   <li>
@@ -477,6 +478,7 @@ const GuideContent = styled.div`
     color: var(--n400-color);
     p em {
       font-weight: var(--font-bodyM-weight);
+      color: var(--revu-color);
     }
   }
   .guide-list li:not(:last-of-type) {

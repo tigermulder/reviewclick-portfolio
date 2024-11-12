@@ -33,8 +33,8 @@ const NotificationDetail = () => {
   }
 
   const notifyData = data?.notification
+  const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
 
-  console.log(notifyData)
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
@@ -43,26 +43,22 @@ const NotificationDetail = () => {
       </AlertLogo>
       <AlertContainer>
         <Header>
-          <p>리뷰참여완료</p>
-          <span>리뷰 참여가 완료됐어요.</span>
+          <p>{notifyData?.title}</p>
         </Header>
         <Body>
           <BodyTitle>캠페인정보</BodyTitle>
           <BodyContainer>
             <ThumbArea>
-              <img src={dummyImage} alt="나의캠페인 썸네일" />
+              <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
             </ThumbArea>
             <InfoArea>
-              <p>{notifyData?.title}</p>
-              <span>7,500P</span>
+              <p>{notifyData?.cardInfo?.title}</p>
+              <span>{notifyData?.cardInfo?.reward}P</span>
             </InfoArea>
           </BodyContainer>
         </Body>
         <div>
-          <FooterText>
-            리뷰참여 시작 후 3시간 이내 해당 제품을 구매해야만 다음 단계로
-            넘어갈 수 있어요.
-          </FooterText>
+          <FooterText>{notifyData?.content}</FooterText>
         </div>
       </AlertContainer>
       <Time>
@@ -120,14 +116,6 @@ const Header = styled.div`
     border-top-left-radius: 1rem;
   }
   p {
-    display: inline-block;
-    margin-right: 0.8rem;
-    font-size: var(--font-h5-size);
-    font-weight: var(--font-h5-weight);
-    letter-spacing: var(--font-h5-letter-spacing);
-    color: var(--prim-L300);
-  }
-  span {
     font-size: var(--font-bodyM-size);
     font-weight: var(--font-bodyM-weight);
     line-height: var(--font-bodyM-line-height);

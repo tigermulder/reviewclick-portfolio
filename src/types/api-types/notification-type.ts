@@ -38,5 +38,13 @@ export interface NotificationItemResponse {
     createAt: string // ISO format
     title: string
     content: string
+    cardInfo?: {
+      campaignCode: string
+      campaignId: number
+      reviewId: number
+      reward: number
+      thumbnailUrl: string
+      title: string
+    }
   }
 }
