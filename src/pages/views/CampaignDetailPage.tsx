@@ -126,7 +126,7 @@ const CampaignDetailPage = () => {
 
   //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
-    const isLoggedIn = sessionStorage.getItem("email")
+    const isLoggedIn = localStorage.getItem("email")
     if (!isLoggedIn) {
       addToast("계정인증이 필요합니다.", "warning", 1000, "Join")
       navigate(RoutePath.Join, { replace: true })
