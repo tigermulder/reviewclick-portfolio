@@ -6,6 +6,7 @@ import NewsContent from "./AlertPageDetail/NewsContent"
 import FaqContent from "./AlertPageDetail/FaqContent"
 import { useRecoilState } from "recoil"
 import { alertSelectedTabState } from "@/store/alerttap-recoil"
+import styled from "styled-components"
 
 const AlertHubPage = () => {
   const [selectedTab, setSelectedTab] = useRecoilState(alertSelectedTabState)
@@ -30,13 +31,17 @@ const AlertHubPage = () => {
       />
 
       {/* 선택된 탭에 따라 콘텐츠 렌더링 */}
-      <div>
+      <TabContent>
         {selectedTab === "news" && <NewsContent />}
         {selectedTab === "faq" && <FaqContent />}
-      </div>
+      </TabContent>
       <FaqButton />
     </>
   )
 }
 
 export default AlertHubPage
+
+const TabContent = styled.div`
+  padding-bottom: 14rem;
+`
