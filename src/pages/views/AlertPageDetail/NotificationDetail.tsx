@@ -7,6 +7,30 @@ import { getNotificationItem } from "@/services/notification"
 import { useQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
+import React from "react"
+
+const parenthesesFilter = (text?: string): JSX.Element => {
+  if (!text) return <></>
+
+  const regex = /(\(.*?\))/g
+  const parts = text.split(regex)
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (regex.test(part)) {
+          return (
+            <span key={index} style={{ color: "var(--revu-color)" }}>
+              {part}
+            </span>
+          )
+        } else {
+          return <React.Fragment key={index}>{part}</React.Fragment>
+        }
+      })}
+    </>
+  )
+}
 
 const NotificationDetail = () => {
   const { notificationId } = useParams()
@@ -35,26 +59,6 @@ const NotificationDetail = () => {
   const notifyData = data?.notification
   const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
 
-  // ** 괄호 부분 찾기 함수 */
-  const parenthesesFilter = (text: any) => {
-    // 정규식을 사용하여 괄호로 구분된 부분을 찾아 배열로 분리
-    const regex = /(\(.*?\))/g
-    const parts = text.split(regex)
-
-    return parts.map((part: string, index: number) => {
-      if (part.match(regex)) {
-        // 괄호로 둘러싸인 부분
-        return (
-          <span key={index} style={{ color: "red" }}>
-            {part}
-          </span>
-        )
-      } else {
-        // 일반 텍스트 부분
-        return <span key={index}>{part}</span>
-      }
-    })
-  }
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
