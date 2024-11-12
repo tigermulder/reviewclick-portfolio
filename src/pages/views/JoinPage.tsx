@@ -173,13 +173,6 @@ const JoinPage = () => {
     setEmailSendMessage("")
   }
 
-  //** 컴포넌트 언마운트 시 타이머 정리 */
-  useEffect(() => {
-    return () => {
-      if (emailTimerRef.current) clearInterval(emailTimerRef.current)
-    }
-  }, [])
-
   //** 회원가입 버튼 활성화 조건 체크 */
   // useEffect(() => {
   //   const isRegisterEnabled =
@@ -297,6 +290,20 @@ const JoinPage = () => {
     emailSent ||
     emailConfirmed
   const redirect = sessionStorage.getItem("redirectPath")
+
+  const isLoggedIn = localStorage.getItem("email")
+  //** 컴포넌트 언마운트 시 타이머 정리 */
+  useEffect(() => {
+    if (isLoggedIn !== "null") {
+      addToast("이미 인증되었습니다", "warning", 1000, "Join")
+      if (redirect) {
+        navigate(redirect)
+      }
+    }
+    return () => {
+      if (emailTimerRef.current) clearInterval(emailTimerRef.current)
+    }
+  }, [])
   return (
     <Signup>
       <ReuseHeader
