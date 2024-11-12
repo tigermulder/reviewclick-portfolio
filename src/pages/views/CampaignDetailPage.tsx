@@ -72,15 +72,12 @@ const CampaignDetailPage = () => {
       try {
         const data = await logincheck()
         if (data.logined === 1) {
-          // 로그인 상태일 경우 처리
-          console.log("로그인 상태입니다:", data.email)
-        } else {
-          // 로그인되지 않은 경우 처리
-          console.log("로그인되지 않았습니다.")
-          navigate("/login") // 로그인 페이지로 이동 등
+          localStorage.setItem("email", data.email)
+          localStorage.setItem("authToken", data.token)
         }
       } catch (error) {
-        console.error("로그인 체크 중 오류 발생:", error)
+        console.error(error)
+        addToast("로그인 체크 중 오류 발생", "warning", 1000, "Join")
       }
     }
 
