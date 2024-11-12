@@ -7,30 +7,7 @@ import { getNotificationItem } from "@/services/notification"
 import { useQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
-import React from "react"
-
-const parenthesesFilter = (text?: string): JSX.Element => {
-  if (!text) return <></>
-
-  const regex = /(\(.*?\))/g
-  const parts = text.split(regex)
-
-  return (
-    <>
-      {parts.map((part, index) => {
-        if (regex.test(part)) {
-          return (
-            <span key={index} style={{ color: "var(--revu-color)" }}>
-              {part}
-            </span>
-          )
-        } else {
-          return <React.Fragment key={index}>{part}</React.Fragment>
-        }
-      })}
-    </>
-  )
-}
+import { parseTitle } from "@/utils/util"
 
 const NotificationDetail = () => {
   const { notificationId } = useParams()
@@ -58,7 +35,7 @@ const NotificationDetail = () => {
 
   const notifyData = data?.notification
   const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
-
+  const { status, mainText } = parseTitle(notifyData?.title)
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
@@ -67,7 +44,10 @@ const NotificationDetail = () => {
       </AlertLogo>
       <AlertContainer>
         <Header>
-          <p>{parenthesesFilter(notifyData?.title)}</p>
+          <p>
+            <span>{status}</span>
+            {mainText}
+          </p>
         </Header>
         <Body>
           <BodyTitle>캠페인정보</BodyTitle>
@@ -145,6 +125,11 @@ const Header = styled.div`
     line-height: var(--font-bodyM-line-height);
     letter-spacing: var(--font-bodyM-letter-spacing);
     color: var(--n500-color);
+
+    span {
+      color: var(--revu-color);
+      font-weight: var(--font-weight-bold);
+    }
   }
 `
 

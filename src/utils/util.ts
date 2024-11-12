@@ -191,3 +191,21 @@ export const currentCalculateRemainingTime = (
     return { currTime }
   }
 }
+
+// ** 괄호 부분 찾기 함수 */
+type ParsedTitle = {
+  status: string
+  mainText: string
+}
+
+export function parseTitle(text: string | undefined): ParsedTitle {
+  if (!text) {
+    return { status: "", mainText: "" }
+  }
+
+  const match = text.match(/\[(.*?)\]/)
+  const status = match ? match[0] : ""
+  const mainText = text.replace(status, "").trim()
+
+  return { status, mainText }
+}
