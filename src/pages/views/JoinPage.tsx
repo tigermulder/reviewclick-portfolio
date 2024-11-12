@@ -296,7 +296,7 @@ const JoinPage = () => {
 
   return (
     <Signup>
-      <ReuseHeader title="계정인증" onBack={() => navigate(RoutePath.Login)} />
+      <ReuseHeader title="계정인증" onBack={() => navigate(-1)} />
       {/* 약관 동의 섹션 */}
       <AgreementSection>
         <AgreementAll>

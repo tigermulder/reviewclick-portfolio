@@ -26,7 +26,6 @@ export interface NotificationListResponse {
 
 //** Notification 상세 내용 요청 type */
 export interface NotificationItemRequest {
-  token: string
   notificationId: number
 }
 export interface NotificationItemResponse {
