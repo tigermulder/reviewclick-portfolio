@@ -73,7 +73,7 @@ const CampaignDetailPage = () => {
 
   //** 애니메이션 효과 */
   useEffect(() => {
-    console.log(fetchLoginInfo)
+    console.log(fetchLoginInfo())
     const handleScroll = () => {
       let scrollPosition = window.scrollY
       const maxScroll =
