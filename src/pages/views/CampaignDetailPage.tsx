@@ -66,8 +66,14 @@ const CampaignDetailPage = () => {
     setSelectedTab(tabValue)
   }
 
+  const fetchLoginInfo = async () => {
+    const response = await logincheck()
+    return response
+  }
+
   //** 애니메이션 효과 */
   useEffect(() => {
+    console.log(fetchLoginInfo)
     const handleScroll = () => {
       let scrollPosition = window.scrollY
       const maxScroll =
