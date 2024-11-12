@@ -17,7 +17,7 @@ const BottomTabBar = () => {
   const location = useLocation()
   const currentPath = location.pathname
   const setIsMenuOpen = useSetRecoilState(isGlobalCategoryMenuOpenState)
-  const { isLoggedIn } = useRecoilValue(authState)
+  const isLoggedIn = sessionStorage.getItem("email")
   const { addToast } = useToast()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("")
