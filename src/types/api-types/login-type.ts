@@ -15,11 +15,14 @@ export interface LoginResponse {
 }
 
 //** 로그인처리 type */
-export interface LoginCheckResponse {
+export interface LoginCheckResponseData {
   statusCode: number
   logined: number
-  email: string
+  partner_uid: string
+  partnerId: number
+  spaceId: number
+  spaceName: string
   token: string
-  errorCode?: number // optional
-  error?: string // optional
+  uid: number
+  email: string
 }

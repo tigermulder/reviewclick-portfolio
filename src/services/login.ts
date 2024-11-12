@@ -2,14 +2,15 @@ import axiosInstance from "./axios"
 import {
   LoginRequest,
   LoginResponse,
-  LoginCheckResponse,
+  LoginCheckResponseData,
 } from "types/api-types/login-type"
 import { LogoutResponse } from "types/api-types/logout-type"
 import { HangResponse } from "types/api-types/hang-type"
 
 //** 로그인 처리 API */
-export const logincheck = async (): Promise<LoginCheckResponse> => {
-  const response = await axiosInstance.get<LoginCheckResponse>("/login/check")
+export const logincheck = async (): Promise<LoginCheckResponseData> => {
+  const response =
+    await axiosInstance.get<LoginCheckResponseData>("/login/check")
 
   console.log(response)
   return response.data

@@ -66,14 +66,30 @@ const CampaignDetailPage = () => {
     setSelectedTab(tabValue)
   }
 
-  const fetchLoginInfo = async () => {
-    const response = await logincheck()
-    return response
-  }
+  //** 로그인정보 */
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const data = await logincheck()
+        if (data.logined === 1) {
+          // 로그인 상태일 경우 처리
+          console.log("로그인 상태입니다:", data.email)
+        } else {
+          // 로그인되지 않은 경우 처리
+          console.log("로그인되지 않았습니다.")
+          navigate("/login") // 로그인 페이지로 이동 등
+        }
+      } catch (error) {
+        console.error("로그인 체크 중 오류 발생:", error)
+      }
+    }
+
+    checkLoginStatus()
+  }, [navigate])
 
   //** 애니메이션 효과 */
   useEffect(() => {
-    console.log(fetchLoginInfo())
+    console.log(data)
     const handleScroll = () => {
       let scrollPosition = window.scrollY
       const maxScroll =
