@@ -127,6 +127,7 @@ const Header = styled.div`
     color: var(--n500-color);
 
     span {
+      margin-right: 0.4rem;
       color: var(--revu-color);
       font-weight: var(--font-weight-bold);
     }
