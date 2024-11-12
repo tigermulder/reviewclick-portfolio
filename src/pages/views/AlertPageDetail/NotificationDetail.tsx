@@ -35,6 +35,26 @@ const NotificationDetail = () => {
   const notifyData = data?.notification
   const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
 
+  // ** 괄호 부분 찾기 함수 */
+  const parenthesesFilter = (text: any) => {
+    // 정규식을 사용하여 괄호로 구분된 부분을 찾아 배열로 분리
+    const regex = /(\(.*?\))/g
+    const parts = text.split(regex)
+
+    return parts.map((part: string, index: number) => {
+      if (part.match(regex)) {
+        // 괄호로 둘러싸인 부분
+        return (
+          <span key={index} style={{ color: "red" }}>
+            {part}
+          </span>
+        )
+      } else {
+        // 일반 텍스트 부분
+        return <span key={index}>{part}</span>
+      }
+    })
+  }
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
@@ -43,7 +63,7 @@ const NotificationDetail = () => {
       </AlertLogo>
       <AlertContainer>
         <Header>
-          <p>{notifyData?.title}</p>
+          <p>{parenthesesFilter(notifyData?.title)}</p>
         </Header>
         <Body>
           <BodyTitle>캠페인정보</BodyTitle>
