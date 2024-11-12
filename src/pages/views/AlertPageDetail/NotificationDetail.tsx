@@ -33,6 +33,8 @@ const NotificationDetail = () => {
   }
 
   const notifyData = data?.notification
+
+  console.log(notifyData)
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
