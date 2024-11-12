@@ -11,7 +11,6 @@ import styled from "styled-components"
 const MyPage = () => {
   const [isNoticeOpen, setIsNoticeOpen] = useState<boolean>(false)
   const userEmail = localStorage.getItem("email")
-  const userNickName = localStorage.getItem("nickname")
   const toggleNotice = () => {
     setIsNoticeOpen((prev) => !prev)
   }
@@ -26,7 +25,7 @@ const MyPage = () => {
         <h2>
           안녕하세요,
           <br />
-          <span>{userNickName}</span> 회원님!
+          <span>{extractUsername(userEmail)}</span> 회원님!
         </h2>
         <span>ID : {extractUsername(userEmail)}</span>
       </TitleSection>
