@@ -45,16 +45,13 @@ const NotificationDetail = () => {
           <span>리뷰 참여가 완료됐어요.</span>
         </Header>
         <Body>
-          <BodyTitle>{notifyData?.title}</BodyTitle>
+          <BodyTitle>캠페인정보</BodyTitle>
           <BodyContainer>
             <ThumbArea>
               <img src={dummyImage} alt="나의캠페인 썸네일" />
             </ThumbArea>
             <InfoArea>
-              <p>
-                캠페인명 두줄 말줄임 캠페인명 두줄 말줄임 두줄 말줄임두줄
-                말줄임두줄 말줄임
-              </p>
+              <p>{notifyData?.title}</p>
               <span>7,500P</span>
             </InfoArea>
           </BodyContainer>
