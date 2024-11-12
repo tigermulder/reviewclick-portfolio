@@ -266,6 +266,9 @@ const JoinPage = () => {
       optionalAll: checked,
       optional1: checked,
     })
+    if (checked === false) {
+      setId("")
+    }
   }
 
   //** 선택 약관 전체 체크박스 변경 함수 */
