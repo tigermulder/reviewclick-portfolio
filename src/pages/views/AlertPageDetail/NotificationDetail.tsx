@@ -15,7 +15,7 @@ const NotificationDetail = () => {
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
-  const fetchNoticeDetail = async () => {
+  const fetchNotifyDetail = async () => {
     const response = await getNotificationItem({
       notificationId: Number(notificationId),
     })
@@ -24,7 +24,7 @@ const NotificationDetail = () => {
 
   const { data, isFetching, error } = useQuery({
     queryKey: ["noticeDetail", notificationId],
-    queryFn: fetchNoticeDetail,
+    queryFn: fetchNotifyDetail,
     enabled: !!notificationId,
     staleTime: 0,
   })
@@ -32,7 +32,7 @@ const NotificationDetail = () => {
     throw error
   }
 
-  console.log(data)
+  const notifyData = data?.notification
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
@@ -45,7 +45,7 @@ const NotificationDetail = () => {
           <span>리뷰 참여가 완료됐어요.</span>
         </Header>
         <Body>
-          <BodyTitle>캠페인정보</BodyTitle>
+          <BodyTitle>{notifyData?.title}</BodyTitle>
           <BodyContainer>
             <ThumbArea>
               <img src={dummyImage} alt="나의캠페인 썸네일" />
