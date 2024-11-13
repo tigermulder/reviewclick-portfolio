@@ -108,7 +108,7 @@ const ContactSupport = () => {
 
       // 선택된 캠페인이 있을 경우 추가
       if (selectedCampaign) {
-        requestData.campaignId = selectedCampaign.value
+        requestData.reviewId = selectedCampaign.value
       }
       const response = await addQna(requestData)
       if (response.statusCode === 0) {
