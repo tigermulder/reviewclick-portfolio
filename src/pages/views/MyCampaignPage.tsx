@@ -20,6 +20,9 @@ import styled from "styled-components"
 const MyCampaignPage = () => {
   const [selectedChip, setSelectedChip] = useState("전체")
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [currTimes, setCurrTimes] = useState<
+    { reviewId: number; currTime: string | null }[]
+  >([]) // 각 리뷰 아이템의 currTime을 저장하는 상태 변수
   const setReivewList = useSetRecoilState(reviewListState)
   const router = useRouter()
   //** 스크롤 0부터시작 */
@@ -48,7 +51,7 @@ const MyCampaignPage = () => {
     const response = await getReviewList(requestData)
     return response
   }
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["reviewList"],
     queryFn: fetchCampaignList,
     refetchOnMount: true,
@@ -64,6 +67,33 @@ const MyCampaignPage = () => {
       setReivewList(allReivews)
     }
   }, [data, setReivewList])
+
+  // currentTime이나 reviewList가 변경될 때마다 currTimes 업데이트
+  useEffect(() => {
+    if (reviewList) {
+      const updatedCurrTimes = reviewList.map((reviewItem) => {
+        const currTime = reviewItem.purchase_timeout
+          ? currentCalculateRemainingTime(
+              reviewItem.purchase_timeout,
+              reviewItem.joinAt,
+              currentTime
+            ).currTime
+          : null
+        return { reviewId: reviewItem.reviewId, currTime }
+      })
+      setCurrTimes(updatedCurrTimes)
+    }
+  }, [currentTime, reviewList])
+
+  // currTime이 '00시 00분 00초'에 도달하면 refetch 트리거
+  useEffect(() => {
+    const anyTimeZero = currTimes.some(
+      (item) => item.currTime === "(T-00:00:00)"
+    )
+    if (anyTimeZero) {
+      refetch()
+    }
+  }, [currTimes, refetch])
 
   return (
     <>

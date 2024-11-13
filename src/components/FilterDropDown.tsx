@@ -7,6 +7,7 @@ import IconDropDown from "assets/ico-dropdown-arrow.svg?react"
 import styled from "styled-components"
 
 const FilterDropDown = ({
+  id, // 드롭다운 식별을 위한 ID 추가
   options,
   selectedFilter,
   setSelectedFilter,
@@ -16,34 +17,53 @@ const FilterDropDown = ({
   containerHeight = "3.2rem",
   containerTop = "40px",
   marginBottom = "0",
+  openDropdown,
+  setOpenDropdown,
 }: FilterDropDownProps) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const isOpen = openDropdown === id // 현재 드롭다운이 열려 있는지 확인
   const [dynamicContainerWidth, setDynamicContainerWidth] =
     useState(containerWidth)
-  const buttonRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen)
+    setOpenDropdown(isOpen ? null : id) // 드롭다운 열림 상태 토글
   }
 
   const handleOptionClick = (option: FilterOption) => {
     setSelectedFilter(option) // 선택된 필터 업데이트
-    setIsOpen(false) // 드롭다운 닫기
+    setOpenDropdown(null) // 드롭다운 닫기
   }
 
+  // 드롭다운 외부 클릭 시 닫힘 처리
   useEffect(() => {
-    if (buttonWidth === "100%" && buttonRef.current) {
-      setDynamicContainerWidth(`${buttonRef.current.offsetWidth}px`)
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdown(null)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [isOpen, setOpenDropdown])
+
+  useEffect(() => {
+    if (buttonWidth === "100%" && wrapperRef.current) {
+      setDynamicContainerWidth(`${wrapperRef.current.offsetWidth}px`)
     } else {
       setDynamicContainerWidth(containerWidth)
     }
   }, [buttonWidth, containerWidth])
 
   return (
-    <DropdownWrapper $marginBottom={marginBottom}>
+    <DropdownWrapper ref={wrapperRef} $marginBottom={marginBottom}>
       {/* 드롭다운을 열기 위한 버튼 */}
       <DropdownButton
-        ref={buttonRef}
         onClick={toggleDropdown}
         $width={buttonWidth}
         $height={buttonHeight}

@@ -5,6 +5,7 @@ export type FilterOption = {
   value: string | number
 }
 export interface FilterDropDownProps {
+  id: string
   options: FilterOption[]
   selectedFilter: FilterOption
   setSelectedFilter: (option: FilterOption) => void
@@ -14,4 +15,6 @@ export interface FilterDropDownProps {
   containerHeight?: string
   containerTop?: string
   marginBottom?: string
+  openDropdown: string | null // 현재 열려 있는 드롭다운 ID
+  setOpenDropdown: (id: string | null) => void // 열려 있는 드롭다운 ID 설정 함수
 }

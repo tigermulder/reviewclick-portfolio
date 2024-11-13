@@ -36,6 +36,7 @@ const ContactSupport = () => {
   const [modalCancelText, setModalCancelText] = useState<string | undefined>(
     undefined
   )
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
   //** selectedFilter가 변경될 때 캠페인 리스트 가져오기 */
   const fetchCampaignList = async () => {
@@ -143,6 +144,7 @@ const ContactSupport = () => {
     <>
       <ReuseHeader title="문의등록" onBack={() => navigate(RoutePath.Alert)} />
       <FilterDropDown
+        id="contact"
         options={contactOptions}
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
@@ -151,10 +153,13 @@ const ContactSupport = () => {
         containerTop="inherit"
         containerHeight="4rem"
         marginBottom="0.9rem"
+        openDropdown={openDropdown}
+        setOpenDropdown={setOpenDropdown}
       />
       {/* 캠페인 리스트가 있을 경우 추가적인 FilterDropDown 표시 */}
       {campaignList.length > 0 && (
         <FilterDropDown
+          id="campaign"
           options={campaignList.map((campaign, idx) => ({
             id: idx,
             label: campaign.title,
@@ -169,6 +174,8 @@ const ContactSupport = () => {
           containerTop="inherit"
           containerHeight="4rem"
           marginBottom="0.9rem"
+          openDropdown={openDropdown}
+          setOpenDropdown={setOpenDropdown}
         />
       )}
       <NoticeBox>
