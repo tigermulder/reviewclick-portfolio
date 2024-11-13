@@ -11,7 +11,6 @@ import {
   ReviewAuthResponse,
   ReviewConfirmRequest,
   ReviewConfirmResponse,
-  ReviewUploadResponse,
 } from "types/api-types/review-type"
 
 //** 리뷰 참여 리스트 요청 API */

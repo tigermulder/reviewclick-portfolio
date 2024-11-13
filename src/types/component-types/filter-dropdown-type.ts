@@ -2,7 +2,7 @@
 export type FilterOption = {
   id: number
   label: string
-  value: string
+  value: string | number
 }
 export interface FilterDropDownProps {
   options: FilterOption[]
@@ -13,4 +13,5 @@ export interface FilterDropDownProps {
   containerWidth?: string
   containerHeight?: string
   containerTop?: string
+  marginBottom?: string
 }

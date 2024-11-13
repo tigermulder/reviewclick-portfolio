@@ -15,6 +15,7 @@ const FilterDropDown = ({
   containerWidth = "160px",
   containerHeight = "3.2rem",
   containerTop = "40px",
+  marginBottom = "0",
 }: FilterDropDownProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [dynamicContainerWidth, setDynamicContainerWidth] =
@@ -39,7 +40,7 @@ const FilterDropDown = ({
   }, [buttonWidth, containerWidth])
 
   return (
-    <>
+    <DropdownWrapper $marginBottom={marginBottom}>
       {/* 드롭다운을 열기 위한 버튼 */}
       <DropdownButton
         ref={buttonRef}
@@ -66,11 +67,15 @@ const FilterDropDown = ({
           ))}
         </DropDownContainer>
       )}
-    </>
+    </DropdownWrapper>
   )
 }
 
 export default FilterDropDown
+
+const DropdownWrapper = styled.div<{ $marginBottom: string }>`
+  margin-bottom: ${({ $marginBottom }) => $marginBottom};
+`
 
 const DropdownButton = styled.div<{ $width: string; $height: string }>`
   width: ${({ $width }) => $width};

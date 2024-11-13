@@ -48,6 +48,7 @@ export interface QnaItemResponse {
 export interface QnaAddRequest {
   qnaCategory: string
   title: string
+  reviewId?: number
   question: string
 }
 export interface QnaAddResponse {

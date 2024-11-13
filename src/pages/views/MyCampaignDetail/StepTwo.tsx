@@ -250,16 +250,21 @@ const StepTwo = ({
                   </li>
                   <li>
                     <p>
-                      리뷰 작성 &gt; 리뷰 AI 검수 완료 &gt; 상품 랜딩페이지로
-                      이동 &gt; 리뷰 등록(작성한 리뷰 붙여넣기)
+                      상품 판매 사이트에 리뷰 등록 시 실제 상품 사진을 1개 이상
+                      첨부해 주세요.
                     </p>
                   </li>
                   <li>
                     <p>
-                      부정적인 글로 작성되는 경우 미션 진행 및 포인트 지급에
-                      영향을 줄 수 있으니, 긍정적인 경험을 바탕으로
-                      작성해주세요.
+                      긍정 리뷰 인증은 리뷰 품질을 보장하지 않습니다.다만, 리뷰
+                      인증을 무력화 하는 시도 및 부적절한 리뷰&#40;텍스트 반복,
+                      타인 리뷰 복사, 관련 없는 상품 리뷰 등&#41;가 확인될
+                      경우해당 계정에 지급된 포인트는 회수될 수 있으며, 캠페인
+                      참여가영구 중단될 수 있습니다.
                     </p>
+                  </li>
+                  <li>
+                    <p>작성한 리뷰는 6개월간 유지해주셔야 합니다.</p>
                   </li>
                 </ul>
               </GuideContent>
@@ -478,7 +483,7 @@ const GuideContent = styled.div`
     color: var(--n400-color);
     p em {
       font-weight: var(--font-bodyM-weight);
-      color: var(--revu-color);
+      color: var(--purple);
     }
   }
   .guide-list li:not(:last-of-type) {

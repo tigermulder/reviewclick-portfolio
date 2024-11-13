@@ -137,12 +137,3 @@ export interface ReviewConfirmResponse {
   error?: string
   reviewId: number
 }
-
-//** 리뷰 내용 검토 type */
-export interface ReviewUploadResponse {
-  statusCode: number
-  errorCode?: number
-  error?: string
-  reviewId: number
-  reviewText?: string // 변경된 텍스트 알고리즘상 text에 변형을 줄수있음
-}
