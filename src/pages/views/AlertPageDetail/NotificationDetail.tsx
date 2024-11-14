@@ -7,7 +7,7 @@ import { getNotificationItem } from "@/services/notification"
 import { useQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
-import { parseTitle, numberWithComma } from "@/utils/util"
+import { parseTitle } from "@/utils/util"
 
 const NotificationDetail = () => {
   const { notificationId } = useParams()
@@ -36,7 +36,6 @@ const NotificationDetail = () => {
   const notifyData = data?.notification
   const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
   const { status, mainText } = parseTitle(notifyData?.title)
-  const rewardText = String(notifyData?.cardInfo?.reward)
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
@@ -58,7 +57,7 @@ const NotificationDetail = () => {
             </ThumbArea>
             <InfoArea>
               <p>{notifyData?.cardInfo?.title}</p>
-              <span>{numberWithComma(rewardText)}P</span>
+              <span>{notifyData?.cardInfo?.reward.toLocaleString()}P</span>
             </InfoArea>
           </BodyContainer>
         </Body>

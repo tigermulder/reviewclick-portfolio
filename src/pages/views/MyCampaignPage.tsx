@@ -165,7 +165,7 @@ const MyCampaignPage = () => {
                 <ReviewCardInfo>
                   <CardDate>{formatDate(reviewItem.createdAt)}</CardDate>
                   <CardTitle>[리뷰] {reviewItem.title}</CardTitle>
-                  <CardPoint>{reviewItem.reward}P</CardPoint>
+                  <CardPoint>{reviewItem.reward.toLocaleString()}P</CardPoint>
                 </ReviewCardInfo>
               </ReviewCardHeader>
               <Button $variant={button.variant} onClick={handleStepRouting}>
