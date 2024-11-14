@@ -21,6 +21,7 @@ export const getReviewList = async (
     "/review/list",
     data
   )
+  console.log(response)
   return response.data
 }
 
