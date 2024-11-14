@@ -95,7 +95,7 @@ const MyCampaignPage = () => {
       refetch()
     }
   }, [currTimes, refetch])
-  const redirect = sessionStorage.getItem("redirectPath") || "/default-path"
+
   return (
     <>
       <SinglePageHeader title="나의 캠페인" />
@@ -153,7 +153,7 @@ const MyCampaignPage = () => {
             : null
           return (
             <li key={reviewItem.reviewId}>
-              <ReviewCardHeader to={redirect}>
+              <ReviewCardHeader to={`/campaign/${reviewItem.campaignCode}`}>
                 <ReviewCardThumb>
                   <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
                   {isEnded && <DimmedBackground />}

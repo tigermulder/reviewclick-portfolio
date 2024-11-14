@@ -15,6 +15,7 @@ export interface ReviewListResponse {
 export interface ReviewItem {
   reviewId: number
   reward: number
+  campaignCode: string
   campaignId: number
   thumbnailUrl: string
   uid: number
