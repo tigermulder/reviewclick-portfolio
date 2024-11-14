@@ -54,23 +54,6 @@ const StepTwo = ({
       setReviewText(text.slice(0, maxChars)) // 최대 문자 수 초과 시 자르기
     }
   }
-  //** 복사 버튼 핸들러 */
-  const handleCopy = () => {
-    if (reviewText.trim().length === 0 || reviewText.trim().length < minChars) {
-      // 텍스트가 비어있을 경우 토스트 메시지 표시 (옵션)
-      addToast("100자이상 입력해주세요", "copy", 1000, "copy")
-      return
-    }
-    navigator.clipboard
-      .writeText(reviewText)
-      .then(() => {
-        addToast("내용이 복사됐어요.", "copy", 1000, "copy")
-      })
-      .catch((err) => {
-        console.error("copy되지 않았습니다.: ", err)
-        // 복사 실패 시 에러 처리 (옵션)
-      })
-  }
 
   //** 리뷰검수 OCR */
   const handleReviewOcrSave = async () => {
@@ -97,13 +80,28 @@ const StepTwo = ({
       setLoadingModalOpen(false)
       if (response.statusCode === 0) {
         // 부모 컴포넌트 상태 업데이트
+        // 리뷰 텍스트를 클립보드에 복사
+        navigator.clipboard
+          .writeText(reviewText)
+          .then(() => {
+            addToast("내용이 복사됐어요.", "copy", 1000, "copy")
+          })
+          .catch((err) => {
+            console.error("copy되지 않았습니다.: ", err)
+          })
         setValidatedReviewText(reviewText)
         setModalTitle("📝 거의 다 왔어요!")
         setModalContent(
-          <p>
-            리뷰 검수가 완료됐어요. <br />
-            리뷰를 등록하러 가볼까요?
-          </p>
+          <>
+            <p>
+              리뷰 검수가 완료됐어요. <br />
+              리뷰를 등록하러 가볼까요?
+            </p>
+            <p>
+              ‘등록하러가기’ 버튼을 클릭하면 <br />
+              검수 완료된 리뷰가 자동으로 복사돼요!
+            </p>
+          </>
         )
         setModalConfirmText("등록하러가기")
         setModalCancelText("아니요")
@@ -113,12 +111,9 @@ const StepTwo = ({
         setModalTitle("️⛔ 앗, 잠깐!")
         setModalContent(
           <p>
-            부정적인 리뷰는
-            <br />
-            포인트 적립에 영향을 줄 수 있어요.
-            <br />
-            긍정적인 사용 경험을 중심으로 수정 후<br />
-            검수를 다시 받아보세요.
+            단순 텍스트를 반복하거나 연관성 없는 리뷰를 작성하는 등 상품에
+            부정적인 리뷰는 포인트 적립에 영향을 줄 수 있으니, 긍정적인 사용
+            경험을 중심으로 작성해 주세요.
           </p>
         )
         setModalConfirmText("닫기")
@@ -132,12 +127,9 @@ const StepTwo = ({
       setModalTitle("️⛔ 앗, 잠깐!")
       setModalContent(
         <p>
-          부정적인 리뷰는
-          <br />
-          포인트 적립에 영향을 줄 수 있어요.
-          <br />
-          긍정적인 사용 경험을 중심으로 수정 후<br />
-          검수를 다시 받아보세요.
+          단순 텍스트를 반복하거나 연관성 없는 리뷰를 작성하는 등 상품에
+          부정적인 리뷰는 포인트 적립에 영향을 줄 수 있으니, 긍정적인 사용
+          경험을 중심으로 작성해 주세요.
         </p>
       )
       setModalConfirmText("재검수하기")
@@ -226,6 +218,22 @@ const StepTwo = ({
         </CampaignStatus>
         {/* 리뷰가이드 및 리뷰작성 */}
         <ReviewTestContainer>
+          <ReviewContent>
+            <ReviewHeader>리뷰 작성</ReviewHeader>
+            <ReviewTextBox>
+              <textarea
+                placeholder="상품과 연관이 없거나 성의없는 리뷰 작성 시 미션진행이 어려울 수 있습니다."
+                value={reviewText}
+                onChange={handleReviewChange}
+              />
+              <Count>
+                <span>{reviewText.length}</span>&nbsp;/180
+              </Count>
+              {/* <Button $variant="copy" onClick={handleCopy}>
+                복사
+              </Button> */}
+            </ReviewTextBox>
+          </ReviewContent>
           <GuideContainer>
             <GuideHeader onClick={toggleGuide}>
               <p className="title">작성 가이드</p>
@@ -270,22 +278,6 @@ const StepTwo = ({
               </GuideContent>
             )}
           </GuideContainer>
-          <ReviewContent>
-            <ReviewHeader>리뷰 작성</ReviewHeader>
-            <ReviewTextBox>
-              <textarea
-                placeholder="상품과 연관이 없거나 성의없는 리뷰 작성 시 포인트 지급 대상자에서 제외됩니다."
-                value={reviewText}
-                onChange={handleReviewChange}
-              />
-              <Count>
-                <span>{reviewText.length}</span>&nbsp;/180
-              </Count>
-              <Button $variant="copy" onClick={handleCopy}>
-                복사
-              </Button>
-            </ReviewTextBox>
-          </ReviewContent>
         </ReviewTestContainer>
         {/* 픽스된 bottom 버튼 */}
         <BottomButtonContainer>
@@ -431,7 +423,7 @@ const ReviewTestContainer = styled.div`
 `
 
 const GuideContainer = styled.div`
-  margin-bottom: 2rem;
+  margin: 2rem 0;
 `
 
 const GuideHeader = styled.button`
@@ -503,7 +495,7 @@ const GuideContent = styled.div`
 `
 
 const ReviewContent = styled.div`
-  margin-top: 3.6rem;
+  margin-top: 0;
 `
 
 const ReviewHeader = styled.p`
@@ -569,7 +561,7 @@ const BottomButtonContainer = styled.div`
 const Count = styled.div`
   position: absolute;
   right: 1.6rem;
-  bottom: 6rem;
+  bottom: 1.6rem;
   font-size: 1.4rem;
   color: var(--n200-color);
 

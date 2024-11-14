@@ -117,18 +117,6 @@ const StepThree = ({
     }
   }
 
-  const handleCopy = () => {
-    if (textRef.current) {
-      const text = textRef.current.innerText
-      try {
-        navigator.clipboard.writeText(text)
-        addToast("내용이 복사됐어요.", "copy", 1000, "copy")
-      } catch (err) {
-        addToast("복사 실패.", "copy", 1000, "copy")
-      }
-    }
-  }
-
   // 모달 확인 버튼 핸들러
   const handleModalConfirm = async () => {
     setResultModalOpen(false)
@@ -208,11 +196,12 @@ const StepThree = ({
             <StepItemReviewBox ref={textRef}>
               {validatedReviewText}
             </StepItemReviewBox>
-            <Button $variant="copy" onClick={handleCopy}>
-              복사
-            </Button>
           </StepItemReviewContainer>
-
+          <StepItemReviewText>
+            ‘등록하러가기’ 클릭 시 검수 완료된 리뷰 내용과 경제적
+            이해관계를명시하는 문구가 자동 입력 및 복사되며, ‘리뷰어’는 이에
+            동의합니다.
+          </StepItemReviewText>
           <Button $variant="pink" onClick={handleNavigate}>
             리뷰 등록하러가기
           </Button>
@@ -340,10 +329,22 @@ const StepItemReviewContainer = styled.div`
   border-radius: 1rem;
 `
 
+const StepItemReviewText = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1.8rem;
+  margin-bottom: 1rem;
+  font-size: var(--font-callout-small-size);
+  font-weight: var(--font-callout-small-weight);
+  line-height: 1.4;
+  letter-spacing: var(--font-callout-small-letter-spacing);
+  color: var(--n200-color);
+  background: url("${IconNotice}") no-repeat left 0px / 1.5rem 1.5rem;
+`
+
 const StepItemReviewBox = styled.div`
   display: block;
-
-  margin-bottom: 1.4rem;
   width: 100%;
   height: 7rem;
   overflow-y: scroll;

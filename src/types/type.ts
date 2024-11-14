@@ -53,3 +53,7 @@ export interface RemainingTime {
 export interface currentRemainingTime {
   currTime: string
 }
+
+export const spaceCodeMapping: { [key: string]: string } = {
+  cashwalk: "캐시워크",
+}

@@ -24,6 +24,7 @@ function App() {
         if (data.logined === 1) {
           localStorage.setItem("email", data.email)
           sessionStorage.setItem("authToken", data.token)
+          sessionStorage.setItem("spaceName", data.spaceName)
         }
       } catch (error) {
         console.error(error)

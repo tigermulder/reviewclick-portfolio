@@ -50,7 +50,11 @@ const BottomTabBar = () => {
   ) => {
     e.preventDefault()
     setActiveTab(tabName)
-    if (requiresAuth && isLoggedIn === "null") {
+    if (
+      (requiresAuth && isLoggedIn === "null") ||
+      isLoggedIn === "" ||
+      !isLoggedIn
+    ) {
       addToast(
         "캠페인 신청 및 계정 인증 완료후 이용가능합니다.",
         "warning",

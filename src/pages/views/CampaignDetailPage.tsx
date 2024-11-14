@@ -23,6 +23,7 @@ import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
+import { spaceCodeMapping } from "@/types/type"
 
 // React Query 키
 const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
@@ -43,6 +44,9 @@ const CampaignDetailPage = () => {
   const { campaignCode } = useParams()
   const { addToast } = useToast()
   const navigate = useNavigate()
+
+  // const spaceNameKey = sessionStorage.getItem("spaceName")
+  // const spaceName = spaceNameKey ? spaceCodeMapping[spaceNameKey] : "매체사없음"
 
   useEffect(() => {
     if (campaignCode) {
@@ -128,7 +132,7 @@ const CampaignDetailPage = () => {
   //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
     const isLoggedIn = localStorage.getItem("email")
-    if (isLoggedIn === "null") {
+    if (isLoggedIn === "null" || isLoggedIn === "") {
       setIsAuthModalOpen(true)
     } else {
       setIsModalOpen(true)
@@ -256,8 +260,6 @@ const CampaignDetailPage = () => {
     //** 그 외의 경우 신청 불가 */
     return <Button $variant="disable">캠페인 신청 불가</Button>
   }
-
-  const userEmail = localStorage.getItem("email")
 
   return (
     <>
@@ -397,20 +399,12 @@ const CampaignDetailPage = () => {
         }
         content={
           isApplySuccess ? (
-            <ol>
-              <li>
-                캠페인은 <em>선착순으로</em> 진행돼요.
-              </li>
-              <li>
-                반드시 ‘신청하기’ 클릭 후 <em>3시간 이내에</em> 리뷰클릭에서
-                제공하는 캠페인 URL을 통해 구매 및 인증 한 건에 대해서만
-                캠페인이 인정됩니다.
-              </li>
-              <li>
-                캠페인은 <span>1일 1회 신청</span> 가능해요.
-                <br />* 동일 캠페인 재신청 불가
-              </li>
-            </ol>
+            <>
+              <p>
+                <em>3시간</em> 안에 상품구매와
+              </p>
+              <p>구매 영수증 인증을 진행해주세요.</p>
+            </>
           ) : errorCode === 7 ? (
             <>
               <p>
@@ -419,12 +413,21 @@ const CampaignDetailPage = () => {
               </p>
             </>
           ) : (
-            <>
-              <p>
-                <em>3시간</em> 안에 상품구매와
-              </p>
-              <p>구매 영수증 인증을 진행해주세요.</p>
-            </>
+            <ol>
+              <li>
+                캠페인은 선착순으로 진행되며, 참여 도중 캠페인이 조기 마감될 수
+                있습니다.
+              </li>
+              <li>
+                리워드는 미션 완료 후 캠페인을 신청한 어플&#40;혹은
+                웹서비스&#41;을 통해 지급되며, 미션 중 리워드 지급사는 변경할 수
+                없습니다.
+              </li>
+              <li>
+                캠페인은 <span>1일 1회 신청</span> 가능하며, 동일한 캠페인에
+                대해서는 재신청이 불가합니다.
+              </li>
+            </ol>
           )
         }
         confirmText={isApplySuccess ? "나의 캠페인 내역" : "신청하기"}
