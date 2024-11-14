@@ -18,7 +18,7 @@ const MyPage = () => {
   return (
     <>
       {/* 마이페이지 헤더 타이틀 */}
-      <SinglePageHeader title="마이페이지" showRouteToggle={true} />
+      <SinglePageHeader title="마이페이지" showRouteToggle={false} />
 
       {/* 타이틀 */}
       <TitleSection>
