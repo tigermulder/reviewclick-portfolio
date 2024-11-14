@@ -43,7 +43,7 @@ export const AppRoute = () => {
       {/* Layout을 루트 경로로 지정하고, Outlet으로 자식 라우트를 렌더링 */}
       <Route element={<Layout />}>
         {/* main 페이지 */}
-        <Route path={RoutePath.Home} element={<MainPage />} />
+        {/* <Route path={RoutePath.Home} element={<MainPage />} /> */}
         {/* 캠페인상세 페이지 */}
         <Route
           path="/campaign/:campaignCode"
@@ -107,6 +107,8 @@ export const AppRoute = () => {
         <Route path={RoutePath.TermsOfService} element={<TermsOfService />} />
         {/* 개인정보처리방침 */}
         <Route path={RoutePath.PrivacyPolicy} element={<PrivacyPolicy />} />
+        {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
+        <Route path="*" element={<MyPage />} />
       </Route>
     </ReactRouterRoutes>
   )

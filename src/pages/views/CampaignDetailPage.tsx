@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, redirect } from "react-router-dom"
 import { keepPreviousData, useSuspenseQuery } from "@tanstack/react-query"
 import { useRecoilValue } from "recoil"
 import { getCampaignItem } from "services/campaign"
@@ -39,6 +39,7 @@ const CampaignDetailPage = () => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false) // 신청 취소 모달 상태
   const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
   const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false) // 계정 인증 모달 상태
   const { campaignCode } = useParams()
   const { addToast } = useToast()
   const navigate = useNavigate()
@@ -128,12 +129,16 @@ const CampaignDetailPage = () => {
   const handleApply = () => {
     const isLoggedIn = localStorage.getItem("email")
     if (isLoggedIn === "null") {
-      addToast("계정인증이 필요합니다.", "warning", 1000, "Join")
-      navigate(RoutePath.Join, { replace: true })
-      setErrorCode(null)
+      setIsAuthModalOpen(true)
     } else {
       setIsModalOpen(true)
     }
+  }
+
+  // 계정 인증 모달 확인 버튼 핸들러
+  const handleAuthModalConfirm = () => {
+    setIsAuthModalOpen(false)
+    navigate(RoutePath.Join) // 계정 인증 페이지로 이동
   }
   // ** 모달에서 캠페인 신청핸들러 [1-2] */
   const handleConfirm = async () => {
@@ -157,7 +162,7 @@ const CampaignDetailPage = () => {
         }
       }
       addToast("이미신청했습니다.", "warning", 2000, "campaign")
-      setErrorCode(null) // 다른 에러 코드 초기화
+      setErrorCode(null)
     }
   }
   //** 모달닫기 핸들러 [1-3] */
@@ -250,6 +255,8 @@ const CampaignDetailPage = () => {
     //** 그 외의 경우 신청 불가 */
     return <Button $variant="disable">캠페인 신청 불가</Button>
   }
+
+  const userEmail = localStorage.getItem("email")
 
   return (
     <>
@@ -371,7 +378,6 @@ const CampaignDetailPage = () => {
           {renderButton()}
         </FooterButtons>
       </DetailBody>
-
       {/* 신청, 신청완료, 신청횟수 모달 */}
       <Modal
         isOpen={isModalOpen}
@@ -424,6 +430,23 @@ const CampaignDetailPage = () => {
         cancelText={
           isApplySuccess ? "더 둘러보기" : errorCode === 7 ? "확인" : "취소"
         }
+      />
+      {/* 계정인증 모달 */}
+      <Modal
+        isOpen={isCancelModalOpen}
+        onConfirm={handleAuthModalConfirm}
+        onCancel={handleCloseModal}
+        title="계정인증을 하시겠습니까?"
+        content={
+          <>
+            <p>
+              캠페인은 계정 인증 후 신청이 가능합니다. <br /> 계정 인증을 하러
+              가시겠습니까?
+            </p>
+          </>
+        }
+        confirmText="계정인증"
+        cancelText="아니요"
       />
       {/* 신청취소 모달 */}
       <Modal

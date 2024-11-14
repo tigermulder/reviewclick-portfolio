@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { useRouter } from "@/hooks/useRouting"
 import { useQuery } from "@tanstack/react-query"
 import { getReviewList } from "@/services/review"
@@ -94,7 +95,7 @@ const MyCampaignPage = () => {
       refetch()
     }
   }, [currTimes, refetch])
-
+  const redirect = sessionStorage.getItem("redirectPath") || "/default-path"
   return (
     <>
       <SinglePageHeader title="나의 캠페인" />
@@ -152,7 +153,7 @@ const MyCampaignPage = () => {
             : null
           return (
             <li key={reviewItem.reviewId}>
-              <ReviewCardHeader>
+              <ReviewCardHeader to={redirect}>
                 <ReviewCardThumb>
                   <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
                   {isEnded && <DimmedBackground />}
@@ -225,7 +226,7 @@ const MyReviewContainer = styled.ul`
   }
 `
 
-const ReviewCardHeader = styled.div`
+const ReviewCardHeader = styled(Link)`
   position: relative;
   margin-bottom: 2rem;
   border-radius: 0.8rem;
