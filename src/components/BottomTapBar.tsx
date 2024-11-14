@@ -17,10 +17,20 @@ const BottomTabBar = () => {
   const location = useLocation()
   const currentPath = location.pathname
   const setIsMenuOpen = useSetRecoilState(isGlobalCategoryMenuOpenState)
-  const isLoggedIn = localStorage.getItem("email")
   const { addToast } = useToast()
   const navigate = useNavigate()
+
   const [activeTab, setActiveTab] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const email = localStorage.getItem("email")
+    if (email && email !== "null" && email !== "") {
+      setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false)
+    }
+  }, [])
 
   useEffect(() => {
     if (currentPath.startsWith(RoutePath.MyCampaign)) {
@@ -36,12 +46,6 @@ const BottomTabBar = () => {
     }
   }, [currentPath])
 
-  const handleCategoryClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setActiveTab("category")
-    setIsMenuOpen(true)
-  }
-
   const handleTabClick = (
     tabName: string,
     requiresAuth: boolean,
@@ -50,13 +54,20 @@ const BottomTabBar = () => {
   ) => {
     e.preventDefault()
     setActiveTab(tabName)
-    if (
-      (requiresAuth && isLoggedIn === "null") ||
-      isLoggedIn === "" ||
-      !isLoggedIn
-    ) {
+
+    if (isLoggedIn === null) {
       addToast(
-        "캠페인 신청 및 계정 인증 완료후 이용가능합니다.",
+        "캠페인 신청 및 계정 인증 완료 후 이용가능합니다.",
+        "warning",
+        1000,
+        "Join"
+      )
+      return
+    }
+
+    if (requiresAuth && !isLoggedIn) {
+      addToast(
+        "캠페인 신청 및 계정 인증 완료 후 이용가능합니다.",
         "warning",
         1000,
         "Join"
