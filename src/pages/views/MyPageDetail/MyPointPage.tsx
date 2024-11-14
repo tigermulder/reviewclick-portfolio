@@ -47,7 +47,7 @@ const MyPointPage = () => {
                 <ReviewCardInfo>
                   <CardDate>{formatDate(rewardItem.updatedAt)}</CardDate>
                   <CardTitle>{rewardItem.campaignTitle}</CardTitle>
-                  <CardPoint>{rewardItem.reward}P</CardPoint>
+                  <CardPoint>{rewardItem.reward.toLocaleString()}P</CardPoint>
                 </ReviewCardInfo>
               </MyPointWrapper>
             </li>

@@ -188,7 +188,7 @@ const StepOne = ({
             </StepItemInfoThumb>
             <StepItemInfoTextBox>
               <span>{campaignTitle}</span>
-              <p>{reward}P</p>
+              <p>{reward?.toLocaleString()}P</p>
             </StepItemInfoTextBox>
           </StepItemInfo>
           <Button $variant="pink" onClick={handleNavigate}>
