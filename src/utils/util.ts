@@ -209,3 +209,8 @@ export function parseTitle(text: string | undefined): ParsedTitle {
 
   return { status, mainText }
 }
+
+// ** 숫자 천단위로 콤마찍기 */
+export const numberWithComma = (rewardText: string) => {
+  return rewardText.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
