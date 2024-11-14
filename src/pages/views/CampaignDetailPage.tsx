@@ -169,6 +169,7 @@ const CampaignDetailPage = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false)
     setIsCancelModalOpen(false)
+    setIsAuthModalOpen(false)
     if (isApplySuccess) {
       navigate(`/campaign/${campaignCode}`, { replace: true })
       setErrorCode(null)
@@ -433,9 +434,9 @@ const CampaignDetailPage = () => {
       />
       {/* 계정인증 모달 */}
       <Modal
-        isOpen={isCancelModalOpen}
+        isOpen={isAuthModalOpen}
         onConfirm={handleAuthModalConfirm}
-        onCancel={handleCloseModal}
+        onCancel={() => setIsAuthModalOpen(false)}
         title="계정인증을 하시겠습니까?"
         content={
           <>
