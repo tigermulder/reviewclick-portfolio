@@ -285,8 +285,13 @@ const CampaignDetailPage = () => {
           </Button>
         )
       } else {
-        // 참여 중이며 취소가 불가능한 경우
-        return <Button $variant="disable">캠페인 참여중</Button>
+        if (data.review_status === "giveup") {
+          // 그 외의 경우 신청 불가
+          return <Button $variant="disable">캠페인 신청 불가</Button>
+        } else {
+          // 참여 중이며 취소가 불가능한 경우
+          return <Button $variant="disable">캠페인 참여중</Button>
+        }
       }
     } else if (isJoin === 0 && isEnable === 1) {
       return (
@@ -719,7 +724,7 @@ const DetailInfo = styled.span`
 `
 
 const RewardDetailInfo = styled.span`
-  color: var(--purple);
+  color: var(--purple) !important;
 `
 
 const Main = styled.div`
