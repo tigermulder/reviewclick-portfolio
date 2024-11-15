@@ -260,11 +260,13 @@ const CampaignDetailPage = () => {
       if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {
         return <Button $variant="grey">캠페인 신청 불가</Button>
       } else {
-        return (
-          <Button onClick={handleCancelOpen} $variant="grey">
-            캠페인 신청 취소하기
-          </Button>
-        )
+        if (isCancellable === 1) {
+          return (
+            <Button onClick={handleCancelOpen} $variant="grey">
+              캠페인 신청 취소하기
+            </Button>
+          )
+        }
       }
     } else {
       // 캠페인이 마감되었거나 정원이 찬 경우
