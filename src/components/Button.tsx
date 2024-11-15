@@ -54,6 +54,12 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           color: var(--primary-color);
           border: 1px solid var(--n80-color);
         `
+      case "join":
+        return css`
+          background-color: var(--white);
+          color: ${disabled ? "var(--n200-color)" : "var(--primary-color)"};
+          border: 1px solid var(--n80-color);
+        `
       case "arrow":
         return css`
           background-color: var(--n20-color);

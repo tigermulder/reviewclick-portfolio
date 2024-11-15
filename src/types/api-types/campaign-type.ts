@@ -21,6 +21,7 @@ export interface CampaignListResponse {
 // 캠페인 개체의 타입
 export interface Campaign {
   campaignId: number
+  reviewId: number
   advertiserId: number
   title: string
   categoryId: number

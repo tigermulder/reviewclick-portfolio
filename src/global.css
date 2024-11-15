@@ -313,6 +313,7 @@ body,
   font-size: var(--base-font-size);
   word-break: break-all;
   overflow: hidden;
+  line-height: 1.4;
 }
 @font-face {
   font-family: "SUIT";

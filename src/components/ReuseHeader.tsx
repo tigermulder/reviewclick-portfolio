@@ -69,12 +69,12 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 `
 
 const BackButton = styled.button`
   position: absolute;
-  left: 0.4rem;
+  left: 0.8rem;
   background: none;
   border: none;
   cursor: pointer;

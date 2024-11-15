@@ -209,3 +209,10 @@ export function parseTitle(text: string | undefined): ParsedTitle {
 
   return { status, mainText }
 }
+
+//** 시간포맷함수 */
+export const formatTime = (seconds: number) => {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  return `${m}:${s < 10 ? `0${s}` : s}`
+}

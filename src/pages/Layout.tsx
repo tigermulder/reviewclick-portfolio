@@ -10,7 +10,8 @@ const Layout = () => {
   const isNotificationDetail = !!useMatch("/alert/notification/:notificationId") // 새소식 상세 경로
   const isNoticeDetail = !!useMatch("/alert/notice/:noticeId") // 공지사항 상세 경로
   const isLoginPage = location.pathname === RoutePath.Login // 로그인 페이지
-  const isJoinPage = location.pathname === RoutePath.Join // 회원가입 페이지
+  const isJoinPage = location.pathname === RoutePath.Join // 인증 페이지 1-1
+  const isJoinVerifyPage = location.pathname === RoutePath.JoinVerify // 인증 페이지 1-2
   const isFindIdPage = location.pathname === RoutePath.FindId // 아이디찾기 페이지
   const isFindPassWordPage = location.pathname === RoutePath.FindPassword // 아이디찾기 페이지
   const isMyCartPage = location.pathname === RoutePath.MyCart // 장바구니 페이지
@@ -29,6 +30,7 @@ const Layout = () => {
     isMyCartPage ||
     isFindIdPage ||
     isJoinPage ||
+    isJoinVerifyPage ||
     isFindPassWordPage
 
   return (

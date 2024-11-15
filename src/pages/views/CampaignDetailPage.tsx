@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate, redirect } from "react-router-dom"
-import { keepPreviousData, useSuspenseQuery } from "@tanstack/react-query"
+import {
+  keepPreviousData,
+  useQuery,
+  useSuspenseQuery,
+} from "@tanstack/react-query"
 import { useRecoilValue } from "recoil"
 import { getCampaignItem } from "services/campaign"
 import { formatDate, disCountRate } from "@/utils/util"
@@ -23,6 +27,7 @@ import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
+import { getReviewList } from "@/services/review"
 import { spaceCodeMapping } from "@/types/type"
 
 // React Query 키
@@ -56,6 +61,23 @@ const CampaignDetailPage = () => {
 
   //** 스크롤 0부터시작 */
   useScrollToTop()
+
+  //** 리액트쿼리 나의 리뷰리스트 */
+  const fetchCampaignList = async ({ queryKey }: { queryKey: string[] }) => {
+    const [_key] = queryKey
+    const requestData = {
+      pageSize: 20,
+      pageIndex: 1,
+    }
+    const response = await getReviewList(requestData)
+    return response
+  }
+  const { data: review } = useQuery({
+    queryKey: ["reviewList"],
+    queryFn: fetchCampaignList,
+    refetchOnMount: true,
+    staleTime: 0,
+  })
 
   //** 유의사항 토글버튼 */
   const toggleGuide = () => {
@@ -111,11 +133,11 @@ const CampaignDetailPage = () => {
       getCampaignItem({
         campaignCode: campaignCode,
       }),
-    staleTime: 10 * 60 * 1000,
-    gcTime: 30 * 60 * 1000,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: true,
+    staleTime: 0, // 데이터 즉시 신선하지 않게 설정
+    gcTime: 0, // 데이터 캐시 즉시 제거
+    refetchOnMount: true, // 컴포넌트 마운트 시마다 데이터 재요청
+    refetchOnWindowFocus: true, // 창 포커스 시 데이터 재요청
+    refetchOnReconnect: true, // 네트워크 재연결 시 데이터 재요청
   })
   if (error && isFetching) {
     throw error
@@ -165,7 +187,7 @@ const CampaignDetailPage = () => {
           return
         }
       }
-      addToast("이미신청했습니다.", "warning", 2000, "campaign")
+      addToast("이미신청했습니다.", "warning", 1000, "campaign")
       setErrorCode(null)
     }
   }
@@ -198,19 +220,19 @@ const CampaignDetailPage = () => {
   const handleConfirmCancel = async () => {
     try {
       const data = {
-        reviewId: campaignDetail.campaignId,
+        reviewId: campaignDetail.reviewId,
       }
       const response = await cancelReview(data)
 
       // 신청 취소 성공 시 처리
-      addToast("캠페인 신청이 취소되었습니다.", "check", 2000, "campaign")
+      addToast("캠페인 신청이 취소되었습니다.", "check", 1000, "campaign")
       setIsApplySuccess(false) // 신청 성공 상태를 초기화
       setIsCancelModalOpen(false) // 모달 닫기
     } catch (error) {
       addToast(
         "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
         "warning",
-        2000,
+        1000,
         "campaign"
       )
     }
@@ -231,25 +253,42 @@ const CampaignDetailPage = () => {
   const isEnable = data.is_join_enable
 
   const renderButton = () => {
-    //** 캠페인이 마감되었거나 정원이 찬 경우 */
-    if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {
-      return <Button $variant="grey">캠페인 신청 불가</Button>
+    if (Array.isArray(review?.list) && review.list.length > 0) {
+      // 캠페인 신청 취소 버튼 (유저가 이미 참여한 캠페인이 있는 경우)
+      return (
+        <Button onClick={handleCancelOpen} $variant="grey">
+          캠페인 신청 취소하기
+        </Button>
+      )
+    } else {
+      // 캠페인이 마감되었거나 정원이 찬 경우
+      if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {
+        return <Button $variant="grey">캠페인 신청 불가</Button>
+      }
     }
-    //** 이미 참여 중인 경우 */
+
+    // 이미 참여 중인 경우
     if (isJoin === 1) {
       if (isCancellable === 1) {
-        //** 참여 중이며 취소가 가능한 경우 */
+        // 참여 중이며 취소가 가능한 경우
         return (
           <Button onClick={handleCancelOpen} $variant="grey">
             캠페인 신청 취소하기
           </Button>
         )
       } else {
-        //** 참여 중이며 취소가 불가능한 경우 */
+        // 참여 중이며 취소가 불가능한 경우
         return <Button $variant="disable">캠페인 참여중</Button>
       }
+    } else if (isJoin === 0 && isEnable === 1) {
+      return (
+        <Button onClick={handleApply} $variant="red">
+          캠페인 신청하기
+        </Button>
+      )
     }
-    //** 신청 가능 상태인 경우 */
+
+    // 신청 가능 상태인 경우
     if (isEnable === 1) {
       return (
         <Button onClick={handleApply} $variant="red">
@@ -257,7 +296,8 @@ const CampaignDetailPage = () => {
         </Button>
       )
     }
-    //** 그 외의 경우 신청 불가 */
+
+    // 그 외의 경우 신청 불가
     return <Button $variant="disable">캠페인 신청 불가</Button>
   }
 
@@ -288,7 +328,7 @@ const CampaignDetailPage = () => {
             </li>
             <li>
               <span>미션완료기간</span>
-              <DetailInfo>미션 완료 기간 정보 없음</DetailInfo>
+              <DetailInfo>구매 영수증 인증 후 7일 이내 필수</DetailInfo>
             </li>
             <li>
               <span>상품가</span>
@@ -296,7 +336,9 @@ const CampaignDetailPage = () => {
             </li>
             <li>
               <span>적립포인트</span>
-              <DetailInfo>{campaignDetail.reward.toLocaleString()}P</DetailInfo>
+              <RewardDetailInfo>
+                {campaignDetail.reward.toLocaleString()}P
+              </RewardDetailInfo>
             </li>
           </CampaignDetails>
         </CampaignContainer>
@@ -665,7 +707,11 @@ const CampaignDetails = styled.ul`
 `
 
 const DetailInfo = styled.span`
-  color: #000;
+  color: var(--primary-color);
+`
+
+const RewardDetailInfo = styled.span`
+  color: var(--purple);
 `
 
 const Main = styled.div`

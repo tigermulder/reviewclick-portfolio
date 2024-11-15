@@ -50,6 +50,7 @@ function App() {
     location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.MyCart ||
     location.pathname === RoutePath.Join ||
+    location.pathname === RoutePath.JoinVerify ||
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.UserPointLog ||
@@ -71,6 +72,7 @@ function App() {
   const hideTapBar =
     location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.Join ||
+    location.pathname === RoutePath.JoinVerify ||
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.ResetPassword ||

@@ -212,7 +212,7 @@ const StepTwo = ({
             <StepItemInfoTextBox>
               <CardDate>{formatDate(creatTime)}</CardDate>
               <span>{campaignTitle}</span>
-              <p>{reward}P</p>
+              <p>{reward?.toLocaleString()}P</p>
             </StepItemInfoTextBox>
           </CampaignStatusCard>
         </CampaignStatus>

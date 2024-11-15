@@ -164,7 +164,7 @@ const MyCampaignPage = () => {
                 </ReviewCardThumb>
                 <ReviewCardInfo>
                   <CardDate>{formatDate(reviewItem.createdAt)}</CardDate>
-                  <CardTitle>[리뷰] {reviewItem.title}</CardTitle>
+                  <CardTitle>{reviewItem.title}</CardTitle>
                   <CardPoint>{reviewItem.reward.toLocaleString()}P</CardPoint>
                 </ReviewCardInfo>
               </ReviewCardHeader>

@@ -1,7 +1,10 @@
-// src/components/CheckBox.tsx
 import IcoChkOff from "assets/ico_chk_off.svg?react"
-import IcoChkOn from "assets/ico_chk_on.svg?react"
-import { CheckboxProps } from "@/types/component-types/check-box-type"
+import IcoChk from "assets/ico_chk.svg?react"
+import {
+  CheckboxProps,
+  CheckboxCustomProps,
+  CheckboxTextProps,
+} from "@/types/component-types/check-box-type"
 import styled from "styled-components"
 
 const Checkbox = ({
@@ -11,68 +14,85 @@ const Checkbox = ({
   $isTitle = false,
 }: CheckboxProps) => {
   return (
-    <CheckboxLabel>
+    <CheckboxLabel $isTitle={$isTitle} checked={checked}>
       <CheckboxInput type="checkbox" checked={checked} onChange={onChange} />
       <CheckboxCustom checked={checked}>
-        <IcoChkOff />
-        <IcoChkOn />
+        {$isTitle ? <IcoChk /> : <IcoChkOff />}
       </CheckboxCustom>
-      <CheckboxText $isTitle={$isTitle}>{label}</CheckboxText>
+      <CheckboxText $isTitle={$isTitle} checked={checked}>
+        {label}
+      </CheckboxText>
     </CheckboxLabel>
   )
 }
 
 export default Checkbox
 
-const CheckboxLabel = styled.label`
+const CheckboxLabel = styled.label<{ $isTitle?: boolean; checked: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
+  position: relative;
+  ${({ $isTitle, checked }) =>
+    $isTitle &&
+    `
+    padding: 1.1rem 1.5rem;
+    border: 1px solid ${checked ? "var(--primary-color)" : "var(--n40-color)"};
+    border-radius: 0.5rem;
+    background-color: ${
+      checked ? "var(--light-primary-color)" : "var(--white)"
+    };
+    color: ${checked ? "var(--primary-color)" : "var(--n600-color)"};
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-color: ${checked ? "var(--prim-L400)" : "var(--n40-color)"};
+    }
+    ${
+      checked &&
+      `
+      border-color: var(--prim-L400);
+    `
+    }
+  `}
 `
 
 const CheckboxInput = styled.input`
-  display: none;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
 `
 
-interface CheckboxCustomProps {
-  checked: boolean
-}
-const CheckboxCustom = styled.span.attrs<CheckboxCustomProps>(
-  ({ checked }) => ({
-    style: {
-      "--svg-display": checked ? "block" : "none",
-      "--svg-first-display": checked ? "none" : "block",
-    } as React.CSSProperties,
-  })
-)<CheckboxCustomProps>`
-  width: 1.6rem;
-  height: 1.6rem;
+const CheckboxCustom = styled.span<CheckboxCustomProps>`
+  width: 2rem;
+  height: 2rem;
   margin-right: 0.8rem;
   position: relative;
 
-  & > svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: var(--svg-display);
-  }
-
-  & > svg:first-child {
-    display: var(--svg-first-display);
+  svg {
+    width: 2rem;
+    height: 2rem;
+    color: ${({ checked }) =>
+      checked ? "var(--primary-color)" : "var(--whitesmoke)"};
+    .all-check {
+      color: ${({ checked }) =>
+        checked ? "var(--prim-L400)" : "var(--n100-color)"};
+    }
+    .check-fill {
+      color: ${({ checked }) => (checked ? "var(--white)" : "var(--silver)")};
+    }
   }
 `
 
-interface CheckboxTextProps {
-  $isTitle: boolean
-}
-const CheckboxText = styled.span.attrs<Partial<CheckboxTextProps>>(
-  ({ $isTitle = false }) => ({
-    $isTitle,
-    "data-is-title": $isTitle,
-  })
-)<CheckboxTextProps>`
+const CheckboxText = styled.span<Partial<CheckboxTextProps>>`
   font-size: ${({ $isTitle }) =>
     $isTitle ? "var(--font-title-size)" : "var(--font-caption-size)"};
   font-weight: ${({ $isTitle }) =>
@@ -81,6 +101,10 @@ const CheckboxText = styled.span.attrs<Partial<CheckboxTextProps>>(
     $isTitle ? "var(--font-title-line-height)" : "normal"};
   letter-spacing: ${({ $isTitle }) =>
     $isTitle ? "var(--font-title-letter-spacing)" : "normal"};
-  color: ${({ $isTitle }) =>
-    $isTitle ? "var(--n600-color)" : "var(--n400-color)"};
+  color: ${({ $isTitle, checked }) =>
+    $isTitle
+      ? checked
+        ? "var(--prim-L400)"
+        : "var(--n100-color)"
+      : "var(--n600-color)"};
 `

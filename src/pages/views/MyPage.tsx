@@ -58,23 +58,35 @@ const MyPage = () => {
               <NoticeContent>
                 <ul>
                   <li>
-                    리뷰클릭은 네이버 계정으로만 회원가입 및 로그인이 가능하며,
-                    가입한 네이버 계정과 캠페인 참여 계정이 동일해야합니다.
+                    리뷰클릭은 네이버 ID로만 계정 인증이 가능하며, 인증된 네이버
+                    계정과 캠페인 참여 계정이 동일해야합니다.
                   </li>
                   <li>
-                    기간 내 구매 및 구매 인증, 리뷰 등록 및 인증이 이루어 지지
-                    않을 경우 참여하신 캠페인은 미션 실패로 간주하며, 포인트는
+                    캠페인 기간 내 구매 및 구매 인증, 리뷰 등록 및 인증이
+                    완료되지 않을 경우, 해당 미션은 실패로 간주되어 포인트는
                     지급되지 않습니다.
                   </li>
-                  <li>캠페인 참여 기회는 1일 3회 제공됩니다.</li>
                   <li>
-                    모든 캠페인은 부정적인 글로 작성되는 경우 미션 진행 및
-                    포인트 지급에 영향을 줄 수 있으니, 긍정적인 경험을 바탕으로
-                    작성하여 주시기 바랍니다.
+                    캠페인 참여 기회는 1일 1회 제공되며, 계정당 최대 3회까지
+                    참여할 수 있습니다.
+                  </li>
+                  <li>
+                    부정적인 글로 작성되는 경우 미션 진행 및 포인트 지급에
+                    영향을 줄 수 있으니, 긍정적인 경험을 바탕으로 작성하여
+                    주시기 바랍니다.
                   </li>
                   <li>
                     부정 행위나 부적절한 행위가 발각될 경우 포인트는 지급되지
                     않습니다.
+                  </li>
+                  <li>
+                    등록한 콘텐츠는 6개월간 유지되어야하며, 임의로 수정하거나,
+                    삭제된 것이 발견될 경우 캠페인 참여가 불가능할 수 있습니다.
+                  </li>
+                  <li>
+                    캠페인 미션 완료 후 상품 환불, 재판매 등과 같은 행위가
+                    발각될 경우 캠페인 참여 제한이 있으며, 포인트는 회수될 수
+                    있습니다.
                   </li>
                 </ul>
               </NoticeContent>
@@ -111,7 +123,7 @@ const TitleSection = styled.div`
 `
 
 const Links = styled.ul`
-  padding-bottom: 1.9rem;
+  padding-bottom: 5rem;
 
   li {
     position: relative;
@@ -169,7 +181,7 @@ const NoticeContainer = styled.div`
 
 const NoticeHeader = styled.div`
   position: relative;
-  padding: 2.2rem 1.6rem;
+  padding: 2.2rem 0;
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);

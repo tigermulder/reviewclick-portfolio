@@ -4,6 +4,7 @@ export interface ButtonProps {
   $variant:
     | "red"
     | "outlined"
+    | "join"
     | "arrow"
     | "grey"
     | "pink"
@@ -22,6 +23,7 @@ export interface StyledButtonProps {
   $variant:
     | "red"
     | "outlined"
+    | "join"
     | "arrow"
     | "grey"
     | "pink"
