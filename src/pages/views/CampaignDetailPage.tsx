@@ -27,7 +27,6 @@ import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
-import { getReviewList } from "@/services/review"
 import { spaceCodeMapping } from "@/types/type"
 
 // React Query 키
@@ -61,23 +60,6 @@ const CampaignDetailPage = () => {
 
   //** 스크롤 0부터시작 */
   useScrollToTop()
-
-  //** 리액트쿼리 나의 리뷰리스트 */
-  const fetchCampaignList = async ({ queryKey }: { queryKey: string[] }) => {
-    const [_key] = queryKey
-    const requestData = {
-      pageSize: 20,
-      pageIndex: 1,
-    }
-    const response = await getReviewList(requestData)
-    return response
-  }
-  const { data: review } = useQuery({
-    queryKey: ["reviewList"],
-    queryFn: fetchCampaignList,
-    refetchOnMount: true,
-    staleTime: 0,
-  })
 
   //** 유의사항 토글버튼 */
   const toggleGuide = () => {
@@ -225,12 +207,6 @@ const CampaignDetailPage = () => {
     window.open(url, "_blank", "noopener,noreferrer")
   }
 
-  //** 캠페인 신청조건 */
-  const isOpen = data.is_campaign_open
-  const isCancellable = data.is_join_cancellable
-  const isJoin = data.campaign.is_join
-  const isEnable = data.is_join_enable
-
   //** 캠페인신청 취소 핸들러 [2-2] */
   const handleConfirmCancel = async () => {
     try {
@@ -254,65 +230,64 @@ const CampaignDetailPage = () => {
     }
   }
 
-  const renderButton = () => {
-    if (Array.isArray(review?.list) && review.list.length > 0) {
-      // 캠페인 신청 취소 버튼 (유저가 이미 참여한 캠페인이 있는 경우)
-      if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {
-        return <Button $variant="grey">캠페인 신청 불가</Button>
-      } else {
-        if (isCancellable === 1) {
-          return (
-            <Button onClick={handleCancelOpen} $variant="grey">
-              캠페인 신청 취소하기
-            </Button>
-          )
-        }
-      }
-    } else {
-      // 캠페인이 마감되었거나 정원이 찬 경우
-      if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {
-        return <Button $variant="grey">캠페인 신청 불가</Button>
-      }
-    }
-
-    // 이미 참여 중인 경우
-    if (isJoin === 1) {
-      if (isCancellable === 1) {
-        // 참여 중이며 취소가 가능한 경우
+    //** 캠페인 신청조건 */
+    const renderButton = () => {
+      const campaignStatus = data.campaign.status;
+      const reviewStatus = data.review_status;
+      const quota = data.campaign.quota;
+      const joins = data.campaign.joins;
+      // 캠페인 상태에 따른 추가 조건
+      if (campaignStatus === 'closed' || campaignStatus === 'pause') {
         return (
-          <Button onClick={handleCancelOpen} $variant="grey">
-            캠페인 신청 취소하기
+          <Button $variant="disable">
+            캠페인 신청 불가
           </Button>
-        )
-      } else {
-        if (data.review_status === "giveup") {
-          // 그 외의 경우 신청 불가
-          return <Button $variant="disable">캠페인 신청 불가</Button>
-        } else {
-          // 참여 중이며 취소가 불가능한 경우
-          return <Button $variant="disable">캠페인 참여중</Button>
-        }
+        );
       }
-    } else if (isJoin === 0 && isEnable === 1) {
-      return (
-        <Button onClick={handleApply} $variant="red">
-          캠페인 신청하기
-        </Button>
-      )
-    }
-
-    // 신청 가능 상태인 경우
-    if (isEnable === 1) {
-      return (
-        <Button onClick={handleApply} $variant="red">
-          캠페인 신청하기
-        </Button>
-      )
-    }
-
-    // 그 외의 경우 신청 불가
-    return <Button $variant="disable">캠페인 신청 불가</Button>
-  }
+      // 기존 신청 가능 여부 확인
+      if (quota !== joins) {
+        if (reviewStatus === null) {
+          // 신청하지 않은 상태
+          return (
+            <Button onClick={handleApply} $variant="red">
+              캠페인 신청하기
+            </Button>
+          );
+        } else {
+          // 이미 신청한 상태
+          switch (reviewStatus) {
+            case 'join':
+              return (
+                <Button onClick={handleCancelOpen} $variant="grey">
+                  캠페인 신청 취소하기
+                </Button>
+              );
+            case 'purchase':
+            case 'confirm':
+            case 'upload':
+              return (
+                <Button $variant="disable">
+                  캠페인 참여중
+                </Button>
+              );
+            default:
+              return (
+                <Button $variant="disable">
+                  캠페인 신청 불가
+                </Button>
+              );
+          }
+        }
+      } else {
+        // 정원이 다 찬 경우 신청 불가 처리
+        return (
+          <Button $variant="disable">
+            캠페인 신청 불가
+          </Button>
+        );
+      }
+    };
+    
 
   return (
     <>
