@@ -111,7 +111,7 @@ export interface ReviewJoinResponse {
 
 //** 리뷰 참여 취소 요청 type */
 export interface ReviewCancelRequest {
-  reviewId: number
+  reviewId: number | undefined
 }
 export interface ReviewCancelResponse {
   statusCode: number

@@ -131,7 +131,7 @@ const CampaignDetailPage = () => {
     queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignCode),
     queryFn: () =>
       getCampaignItem({
-        campaignCode: campaignCode,
+        campaignCode: campaignCode as string,
       }),
     staleTime: 0, // 데이터 즉시 신선하지 않게 설정
     gcTime: 0, // 데이터 캐시 즉시 제거
@@ -216,27 +216,6 @@ const CampaignDetailPage = () => {
   const handleCancelOpen = () => {
     setIsCancelModalOpen(true)
   }
-  //** 캠페인신청 취소 핸들러 [2-2] */
-  const handleConfirmCancel = async () => {
-    try {
-      const data = {
-        reviewId: campaignDetail.reviewId,
-      }
-      const response = await cancelReview(data)
-
-      // 신청 취소 성공 시 처리
-      addToast("캠페인 신청이 취소되었습니다.", "check", 1000, "campaign")
-      setIsApplySuccess(false) // 신청 성공 상태를 초기화
-      setIsCancelModalOpen(false) // 모달 닫기
-    } catch (error) {
-      addToast(
-        "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
-        "warning",
-        1000,
-        "campaign"
-      )
-    }
-  }
 
   const thumbnailUrl = campaignDetail.thumbnailUrl || dummyImage
 
@@ -252,14 +231,41 @@ const CampaignDetailPage = () => {
   const isJoin = data.campaign.is_join
   const isEnable = data.is_join_enable
 
+  //** 캠페인신청 취소 핸들러 [2-2] */
+  const handleConfirmCancel = async () => {
+    try {
+      const cancelData = {
+        reviewId: data.reviewId,
+      }
+      const response = await cancelReview(cancelData)
+      if (response.statusCode === 0) {
+        // 신청 취소 성공 시 처리
+        addToast("캠페인 신청이 취소되었습니다.", "check", 1000, "campaign")
+        setIsApplySuccess(false) // 신청 성공 상태를 초기화
+        setIsCancelModalOpen(false) // 모달 닫기
+      }
+    } catch (error) {
+      addToast(
+        "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
+        "warning",
+        1000,
+        "campaign"
+      )
+    }
+  }
+
   const renderButton = () => {
     if (Array.isArray(review?.list) && review.list.length > 0) {
       // 캠페인 신청 취소 버튼 (유저가 이미 참여한 캠페인이 있는 경우)
-      return (
-        <Button onClick={handleCancelOpen} $variant="grey">
-          캠페인 신청 취소하기
-        </Button>
-      )
+      if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {
+        return <Button $variant="grey">캠페인 신청 불가</Button>
+      } else {
+        return (
+          <Button onClick={handleCancelOpen} $variant="grey">
+            캠페인 신청 취소하기
+          </Button>
+        )
+      }
     } else {
       // 캠페인이 마감되었거나 정원이 찬 경우
       if (isOpen === 0 || data.campaign.quota === data.campaign.joins) {

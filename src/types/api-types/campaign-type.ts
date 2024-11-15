@@ -21,7 +21,6 @@ export interface CampaignListResponse {
 // 캠페인 개체의 타입
 export interface Campaign {
   campaignId: number
-  reviewId: number
   advertiserId: number
   title: string
   categoryId: number
@@ -60,6 +59,7 @@ export interface CampaignItemResponse {
   is_join_enable: number
   is_join_cancellable: number
   is_campaign_open: number
+  reviewId?: number
 }
 
 export interface Review {
