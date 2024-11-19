@@ -21,53 +21,6 @@ import Notice from "./CampaignDetail/Notice"
 import FooterButtons from "./CampaignDetail/FooterButtons"
 import useScrollAnimation from "@/hooks/useScrollAnimation"
 import styled from "styled-components"
-import { CampaignItemResponse } from "@/types/api-types/campaign-type"
-
-const dummyCampaignDetailResponse: CampaignItemResponse = {
-  statusCode: 0,
-  campaign: {
-    campaignId: 121,
-    campaignCode: "wiEP7do1",
-    advertiserId: 8,
-    title: "파로돈탁스 클래식 검케어 잇몸치약 100g, 6개",
-    categoryId: 6,
-    NSproductNo: "10614568543",
-    price: 21900,
-    reward: 16000,
-    cost: 0,
-    snsUrl:
-      "https://brand.naver.com/parodontax/products/10614568543?NaPm=ct%3Dm32rbdn4%7Cci%3D6bbfcc0d12586d436c154e791d23c0bcb06fda7b%7Ctr%3Donepl%7Csn%3D11305476%7Cic%3DK07201%7Chk%3Dc03d82425bdd1829bf9af182fe31ea689f0e60be&inflow_ext=%7B%22bc%22%3A%221429%22%2C%22as%22%3A%2244007751%22%2C%22bs%22%3A%2229591200%22%2C%22ec%22%3A%22000944%22%2C%22tr%22%3A%22onepl%22%2C%22ic%22%3A%22K07201%22%2C%22tc%22%3A%22-%22%7D",
-    costPartner: 0,
-    reviewKeyword: null,
-    thumbnailUrl:
-      "https://shop-phinf.pstatic.net/20240719_94/1721365692826oPKTe_JPEG/2402896699366080_1456704706.jpg",
-    startAt: "2024-11-12T15:00:00.000Z",
-    endAt: "2024-12-12T15:00:00.000Z",
-    status: "open",
-    quota: 5,
-    joins: 5,
-    uploads: 0,
-    favorites: 0,
-    createdAt: "2024-11-04T08:30:41.000Z",
-    is_join: 1,
-    is_favorite: 0,
-  },
-  review_status: "giveup",
-  is_join_enable: 0,
-  is_join_cancellable: 0,
-  is_campaign_open: 0,
-  reviewId: 184,
-  user: {
-    uid: 157,
-    email: "song1234556@naver.com",
-    partnerUid: "wookie4",
-    spaceId: 4,
-    spaceName: "cashwalk",
-    partnerId: 7,
-  },
-  title: "",
-  reviews: [],
-}
 
 // React Query 키
 const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
@@ -113,7 +66,7 @@ const CampaignDetailPage = () => {
   }
 
   //** 캠페인 상세ITEM */
-  const { data, error, isFetching } = useSuspenseQuery({
+  const { data, error, isFetching, refetch } = useSuspenseQuery({
     queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignCode),
     queryFn: () =>
       getCampaignItem({
@@ -164,6 +117,7 @@ const CampaignDetailPage = () => {
       if (response.statusCode === 0) {
         setIsApplySuccess(true)
         setErrorCode(null)
+        refetch()
       }
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
@@ -224,6 +178,7 @@ const CampaignDetailPage = () => {
       const response = await cancelReview(cancelData)
       if (response.statusCode === 0) {
         // 신청 취소 성공 시 처리
+        refetch()
         addToast("캠페인 신청이 취소되었습니다.", "check", 1000, "campaign")
         setIsApplySuccess(false) // 신청 성공 상태를 초기화
         setIsCancelModalOpen(false) // 모달 닫기
