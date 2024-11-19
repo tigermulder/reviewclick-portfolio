@@ -1,11 +1,12 @@
 import ReuseHeader from "@/components/ReuseHeader"
-import { useNavigate } from "react-router-dom"
+import { replace, useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 import dummyImage from "assets/dummy-image.png"
 import { getRewardList } from "@/services/reward"
 import styled from "styled-components"
 import { useQuery } from "@tanstack/react-query"
 import { formatDate } from "@/utils/util"
+import NoRewards from "./NoReward"
 
 const MyPointPage = () => {
   const navigate = useNavigate()
@@ -25,6 +26,7 @@ const MyPointPage = () => {
     queryFn: fetchMyRewardList,
     refetchOnMount: true,
     staleTime: 0,
+    retry: 0, // 재요청 횟수
   })
   const rewardList = data?.list
 
@@ -32,27 +34,31 @@ const MyPointPage = () => {
     <MyPointContainer>
       <ReuseHeader
         title="포인트 적립 내역"
-        onBack={() => navigate(RoutePath.UserProfile)}
+        onBack={() => navigate(RoutePath.UserProfile, { replace: true })}
       />
       <MyPointListContainer>
-        {rewardList?.map((rewardItem) => {
-          const thumbnailUrl = rewardItem.campaignThumbnailUrl || dummyImage
-          return (
-            <li key={rewardItem.reviewId}>
-              <MyPointCard>지급완료</MyPointCard>
-              <MyPointWrapper>
-                <ReviewCardThumb>
-                  <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-                </ReviewCardThumb>
-                <ReviewCardInfo>
-                  <CardDate>{formatDate(rewardItem.updatedAt)}</CardDate>
-                  <CardTitle>{rewardItem.campaignTitle}</CardTitle>
-                  <CardPoint>{rewardItem.reward.toLocaleString()}P</CardPoint>
-                </ReviewCardInfo>
-              </MyPointWrapper>
-            </li>
-          )
-        })}
+        {rewardList && rewardList.length > 0 ? (
+          rewardList.map((rewardItem) => {
+            const thumbnailUrl = rewardItem.campaignThumbnailUrl || dummyImage
+            return (
+              <li key={rewardItem.reviewId}>
+                <MyPointCard>지급완료</MyPointCard>
+                <MyPointWrapper>
+                  <ReviewCardThumb>
+                    <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
+                  </ReviewCardThumb>
+                  <ReviewCardInfo>
+                    <CardDate>{formatDate(rewardItem.updatedAt)}</CardDate>
+                    <CardTitle>{rewardItem.campaignTitle}</CardTitle>
+                    <CardPoint>{rewardItem.reward.toLocaleString()}P</CardPoint>
+                  </ReviewCardInfo>
+                </MyPointWrapper>
+              </li>
+            )
+          })
+        ) : (
+          <NoRewards /> // 리워드 리스트가 없을 때
+        )}
       </MyPointListContainer>
     </MyPointContainer>
   )

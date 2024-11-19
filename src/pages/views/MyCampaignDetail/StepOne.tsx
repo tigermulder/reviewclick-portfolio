@@ -171,7 +171,8 @@ const StepOne = ({
       />
       <CartTitle>
         <p>
-          상품 구매하고 <br />
+          3시간 내에 상품 구매하고
+          <br />
           온라인 영수증 인증하기
         </p>
       </CartTitle>
@@ -181,10 +182,10 @@ const StepOne = ({
           <StepItemInfo>
             <StepItemInfoThumb>
               <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-              {isEnded && <DimmedBackground />}
+              {/* {isEnded && <DimmedBackground />}
               <RemainingDays $isEnded={isEnded}>
                 {isEnded ? "종료" : remainingTime}
-              </RemainingDays>
+              </RemainingDays> */}
             </StepItemInfoThumb>
             <StepItemInfoTextBox>
               <span>{campaignTitle}</span>
@@ -192,7 +193,7 @@ const StepOne = ({
             </StepItemInfoTextBox>
           </StepItemInfo>
           <Button $variant="pink" onClick={handleNavigate}>
-            구매하러가기
+            상품 구매하러가기
           </Button>
         </StepItem>
         <StepItem>
@@ -205,7 +206,7 @@ const StepOne = ({
             <img src={SampleReviewImage} alt={"기본 영수증 이미지"} />
           </figure>
           <Button $variant="pink" onClick={handleButtonClick}>
-            이미지업로드
+            구매 영수증 업로드
           </Button>
           {/* 숨겨진 파일 입력 */}
           <input

@@ -60,7 +60,7 @@ const AccountVerificationPage = () => {
       if (data.statusCode === 0) {
         setEmailSent(true)
         startEmailTimer()
-        addToast("인증 코드를 이메일로 전송했습니다.", "warning", 1000, "email")
+        addToast("인증코드가 이메일로 전송됐어요", "warning", 1000, "email")
       } else {
         addToast("인증 코드 전송에 실패했습니다.", "warning", 1000, "email")
       }

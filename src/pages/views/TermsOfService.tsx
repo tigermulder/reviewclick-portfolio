@@ -9,7 +9,7 @@ const TermsOfService = () => {
     <>
       <ReuseHeader
         title="이용약관"
-        onBack={() => navigate(RoutePath.UserProfile)}
+        onBack={() => navigate(RoutePath.UserProfile, { replace: true })}
       />
       <TextBox>
         <Section>

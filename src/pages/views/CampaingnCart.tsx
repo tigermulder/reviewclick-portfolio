@@ -42,13 +42,13 @@ const CampaignCart = () => {
       <ReuseHeader title="찜 목록" onBack={() => navigate(-1)} />
       {/* 캠페인 리스트 */}
       <CampaignList>
-        <FilterContainer>
+        {/* <FilterContainer>
           <FilterDropDown
             options={cartOptions}
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
           />
-        </FilterContainer>
+        </FilterContainer> */}
         {filteredCampaigns.length > 0 ? (
           filteredCampaigns.map((campaign) => {
             // 남은 시간 계산

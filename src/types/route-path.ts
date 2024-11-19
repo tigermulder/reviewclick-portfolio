@@ -24,6 +24,7 @@ export const RoutePath = {
     `/alert/notification/${notificationId}`,
   TermsOfService: "/terms_Service",
   PrivacyPolicy: "/Privacy_Policy",
+  Introduce: "/Introduce_service",
 } as const
 
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath]
@@ -40,4 +41,5 @@ export interface ContentProps {
   $ContactAddPage: boolean
   $isNoticeDetail: boolean
   $isNotificationDetail: boolean
+  $isIntroducePage: boolean
 }

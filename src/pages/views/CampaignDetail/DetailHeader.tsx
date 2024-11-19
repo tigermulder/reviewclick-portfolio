@@ -1,0 +1,41 @@
+import styled from "styled-components"
+
+interface DetailHeaderProps {
+  imageUrl: string
+  scale: number
+}
+
+function DetailHeader({ imageUrl, scale }: DetailHeaderProps) {
+  return (
+    <HeaderContainer>
+      <Background $imageUrl={imageUrl} $scale={scale} />
+    </HeaderContainer>
+  )
+}
+
+export default DetailHeader
+
+const HeaderContainer = styled.div`
+  position: relative;
+  height: 420px;
+`
+
+const Background = styled.div<{
+  $imageUrl: string
+  $scale: number
+}>`
+  position: fixed;
+  max-width: 768px;
+  min-width: 375px;
+  top: 0;
+  left: 0;
+  background-image: url(${(props) => props.$imageUrl});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 420px;
+  z-index: -10;
+  transform: scale(${(props) => props.$scale});
+  transition: transform 0.2s ease-out;
+`

@@ -56,22 +56,12 @@ const BottomTabBar = () => {
     setActiveTab(tabName)
 
     if (isLoggedIn === null) {
-      addToast(
-        "캠페인 신청 및 계정 인증 완료 후 이용가능합니다.",
-        "warning",
-        1000,
-        "Join"
-      )
+      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 1000, "Join")
       return
     }
 
     if (requiresAuth && !isLoggedIn) {
-      addToast(
-        "캠페인 신청 및 계정 인증 완료 후 이용가능합니다.",
-        "warning",
-        1000,
-        "Join"
-      )
+      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 1000, "Join")
     } else {
       navigate(path, { replace: true })
     }

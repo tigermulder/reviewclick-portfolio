@@ -176,7 +176,8 @@ export const currentCalculateRemainingTime = (
       (remainingAfterDays % millisecondsInAMinute) / millisecondsInASecond
     )
 
-    const currTime = `D-${days} (T-${pad(hours)}:${pad(minutes)}:${pad(seconds)})`
+    const currTime = `-${days}일`
+    // (T-${pad(hours)}:${pad(minutes)}:${pad(seconds)})
     return { currTime }
   } else {
     // 남은 시간이 24시간 미만인 경우

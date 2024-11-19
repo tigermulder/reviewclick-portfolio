@@ -17,6 +17,7 @@ import { RoutePath } from "@/types/route-path"
 import SinglePageHeader from "@/components/SinglePageHeader"
 import { currentCalculateRemainingTime } from "@/utils/util"
 import styled from "styled-components"
+import NoCampaign from "./MyCampaignDetail/NoCampaign"
 
 const MyCampaignPage = () => {
   const [selectedChip, setSelectedChip] = useState("전체")
@@ -57,6 +58,7 @@ const MyCampaignPage = () => {
     queryFn: fetchCampaignList,
     refetchOnMount: true,
     staleTime: 0,
+    retry: 1, // 재요청 횟수
   })
   // ** 현재 신청한캠페인 갯수 */
   const reviewLength = data?.totalItems
@@ -108,74 +110,95 @@ const MyCampaignPage = () => {
       <CartCardDesc>
         <p>
           신청한 캠페인
-          <Result>{reviewLength}</Result>
-          <Total>/{reviewLength}</Total>
+          <Result>
+            {reviewLength === 0 ||
+            reviewLength === undefined ||
+            reviewLength === null ||
+            !reviewLength
+              ? "0"
+              : reviewLength}
+          </Result>
+          <Total>
+            /
+            {reviewLength === 0 ||
+            reviewLength === undefined ||
+            reviewLength === null ||
+            !reviewLength
+              ? "3"
+              : reviewLength}
+          </Total>
         </p>
       </CartCardDesc>
       <MyReviewContainer>
-        {reviewList?.map((reviewItem) => {
-          //** 캠페인 남은 시간 */
-          const endAt = reviewItem.endAt
-          const { remainingTime, isEnded } = calculateRemainingTime(endAt)
-          const thumbnailUrl = reviewItem.thumbnailUrl || dummyImage
-          const button = buttonConfig[reviewItem.status] || {
-            variant: "default",
-            text: "상품구매",
-          }
-
-          //** 스텝별 버튼 핸들러 */
-          const handleStepRouting = () => {
-            if (button.text === "지급완료") {
-              router.push(RoutePath.UserPointLog)
-            } else if (button.text === "미션중단") {
-              router.push(RoutePath.MyCampaign)
-            } else {
-              const detail = RoutePath.MyReivewDetail(`${reviewItem.reviewId}`)
-              router.push(detail)
+        {reviewList && reviewList.length > 0 ? (
+          reviewList.map((reviewItem) => {
+            //** 캠페인 남은 시간 */
+            const endAt = reviewItem.endAt
+            const { remainingTime, isEnded } = calculateRemainingTime(endAt)
+            const thumbnailUrl = reviewItem.thumbnailUrl || dummyImage
+            const button = buttonConfig[reviewItem.status] || {
+              variant: "default",
+              text: "상품구매",
             }
-          }
 
-          //** 구매전타이머 함수 */
-          const currTime = reviewItem.purchase_timeout
-            ? currentCalculateRemainingTime(
-                reviewItem.purchase_timeout,
-                reviewItem.joinAt,
-                currentTime
-              ).currTime
-            : null
-          //** 리뷰인증후 타이머 */
-          const currDayTime = reviewItem.review_timeout
-            ? currentCalculateRemainingTime(
-                reviewItem.review_timeout,
-                reviewItem.purchaseAt,
-                currentTime
-              ).currTime
-            : null
-          return (
-            <li key={reviewItem.reviewId}>
-              <ReviewCardHeader to={`/campaign/${reviewItem.campaignCode}`}>
-                <ReviewCardThumb>
-                  <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-                  {isEnded && <DimmedBackground />}
-                  <RemainingDays $isEnded={isEnded}>
-                    {isEnded ? "종료" : remainingTime}
-                  </RemainingDays>
-                  {isEnded && <EndedOverlay />}
-                </ReviewCardThumb>
-                <ReviewCardInfo>
-                  <CardDate>{formatDate(reviewItem.createdAt)}</CardDate>
-                  <CardTitle>{reviewItem.title}</CardTitle>
-                  <CardPoint>{reviewItem.reward.toLocaleString()}P</CardPoint>
-                </ReviewCardInfo>
-              </ReviewCardHeader>
-              <Button $variant={button.variant} onClick={handleStepRouting}>
-                {button.text} {currTime && <em>{currTime}</em>}
-                {currDayTime && <em>{currDayTime}</em>}
-              </Button>
-              <ProgressStep status={reviewItem.status} />
-            </li>
-          )
-        })}
+            //** 스텝별 버튼 핸들러 */
+            const handleStepRouting = () => {
+              if (button.text === "지급완료") {
+                router.push(RoutePath.UserPointLog)
+              } else if (button.text === "미션중단") {
+                router.push(RoutePath.MyCampaign)
+              } else {
+                const detail = RoutePath.MyReivewDetail(
+                  `${reviewItem.reviewId}`
+                )
+                router.push(detail)
+              }
+            }
+
+            //** 구매전타이머 함수 */
+            const currTime = reviewItem.purchase_timeout
+              ? currentCalculateRemainingTime(
+                  reviewItem.purchase_timeout,
+                  reviewItem.joinAt,
+                  currentTime
+                ).currTime
+              : null
+            //** 리뷰인증후 타이머 */
+            const currDayTime = reviewItem.review_timeout
+              ? currentCalculateRemainingTime(
+                  reviewItem.review_timeout,
+                  reviewItem.purchaseAt,
+                  currentTime
+                ).currTime
+              : null
+            return (
+              <li key={reviewItem.reviewId}>
+                <ReviewCardHeader to={`/campaign/${reviewItem.campaignCode}`}>
+                  <ReviewCardThumb>
+                    <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
+                    {/* {isEnded && <DimmedBackground />}
+                    <RemainingDays $isEnded={isEnded}>
+                      {isEnded ? "종료" : remainingTime}
+                    </RemainingDays>
+                    {isEnded && <EndedOverlay />} */}
+                  </ReviewCardThumb>
+                  <ReviewCardInfo>
+                    <CardDate>{formatDate(reviewItem.createdAt)}</CardDate>
+                    <CardTitle>{reviewItem.title}</CardTitle>
+                    <CardPoint>{reviewItem.reward.toLocaleString()}P</CardPoint>
+                  </ReviewCardInfo>
+                </ReviewCardHeader>
+                <ProgressStep status={reviewItem.status} />
+                <Button $variant={button.variant} onClick={handleStepRouting}>
+                  {button.text} {currTime && <em>{currTime}</em>}
+                  {currDayTime && <em>{currDayTime}</em>}
+                </Button>
+              </li>
+            )
+          })
+        ) : (
+          <NoCampaign />
+        )}
       </MyReviewContainer>
     </>
   )
@@ -194,7 +217,7 @@ const CartCardDesc = styled.div`
 `
 
 const Result = styled.span`
-  margin-left: 0.4rem;
+  margin-left: 0.5rem;
   color: var(--success-color);
 `
 
@@ -228,7 +251,6 @@ const MyReviewContainer = styled.ul`
 
 const ReviewCardHeader = styled(Link)`
   position: relative;
-  margin-bottom: 2rem;
   border-radius: 0.8rem;
   overflow: hidden;
   display: flex;

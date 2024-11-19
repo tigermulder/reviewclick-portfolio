@@ -62,9 +62,10 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
         `
       case "arrow":
         return css`
-          background-color: var(--n20-color);
-          color: var(--primary-color);
-          border: 0.1rem solid var(--n60-color);
+          background-color: var(--white);
+          color: var(--prim-L100);
+          border: 0.1rem solid var(--prim-L100);
+          border-radius: 50px;
           height: 3.8rem;
           font-size: var(--font-title-size);
           font-weight: var(--font-title-weight);
@@ -73,14 +74,14 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.6rem;
-          color: var(--n400-color);
+          gap: 0.2rem;
+          color: var(--prim-L100);
 
           &::after {
             content: "";
             background: url("${IconArrowGo}") no-repeat center / 100%;
-            width: 0.9rem;
-            height: 0.9rem;
+            width: 2rem;
+            height: 2rem;
           }
         `
       case "grey":

@@ -65,6 +65,7 @@ function App() {
     location.pathname === RoutePath.ContactAdd ||
     location.pathname === RoutePath.TermsOfService ||
     location.pathname === RoutePath.PrivacyPolicy ||
+    location.pathname === RoutePath.Introduce ||
     isCampaignDetail ||
     isReviewDetail ||
     isNoticeDetail ||
@@ -82,6 +83,8 @@ function App() {
     location.pathname === RoutePath.UserAccountSetting ||
     location.pathname === RoutePath.UserAccountDeletion ||
     location.pathname === RoutePath.ContactAdd ||
+    location.pathname === RoutePath.UserPointLog ||
+    location.pathname === RoutePath.Introduce ||
     isReviewDetail ||
     isNoticeDetail ||
     isNotificationDetail

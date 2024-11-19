@@ -32,6 +32,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           다시 확인해주세요
         </>
       )
+    } else if (this.state.error?.message.includes("401")) {
+      // 401 인증에러 메시지
+      return <>접근 권한이 없습니다.</>
     } else {
       // 500 에러 메시지
       return (
@@ -48,6 +51,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   renderErrorTitle(): string {
     if (this.state.error?.message.includes("404")) {
       return "페이지를 찾을 수 없어요"
+    } else if (this.state.error?.message.includes("401")) {
+      return "401 Unauthorized"
     } else {
       return "네트워크가 불안정해요"
     }
@@ -55,7 +60,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   // 에러 이미지 렌더링
   renderErrorImage(): string {
-    if (this.state.error?.message.includes("404")) {
+    if (
+      this.state.error?.message.includes("404") ||
+      this.state.error?.message.includes("401")
+    ) {
       return Error404Image
     } else {
       return Error500Image
@@ -64,7 +72,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   // 이미지 스타일 적용
   getImageStyle(): React.CSSProperties {
-    if (this.state.error?.message.includes("404")) {
+    if (
+      this.state.error?.message.includes("404") ||
+      this.state.error?.message.includes("401")
+    ) {
       return {
         width: "9rem",
         height: "auto",

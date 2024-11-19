@@ -1,24 +1,12 @@
 import { useState, useEffect } from "react"
-import { useParams, useNavigate, redirect } from "react-router-dom"
-import {
-  keepPreviousData,
-  useQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query"
-import { useRecoilValue } from "recoil"
+import { useParams, useNavigate } from "react-router-dom"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { getCampaignItem } from "services/campaign"
-import { formatDate, disCountRate } from "@/utils/util"
-import IconNoticeArrow from "assets/ico-notice-arrow.svg?react"
-import IconStar from "assets/ico-star.svg?url"
-import CampaignDetailBackButton from "@/components/CampaignDetailBackButton"
-import CampaignDetailShareButton from "@/components/CampaignDetailShareButton"
 import Button from "@/components/Button"
 import Modal from "@/components/Modal"
-import LikeButton from "@/components/LikeButton"
 import ShareModal from "@/components/ShareModal"
 import useToast from "@/hooks/useToast"
 import useScrollToTop from "@/hooks/useScrollToTop"
-import styled from "styled-components"
 import { RoutePath } from "@/types/route-path"
 import ContentTab from "@/components/Tab"
 import dummyImage from "assets/dummy-image.png"
@@ -27,7 +15,59 @@ import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
-import { spaceCodeMapping } from "@/types/type"
+import DetailHeader from "./CampaignDetail/DetailHeader"
+import CampaignDetails from "./CampaignDetail/CampaignDetails"
+import Notice from "./CampaignDetail/Notice"
+import FooterButtons from "./CampaignDetail/FooterButtons"
+import useScrollAnimation from "@/hooks/useScrollAnimation"
+import styled from "styled-components"
+import { CampaignItemResponse } from "@/types/api-types/campaign-type"
+
+const dummyCampaignDetailResponse: CampaignItemResponse = {
+  statusCode: 0,
+  campaign: {
+    campaignId: 121,
+    campaignCode: "wiEP7do1",
+    advertiserId: 8,
+    title: "파로돈탁스 클래식 검케어 잇몸치약 100g, 6개",
+    categoryId: 6,
+    NSproductNo: "10614568543",
+    price: 21900,
+    reward: 16000,
+    cost: 0,
+    snsUrl:
+      "https://brand.naver.com/parodontax/products/10614568543?NaPm=ct%3Dm32rbdn4%7Cci%3D6bbfcc0d12586d436c154e791d23c0bcb06fda7b%7Ctr%3Donepl%7Csn%3D11305476%7Cic%3DK07201%7Chk%3Dc03d82425bdd1829bf9af182fe31ea689f0e60be&inflow_ext=%7B%22bc%22%3A%221429%22%2C%22as%22%3A%2244007751%22%2C%22bs%22%3A%2229591200%22%2C%22ec%22%3A%22000944%22%2C%22tr%22%3A%22onepl%22%2C%22ic%22%3A%22K07201%22%2C%22tc%22%3A%22-%22%7D",
+    costPartner: 0,
+    reviewKeyword: null,
+    thumbnailUrl:
+      "https://shop-phinf.pstatic.net/20240719_94/1721365692826oPKTe_JPEG/2402896699366080_1456704706.jpg",
+    startAt: "2024-11-12T15:00:00.000Z",
+    endAt: "2024-12-12T15:00:00.000Z",
+    status: "open",
+    quota: 5,
+    joins: 5,
+    uploads: 0,
+    favorites: 0,
+    createdAt: "2024-11-04T08:30:41.000Z",
+    is_join: 1,
+    is_favorite: 0,
+  },
+  review_status: "giveup",
+  is_join_enable: 0,
+  is_join_cancellable: 0,
+  is_campaign_open: 0,
+  reviewId: 184,
+  user: {
+    uid: 157,
+    email: "song1234556@naver.com",
+    partnerUid: "wookie4",
+    spaceId: 4,
+    spaceName: "cashwalk",
+    partnerId: 7,
+  },
+  title: "",
+  reviews: [],
+}
 
 // React Query 키
 const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
@@ -38,8 +78,6 @@ const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
 const CampaignDetailPage = () => {
   const [selectedTab, setSelectedTab] = useState("info") // 기본선택
   const [isGuideOpen, setIsGuideOpen] = useState(false) // 가이드 표시 여부 상태
-  const [popUpOffsetY, setPopUpOffsetY] = useState(-62) // PopUp 위치 상태 추가
-  const [scale, setScale] = useState(1) // 배경 이미지 확대 상태
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState) // Recoil 모달
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false) // 신청 취소 모달 상태
   const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
@@ -48,9 +86,7 @@ const CampaignDetailPage = () => {
   const { campaignCode } = useParams()
   const { addToast } = useToast()
   const navigate = useNavigate()
-
-  // const spaceNameKey = sessionStorage.getItem("spaceName")
-  // const spaceName = spaceNameKey ? spaceCodeMapping[spaceNameKey] : "매체사없음"
+  const { popUpOffsetY, scale } = useScrollAnimation()
 
   useEffect(() => {
     if (campaignCode) {
@@ -72,38 +108,6 @@ const CampaignDetailPage = () => {
     setSelectedTab(tabValue)
   }
 
-  //** 애니메이션 효과 */
-  useEffect(() => {
-    const handleScroll = () => {
-      let scrollPosition = window.scrollY
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight
-      // 스크롤 위치를 0과 maxScroll 사이로 제한
-      const clampedScrollPosition = Math.max(
-        0,
-        Math.min(scrollPosition, maxScroll)
-      )
-      // PopUp 위치 업데이트
-      let newOffsetY = -62
-      if (clampedScrollPosition <= 100) {
-        newOffsetY = -62 + (clampedScrollPosition / 100) * 62
-      } else {
-        newOffsetY = 0
-      }
-      setPopUpOffsetY(newOffsetY)
-      // 배경 이미지 확대 효과 적용 (최상단)
-      if (scrollPosition < 0) {
-        const scaleFactor = 1 - scrollPosition / 400
-        setScale(scaleFactor)
-      } else {
-        setScale(1)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
   if (!campaignCode) {
     return <div>유효하지 않은 캠페인 ID입니다.</div>
   }
@@ -117,6 +121,7 @@ const CampaignDetailPage = () => {
       }),
     staleTime: 0, // 데이터 즉시 신선하지 않게 설정
     gcTime: 0, // 데이터 캐시 즉시 제거
+    retry: 0, // 재요청 횟수
     refetchOnMount: true, // 컴포넌트 마운트 시마다 데이터 재요청
     refetchOnWindowFocus: true, // 창 포커스 시 데이터 재요청
     refetchOnReconnect: true, // 네트워크 재연결 시 데이터 재요청
@@ -126,6 +131,7 @@ const CampaignDetailPage = () => {
   }
 
   const campaignDetail = data.campaign
+  const reviewStatus = data.review_status
 
   //** D-Day 계산 */
   const today = new Date()
@@ -143,10 +149,10 @@ const CampaignDetailPage = () => {
     }
   }
 
-  // 계정 인증 모달 확인 버튼 핸들러
+  //** 계정 인증 모달 확인 버튼 핸들러 */
   const handleAuthModalConfirm = () => {
     setIsAuthModalOpen(false)
-    navigate(RoutePath.Join) // 계정 인증 페이지로 이동
+    navigate(RoutePath.Join)
   }
   // ** 모달에서 캠페인 신청핸들러 [1-2] */
   const handleConfirm = async () => {
@@ -155,9 +161,10 @@ const CampaignDetailPage = () => {
         campaignId: campaignDetail.campaignId,
       }
       const response = await joinReview(data)
-
-      setIsApplySuccess(true)
-      setErrorCode(null)
+      if (response.statusCode === 0) {
+        setIsApplySuccess(true)
+        setErrorCode(null)
+      }
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
         const { statusCode, errorCode } = error.response.data || {}
@@ -199,6 +206,7 @@ const CampaignDetailPage = () => {
     setIsCancelModalOpen(true)
   }
 
+  //** 썸네일 */
   const thumbnailUrl = campaignDetail.thumbnailUrl || dummyImage
 
   //** 상품구경하러가기 버튼 핸들러 */
@@ -230,65 +238,6 @@ const CampaignDetailPage = () => {
     }
   }
 
-    //** 캠페인 신청조건 */
-    const renderButton = () => {
-      const campaignStatus = data.campaign.status;
-      const reviewStatus = data.review_status;
-      const quota = data.campaign.quota;
-      const joins = data.campaign.joins;
-      // 캠페인 상태에 따른 추가 조건
-      if (campaignStatus === 'closed' || campaignStatus === 'pause') {
-        return (
-          <Button $variant="disable">
-            캠페인 신청 불가
-          </Button>
-        );
-      }
-      // 기존 신청 가능 여부 확인
-      if (quota !== joins) {
-        if (reviewStatus === null) {
-          // 신청하지 않은 상태
-          return (
-            <Button onClick={handleApply} $variant="red">
-              캠페인 신청하기
-            </Button>
-          );
-        } else {
-          // 이미 신청한 상태
-          switch (reviewStatus) {
-            case 'join':
-              return (
-                <Button onClick={handleCancelOpen} $variant="grey">
-                  캠페인 신청 취소하기
-                </Button>
-              );
-            case 'purchase':
-            case 'confirm':
-            case 'upload':
-              return (
-                <Button $variant="disable">
-                  캠페인 참여중
-                </Button>
-              );
-            default:
-              return (
-                <Button $variant="disable">
-                  캠페인 신청 불가
-                </Button>
-              );
-          }
-        }
-      } else {
-        // 정원이 다 찬 경우 신청 불가 처리
-        return (
-          <Button $variant="disable">
-            캠페인 신청 불가
-          </Button>
-        );
-      }
-    };
-    
-
   return (
     <>
       {/* 캐시워크때문에 주석처리 */}
@@ -296,9 +245,7 @@ const CampaignDetailPage = () => {
       <CampaignDetailShareButton /> */}
       {/* 캐시워크때문에 주석처리 */}
       <ShareModal />
-      <DetailHeader>
-        <Background $imageUrl={thumbnailUrl} $scale={scale} />
-      </DetailHeader>
+      <DetailHeader imageUrl={thumbnailUrl} scale={scale} />
       <DetailBody>
         {/* PopUp을 DetailBody 내부에 조건부로 렌더링 */}
         <PopUp $offsetY={popUpOffsetY}>
@@ -309,26 +256,7 @@ const CampaignDetailPage = () => {
         <Title>{campaignDetail.title}</Title>
         <Divider />
         <CampaignContainer>
-          <CampaignDetails>
-            <li>
-              <span>신청 마감일</span>
-              <DetailInfo>{formatDate(campaignDetail.endAt)}</DetailInfo>
-            </li>
-            <li>
-              <span>미션완료기간</span>
-              <DetailInfo>구매 영수증 인증 후 7일 이내 필수</DetailInfo>
-            </li>
-            <li>
-              <span>상품가</span>
-              <DetailInfo>{campaignDetail.price.toLocaleString()}원</DetailInfo>
-            </li>
-            <li>
-              <span>적립포인트</span>
-              <RewardDetailInfo>
-                {campaignDetail.reward.toLocaleString()}P
-              </RewardDetailInfo>
-            </li>
-          </CampaignDetails>
+          <CampaignDetails campaign={campaignDetail} />
         </CampaignContainer>
         <Button $variant="arrow" onClick={handleViewProduct}>
           상품구경하기
@@ -358,58 +286,14 @@ const CampaignDetailPage = () => {
           )}
         </Main>
         {/* 유의사항 */}
-        <Details open>
-          <Summary>
-            <NoticeTitle>※ 유의사항 안내</NoticeTitle>
-            <IconPlaceholder>
-              <StyledIconNoticeArrow />
-            </IconPlaceholder>
-          </Summary>
-          <NoticeBox>
-            <li>
-              캠페인 상세 페이지 내 URL을 통하여 구매한 건에 대해서만
-              인정됩니다.
-            </li>
-            <li>
-              기간 내 영수증 인증 &gt; 리뷰 등록 및 인증이 완료된 후 포인트가
-              적립됩니다.
-            </li>
-            <li>
-              영수증 인증 완료 후 7일 이내 남은 미션을 완료해주시기 바랍니다.
-              (캠페인 미션 기간 준수)
-            </li>
-            <li>
-              정당한 사유 없이 캠페인 미션 기간 내 리뷰를 등록하지 않거나, 부정
-              행위가 적발 될 경우 미션 실패로 간주되며, 포인트는 지급되지
-              않습니다.
-            </li>
-            <li>
-              배송 관련 문의는 제품 상세 페이지 내 표시된 담당자 연락처로
-              연락하여 조율하시기 바랍니다.
-            </li>
-            <li>
-              배송 지연, 상품 파손 등과 같은 사유로 인하여 진행이 어려운 경우
-              고객센터로 문의바랍니다.
-            </li>
-            <li>
-              제공받은 제품 재판매 적발 시 회수는 물론, 법적 조치로 인한
-              불이익을 받을 수 있습니다.
-            </li>
-            <li>작성된 콘텐츠는 최소 6개월 유지해주셔야 합니다.</li>
-            <li>
-              공정거래위원회 지침에 따른 대가성 문구를 포함해주시기 바랍니다.
-            </li>
-          </NoticeBox>
-        </Details>
-        <FooterButtons>
-          {/* 찜하기 버튼 */}
-          {/* <LikeButton
-            categoryId={campaignDetail.categoryId}
-            campaignId={campaignDetail.campaignId}
-          /> */}
-          {/* 캠페인 신청하기 버튼 */}
-          {renderButton()}
-        </FooterButtons>
+        <Notice />
+
+        <FooterButtons
+          campaignDetail={campaignDetail}
+          reviewStatus={reviewStatus}
+          handleApply={handleApply}
+          handleCancelOpen={handleCancelOpen}
+        />
       </DetailBody>
       {/* 신청, 신청완료, 신청횟수 모달 */}
       <Modal
@@ -520,31 +404,6 @@ const Line = styled.div`
   }
 `
 
-const DetailHeader = styled.div`
-  position: relative;
-  height: 420px;
-`
-
-const Background = styled.div<{
-  $imageUrl: string
-  $scale: number
-}>`
-  position: fixed;
-  max-width: 768px;
-  min-width: 375px;
-  top: 0;
-  left: 0;
-  background-image: url(${(props) => props.$imageUrl});
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 100%;
-  height: 420px;
-  z-index: -10;
-  transform: scale(${(props) => props.$scale});
-  transition: transform 0.2s ease-out;
-`
-
 const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
   style: {
     transform: `translate(-50%, ${$offsetY}px)`,
@@ -553,15 +412,15 @@ const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
   width: calc(100% - 30px);
   position: absolute;
   left: 50%;
-  height: 3.2rem;
+  height: 3.8rem;
   display: flex;
   align-items: center;
   justify-content: start;
   background: rgba(255, 255, 255, 0.8);
-  border-radius: 2rem;
+  border-radius: 1.8rem;
   padding: 0 2rem;
   color: var(--purple);
-  font-size: var(--font-bodyL-size);
+  font-size: var(--font-h5-size);
   font-weight: var(--font-weight-bold);
   line-height: var(--font-bodyL-line-height);
   letter-spacing: var(--font-bodyL-letter-spacing);
@@ -613,95 +472,6 @@ const CampaignContainer = styled.div`
   padding: 0 0 0 20px;
 `
 
-const CampaignDetails = styled.ul`
-  position: relative;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -1.2rem;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 90%;
-    border-left: 0.2rem dashed var(--n40-color);
-  }
-
-  li {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.4rem;
-    font-size: var(--font-bodyL-size);
-    line-height: var(--font-bodyL-line-height);
-    letter-spacing: var(--font-bodyL-letter-spacing);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: -1.35rem;
-      transform: translateY(-50%);
-      width: 0.5rem;
-      height: 0.5rem;
-      background: var(--n80-color);
-      border-radius: 50%;
-    }
-    &:first-child {
-      margin-top: 0;
-      color: var(--primary-color);
-      &::before {
-        background: none;
-        background-image: url("${IconStar}");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        width: 1.3rem;
-        height: 1.6rem;
-        left: -1.6rem;
-      }
-      span:first-child,
-      span:last-child {
-        color: inherit;
-      }
-    }
-    &:not(:first-child) {
-      span:first-child {
-        color: var(--n300-color);
-      }
-      span:last-child {
-        color: var(--n300-color);
-      }
-    }
-    &:last-child {
-      span:first-child,
-      span:last-child {
-        font-weight: var(--font-bodyM-weight);
-      }
-    }
-
-    span {
-      &:first-child {
-        display: block;
-        width: 100px;
-        flex-shrink: 0;
-      }
-    }
-  }
-`
-
-const DetailInfo = styled.span`
-  color: var(--primary-color);
-`
-
-const RewardDetailInfo = styled.span`
-  color: var(--purple) !important;
-`
-
 const Main = styled.div`
   padding: 1.4rem 0;
 `
@@ -732,85 +502,4 @@ const ButtonContainer = styled.div`
   padding-top: 5rem;
   margin-top: -3rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 22.19%);
-`
-
-const Details = styled.details`
-  margin: 2rem 0;
-  cursor: pointer;
-`
-
-const Summary = styled.summary`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  &::-webkit-details-marker {
-    display: none;
-  }
-`
-
-const NoticeTitle = styled.p`
-  font-weight: bold;
-  font-size: 1.4rem;
-`
-
-const IconPlaceholder = styled.div`
-  width: 24px;
-  height: 24px;
-  transition: transform 0.1s ease;
-  transform: rotate(180deg);
-
-  details[open] & {
-    transform: rotate(0deg);
-  }
-`
-
-const StyledIconNoticeArrow = styled(IconNoticeArrow)`
-  width: 100%;
-  height: 100%;
-`
-
-const NoticeBox = styled.ul`
-  padding: 1.6rem 1.6rem 1.6rem 3.2rem;
-  margin-top: 1.5rem;
-  border-radius: 1rem;
-  background: var(--whitewood);
-  color: var(--gray-01);
-  font-size: 1.4rem;
-  line-height: 1.4;
-
-  li {
-    position: relative;
-  }
-  li:not(:last-child) {
-    margin-bottom: 0.2rem;
-  }
-  li:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 20%;
-    right: 100%;
-    transform: translateY(-50%);
-    margin-right: 1rem;
-    width: 0.3rem;
-    height: 0.3rem;
-    border-radius: 50%;
-    background: var(--gray-01);
-  }
-`
-
-const FooterButtons = styled.div`
-  max-width: 768px;
-  min-width: 375px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  position: fixed;
-  bottom: 5.9rem;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  z-index: 100;
-  padding: 1.5rem;
 `

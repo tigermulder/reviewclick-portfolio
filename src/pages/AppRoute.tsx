@@ -6,7 +6,7 @@ const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/AgreementPage"))
 const JoinVerifyPage = lazy(() => import("./views/AccountVerificationPage"))
 const MainPage = lazy(() => import("./views/MainPage"))
-const CampaignDetailPage = lazy(() => import("./views/CampaignDetailPage"))
+const CampaignDetailPage = lazy(() => import("./views/CampaignDetailLayout"))
 const CampaignCart = lazy(() => import("./views/CampaingnCart"))
 const FindIdPage = lazy(() => import("./views/FindIdPage"))
 const FindPasswordPage = lazy(() => import("./views/FindPasswordPage"))
@@ -37,12 +37,15 @@ const NotificationDetail = lazy(
   () => import("./views/AlertPageDetail/NotificationDetail")
 )
 const NoticeDetail = lazy(() => import("./views/AlertPageDetail/NoticeDetail"))
+const RevuIntroducePage = lazy(() => import("./views/RevuIntroducePage"))
 
 export const AppRoute = () => {
   return (
     <ReactRouterRoutes>
       {/* Layout을 루트 경로로 지정하고, Outlet으로 자식 라우트를 렌더링 */}
       <Route element={<Layout />}>
+        {/* Introduce 페이지 */}
+        <Route path={RoutePath.Introduce} element={<RevuIntroducePage />} />
         {/* main 페이지 */}
         {/* <Route path={RoutePath.Home} element={<MainPage />} /> */}
         {/* 캠페인상세 페이지 */}

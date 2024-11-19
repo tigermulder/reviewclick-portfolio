@@ -6,26 +6,10 @@ import IconCopy from "assets/ico-copy.svg?react"
 import styled, { keyframes } from "styled-components"
 
 const toastIcons: Record<Toast["type"], React.ReactNode> = {
-  check: (
-    <span role="img" aria-label="check">
-      ✅
-    </span>
-  ),
-  uncheck: (
-    <span role="img" aria-label="uncheck">
-      ☑️
-    </span>
-  ),
-  info: (
-    <span role="img" aria-label="info">
-      ℹ️
-    </span>
-  ),
-  warning: (
-    <span role="img" aria-label="warning">
-      ❗
-    </span>
-  ),
+  check: <span role="img" aria-label="check"></span>,
+  uncheck: <span role="img" aria-label="uncheck"></span>,
+  info: <span role="img" aria-label="info"></span>,
+  warning: <span role="img" aria-label="warning"></span>,
   copy: <IconCopy />,
 }
 

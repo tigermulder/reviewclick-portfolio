@@ -1,14 +1,12 @@
-import { ReactNode } from "react"
-
 //** 캠페인리스트 요청 type */
 export interface CampaignListRequest {
-  pageSize?: number // optional
-  pageIndex?: number // optional
-  order?: string // optional, e.g., recent, joinDesc
-  category?: string // optional
-  keyword?: string // optional
-  startAt?: string // optional, yyyyMMdd
-  endAt?: string // optional, yyyyMMdd
+  pageSize?: number
+  pageIndex?: number
+  order?: string
+  category?: string
+  keyword?: string
+  startAt?: string
+  endAt?: string
 }
 export interface CampaignListResponse {
   statusCode: number
@@ -18,9 +16,9 @@ export interface CampaignListResponse {
   pageSize: number
   pageIndex: number
 }
-// 캠페인 개체의 타입
 export interface Campaign {
   campaignId: number
+  campaignCode: string
   advertiserId: number
   title: string
   categoryId: number
@@ -43,14 +41,20 @@ export interface Campaign {
   is_join: number
   is_favorite: number
 }
+export interface User {
+  uid: number
+  email: string
+  partnerUid: string
+  spaceId: number
+  spaceName: string
+  partnerId: number
+}
 
 //** 캠페인 상세 정보 요청 */
 export interface CampaignItemRequest {
   campaignCode: string
 }
 export interface CampaignItemResponse {
-  thumbnailUrl: string
-  description: string
   title: string
   statusCode: number
   campaign: Campaign
@@ -60,9 +64,9 @@ export interface CampaignItemResponse {
   is_join_cancellable: number
   is_campaign_open: number
   reviewId?: number
+  user: User
 }
 
 export interface Review {
-  // 리뷰 객체가 어떻게 구성되어 있는지 모르기 때문에 임시로 빈 객체로 정의
   [key: string]: any
 }

@@ -22,7 +22,7 @@ const MypageServicePage = () => {
     <>
       <ReuseHeader
         title="서비스 이용가이드"
-        onBack={() => navigate(RoutePath.UserProfile)}
+        onBack={() => navigate(RoutePath.UserProfile, { replace: true })}
       />
       <GuideTop>
         <GuideImage src={guideImg} alt="서비스 이용가이드" />

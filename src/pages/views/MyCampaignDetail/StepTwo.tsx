@@ -81,8 +81,9 @@ const StepTwo = ({
       if (response.statusCode === 0) {
         // 부모 컴포넌트 상태 업데이트
         // 리뷰 텍스트를 클립보드에 복사
+        const textToCopy = `<협찬>\n${reviewText}`
         navigator.clipboard
-          .writeText(reviewText)
+          .writeText(textToCopy)
           .then(() => {
             addToast("내용이 복사됐어요.", "copy", 1000, "copy")
           })
@@ -204,10 +205,10 @@ const StepTwo = ({
           <CampaignStatusCard>
             <CampaignStatusCardThumb>
               <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-              {isEnded && <DimmedBackground />}
+              {/* {isEnded && <DimmedBackground />}
               <RemainingDays $isEnded={isEnded}>
                 {isEnded ? "종료" : remainingTime}
-              </RemainingDays>
+              </RemainingDays> */}
             </CampaignStatusCardThumb>
             <StepItemInfoTextBox>
               <CardDate>{formatDate(creatTime)}</CardDate>
@@ -252,8 +253,8 @@ const StepTwo = ({
                   <li>
                     <p>
                       경제적 이해관계(대가성 여부)를 명시하기 위해 본문 첫 줄에
-                      자동으로 <em> &lt;협찬&gt;</em> 문구가 입력되며,
-                      “리뷰어”는 이에 동의합니다.
+                      자동으로 <em>&lt;협찬&gt;</em> 문구가 입력되며, “리뷰어”는
+                      이에 동의합니다.
                     </p>
                   </li>
                   <li>
@@ -290,7 +291,7 @@ const StepTwo = ({
             disabled={reviewText.trim().length < minChars}
             onClick={handleReviewOcrSave}
           >
-            리뷰 검수
+            리뷰 AI검수
           </Button>
         </BottomButtonContainer>
       </CartTest>

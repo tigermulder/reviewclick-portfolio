@@ -141,6 +141,7 @@ const Links = styled.ul`
       width: 2.4rem;
       height: 2.4rem;
       background: url("${IconArrowRight}") no-repeat center / 100%;
+      pointer-events: none;
     }
 
     &.service a {

@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
     <>
       <ReuseHeader
         title="개인정보처리방침"
-        onBack={() => navigate(RoutePath.UserProfile)}
+        onBack={() => navigate(RoutePath.UserProfile, { replace: true })}
       />
       <TextBox>
         <Section>
