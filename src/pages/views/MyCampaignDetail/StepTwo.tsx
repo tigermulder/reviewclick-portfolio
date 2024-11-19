@@ -89,7 +89,7 @@ const StepTwo = ({
           .catch((err) => {
             console.error("copy되지 않았습니다.: ", err)
           })
-        setValidatedReviewText(reviewText)
+        setValidatedReviewText(textToCopy)
         setModalTitle("📝 거의 다 왔어요!")
         setModalContent(
           <>

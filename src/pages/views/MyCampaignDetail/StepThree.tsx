@@ -144,9 +144,59 @@ const StepThree = ({
 
   // 새 창으로 이동하는 핸들러
   const handleNavigate = () => {
-    const url =
-      "https://new-m.pay.naver.com/historybenefit/paymenthistory?page=1" // 이동하려는 URL
-    window.open(url, "_blank")
+    if (textRef.current) {
+      const text = textRef.current.textContent || ""
+
+      if (navigator.clipboard && window.isSecureContext) {
+        // 클립보드 API 사용
+        navigator.clipboard
+          .writeText(text)
+          .then(
+            () => {
+              addToast("리뷰 내용이 복사되었어요.", "copy", 1000, "copy")
+            },
+            (err) => {
+              console.error("복사 실패:", err)
+              addToast("복사에 실패했습니다.", "copy", 1000, "copy")
+            }
+          )
+          .finally(() => {
+            // 링크로 이동
+            const url =
+              "https://new-m.pay.naver.com/historybenefit/paymenthistory?page=1"
+            window.open(url, "_blank")
+          })
+      } else {
+        // 텍스트 영역을 사용한 복사
+        const textArea = document.createElement("textarea")
+        textArea.value = text
+        textArea.style.position = "fixed" // 화면 밖에 위치하도록 설정
+        textArea.style.left = "-999999px"
+        textArea.style.top = "-999999px"
+        document.body.appendChild(textArea)
+        textArea.focus()
+        textArea.select()
+
+        try {
+          document.execCommand("copy")
+          addToast("리뷰 내용이 복사되었어요.", "copy", 1000, "copy")
+        } catch (err) {
+          console.error("복사 실패:", err)
+          addToast("복사에 실패했습니다.", "copy", 1000, "copy")
+        } finally {
+          document.body.removeChild(textArea)
+          const url =
+            "https://new-m.pay.naver.com/historybenefit/paymenthistory?page=1"
+          window.open(url, "_blank")
+        }
+      }
+    } else {
+      addToast("복사할 내용이 없습니다.", "copy", 1000, "copy")
+      // 텍스트가 없어도 링크로 이동
+      const url =
+        "https://new-m.pay.naver.com/historybenefit/paymenthistory?page=1"
+      window.open(url, "_blank")
+    }
   }
 
   return (
@@ -198,8 +248,8 @@ const StepThree = ({
             </StepItemReviewBox>
           </StepItemReviewContainer>
           <StepItemReviewText>
-            ‘등록하러가기’ 클릭 시 검수 완료된 리뷰 내용과 경제적
-            이해관계를명시하는 문구가 자동 입력 및 복사되며, ‘리뷰어’는 이에
+            ‘등록하러가기’ 클릭 시 검수 완료된 리뷰와 경제적 이해관계를 명시하는
+            &lt;협찬&gt; 문구가 자동 입력 및 복사되며, ‘리뷰어’는 이에
             동의합니다.
           </StepItemReviewText>
           <Button $variant="pink" onClick={handleNavigate}>
