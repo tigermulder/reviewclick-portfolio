@@ -79,9 +79,8 @@ const StepTwo = ({
       // 로딩 모달 닫기
       setLoadingModalOpen(false)
       if (response.statusCode === 0) {
-        // 부모 컴포넌트 상태 업데이트
         // 리뷰 텍스트를 클립보드에 복사
-        const textToCopy = `<협찬>\n${reviewText}`
+        const textToCopy = `<협찬> ${reviewText}`
         navigator.clipboard
           .writeText(textToCopy)
           .then(() => {

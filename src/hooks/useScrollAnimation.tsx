@@ -13,9 +13,9 @@ const useScrollAnimation = () => {
         0,
         Math.min(scrollPosition, maxScroll)
       )
-      let newOffsetY = -62
+      let newOffsetY = -64
       if (clampedScrollPosition <= 100) {
-        newOffsetY = -62 + (clampedScrollPosition / 100) * 62
+        newOffsetY = -64 + (clampedScrollPosition / 100) * 64
       } else {
         newOffsetY = 0
       }

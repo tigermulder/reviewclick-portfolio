@@ -32,10 +32,7 @@ const MyPointPage = () => {
 
   return (
     <MyPointContainer>
-      <ReuseHeader
-        title="포인트 적립 내역"
-        onBack={() => navigate(RoutePath.UserProfile, { replace: true })}
-      />
+      <ReuseHeader title="포인트 적립 내역" onBack={() => navigate(-1)} />
       <MyPointListContainer>
         {rewardList && rewardList.length > 0 ? (
           rewardList.map((rewardItem) => {
