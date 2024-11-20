@@ -3,7 +3,7 @@ export const statusToStepMap: Record<string, number> = {
   join: 1,
   purchase: 2,
   confirm: 3,
-  upload: 3,
+  upload: 4,
   reward: 4,
   giveup: 4,
   timeout: 4,
@@ -11,6 +11,7 @@ export const statusToStepMap: Record<string, number> = {
 
 export interface ProgressStepProps {
   status: string
+  uploadComplete: number
 }
 
 export interface StepBoxProps {

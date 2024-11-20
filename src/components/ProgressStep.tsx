@@ -9,18 +9,36 @@ import StepDone from "assets/ico_step_done.svg?url"
 import StepSuccess from "assets/ico_step_success.svg"
 import StepFailed from "assets/ico_step_failed.svg"
 
-const ProgressStep = ({ status }: ProgressStepProps) => {
-  const isMissionFailed = status === "giveup" || status === "timeout"
-  const isReviewFailed = status === "confirm" || status === "upload"
-  const fourthStepName = isMissionFailed ? "미션중단" : "지급완료"
-  const threeStepName = isReviewFailed ? "리뷰등록" : "리뷰등록"
-  const fourthStepIcon = isMissionFailed ? StepFailed : StepSuccess
+const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
+  // 수정된 부분 시작
+  let adjustedStatus = status
+  let isMissionFailed = false
+  let isReviewFailed = false
+  let fourthStepName = "지급완료"
+  let threeStepName = "리뷰등록"
+  let fourthStepIcon = StepSuccess
 
+  if (status === "upload") {
+    if (uploadComplete === 1) {
+      adjustedStatus = "reward"
+    } else {
+      adjustedStatus = "timeout"
+      fourthStepName = "지급대기"
+      fourthStepIcon = StepFailed
+      isMissionFailed = false
+    }
+  } else if (status === "giveup" || status === "timeout") {
+    isMissionFailed = true
+    fourthStepName = "미션중단"
+    fourthStepIcon = StepFailed
+  } else if (status === "confirm") {
+    isReviewFailed = true
+  }
   const steps = [
     { name: "상품구매", key: "join" },
     { name: "리뷰검수", key: "purchase" },
     { name: threeStepName, key: "confirm" },
-    { name: fourthStepName, key: "reward" }, // 4단계는 조건부
+    { name: fourthStepName, key: "reward" },
   ]
 
   const currentStep = statusToStepMap[status] || 1

@@ -182,7 +182,10 @@ const MyCampaignPage = () => {
                     <CardPoint>{reviewItem.reward.toLocaleString()}P</CardPoint>
                   </ReviewCardInfo>
                 </ReviewCardHeader>
-                <ProgressStep status={reviewItem.status} />
+                <ProgressStep
+                  status={reviewItem.status}
+                  uploadComplete={reviewItem.uploadComplete}
+                />
                 <Button $variant={button.variant} onClick={handleStepRouting}>
                   {button.text} {currTime && <em>{currTime}</em>}
                   {currDayTime && <em>{currDayTime}</em>}
