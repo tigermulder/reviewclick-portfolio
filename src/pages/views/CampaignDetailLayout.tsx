@@ -203,13 +203,12 @@ const CampaignDetailPage = () => {
         </PopUp>
         <Dday>{`D-${dDay}`}</Dday>
         <Title>{campaignDetail.title}</Title>
-        <Divider />
         <CampaignContainer>
-          <CampaignDetails campaign={campaignDetail} />
+          <CampaignDetails
+            campaign={campaignDetail}
+            handleViewProduct={handleViewProduct}
+          />
         </CampaignContainer>
-        <Button $variant="arrow" onClick={handleViewProduct}>
-          상품구경하기
-        </Button>
         <Line />
         <ContentTab
           tabs={singleTab}
@@ -388,17 +387,10 @@ const Dday = styled.span`
 `
 
 const Title = styled.p`
-  margin: 1.1rem 0;
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-h3-weight);
-  line-height: var(--font-h3-line-height);
-  letter-spacing: var(--font-h3-letter-spacing);
-`
-
-const Divider = styled.hr`
-  background: var(--n40-color);
-  height: 1px;
-  border: 0;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: calc(1.6rem * (-0.3 / 100));
 `
 
 const CampaignContainer = styled.div`
