@@ -190,14 +190,14 @@ const MyCampaignPage = () => {
                   uploadComplete={reviewItem.uploadComplete}
                 />
                 <Button $variant={button.variant} onClick={handleStepRouting}>
-                  {button.text}{" "}
+                  {button.text}
                   {button.text === "지급대기" ? (
+                    ""
+                  ) : (
                     <>
                       {currTime && <em>{currTime}</em>}
                       {currDayTime && <em>{currDayTime}</em>}
                     </>
-                  ) : (
-                    ""
                   )}
                 </Button>
               </li>
