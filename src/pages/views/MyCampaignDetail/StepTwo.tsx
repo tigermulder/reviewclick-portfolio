@@ -317,38 +317,6 @@ const CampaignStatusCardThumb = styled.div`
   }
 `
 
-const DimmedBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-`
-
-interface RemainingDaysProps {
-  $isEnded: boolean
-}
-const RemainingDays = styled.span.attrs<RemainingDaysProps>((props) => ({
-  "aria-label": props.$isEnded ? "캠페인이 종료되었습니다" : "캠페인 남은 일수",
-  "data-is-ended": props.$isEnded,
-}))<RemainingDaysProps>`
-  position: absolute;
-  bottom: ${({ $isEnded }) => ($isEnded ? "50%" : "0.7rem")};
-  left: ${({ $isEnded }) => ($isEnded ? "50%" : "0")};
-  transform: ${({ $isEnded }) => ($isEnded ? "translate(-50%, 50%)" : "none")};
-  background-color: black;
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.2rem;
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  line-height: var(--font-caption-line-height);
-  letter-spacing: var(--font-caption-letter-spacing);
-  z-index: 2;
-`
-
 const StepItemInfoTextBox = styled.div`
   margin-left: 1.4rem;
   flex-grow: 1;
