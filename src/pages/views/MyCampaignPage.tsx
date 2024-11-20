@@ -60,9 +60,12 @@ const MyCampaignPage = () => {
     staleTime: 0,
     retry: 1, // 재요청 횟수
   })
-  // ** 현재 신청한캠페인 갯수 */
+  // ** 현재 신청한캠페인 */
   const reviewLength = data?.totalItems
   const reviewList = data?.list
+  const reviewJoin = data?.n_review_join
+  const reviewMax = data?.n_max_review_join
+
   // ** 나의리뷰리스트 데이터를 Recoil 상태로 업데이트  */
   useEffect(() => {
     if (data?.list) {
@@ -111,21 +114,21 @@ const MyCampaignPage = () => {
         <p>
           신청한 캠페인
           <Result>
-            {reviewLength === 0 ||
-            reviewLength === undefined ||
-            reviewLength === null ||
-            !reviewLength
+            {reviewJoin === 0 ||
+            reviewJoin === undefined ||
+            reviewJoin === null ||
+            !reviewJoin
               ? "0"
-              : reviewLength}
+              : reviewJoin}
           </Result>
           <Total>
             /
-            {reviewLength === 0 ||
-            reviewLength === undefined ||
-            reviewLength === null ||
-            !reviewLength
+            {reviewMax === 0 ||
+            reviewMax === undefined ||
+            reviewMax === null ||
+            !reviewMax
               ? "3"
-              : reviewLength}
+              : reviewMax}
           </Total>
         </p>
       </CartCardDesc>

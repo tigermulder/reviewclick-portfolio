@@ -10,6 +10,8 @@ export interface ReviewListResponse {
   totalPages: number
   pageSize: number
   pageIndex: number
+  n_review_join: number
+  n_max_review_join: number
 }
 
 export interface ReviewItem {

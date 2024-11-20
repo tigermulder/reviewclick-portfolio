@@ -26,5 +26,6 @@ export const getCampaignItem = async (
     "/campaign/item",
     data
   )
+  console.log(response)
   return response.data
 }

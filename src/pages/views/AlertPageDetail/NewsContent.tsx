@@ -28,7 +28,7 @@ const NewsContent = () => {
     staleTime: 0,
   })
   const notificationList = data?.list
-  console.log(notificationList)
+
   return (
     <NoticeContainer>
       {notificationList?.map((notificationItem) => {
