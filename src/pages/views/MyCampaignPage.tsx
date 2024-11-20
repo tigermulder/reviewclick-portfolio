@@ -15,8 +15,8 @@ import useScrollToTop from "@/hooks/useScrollToTop"
 import { RoutePath } from "@/types/route-path"
 import SinglePageHeader from "@/components/SinglePageHeader"
 import { currentCalculateRemainingTime } from "@/utils/util"
-import styled from "styled-components"
 import NoCampaign from "./MyCampaignDetail/NoCampaign"
+import styled from "styled-components"
 
 const MyCampaignPage = () => {
   const [selectedChip, setSelectedChip] = useState("전체")
@@ -92,7 +92,7 @@ const MyCampaignPage = () => {
   // currTime이 '00시 00분 00초'에 도달하면 refetch 트리거
   useEffect(() => {
     const anyTimeZero = currTimes.some(
-      (item) => item.currTime === "(T-00:00:00)"
+      (item) => item.currTime === "(-00:00:00)"
     )
     if (anyTimeZero) {
       refetch()

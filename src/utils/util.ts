@@ -177,7 +177,7 @@ export const currentCalculateRemainingTime = (
     const seconds = Math.floor(
       (diff % millisecondsInAMinute) / millisecondsInASecond
     )
-    const currTime = `(T-${pad(hours)}:${pad(minutes)}:${pad(seconds)})`
+    const currTime = `(-${pad(hours)}:${pad(minutes)}:${pad(seconds)})`
     return { currTime }
   }
 }

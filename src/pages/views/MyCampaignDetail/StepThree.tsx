@@ -63,7 +63,7 @@ const StepThree = ({
         // 로딩 모달 닫기
         setLoadingModalOpen(false)
         if (response.statusCode === 0) {
-          setModalTitle("👏 축하드려요!")
+          setModalTitle("리뷰 확인 중")
           setModalContent(
             <>
               <p>
@@ -86,8 +86,11 @@ const StepThree = ({
         setModalContent(
           <>
             <p>
-              리뷰 확인에 실패했어요. <br />
-              이미지 확인 후 다시 시도해주세요.
+              등록한 실리뷰를 확인할 수 없어요.
+              <br />
+              검수 완료된 리뷰의 내용과
+              <br />
+              동일하게 리뷰를 등록한 후 다시 요청해주세요.
             </p>
           </>
         )
