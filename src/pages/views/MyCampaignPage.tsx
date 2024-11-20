@@ -144,7 +144,10 @@ const MyCampaignPage = () => {
             const handleStepRouting = () => {
               if (button.text === "지급완료") {
                 router.push(RoutePath.UserPointLog)
-              } else if (button.text === "미션중단") {
+              } else if (
+                button.text === "미션중단" ||
+                button.text === "지급대기"
+              ) {
                 router.push(RoutePath.MyCampaign)
               } else {
                 const detail = RoutePath.MyReivewDetail(
@@ -187,8 +190,15 @@ const MyCampaignPage = () => {
                   uploadComplete={reviewItem.uploadComplete}
                 />
                 <Button $variant={button.variant} onClick={handleStepRouting}>
-                  {button.text} {currTime && <em>{currTime}</em>}
-                  {currDayTime && <em>{currDayTime}</em>}
+                  {button.text}{" "}
+                  {button.text === "지급대기" ? (
+                    <>
+                      {currTime && <em>{currTime}</em>}
+                      {currDayTime && <em>{currDayTime}</em>}
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </Button>
               </li>
             )
