@@ -375,7 +375,6 @@ const DetailBody = styled.div`
   position: relative;
   top: -9.9rem;
   padding: 1.9rem 1.5rem 6.6rem;
-  border-radius: 3rem 3rem 0 0;
   background: #fff;
 `
 

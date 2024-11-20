@@ -47,6 +47,7 @@ const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
   font-size: 1.8rem;
   line-height: var(--base-line-height);
   color: var(--n200-color);
+  font-weight: var(--font-weight-bold);
   white-space: nowrap;
 
   &.selected {

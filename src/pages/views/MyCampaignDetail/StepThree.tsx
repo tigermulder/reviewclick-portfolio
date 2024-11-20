@@ -66,9 +66,11 @@ const StepThree = ({
           setModalContent(
             <>
               <p>
-                미션 성공으로 포인트가 지급됐어요. <br />
-                포인트 지급 정보는 ‘내정보’ &gt; <br />
-                ‘포인트 적립내역’에서 확인할 수 있어요.
+                리뷰 인증 요청이 접수되었습니다. <br />
+                인증이 정상적으로 완료되면 <br />
+                3시간 이내 리워드가 지급됩니다. <br />
+                실패할 경우 <br />
+                다시 리뷰 인증을 진행해 주세요.
               </p>
             </>
           )
@@ -77,20 +79,6 @@ const StepThree = ({
           setResultModalOpen(true)
           // 로컬스토리지 복사텍스트 삭제
           localStorage.removeItem(LOCAL_STORAGE_KEY)
-        } else {
-          setModalTitle("⛔ 앗, 잠깐!")
-          setModalContent(
-            <>
-              <p>
-                리뷰 확인에 실패했어요. <br />
-                이미지 확인 후 다시 시도해주세요.
-              </p>
-            </>
-          )
-          setModalConfirmText("다시시도")
-          setModalCancelText("나의 캠페인 내역")
-          setResultModalOpen(true)
-          setShowLinkRouter(true)
         }
       } catch (error) {
         setModalTitle("⛔ 앗, 잠깐!")
@@ -217,7 +205,7 @@ const StepThree = ({
             <p>
               등록한 실리뷰를 확인하고 있어요.
               <br />
-              문제가 없으면 포인트가 바로 지급돼요.
+              문제가 없으면 포인트가 바로 지급됩니다.
             </p>
           </>
         }
