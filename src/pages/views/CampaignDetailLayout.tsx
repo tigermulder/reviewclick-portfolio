@@ -203,12 +203,10 @@ const CampaignDetailPage = () => {
         </PopUp>
         <Dday>{`D-${dDay}`}</Dday>
         <Title>{campaignDetail.title}</Title>
-        <CampaignContainer>
-          <CampaignDetails
-            campaign={campaignDetail}
-            handleViewProduct={handleViewProduct}
-          />
-        </CampaignContainer>
+        <CampaignDetails
+          campaign={campaignDetail}
+          handleViewProduct={handleViewProduct}
+        />
         <Line />
         <ContentTab
           tabs={singleTab}
@@ -391,15 +389,6 @@ const Title = styled.p`
   font-size: 1.6rem;
   font-weight: var(--font-weight-medium);
   letter-spacing: calc(1.6rem * (-0.3 / 100));
-`
-
-const CampaignContainer = styled.div`
-  width: 100%;
-  background-color: #fff;
-  border-radius: 10px;
-  height: 80px;
-  margin: 30px 0 28px 5px;
-  padding: 0 0 0 20px;
 `
 
 const Main = styled.div`
