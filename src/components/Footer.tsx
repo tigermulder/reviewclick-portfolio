@@ -74,6 +74,10 @@ const CompanyInfo = styled.div`
   font-weight: 500;
   line-height: 16px;
   word-wrap: break-word;
+
+  a {
+    width: 100%;
+  }
 `
 
 const EmailSpan = styled.span`
