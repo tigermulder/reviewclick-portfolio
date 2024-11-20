@@ -131,8 +131,8 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           font-weight: var(--font-bodyM-weight);
           line-height: var(--font-bodyM-line-height);
           letter-spacing: var(--font-bodyM-letter-spacing);
-          background: var(--n20-color);
           color: var(--success-color);
+          border: 1px solid var(--success-color);
           display: flex;
           align-items: center;
           justify-content: center;
