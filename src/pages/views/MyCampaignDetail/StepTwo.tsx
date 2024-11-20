@@ -498,6 +498,7 @@ const ReviewTextBox = styled.div`
     display: block;
     width: 100%;
     height: 100%;
+    resize: none;
     outline: 0;
     border: none;
     &::placeholder {
