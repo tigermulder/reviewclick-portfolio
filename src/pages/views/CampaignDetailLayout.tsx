@@ -411,7 +411,7 @@ const CampaignContainer = styled.div`
 `
 
 const Main = styled.div`
-  padding: 1.4rem 0;
+  padding: 1.4rem 0 0;
 `
 
 const ImagePlaceholder = styled.div`
@@ -423,7 +423,7 @@ const ImagePlaceholder = styled.div`
 `
 
 const GuideDetail = styled.div`
-  height: 1350px;
+  height: 1382px;
   background-image: url("${detailGuideImage}");
   background-repeat: no-repeat;
   background-position: center;
