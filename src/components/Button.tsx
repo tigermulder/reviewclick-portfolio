@@ -65,7 +65,6 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           background-color: var(--white);
           color: var(--prim-L100);
           border: 0.1rem solid var(--prim-L100);
-          border-radius: 50px;
           height: 3.8rem;
           font-size: var(--font-title-size);
           font-weight: var(--font-title-weight);
