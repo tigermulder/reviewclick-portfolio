@@ -107,7 +107,7 @@ const DetailsList = styled.ul`
     content: "";
     position: absolute;
     top: 50%;
-    left: -1.77rem;
+    left: -1.6rem;
     transform: translateY(-50%);
     height: 50%;
     width: 0.1rem;
@@ -128,7 +128,7 @@ const DetailsList = styled.ul`
       content: "";
       position: absolute;
       top: 50%;
-      left: -1.35rem;
+      left: -1.76rem;
       transform: translateY(-50%);
       width: 0.5rem;
       height: 0.5rem;
