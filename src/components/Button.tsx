@@ -160,7 +160,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           font-weight: var(--font-bodyM-weight);
           line-height: var(--font-bodyM-line-height);
           letter-spacing: var(--font-bodyM-letter-spacing);
-          background: var(--n20-color);
+          border: 1px solid var(--n20-color);
           color: var(--primary-color);
           display: flex;
           align-items: center;
