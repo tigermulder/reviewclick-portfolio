@@ -219,11 +219,8 @@ const CampaignDetailPage = () => {
         <Main>
           <div>
             <ImagePlaceholder />
-            {/* GuideCont를 조건부로 렌더링 */}
-
-            <GuideCont>
-              <GuideDetail />
-            </GuideCont>
+            {/* GuideDetail 이용가이드 */}
+            <GuideDetail />
           </div>
         </Main>
         {/* 유의사항 */}
@@ -431,10 +428,4 @@ const GuideDetail = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-`
-
-const GuideCont = styled.div`
-  margin-top: 2.2rem;
-  border-top: 0.1rem solid var(--n80-color);
-  padding: 3rem 0 1.8rem;
 `
