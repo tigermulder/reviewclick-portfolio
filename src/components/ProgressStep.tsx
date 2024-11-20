@@ -37,7 +37,6 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     { name: "상품구매", key: "join" },
     { name: "리뷰검수", key: "purchase" },
     { name: threeStepName, key: "confirm" },
-    { name: "지급대기", key: "upload" },
     { name: fourthStepName, key: "reward" },
   ]
 
