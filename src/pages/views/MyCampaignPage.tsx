@@ -17,6 +17,7 @@ import SinglePageHeader from "@/components/SinglePageHeader"
 import { currentCalculateRemainingTime } from "@/utils/util"
 import NoCampaign from "./MyCampaignDetail/NoCampaign"
 import styled from "styled-components"
+import { ButtonProps } from "@/types/component-types/button-type"
 
 const MyCampaignPage = () => {
   const [selectedChip, setSelectedChip] = useState("전체")
@@ -135,10 +136,13 @@ const MyCampaignPage = () => {
           reviewList.map((reviewItem) => {
             //** 캠페인 남은 시간 */
             const thumbnailUrl = reviewItem.thumbnailUrl || dummyImage
-            const button = buttonConfig[reviewItem.status] || {
-              variant: "default",
-              text: "상품구매",
-            }
+            const button: { variant: ButtonProps["$variant"]; text: string } =
+              reviewItem.uploadComplete === 1
+                ? { variant: "success", text: "지급완료" }
+                : buttonConfig[reviewItem.status] || {
+                    variant: "default",
+                    text: "상품구매",
+                  }
 
             //** 스텝별 버튼 핸들러 */
             const handleStepRouting = () => {
