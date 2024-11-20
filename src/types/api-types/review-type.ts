@@ -52,9 +52,9 @@ export interface ReviewItemResponse {
   review: {
     reviewId: number
     status: string
-    reviewText: string // 리뷰 내용
-    createdAt: string // ISO 형식 날짜
-    updatedAt: string // ISO 형식 날짜 (리뷰가 업데이트된 시간)
+    reviewText: string
+    createdAt: string
+    updatedAt: string
   }
   review_detail: {
     reviewId: number
@@ -62,7 +62,7 @@ export interface ReviewItemResponse {
     reviewText: string | null
     signature: string | null
     positiveIndex: number | null
-    joinAt: string // ISO 형식 날짜
+    joinAt: string
     reviewRating: number | null
     purchaseAt: string | null
     confirmAt: string | null

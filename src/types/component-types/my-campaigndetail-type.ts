@@ -71,7 +71,7 @@ export interface StepTwoProps {
 // ** 스텝 3번 */
 export interface StepThreeProps {
   reviewIdKey: string | undefined
-  validatedReviewText: string
+  validatedReviewText: string | undefined | null
   goToNextStep: () => void
   refetchData: () => void
   LOCAL_STORAGE_KEY: string

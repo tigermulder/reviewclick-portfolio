@@ -176,7 +176,7 @@ export const currentCalculateRemainingTime = (
       (remainingAfterDays % millisecondsInAMinute) / millisecondsInASecond
     )
 
-    const currTime = `-${days}일`
+    const currTime = `(-${days}일)`
     // (T-${pad(hours)}:${pad(minutes)}:${pad(seconds)})
     return { currTime }
   } else {

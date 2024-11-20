@@ -133,11 +133,17 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
   ${({ $tabName }) =>
     $tabName === "campaign" &&
     css`
-      padding: 0.5rem 9.6rem 0.5rem 4.7rem;
+      width: 50%;
+      padding: 0.5rem 0;
       background: var(--white);
       border-top-right-radius: 30px;
       border-top: 0.1rem solid var(--n80-color);
       flex: 1;
+      display: flex;
+      justify-content: center;
+      a {
+        margin-left: -1.6rem;
+      }
     `}
 
   ${({ $tabName }) =>
@@ -153,17 +159,24 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
   ${({ $tabName }) =>
     $tabName === "alerts" &&
     css`
-      padding: 0.5rem 4.7rem 0.5rem 9.6rem;
+      width: 50%;
+      padding: 0.5rem 0;
       border-top-left-radius: 30px;
       background: var(--white);
       border-top: 0.1rem solid var(--n80-color);
       flex: 1;
+      display: flex;
+      justify-content: center;
+      a {
+        margin-left: 1.6rem;
+      }
     `}
 `
 
 const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
   $tabName?: string
 }>`
+  width: 4.8rem;
   height: 5rem;
   display: flex;
   flex-direction: column;
@@ -205,5 +218,6 @@ const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
 }))<{ $active: boolean }>`
   font-size: 1rem;
   font-weight: 600;
+  letter-spacing: -0.5px;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
 `

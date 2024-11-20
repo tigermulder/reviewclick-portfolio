@@ -69,6 +69,7 @@ const MyCampaignDetailLayout = () => {
     reward,
     endAt,
     creatAt,
+    reviewText,
   } = {
     status: data?.review.status as HeaderStatusType,
     campaignThumb: data?.campaign.thumbnailUrl,
@@ -77,6 +78,7 @@ const MyCampaignDetailLayout = () => {
     reward: data?.campaign.reward,
     endAt: data?.campaign.endAt,
     creatAt: String(data?.campaign.createdAt),
+    reviewText: data?.review_detail.reviewText,
   }
   // 남은 시간 계산
   const { remainingTime, isEnded } = calculateRemainingTime(endAt)
@@ -136,7 +138,7 @@ const MyCampaignDetailLayout = () => {
             reviewIdKey={reviewId}
             goToNextStep={goToNextStep}
             refetchData={refetch}
-            validatedReviewText={validatedReviewText}
+            validatedReviewText={reviewText}
             LOCAL_STORAGE_KEY={LOCAL_STORAGE_KEY}
           />
         )

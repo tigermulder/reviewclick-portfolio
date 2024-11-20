@@ -104,7 +104,7 @@ function App() {
       {/* GlobalCategoryMenu는 항상 렌더링되어야 함 */}
       <GlobalCategoryMenu />
       {/* Bottom Tap Bar */}
-      {!hideTapBar && <BottomTapBar />}
+      {!hideTapBar && <Navbar />}
       {/* ToastMassage */}
       <ToastMassage />
     </div>

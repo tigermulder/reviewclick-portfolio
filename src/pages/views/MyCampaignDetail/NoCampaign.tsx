@@ -59,7 +59,7 @@ const NoCampaignTitle = styled.h2`
 `
 
 const NoCampaignIcon = styled.div`
-  width: 54%;
+  width: 48%;
 `
 
 const NoCampaignList = styled.div`
