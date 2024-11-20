@@ -109,7 +109,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           font-weight: var(--font-bodyM-weight);
           line-height: var(--font-bodyM-line-height);
           letter-spacing: var(--font-bodyM-letter-spacing);
-          box-shadow: 0px 0px 12px rgba(246.44, 95.26, 102.39, 0.5);
+          box-shadow: 0px 0px 10px rgba(246.44, 95.26, 102.39, 0.3);
           border: 1px solid var(--prim-L60);
           color: var(--revu-color);
           display: flex;
