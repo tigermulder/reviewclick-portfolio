@@ -13,7 +13,7 @@ const NoRewards = () => {
       <NoRewardsSubMessage>
         포인트를 적립하려면 캠페인에 참여해보세요!
       </NoRewardsSubMessage>
-      <Button $variant="red" onClick={() => navigate(RoutePath.MyCampaign)}>
+      <Button $variant="grey" onClick={() => navigate(RoutePath.MyCampaign)}>
         나의 캠페인 이동
       </Button>
     </NoRewardsContainer>
