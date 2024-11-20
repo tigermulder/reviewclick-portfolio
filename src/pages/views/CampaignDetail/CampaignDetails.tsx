@@ -69,7 +69,7 @@ const InfoBox = styled.div`
       color: var(--n400-color);
     }
   }
-  &div p {
+  & div p {
     font-size: 2.6rem;
     letter-spacing: calc(2.6rem * (-0.4 / 100));
     font-weight: var(--font-weight-extrabold);
