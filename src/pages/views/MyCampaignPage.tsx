@@ -197,7 +197,8 @@ const MyCampaignPage = () => {
                   {button.text}
                   {button.text === "지급대기" ||
                   (button.text === "지급완료" &&
-                    reviewItem.uploadComplete === 1) ? (
+                    reviewItem.uploadComplete === 1 &&
+                    reviewItem.status) ? (
                     ""
                   ) : (
                     <>
