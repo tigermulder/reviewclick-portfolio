@@ -371,7 +371,7 @@ const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
 const DetailBody = styled.div`
   position: relative;
   top: -9.9rem;
-  padding: 1.9rem 1.5rem 6.6rem;
+  padding: 1.9rem 1.5rem 3.6rem;
   background: #fff;
 `
 
