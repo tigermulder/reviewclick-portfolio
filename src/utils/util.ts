@@ -163,11 +163,13 @@ export const currentCalculateRemainingTime = (
   // 숫자를 두 자리로 포맷팅하는 함수
   const pad = (num: number) => num.toString().padStart(2, "0")
 
-  if (diff >= millisecondsInADay) {
-    const days = Math.floor(diff / millisecondsInADay)
-    const currTime = `D-${days}일`
+  if (diff > millisecondsInADay) {
+    // 남은 시간이 1일 이상인 경우
+    const days = Math.ceil(diff / millisecondsInADay)
+    const currTime = `(-${days}일)`
     return { currTime }
   } else {
+    // 남은 시간이 1일 이하인 경우
     const hours = Math.floor(diff / millisecondsInAnHour)
     const minutes = Math.floor(
       (diff % millisecondsInAnHour) / millisecondsInAMinute
@@ -175,7 +177,7 @@ export const currentCalculateRemainingTime = (
     const seconds = Math.floor(
       (diff % millisecondsInAMinute) / millisecondsInASecond
     )
-    const currTime = `T-${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
+    const currTime = `(-${pad(hours)}:${pad(minutes)}:${pad(seconds)})`
     return { currTime }
   }
 }
