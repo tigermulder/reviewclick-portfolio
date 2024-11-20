@@ -93,7 +93,7 @@ const MyCampaignPage = () => {
   // currTime이 '00시 00분 00초'에 도달하면 refetch 트리거
   useEffect(() => {
     const anyTimeZero = currTimes.some(
-      (item) => item.currTime === "(-00:00:00)"
+      (item) => item.currTime === "(T-00:00:00)"
     )
     if (anyTimeZero) {
       refetch()
