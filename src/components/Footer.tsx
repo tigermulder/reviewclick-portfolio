@@ -18,7 +18,7 @@ const Footer = () => {
         <br />
         문의 : <EmailSpan>revuclick@jamonglab.com</EmailSpan>
         <br />
-        고객센터 : <a href="tel:0234729229"></a>02-3472-9229
+        고객센터 : <a href="tel:0234729229">02-3472-9229</a>
         <br />
         * 업무시간 : 평일 10:00 ~ 17:00 (점심: 12:00 ~ 13:00 / 주말, 공휴일
         휴무)
@@ -74,10 +74,6 @@ const CompanyInfo = styled.div`
   font-weight: 500;
   line-height: 16px;
   word-wrap: break-word;
-
-  a {
-    width: 100%;
-  }
 `
 
 const EmailSpan = styled.span`
