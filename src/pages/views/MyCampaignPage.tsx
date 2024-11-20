@@ -137,7 +137,7 @@ const MyCampaignPage = () => {
             //** 캠페인 남은 시간 */
             const thumbnailUrl = reviewItem.thumbnailUrl || dummyImage
             const button: { variant: ButtonProps["$variant"]; text: string } =
-              reviewItem.uploadComplete === 1
+              reviewItem.uploadComplete === 1 && reviewItem.status === "upload"
                 ? { variant: "success", text: "지급완료" }
                 : buttonConfig[reviewItem.status] || {
                     variant: "default",
