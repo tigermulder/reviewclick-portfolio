@@ -423,7 +423,7 @@ const ImagePlaceholder = styled.div`
 `
 
 const GuideDetail = styled.div`
-  height: 1528px;
+  height: 1350px;
   background-image: url("${detailGuideImage}");
   background-repeat: no-repeat;
   background-position: center;
