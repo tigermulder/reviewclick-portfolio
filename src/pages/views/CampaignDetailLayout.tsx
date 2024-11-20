@@ -30,7 +30,6 @@ const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
 
 const CampaignDetailPage = () => {
   const [selectedTab, setSelectedTab] = useState("info") // 기본선택
-  const [isGuideOpen, setIsGuideOpen] = useState(false) // 가이드 표시 여부 상태
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState) // Recoil 모달
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false) // 신청 취소 모달 상태
   const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
@@ -49,11 +48,6 @@ const CampaignDetailPage = () => {
 
   //** 스크롤 0부터시작 */
   useScrollToTop()
-
-  //** 유의사항 토글버튼 */
-  const toggleGuide = () => {
-    setIsGuideOpen(true)
-  }
 
   //** 탭 설정 */
   const singleTab = [{ label: "캠페인 정보", value: "info" }]
@@ -226,19 +220,11 @@ const CampaignDetailPage = () => {
           <div>
             <ImagePlaceholder />
             {/* GuideCont를 조건부로 렌더링 */}
-            {isGuideOpen && (
-              <GuideCont>
-                <GuideDetail />
-              </GuideCont>
-            )}
+
+            <GuideCont>
+              <GuideDetail />
+            </GuideCont>
           </div>
-          {!isGuideOpen && (
-            <ButtonContainer>
-              <Button $variant="outlined" onClick={toggleGuide}>
-                이용가이드 상세보기
-              </Button>
-            </ButtonContainer>
-          )}
         </Main>
         {/* 유의사항 */}
         <Notice />
@@ -452,10 +438,4 @@ const GuideCont = styled.div`
   margin-top: 2.2rem;
   border-top: 0.1rem solid var(--n80-color);
   padding: 3rem 0 1.8rem;
-`
-
-const ButtonContainer = styled.div`
-  padding-top: 5rem;
-  margin-top: -3rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 22.19%);
 `
