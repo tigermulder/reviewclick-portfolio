@@ -23,7 +23,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     } else {
       adjustedStatus = "timeout"
       fourthStepName = "지급대기"
-      fourthStepIcon = StepFailed
+      fourthStepIcon = StepSuccess
       isMissionFailed = false
     }
   } else if (status === "giveup" || status === "timeout") {
