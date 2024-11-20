@@ -61,10 +61,10 @@ const StepTwo = ({
       addToast("100자 이상 입력해주세요", "copy", 1000, "copy")
       return
     }
-
+    const textToCopy = `<협찬> ${reviewText}`
     const data: ReviewConfirmRequest = {
       reviewId: Number(reviewIdKey),
-      reviewText: reviewText,
+      reviewText: textToCopy,
     }
 
     // 로딩 모달 표시
@@ -80,7 +80,6 @@ const StepTwo = ({
       setLoadingModalOpen(false)
       if (response.statusCode === 0) {
         // 리뷰 텍스트를 클립보드에 복사
-        const textToCopy = `<협찬> ${reviewText}`
         navigator.clipboard
           .writeText(textToCopy)
           .then(() => {

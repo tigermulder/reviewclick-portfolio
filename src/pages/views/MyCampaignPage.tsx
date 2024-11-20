@@ -12,7 +12,6 @@ import { buttonConfig } from "@/types/component-types/my-campaign-type"
 import { formatDate } from "@/utils/util"
 import dummyImage from "assets/dummy-image.png"
 import useScrollToTop from "@/hooks/useScrollToTop"
-import { calculateRemainingTime } from "@/utils/util"
 import { RoutePath } from "@/types/route-path"
 import SinglePageHeader from "@/components/SinglePageHeader"
 import { currentCalculateRemainingTime } from "@/utils/util"
@@ -61,7 +60,6 @@ const MyCampaignPage = () => {
     retry: 1, // 재요청 횟수
   })
   // ** 현재 신청한캠페인 */
-  const reviewLength = data?.totalItems
   const reviewList = data?.list
   const reviewJoin = data?.n_review_join
   const reviewMax = data?.n_max_review_join
@@ -136,8 +134,6 @@ const MyCampaignPage = () => {
         {reviewList && reviewList.length > 0 ? (
           reviewList.map((reviewItem) => {
             //** 캠페인 남은 시간 */
-            const endAt = reviewItem.endAt
-            const { remainingTime, isEnded } = calculateRemainingTime(endAt)
             const thumbnailUrl = reviewItem.thumbnailUrl || dummyImage
             const button = buttonConfig[reviewItem.status] || {
               variant: "default",
@@ -179,11 +175,6 @@ const MyCampaignPage = () => {
                 <ReviewCardHeader to={`/campaign/${reviewItem.campaignCode}`}>
                   <ReviewCardThumb>
                     <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-                    {/* {isEnded && <DimmedBackground />}
-                    <RemainingDays $isEnded={isEnded}>
-                      {isEnded ? "종료" : remainingTime}
-                    </RemainingDays>
-                    {isEnded && <EndedOverlay />} */}
                   </ReviewCardThumb>
                   <ReviewCardInfo>
                     <CardDate>{formatDate(reviewItem.createdAt)}</CardDate>
@@ -273,49 +264,6 @@ const ReviewCardThumb = styled.div`
     width: 100%;
     height: 100%;
   }
-`
-
-const DimmedBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-`
-
-interface RemainingDaysProps {
-  $isEnded: boolean
-}
-const RemainingDays = styled.span.attrs<RemainingDaysProps>((props) => ({
-  "aria-label": props.$isEnded ? "캠페인이 종료되었습니다" : "캠페인 남은 일수",
-  "data-is-ended": props.$isEnded,
-}))<RemainingDaysProps>`
-  position: absolute;
-  bottom: ${({ $isEnded }) => ($isEnded ? "50%" : "0.7rem")};
-  left: ${({ $isEnded }) => ($isEnded ? "50%" : "0")};
-  transform: ${({ $isEnded }) => ($isEnded ? "translate(-50%, 50%)" : "none")};
-  background-color: black;
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.2rem;
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  line-height: var(--font-caption-line-height);
-  letter-spacing: var(--font-caption-letter-spacing);
-  z-index: 2;
-`
-
-const EndedOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 1;
-  pointer-events: none;
 `
 
 const ReviewCardInfo = styled.div`
