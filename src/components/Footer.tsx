@@ -16,7 +16,10 @@ const Footer = () => {
         <br />
         소재지 : 서울특별시 서초구 서초대로60길 18, 7층 (정인빌딩)
         <br />
-        문의 : <EmailSpan>revuclick@jamonglab.com</EmailSpan>
+        문의 :{" "}
+        <EmailSpan href="mailto:revuclick@jamonglab.com">
+          revuclick@jamonglab.com
+        </EmailSpan>
         <br />
         고객센터 : <a href="tel:0234729229">02-3472-9229</a>
         <br />
@@ -76,7 +79,7 @@ const CompanyInfo = styled.div`
   word-wrap: break-word;
 `
 
-const EmailSpan = styled.span`
+const EmailSpan = styled.a`
   color: #a0acb1;
 `
 
