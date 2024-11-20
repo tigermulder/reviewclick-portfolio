@@ -10,7 +10,6 @@ import StepSuccess from "assets/ico_step_success.svg"
 import StepFailed from "assets/ico_step_failed.svg"
 
 const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
-  // 수정된 부분 시작
   let adjustedStatus = status
   let isMissionFailed = false
   let isReviewFailed = false
@@ -48,12 +47,11 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
       <ProgressStepWrapper>
         {steps.map((step, index) => {
           let stepStatus: "done" | "active" | "default" = "default"
-
           if (isMissionFailed) {
             // 미션중단인 경우, 모든 단계는 default except 마지막 단계
             stepStatus = index === 3 ? "active" : "default"
           } else {
-            if (index + 1 < currentStep) {
+            if (index + 1 <= currentStep) {
               stepStatus = "done"
             } else if (index + 1 === currentStep) {
               stepStatus = "active"
