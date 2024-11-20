@@ -195,7 +195,9 @@ const MyCampaignPage = () => {
                 />
                 <Button $variant={button.variant} onClick={handleStepRouting}>
                   {button.text}
-                  {button.text === "지급대기" ? (
+                  {button.text === "지급대기" ||
+                  (button.text === "지급완료" &&
+                    reviewItem.uploadComplete === 1) ? (
                     ""
                   ) : (
                     <>
