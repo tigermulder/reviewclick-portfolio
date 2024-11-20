@@ -61,8 +61,6 @@ export interface StepTwoProps {
   thumbnailUrl: string
   campaignTitle: string | undefined
   reward: number | undefined
-  isEnded: boolean
-  remainingTime: string
   creatTime: string
   goToNextStep: () => void
   refetchData: () => void

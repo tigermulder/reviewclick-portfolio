@@ -17,8 +17,6 @@ const StepTwo = ({
   thumbnailUrl,
   campaignTitle,
   reward,
-  isEnded,
-  remainingTime,
   creatTime,
   goToNextStep,
   refetchData,
@@ -203,10 +201,6 @@ const StepTwo = ({
           <CampaignStatusCard>
             <CampaignStatusCardThumb>
               <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-              {/* {isEnded && <DimmedBackground />}
-              <RemainingDays $isEnded={isEnded}>
-                {isEnded ? "종료" : remainingTime}
-              </RemainingDays> */}
             </CampaignStatusCardThumb>
             <StepItemInfoTextBox>
               <CardDate>{formatDate(creatTime)}</CardDate>

@@ -124,8 +124,6 @@ const MyCampaignDetailLayout = () => {
             thumbnailUrl={thumbnailUrl}
             campaignTitle={campaignTitle}
             reward={reward}
-            isEnded={isEnded}
-            remainingTime={remainingTime}
             creatTime={creatAt}
             goToNextStep={goToNextStep}
             refetchData={refetch}

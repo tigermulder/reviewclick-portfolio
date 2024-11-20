@@ -55,6 +55,7 @@ const StepThree = ({
 
       try {
         const response = await uploadReview(formData)
+        console.log(response)
         // const response = {
         //   statusCode: 0,
         // };
