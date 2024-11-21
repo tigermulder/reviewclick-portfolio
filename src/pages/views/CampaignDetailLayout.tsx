@@ -72,7 +72,7 @@ const CampaignDetailPage = () => {
     if (!isScrolledToBottom) {
       // 스크롤 내리기 동작
       window.scrollBy({
-        top: window.innerHeight * 0.3, // 한 번에 스크롤할 양
+        top: window.innerHeight * 0.5, // 한 번에 스크롤할 양
         left: 0,
         behavior: "smooth",
       })
