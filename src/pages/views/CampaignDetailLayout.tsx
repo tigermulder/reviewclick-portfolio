@@ -78,8 +78,18 @@ const CampaignDetailPage = () => {
         behavior: "smooth",
       })
     } else {
-      // 기존 버튼의 기능 수행 (예: 캠페인 신청하기)
-      handleApply()
+      if (isProductViewed) {
+        // '상품 구경하러가기'를 클릭한 경우 캠페인 신청 진행
+        handleApply()
+      } else {
+        // '상품 구경하러가기'를 클릭하지 않은 경우 토스트 메시지 표시
+        addToast(
+          "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
+          "warning",
+          2000,
+          "campaign"
+        )
+      }
     }
   }
   //** 탭 설정 */
@@ -197,15 +207,6 @@ const CampaignDetailPage = () => {
     setIsProductViewed(true) // 버튼 클릭 여부 업데이트
   }
 
-  const handleShowToast = () => {
-    addToast(
-      "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
-      "warning",
-      2000,
-      "campaign"
-    )
-  }
-
   //** 캠페인신청 취소 핸들러 [2-2] */
   const handleConfirmCancel = async () => {
     try {
@@ -272,8 +273,6 @@ const CampaignDetailPage = () => {
           handleCancelOpen={handleCancelOpen}
           isScrolledToBottom={isScrolledToBottom}
           handleButtonClick={handleButtonClick}
-          isProductViewed={isProductViewed}
-          handleShowToast={handleShowToast}
         />
       </DetailBody>
       {/* 신청, 신청완료, 신청횟수 모달 */}

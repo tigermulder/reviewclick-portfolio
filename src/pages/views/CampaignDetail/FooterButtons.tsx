@@ -8,8 +8,6 @@ function FooterButtons({
   handleCancelOpen,
   isScrolledToBottom,
   handleButtonClick,
-  isProductViewed,
-  handleShowToast,
 }: FooterButtonsProps) {
   const renderButton = () => {
     const campaignStatus = campaignDetail.status
@@ -23,10 +21,7 @@ function FooterButtons({
     if (quota !== joins) {
       if (reviewStatus === null) {
         return (
-          <Button
-            onClick={isProductViewed ? handleShowToast : handleButtonClick}
-            $variant="red"
-          >
+          <Button onClick={handleButtonClick} $variant="red">
             {isScrolledToBottom ? "캠페인 신청하기" : "스크롤 내리기"}
           </Button>
         )

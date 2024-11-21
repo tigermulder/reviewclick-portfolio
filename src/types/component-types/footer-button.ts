@@ -4,6 +4,4 @@ export interface FooterButtonsProps {
   handleCancelOpen: () => void
   isScrolledToBottom: boolean
   handleButtonClick: () => void
-  isProductViewed: boolean
-  handleShowToast: () => void
 }
