@@ -1,13 +1,11 @@
 import { AppRoute } from "pages/AppRoute"
 import { useLocation, useMatch, useParams } from "react-router-dom"
 import AppBar from "components/AppBar"
-import BottomTapBar from "components/BottomTapBar"
 import Navbar from "./components/Navbar"
 import Footer from "components/Footer"
 import ToastMassage from "components/ToastMassage"
 import GlobalCategoryMenu from "components/GlobalCategoryMenu"
 import { RoutePath } from "./types/route-path"
-import { useUserStatus } from "./hooks/useUserStatus"
 import { logincheck } from "@/services/login"
 import "./global.css"
 import { useEffect } from "react"
@@ -29,7 +27,7 @@ function App() {
         }
       } catch (error) {
         console.error(error)
-        addToast("로그인 체크 중 오류 발생", "warning", 1000, "Join")
+        addToast("로그인 체크 중 오류 발생", "warning", 3000, "Join")
       }
     }
     checkLoginStatus()

@@ -145,11 +145,11 @@ const StepThree = ({
           .writeText(text)
           .then(
             () => {
-              addToast("리뷰 내용이 복사되었어요.", "copy", 1000, "copy")
+              addToast("리뷰 내용이 복사되었어요.", "copy", 3000, "copy")
             },
             (err) => {
               console.error("복사 실패:", err)
-              addToast("복사에 실패했습니다.", "copy", 1000, "copy")
+              addToast("복사에 실패했습니다.", "copy", 3000, "copy")
             }
           )
           .finally(() => {
@@ -171,10 +171,10 @@ const StepThree = ({
 
         try {
           document.execCommand("copy")
-          addToast("리뷰 내용이 복사되었어요.", "copy", 1000, "copy")
+          addToast("리뷰 내용이 복사되었어요.", "copy", 3000, "copy")
         } catch (err) {
           console.error("복사 실패:", err)
-          addToast("복사에 실패했습니다.", "copy", 1000, "copy")
+          addToast("복사에 실패했습니다.", "copy", 3000, "copy")
         } finally {
           document.body.removeChild(textArea)
           const url =
@@ -183,7 +183,7 @@ const StepThree = ({
         }
       }
     } else {
-      addToast("복사할 내용이 없습니다.", "copy", 1000, "copy")
+      addToast("복사할 내용이 없습니다.", "copy", 3000, "copy")
       // 텍스트가 없어도 링크로 이동
       const url =
         "https://new-m.pay.naver.com/historybenefit/paymenthistory?page=1"

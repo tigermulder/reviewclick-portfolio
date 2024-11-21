@@ -49,12 +49,12 @@ const Navbar = () => {
     setActiveTab(tabName)
 
     if (isLoggedIn === null) {
-      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 1000, "Join")
+      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 3000, "Join")
       return
     }
 
     if (requiresAuth && !isLoggedIn) {
-      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 1000, "Join")
+      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 3000, "Join")
     } else {
       navigate(path, { replace: true })
     }

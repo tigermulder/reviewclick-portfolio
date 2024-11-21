@@ -56,7 +56,7 @@ const StepTwo = ({
   //** 리뷰검수 OCR */
   const handleReviewOcrSave = async () => {
     if (reviewText.trim().length < minChars) {
-      addToast("100자 이상 입력해주세요", "copy", 1000, "copy")
+      addToast("100자 이상 입력해주세요", "copy", 3000, "copy")
       return
     }
     const textToCopy = `<협찬> ${reviewText}`
@@ -81,7 +81,7 @@ const StepTwo = ({
         navigator.clipboard
           .writeText(textToCopy)
           .then(() => {
-            addToast("내용이 복사됐어요.", "copy", 1000, "copy")
+            addToast("내용이 복사됐어요.", "copy", 3000, "copy")
           })
           .catch((err) => {
             console.error("copy되지 않았습니다.: ", err)
