@@ -38,6 +38,7 @@ const CampaignDetailPage = () => {
   const { addToast } = useToast()
   const navigate = useNavigate()
   const { popUpOffsetY, scale } = useScrollAnimation()
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
 
   useEffect(() => {
     if (campaignCode) {
@@ -48,6 +49,38 @@ const CampaignDetailPage = () => {
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
+  //** 스크롤다운기능 */
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const windowHeight = window.innerHeight
+      const fullHeight = document.documentElement.scrollHeight
+
+      if (scrollTop + windowHeight >= fullHeight - 100) {
+        // 페이지 끝에서 100px 전에 상태 변경
+        setIsScrolledToBottom(true)
+      } else {
+        setIsScrolledToBottom(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const handleButtonClick = () => {
+    if (!isScrolledToBottom) {
+      // 스크롤 내리기 동작
+      window.scrollBy({
+        top: window.innerHeight * 0.3, // 한 번에 스크롤할 양
+        left: 0,
+        behavior: "smooth",
+      })
+    } else {
+      // 기존 버튼의 기능 수행 (예: 캠페인 신청하기)
+      handleApply()
+    }
+  }
   //** 탭 설정 */
   const singleTab = [{ label: "캠페인 정보", value: "info" }]
   const handleTabSelect = (tabValue: string) => {
@@ -225,8 +258,9 @@ const CampaignDetailPage = () => {
         <FooterButtons
           campaignDetail={campaignDetail}
           reviewStatus={reviewStatus}
-          handleApply={handleApply}
           handleCancelOpen={handleCancelOpen}
+          isScrolledToBottom={isScrolledToBottom}
+          handleButtonClick={handleButtonClick}
         />
       </DetailBody>
       {/* 신청, 신청완료, 신청횟수 모달 */}

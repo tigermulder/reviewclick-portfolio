@@ -1,18 +1,13 @@
 import styled from "styled-components"
 import Button from "@/components/Button"
-
-interface FooterButtonsProps {
-  campaignDetail: any
-  reviewStatus: string | null
-  handleApply: () => void
-  handleCancelOpen: () => void
-}
+import { FooterButtonsProps } from "@/types/component-types/footer-button"
 
 function FooterButtons({
   campaignDetail,
   reviewStatus,
-  handleApply,
   handleCancelOpen,
+  isScrolledToBottom,
+  handleButtonClick,
 }: FooterButtonsProps) {
   const renderButton = () => {
     const campaignStatus = campaignDetail.status
@@ -26,8 +21,8 @@ function FooterButtons({
     if (quota !== joins) {
       if (reviewStatus === null) {
         return (
-          <Button onClick={handleApply} $variant="red">
-            캠페인 신청하기
+          <Button onClick={handleButtonClick} $variant="red">
+            {isScrolledToBottom ? "캠페인 신청하기" : "스크롤 내리기"}
           </Button>
         )
       } else {
@@ -53,11 +48,6 @@ function FooterButtons({
 
   return (
     <FooterContainer>
-      {/* 찜하기 버튼 */}
-      {/* <LikeButton
-        categoryId={campaignDetail.categoryId}
-        campaignId={campaignDetail.campaignId}
-      /> */}
       {/* 캠페인 신청하기 버튼 */}
       {renderButton()}
     </FooterContainer>
