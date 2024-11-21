@@ -87,7 +87,7 @@ const CampaignDetailPage = () => {
         addToast(
           "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
           "warning",
-          2000,
+          3000,
           "campaign"
         )
         // '상품 구경하러가기' 버튼 위치로 스크롤
