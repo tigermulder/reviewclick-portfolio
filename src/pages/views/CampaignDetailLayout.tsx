@@ -391,7 +391,7 @@ const Title = styled.p`
 `
 
 const Main = styled.div`
-  padding: 1.4rem 0 0;
+  padding: 1.4rem 0 4rem;
 `
 
 const ImagePlaceholder = styled.div`
