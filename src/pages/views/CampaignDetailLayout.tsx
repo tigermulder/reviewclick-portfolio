@@ -256,6 +256,7 @@ const CampaignDetailPage = () => {
         <CampaignDetails
           campaign={campaignDetail}
           handleViewProduct={handleViewProduct}
+          ref={viewProductRef}
         />
         <Line />
         <ContentTab
