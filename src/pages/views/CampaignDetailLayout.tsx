@@ -39,6 +39,7 @@ const CampaignDetailPage = () => {
   const navigate = useNavigate()
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
+  const [isProductViewed, setIsProductViewed] = useState(false)
 
   useEffect(() => {
     if (campaignCode) {
@@ -193,6 +194,16 @@ const CampaignDetailPage = () => {
   const handleViewProduct = () => {
     const url = campaignDetail.snsUrl || "https://naver.com"
     window.open(url, "_blank", "noopener,noreferrer")
+    setIsProductViewed(true) // 버튼 클릭 여부 업데이트
+  }
+
+  const handleShowToast = () => {
+    addToast(
+      "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
+      "warning",
+      2000,
+      "campaign"
+    )
   }
 
   //** 캠페인신청 취소 핸들러 [2-2] */
@@ -261,6 +272,8 @@ const CampaignDetailPage = () => {
           handleCancelOpen={handleCancelOpen}
           isScrolledToBottom={isScrolledToBottom}
           handleButtonClick={handleButtonClick}
+          isProductViewed={isProductViewed} // 추가된 props
+          handleShowToast={handleShowToast} // 추가된 props
         />
       </DetailBody>
       {/* 신청, 신청완료, 신청횟수 모달 */}

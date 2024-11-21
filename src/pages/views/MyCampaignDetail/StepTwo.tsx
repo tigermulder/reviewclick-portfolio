@@ -102,20 +102,6 @@ const StepTwo = ({
         setModalConfirmText("등록하러가기")
         setModalCancelText("아니요")
         setResultModalOpen(true)
-      } else {
-        // 리뷰 수정 모달 설정
-        setModalTitle("️⛔ 앗, 잠깐!")
-        setModalContent(
-          <p>
-            단순 텍스트를 반복하거나 연관성 없는 리뷰를 작성하는 등 상품에
-            부정적인 리뷰는 포인트 적립에 영향을 줄 수 있으니, 긍정적인 사용
-            경험을 중심으로 작성해 주세요.
-          </p>
-        )
-        setModalConfirmText("닫기")
-        setModalCancelText("작성한 리뷰 수정하기")
-        setResultModalOpen(true)
-        setShowLinkRouter(true)
       }
     } catch (error) {
       // 로딩 모달 닫기
@@ -214,7 +200,7 @@ const StepTwo = ({
             <ReviewHeader>리뷰 작성</ReviewHeader>
             <ReviewTextBox>
               <textarea
-                placeholder="리뷰 검수 통과가 리뷰의 적합성, 적절성을 보장하지 않습니다."
+                placeholder="상품과 연관이 없거나 성의없는 리뷰 작성 시 미션진행이 어려울 수 있습니다."
                 value={reviewText}
                 onChange={handleReviewChange}
               />
@@ -253,6 +239,18 @@ const StepTwo = ({
                       자동으로 <em>&lt;협찬&gt;</em> 문구가 입력되며, “리뷰어”는
                       이에 동의합니다.
                     </p>
+                  </li>
+                  <li>
+                    <p>
+                      긍정 리뷰 인증은 리뷰 품질은 보장하지 않습니다.다만, 리뷰
+                      인증을 무력화하는 시도 및 부적절한 리뷰(텍스트 반복, 타인
+                      리뷰 복사, 관련 없는 상품 리뷰 등)가 확인될 경우 해당
+                      계정에 지급된 포인트는 회수될 수 있으며, 캠페인 참여가
+                      영구 중단될 수 있습니다.
+                    </p>
+                  </li>
+                  <li>
+                    <p>작성한 리뷰는 6개월간 유지해주셔야 합니다.</p>
                   </li>
                 </ul>
               </GuideContent>

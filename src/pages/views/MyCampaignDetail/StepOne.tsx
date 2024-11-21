@@ -82,6 +82,10 @@ const StepOne = ({
               <p>예시 사진 및 아래 내용을 참고하여 다시 업로드 해주세요.</p>
               <p>영수증의 일부가 잘리지 않도록 전체를 캡쳐해 주세요.</p>
               <p>사진이 흐리거나 어두운 경우, 잘 보이도록 다시 캡쳐해주세요.</p>
+              <p>
+                문제가 계속될 경우, 1:1 문의 혹은 고객센터로 문의해 주시기
+                바랍니다.
+              </p>
             </>
           )
           setModalConfirmText("재인증")
@@ -226,11 +230,10 @@ const StepOne = ({
 export default StepOne
 
 const CartTitle = styled.div`
-  margin-top: 3.5rem;
   background: var(--white);
 
   p {
-    padding: 5.4rem 1.5rem 2rem;
+    padding: 7rem 1.5rem 2rem;
     font-size: var(--font-h2-size);
     font-weight: var(--font-h2-weight);
     letter-spacing: var(--font-h2-letter-spacing);
@@ -240,7 +243,7 @@ const CartTitle = styled.div`
 
 const CartStepContainer = styled.ul`
   margin: 0 -1.5rem;
-  padding: 4rem 1.5rem 10rem 2.6rem;
+  padding: 2rem 1.5rem 10rem 2.6rem;
   min-height: 100vh;
   background: var(--whitewood);
 
