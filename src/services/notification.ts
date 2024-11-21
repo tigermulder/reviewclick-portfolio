@@ -25,5 +25,6 @@ export const getNotificationItem = async (
     "/notification/item",
     data
   )
+  console.log(response)
   return response.data
 }

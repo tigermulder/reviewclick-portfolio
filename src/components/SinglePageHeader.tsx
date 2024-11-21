@@ -21,7 +21,7 @@ export default SinglePageHeader
 
 const HeaderContainer = styled.div`
   max-width: 768px;
-  min-width: 375px;
+  min-width: 280px;
   display: flex;
   justify-content: space-between;
   position: fixed;

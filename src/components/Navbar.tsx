@@ -117,7 +117,7 @@ const Nav = styled.nav`
   left: 0;
   z-index: 20;
   max-width: 768px;
-  min-width: 375px;
+  min-width: 280px;
   width: 100%;
   display: flex;
   align-items: center;

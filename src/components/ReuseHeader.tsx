@@ -58,7 +58,7 @@ export default ReuseHeader
 
 const HeaderContainer = styled.header`
   max-width: 768px;
-  min-width: 375px;
+  min-width: 280px;
   position: fixed;
   top: 0;
   left: 0;
