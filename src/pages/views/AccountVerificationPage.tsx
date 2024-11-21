@@ -46,9 +46,9 @@ const AccountVerificationPage = () => {
       const errorCode = error.response?.data?.errorCode
       setEmailCheckMessage("")
       if (errorCode === 1) {
-        addToast("매체사로 접속해주세요", "warning", 1000, "email")
+        addToast("매체사로 접속해주세요", "warning", 3000, "email")
       } else {
-        addToast("네트워크 에러입니다", "warning", 1000, "email")
+        addToast("네트워크 에러입니다", "warning", 3000, "email")
       }
     },
   })
@@ -60,9 +60,9 @@ const AccountVerificationPage = () => {
       if (data.statusCode === 0) {
         setEmailSent(true)
         startEmailTimer()
-        addToast("인증코드가 이메일로 전송됐어요", "warning", 1000, "email")
+        addToast("인증코드가 이메일로 전송됐어요", "warning", 3000, "email")
       } else {
-        addToast("인증 코드 전송에 실패했습니다.", "warning", 1000, "email")
+        addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "email")
       }
     },
     onError: () => {
@@ -83,7 +83,7 @@ const AccountVerificationPage = () => {
         localStorage.setItem("email", id)
         setEmailConfirmed(true)
         resetEmailTimer()
-        addToast("계정인증이 완료되었습니다.", "check", 1200, "email")
+        addToast("계정인증이 완료되었습니다.", "check", 3000, "email")
 
         const redirect = sessionStorage.getItem("redirectPath")
         if (redirect) {
@@ -92,7 +92,7 @@ const AccountVerificationPage = () => {
           navigate(RoutePath.MyCampaign)
         }
       } else {
-        addToast("인증 코드가 올바르지 않습니다.", "warning", 1000, "email")
+        addToast("인증 코드가 올바르지 않습니다.", "warning", 3000, "email")
       }
     },
     onError: () => {
