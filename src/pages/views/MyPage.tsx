@@ -125,7 +125,7 @@ const TitleSection = styled.div`
 const Links = styled.ul`
   padding-bottom: 5rem;
 
-  li {
+  > li {
     position: relative;
 
     & + li {
