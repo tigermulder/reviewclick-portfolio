@@ -272,8 +272,8 @@ const CampaignDetailPage = () => {
           handleCancelOpen={handleCancelOpen}
           isScrolledToBottom={isScrolledToBottom}
           handleButtonClick={handleButtonClick}
-          isProductViewed={isProductViewed} // 추가된 props
-          handleShowToast={handleShowToast} // 추가된 props
+          isProductViewed={isProductViewed}
+          handleShowToast={handleShowToast}
         />
       </DetailBody>
       {/* 신청, 신청완료, 신청횟수 모달 */}

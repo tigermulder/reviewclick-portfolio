@@ -24,7 +24,7 @@ function FooterButtons({
       if (reviewStatus === null) {
         return (
           <Button
-            onClick={isProductViewed ? handleButtonClick : handleShowToast}
+            onClick={isProductViewed ? handleShowToast : handleButtonClick}
             $variant="red"
           >
             {isScrolledToBottom ? "캠페인 신청하기" : "스크롤 내리기"}
