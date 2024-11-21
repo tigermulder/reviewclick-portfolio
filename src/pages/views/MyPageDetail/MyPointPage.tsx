@@ -39,7 +39,9 @@ const MyPointPage = () => {
             const thumbnailUrl = rewardItem.campaignThumbnailUrl || dummyImage
             return (
               <li key={rewardItem.reviewId}>
-                <MyPointCard>지급완료</MyPointCard>
+                <MyPointCard>
+                  {rewardItem.uploadComplete === 1 ? "지급 완료" : "지급 대기"}
+                </MyPointCard>
                 <MyPointWrapper>
                   <ReviewCardThumb>
                     <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
