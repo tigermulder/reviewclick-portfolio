@@ -1,3 +1,4 @@
+import { forwardRef } from "react"
 import IconArrowGo from "assets/ico_arr_go.svg?url"
 import IconSuccess from "assets/ico_step_success.svg?url"
 import IconFailed from "assets/ico_step_failed.svg?url"
@@ -9,23 +10,22 @@ import {
 } from "@/types/component-types/button-type"
 import styled, { css } from "styled-components"
 
-const Button = ({
-  children,
-  disabled,
-  $variant,
-  type = "button",
-  $marginTop,
-  onClick,
-}: ButtonProps) => (
-  <StyledButton
-    disabled={disabled || $variant === "spinner"}
-    $variant={$variant}
-    type={type}
-    onClick={onClick}
-    $marginTop={$marginTop}
-  >
-    {$variant !== "spinner" && children}
-  </StyledButton>
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { children, disabled, $variant, type = "button", $marginTop, onClick },
+    ref
+  ) => (
+    <StyledButton
+      ref={ref} // Pass the ref to StyledButton
+      disabled={disabled || $variant === "spinner"}
+      $variant={$variant}
+      type={type}
+      onClick={onClick}
+      $marginTop={$marginTop}
+    >
+      {$variant !== "spinner" && children}
+    </StyledButton>
+  )
 )
 
 export default Button

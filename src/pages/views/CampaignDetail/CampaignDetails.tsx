@@ -1,48 +1,49 @@
 import styled from "styled-components"
 import IconStar from "assets/ico-star1.svg?url"
 import Button from "@/components/Button"
+import { forwardRef } from "react"
 import { formatDate } from "@/utils/util"
 
 interface CampaignDetailsProps {
-  campaign: any
+  campaign: any // 정확한 타입으로 변경하세요.
   handleViewProduct: () => void
 }
 
-function CampaignDetails({
-  campaign,
-  handleViewProduct,
-}: CampaignDetailsProps) {
-  return (
-    <Container>
-      <InfoBox>
-        <div>
-          <span>
-            상품가 <em>{campaign.price.toLocaleString()}원</em>
-          </span>
-          <p>{campaign.reward.toLocaleString()}P</p>
-        </div>
-        <ButtonContainer>
-          <Button $variant="arrow" onClick={handleViewProduct}>
-            상품 구경하러가기
-          </Button>
-        </ButtonContainer>
-      </InfoBox>
-      <Divider />
-      <DetailContainer>
-        <DetailsList>
-          <li>
-            <DetailInfoHeading>신청 마감일</DetailInfoHeading>
-            <DetailInfo>{formatDate(campaign.endAt)}</DetailInfo>
-          </li>
-          <li>
-            <DetailInfoHeading>미션완료기간</DetailInfoHeading>
-            <DetailInfo>구매 영수증 인증 후 7일 이내 필수</DetailInfo>
-          </li>
-        </DetailsList>
-      </DetailContainer>
-    </Container>
-  )
-}
+// `forwardRef`를 사용하여 컴포넌트를 감쌉니다.
+const CampaignDetails = forwardRef<HTMLButtonElement, CampaignDetailsProps>(
+  ({ campaign, handleViewProduct }, ref) => {
+    return (
+      <Container>
+        <InfoBox>
+          <div>
+            <span>
+              상품가 <em>{campaign.price.toLocaleString()}원</em>
+            </span>
+            <p>{campaign.reward.toLocaleString()}P</p>
+          </div>
+          <ButtonContainer>
+            <Button $variant="arrow" onClick={handleViewProduct} ref={ref}>
+              상품 구경하러가기
+            </Button>
+          </ButtonContainer>
+        </InfoBox>
+        <Divider />
+        <DetailContainer>
+          <DetailsList>
+            <li>
+              <DetailInfoHeading>신청 마감일</DetailInfoHeading>
+              <DetailInfo>{formatDate(campaign.endAt)}</DetailInfo>
+            </li>
+            <li>
+              <DetailInfoHeading>미션완료기간</DetailInfoHeading>
+              <DetailInfo>구매 영수증 인증 후 7일 이내 필수</DetailInfo>
+            </li>
+          </DetailsList>
+        </DetailContainer>
+      </Container>
+    )
+  }
+)
 
 export default CampaignDetails
 

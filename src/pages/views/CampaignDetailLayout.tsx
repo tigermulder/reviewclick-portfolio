@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { getCampaignItem } from "services/campaign"
@@ -40,6 +40,7 @@ const CampaignDetailPage = () => {
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
   const [isProductViewed, setIsProductViewed] = useState(false)
+  const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
 
   useEffect(() => {
     if (campaignCode) {
@@ -89,6 +90,11 @@ const CampaignDetailPage = () => {
           2000,
           "campaign"
         )
+        // '상품 구경하러가기' 버튼 위치로 스크롤
+        viewProductRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        })
       }
     }
   }
