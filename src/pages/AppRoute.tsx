@@ -1,5 +1,5 @@
 import { lazy } from "react"
-import { Route, Routes as ReviewClickRoutes } from "react-router-dom"
+import { Route, Routes as ReviewClickRoutes, Navigate } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
 const LoginPage = lazy(() => import("./views/LoginPage"))
@@ -111,8 +111,10 @@ export const AppRoute = () => {
         <Route path={RoutePath.TermsOfService} element={<TermsOfService />} />
         {/* 개인정보처리방침 */}
         <Route path={RoutePath.PrivacyPolicy} element={<PrivacyPolicy />} />
-        {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
-        <Route path="*" element={<NotFoundPage />} />
+        {/* NotFoundPage를 /404 경로에 매핑 */}
+        <Route path="/404" element={<NotFoundPage />} />
+        {/* 모든 예외 경로를 /404로 리디렉션 */}
+        <Route path="*" element={<Navigate to="/404" replace />} />
       </Route>
     </ReviewClickRoutes>
   )
