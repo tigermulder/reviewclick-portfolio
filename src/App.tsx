@@ -88,8 +88,7 @@ function App() {
     location.pathname === RoutePath.Introduce ||
     isReviewDetail ||
     isNoticeDetail ||
-    isNotificationDetail ||
-    isNotFound
+    isNotificationDetail
   const showFooter =
     (location.pathname === RoutePath.Home && !isCampaignDetail) ||
     location.pathname === RoutePath.UserProfile
