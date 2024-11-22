@@ -25,6 +25,7 @@ export const RoutePath = {
   TermsOfService: "terms_service",
   PrivacyPolicy: "privacy_policy",
   Introduce: "introduce_service",
+  NotFound: "/404",
 } as const
 
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath]
