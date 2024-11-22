@@ -28,6 +28,7 @@ const MyCampaignPage = () => {
   const setReivewList = useSetRecoilState(reviewListState)
   const navigate = useNavigate()
   const router = useRouter()
+
   //** 스크롤 0부터시작 */
   useScrollToTop()
 
@@ -36,6 +37,7 @@ const MyCampaignPage = () => {
   const handleSelectChip = (chip: ChipType) => {
     setSelectedChip(chip)
   }
+
   //** step status 매핑 */
   const statusMapping: Record<ChipType, string[]> = {
     전체: [],
@@ -65,6 +67,7 @@ const MyCampaignPage = () => {
     const response = await getReviewList(requestData)
     return response
   }
+
   const { data, refetch } = useQuery({
     queryKey: ["reviewList"],
     queryFn: fetchCampaignList,
@@ -72,6 +75,7 @@ const MyCampaignPage = () => {
     staleTime: 0,
     retry: 1, // 재요청 횟수
   })
+
   // ** 현재 신청한캠페인 */
   const reviewList = data?.list
   const reviewJoin = data?.n_review_join
@@ -135,6 +139,7 @@ const MyCampaignPage = () => {
       statusesToFilter.includes(reviewItem.status)
     )
   }, [reviewList, selectedChip])
+
   return (
     <>
       <ReuseHeader title="나의 캠페인" onBack={handleGoBack} />
@@ -166,7 +171,8 @@ const MyCampaignPage = () => {
           </Total>
         </p>
       </CartCardDesc>
-      <MyReviewContainer>
+      {/* hasItems prop 추가 */}
+      <MyReviewContainer $hasItems={filteredReviewList.length > 0}>
         {filteredReviewList && filteredReviewList.length > 0 ? (
           filteredReviewList.map((reviewItem) => {
             //** 캠페인 남은 시간 */
@@ -276,17 +282,21 @@ const Total = styled.span`
   letter-spacing: var(--font-callout-small-letter-spacing);
 `
 
-const MyReviewContainer = styled.ul`
+const MyReviewContainer = styled.ul<{ $hasItems: boolean }>`
   margin-top: 1.2rem;
-  background: var(--white);
+  background: ${({ $hasItems }) =>
+    $hasItems ? "var(--white)" : "transparent"};
   border-radius: 1.2rem;
+
   li {
     position: relative;
     padding: 2rem 1.5rem;
+
     em {
       margin-left: 0.4rem;
     }
   }
+
   li:not(:last-child):after {
     content: "";
     position: absolute;
