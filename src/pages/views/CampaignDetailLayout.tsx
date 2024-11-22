@@ -9,7 +9,6 @@ import useScrollToTop from "@/hooks/useScrollToTop"
 import { RoutePath } from "@/types/route-path"
 import ContentTab from "@/components/Tab"
 import dummyImage from "assets/dummy-image.png"
-import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
 import { useRecoilState } from "recoil"
@@ -18,6 +17,7 @@ import CampaignDetails from "./CampaignDetail/CampaignDetails"
 import Notice from "./CampaignDetail/Notice"
 import FooterButtons from "./CampaignDetail/FooterButtons"
 import useScrollAnimation from "@/hooks/useScrollAnimation"
+import GuideDetail from "./CampaignDetail/GuideDetail"
 import styled from "styled-components"
 
 // React Query 키
@@ -442,13 +442,4 @@ const Title = styled.p`
 
 const Main = styled.div`
   padding: 0 0 5.4rem;
-`
-
-const GuideDetail = styled.div`
-  height: 1382px;
-  margin-top: 4.3rem;
-  background-image: url("${detailGuideImage}");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
 `
