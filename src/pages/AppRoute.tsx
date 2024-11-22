@@ -1,5 +1,5 @@
 import { lazy } from "react"
-import { Route, Routes as ReactRouterRoutes } from "react-router-dom"
+import { Route, Routes as ReviewClickRoutes } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
 const LoginPage = lazy(() => import("./views/LoginPage"))
@@ -42,18 +42,15 @@ const NotFoundPage = lazy(() => import("./views/NotFoundPage"))
 
 export const AppRoute = () => {
   return (
-    <ReactRouterRoutes>
+    <ReviewClickRoutes>
       {/* Layout을 루트 경로로 지정하고, Outlet으로 자식 라우트를 렌더링 */}
-      <Route element={<Layout />}>
+      <Route path="/" element={<Layout />}>
         {/* Introduce 페이지 */}
         <Route path={RoutePath.Introduce} element={<RevuIntroducePage />} />
         {/* main 페이지 */}
         {/* <Route path={RoutePath.Home} element={<MainPage />} /> */}
         {/* 캠페인상세 페이지 */}
-        <Route
-          path="/campaign/:campaignCode"
-          element={<CampaignDetailPage />}
-        />
+        <Route path="campaign/:campaignCode" element={<CampaignDetailPage />} />
         {/* 로그인 페이지 */}
         <Route path={RoutePath.Login} element={<LoginPage />} />
         {/* 인증 페이지 1-1 */}
@@ -72,7 +69,7 @@ export const AppRoute = () => {
         <Route path={RoutePath.MyCampaign} element={<MyCampaignPage />} />
         {/* 나의 캠페인 detail 페이지 */}
         <Route
-          path="/my_campaign/:reviewId"
+          path="my_campaign/:reviewId"
           element={<MyCampaignDetailLayout />}
         />
         {/* 내 정보 */}
@@ -103,20 +100,20 @@ export const AppRoute = () => {
         <Route path={RoutePath.Alert} element={<AlertHubPage />} />
         {/* 알림새소식 detail 페이지 */}
         <Route
-          path="/alert/notification/:notificationId"
+          path="alert/notification/:notificationId"
           element={<NotificationDetail />}
         />
         {/* 알림공지사항 detail 페이지 */}
-        <Route path="/alert/notice/:noticeId" element={<NoticeDetail />} />
+        <Route path="alert/notice/:noticeId" element={<NoticeDetail />} />
         {/* 문의등록하기 페이지 */}
         <Route path={RoutePath.ContactAdd} element={<ContactSupport />} />
         {/* 이용약관 */}
         <Route path={RoutePath.TermsOfService} element={<TermsOfService />} />
         {/* 개인정보처리방침 */}
         <Route path={RoutePath.PrivacyPolicy} element={<PrivacyPolicy />} />
+        {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
-      {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
-      <Route path="*" element={<NotFoundPage />} />
-    </ReactRouterRoutes>
+    </ReviewClickRoutes>
   )
 }
