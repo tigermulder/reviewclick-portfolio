@@ -1,12 +1,8 @@
 import styled from "styled-components"
 import { FilterCampaignBar } from "@/types/component-types/filter-campaign"
-import { ChipType } from "@/types/component-types/chip-type"
+import { chips, ChipType } from "@/types/component-types/chip-type"
 
-const FilterCampaign = ({
-  chips,
-  selectedChip,
-  onSelect,
-}: FilterCampaignBar) => {
+const FilterCampaign = ({ selectedChip, onSelect }: FilterCampaignBar) => {
   return (
     <FilterChipWrap>
       <FilterChipBarStyled>
