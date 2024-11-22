@@ -1,19 +1,9 @@
 import Error404Image from "assets/404error.png"
 import Button from "@/components/Button"
-import { useNavigate } from "react-router-dom"
+import { handleGoBack } from "@/utils/util"
 import styled from "styled-components"
 
 const NotFoundPage = () => {
-  const navigate = useNavigate()
-  const redirectPath = sessionStorage.getItem("redirectPath")
-  const handleGoBack = () => {
-    if (redirectPath) {
-      navigate(redirectPath)
-    } else {
-      navigate(-1) // 이전 페이지로 돌아감
-    }
-  }
-
   return (
     <ErrorContainer>
       <img src={Error404Image} alt="에러 이미지" />

@@ -1,5 +1,7 @@
 import { RemainingTime, currentRemainingTime } from "@/types/type"
+import { useNavigate } from "react-router-dom"
 
+const navigate = useNavigate()
 export const categories = [
   { id: 1, name: "전체" }, // '전체'는 특별하게 처리
   { id: 2, name: "패션" },
@@ -205,4 +207,14 @@ export const formatTime = (seconds: number) => {
   const m = Math.floor(seconds / 60)
   const s = seconds % 60
   return `${m}:${s < 10 ? `0${s}` : s}`
+}
+
+//** 리다이렉션 함수 */
+export const handleGoBack = () => {
+  const redirectPath = sessionStorage.getItem("redirectPath")
+  if (redirectPath) {
+    navigate(redirectPath)
+  } else {
+    navigate(-1) // 이전 페이지로 돌아감
+  }
 }

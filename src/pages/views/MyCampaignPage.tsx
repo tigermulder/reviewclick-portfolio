@@ -13,7 +13,8 @@ import { formatDate } from "@/utils/util"
 import dummyImage from "assets/dummy-image.png"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import { RoutePath } from "@/types/route-path"
-import SinglePageHeader from "@/components/SinglePageHeader"
+import ReuseHeader from "@/components/ReuseHeader"
+import { handleGoBack } from "@/utils/util"
 import { currentCalculateRemainingTime } from "@/utils/util"
 import NoCampaign from "./MyCampaignDetail/NoCampaign"
 import styled from "styled-components"
@@ -102,7 +103,7 @@ const MyCampaignPage = () => {
 
   return (
     <>
-      <SinglePageHeader title="나의 캠페인" />
+      <ReuseHeader title="나의 캠페인" onBack={handleGoBack} />
       <FilterCalendar
         chips={chips}
         selectedChip={selectedChip}
