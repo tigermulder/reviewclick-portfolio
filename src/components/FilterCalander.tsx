@@ -36,7 +36,7 @@ export default FilterCalendar
 const FilterChipWrap = styled.div`
   position: fixed;
   width: 100%;
-  top: 4.5rem;
+  top: 4.3rem;
   left: 0;
   padding: 2.2rem 1.5rem 0.8rem;
   height: 6rem;
