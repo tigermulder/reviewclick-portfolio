@@ -1,15 +1,16 @@
 import styled from "styled-components"
-import { FilterCalendarBar } from "@/types/component-types/filter-calender"
+import { FilterCampaignBar } from "@/types/component-types/filter-campaign"
+import { ChipType } from "@/types/component-types/chip-type"
 
-const FilterCalendar = ({
+const FilterCampaign = ({
   chips,
   selectedChip,
   onSelect,
-}: FilterCalendarBar) => {
+}: FilterCampaignBar) => {
   return (
     <FilterChipWrap>
       <FilterChipBarStyled>
-        {chips.map((chip) => (
+        {chips.map((chip: ChipType) => (
           <Chip
             key={chip}
             selected={chip === selectedChip}
@@ -31,7 +32,7 @@ const FilterCalendar = ({
   )
 }
 
-export default FilterCalendar
+export default FilterCampaign
 
 const FilterChipWrap = styled.div`
   position: fixed;

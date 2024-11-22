@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useRouter } from "@/hooks/useRouting"
 import { useQuery } from "@tanstack/react-query"
@@ -6,7 +6,7 @@ import { getReviewList } from "@/services/review"
 import { useSetRecoilState } from "recoil"
 import { reviewListState } from "@/store/mycampaign-recoil"
 import ProgressStep from "@/components/ProgressStep"
-import FilterCalendar from "@/components/FilterCalander"
+import FilterCampaign from "@/components/FilterCampaign"
 import Button from "@/components/Button"
 import { buttonConfig } from "@/types/component-types/my-campaign-type"
 import { formatDate } from "@/utils/util"
@@ -18,21 +18,33 @@ import { currentCalculateRemainingTime } from "@/utils/util"
 import NoCampaign from "./MyCampaignDetail/NoCampaign"
 import styled from "styled-components"
 import { ButtonProps } from "@/types/component-types/button-type"
+import { chips, ChipType } from "@/types/component-types/chip-type"
 
 const MyCampaignPage = () => {
-  const [selectedChip, setSelectedChip] = useState("전체")
   const [currentTime, setCurrentTime] = useState(new Date())
   const [currTimes, setCurrTimes] = useState<
     { reviewId: number; currTime: string | null }[]
-  >([]) // 각 리뷰 아이템의 currTime을 저장하는 상태 변수
+  >([]) // 각 리뷰 아이템의 currTime을 저장
   const setReivewList = useSetRecoilState(reviewListState)
   const navigate = useNavigate()
   const router = useRouter()
   //** 스크롤 0부터시작 */
   useScrollToTop()
-  const chips = ["전체"]
-  const handleSelectChip = (chip: string) => {
+
+  //** FilterCampaign option상태 */
+  const [selectedChip, setSelectedChip] = useState<ChipType>("전체")
+  const handleSelectChip = (chip: ChipType) => {
     setSelectedChip(chip)
+  }
+  //** step status 매핑 */
+  const statusMapping: Record<ChipType, string[]> = {
+    전체: [],
+    상품구매: ["join"],
+    리뷰검수: ["purchase"],
+    리뷰등록: ["confirm"],
+    지급대기: ["upload"],
+    지급완료: ["reward"],
+    미션중단: ["giveup", "timeout"],
   }
 
   //** 스텝타이머 */
@@ -74,7 +86,7 @@ const MyCampaignPage = () => {
     }
   }, [data, setReivewList])
 
-  // currentTime이나 reviewList가 변경될 때마다 currTimes 업데이트
+  //** currentTime이나 reviewList가 변경될 때마다 currTimes 업데이트 */
   useEffect(() => {
     if (reviewList) {
       const updatedCurrTimes = reviewList.map((reviewItem) => {
@@ -91,7 +103,7 @@ const MyCampaignPage = () => {
     }
   }, [currentTime, reviewList])
 
-  // currTime이 '00시 00분 00초'에 도달하면 refetch 트리거
+  //** currTime이 '00시 00분 00초'에 도달하면 refetch 트리거 */
   useEffect(() => {
     const anyTimeZero = currTimes.some(
       (item) => item.currTime === "(-00:00:00)"
@@ -101,6 +113,7 @@ const MyCampaignPage = () => {
     }
   }, [currTimes, refetch])
 
+  // ** 캠페인상세 이동핸들러 */
   const handleGoBack = () => {
     const redirectPath = sessionStorage.getItem("redirectPath")
     if (redirectPath) {
@@ -110,10 +123,23 @@ const MyCampaignPage = () => {
     }
   }
 
+  //** selectedChip에 따라 reviewList 필터링 */
+  const filteredReviewList = useMemo(() => {
+    if (!reviewList) return []
+
+    const statusesToFilter = statusMapping[selectedChip]
+    if (statusesToFilter.length === 0) {
+      return reviewList // 필터링 없이 모든 항목 표시
+    }
+
+    return reviewList.filter((reviewItem) =>
+      statusesToFilter.includes(reviewItem.status)
+    )
+  }, [reviewList, selectedChip])
   return (
     <>
       <ReuseHeader title="나의 캠페인" onBack={handleGoBack} />
-      <FilterCalendar
+      <FilterCampaign
         chips={chips}
         selectedChip={selectedChip}
         onSelect={handleSelectChip}

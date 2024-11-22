@@ -265,10 +265,8 @@ const CampaignDetailPage = () => {
           onTabSelect={handleTabSelect}
         />
         <Main>
-          <div>
-            {/* GuideDetail 이용가이드 */}
-            <GuideDetail />
-          </div>
+          {/* GuideDetail 이용가이드 */}
+          <GuideDetail />
         </Main>
         {/* 유의사항 */}
         <Notice />
@@ -443,12 +441,12 @@ const Title = styled.p`
 `
 
 const Main = styled.div`
-  padding: 1.4rem 0 5.4rem;
+  padding: 0 0 5.4rem;
 `
 
 const GuideDetail = styled.div`
   height: 1382px;
-  margin-top: 1.4rem;
+  margin-top: 4.3rem;
   background-image: url("${detailGuideImage}");
   background-repeat: no-repeat;
   background-position: center;
