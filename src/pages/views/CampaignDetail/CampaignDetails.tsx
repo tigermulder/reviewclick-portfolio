@@ -32,7 +32,7 @@ const CampaignDetails = forwardRef<HTMLButtonElement, CampaignDetailsProps>(
           <DetailsList>
             <li>
               <DetailInfoHeading>신청 마감일</DetailInfoHeading>
-              <DetailInfo>{formatDate(campaign.endAt)}</DetailInfo>
+              <DetailInfo>{formatDate(campaign.joinEndAt)}</DetailInfo>
             </li>
             <li>
               <DetailInfoHeading>미션완료기간</DetailInfoHeading>
