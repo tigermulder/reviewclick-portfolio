@@ -52,7 +52,6 @@ const MyCampaignPage = () => {
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000) // 매초 업데이트
-
     return () => clearInterval(timer) // 컴포넌트 언마운트 시 클리어
   }, [])
 
@@ -168,8 +167,8 @@ const MyCampaignPage = () => {
         </p>
       </CartCardDesc>
       <MyReviewContainer>
-        {reviewList && reviewList.length > 0 ? (
-          reviewList.map((reviewItem) => {
+        {filteredReviewList && filteredReviewList.length > 0 ? (
+          filteredReviewList.map((reviewItem) => {
             //** 캠페인 남은 시간 */
             const thumbnailUrl = reviewItem.thumbnailUrl || dummyImage
             const button: { variant: ButtonProps["$variant"]; text: string } =
