@@ -5,6 +5,15 @@ import styled from "styled-components"
 
 const NotFoundPage = () => {
   const navigate = useNavigate()
+  const redirectPath = sessionStorage.getItem("redirectPath")
+  const handleGoBack = () => {
+    if (redirectPath) {
+      navigate(redirectPath)
+    } else {
+      navigate(-1) // 이전 페이지로 돌아감
+    }
+  }
+
   return (
     <ErrorContainer>
       <img src={Error404Image} alt="에러 이미지" />
@@ -14,7 +23,7 @@ const NotFoundPage = () => {
         다시 한 번 확인해주세요.
       </ErrorMessage>
       <ButtonContainer>
-        <Button onClick={() => navigate(-1)} $variant="pink">
+        <Button onClick={handleGoBack} $variant="pink">
           돌아가기
         </Button>
       </ButtonContainer>
