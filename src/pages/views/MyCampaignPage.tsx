@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useRouter } from "@/hooks/useRouting"
 import { useQuery } from "@tanstack/react-query"
 import { getReviewList } from "@/services/review"
@@ -14,7 +14,6 @@ import dummyImage from "assets/dummy-image.png"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import { RoutePath } from "@/types/route-path"
 import ReuseHeader from "@/components/ReuseHeader"
-import { handleGoBack } from "@/utils/util"
 import { currentCalculateRemainingTime } from "@/utils/util"
 import NoCampaign from "./MyCampaignDetail/NoCampaign"
 import styled from "styled-components"
@@ -27,6 +26,7 @@ const MyCampaignPage = () => {
     { reviewId: number; currTime: string | null }[]
   >([]) // 각 리뷰 아이템의 currTime을 저장하는 상태 변수
   const setReivewList = useSetRecoilState(reviewListState)
+  const navigate = useNavigate()
   const router = useRouter()
   //** 스크롤 0부터시작 */
   useScrollToTop()
@@ -100,6 +100,15 @@ const MyCampaignPage = () => {
       refetch()
     }
   }, [currTimes, refetch])
+
+  const handleGoBack = () => {
+    const redirectPath = sessionStorage.getItem("redirectPath")
+    if (redirectPath) {
+      navigate(redirectPath)
+    } else {
+      navigate(-1) // 이전 페이지로 돌아감
+    }
+  }
 
   return (
     <>
