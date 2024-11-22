@@ -44,7 +44,7 @@ export const AppRoute = () => {
   return (
     <ReactRouterRoutes>
       {/* Layout을 루트 경로로 지정하고, Outlet으로 자식 라우트를 렌더링 */}
-      <Route element={<Layout />}>
+      <Route path="/" element={<Layout />}>
         {/* Introduce 페이지 */}
         <Route path={RoutePath.Introduce} element={<RevuIntroducePage />} />
         {/* main 페이지 */}
