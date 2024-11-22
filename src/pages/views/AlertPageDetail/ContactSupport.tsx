@@ -55,7 +55,7 @@ const ContactSupport = () => {
     const loadCampaignList = async () => {
       if (
         selectedFilter.value === "campaign" ||
-        selectedCampaign?.value === "point"
+        selectedFilter.value === "point"
       ) {
         const list = await fetchCampaignList()
         setCampaignList(list)
