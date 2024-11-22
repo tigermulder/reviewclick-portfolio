@@ -43,4 +43,5 @@ export interface ContentProps {
   $isNoticeDetail: boolean
   $isNotificationDetail: boolean
   $isIntroducePage: boolean
+  $isNotFound: boolean
 }

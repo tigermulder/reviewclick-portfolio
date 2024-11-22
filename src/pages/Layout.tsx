@@ -24,6 +24,7 @@ const Layout = () => {
   const ContactAddPage = location.pathname === RoutePath.ContactAdd // 문의등록 페이지
   const UserAccountDeletionPage =
     location.pathname === RoutePath.UserAccountDeletion // 회원탈퇴 페이지
+  const isNotFound = location.pathname === RoutePath.NotFound
   const isSpecialPage =
     isLoginPage ||
     isCampaignDetail ||
@@ -49,6 +50,7 @@ const Layout = () => {
         $isNoticeDetail={isNoticeDetail}
         $isNotificationDetail={isNotificationDetail}
         $isIntroducePage={isIntroducePage}
+        $isNotFound={isNotFound}
       >
         {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
         <Outlet />
@@ -75,6 +77,7 @@ const Content = styled.main<ContentProps>`
     $isNoticeDetail,
     $isNotificationDetail,
     $isIntroducePage,
+    $isNotFound,
   }) => {
     if ($isMyCampaignPage) {
       return `
@@ -135,6 +138,11 @@ const Content = styled.main<ContentProps>`
         min-height: 100vh; 
         background-color: #212529;
       `
+    } else if ($isNotFound) {
+      return `
+      margin: 0;
+      padding: 0 1.5rem;
+    `
     } else {
       return `
         margin: 60px auto 0;
