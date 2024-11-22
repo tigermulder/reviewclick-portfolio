@@ -1,8 +1,12 @@
 import styled from "styled-components"
 import { FilterCampaignBar } from "@/types/component-types/filter-campaign"
-import { chips, ChipType } from "@/types/component-types/chip-type"
+import { ChipType } from "@/types/component-types/chip-type"
 
-const FilterCampaign = ({ selectedChip, onSelect }: FilterCampaignBar) => {
+const FilterCampaign = ({
+  chips,
+  selectedChip,
+  onSelect,
+}: FilterCampaignBar) => {
   return (
     <FilterChipWrap>
       <FilterChipBarStyled>
@@ -46,8 +50,6 @@ const FilterChipWrap = styled.div`
 `
 
 const FilterChipBarStyled = styled.ul`
-  margin-right: 1rem;
-
   background: var(--white);
   display: flex;
   align-items: center;

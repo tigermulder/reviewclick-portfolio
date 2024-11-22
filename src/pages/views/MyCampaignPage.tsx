@@ -18,7 +18,7 @@ import { currentCalculateRemainingTime } from "@/utils/util"
 import NoCampaign from "./MyCampaignDetail/NoCampaign"
 import styled from "styled-components"
 import { ButtonProps } from "@/types/component-types/button-type"
-import { ChipType } from "@/types/component-types/chip-type"
+import { chips, ChipType } from "@/types/component-types/chip-type"
 
 const MyCampaignPage = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -138,7 +138,11 @@ const MyCampaignPage = () => {
   return (
     <>
       <ReuseHeader title="나의 캠페인" onBack={handleGoBack} />
-      <FilterCampaign selectedChip={selectedChip} onSelect={handleSelectChip} />
+      <FilterCampaign
+        chips={chips}
+        selectedChip={selectedChip}
+        onSelect={handleSelectChip}
+      />
       {/* 다른 컴포넌트들 */}
       <CartCardDesc>
         <p>
