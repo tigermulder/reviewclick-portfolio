@@ -9,7 +9,6 @@ import useScrollToTop from "@/hooks/useScrollToTop"
 import { RoutePath } from "@/types/route-path"
 import ContentTab from "@/components/Tab"
 import dummyImage from "assets/dummy-image.png"
-import detailImage from "assets/prd-img.png"
 import detailGuideImage from "assets/prd-detail-guide.png"
 import { joinReview, cancelReview } from "@/services/review"
 import { isModalOpenState } from "@/store/modal-recoil"
@@ -267,7 +266,6 @@ const CampaignDetailPage = () => {
         />
         <Main>
           <div>
-            <ImagePlaceholder />
             {/* GuideDetail 이용가이드 */}
             <GuideDetail />
           </div>
@@ -446,14 +444,6 @@ const Title = styled.p`
 
 const Main = styled.div`
   padding: 1.4rem 0 5.4rem;
-`
-
-const ImagePlaceholder = styled.div`
-  height: 384px;
-  background-image: url("${detailImage}");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
 `
 
 const GuideDetail = styled.div`
