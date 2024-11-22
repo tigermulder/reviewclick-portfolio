@@ -39,7 +39,7 @@ const CampaignDetailPage = () => {
   const navigate = useNavigate()
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
-  const [isProductViewed, setIsProductViewed] = useState(false)
+  // const [isProductViewed, setIsProductViewed] = useState(false)
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
 
   useEffect(() => {
@@ -79,23 +79,24 @@ const CampaignDetailPage = () => {
         behavior: "smooth",
       })
     } else {
-      if (isProductViewed) {
-        // '상품 구경하러가기'를 클릭한 경우 캠페인 신청 진행
-        handleApply()
-      } else {
-        // '상품 구경하러가기'를 클릭하지 않은 경우 토스트 메시지 표시
-        addToast(
-          "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
-          "warning",
-          3000,
-          "campaign"
-        )
-        // '상품 구경하러가기' 버튼 위치로 스크롤
-        viewProductRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        })
-      }
+      handleApply()
+      // if (isProductViewed) {
+      //   // '상품 구경하러가기'를 클릭한 경우 캠페인 신청 진행
+
+      // } else {
+      //   // '상품 구경하러가기'를 클릭하지 않은 경우 토스트 메시지 표시
+      //   addToast(
+      //     "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
+      //     "warning",
+      //     3000,
+      //     "campaign"
+      //   )
+      //   // '상품 구경하러가기' 버튼 위치로 스크롤
+      //   viewProductRef.current?.scrollIntoView({
+      //     behavior: "smooth",
+      //     block: "center",
+      //   })
+      // }
     }
   }
   //** 탭 설정 */
@@ -210,7 +211,7 @@ const CampaignDetailPage = () => {
   const handleViewProduct = () => {
     const url = campaignDetail.snsUrl || "https://naver.com"
     window.open(url, "_blank", "noopener,noreferrer")
-    setIsProductViewed(true) // 버튼 클릭 여부 업데이트
+    // setIsProductViewed(true) // 버튼 클릭 여부 업데이트
   }
 
   //** 캠페인신청 취소 핸들러 [2-2] */
