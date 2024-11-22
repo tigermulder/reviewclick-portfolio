@@ -38,6 +38,7 @@ const NotificationDetail = lazy(
 )
 const NoticeDetail = lazy(() => import("./views/AlertPageDetail/NoticeDetail"))
 const RevuIntroducePage = lazy(() => import("./views/RevuIntroducePage"))
+const NotFoundPage = lazy(() => import("./views/NotFoundPage"))
 
 export const AppRoute = () => {
   return (
@@ -114,7 +115,7 @@ export const AppRoute = () => {
         {/* 개인정보처리방침 */}
         <Route path={RoutePath.PrivacyPolicy} element={<PrivacyPolicy />} />
         {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
-        <Route path="*" element={null} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </ReactRouterRoutes>
   )

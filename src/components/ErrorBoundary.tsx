@@ -29,12 +29,17 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         <>
           입력한 주소가 정확한지
           <br />
-          다시 확인해주세요
+          다시 한 번 확인해주세요.
         </>
       )
     } else if (this.state.error?.message.includes("401")) {
       // 401 인증에러 메시지
-      return <>접근 권한이 없습니다.</>
+      return (
+        <>
+          세션이 만료되었거나 <br />
+          접근 권한이 없는 페이지일 수 있어요.
+        </>
+      )
     } else {
       // 500 에러 메시지
       return (
@@ -52,7 +57,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.error?.message.includes("404")) {
       return "페이지를 찾을 수 없어요"
     } else if (this.state.error?.message.includes("401")) {
-      return "401 Unauthorized"
+      return "잘못된 접근이에요"
     } else {
       return "네트워크가 불안정해요"
     }
