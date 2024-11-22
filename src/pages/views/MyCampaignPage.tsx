@@ -154,7 +154,7 @@ const MyCampaignPage = () => {
               ) {
                 router.push(RoutePath.MyCampaign)
               } else {
-                const detail = RoutePath.MyReivewDetail(
+                const detail = RoutePath.MyReviewDetail(
                   `${reviewItem.reviewId}`
                 )
                 router.push(detail)
