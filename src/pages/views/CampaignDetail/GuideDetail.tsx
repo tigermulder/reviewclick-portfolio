@@ -111,6 +111,9 @@ const Divider = styled.div`
 const GuideList = styled.ul`
   margin: 3.2rem 0 5.3rem;
 
+  li + li {
+    margin-top: 2rem;
+  }
   li p:nth-child(1) {
     font-size: var(--font-title-size);
     font-weight: var(--font-title-weight);
