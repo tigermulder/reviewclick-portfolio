@@ -5,7 +5,7 @@ const GuideDetail = () => {
   return (
     <div>
       <SectionTitle>미션 프로세스</SectionTitle>
-      <img src={detailGuideImage} alt="미션프로세스" />
+      <GuideImg src={detailGuideImage} alt="미션프로세스" />
       <Divider />
       <SectionTitle>상품구매 가이드</SectionTitle>
       <GuideList>
@@ -96,6 +96,11 @@ const SectionTitle = styled.h3`
   color: var(--n600-color);
 `
 
+const GuideImg = styled.img`
+  width: 30.5rem;
+  margin: 2rem auto 4.4rem;
+`
+
 const Divider = styled.div`
   width: 100%;
   height: 0.1rem;
@@ -104,6 +109,19 @@ const Divider = styled.div`
 
 const GuideList = styled.ul`
   margin: 3.2rem 0 5.3rem;
+
+  li p:nth-child(1) {
+    font-size: var(--font-title-size);
+    font-weight: var(--font-title-weight);
+    letter-spacing: var(--font-title-letter-spacing);
+    color: var(--n600-color);
+  }
+  li p:nth-child(2) {
+    margin-top: 0.4rem;
+    font-size: var(--font-bodyL-size);
+    font-weight: var(--font-bodyL-weight);
+    letter-spacing: var(--font-bodyL-letter-spacing);
+  }
 `
 
 const Red = styled.em`
