@@ -83,7 +83,7 @@ const StyledIconNoticeArrow = styled(IconNoticeArrow)`
 `
 
 const NoticeBox = styled.ul`
-  padding: 1.6rem 1.6rem 1.6rem 3.2rem;
+  padding: 1.6rem 1.6rem 1.6rem 3rem;
   margin-top: 2.4rem;
   border-radius: 1rem;
   background: var(--whitewood);

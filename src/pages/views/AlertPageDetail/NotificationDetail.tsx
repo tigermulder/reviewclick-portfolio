@@ -49,18 +49,20 @@ const NotificationDetail = () => {
             {mainText}
           </p>
         </Header>
-        <Body>
-          <BodyTitle>캠페인정보</BodyTitle>
-          <BodyContainer>
-            <ThumbArea>
-              <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-            </ThumbArea>
-            <InfoArea>
-              <p>{notifyData?.cardInfo?.title}</p>
-              <span>{notifyData?.cardInfo?.reward.toLocaleString()}P</span>
-            </InfoArea>
-          </BodyContainer>
-        </Body>
+        {notifyData?.cardInfo && (
+          <Body>
+            <BodyTitle>캠페인정보</BodyTitle>
+            <BodyContainer>
+              <ThumbArea>
+                <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
+              </ThumbArea>
+              <InfoArea>
+                <p>{notifyData?.cardInfo?.title}</p>
+                <span>{notifyData?.cardInfo?.reward.toLocaleString()}P</span>
+              </InfoArea>
+            </BodyContainer>
+          </Body>
+        )}
         <div>
           <FooterText>{notifyData?.content}</FooterText>
         </div>
