@@ -54,93 +54,12 @@ const Layout = () => {
         {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
         <Outlet />
       </Content>
+      {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
+      <Outlet />
     </>
   )
 }
 
 export default Layout
 
-const Content = styled.main<ContentProps>`
-  width: 100%;
-
-  ${({
-    $isMyCampaignPage,
-    $isSpecialPage,
-    $isCampaignDetail,
-    $isUserPointLogPage,
-    $UserServiceGuidePage,
-    $TermsOfServicePage,
-    $PrivacyPolicyPage,
-    $UserAccountDeletionPage,
-    $ContactAddPage,
-    $isNoticeDetail,
-    $isNotificationDetail,
-    $isIntroducePage,
-  }) => {
-    if ($isMyCampaignPage) {
-      return `
-        min-height: 100vh; 
-        margin: 11.8rem auto 0;
-        padding: 2.4rem 1.5rem 8rem;
-        background: var(--whitewood);
-      `
-    } else if ($isSpecialPage) {
-      if ($isCampaignDetail) {
-        return `
-          min-height: 100vh; 
-          margin: 0;
-        `
-      } else {
-        return `
-          min-height: 100vh; 
-          margin: 0;
-          padding: 0 1.5rem;
-        `
-      }
-    } else if ($isUserPointLogPage) {
-      return `
-        background-color: var(--n20-color);
-        min-height: 100vh; 
-        margin: 0;
-        padding: 0 1.5rem;
-      `
-    } else if ($UserServiceGuidePage) {
-      return `
-        padding: 4.4rem 0 0;
-        background-color: var(--n80-color);
-      `
-    } else if ($TermsOfServicePage) {
-      return `
-        padding: 7rem 1.5rem 4rem;
-        background-color: var(--whitewood);
-      `
-    } else if ($PrivacyPolicyPage) {
-      return `
-        padding: 7rem 1.5rem 4rem;
-        background-color: var(--whitewood);
-      `
-    } else if ($UserAccountDeletionPage) {
-      return `
-        min-height: 100vh; 
-        padding: 4.4rem 1.5rem 4rem;
-        background-color: var(--n20-color);
-      `
-    } else if ($ContactAddPage || $isNoticeDetail || $isNotificationDetail) {
-      return `
-        min-height: 100vh; 
-        padding: 7rem 1.5rem 4rem;
-        background-color: var(--n20-color);
-      `
-    } else if ($isIntroducePage) {
-      return `
-        min-height: 100vh; 
-        background-color: #212529;
-      `
-    } else {
-      return `
-        margin: 60px auto 0;
-        padding: 0 1.5rem;
-      `
-    }
-  }}
-`
+const Content = styled.main<ContentProps>``
