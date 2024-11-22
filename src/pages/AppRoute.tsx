@@ -117,8 +117,6 @@ export const AppRoute = () => {
         {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
         <Route path="*" element={<NotFoundPage />} />
       </Route>
-      {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
-      <Route path="*" element={<NotFoundPage />} />
     </ReactRouterRoutes>
   )
 }
