@@ -65,7 +65,7 @@ function App() {
     location.pathname === RoutePath.TermsOfService ||
     location.pathname === RoutePath.PrivacyPolicy ||
     location.pathname === RoutePath.Introduce ||
-    location.pathname === "*"
+    location.pathname === "/*"
   isCampaignDetail || isReviewDetail || isNoticeDetail || isNotificationDetail
   const hideTapBar =
     location.pathname === RoutePath.Login ||
