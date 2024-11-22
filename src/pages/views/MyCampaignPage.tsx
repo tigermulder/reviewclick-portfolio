@@ -140,6 +140,22 @@ const MyCampaignPage = () => {
     )
   }, [reviewList, selectedChip])
 
+  // ** NoCampaign 타이틀 및 메시지 결정
+  const getNoCampaignProps = () => {
+    if (!reviewList || reviewList.length === 0) {
+      // 캠페인이 아예 없을 때
+      return {
+        title: "아직 참여중인 캠페인이 없어요.",
+      }
+    } else {
+      // 필터로 인해 필터된 리스트가 없을 때
+      return {
+        title: "선택한 필터에 맞는 캠페인이 없어요.",
+      }
+    }
+  }
+  const noCampaignProps = getNoCampaignProps()
+
   return (
     <>
       <ReuseHeader title="나의 캠페인" onBack={handleGoBack} />
@@ -252,7 +268,7 @@ const MyCampaignPage = () => {
             )
           })
         ) : (
-          <NoCampaign />
+          <NoCampaign {...noCampaignProps} />
         )}
       </MyReviewContainer>
     </>

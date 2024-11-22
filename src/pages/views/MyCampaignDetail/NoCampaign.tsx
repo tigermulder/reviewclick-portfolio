@@ -1,15 +1,16 @@
 import EmptyIcon from "assets/prd-empty.png"
 import EmptyList from "assets/prd-empty-list.png"
+import { NoCampaignProps } from "@/types/component-types/no-campaign-type"
 import styled from "styled-components"
 
-const NoCampaign = () => {
+const NoCampaign = ({ title }: NoCampaignProps) => {
   return (
     <NoCampaignContainer>
       <NoCampaignIcon>
         <img src={EmptyIcon} alt="참여중인 캠페인없음" />
       </NoCampaignIcon>
 
-      <NoCampaignTitle>아직 참여중인 캠페인이 없어요.</NoCampaignTitle>
+      <NoCampaignTitle>{title}</NoCampaignTitle>
       <p>
         캠페인을 신청하고 미션을 시작해보세요! <br /> 여기서 모든 캠페인 진행
         상황을 확인할 수 있어요.
