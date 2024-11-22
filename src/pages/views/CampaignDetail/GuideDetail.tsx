@@ -53,7 +53,7 @@ const GuideDetail = () => {
             <br />
             <b>★ 긍정적인 경험을 바탕으로 작성해주세요.(100~180자 이내)</b>
             <br />★ 리뷰 본문 첫 줄에 경제적 이해 관계(대가성 유무)를 명시하는{" "}
-            <Red>&lt;협찬&gt;</Red> <b>문구 기재 필수</b>
+            <Purple>&lt;협찬&gt;</Purple> <b>문구 기재 필수</b>
           </p>
         </li>
         <li>
@@ -90,6 +90,7 @@ const GuideDetail = () => {
 export default GuideDetail
 
 const SectionTitle = styled.h3`
+  margin-top: 4.3rem;
   font-size: var(--font-h3-size);
   font-weight: var(--font-h3-weight);
   letter-spacing: var(--font-h3-letter-spacing);
@@ -126,5 +127,10 @@ const GuideList = styled.ul`
 
 const Red = styled.em`
   color: var(--prim-L300);
+  font-weight: var(--font-weight-bold);
+`
+
+const Purple = styled.em`
+  color: var(--purple);
   font-weight: var(--font-weight-bold);
 `

@@ -264,13 +264,12 @@ const CampaignDetailPage = () => {
           selectedTab={selectedTab}
           onTabSelect={handleTabSelect}
         />
-        <Main>
-          {/* GuideDetail 이용가이드 */}
-          <GuideDetail />
-        </Main>
+
+        {/* GuideDetail 이용가이드 */}
+        <GuideDetail />
         {/* 유의사항 */}
         <Notice />
-
+        {/* 상세버튼 */}
         <FooterButtons
           campaignDetail={campaignDetail}
           reviewStatus={reviewStatus}
@@ -438,8 +437,4 @@ const Title = styled.p`
   font-size: 1.6rem;
   font-weight: var(--font-weight-medium);
   letter-spacing: calc(1.6rem * (-0.3 / 100));
-`
-
-const Main = styled.div`
-  padding: 0 0 5.4rem;
 `
