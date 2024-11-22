@@ -9,6 +9,7 @@ const Layout = () => {
   const isReviewDetail = !!useMatch("/my_campaign/:reviewId") // MY캠페인 상세 경로
   const isNotificationDetail = !!useMatch("/alert/notification/:notificationId") // 새소식 상세 경로
   const isNoticeDetail = !!useMatch("/alert/notice/:noticeId") // 공지사항 상세 경로
+  const isNotFound = !!useMatch("*")
   const isIntroducePage = location.pathname === RoutePath.Introduce // 소개페이지
   const isLoginPage = location.pathname === RoutePath.Login // 로그인 페이지
   const isJoinPage = location.pathname === RoutePath.Join // 인증 페이지 1-1
@@ -49,6 +50,7 @@ const Layout = () => {
         $isNoticeDetail={isNoticeDetail}
         $isNotificationDetail={isNotificationDetail}
         $isIntroducePage={isIntroducePage}
+        $isNotFound={isNotFound}
       >
         {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
         <Outlet />
@@ -75,6 +77,7 @@ const Content = styled.main<ContentProps>`
     $isNoticeDetail,
     $isNotificationDetail,
     $isIntroducePage,
+    $isNotFound,
   }) => {
     if ($isMyCampaignPage) {
       return `
@@ -134,6 +137,11 @@ const Content = styled.main<ContentProps>`
       return `
         min-height: 100vh; 
         background-color: #212529;
+      `
+    } else if ($isNotFound) {
+      return `
+        margin: 0;
+        padding: 0 1.5rem;
       `
     } else {
       return `
