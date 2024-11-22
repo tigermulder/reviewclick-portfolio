@@ -280,7 +280,7 @@ const TitleAreaContainer = styled.div`
 
   textarea {
     display: block;
-    padding: 1.5rem 1.4rem 1.4rem;
+    padding: 1.1rem 1.4rem 1.4rem;
     width: 100%;
     height: 100%;
     overflow: hidden;

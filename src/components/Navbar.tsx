@@ -48,7 +48,7 @@ const Navbar = () => {
     e.preventDefault()
     setActiveTab(tabName)
 
-    if (isLoggedIn === null) {
+    if (isLoggedIn === false) {
       addToast("계정 인증 완료 후 이용 가능해요.", "warning", 3000, "Join")
       return
     }
