@@ -43,6 +43,7 @@ function App() {
   const isReviewDetail = useMatch("/my_campaign/:reviewId")
   const isNoticeDetail = useMatch("/alert/notice/:noticeId")
   const isNotificationDetail = useMatch("/alert/notification/:notificationId")
+  const isNotFound = useMatch("*")
 
   const hideAppBar =
     location.pathname === RoutePath.Home ||
@@ -68,7 +69,8 @@ function App() {
     isCampaignDetail ||
     isReviewDetail ||
     isNoticeDetail ||
-    isNotificationDetail
+    isNotificationDetail ||
+    isNotFound
   const hideTapBar =
     location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.Join ||
@@ -86,7 +88,8 @@ function App() {
     location.pathname === RoutePath.Introduce ||
     isReviewDetail ||
     isNoticeDetail ||
-    isNotificationDetail
+    isNotificationDetail ||
+    isNotFound
   const showFooter =
     (location.pathname === RoutePath.Home && !isCampaignDetail) ||
     location.pathname === RoutePath.UserProfile

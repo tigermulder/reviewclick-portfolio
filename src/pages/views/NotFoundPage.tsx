@@ -5,7 +5,6 @@ import styled from "styled-components"
 
 const NotFoundPage = () => {
   const navigate = useNavigate()
-  console.log("NotFoundPage 렌더링됨")
   return (
     <ErrorContainer>
       <img src={Error404Image} alt="에러 이미지" />
