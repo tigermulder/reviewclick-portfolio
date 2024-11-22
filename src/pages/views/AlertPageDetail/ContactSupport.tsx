@@ -53,7 +53,10 @@ const ContactSupport = () => {
   }
   useEffect(() => {
     const loadCampaignList = async () => {
-      if (selectedFilter.value === "campaign") {
+      if (
+        selectedFilter.value === "campaign" ||
+        selectedCampaign?.value === "point"
+      ) {
         const list = await fetchCampaignList()
         setCampaignList(list)
       } else {
