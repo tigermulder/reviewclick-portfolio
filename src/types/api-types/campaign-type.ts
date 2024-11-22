@@ -32,6 +32,7 @@ export interface Campaign {
   thumbnailUrl: string
   startAt: string
   endAt: string
+  joinEndAt: string
   status: string
   quota: number
   joins: number
