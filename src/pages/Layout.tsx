@@ -4,6 +4,7 @@ import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
 
 const Layout = () => {
+  console.log("Layout 렌더링됨")
   const location = useLocation() // 현재 경로
   const isCampaignDetail = !!useMatch("/campaign/:campaignId") // 캠페인 상세 경로
   const isReviewDetail = !!useMatch("/my_campaign/:reviewId") // MY캠페인 상세 경로
