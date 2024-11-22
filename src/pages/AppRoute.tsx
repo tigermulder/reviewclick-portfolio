@@ -115,8 +115,14 @@ export const AppRoute = () => {
         {/* 개인정보처리방침 */}
         <Route path={RoutePath.PrivacyPolicy} element={<PrivacyPolicy />} />
         {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
+        <Route path="/*" element={<NotFoundPage />} />
+        {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
         <Route path="*" element={<NotFoundPage />} />
       </Route>
+      {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
+      <Route path="/*" element={<NotFoundPage />} />
+      {/* 모든 예외 경로를 NotFoundPage로 라우팅 */}
+      <Route path="*" element={<NotFoundPage />} />
     </ReactRouterRoutes>
   )
 }
