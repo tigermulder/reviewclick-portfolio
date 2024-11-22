@@ -7,7 +7,7 @@ export const RoutePath = {
   FindPassword: "find_password",
   ResetPassword: "reset_password",
   MyCart: "my_cart",
-  MyCampaign: "my_campaign",
+  MyCampaign: "/my_campaign",
   Notification: "notification",
   Alert: "alert",
   ContactAdd: "alert/contactadd",
