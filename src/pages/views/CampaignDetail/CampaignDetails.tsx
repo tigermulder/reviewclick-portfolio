@@ -3,9 +3,9 @@ import IconStar from "assets/ico-star1.svg?url"
 import Button from "@/components/Button"
 import { forwardRef } from "react"
 import { formatDate } from "@/utils/util"
-
+import { Campaign } from "@/types/api-types/campaign-type"
 interface CampaignDetailsProps {
-  campaign: any // 정확한 타입으로 변경하세요.
+  campaign: Campaign
   handleViewProduct: () => void
 }
 
