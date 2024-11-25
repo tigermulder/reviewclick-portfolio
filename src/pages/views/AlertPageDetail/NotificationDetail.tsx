@@ -39,6 +39,7 @@ const NotificationDetail = () => {
   const { status, mainText } = parseTitle(notifyData?.title)
   const userTime = notifyData?.createAt as string
   const managerTime = notifyData?.cardInfo?.answerAt as string
+  console.log(data?.notification.createAt)
   console.log(userTime)
   return (
     <Container>

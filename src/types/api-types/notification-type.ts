@@ -33,12 +33,12 @@ export interface NotificationItemResponse {
   errorCode?: number
   error?: string
   notification: {
+    content: string
+    createAt: string
     notificationId: number
     notificationCategory: string
     uid: number
     title: string
-    content: string
-    createAt: string | undefined
     cardInfo?: {
       type: string
       title: string
