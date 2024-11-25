@@ -48,6 +48,7 @@ const NotificationDetail = () => {
         <IconNotify />
       </AlertLogo>
       <AlertContainer>
+        <YearDay>{formatTalkDate(userTime)}</YearDay>
         <Header>
           <p>
             <span>{status}</span>
@@ -68,7 +69,6 @@ const NotificationDetail = () => {
             </BodyContainer>
           </Body>
         )}
-        <YearDay>{formatTalkDate(userTime)}</YearDay>
         <div>
           <FooterText>{notifyData?.content}</FooterText>
         </div>
@@ -102,7 +102,7 @@ const AlertLogo = styled.div`
 const AlertContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
   margin-left: 1.6rem;
 
   div {
