@@ -66,12 +66,13 @@ const MyPointPage = () => {
 export default MyPointPage
 
 const MyPointContainer = styled.div`
-  padding: 6rem 0;
+  padding: 8rem 0;
 `
 
 const MyPointListContainer = styled.ul`
   width: 100%;
   display: flex;
+  flex-direction: column;
   gap: 1.4rem;
 
   li {
