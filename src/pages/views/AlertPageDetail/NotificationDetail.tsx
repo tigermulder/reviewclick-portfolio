@@ -47,8 +47,8 @@ const NotificationDetail = () => {
       <AlertLogo>
         <IconNotify />
       </AlertLogo>
+      <YearDay>{formatTalkDate(userTime)}</YearDay>
       <AlertContainer>
-        <YearDay>{formatTalkDate(userTime)}</YearDay>
         <Header>
           <p>
             <span>{status}</span>
