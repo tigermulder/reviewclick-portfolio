@@ -159,10 +159,7 @@ export const currentCalculateRemainingTime = (
   const millisecondsInAnHour = 1000 * 60 * 60
   const millisecondsInAMinute = 1000 * 60
   const millisecondsInASecond = 1000
-
-  // 숫자를 두 자리로 포맷팅하는 함수
   const pad = (num: number) => num.toString().padStart(2, "0")
-
   if (diff > millisecondsInADay) {
     // 남은 시간이 1일 이상인 경우
     const days = Math.ceil(diff / millisecondsInADay)

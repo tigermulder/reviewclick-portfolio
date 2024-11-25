@@ -237,6 +237,9 @@ const CampaignDetailPage = () => {
     }
   }
 
+  //** 디데이 0일시 join 채우기 */
+  const displayJoins = dDay > 0 ? campaignDetail.joins : campaignDetail.quota
+
   return (
     <>
       {/* 캐시워크때문에 주석처리 */}
@@ -248,8 +251,7 @@ const CampaignDetailPage = () => {
       <DetailBody>
         {/* PopUp을 DetailBody 내부에 조건부로 렌더링 */}
         <PopUp $offsetY={popUpOffsetY}>
-          🎉 신청을 서두르세요! 신청인원 {campaignDetail.joins}/
-          {campaignDetail.quota}
+          🎉 신청을 서두르세요! 신청인원 {displayJoins}/{campaignDetail.quota}
         </PopUp>
         <Dday>{`D-${dDay}`}</Dday>
         <Title>{campaignDetail.title}</Title>
