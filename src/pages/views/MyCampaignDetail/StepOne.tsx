@@ -72,7 +72,7 @@ const StepOne = ({
               리뷰 등록&#40;인증&#41; 미션을 진행해 주세요.
             </p>
           )
-          setModalConfirmText("리뷰검수하기")
+          setModalConfirmText("나의 캠페인 내역")
           setModalCancelText("닫기")
           setResultModalOpen(true)
         }
@@ -111,9 +111,10 @@ const StepOne = ({
     setResultModalOpen(false)
     if (modalConfirmText === "재인증") {
       handleButtonClick()
-    } else if (modalConfirmText === "리뷰검수하기") {
+    } else if (modalConfirmText === "나의 캠페인 내역") {
       // 데이터 다시 가져오기
-      await refetchData()
+      // await refetchData()
+      navigate(RoutePath.MyCampaign)
       // 다음 스텝으로 이동
       goToNextStep()
     }

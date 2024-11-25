@@ -42,7 +42,7 @@ const CampaignDetailPage = () => {
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
 
   useEffect(() => {
-    if (campaignCode && !sessionStorage.getItem("redirectPath")) {
+    if (campaignCode) {
       sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
     }
   }, [campaignCode])
