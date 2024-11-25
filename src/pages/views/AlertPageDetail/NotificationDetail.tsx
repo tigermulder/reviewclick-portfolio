@@ -39,7 +39,7 @@ const NotificationDetail = () => {
   const { status, mainText } = parseTitle(notifyData?.title)
   const userTime = notifyData?.createAt as string
   const managerTime = notifyData?.cardInfo?.answerAt as string
-  console.log(formatTalkTime(userTime))
+  console.log(userTime)
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
