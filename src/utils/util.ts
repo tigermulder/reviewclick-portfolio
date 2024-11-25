@@ -229,3 +229,22 @@ export const formatTalkTime = (isoTimestamp: string): string => {
   // 최종 형식화된 문자열 결합
   return `${period} ${hours}:${paddedMinutes}`
 }
+
+//** 새소식 알림 부분 년월일포맷 함수 */
+export const formatTalkDate = (isoTimestamp: string): string => {
+  // ISO 타임스탬프를 Date 객체로 파싱
+  const date = new Date(isoTimestamp)
+
+  // 유효한 날짜인지 확인
+  if (isNaN(date.getTime())) {
+    throw new Error("유효하지 않은 ISO 타임스탬프가 제공되었습니다.")
+  }
+
+  // 연, 월, 일 추출
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1 // 월은 0부터 시작하므로 1을 더함
+  const day = date.getDate()
+
+  // "YYYY년 MM월 DD일" 형식으로 변환
+  return `${year}년 ${month}월 ${day}일`
+}

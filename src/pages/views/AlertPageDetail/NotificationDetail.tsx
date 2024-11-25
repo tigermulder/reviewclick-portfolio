@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 import { parseTitle } from "@/utils/util"
-import { formatTalkTime } from "@/utils/util"
+import { formatTalkTime, formatTalkDate } from "@/utils/util"
 
 const NotificationDetail = () => {
   const { notificationId } = useParams()
@@ -68,6 +68,7 @@ const NotificationDetail = () => {
             </BodyContainer>
           </Body>
         )}
+        <YearDay>{formatTalkDate(userTime)}</YearDay>
         <div>
           <FooterText>{notifyData?.content}</FooterText>
         </div>
@@ -195,7 +196,15 @@ const FooterText = styled.p`
   color: var(--n500-color);
 `
 
-const Time = styled.div`
+const YearDay = styled.p`
+  font-size: var(--font-callout-small-size);
+  font-weight: var(--font-callout-small-weight);
+  letter-spacing: var(--font-callout-small-letter-spacing);
+  color: var(--n100-color);
+  text-align: center;
+`
+
+const Time = styled.span`
   margin-left: 0.6rem;
   font-size: var(--font-callout-small-size);
   font-weight: var(--font-callout-small-weight);
