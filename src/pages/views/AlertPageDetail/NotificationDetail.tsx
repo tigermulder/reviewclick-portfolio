@@ -39,8 +39,7 @@ const NotificationDetail = () => {
   const { status, mainText } = parseTitle(notifyData?.title)
   const userTime = notifyData?.createdAt as string
   const managerTime = notifyData?.cardInfoQnaAnswer?.answerAt as string
-  console.log(data?.notification.createdAt)
-  console.log(userTime)
+
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
@@ -73,7 +72,22 @@ const NotificationDetail = () => {
         )}
 
         <div>
-          <FooterText>{notifyData?.content}</FooterText>
+          {notifyData?.cardInfoQnaAnswer ? (
+            <QnAContainer>
+              <AnswerTitle>
+                A. {notifyData.cardInfoQnaAnswer.question}
+              </AnswerTitle>
+              <Separator />
+              <AnswerContent>
+                Q. {notifyData.cardInfoQnaAnswer.answer}
+              </AnswerContent>
+              <Time>
+                <p>{formatTalkTime(managerTime)}</p>
+              </Time>
+            </QnAContainer>
+          ) : (
+            <FooterText>{notifyData?.content}</FooterText>
+          )}
         </div>
       </AlertContainer>
       <Time>
@@ -216,4 +230,46 @@ const Time = styled.span`
   color: var(--n100-color);
   align-self: flex-end;
   flex-shrink: 0;
+`
+
+const QnAContainer = styled.div`
+  width: 252px;
+  height: 288px;
+  padding-top: 10px;
+  padding-bottom: 226px;
+  padding-left: 14px;
+  padding-right: 14px;
+  background: white;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  display: inline-flex;
+`
+
+const AnswerTitle = styled.div`
+  width: 224px;
+  color: #3c4348;
+  font-size: 14px;
+  font-family: SUIT, sans-serif;
+  font-weight: 500;
+  line-height: 18.2px;
+  word-wrap: break-word;
+`
+
+const Separator = styled.div`
+  width: 78%;
+  height: 0px;
+  border: 1px #e9ecef solid;
+`
+
+const AnswerContent = styled.div`
+  width: 224px;
+  color: #3c4348;
+  font-size: 14px;
+  font-family: SUIT, sans-serif;
+  font-weight: 500;
+  line-height: 18.2px;
+  word-wrap: break-word;
 `
