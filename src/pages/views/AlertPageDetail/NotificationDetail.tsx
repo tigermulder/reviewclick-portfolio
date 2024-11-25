@@ -80,7 +80,9 @@ const NotificationDetail = () => {
             </AnswerContent>
           </QnAContainer>
         ) : (
-          <FooterText>{notifyData?.content}</FooterText>
+          <div>
+            <FooterText>{notifyData?.content}</FooterText>
+          </div>
         )}
       </AlertContainer>
       <Time>
