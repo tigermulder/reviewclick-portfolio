@@ -40,7 +40,11 @@ const MyPointPage = () => {
             return (
               <li key={rewardItem.reviewId}>
                 <MyPointCard>
-                  {rewardItem.uploadComplete === 1 ? "지급 완료" : "지급 대기"}
+                  {rewardItem.status === "reward"
+                    ? "지급 완료"
+                    : rewardItem.uploadComplete === 1
+                      ? "지급 완료"
+                      : "지급 대기"}
                 </MyPointCard>
                 <MyPointWrapper>
                   <ReviewCardThumb>
