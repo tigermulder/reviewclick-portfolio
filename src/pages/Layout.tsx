@@ -111,12 +111,7 @@ const Content = styled.main<ContentProps>`
         padding: 4.4rem 0 0;
         background-color: var(--n80-color);
       `
-    } else if ($TermsOfServicePage) {
-      return `
-        padding: 7rem 1.5rem 4rem;
-        background-color: var(--whitewood);
-      `
-    } else if ($PrivacyPolicyPage) {
+    } else if ($PrivacyPolicyPage || $TermsOfServicePage) {
       return `
         padding: 7rem 1.5rem 4rem;
         background-color: var(--whitewood);
