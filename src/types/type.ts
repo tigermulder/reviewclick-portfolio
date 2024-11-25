@@ -31,7 +31,7 @@ export type RoutePathHook =
   | typeof RoutePath.Notification
   | typeof RoutePath.Alert
   | typeof RoutePath.ContactAdd
-  | ReturnType<typeof RoutePath.MyReivewDetail>
+  | ReturnType<typeof RoutePath.MyReviewDetail>
   | ReturnType<typeof RoutePath.CampaignDetail>
   | ReturnType<typeof RoutePath.NotificationDetail>
   | ReturnType<typeof RoutePath.NoticeDetail>

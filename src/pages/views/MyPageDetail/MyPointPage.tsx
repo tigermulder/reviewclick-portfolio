@@ -67,13 +67,15 @@ export default MyPointPage
 
 const MyPointContainer = styled.div`
   padding: 6rem 0;
+  display: flex;
+  gap: 1.4rem;
 `
 
 const MyPointListContainer = styled.ul`
   li {
     background: var(--white);
     padding: 1.3rem 2.3rem 1.8rem;
-    border-radius: 0.8rem;
+    border-radius: 1.2rem;
     overflow: hidden;
   }
 `

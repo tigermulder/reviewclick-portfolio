@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 import { parseTitle } from "@/utils/util"
+import { formatTalkTime } from "@/utils/util"
 
 const NotificationDetail = () => {
   const { notificationId } = useParams()
@@ -36,6 +37,9 @@ const NotificationDetail = () => {
   const notifyData = data?.notification
   const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
   const { status, mainText } = parseTitle(notifyData?.title)
+  const userTime = notifyData?.createAt as string
+  const managerTime = notifyData?.cardInfo?.answerAt as string
+  console.log(notifyData?.notificationCategory === "qna_answer")
   return (
     <Container>
       <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
@@ -68,7 +72,7 @@ const NotificationDetail = () => {
         </div>
       </AlertContainer>
       <Time>
-        <p>오후 4:46</p>
+        <p>{formatTalkTime(userTime)}</p>
       </Time>
     </Container>
   )

@@ -34,17 +34,22 @@ export interface NotificationItemResponse {
   error?: string
   notification: {
     notificationId: number
-    noticeCategory: string
-    createAt: string // ISO format
+    notificationCategory: string
+    uid: number
     title: string
     content: string
+    createAt: string | undefined
     cardInfo?: {
-      campaignCode: string
-      campaignId: number
-      reviewId: number
-      reward: number
-      thumbnailUrl: string
+      type: string
       title: string
+      campaignId: number
+      campaignCode: string
+      reward: number
+      reviewId: number
+      thumbnailUrl: string
+      question: string
+      answer: string
+      answerAt: string
     }
   }
 }

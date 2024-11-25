@@ -206,3 +206,31 @@ export const formatTime = (seconds: number) => {
   const s = seconds % 60
   return `${m}:${s < 10 ? `0${s}` : s}`
 }
+
+//** 새소식 알림 부분 시간포맷 함수 */
+export const formatTalkTime = (isoTimestamp: string): string => {
+  // ISO 타임스탬프를 Date 객체로 파싱
+  const date = new Date(isoTimestamp)
+
+  // 유효한 날짜인지 확인
+  if (isNaN(date.getTime())) {
+    throw new Error("유효하지 않은 ISO 타임스탬프가 제공되었습니다.")
+  }
+
+  // 로컬 시간의 시와 분을 가져옴
+  let hours = date.getHours()
+  const minutes = date.getMinutes()
+
+  // 오전 또는 오후 결정
+  const period = hours >= 12 ? "오후" : "오전"
+
+  // 24시간 형식을 12시간 형식으로 변환
+  hours = hours % 12
+  hours = hours === 0 ? 12 : hours // 자정(0)과 정오(12)를 12로 조정
+
+  // 분이 한 자리인 경우 앞에 0을 추가
+  const paddedMinutes = minutes.toString().padStart(2, "0")
+
+  // 최종 형식화된 문자열 결합
+  return `${period} ${hours}:${paddedMinutes}`
+}
