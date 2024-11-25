@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import {
   statusToStepMap,
   ProgressStepProps,
@@ -34,9 +34,21 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     isReviewFailed = true
   }
   const steps = [
-    { name: "상품구매", key: "join" },
-    { name: "리뷰검수", key: "purchase" },
-    { name: threeStepName, key: "confirm" },
+    {
+      name: "상품구매",
+      key: "join",
+      tooltip: "상품을 구매하고 구매 영수증을 인증해주세요!",
+    },
+    {
+      name: "리뷰검수",
+      key: "purchase",
+      tooltip: "리뷰 작성하고 AI검수를 통해 긍정적인 리뷰인지 확인받으세요!",
+    },
+    {
+      name: threeStepName,
+      key: "confirm",
+      tooltip: "리뷰를 등록하고 캡쳐본을 업로드하면 미션 완료!",
+    },
     { name: fourthStepName, key: "reward" },
   ]
 
@@ -58,6 +70,8 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
             }
           }
           const isFourthStep = index === 3
+
+          const showTooltip = index + 1 === currentStep
           return (
             <StepBox key={step.key} $status={stepStatus}>
               <Circle>
@@ -80,6 +94,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                 )}
               </Circle>
               <ProgressName>{step.name}</ProgressName>
+              {showTooltip && <Tooltip>{step.tooltip}</Tooltip>}
             </StepBox>
           )
         })}
@@ -198,4 +213,29 @@ const ProgressName = styled.span`
   line-height: var(--base-line-height);
   font-weight: var(--font-weight-medium);
   color: var(--n400-color);
+`
+
+const Tooltip = styled.div`
+  position: absolute;
+  bottom: 2.5rem; /* 툴팁의 높이를 조정 */
+  background: var(--black);
+  color: var(--white);
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: var(--black) transparent transparent transparent;
+  }
 `
