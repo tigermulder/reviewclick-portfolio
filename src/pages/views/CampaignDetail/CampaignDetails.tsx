@@ -88,22 +88,13 @@ const Divider = styled.div`
 `
 
 const DetailContainer = styled.div`
+  position: relative;
   width: 100%;
   background-color: #fff;
   border-radius: 1rem;
   height: 4rem;
   margin: 2rem auto 0;
   padding: 0 0 0 1.6rem;
-`
-
-const DetailsList = styled.ul`
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.4px;
-
   &::before {
     content: "";
     position: absolute;
@@ -113,6 +104,14 @@ const DetailsList = styled.ul`
     width: 0.2rem;
     border-left: 0.15rem dashed var(--n40-color);
   }
+`
+
+const DetailsList = styled.ul`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4px;
 
   li {
     position: relative;
