@@ -116,7 +116,7 @@ const StepOne = ({
       // await refetchData()
       navigate(RoutePath.MyCampaign)
       // 다음 스텝으로 이동
-      goToNextStep()
+      // goToNextStep()
     }
   }
 

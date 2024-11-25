@@ -24,6 +24,7 @@ function App() {
           localStorage.setItem("email", data.email)
           sessionStorage.setItem("authToken", data.token)
           sessionStorage.setItem("spaceName", data.spaceName)
+          sessionStorage.setItem("penalty", data.penalty)
         }
       } catch (error) {
         console.error(error)

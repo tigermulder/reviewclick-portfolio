@@ -189,12 +189,6 @@ const IcoCustom = styled.div<IcoCustomProps>`
   width: 1.3rem;
   height: 1.3rem;
   background: url("${(props) => props.$icon}") no-repeat center / 100%;
-
-  ${({ $isMissionFailed }) =>
-    $isMissionFailed &&
-    css`
-      box-shadow: 0px 0px 10px rgba(32, 32, 32, 0.25);
-    `}
 `
 
 const ProgressName = styled.span`
