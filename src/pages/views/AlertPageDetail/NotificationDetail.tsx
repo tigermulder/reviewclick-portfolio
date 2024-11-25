@@ -78,9 +78,6 @@ const NotificationDetail = () => {
             <AnswerContent>
               Q. {notifyData.cardInfoQnaAnswer.question}
             </AnswerContent>
-            <Time>
-              <p>{formatTalkTime(managerTime)}</p>
-            </Time>
           </QnAContainer>
         ) : (
           <FooterText>{notifyData?.content}</FooterText>
