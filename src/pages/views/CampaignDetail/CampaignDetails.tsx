@@ -98,9 +98,9 @@ const DetailContainer = styled.div`
   &::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: 1.1rem;
     left: 0;
-    height: 100%;
+    height: 53%;
     width: 0.2rem;
     border-left: 0.15rem dashed var(--n40-color);
   }
