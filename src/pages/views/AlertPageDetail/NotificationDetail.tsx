@@ -35,10 +35,10 @@ const NotificationDetail = () => {
   }
 
   const notifyData = data?.notification
-  const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
+  const thumbnailUrl = notifyData?.cardInfoReview?.thumbnailUrl || dummyImage
   const { status, mainText } = parseTitle(notifyData?.title)
   const userTime = notifyData?.createdAt as string
-  const managerTime = notifyData?.cardInfo?.answerAt as string
+  const managerTime = notifyData?.cardInfoQnaAnswer?.answerAt as string
   console.log(data?.notification.createdAt)
   console.log(userTime)
   return (
@@ -47,15 +47,15 @@ const NotificationDetail = () => {
       <AlertLogo>
         <IconNotify />
       </AlertLogo>
-      <YearDay>{formatTalkDate(userTime)}</YearDay>
       <AlertContainer>
+        <YearDay>{formatTalkDate(userTime)}</YearDay>
         <Header>
           <p>
             <span>{status}</span>
             {mainText}
           </p>
         </Header>
-        {notifyData?.cardInfo && (
+        {notifyData?.cardInfoReview && (
           <Body>
             <BodyTitle>캠페인정보</BodyTitle>
             <BodyContainer>
@@ -63,12 +63,15 @@ const NotificationDetail = () => {
                 <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
               </ThumbArea>
               <InfoArea>
-                <p>{notifyData?.cardInfo?.title}</p>
-                <span>{notifyData?.cardInfo?.reward.toLocaleString()}P</span>
+                <p>{notifyData?.cardInfoReview?.title}</p>
+                <span>
+                  {notifyData?.cardInfoReview?.reward.toLocaleString()}P
+                </span>
               </InfoArea>
             </BodyContainer>
           </Body>
         )}
+
         <div>
           <FooterText>{notifyData?.content}</FooterText>
         </div>
@@ -92,6 +95,7 @@ const AlertLogo = styled.div`
   width: 3rem;
   height: 3rem;
   flex-shrink: 0;
+  margin-top: 1.8rem;
 
   svg {
     width: 100%;

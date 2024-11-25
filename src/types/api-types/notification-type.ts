@@ -39,7 +39,7 @@ export interface NotificationItemResponse {
     notificationCategory: string
     uid: number
     title: string
-    cardInfo?: {
+    cardInfoReview?: {
       type: string
       title: string
       campaignId: number
@@ -47,6 +47,10 @@ export interface NotificationItemResponse {
       reward: number
       reviewId: number
       thumbnailUrl: string
+    }
+    cardInfoQnaAnswer?: {
+      type: string
+      title: string
       question: string
       answer: string
       answerAt: string
