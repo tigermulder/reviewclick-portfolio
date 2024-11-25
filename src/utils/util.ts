@@ -212,11 +212,6 @@ export const formatTalkTime = (isoTimestamp: string): string => {
   // ISO 타임스탬프를 Date 객체로 파싱
   const date = new Date(isoTimestamp)
 
-  // 유효한 날짜인지 확인
-  if (isNaN(date.getTime())) {
-    throw new Error("유효하지 않은 ISO 타임스탬프가 제공되었습니다.")
-  }
-
   // 로컬 시간의 시와 분을 가져옴
   let hours = date.getHours()
   const minutes = date.getMinutes()
