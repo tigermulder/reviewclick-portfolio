@@ -233,18 +233,12 @@ const Time = styled.span`
 `
 
 const QnAContainer = styled.div`
-  width: 252px;
-  height: 288px;
-  padding-top: 10px;
-  padding-bottom: 226px;
-  padding-left: 14px;
-  padding-right: 14px;
   background: white;
   border-radius: 10px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.4rem;
   display: inline-flex;
 `
 
@@ -258,8 +252,8 @@ const AnswerTitle = styled.div`
   word-wrap: break-word;
 `
 
-const Separator = styled.div`
-  width: 78%;
+const Separator = styled.span`
+  width: 80%;
   height: 0px;
   border: 1px #e9ecef solid;
 `
