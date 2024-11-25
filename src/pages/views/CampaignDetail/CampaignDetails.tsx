@@ -107,12 +107,10 @@ const DetailsList = styled.ul`
   &::before {
     content: "";
     position: absolute;
-    top: 50%;
-    left: -1.6rem;
-    transform: translateY(-50%);
-    height: 50%;
-    width: 0.1rem;
-    margin-top: 0.5rem;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0.2rem;
     border-left: 0.15rem dashed var(--n40-color);
   }
 
