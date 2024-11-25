@@ -67,12 +67,12 @@ export default MyPointPage
 
 const MyPointContainer = styled.div`
   padding: 6rem 0;
-  display: flex;
-  gap: 1.4rem;
 `
 
 const MyPointListContainer = styled.ul`
   width: 100%;
+  display: flex;
+  gap: 1.4rem;
 
   li {
     background: var(--white);
