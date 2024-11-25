@@ -248,6 +248,7 @@ const AnswerTitle = styled.p`
 const Separator = styled.span`
   width: 100%;
   height: 0px;
+  margin: 0.4rem 0;
   border: 1px solid var(--n40-color);
 `
 

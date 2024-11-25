@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import dummyImage from "assets/dummy-image.png"
 import { getRewardList } from "@/services/reward"
 import styled from "styled-components"
-import { useQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { formatDate } from "@/utils/util"
 import NoRewards from "./NoReward"
 
@@ -20,7 +20,7 @@ const MyPointPage = () => {
     const response = await getRewardList(requestData)
     return response
   }
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["RewardList"],
     queryFn: fetchMyRewardList,
     refetchOnMount: true,

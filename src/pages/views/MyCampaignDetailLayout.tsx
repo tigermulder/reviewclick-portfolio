@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { getReviewItem } from "@/services/review"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import ReuseHeader from "@/components/ReuseHeader"
@@ -53,10 +53,9 @@ const MyCampaignDetailLayout = () => {
     const response = await getReviewItem(reviewIdKey)
     return response
   }
-  const { data, refetch } = useQuery({
+  const { data, refetch } = useSuspenseQuery({
     queryKey: ["reviewListItem", reviewId],
     queryFn: () => fetchCampaignListItem(reviewId as string),
-    enabled: !!reviewId,
     refetchOnWindowFocus: true, // 창이 포커스될 때 데이터 갱신
     refetchOnMount: true, // 컴포넌트 마운트 시 데이터 갱신
     staleTime: 0, // 데이터가 항상 최신이 아니라고 간주
