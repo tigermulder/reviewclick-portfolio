@@ -121,6 +121,8 @@ const MyCampaignPage = () => {
     const redirectPath = sessionStorage.getItem("redirectPath")
     if (redirectPath) {
       navigate(redirectPath)
+    } else {
+      navigate(-1) // 이전 페이지로 돌아감
     }
   }
 
