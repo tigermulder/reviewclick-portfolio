@@ -235,11 +235,6 @@ export const formatTalkDate = (isoTimestamp: string): string => {
   // ISO 타임스탬프를 Date 객체로 파싱
   const date = new Date(isoTimestamp)
 
-  // 유효한 날짜인지 확인
-  if (isNaN(date.getTime())) {
-    throw new Error("유효하지 않은 ISO 타임스탬프가 제공되었습니다.")
-  }
-
   // 연, 월, 일 추출
   const year = date.getFullYear()
   const month = date.getMonth() + 1 // 월은 0부터 시작하므로 1을 더함
