@@ -39,7 +39,7 @@ const FilterChipWrap = styled.div`
   width: 100%;
   top: 4.3rem;
   left: 0;
-  padding: 2.2rem 1.5rem 0.8rem;
+  padding: 2rem 1.5rem 1.2rem;
   height: 6rem;
   background: var(--white);
   display: flex;
