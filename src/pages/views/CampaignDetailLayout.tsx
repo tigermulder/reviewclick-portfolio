@@ -173,7 +173,7 @@ const CampaignDetailPage = () => {
           return
         }
       }
-      addToast("이미신청했습니다.", "warning", 1000, "campaign")
+      addToast("캠페인신청이 불가합니다.", "warning", 1000, "campaign")
       setErrorCode(null)
     }
   }

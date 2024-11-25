@@ -14,6 +14,7 @@ export const getNotificationList = async (
     "/notification/list",
     data
   )
+  console.log(response)
   return response.data
 }
 

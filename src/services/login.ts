@@ -12,7 +12,6 @@ export const logincheck = async (): Promise<LoginCheckResponseData> => {
   const response =
     await axiosInstance.get<LoginCheckResponseData>("/login/check")
 
-  console.log(response)
   return response.data
 }
 
