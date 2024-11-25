@@ -71,24 +71,20 @@ const NotificationDetail = () => {
           </Body>
         )}
 
-        <div>
-          {notifyData?.cardInfoQnaAnswer ? (
-            <QnAContainer>
-              <AnswerTitle>
-                A. {notifyData.cardInfoQnaAnswer.question}
-              </AnswerTitle>
-              <Separator />
-              <AnswerContent>
-                Q. {notifyData.cardInfoQnaAnswer.answer}
-              </AnswerContent>
-              <Time>
-                <p>{formatTalkTime(managerTime)}</p>
-              </Time>
-            </QnAContainer>
-          ) : (
-            <FooterText>{notifyData?.content}</FooterText>
-          )}
-        </div>
+        {notifyData?.cardInfoQnaAnswer ? (
+          <QnAContainer>
+            <AnswerTitle>A. {notifyData.cardInfoQnaAnswer.answer}</AnswerTitle>
+            <Separator />
+            <AnswerContent>
+              Q. {notifyData.cardInfoQnaAnswer.question}
+            </AnswerContent>
+            <Time>
+              <p>{formatTalkTime(managerTime)}</p>
+            </Time>
+          </QnAContainer>
+        ) : (
+          <FooterText>{notifyData?.content}</FooterText>
+        )}
       </AlertContainer>
       <Time>
         <p>{formatTalkTime(userTime)}</p>
@@ -251,9 +247,9 @@ const AnswerTitle = styled.p`
 `
 
 const Separator = styled.span`
-  width: 80%;
+  width: 100%;
   height: 0px;
-  border: 1px #e9ecef solid;
+  border: 1px solid var(--n40-color);
 `
 
 const AnswerContent = styled.p`
@@ -261,5 +257,5 @@ const AnswerContent = styled.p`
   font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
-  color: var(--n300-color);
+  color: var(--n100-color);
 `
