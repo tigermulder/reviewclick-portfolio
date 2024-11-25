@@ -22,7 +22,7 @@ export const RoutePath = {
   NoticeDetail: (noticeId: string) => `/alert/notice/${noticeId}`,
   NotificationDetail: (notificationId: string) =>
     `/alert/notification/${notificationId}`,
-  TermsOfService: "t/erms_service",
+  TermsOfService: "terms_service",
   PrivacyPolicy: "/privacy_policy",
   Introduce: "/introduce_service",
   NotFound: "/404",

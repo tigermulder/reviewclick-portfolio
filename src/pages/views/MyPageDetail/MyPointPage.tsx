@@ -72,6 +72,8 @@ const MyPointContainer = styled.div`
 `
 
 const MyPointListContainer = styled.ul`
+  width: 100%;
+
   li {
     background: var(--white);
     padding: 1.3rem 2.3rem 1.8rem;

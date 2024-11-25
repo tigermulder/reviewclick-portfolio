@@ -242,14 +242,12 @@ const QnAContainer = styled.div`
   display: inline-flex;
 `
 
-const AnswerTitle = styled.div`
-  width: 224px;
-  color: #3c4348;
-  font-size: 14px;
-  font-family: SUIT, sans-serif;
-  font-weight: 500;
-  line-height: 18.2px;
-  word-wrap: break-word;
+const AnswerTitle = styled.p`
+  font-size: var(--font-bodyM-size);
+  font-weight: var(--font-bodyM-weight);
+  line-height: var(--font-bodyM-line-height);
+  letter-spacing: var(--font-bodyM-letter-spacing);
+  color: var(--n500-color);
 `
 
 const Separator = styled.span`
@@ -258,12 +256,10 @@ const Separator = styled.span`
   border: 1px #e9ecef solid;
 `
 
-const AnswerContent = styled.div`
-  width: 224px;
-  color: #3c4348;
-  font-size: 14px;
-  font-family: SUIT, sans-serif;
-  font-weight: 500;
-  line-height: 18.2px;
-  word-wrap: break-word;
+const AnswerContent = styled.p`
+  font-size: var(--font-bodyM-size);
+  font-weight: var(--font-bodyM-weight);
+  line-height: var(--font-bodyM-line-height);
+  letter-spacing: var(--font-bodyM-letter-spacing);
+  color: var(--n300-color);
 `
