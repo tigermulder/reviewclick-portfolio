@@ -34,7 +34,7 @@ export interface NotificationItemResponse {
   error?: string
   notification: {
     content: string
-    createAt: string
+    createdAt: string
     notificationId: number
     notificationCategory: string
     uid: number

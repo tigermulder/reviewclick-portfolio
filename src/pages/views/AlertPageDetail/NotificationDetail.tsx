@@ -37,9 +37,9 @@ const NotificationDetail = () => {
   const notifyData = data?.notification
   const thumbnailUrl = notifyData?.cardInfo?.thumbnailUrl || dummyImage
   const { status, mainText } = parseTitle(notifyData?.title)
-  const userTime = notifyData?.createAt as string
+  const userTime = notifyData?.createdAt as string
   const managerTime = notifyData?.cardInfo?.answerAt as string
-  console.log(data?.notification.createAt)
+  console.log(data?.notification.createdAt)
   console.log(userTime)
   return (
     <Container>
@@ -73,7 +73,7 @@ const NotificationDetail = () => {
         </div>
       </AlertContainer>
       <Time>
-        <p>{22}</p>
+        <p>{formatTalkTime(userTime)}</p>
       </Time>
     </Container>
   )
