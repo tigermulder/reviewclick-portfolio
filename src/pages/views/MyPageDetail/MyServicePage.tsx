@@ -100,11 +100,11 @@ const TabItem = styled.li`
   background-color: var(--whitesmoke);
   border-radius: 2.2rem 2.2rem 0 0;
   font-weight: var(--font-weight-medium);
-  color: var(--primary-color);
+  color: var(--silver);
 
   &.on {
     background-color: #fff;
-    color: var(--silver);
+    color: var(--primary-color);
   }
 `
 
