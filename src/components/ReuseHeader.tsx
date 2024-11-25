@@ -12,7 +12,6 @@ const ReuseHeader = ({
 }: ReuseHeaderProps) => {
   const router = useRouter()
 
-  // 기본 동작으로 뒤로 가기
   const handleBack = () => {
     if (onBack) {
       onBack()
@@ -21,7 +20,6 @@ const ReuseHeader = ({
     }
   }
 
-  // 스텝 클릭 핸들러
   const handleStepClick = (stepIndex: number) => {
     if (onStepChange) {
       onStepChange(stepIndex)
@@ -87,7 +85,6 @@ const Title = styled.h1`
   letter-spacing: var(--font-h3-letter-spacing);
 `
 
-// 스텝 컨테이너
 const StepsContainer = styled.div`
   display: flex;
   position: absolute;
@@ -96,7 +93,6 @@ const StepsContainer = styled.div`
   align-items: center;
 `
 
-// 각 스텝 버튼
 const StepButton = styled.button<{ isActive: boolean }>`
   background: ${({ isActive }) =>
     isActive ? "var(--primary-color)" : "var(--n10-color)"};

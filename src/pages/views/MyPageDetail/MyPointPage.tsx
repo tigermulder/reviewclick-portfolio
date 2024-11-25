@@ -1,6 +1,5 @@
 import ReuseHeader from "@/components/ReuseHeader"
-import { replace, useNavigate } from "react-router-dom"
-import { RoutePath } from "@/types/route-path"
+import { useNavigate } from "react-router-dom"
 import dummyImage from "assets/dummy-image.png"
 import { getRewardList } from "@/services/reward"
 import styled from "styled-components"
