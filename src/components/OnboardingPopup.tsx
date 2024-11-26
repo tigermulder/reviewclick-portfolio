@@ -217,6 +217,7 @@ const CloseButton = styled.button<CloseButtonProps>`
 const FirstPageTitle = styled.h2`
   font-size: 2.4rem;
   color: #33373a;
+  font-weight: var(--font-weight-medium);
   letter-spacing: -0.48px;
 `
 
