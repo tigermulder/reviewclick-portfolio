@@ -288,6 +288,8 @@ const Pagination = styled.span`
 `
 
 const Icon = styled.img`
+  display: inline-block;
+  vertical-align: -0.15rem;
   width: 1rem;
   height: 1rem;
   margin-left: 0.2rem;
