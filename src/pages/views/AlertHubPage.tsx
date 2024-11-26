@@ -1,6 +1,5 @@
 import SinglePageHeader from "@/components/SinglePageHeader"
 import ContentTab from "@/components/Tab"
-import useScrollToTop from "@/hooks/useScrollToTop"
 import FaqButton from "@/components/FaqButton"
 import NewsContent from "./AlertPageDetail/NewsContent"
 import FaqContent from "./AlertPageDetail/FaqContent"
@@ -18,8 +17,7 @@ const AlertHubPage = () => {
   const handleTabSelect = (tabValue: string) => {
     setSelectedTab(tabValue)
   }
-  //** 스크롤 0부터시작 */
-  useScrollToTop()
+
   return (
     <>
       {/* 알림 헤더 타이틀 */}

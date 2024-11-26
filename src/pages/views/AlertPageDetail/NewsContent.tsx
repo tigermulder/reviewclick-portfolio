@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { getNotificationList } from "@/services/notification"
 import IconNotify from "assets/ico-notify.svg?react"
 import { formatDate } from "@/utils/util"
@@ -33,13 +33,8 @@ const NewsContent = () => {
         return undefined
       },
       initialPageParam: 1,
-      refetchInterval: 10 * 60 * 1000, // 10분 마다 리패치
-      staleTime: 10 * 60 * 1000, // 10분 동안 데이터가 신선함
-      gcTime: 11 * 60 * 1000, // 20분 동안 캐시 유지
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-      placeholderData: keepPreviousData, // 이전 데이터를 유지
+      refetchOnMount: true,
+      staleTime: 0,
     })
 
   // ** 무한 스크롤을 위한 Intersection Observer */
