@@ -21,6 +21,20 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [])
 
+  //** 스크롤방지 */
+  useEffect(() => {
+    if (showPopup) {
+      // 모달이 열리면 body 스크롤을 막음
+      document.body.style.overflow = "hidden"
+    } else {
+      // 모달이 닫히면 body 스크롤을 다시 활성화
+      document.body.style.overflow = "auto"
+    }
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [showPopup])
+
   //** 오늘하루 보지않기 */
   const handleDoNotShowAgain = () => {
     localStorage.setItem("doNotShowOnboardingToday", "true")
@@ -110,9 +124,9 @@ const PopupContainer = styled.div`
   position: relative;
   width: 90%;
   max-width: 400px;
-  height: 70%;
   margin: auto;
-  top: 15%;
+  top: 50%;
+  transform: translateY(-50%);
   background: white;
   border-radius: 10px;
   overflow: hidden;
@@ -136,6 +150,7 @@ const CustomSwiper = styled(Swiper)`
 
   .swiper-pagination-bullet-active {
     width: 2.4rem;
+    border-radius: 0.5rem;
     background-color: var(--prim-L300);
   }
 
@@ -158,11 +173,11 @@ const CloseButton = styled.button<CloseButtonProps>`
   &::after {
     content: "";
     position: absolute;
-    width: 2px;
-    height: 16px;
+    width: 0.2rem;
+    height: 1.8rem;
     background-color: ${(props) => props.$color};
-    top: 2rem;
-    right: 2rem;
+    top: 0.3rem;
+    left: 1.2rem;
   }
 
   &::before {
