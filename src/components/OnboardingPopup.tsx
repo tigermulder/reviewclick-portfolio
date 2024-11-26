@@ -53,12 +53,12 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
 
   return (
     <Overlay>
-      <Dimmed>
+      <Dimmed />
+      <PopupContainer>
+        {/* 오늘 하루 보지 않기 */}
         <DoNotShowAgain onClick={handleDoNotShowAgain}>
           오늘 하루 보지 않기
         </DoNotShowAgain>
-      </Dimmed>
-      <PopupContainer>
         <CustomSwiper
           slidesPerView={1}
           // pagination={{ clickable: true }} // 기본 페이지네이션 옵션 제거
@@ -131,8 +131,8 @@ const Dimmed = styled.div`
 
 const DoNotShowAgain = styled.button`
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  top: -2rem;
+  left: 0;
   color: white;
   background: transparent;
   border: none;
