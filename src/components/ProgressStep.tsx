@@ -226,10 +226,17 @@ const Tooltip = styled.div`
   position: absolute;
   bottom: 5.4rem;
   background: rgba(33, 37, 41, 0.94);
-  padding: 0.7rem 0.9rem;
+  padding: 0.7rem 1rem;
   border-radius: 0.8rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: calc(1rem * (-0.4 / 100));
   font-size: 1rem;
   white-space: nowrap;
+  animation: floating 0.8s linear infinite alternate;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 0.8rem;
   z-index: 10;
 
   &::after {
@@ -245,13 +252,11 @@ const Tooltip = styled.div`
 `
 
 const TooltipText = styled.div`
-  font-size: 1rem;
   color: var(--white);
 `
 
 const Pagination = styled.div`
-  padding: 0.2rem 0.5rem;
-  color: var(--n80-color);
+  color: var(--n100-color);
   em {
     color: var(--white);
   }
