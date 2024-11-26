@@ -239,8 +239,6 @@ const Tooltip = styled.div`
   padding: 0.7rem 1rem;
   max-width: 18rem;
   border-radius: 0.8rem;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: calc(1rem * (-0.4 / 100));
   font-size: 1rem;
   white-space: normal;
   animation: ${tooltipAnimation} 0.8s linear infinite alternate;
@@ -262,6 +260,8 @@ const Tooltip = styled.div`
 `
 
 const TooltipText = styled.p`
+  display: inline-block;
+  width: 13.5rem;
   font-size: var(--font-callout-small-size);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--font-callout-small-letter-spacing);
@@ -270,6 +270,7 @@ const TooltipText = styled.p`
 `
 
 const Pagination = styled.span`
+  flex-shrink: 0;
   font-size: var(--font-callout-small-size);
   font-weight: var(--font-callout-small-weight);
   letter-spacing: var(--font-callout-small-letter-spacing);
