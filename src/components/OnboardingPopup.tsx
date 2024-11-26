@@ -170,14 +170,13 @@ const PopupContainer = styled.div`
   transform: translateY(-50%);
   background: white;
   border-radius: 10px;
-  text-align: center;
 `
 
 const SlideContent = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 2.5rem;
 `
 
 const CustomSwiper = styled(Swiper)`
