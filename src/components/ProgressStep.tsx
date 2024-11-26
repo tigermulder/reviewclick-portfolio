@@ -227,7 +227,7 @@ const tooltipAnimation = keyframes`
       transform: translate(-2.7rem, 25%);
   }
   to {
-      transform: translate(-2.7rem, 10%);
+      transform: translate(-2.7rem, 15%);
   }
 `
 
