@@ -139,6 +139,9 @@ const SlideContent = styled.div`
 `
 
 const CustomSwiper = styled(Swiper)`
+  .swiper {
+    overflow: inherit;
+  }
   .swiper-pagination {
     position: absolute;
     bottom: -2.4rem !important;
