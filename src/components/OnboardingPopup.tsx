@@ -140,9 +140,8 @@ const Dimmed = styled.div`
 
 const DoNotShowAgain = styled.div`
   position: absolute;
-  bottom: -3rem;
-  left: 50%;
-  transform: translateX(-50%);
+  top: -3rem;
+  left: 0%;
   color: var(--n80-color);
   background: transparent;
   border: none;
