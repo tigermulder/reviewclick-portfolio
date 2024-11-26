@@ -233,7 +233,7 @@ const tooltipAnimation = keyframes`
 
 const Tooltip = styled.div`
   position: absolute;
-  bottom: 6rem;
+  bottom: 6.45rem;
   left: 50%;
   background: rgba(33, 37, 41, 0.94);
   padding: 0.7rem 1rem;
@@ -241,7 +241,8 @@ const Tooltip = styled.div`
   border-radius: 0.8rem;
   font-size: 1rem;
   white-space: normal;
-  animation: ${tooltipAnimation} 0.8s linear infinite alternate;
+  animation: ${tooltipAnimation} 0.65s cubic-bezier(0.4, 0, 1, 1) 0s infinite
+    alternate none running cgGovD;
   display: inline-flex;
   justify-content: space-between;
   align-items: end;
