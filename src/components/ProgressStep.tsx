@@ -241,8 +241,7 @@ const Tooltip = styled.div`
   border-radius: 0.8rem;
   font-size: 1rem;
   white-space: normal;
-  animation: ${tooltipAnimation} 0.65s cubic-bezier(0.4, 0, 1, 1) 0s infinite
-    alternate none running cgGovD;
+  animation: ${tooltipAnimation} 0.65s ease-out infinite alternate;
   display: inline-flex;
   justify-content: space-between;
   align-items: end;
