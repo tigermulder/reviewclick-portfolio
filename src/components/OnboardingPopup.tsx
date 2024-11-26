@@ -143,7 +143,6 @@ const PopupContainer = styled.div`
   width: 90%;
   max-width: 400px;
   height: 50rem;
-  overflow: hidden;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
@@ -207,7 +206,7 @@ const PaginationContainer = styled.div`
 `
 
 const PaginationBullet = styled.button<{ active: boolean }>`
-  border-radius: 50%;
+  border-radius: ${(props) => (props.active ? "0.5rem" : "50%")};
   background-color: ${(props) =>
     props.active ? "var(--prim-L300)" : "var(--n80-color)"};
   width: ${(props) => (props.active ? "2.4rem" : "0.7rem")};
