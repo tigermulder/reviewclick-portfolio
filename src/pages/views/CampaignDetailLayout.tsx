@@ -33,6 +33,7 @@ const CampaignDetailPage = () => {
   const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
   const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false) // 계정 인증 모달 상태
+  const [isRestrictionModalOpen, setIsRestrictionModalOpen] = useState(false) // 계정제한 모달 상태
   const { campaignCode } = useParams()
   const { addToast } = useToast()
   const navigate = useNavigate()
@@ -137,11 +138,16 @@ const CampaignDetailPage = () => {
 
   //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
-    const isLoggedIn = localStorage.getItem("email")
-    if (isLoggedIn === "null" || isLoggedIn === "") {
-      setIsAuthModalOpen(true)
+    const penalty = sessionStorage.getItem("penalty")
+    if (penalty === "step3") {
+      setIsRestrictionModalOpen(true)
     } else {
-      setIsModalOpen(true)
+      const isLoggedIn = localStorage.getItem("email")
+      if (isLoggedIn === "null" || isLoggedIn === "") {
+        setIsAuthModalOpen(true)
+      } else {
+        setIsModalOpen(true)
+      }
     }
   }
 
@@ -366,6 +372,25 @@ const CampaignDetailPage = () => {
         }
         confirmText="신청 취소하기"
         cancelText="닫기"
+      />
+      {/* 계정제한 모달 */}
+      <Modal
+        isOpen={isRestrictionModalOpen}
+        onConfirm={() => setIsRestrictionModalOpen(false)}
+        onCancel={() => setIsRestrictionModalOpen(false)}
+        title="❗️계정 제한 안내"
+        content={
+          <>
+            <p>
+              캠페인 미션을 정상적으로 완료하지 않은 것으로 확인되어 계정이
+              제한되었습니다.
+            </p>
+            <p>자세한 사항은 고객센터를 통해 문의해주시기 바랍니다.</p>
+          </>
+        }
+        confirmText="확인"
+        cancelText=""
+        showRouteLink={true}
       />
     </>
   )

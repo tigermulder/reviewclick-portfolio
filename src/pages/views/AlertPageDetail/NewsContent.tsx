@@ -15,7 +15,7 @@ const NewsContent = () => {
   }) => {
     const [_key] = queryKey
     const requestData = {
-      pageSize: 20,
+      pageSize: 40,
       pageIndex: 1,
     }
     const response = await getNotificationList(requestData)
