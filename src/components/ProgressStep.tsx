@@ -222,14 +222,14 @@ const ProgressName = styled.span`
   color: var(--n400-color);
 `
 
-const tooltipAnimation = keyframes`
-  from {
-      transform: translateY(20%);
-  }
-  to {
-      transform: translateY(10%);
-  }
-`
+// const tooltipAnimation = keyframes`
+//   from {
+//       transform: translateY(20%);
+//   }
+//   to {
+//       transform: translateY(10%);
+//   }
+// `
 
 const Tooltip = styled.div`
   position: absolute;
@@ -242,7 +242,7 @@ const Tooltip = styled.div`
   border-radius: 0.8rem;
   font-size: 1rem;
   white-space: normal;
-  animation: ${tooltipAnimation} 0.8s linear infinite alternate;
+
   display: inline-flex;
   justify-content: space-between;
   align-items: end;
