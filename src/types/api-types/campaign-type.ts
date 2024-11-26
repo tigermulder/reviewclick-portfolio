@@ -10,6 +10,8 @@ export interface CampaignListRequest {
 }
 export interface CampaignListResponse {
   statusCode: number
+  errorCode?: number
+  error?: string
   list: Campaign[]
   totalItems: number
   totalPages: number

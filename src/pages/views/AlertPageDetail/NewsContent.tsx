@@ -1,5 +1,6 @@
+import { useEffect, useRef } from "react"
+import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query"
 import { getNotificationList } from "@/services/notification"
-import { useQuery } from "@tanstack/react-query"
 import IconNotify from "assets/ico-notify.svg?react"
 import { formatDate } from "@/utils/util"
 import { Link } from "react-router-dom"
@@ -7,47 +8,86 @@ import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
 
 const NewsContent = () => {
-  //** 리액트쿼리 나의 알림리스트 */
-  const fetchNotificationList = async ({
-    queryKey,
-  }: {
-    queryKey: string[]
-  }) => {
-    const [_key] = queryKey
+  // ** 로드 모어 요소에 대한 레퍼런스 선언 */
+  const loadMoreRef = useRef<HTMLDivElement | null>(null)
+
+  //** Fetch campaign list */
+  const fetchNotificationList = async ({ pageParam = 1 }) => {
     const requestData = {
-      pageSize: 40,
-      pageIndex: 1,
+      pageSize: 10,
+      pageIndex: pageParam,
     }
     const response = await getNotificationList(requestData)
     return response
   }
-  const { data } = useQuery({
-    queryKey: ["notificationList"],
-    queryFn: fetchNotificationList,
-    refetchOnMount: true,
-    staleTime: 0,
-  })
-  const notificationList = data?.list
+
+  // ** React Query - 무한 알림 리스트 */
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ["notificationList"],
+      queryFn: fetchNotificationList,
+      getNextPageParam: (lastPage) => {
+        if (lastPage.pageIndex < lastPage.totalPages) {
+          return lastPage.pageIndex + 1
+        }
+        return undefined
+      },
+      initialPageParam: 1,
+      refetchInterval: 10 * 60 * 1000, // 10분 마다 리패치
+      staleTime: 10 * 60 * 1000, // 10분 동안 데이터가 신선함
+      gcTime: 11 * 60 * 1000, // 20분 동안 캐시 유지
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+      placeholderData: keepPreviousData, // 이전 데이터를 유지
+    })
+
+  // ** 무한 스크롤을 위한 Intersection Observer */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // 관찰 대상이 보이고 있고 다음 페이지가 있을 경우
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage()
+        }
+      },
+      { threshold: 1.0 }
+    )
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current)
+    }
+
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current)
+      }
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage])
+
+  // ** 페이지 데이터 평탄화 */
+  const notificationList = data?.pages.flatMap((page) => page.list) || []
 
   return (
     <NoticeContainer>
-      {notificationList?.map((notificationItem) => {
-        return (
-          <li key={notificationItem.notificationId}>
-            <StyledLink
-              to={RoutePath.NotificationDetail(
-                `${notificationItem.notificationId}`
-              )}
-            >
-              <NotifyDate>
-                <IconNotify />
-                {formatDate(notificationItem.createdAt)}
-              </NotifyDate>
-              <NotifyMessage>{notificationItem.title}</NotifyMessage>
-            </StyledLink>
-          </li>
-        )
-      })}
+      {notificationList.map((notificationItem) => (
+        <li key={notificationItem.notificationId}>
+          <StyledLink
+            to={RoutePath.NotificationDetail(
+              `${notificationItem.notificationId}`
+            )}
+          >
+            <NotifyDate>
+              <IconNotify />
+              {formatDate(notificationItem.createdAt)}
+            </NotifyDate>
+            <NotifyMessage>{notificationItem.title}</NotifyMessage>
+          </StyledLink>
+        </li>
+      ))}
+      {/* 로드 모어 트리거 요소 */}
+      <div ref={loadMoreRef} />
+      {isFetchingNextPage && <Loading>로딩 중...</Loading>}
     </NoticeContainer>
   )
 }
@@ -60,7 +100,6 @@ const NoticeContainer = styled.ul`
     position: relative;
     padding: 1.8rem 0;
     display: flex;
-
     border-bottom: 0.1rem solid var(--whitesmoke);
   }
 `
@@ -91,4 +130,11 @@ const StyledLink = styled(Link)`
   position: relative;
   display: block;
   width: 100%;
+`
+
+const Loading = styled.div`
+  padding: 1rem;
+  text-align: center;
+  font-size: var(--font-bodyM-size);
+  color: var(--n300-color);
 `

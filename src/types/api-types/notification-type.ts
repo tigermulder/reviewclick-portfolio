@@ -8,20 +8,24 @@ export interface NotificationListResponse {
   statusCode: number
   errorCode?: number
   error?: string
-  list: Array<{
-    notificationId: number
-    notificationCategory: string
-    uid: number
-    createdAt: string
-    title: string
-    content: string
-  }>
-  itemTotal: number
-  pageTotal: number
+  list: Notification[]
+  totalItems: number
+  totalPages: number
   pageSize: number
   pageIndex: number
-  notificationCategory?: string
+  startAt: boolean
+  endAt: boolean
   order?: string
+}
+
+export interface Notification {
+  notificationId: number
+  notificationCategory: string
+  uid: number
+  createdAt: string
+  title: string
+  content: string
+  tableId: number
 }
 
 //** Notification 상세 내용 요청 type */
