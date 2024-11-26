@@ -121,7 +121,7 @@ const ProgressContainer = styled.div`
 const ProgressStepWrapper = styled.div`
   position: absolute;
   top: 50%;
-  transform: translateY(-2.7rem);
+  transform: translateY(-50%);
   width: 100%;
   height: 100%;
   display: flex;
@@ -132,7 +132,7 @@ const ProgressStepWrapper = styled.div`
 const StepBox = styled.div<StepBoxProps>`
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-2.7rem);
   display: flex;
   align-items: center;
   justify-content: center;
