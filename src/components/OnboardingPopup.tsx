@@ -129,7 +129,6 @@ const PopupContainer = styled.div`
   transform: translateY(-50%);
   background: white;
   border-radius: 10px;
-  overflow: hidden;
 `
 
 const SlideContent = styled.div`
@@ -142,9 +141,10 @@ const SlideContent = styled.div`
 const CustomSwiper = styled(Swiper)`
   .swiper-pagination {
     position: absolute;
-    bottom: 2.4rem !important;
-    left: 50%;
+    bottom: -2.4rem !important;
+    left: 50% !important;
     transform: translateX(-50%);
+    z-index: 1000;
   }
   .swiper-pagination-bullet {
     border-radius: 50%;
