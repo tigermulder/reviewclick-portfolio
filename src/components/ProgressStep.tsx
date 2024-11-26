@@ -94,7 +94,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                 )}
               </Circle>
               <ProgressName>{step.name}</ProgressName>
-              {showTooltip && <Tooltip>{step.tooltip}</Tooltip>}
+              {showTooltip && step.tooltip && <Tooltip>{step.tooltip}</Tooltip>}
             </StepBox>
           )
         })}
@@ -217,7 +217,7 @@ const ProgressName = styled.span`
 
 const Tooltip = styled.div`
   position: absolute;
-  bottom: 2.5rem; /* 툴팁의 높이를 조정 */
+  bottom: 5.4rem;
   background: var(--black);
   color: var(--white);
   padding: 0.8rem 1.2rem;
