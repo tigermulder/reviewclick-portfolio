@@ -132,7 +132,7 @@ const ProgressStepWrapper = styled.div`
 const StepBox = styled.div<StepBoxProps>`
   position: relative;
   top: 50%;
-  transform: translateY(-2.7rem);
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -235,7 +235,7 @@ const Tooltip = styled.div`
   position: absolute;
   bottom: 6rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-2.7rem);
   background: rgba(33, 37, 41, 0.94);
   padding: 0.7rem 1rem;
   max-width: 15rem;
