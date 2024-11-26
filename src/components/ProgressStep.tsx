@@ -70,7 +70,6 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
             }
           }
           const isFourthStep = index === 3
-
           const showTooltip = index + 1 === currentStep
           return (
             <StepBox key={step.key} $status={stepStatus}>
@@ -94,7 +93,12 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                 )}
               </Circle>
               <ProgressName>{step.name}</ProgressName>
-              {showTooltip && step.tooltip && <Tooltip>{step.tooltip}</Tooltip>}
+              {showTooltip && step.tooltip && (
+                <Tooltip>
+                  <TooltipText>{step.tooltip}</TooltipText>
+                  <Pagination>{`${index + 1}/${steps.length}`}</Pagination>
+                </Tooltip>
+              )}
             </StepBox>
           )
         })}
@@ -218,15 +222,12 @@ const ProgressName = styled.span`
 const Tooltip = styled.div`
   position: absolute;
   bottom: 5.4rem;
-  background: var(--black);
-  color: var(--white);
-  padding: 0.8rem 1.2rem;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  background: rgba(33, 37, 41, 0.94);
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.8rem;
+  font-size: 1rem;
   white-space: nowrap;
   z-index: 10;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 
   &::after {
     content: "";
@@ -238,4 +239,18 @@ const Tooltip = styled.div`
     border-style: solid;
     border-color: var(--black) transparent transparent transparent;
   }
+`
+
+const TooltipText = styled.div`
+  font-size: 1rem;
+  color: var(--white);
+`
+
+const Pagination = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  color: var(--white);
+  font-weight: bold;
 `
