@@ -96,7 +96,10 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
               {showTooltip && step.tooltip && (
                 <Tooltip>
                   <TooltipText>{step.tooltip}</TooltipText>
-                  <Pagination>{`${index + 1}/${steps.length}`}</Pagination>
+                  <Pagination>
+                    <em>{index + 1}</em>
+                    {`/${steps.length - 1}`}
+                  </Pagination>
                 </Tooltip>
               )}
             </StepBox>
@@ -247,10 +250,9 @@ const TooltipText = styled.div`
 `
 
 const Pagination = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
   padding: 0.2rem 0.5rem;
-  font-size: 0.8rem;
-  color: var(--white);
-  font-weight: bold;
+  color: var(--n80-color);
+  em {
+    color: var(--white);
+  }
 `
