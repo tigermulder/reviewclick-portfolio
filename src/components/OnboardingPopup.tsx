@@ -140,22 +140,23 @@ const SlideContent = styled.div`
 `
 
 const CustomSwiper = styled(Swiper)`
+  .swiper-pagination {
+    position: absolute;
+    bottom: 2.4rem !important;
+    left: 50%;
+    transform: translateX(-50%);
+  }
   .swiper-pagination-bullet {
     border-radius: 50%;
-    background-color: #fff;
+    background-color: var(--n100-color);
     width: 0.7rem;
     height: 0.7rem;
     margin: 0 0.5rem;
   }
-
   .swiper-pagination-bullet-active {
     width: 2.4rem;
     border-radius: 0.5rem;
     background-color: var(--prim-L300);
-  }
-
-  .swiper-pagination {
-    bottom: 2.4rem !important;
   }
 `
 
