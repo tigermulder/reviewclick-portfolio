@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import {
   statusToStepMap,
   ProgressStepProps,
@@ -222,9 +222,20 @@ const ProgressName = styled.span`
   color: var(--n400-color);
 `
 
+const tooltipAnimation = keyframes`
+  from {
+      transform: translateY(20%);
+  }
+  to {
+      transform: translateY(10%);
+  }
+`
+
 const Tooltip = styled.div`
   position: absolute;
   bottom: 5.4rem;
+  left: 50%;
+  transform: translateX(-8.5%);
   background: rgba(33, 37, 41, 0.94);
   padding: 0.7rem 1rem;
   border-radius: 0.8rem;
@@ -232,7 +243,7 @@ const Tooltip = styled.div`
   letter-spacing: calc(1rem * (-0.4 / 100));
   font-size: 1rem;
   white-space: nowrap;
-  animation: floating 0.8s linear infinite alternate;
+  animation: ${tooltipAnimation} 0.8s linear infinite alternate;
   display: inline-flex;
   justify-content: space-between;
   align-items: end;
@@ -243,9 +254,8 @@ const Tooltip = styled.div`
     content: "";
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 0.5rem;
+    left: 6%;
+    border-width: 0.6rem;
     border-style: solid;
     border-color: var(--black) transparent transparent transparent;
   }
@@ -255,8 +265,11 @@ const TooltipText = styled.div`
   color: var(--white);
 `
 
-const Pagination = styled.div`
-  color: var(--n100-color);
+const Pagination = styled.span`
+  font-size: var(--font-callout-small-size);
+  font-weight: var(--font-callout-small-weight);
+  letter-spacing: var(--font-callout-small-letter-spacing);
+  color: rgba(255, 255, 255, 0.3);
   em {
     color: var(--white);
   }
