@@ -262,7 +262,11 @@ const Tooltip = styled.div`
 `
 
 const TooltipText = styled.p`
+  font-size: var(--font-callout-small-size);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-callout-small-letter-spacing);
   color: var(--white);
+  word-break: keep-all;
 `
 
 const Pagination = styled.span`
