@@ -5,15 +5,16 @@ import {
   CloseButtonProps,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
-// import { Pagination } from "swiper/modules" // Pagination 모듈 제거
+// import { Pagination } from "swiper/modules" // Pagination 모듈은 이미 제거됨
 import "swiper/css"
-// import "swiper/css/pagination" // Pagination 스타일 제거
+// import "swiper/css/pagination" // Pagination 스타일은 이미 제거됨
 import styled from "styled-components"
 
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [showPopup, setShowPopup] = useState(true)
   const [swiperInstance, setSwiperInstance] = useState<any>(null)
-  const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태 추가
+  const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태
+  const [doNotShowAgainChecked, setDoNotShowAgainChecked] = useState(false) // 체크박스 상태 추가
   const totalSlides = 7 // 총 슬라이드 수
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [])
 
-  //** 스크롤방지 */
+  //** 스크롤 방지 */
   useEffect(() => {
     if (showPopup) {
       // 모달이 열리면 body 스크롤을 막음
@@ -37,14 +38,17 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [showPopup])
 
-  //** 오늘하루 보지않기 */
-  const handleDoNotShowAgain = () => {
-    localStorage.setItem("doNotShowOnboardingToday", "true")
-    setShowPopup(false)
-    onClose()
+  //** 체크박스 상태 변경 핸들러 */
+  const handleDoNotShowAgainChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDoNotShowAgainChecked(e.target.checked)
   }
 
   const handleClose = () => {
+    if (doNotShowAgainChecked) {
+      localStorage.setItem("doNotShowOnboardingToday", "true")
+    }
     setShowPopup(false)
     onClose()
   }
@@ -55,15 +59,10 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     <Overlay>
       <Dimmed />
       <PopupContainer>
-        {/* 오늘 하루 보지 않기 */}
-        <DoNotShowAgain onClick={handleDoNotShowAgain}>
-          오늘 하루 보지 않기
-        </DoNotShowAgain>
         <CustomSwiper
           slidesPerView={1}
-          // pagination={{ clickable: true }} // 기본 페이지네이션 옵션 제거
           allowTouchMove={true}
-          // modules={[Pagination]} // 모듈 제거
+          // Swiper의 기본 페이지네이션은 이미 제거됨
           onSwiper={(swiper) => {
             setSwiperInstance(swiper)
             swiper.on("slideChange", () => {
@@ -105,6 +104,17 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
             />
           ))}
         </PaginationContainer>
+        {/* 오늘 하루 보지 않기 체크박스 */}
+        <DoNotShowAgain>
+          <label>
+            <Checkbox
+              type="checkbox"
+              checked={doNotShowAgainChecked}
+              onChange={handleDoNotShowAgainChange}
+            />
+            오늘 하루 보지 않기
+          </label>
+        </DoNotShowAgain>
       </PopupContainer>
     </Overlay>
   )
@@ -112,7 +122,6 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
 
 export default OnboardingPopup
 
-// 스타일드 컴포넌트들
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -129,20 +138,29 @@ const Dimmed = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `
 
-const DoNotShowAgain = styled.button`
+const DoNotShowAgain = styled.div`
   position: absolute;
-  top: -2rem;
-  left: 0;
-  color: white;
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--n80-color);
   background: transparent;
   border: none;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+`
+
+const Checkbox = styled.input`
+  margin-right: 0.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
 `
 
 const PopupContainer = styled.div`
   position: relative;
   width: 90%;
   max-width: 400px;
-  height: 50rem;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
@@ -159,7 +177,6 @@ const SlideContent = styled.div`
 
 const CustomSwiper = styled(Swiper)`
   height: 100%;
-  /* Swiper의 overflow: hidden을 유지합니다 */
 `
 
 const CloseButton = styled.button<CloseButtonProps>`
