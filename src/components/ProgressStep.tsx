@@ -8,6 +8,7 @@ import {
 import StepDone from "assets/ico_step_done.svg?url"
 import StepSuccess from "assets/ico_step_success.svg"
 import StepFailed from "assets/ico_step_failed.svg"
+import IconCoin from "assets/ico_coin.svg"
 
 const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
   let adjustedStatus = status
@@ -48,6 +49,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
       name: threeStepName,
       key: "confirm",
       tooltip: "리뷰를 등록하고 캡쳐본을 업로드하면 미션 완료!",
+      icon: IconCoin,
     },
     { name: fourthStepName, key: "reward" },
   ]
@@ -95,7 +97,12 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
               <ProgressName>{step.name}</ProgressName>
               {showTooltip && step.tooltip && (
                 <Tooltip>
-                  <TooltipText>{step.tooltip}</TooltipText>
+                  <TooltipText>
+                    {step.tooltip}
+                    {step.icon && (
+                      <Icon src={step.icon} alt={`${step.name} 아이콘`} />
+                    )}
+                  </TooltipText>
                   <Pagination>
                     <em>{index + 1}</em>
                     {`/${steps.length - 1}`}
@@ -278,4 +285,10 @@ const Pagination = styled.span`
   em {
     color: var(--white);
   }
+`
+
+const Icon = styled.img`
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.2rem;
 `
