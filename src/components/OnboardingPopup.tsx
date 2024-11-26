@@ -72,7 +72,10 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
             <SlideContent>
               <CloseButton onClick={handleClose} $color="black" />
               {/* 첫 번째 슬라이드 내용 */}
-              <h2>첫 번째 페이지</h2>
+              <FirstPageTitle>
+                스마트한 쇼핑 생활 <br />
+                리워드 플랫폼
+              </FirstPageTitle>
               <p>여기에 첫 번째 페이지 내용을 작성하세요.</p>
               <StartButton onClick={() => swiperInstance.slideNext()}>
                 캠페인 참여방법 확인하기
@@ -85,7 +88,9 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               <SlideContent>
                 <CloseButton onClick={handleClose} $color="black" />
                 {/* 각 슬라이드 내용 */}
-                <h2>{index + 1 === 6 ? "미션 성공!" : `STEP ${index + 1}`}</h2>
+                <Title>
+                  {index + 1 === 6 ? "미션 성공!" : `STEP ${index + 1}`}
+                </Title>
                 <p>{`이것은 페이지 ${index + 1}의 내용입니다.`}</p>
               </SlideContent>
             </SwiperSlide>
@@ -207,6 +212,19 @@ const CloseButton = styled.button<CloseButtonProps>`
   &::after {
     transform: rotate(-45deg);
   }
+`
+
+const FirstPageTitle = styled.h2`
+  font-size: 2.4rem;
+  color: #33373a;
+  letter-spacing: -0.48px;
+`
+
+const Title = styled.h2`
+  color: var(--white);
+  font-size: var(--font-h3-size);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.36px;
 `
 
 const StartButton = styled.button`
