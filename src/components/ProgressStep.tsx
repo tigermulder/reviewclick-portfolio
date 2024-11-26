@@ -255,9 +255,10 @@ const Tooltip = styled.div`
     position: absolute;
     top: 100%;
     left: 6%;
-    border-width: 0.6rem;
-    border-style: solid;
-    border-color: var(--black) transparent transparent transparent;
+    width: 1.2rem;
+    height: 0.6rem;
+    background: rgba(33, 37, 41, 0.94);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   }
 `
 
