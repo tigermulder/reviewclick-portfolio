@@ -250,15 +250,14 @@ const Tooltip = styled.div`
   gap: 0.8rem;
   z-index: 10;
 
-  &::after {
+  &::before {
     content: "";
     position: absolute;
-    top: 100%;
-    left: 6%;
-    width: 1.2rem;
-    height: 0.6rem;
-    background: rgba(33, 37, 41, 0.94);
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    left: 2rem;
+    bottom: -0.7rem;
+    border-left: 0.7rem solid transparent;
+    border-right: 0.7rem solid transparent;
+    border-top: 0.8rem solid rgba(33, 37, 41, 0.94);
   }
 `
 
