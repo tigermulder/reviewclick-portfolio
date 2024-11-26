@@ -112,7 +112,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               checked={doNotShowAgainChecked}
               onChange={handleDoNotShowAgainChange}
             />
-            오늘 하루 보지 않기
+            <span>오늘 하루 보지 않기</span>
           </label>
         </DoNotShowAgain>
       </PopupContainer>
@@ -146,8 +146,11 @@ const DoNotShowAgain = styled.div`
   background: transparent;
   border: none;
   font-size: 1.4rem;
-  display: flex;
-  align-items: center;
+
+  label {
+    display: flex;
+    align-items: center;
+  }
 `
 
 const Checkbox = styled.input`
