@@ -5,14 +5,16 @@ import {
   CloseButtonProps,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination } from "swiper/modules"
+// import { Pagination } from "swiper/modules" // Pagination 모듈 제거
 import "swiper/css"
-import "swiper/css/pagination"
+// import "swiper/css/pagination" // Pagination 스타일 제거
 import styled from "styled-components"
 
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [showPopup, setShowPopup] = useState(true)
   const [swiperInstance, setSwiperInstance] = useState<any>(null)
+  const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태 추가
+  const totalSlides = 7 // 총 슬라이드 수
 
   useEffect(() => {
     const doNotShowAgain = localStorage.getItem("doNotShowOnboardingToday")
@@ -59,10 +61,15 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
       <PopupContainer>
         <CustomSwiper
           slidesPerView={1}
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: true }} // 기본 페이지네이션 옵션 제거
           allowTouchMove={true}
-          modules={[Pagination]} // 모듈 등록
-          onSwiper={(swiper) => setSwiperInstance(swiper)}
+          // modules={[Pagination]} // 모듈 제거
+          onSwiper={(swiper) => {
+            setSwiperInstance(swiper)
+            swiper.on("slideChange", () => {
+              setActiveIndex(swiper.activeIndex)
+            })
+          }}
         >
           {/* 첫 번째 슬라이드 */}
           <SwiperSlide>
@@ -88,6 +95,16 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
             </SwiperSlide>
           ))}
         </CustomSwiper>
+        {/* 커스텀 페이지네이션 */}
+        <PaginationContainer>
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <PaginationBullet
+              key={index}
+              active={index === activeIndex}
+              onClick={() => swiperInstance.slideTo(index)}
+            />
+          ))}
+        </PaginationContainer>
       </PopupContainer>
     </Overlay>
   )
@@ -95,6 +112,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
 
 export default OnboardingPopup
 
+// 스타일드 컴포넌트들
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -124,6 +142,8 @@ const PopupContainer = styled.div`
   position: relative;
   width: 90%;
   max-width: 400px;
+  height: 50rem;
+  overflow: hidden;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
@@ -139,28 +159,8 @@ const SlideContent = styled.div`
 `
 
 const CustomSwiper = styled(Swiper)`
-  .swiper {
-    overflow: inherit;
-  }
-  .swiper-pagination {
-    position: absolute;
-    bottom: -2.4rem !important;
-    left: 50% !important;
-    transform: translateX(-50%);
-    z-index: 1000;
-  }
-  .swiper-pagination-bullet {
-    border-radius: 50%;
-    background-color: var(--n100-color);
-    width: 0.7rem;
-    height: 0.7rem;
-    margin: 0 0.5rem;
-  }
-  .swiper-pagination-bullet-active {
-    width: 2.4rem;
-    border-radius: 0.5rem;
-    background-color: var(--prim-L300);
-  }
+  height: 100%;
+  /* Swiper의 overflow: hidden을 유지합니다 */
 `
 
 const CloseButton = styled.button<CloseButtonProps>`
@@ -195,4 +195,25 @@ const CloseButton = styled.button<CloseButtonProps>`
 
 const StartButton = styled.button`
   margin-top: 20px;
+`
+
+const PaginationContainer = styled.div`
+  position: absolute;
+  bottom: -2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  z-index: 10;
+`
+
+const PaginationBullet = styled.button<{ active: boolean }>`
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.active ? "var(--prim-L300)" : "var(--n80-color)"};
+  width: ${(props) => (props.active ? "2.4rem" : "0.7rem")};
+  height: 0.7rem;
+  margin: 0 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: width 0.3s ease;
 `
