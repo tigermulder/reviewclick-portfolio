@@ -18,6 +18,7 @@ import Notice from "./CampaignDetail/Notice"
 import FooterButtons from "./CampaignDetail/FooterButtons"
 import useScrollAnimation from "@/hooks/useScrollAnimation"
 import GuideDetail from "./CampaignDetail/GuideDetail"
+import OnboardingPopup from "@/components/OnboardingPopup"
 import styled from "styled-components"
 
 // React Query 키
@@ -40,6 +41,7 @@ const CampaignDetailPage = () => {
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
   // const [isProductViewed, setIsProductViewed] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
 
   useEffect(() => {
@@ -47,6 +49,14 @@ const CampaignDetailPage = () => {
       sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
     }
   }, [campaignCode])
+  useEffect(() => {
+    const savedDate = localStorage.getItem("doNotShowOnboardingToday")
+    const today = new Date().toDateString()
+
+    if (savedDate !== today) {
+      setShowOnboarding(true)
+    }
+  }, [])
 
   //** 스크롤 0부터시작 */
   useScrollToTop()
@@ -248,6 +258,10 @@ const CampaignDetailPage = () => {
 
   return (
     <>
+      {/* 온보딩팝업 */}
+      {showOnboarding && (
+        <OnboardingPopup onClose={() => setShowOnboarding(false)} />
+      )}
       {/* 캐시워크때문에 주석처리 */}
       {/* <CampaignDetailBackButton />
       <CampaignDetailShareButton /> */}
