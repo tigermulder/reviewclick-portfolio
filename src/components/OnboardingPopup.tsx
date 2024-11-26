@@ -1,13 +1,10 @@
-// OnboardingPopup.tsx
 import { useState, useEffect } from "react"
 import {
   OnboardingPopupProps,
   CloseButtonProps,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
-// import { Pagination } from "swiper/modules" // Pagination 모듈은 이미 제거됨
 import "swiper/css"
-// import "swiper/css/pagination" // Pagination 스타일은 이미 제거됨
 import styled from "styled-components"
 
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
@@ -15,7 +12,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null)
   const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태
   const [doNotShowAgainChecked, setDoNotShowAgainChecked] = useState(false) // 체크박스 상태 추가
-  const totalSlides = 7 // 총 슬라이드 수
+  const totalSlides = 7
 
   useEffect(() => {
     const doNotShowAgain = localStorage.getItem("doNotShowOnboardingToday")
@@ -88,7 +85,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               <SlideContent>
                 <CloseButton onClick={handleClose} $color="black" />
                 {/* 각 슬라이드 내용 */}
-                <h2>{`STEP ${index + 1}`}</h2>
+                <h2>{index + 1 === 6 ? "미션 성공!" : `STEP ${index + 1}`}</h2>
                 <p>{`이것은 페이지 ${index + 1}의 내용입니다.`}</p>
               </SlideContent>
             </SwiperSlide>
