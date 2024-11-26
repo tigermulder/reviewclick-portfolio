@@ -233,9 +233,8 @@ const tooltipAnimation = keyframes`
 
 const Tooltip = styled.div`
   position: absolute;
-  bottom: 5.4rem;
-  left: 50%;
-  transform: translateX(-8.5%);
+  bottom: 5.8rem;
+  left: 20%;
   background: rgba(33, 37, 41, 0.94);
   padding: 0.7rem 1rem;
   border-radius: 0.8rem;
@@ -261,7 +260,7 @@ const Tooltip = styled.div`
   }
 `
 
-const TooltipText = styled.div`
+const TooltipText = styled.p`
   color: var(--white);
 `
 
