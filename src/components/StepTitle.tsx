@@ -1,11 +1,12 @@
-import styled from 'styled-components';
+import IconStepCheck from "assets/ico_step_check.svg?react"
+import styled from "styled-components"
 
 const StepContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-`;
+`
 
 const Step = styled.span`
   padding: 0.2rem 0.8rem;
@@ -32,15 +33,20 @@ const Step = styled.span`
     letter-spacing: var(--font-callout-letter-spacing);
     background: transparent;
   }
-`;
+`
+
+const Check = styled(IconStepCheck)`
+  width: 2.4rem;
+  height: 2.4rem;
+`
 
 export type HeaderStatusType = "join" | "purchase" | "confirm" | "upload"
 export const STEP_STATUS_MAP: { [key: number]: HeaderStatusType } = {
-  1: "join" || "purchase",     // 또는 "purchase"
+  1: "join" || "purchase", // 또는 "purchase"
   2: "confirm",
   3: "upload",
   // 필요한 경우 추가 스텝과 상태를 정의
-};
+}
 export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
   join: (
     <StepContainer>
@@ -60,7 +66,7 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
   ),
   confirm: (
     <StepContainer>
-      <Step>1</Step>
+      <Check />
       <Step className="active">리뷰검수</Step>
       <Step>3</Step>
       <Step>4</Step>
@@ -68,10 +74,10 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
   ),
   upload: (
     <StepContainer>
-      <Step>1</Step>
-      <Step>2</Step>
+      <Check />
+      <Check />
       <Step className="active">리뷰등록</Step>
       <Step>4</Step>
     </StepContainer>
   ),
-};
+}

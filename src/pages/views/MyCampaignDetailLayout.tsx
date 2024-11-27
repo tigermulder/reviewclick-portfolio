@@ -79,7 +79,7 @@ const MyCampaignDetailLayout = () => {
     creatAt: String(data?.campaign.createdAt),
     reviewText: data?.review_detail.reviewText,
   }
-  // 남은 시간 계산
+  //** 남은 시간 계산 */
   const { remainingTime, isEnded } = calculateRemainingTime(endAt)
   const thumbnailUrl = campaignThumb || dummyImage
 
