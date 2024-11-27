@@ -92,8 +92,7 @@ function App() {
     isNotificationDetail ||
     isNotFound
   const showFooter =
-    (location.pathname === RoutePath.Home && !isCampaignDetail) ||
-    location.pathname === RoutePath.UserProfile
+    !isCampaignDetail || location.pathname === RoutePath.UserProfile
 
   return (
     <div className="App">
