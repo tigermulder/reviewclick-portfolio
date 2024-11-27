@@ -188,6 +188,7 @@ const RemainingDays = styled.span<{ $isEnded: boolean }>`
 
 const CampaignInfo = styled.div`
   position: relative;
+  width: 82%;
   padding: 0 1.4rem;
   display: flex;
   flex: 1;
