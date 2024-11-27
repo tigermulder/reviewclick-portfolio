@@ -100,7 +100,11 @@ const Navbar = () => {
           onClick={(e) => handleTabClick("alerts", true, RoutePath.Alert, e)}
         >
           <NavItemContent>
-            <StyledIcon as={IconAlerts} $active={activeTab === "alerts"} />
+            <StyledIcon
+              as={IconAlerts}
+              $active={activeTab === "alerts"}
+              $tabName="alerts"
+            />
             <NavText $active={activeTab === "alerts"}>알림</NavText>
           </NavItemContent>
         </StyledLink>
