@@ -218,7 +218,7 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
   }};
   height: ${({ $tabName }) => {
     if ($tabName === "user") return "4.9rem"
-    else if ($tabName === "alerts") return "1.3rem"
+    else if ($tabName === "alerts") return "1.5rem"
     else return "1.7rem"
   }};
   margin-bottom: 0.4rem;
