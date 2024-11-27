@@ -38,6 +38,7 @@ const Step = styled.span`
 const Check = styled(IconStepCheck)`
   width: 1.6rem;
   height: 1.6rem;
+  margin: 0 0.4rem;
 `
 
 export type HeaderStatusType = "join" | "purchase" | "confirm" | "upload"
