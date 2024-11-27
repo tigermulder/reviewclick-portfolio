@@ -241,6 +241,20 @@ const CampaignDetailPage = () => {
         )
         setModalConfirmText("확인")
         setModalCancelText("확인")
+      } else {
+        setRimitModalOpen(true)
+        setModalTitle("신청 횟수 초과!")
+        setModalContent(
+          <>
+            <p>오늘 신청 가능한 횟수를 초과했어요.</p>
+            <p>
+              내일 다시 신청해주세요. <br />
+              (1일 1회 참여 가능)
+            </p>
+          </>
+        )
+        setModalConfirmText("확인")
+        setModalCancelText("확인")
       }
     }
   }
