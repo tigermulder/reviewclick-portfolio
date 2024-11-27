@@ -1,12 +1,15 @@
 import { useState } from "react"
 import styled from "styled-components"
 import { useSwipeable } from "react-swipeable"
-import {
-  BannerContainerProps,
-  BannerItemProps,
-} from "@/types/component-types/banner-type"
+import Banner1 from "assets/banner01.png"
 
-const banners = ["#D32F2F", "#F48FB1", "#C2185B", "#E57373", "#FFCDD2"]
+const banners = [
+  { type: "image", value: Banner1 },
+  { type: "color", value: "#F48FB1" },
+  { type: "color", value: "#C2185B" },
+  { type: "color", value: "#E57373" },
+  { type: "color", value: "#FFCDD2" },
+]
 
 const BannerSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -31,8 +34,8 @@ const BannerSlider = () => {
   return (
     <BannerWrapper {...handlers}>
       <BannerContainer $currentIndex={currentIndex}>
-        {banners.map((color, index) => (
-          <BannerItem key={index} color={color} />
+        {banners.map((banner, index) => (
+          <BannerItem key={index} banner={banner} />
         ))}
       </BannerContainer>
       <Indicator>{`${currentIndex + 1} / ${banners.length}`}</Indicator>
@@ -51,10 +54,35 @@ const BannerWrapper = styled.div`
   border-radius: 10px;
 `
 
-const BannerItem = styled.div<BannerItemProps>`
+const BannerContainer = styled.div<{ $currentIndex: number }>`
+  display: flex;
+  height: 100%;
+  transition: transform 0.3s ease;
+  transform: translateX(-${({ $currentIndex }) => $currentIndex * 100}%);
+`
+
+const BannerItem = ({
+  banner,
+}: {
+  banner: { type: string; value: string }
+}) => {
+  if (banner.type === "image") {
+    return <StyledBannerImage src={banner.value} alt="Banner Image" />
+  } else {
+    return <StyledBannerDiv style={{ backgroundColor: banner.value }} />
+  }
+}
+
+const StyledBannerImage = styled.img`
   min-width: 100%;
   height: 100%;
-  background-color: ${({ color }) => color};
+  object-fit: cover;
+  border-radius: 10px;
+`
+
+const StyledBannerDiv = styled.div`
+  min-width: 100%;
+  height: 100%;
   border-radius: 10px;
 `
 
@@ -67,11 +95,4 @@ const Indicator = styled.div`
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 12px;
-`
-
-const BannerContainer = styled.div<BannerContainerProps>`
-  display: flex;
-  height: 100%;
-  transition: transform 0.3s ease;
-  transform: translateX(-${({ $currentIndex }) => $currentIndex * 100}%);
 `

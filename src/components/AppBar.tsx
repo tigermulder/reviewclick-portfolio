@@ -68,7 +68,7 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 `
 
 const Logo = styled.div`
@@ -160,7 +160,7 @@ const SignUpLink = styled.div`
 `
 
 const HeartText = styled.div`
-  margin-top:0.2rem;
+  margin-top: 0.2rem;
   text-align: center;
   color: var(--silver);
   font-size: 0.8rem;
