@@ -126,11 +126,11 @@ const MainPage = (): JSX.Element => {
             <CampaignCard
               key={campaign.campaignId}
               $isEnded={isEnded}
-              onClick={() =>
-                router.push(
-                  RoutePath.CampaignDetail(String(campaign.campaignId))
-                )
-              }
+              // onClick={() =>
+              //   router.push(
+              //     RoutePath.CampaignDetail(String(campaign.campaignId))
+              //   )
+              // }
             >
               <CampaignImage>
                 <img src={thumbnailUrl} alt={campaign.title} />
