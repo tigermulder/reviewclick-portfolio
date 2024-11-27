@@ -2,13 +2,11 @@ import { useState } from "react"
 import styled from "styled-components"
 import { useSwipeable } from "react-swipeable"
 import Banner1 from "assets/banner01.png"
-import Banner2 from "assets/banner02.png"
 import Banner3 from "assets/banner03.png"
 
 const banners = [
-  { type: "image", value: Banner1 },
-  { type: "image", value: Banner2 },
   { type: "image", value: Banner3 },
+  { type: "image", value: Banner1 },
 ]
 
 const BannerSlider = () => {
