@@ -116,6 +116,9 @@ const DropdownButton = styled.div<{ $width: string; $height: string }>`
     font-size: 1.4rem;
     color: var(--gray);
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
 
