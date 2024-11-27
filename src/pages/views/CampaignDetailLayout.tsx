@@ -414,6 +414,7 @@ const CampaignDetailPage = () => {
         title={modalTitle}
         content={modalContent}
         confirmText={modalConfirmText}
+        cancelText={modalCancelText}
         onConfirm={() => setRimitModalOpen(false)}
         onCancel={() => setRimitModalOpen(false)}
       />
