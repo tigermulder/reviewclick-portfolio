@@ -211,10 +211,10 @@ const CampaignDetailPage = () => {
         refetch()
       }
     } catch (error: any) {
-      console.log(error.response.data.errorCode)
+      const errorCode = error.response.data.errorCode
       setIsApplySuccess(false)
       setIsModalOpen(false)
-      if (error.errorCode === 3) {
+      if (errorCode === 3) {
         setRimitModalOpen(true)
         setModalTitle("신청 횟수 초과!")
         setModalContent(
@@ -228,7 +228,7 @@ const CampaignDetailPage = () => {
         )
         setModalConfirmText("확인")
         setModalCancelText("확인")
-      } else if (error.errorCode === 6) {
+      } else if (errorCode === 6) {
         setRimitModalOpen(true)
         setModalTitle("캠페인 신청 불가")
         setModalContent(
@@ -242,7 +242,7 @@ const CampaignDetailPage = () => {
         )
         setModalConfirmText("확인")
         setModalCancelText("확인")
-      } else if (error.errorCode === 7) {
+      } else if (errorCode === 7) {
         setRimitModalOpen(true)
         setModalTitle("신청 횟수 초과!")
         setModalContent(
