@@ -212,7 +212,7 @@ const CampaignDetailPage = () => {
       }
     } catch (error: any) {
       setIsApplySuccess(false)
-
+      setIsModalOpen(false)
       if (error.errorCode === 3) {
         setRimitModalOpen(true)
         setModalTitle("신청 횟수 초과!")
