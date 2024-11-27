@@ -31,7 +31,6 @@ export const RoutePath = {
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath]
 
 export interface ContentProps {
-  $isHome: boolean
   $isSpecialPage: boolean
   $isCampaignDetail: boolean
   $isMyCampaignPage: boolean
