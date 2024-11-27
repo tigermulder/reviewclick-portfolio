@@ -29,21 +29,21 @@ const LikeButton = ({
 
   const handleLike = (event: React.MouseEvent): void => {
     event.stopPropagation()
-    const token = sessionStorage.getItem("authToken")
-    if (!token) {
-      addToast("로그인이 필요합니다.", "warning", 1000, "login")
-      router.push(RoutePath.Login)
-      return
-    }
+    // const token = sessionStorage.getItem("authToken")
+    // if (!token) {
+    //   addToast("로그인이 필요합니다.", "warning", 1000, "login")
+    //   router.push(RoutePath.Login)
+    //   return
+    // }
     if (onLikeToggle) {
       onLikeToggle() // 외부에서 찜하기 로직을 전달받았을 때 실행
     } else {
       if (defaultIsLiked()) {
         unlikeCampaign()
-        addToast("찜한 목록에서 해제했어요.", "uncheck", 1000, "like")
+        addToast("찜한 목록에서 해제했어요.", "uncheck", 3000, "like")
       } else {
         likeCampaign()
-        addToast("💝찜한 목록에 추가했어요.", "check", 1000, "like")
+        addToast("찜한 목록에 추가했어요.", "check", 3000, "like")
       }
     }
   }
