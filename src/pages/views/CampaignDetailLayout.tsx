@@ -241,15 +241,15 @@ const CampaignDetailPage = () => {
         )
         setModalConfirmText("확인")
         setModalCancelText("확인")
-      } else {
+      } else if (error.errorCode === 6) {
         setRimitModalOpen(true)
-        setModalTitle("신청 횟수 초과!")
+        setModalTitle("캠페인 신청 불가")
         setModalContent(
           <>
-            <p>오늘 신청 가능한 횟수를 초과했어요.</p>
+            <p>이 캠페인은 현재 신청이 불가합니다.</p>
             <p>
-              내일 다시 신청해주세요. <br />
-              (1일 1회 참여 가능)
+              오픈 전이거나 이미 종료된 캠페인이니, <br />
+              다른 캠페인을 확인해 주세요.
             </p>
           </>
         )
