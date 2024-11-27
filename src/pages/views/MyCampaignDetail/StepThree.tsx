@@ -54,24 +54,24 @@ const StepThree = ({
       setLoadingModalOpen(true)
 
       try {
-        const response = await uploadReview(formData)
-        console.log(response)
-        // const response = {
-        //   statusCode: 0,
-        // };
+        // const response = await uploadReview(formData)
+        const response = {
+          statusCode: 0,
+        }
 
         // 로딩 모달 닫기
         setLoadingModalOpen(false)
         if (response.statusCode === 0) {
-          setModalTitle("리뷰 확인 중")
+          setModalTitle("📝 리뷰 확인 중")
           setModalContent(
             <>
               <p>
-                리뷰 인증 요청이 접수되었습니다. <br />
-                인증이 정상적으로 완료되면 <br />
-                3시간 이내 리워드가 지급됩니다. <br />
-                실패할 경우 <br />
-                다시 리뷰 인증을 진행해 주세요.
+                리뷰 인증 요청이 접수됐어요. <br />
+                인증이 정상적으로 완료되면 3시간 이내
+                <br />
+                리워드가 지급됩니다. 실패할 경우 다시
+                <br />
+                리뷰 인증을 진행해 주세요!
               </p>
             </>
           )

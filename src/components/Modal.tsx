@@ -95,7 +95,7 @@ const ModalContainer = styled.div`
   border-radius: 1.2rem;
   width: 90%;
   max-width: 400px;
-  padding: 2.2rem 1.5rem 1.5rem;
+  padding: 2.4rem 1.5rem 1.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 `
 
