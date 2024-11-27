@@ -47,6 +47,9 @@ const CampaignDetailPage = () => {
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
   const [modalConfirmText, setModalConfirmText] = useState<string>("확인")
+  const [modalCancelText, setModalCancelText] = useState<string | undefined>(
+    undefined
+  )
 
   //** 캠페인상세 path set */
   useEffect(() => {
@@ -166,6 +169,7 @@ const CampaignDetailPage = () => {
         </>
       )
       setModalConfirmText("확인")
+      setModalCancelText("확인")
     } else if (penalty === "step3") {
       setIsRestrictionModalOpen(true)
       setModalTitle("❗캠페인 참여 제한 안내")
@@ -179,6 +183,7 @@ const CampaignDetailPage = () => {
         </>
       )
       setModalConfirmText("확인")
+      setModalCancelText("확인")
     } else {
       const isLoggedIn = localStorage.getItem("email")
       if (isLoggedIn === "null" || isLoggedIn === "") {
@@ -221,6 +226,7 @@ const CampaignDetailPage = () => {
           </>
         )
         setModalConfirmText("확인")
+        setModalCancelText("확인")
       } else if (error.errorCode === 7) {
         setRimitModalOpen(true)
         setModalTitle("신청 횟수 초과!")
@@ -234,6 +240,7 @@ const CampaignDetailPage = () => {
           </>
         )
         setModalConfirmText("확인")
+        setModalCancelText("확인")
       }
     }
   }
@@ -436,6 +443,7 @@ const CampaignDetailPage = () => {
         title={modalTitle}
         content={modalContent}
         confirmText={modalConfirmText}
+        cancelText={modalCancelText}
       />
     </>
   )
