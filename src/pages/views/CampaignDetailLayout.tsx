@@ -211,7 +211,7 @@ const CampaignDetailPage = () => {
         refetch()
       }
     } catch (error: any) {
-      console.log(error)
+      console.log(error.response.data.errorCode)
       setIsApplySuccess(false)
       setIsModalOpen(false)
       if (error.errorCode === 3) {
