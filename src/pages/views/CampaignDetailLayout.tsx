@@ -216,7 +216,7 @@ const CampaignDetailPage = () => {
       setIsModalOpen(false)
       if (errorCode === 3) {
         setRimitModalOpen(true)
-        setModalTitle("신청 횟수 초과!")
+        setModalTitle("❗ 신청 횟수 초과!")
         setModalContent(
           <>
             <p>신청 가능한 횟수를 초과했어요.</p>
@@ -230,7 +230,7 @@ const CampaignDetailPage = () => {
         setModalCancelText("확인")
       } else if (errorCode === 6) {
         setRimitModalOpen(true)
-        setModalTitle("캠페인 신청 불가")
+        setModalTitle("❗ 캠페인 신청 불가")
         setModalContent(
           <>
             <p>이 캠페인은 현재 신청이 불가합니다.</p>
@@ -244,7 +244,7 @@ const CampaignDetailPage = () => {
         setModalCancelText("확인")
       } else if (errorCode === 7) {
         setRimitModalOpen(true)
-        setModalTitle("신청 횟수 초과!")
+        setModalTitle("❗ 신청 횟수 초과!")
         setModalContent(
           <>
             <p>오늘 신청 가능한 횟수를 초과했어요.</p>
@@ -304,7 +304,7 @@ const CampaignDetailPage = () => {
       if (response.statusCode === 0) {
         // 신청 취소 성공 시 처리
         refetch()
-        addToast("캠페인 신청이 취소되었습니다.", "check", 1000, "campaign")
+        addToast("캠페인 신청이 취소되었습니다.", "check", 3000, "campaign")
         setIsApplySuccess(false) // 신청 성공 상태를 초기화
         setIsCancelModalOpen(false) // 모달 닫기
       }
@@ -312,7 +312,7 @@ const CampaignDetailPage = () => {
       addToast(
         "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
         "warning",
-        1000,
+        3000,
         "campaign"
       )
     }
