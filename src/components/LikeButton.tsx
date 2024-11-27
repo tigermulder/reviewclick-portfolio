@@ -118,7 +118,4 @@ const HeartText = styled.div`
   font-size: 0.7rem;
   font-weight: var(--font-weight-medium);
   word-wrap: break-word;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `

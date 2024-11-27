@@ -208,6 +208,9 @@ const CampaignTitle = styled.span`
   font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const CampaignDescription = styled.div`
