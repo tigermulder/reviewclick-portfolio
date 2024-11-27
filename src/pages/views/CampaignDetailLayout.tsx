@@ -32,7 +32,6 @@ const CampaignDetailPage = () => {
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState) // Recoil 모달
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false) // 신청 취소 모달 상태
   const [isApplySuccess, setIsApplySuccess] = useState(false) // 신청 성공 여부 상태
-  const [errorCode, setErrorCode] = useState<number | null>(null) // 에러 코드 상태
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false) // 계정 인증 모달 상태
   const [isRestrictionModalOpen, setIsRestrictionModalOpen] = useState(false) // 계정제한 모달 상태
   const { campaignCode } = useParams()
@@ -43,12 +42,19 @@ const CampaignDetailPage = () => {
   // const [isProductViewed, setIsProductViewed] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
+  //** 모달 상태 관리 */
+  const [isRimitModalOpen, setRimitModalOpen] = useState(false)
+  const [modalTitle, setModalTitle] = useState<string>("")
+  const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
+  const [modalConfirmText, setModalConfirmText] = useState<string>("확인")
 
+  //** 캠페인상세 path set */
   useEffect(() => {
     if (campaignCode) {
       sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
     }
   }, [campaignCode])
+  // ** 온보딩팝업 */
   useEffect(() => {
     const savedDate = localStorage.getItem("doNotShowOnboardingToday")
     const today = new Date().toDateString()
@@ -57,10 +63,8 @@ const CampaignDetailPage = () => {
       setShowOnboarding(true)
     }
   }, [])
-
   //** 스크롤 0부터시작 */
   useScrollToTop()
-
   //** 스크롤다운기능 */
   useEffect(() => {
     const handleScroll = () => {
@@ -149,8 +153,32 @@ const CampaignDetailPage = () => {
   //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
     const penalty = sessionStorage.getItem("penalty")
-    if (penalty === "step3") {
+    if (penalty === "step2") {
       setIsRestrictionModalOpen(true)
+      setModalTitle("❗신규 캠페인 참여 제한 안내")
+      setModalContent(
+        <>
+          <p>
+            캠페인 진행 시 규정을 반복적으로 위반한 사례가 확인되어 “신규 캠페인
+            참여”가 제한되었습니다
+          </p>
+          <p>자세한 사항은 고객센터를 통해 문의해주시기 바랍니다.</p>
+        </>
+      )
+      setModalConfirmText("확인")
+    } else if (penalty === "step3") {
+      setIsRestrictionModalOpen(true)
+      setModalTitle("❗캠페인 참여 제한 안내")
+      setModalContent(
+        <>
+          <p>
+            규정 반복 위반으로 인해 신규 및 진행 중인 캠페인 참여가 모두
+            제한되었습니다.
+          </p>
+          <p>자세한 사항은 고객센터를 통해 문의해주시기 바랍니다.</p>
+        </>
+      )
+      setModalConfirmText("확인")
     } else {
       const isLoggedIn = localStorage.getItem("email")
       if (isLoggedIn === "null" || isLoggedIn === "") {
@@ -175,22 +203,38 @@ const CampaignDetailPage = () => {
       const response = await joinReview(data)
       if (response.statusCode === 0) {
         setIsApplySuccess(true)
-        setErrorCode(null)
         refetch()
       }
     } catch (error: any) {
-      if (error.response && error.response.status === 403) {
-        const { statusCode, errorCode } = error.response.data || {}
+      setIsApplySuccess(false)
 
-        // daily limit 에러 처리
-        if (statusCode === -1 && errorCode === 7) {
-          setIsApplySuccess(false)
-          setErrorCode(7)
-          return
-        }
+      if (error.errorCode === 3) {
+        setRimitModalOpen(true)
+        setModalTitle("신청 횟수 초과!")
+        setModalContent(
+          <>
+            <p>신청 가능한 횟수를 초과했어요.</p>
+            <p>
+              캠페인은 최대 3회까지 진행이 가능해요 <br />
+              (1일 1회 참여 가능)
+            </p>
+          </>
+        )
+        setModalConfirmText("확인")
+      } else if (error.errorCode === 7) {
+        setRimitModalOpen(true)
+        setModalTitle("신청 횟수 초과!")
+        setModalContent(
+          <>
+            <p>오늘 신청 가능한 횟수를 초과했어요.</p>
+            <p>
+              내일 다시 신청해주세요. <br />
+              (1일 1회 참여 가능)
+            </p>
+          </>
+        )
+        setModalConfirmText("확인")
       }
-      addToast("캠페인신청이 불가합니다.", "warning", 1000, "campaign")
-      setErrorCode(null)
     }
   }
   //** 모달닫기 핸들러 [1-3] */
@@ -200,13 +244,12 @@ const CampaignDetailPage = () => {
     setIsAuthModalOpen(false)
     if (isApplySuccess) {
       navigate(`/campaign/${campaignCode}`, { replace: true })
-      setErrorCode(null)
     }
   }
   //** 캠페인신청 성공후 핸들러 [1-4] */
   const handleModalConfirm = () => {
     if (isApplySuccess) {
-      // 신청 성공 후 '나의 캠페인 내역'으로 라우팅
+      // 신청 성공 후 '나의 캠페인 내역'으로 이동
       setIsModalOpen(false)
       navigate(RoutePath.MyCampaign)
     } else {
@@ -300,7 +343,7 @@ const CampaignDetailPage = () => {
           handleButtonClick={handleButtonClick}
         />
       </DetailBody>
-      {/* 신청, 신청완료, 신청횟수 모달 */}
+      {/* 신청, 신청완료 모달 */}
       <Modal
         isOpen={isModalOpen}
         onConfirm={handleModalConfirm}
@@ -308,8 +351,6 @@ const CampaignDetailPage = () => {
         title={
           isApplySuccess ? (
             "캠페인 신청 완료!"
-          ) : errorCode === 7 ? (
-            <>하루 신청 한도초과! (1/1)</>
           ) : (
             <>
               {campaignDetail.title} <br /> 캠페인을 신청하시겠어요?
@@ -323,13 +364,6 @@ const CampaignDetailPage = () => {
                 <em>3시간</em> 안에 상품구매와
               </p>
               <p>구매 영수증 인증을 진행해주세요.</p>
-            </>
-          ) : errorCode === 7 ? (
-            <>
-              <p>
-                오늘 신청 가능한 횟수를 초과했어요. <br /> 내일 다시
-                신청해주세요.
-              </p>
             </>
           ) : (
             <ol>
@@ -350,9 +384,16 @@ const CampaignDetailPage = () => {
           )
         }
         confirmText={isApplySuccess ? "나의 캠페인 내역" : "신청하기"}
-        cancelText={
-          isApplySuccess ? "더 둘러보기" : errorCode === 7 ? "확인" : "취소"
-        }
+        cancelText={isApplySuccess ? "더 둘러보기" : "취소"}
+      />
+      {/* 에러처리 모달 */}
+      <Modal
+        isOpen={isRimitModalOpen}
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
+        onConfirm={() => setRimitModalOpen(false)}
+        onCancel={() => setRimitModalOpen(false)}
       />
       {/* 계정인증 모달 */}
       <Modal
@@ -392,19 +433,9 @@ const CampaignDetailPage = () => {
         isOpen={isRestrictionModalOpen}
         onConfirm={() => setIsRestrictionModalOpen(false)}
         onCancel={() => setIsRestrictionModalOpen(false)}
-        title="❗️계정 제한 안내"
-        content={
-          <>
-            <p>
-              캠페인 미션을 정상적으로 완료하지 않은 것으로 확인되어 계정이
-              제한되었습니다.
-            </p>
-            <p>자세한 사항은 고객센터를 통해 문의해주시기 바랍니다.</p>
-          </>
-        }
-        confirmText="확인"
-        cancelText=""
-        showRouteLink={true}
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
       />
     </>
   )

@@ -1,6 +1,6 @@
 import { ModalProps } from "@/types/component-types/modal-type"
 import styled from "styled-components"
-import Button from "@/components/Button" // 재사용할 수 있는 Button 컴포넌트
+import Button from "@/components/Button"
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
