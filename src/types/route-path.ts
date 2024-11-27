@@ -1,5 +1,5 @@
 export const RoutePath = {
-  Home: "/",
+  Home: "",
   Login: "/login",
   Join: "/join",
   JoinVerify: "/join/verify",

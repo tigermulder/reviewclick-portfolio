@@ -98,7 +98,7 @@ const MainPage = (): JSX.Element => {
   return (
     <>
       {/* 카테고리메뉴 */}
-      <CategoryMenu />
+      {/* <CategoryMenu /> */}
       <BannerSlider />
       {/* 필터칩 */}
       <FilterBar />
