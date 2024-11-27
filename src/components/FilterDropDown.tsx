@@ -95,6 +95,7 @@ const FilterDropDown = ({
 export default FilterDropDown
 
 const DropdownWrapper = styled.div<{ $marginBottom: string }>`
+  position: relative;
   margin-bottom: ${({ $marginBottom }) => $marginBottom};
 `
 
@@ -140,7 +141,7 @@ const DropDownContainer = styled.div<{ $width: string; $top: string }>`
   flex-direction: column;
   gap: 4px;
   position: absolute;
-  top: ${({ $top }) => $top};
+  top: calc(100% + 6px);
   right: 1.5rem;
   z-index: 999;
 `
