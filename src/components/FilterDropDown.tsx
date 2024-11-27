@@ -15,7 +15,6 @@ const FilterDropDown = ({
   buttonHeight = "2.8rem",
   containerWidth = "160px",
   containerHeight = "3.2rem",
-  containerTop = "40px",
   marginBottom = "0",
   openDropdown,
   setOpenDropdown,
@@ -75,7 +74,7 @@ const FilterDropDown = ({
 
       {/* 드롭다운 메뉴 */}
       {isOpen && (
-        <DropDownContainer $width={dynamicContainerWidth} $top={containerTop}>
+        <DropDownContainer $width={dynamicContainerWidth}>
           {options.map((option) => (
             <DropDownItem
               key={option.id}
@@ -129,7 +128,7 @@ const DropdownButton = styled.div<{
   }
 `
 
-const DropDownContainer = styled.div<{ $width: string; $top: string }>`
+const DropDownContainer = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width};
   height: auto;
   padding: 1rem 0.8rem;
@@ -142,8 +141,7 @@ const DropDownContainer = styled.div<{ $width: string; $top: string }>`
   gap: 4px;
   position: absolute;
   top: calc(100% + 6px);
-  right: 1.5rem;
-  z-index: 999;
+  z-index: 99;
 `
 
 const DropDownItem = styled.div<{ $highlighted?: boolean; $height: string }>`
