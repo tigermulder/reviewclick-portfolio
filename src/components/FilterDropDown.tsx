@@ -67,6 +67,7 @@ const FilterDropDown = ({
         onClick={toggleDropdown}
         $width={buttonWidth}
         $height={buttonHeight}
+        $isOpen={isOpen}
       >
         <span>{selectedFilter.label}</span>
         <IconDropDown />
@@ -97,15 +98,20 @@ const DropdownWrapper = styled.div<{ $marginBottom: string }>`
   margin-bottom: ${({ $marginBottom }) => $marginBottom};
 `
 
-const DropdownButton = styled.div<{ $width: string; $height: string }>`
+const DropdownButton = styled.div<{
+  $width: string
+  $height: string
+  $isOpen: boolean
+}>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
+  border: 1px solid
+    ${({ $isOpen }) => ($isOpen ? "var(--prim-L400)" : "var(--n200-color)")};
+  box-shadow: 0px 0px 0px 3px ${({ $isOpen }) => ($isOpen ? "#FDD8D9" : "none")};
   padding: 0 0.8rem;
   background: white;
-  box-shadow: 0px 0px 6px rgba(41, 54, 61, 0.05);
   border-radius: 0.8rem;
   overflow: hidden;
-  border: 1px solid var(--n200-color);
   justify-content: center;
   align-items: center;
   gap: 10px;
