@@ -82,7 +82,7 @@ const FilterDropDown = ({
               onClick={() => handleOptionClick(option)}
               $height={containerHeight}
             >
-              {option.label}
+              <p>{option.label}</p>
             </DropDownItem>
           ))}
         </DropDownContainer>
@@ -148,14 +148,19 @@ const DropDownItem = styled.div<{ $highlighted?: boolean; $height: string }>`
   align-items: center;
   padding-left: 1rem;
   background: ${({ $highlighted }) => ($highlighted ? "#F4F5F5" : "white")};
-  color: #788991;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18.2px;
   border: ${({ $highlighted }) =>
     $highlighted ? "none" : "1px solid transparent"};
   cursor: pointer;
   &:hover {
     background-color: #e2e4e4;
+  }
+  p {
+    font-size: var(--font-bodyM-size);
+    font-weight: var(--font-weight-medium);
+    color: var(--n300-color);
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
