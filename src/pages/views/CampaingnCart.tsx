@@ -72,11 +72,11 @@ const CampaignCart = () => {
             return (
               <CampaignItem
                 key={campaign.campaignId}
-                onClick={() =>
-                  navigate(
-                    RoutePath.CampaignDetail(String(campaign.campaignId))
-                  )
-                }
+                // onClick={() =>
+                //   navigate(
+                //     RoutePath.CampaignDetail(String(campaign.campaignId))
+                //   )
+                // }
               >
                 <CampaignThumb>
                   <CampaignImage
