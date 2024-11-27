@@ -2,11 +2,13 @@ import { useState } from "react"
 import styled from "styled-components"
 import { useSwipeable } from "react-swipeable"
 import Banner1 from "assets/banner01.png"
+import Banner2 from "assets/banner02.png"
+import Banner3 from "assets/banner03.png"
 
 const banners = [
   { type: "image", value: Banner1 },
-  { type: "color", value: "#F48FB1" },
-  { type: "color", value: "#C2185B" },
+  { type: "image", value: Banner2 },
+  { type: "image", value: Banner3 },
   { type: "color", value: "#E57373" },
   { type: "color", value: "#FFCDD2" },
 ]
