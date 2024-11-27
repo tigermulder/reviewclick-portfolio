@@ -207,8 +207,16 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
     "aria-hidden": true,
   })
 )<{ $active: boolean; $tabName?: string }>`
-  width: ${({ $tabName }) => ($tabName === "user" ? "4.9rem" : "1.7rem")};
-  height: ${({ $tabName }) => ($tabName === "user" ? "4.9rem" : "1.7rem")};
+  width: ${({ $tabName }) => {
+    if ($tabName === "user") return "4.9rem"
+    else if ($tabName === "alerts") return "1.5rem"
+    else return "1.7rem"
+  }};
+  height: ${({ $tabName }) => {
+    if ($tabName === "user") return "4.9rem"
+    else if ($tabName === "alerts") return "1.3rem"
+    else return "1.7rem"
+  }};
   margin-bottom: 0.4rem;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
 `
