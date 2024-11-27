@@ -203,6 +203,7 @@ const CampaignPoints = styled.p`
 `
 
 const CampaignTitle = styled.span`
+  width: 87%;
   margin-top: 0.5rem;
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
