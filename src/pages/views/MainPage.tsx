@@ -7,11 +7,11 @@ import {
   campaignLikeState,
 } from "store/mainpage-recoil"
 import { getCampaignList } from "services/campaign"
-import CategoryMenu from "components/CategoryMenu"
 import BannerSlider from "components/Banner"
 import LikeButton from "components/LikeButton"
 import { FilterBar } from "components/FilterBar"
 import { useRouter } from "@/hooks/useRouting"
+import CategoryMenu from "components/CategoryMenu"
 import dummyImage from "assets/dummy-image.png"
 import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
@@ -20,8 +20,8 @@ const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
   const filteredCampaigns = useRecoilValue(filteredAndSortedCampaignList)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
-  const campaignLikes = useRecoilValue(campaignLikeState)
-  const router = useRouter() // 네비게이션 커스텀훅
+  // const campaignLikes = useRecoilValue(campaignLikeState)
+  // const router = useRouter() // 네비게이션 커스텀훅
 
   //** Fetch campaign list */
   const fetchCampaigns = async ({ pageParam = 1 }) => {
@@ -33,10 +33,10 @@ const MainPage = (): JSX.Element => {
     return response
   }
 
-  // 찜장바구니 상태값 확인
-  useEffect(() => {
-    console.log("현재 찜목록상태:", campaignLikes)
-  }, [campaignLikes])
+  //* 찜장바구니 상태값 확인
+  // useEffect(() => {
+  //   console.log("현재 찜목록상태:", campaignLikes)
+  // }, [campaignLikes])
 
   //** 리액트쿼리 */
   const {

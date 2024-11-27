@@ -9,8 +9,6 @@ const banners = [
   { type: "image", value: Banner1 },
   { type: "image", value: Banner2 },
   { type: "image", value: Banner3 },
-  { type: "color", value: "#E57373" },
-  { type: "color", value: "#FFCDD2" },
 ]
 
 const BannerSlider = () => {

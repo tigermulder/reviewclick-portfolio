@@ -34,7 +34,7 @@ const AppBar = () => {
       </SearchForm>
 
       {/* 로그인 여부에 따른 찜하기 아이콘 또는 회원가입 링크 */}
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? (
         <Link to={RoutePath.MyCart} aria-label="캠페인 찜 장바구니로 이동">
           <HeartIcon aria-label="캠페인 찜 장바구니">
             <IcoAppBarHeart />
@@ -47,7 +47,13 @@ const AppBar = () => {
             로그인
           </Link>
         </SignUpLink>
-      )}
+      )} */}
+      <Link to={RoutePath.MyCart} aria-label="캠페인 찜 장바구니로 이동">
+        <HeartIcon aria-label="캠페인 찜 장바구니">
+          <IcoAppBarHeart />
+          <HeartText>찜 목록</HeartText>
+        </HeartIcon>
+      </Link>
     </Header>
   )
 }
