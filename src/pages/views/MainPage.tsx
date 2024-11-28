@@ -171,7 +171,7 @@ const CampaignList = styled.ul`
   grid-template-columns: repeat(2, 1fr);
   gap: 1.4rem;
   list-style-type: none;
-  padding: 24px 0 64px;
+  padding: 2.4rem 0 6.4rem;
   width: 100%;
 `
 
@@ -191,12 +191,12 @@ const CampaignCard = styled.li.attrs<CampaignCardProps>((props) => ({
 
 const CampaignImage = styled.div`
   position: relative;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   overflow: hidden;
   background: var(--white);
   img {
     width: 100%;
-    height: 178px;
+    height: 17.8rem;
     object-fit: cover;
   }
 `
@@ -209,14 +209,14 @@ const RemainingDays = styled.span.attrs<RemainingDaysProps>((props) => ({
   "data-is-ended": props.$isEnded,
 }))<RemainingDaysProps>`
   position: absolute;
-  top: ${({ $isEnded }) => ($isEnded ? "50%" : "10px")};
-  left: ${({ $isEnded }) => ($isEnded ? "50%" : "10px")};
+  top: ${({ $isEnded }) => ($isEnded ? "50%" : "1rem")};
+  left: ${({ $isEnded }) => ($isEnded ? "50%" : "1rem")};
   transform: ${({ $isEnded }) => ($isEnded ? "translate(-50%, -50%)" : "none")};
   background-color: black;
   color: white;
   padding: 0.5rem 0.6rem;
   border-radius: 0.2rem;
-  font-size: 14px;
+  font-size: var(--font-bodyM-size);
   font-weight: var(--font-weight-bold);
   z-index: 2;
 `

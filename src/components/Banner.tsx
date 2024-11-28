@@ -46,10 +46,10 @@ export default BannerSlider
 const BannerWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 210px;
+  height: 2.1rem;
   overflow: hidden;
   margin: 8rem 0 1.6rem;
-  border-radius: 10px;
+  border-radius: 1rem;
 `
 
 const BannerContainer = styled.div<{ $currentIndex: number }>`
@@ -75,22 +75,22 @@ const StyledBannerImage = styled.img`
   min-width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 1rem;
 `
 
 const StyledBannerDiv = styled.div`
   min-width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 1rem;
 `
 
 const Indicator = styled.div`
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 1rem;
+  right: 1rem;
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 1.2rem;
 `
