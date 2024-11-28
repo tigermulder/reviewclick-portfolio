@@ -1,7 +1,7 @@
 import { RemainingTime, currentRemainingTime } from "@/types/type"
 
 export const categories = [
-  { id: 1, name: "전체" }, // '전체'는 특별하게 처리
+  { id: 1, name: "전체" },
   { id: 2, name: "패션" },
   { id: 3, name: "뷰티" },
   { id: 4, name: "가구" },

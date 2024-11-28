@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { getNotificationList } from "@/services/notification"
 import IconNotify from "assets/ico-notify.svg?react"
@@ -10,6 +10,28 @@ import styled from "styled-components"
 const NewsContent = () => {
   // ** 로드 모어 요소 선언 */
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
+  // ** 클릭된 알림 ID를 저장하는 상태 */
+  const [clickedNotifications, setClickedNotifications] = useState<number[]>(
+    () => {
+      // 컴포넌트 마운트 시 LocalStorage에서 데이터 불러오기
+      const savedData = localStorage.getItem("clickedNotifications")
+      return savedData ? JSON.parse(savedData) : []
+    }
+  )
+  // ** 클릭된 알림 ID를 LocalStorage에 저장 */
+  useEffect(() => {
+    localStorage.setItem(
+      "clickedNotifications",
+      JSON.stringify(clickedNotifications)
+    )
+  }, [clickedNotifications])
+  // ** 알림 클릭 핸들러 */
+  const handleNotificationClick = (notificationId: number) => {
+    // 이미 클릭된 알림이 아니라면 상태 업데이트
+    if (!clickedNotifications.includes(notificationId)) {
+      setClickedNotifications((prev) => [...prev, notificationId])
+    }
+  }
 
   //** Fetch campaign list */
   const fetchNotificationList = async ({ pageParam = 1 }) => {
@@ -65,21 +87,32 @@ const NewsContent = () => {
 
   return (
     <NoticeContainer>
-      {notificationList.map((notificationItem) => (
-        <li key={notificationItem.notificationId}>
-          <StyledLink
-            to={RoutePath.NotificationDetail(
-              `${notificationItem.notificationId}`
-            )}
-          >
-            <NotifyDate>
-              <IconNotify />
-              {formatDate(notificationItem.createdAt)}
-            </NotifyDate>
-            <NotifyMessage>{notificationItem.title}</NotifyMessage>
-          </StyledLink>
-        </li>
-      ))}
+      {notificationList.map((notificationItem) => {
+        const isClicked = clickedNotifications.includes(
+          notificationItem.notificationId
+        )
+
+        return (
+          <li key={notificationItem.notificationId}>
+            <StyledLink
+              to={RoutePath.NotificationDetail(
+                `${notificationItem.notificationId}`
+              )}
+              onClick={() =>
+                handleNotificationClick(notificationItem.notificationId)
+              }
+            >
+              <NotifyDate isClicked={isClicked}>
+                <IconNotify />
+                {formatDate(notificationItem.createdAt)}
+              </NotifyDate>
+              <NotifyMessage isClicked={isClicked}>
+                {notificationItem.title}
+              </NotifyMessage>
+            </StyledLink>
+          </li>
+        )
+      })}
       {/* 로드 모어 트리거 요소 */}
       <div ref={loadMoreRef} />
       {isFetchingNextPage && <Loading>로딩 중...</Loading>}
@@ -99,7 +132,7 @@ const NoticeContainer = styled.ul`
   }
 `
 
-const NotifyDate = styled.p`
+const NotifyDate = styled.p<{ isClicked: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -107,20 +140,24 @@ const NotifyDate = styled.p`
   font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
-  color: var(--n300-color);
+  color: ${({ isClicked }) =>
+    isClicked ? "var(--n80-color)" : "var(--n300-color)"};
 
   svg {
     width: 1.6rem;
-    color: var(--revu-color);
+    color: ${({ isClicked }) =>
+      isClicked ? "var(--n80-color)" : "var(--revu-color)"};
   }
 `
 
-const NotifyMessage = styled.p`
+const NotifyMessage = styled.p<{ isClicked: boolean }>`
   margin-top: 0.6rem;
   font-size: var(--font-h5-size);
   font-weight: var(--font-h5-weight);
   line-height: var(--font-h5-line-height);
   letter-spacing: var(--font-h5-letter-spacing);
+  color: ${({ isClicked }) =>
+    isClicked ? "var(--n80-color)" : "var(--primary-color)"};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
