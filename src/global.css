@@ -373,7 +373,7 @@ input:focus::placeholder {
 /** 갤럭시 폴드 */
 @media (max-width: 374px) {
   html {
-    font-size: 50%;
+    font-size: 55%;
   }
 }
 
