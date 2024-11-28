@@ -94,7 +94,9 @@ function App() {
   const showFooter =
     (!isCampaignDetail &&
       location.pathname !== RoutePath.MyCampaign &&
-      location.pathname !== RoutePath.Alert) ||
+      location.pathname !== RoutePath.Alert &&
+      location.pathname !== RoutePath.UserPointLog &&
+      location.pathname !== RoutePath.UserServiceGuide) ||
     location.pathname === RoutePath.UserProfile ||
     location.pathname === RoutePath.Home
 
