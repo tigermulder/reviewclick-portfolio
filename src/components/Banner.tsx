@@ -50,6 +50,12 @@ const BannerWrapper = styled.div`
   overflow: hidden;
   margin: 8rem 0 1.6rem;
   border-radius: 1rem;
+
+  @media (max-width: 374px) {
+    & {
+      height: 18rem;
+    }
+  }
 `
 
 const BannerContainer = styled.div<{ $currentIndex: number }>`

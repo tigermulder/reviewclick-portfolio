@@ -199,6 +199,12 @@ const CampaignImage = styled.div`
     height: 17.8rem;
     object-fit: cover;
   }
+
+  @media (max-width: 374px) {
+    & img {
+      height: 13.8rem;
+    }
+  }
 `
 
 interface RemainingDaysProps {
