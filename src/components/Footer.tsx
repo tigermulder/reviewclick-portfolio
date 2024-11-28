@@ -39,11 +39,9 @@ const Footer = () => {
 
 export default Footer
 
-// 스타일 정의
-
 const FooterComponent = styled.div`
   width: 100%;
-  height: 340px;
+  height: 34rem;
   position: relative;
   background: #fafafa;
 `
@@ -55,7 +53,7 @@ const LinkContainer = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 20.8px;
+  gap: 2rem;
 `
 
 const LinkText = styled(Link)`
