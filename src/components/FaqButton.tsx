@@ -23,7 +23,7 @@ export default FaqButton
 const FaqContainer = styled.button`
   position: fixed;
   right: 2.5rem;
-  bottom: 8rem;
+  bottom: 7.6rem;
   z-index: 10;
   width: 6rem;
   height: 6rem;
@@ -32,7 +32,7 @@ const FaqContainer = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 8px 14px rgba(32, 32, 32, 0.1);
+  box-shadow: 0 0.8rem 1.4rem rgba(32, 32, 32, 0.1);
 
   div {
     display: flex;

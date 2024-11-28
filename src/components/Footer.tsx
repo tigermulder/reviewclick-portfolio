@@ -50,8 +50,8 @@ const FooterComponent = styled.div`
 
 const LinkContainer = styled.div`
   position: absolute;
-  left: 16px;
-  top: 92px;
+  left: 1.6rem;
+  top: 9.2rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -59,23 +59,19 @@ const LinkContainer = styled.div`
 `
 
 const LinkText = styled(Link)`
-  color: #788991;
-  font-size: 11.44px;
-  font-family: "SUIT";
-  font-weight: 500;
-  line-height: 16.02px;
+  color: var(--n300-color);
+  font-size: 1.2rem;
+  line-height: 1.6;
   word-wrap: break-word;
 `
 
 const CompanyInfo = styled.div`
   position: absolute;
-  left: 16px;
-  top: 126.24px;
-  color: #a0acb1;
-  font-size: 11px;
-  font-family: "SUIT";
-  font-weight: 500;
-  line-height: 16px;
+  left: 1.6rem;
+  top: 12.6rem;
+  color: var(--n200-color);
+  font-size: 1.1rem;
+  line-height: 1.6;
   word-wrap: break-word;
 `
 
@@ -85,10 +81,10 @@ const EmailSpan = styled.a`
 
 const FooterLogoContainer = styled.div`
   position: absolute;
-  width: 93.6px;
-  height: 20.8px;
-  left: 16px;
-  top: 37px;
+  width: 9.3rem;
+  height: 2rem;
+  left: 1.6rem;
+  top: 3.6rem;
   color: var(--n200-color);
 
   svg {
