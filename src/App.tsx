@@ -92,7 +92,9 @@ function App() {
     isNotificationDetail ||
     isNotFound
   const showFooter =
-    (!isCampaignDetail && location.pathname !== RoutePath.MyCampaign) ||
+    (!isCampaignDetail &&
+      location.pathname !== RoutePath.MyCampaign &&
+      location.pathname !== RoutePath.Alert) ||
     location.pathname === RoutePath.UserProfile ||
     location.pathname === RoutePath.Home
 
