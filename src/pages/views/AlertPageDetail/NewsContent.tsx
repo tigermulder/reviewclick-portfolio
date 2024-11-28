@@ -3,7 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { getNotificationList } from "@/services/notification"
 import IconNotify from "assets/ico-notify.svg?react"
 import { formatDate } from "@/utils/util"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
 
@@ -18,6 +18,7 @@ const NewsContent = () => {
       return savedData ? JSON.parse(savedData) : []
     }
   )
+  const navigate = useNavigate()
   // ** 클릭된 알림 ID를 LocalStorage에 저장 */
   useEffect(() => {
     localStorage.setItem(
@@ -26,11 +27,17 @@ const NewsContent = () => {
     )
   }, [clickedNotifications])
   // ** 알림 클릭 핸들러 */
-  const handleNotificationClick = (notificationId: number) => {
+  const handleNotificationClick = (
+    notificationId: number,
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault()
     // 이미 클릭된 알림이 아니라면 상태 업데이트
     if (!clickedNotifications.includes(notificationId)) {
       setClickedNotifications((prev) => [...prev, notificationId])
     }
+    // 상태 업데이트 후 페이지 이동
+    navigate(RoutePath.NotificationDetail(`${notificationId}`))
   }
 
   //** Fetch campaign list */
@@ -98,8 +105,8 @@ const NewsContent = () => {
               to={RoutePath.NotificationDetail(
                 `${notificationItem.notificationId}`
               )}
-              onClick={() =>
-                handleNotificationClick(notificationItem.notificationId)
+              onClick={(e) =>
+                handleNotificationClick(notificationItem.notificationId, e)
               }
             >
               <NotifyDate isClicked={isClicked}>

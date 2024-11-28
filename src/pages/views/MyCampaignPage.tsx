@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useRouter } from "@/hooks/useRouting"
-import { useQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { getReviewList } from "@/services/review"
 import { useSetRecoilState } from "recoil"
 import { reviewListState } from "@/store/mycampaign-recoil"
@@ -68,7 +68,7 @@ const MyCampaignPage = () => {
     return response
   }
 
-  const { data, refetch } = useQuery({
+  const { data, refetch } = useSuspenseQuery({
     queryKey: ["reviewList"],
     queryFn: fetchCampaignList,
     refetchOnMount: true,
