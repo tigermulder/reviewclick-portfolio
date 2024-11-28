@@ -194,7 +194,7 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
       position: absolute;
       width: 4.8rem;
       height: 4.8rem;
-      top: -22px;
+      top: -2.2rem;
       left: 50%;
       transform: translateX(-50%);
     `}

@@ -26,7 +26,7 @@ const Background = styled.div<{
 }>`
   position: fixed;
   max-width: 768px;
-  min-width: 375px;
+  min-width: 280px;
   top: 0;
   left: 0;
   background-image: url(${(props) => props.$imageUrl});
