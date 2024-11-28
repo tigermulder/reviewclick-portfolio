@@ -110,6 +110,7 @@ const NotifyDate = styled.p`
   color: var(--n300-color);
 
   svg {
+    width: 1.6rem;
     color: var(--revu-color);
   }
 `
