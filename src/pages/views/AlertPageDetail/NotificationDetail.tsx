@@ -38,7 +38,6 @@ const NotificationDetail = () => {
   const thumbnailUrl = notifyData?.cardInfoReview?.thumbnailUrl || dummyImage
   const { status, mainText } = parseTitle(notifyData?.title)
   const userTime = notifyData?.createdAt as string
-  const managerTime = notifyData?.cardInfoQnaAnswer?.answerAt as string
 
   return (
     <Container>
