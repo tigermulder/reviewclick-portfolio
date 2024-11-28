@@ -8,7 +8,7 @@ import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
 
 const NewsContent = () => {
-  // ** 로드 모어 요소에 대한 레퍼런스 선언 */
+  // ** 로드 모어 요소 선언 */
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
 
   //** Fetch campaign list */
@@ -108,6 +108,10 @@ const NotifyDate = styled.p`
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   color: var(--n300-color);
+
+  svg {
+    color: var(--revu-color);
+  }
 `
 
 const NotifyMessage = styled.p`

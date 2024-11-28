@@ -72,6 +72,8 @@ const HeaderContainer = styled.header`
 
 const BackButton = styled.button`
   position: absolute;
+  width: 2rem;
+  height: 2rem;
   left: 1.5rem;
   background: none;
   border: none;

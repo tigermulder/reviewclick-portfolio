@@ -144,7 +144,7 @@ const HeartIcon = styled.div`
   color: #d8ddde;
 
   svg {
-    fill: currentColor; /* SVG의 색상은 부모의 color 속성을 따름 */
+    fill: currentColor;
     width: 100%;
     height: auto;
   }
