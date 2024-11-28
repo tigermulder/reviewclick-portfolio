@@ -26,6 +26,7 @@ const NewsContent = () => {
       JSON.stringify(clickedNotifications)
     )
   }, [clickedNotifications])
+
   // ** 알림 클릭 핸들러 */
   const handleNotificationClick = (
     notificationId: number,
@@ -36,8 +37,10 @@ const NewsContent = () => {
     if (!clickedNotifications.includes(notificationId)) {
       setClickedNotifications((prev) => [...prev, notificationId])
     }
-    // 상태 업데이트 후 페이지 이동
-    navigate(RoutePath.NotificationDetail(`${notificationId}`))
+    // 상태 업데이트 후 페이지 이동 (짧은 지연)
+    setTimeout(() => {
+      navigate(RoutePath.NotificationDetail(`${notificationId}`))
+    }, 0)
   }
 
   //** Fetch campaign list */
