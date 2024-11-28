@@ -46,8 +46,8 @@ export const Chip = ({
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 8px;
-  padding: 18px 0 6px;
+  gap: 0.8rem;
+  padding: 1.8rem 0 0.6rem;
 `
 
 const StyledButton = styled.button.attrs<{ $isActive: boolean }>(

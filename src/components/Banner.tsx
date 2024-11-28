@@ -46,7 +46,7 @@ export default BannerSlider
 const BannerWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 2.1rem;
+  height: 21rem;
   overflow: hidden;
   margin: 8rem 0 1.6rem;
   border-radius: 1rem;
