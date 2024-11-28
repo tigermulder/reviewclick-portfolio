@@ -242,7 +242,7 @@ const StepThree = ({
             동의합니다.
           </StepItemReviewText>
           <Button $variant="pink" onClick={handleNavigate}>
-            리뷰 등록하러가기 <Purple>(자동복사)</Purple>
+            리뷰 등록하러가기 (<Purple>자동복사</Purple>)
           </Button>
         </StepItem>
         <StepItem>
