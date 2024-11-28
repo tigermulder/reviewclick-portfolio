@@ -89,7 +89,7 @@ const Button = styled.button`
 `
 
 const StyledHeartIcon = styled(IcoHeart)<{ $isLiked: boolean }>`
-  width: 24px;
+  width: 2.4rem;
   height: auto;
   color: ${({ $isLiked }) =>
     $isLiked ? "var(--revu-color)" : "var(--n40-color)"};
@@ -97,7 +97,7 @@ const StyledHeartIcon = styled(IcoHeart)<{ $isLiked: boolean }>`
 `
 
 const StyledIcoCampaignHeart = styled(IcoCampaignHeart)<{ $isLiked: boolean }>`
-  width: 24px;
+  width: 2.4rem;
   height: auto;
   color: ${({ $isLiked }) => ($isLiked ? "var(--revu-color)" : "#fff")};
 `
@@ -107,7 +107,7 @@ const CampaignHeart = styled.div<{ $isLiked: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  gap: 3px;
+  gap: 0.3rem;
   display: inline-flex;
   cursor: pointer;
 `

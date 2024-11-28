@@ -94,8 +94,7 @@ const Logo = styled.div`
 const SearchForm = styled.form<{ $isLoggedIn: boolean }>`
   flex-basis: 57%;
   height: 100%;
-  margin-left: ${({ $isLoggedIn }) =>
-    $isLoggedIn ? "3.4rem" : "2.4rem"}; /* 조건에 따라 margin-left 조정 */
+  margin-left: ${({ $isLoggedIn }) => ($isLoggedIn ? "3.4rem" : "2.4rem")};
   overflow: hidden;
 `
 
@@ -118,7 +117,13 @@ const SearchInput = styled.input`
     border: 0.1rem solid var(--n600-color);
 
     ~ .ico-search {
-      color: #29363d; /* 포커스 시 아이콘 색상 변경 */
+      color: var(--n600-color);
+    }
+  }
+
+  @media (max-width: 374px) {
+    &::placeholder {
+      color: transparent;
     }
   }
 `
@@ -129,7 +134,7 @@ const SearchIcon = styled.div`
   top: 50%;
   right: 1.1rem;
   transform: translateY(-50%);
-  color: var(--n200-color); /* 기본 색상 */
+  color: var(--n200-color);
   transition: color 0.1s ease;
 
   svg {
@@ -141,7 +146,7 @@ const SearchIcon = styled.div`
 const HeartIcon = styled.div`
   width: 2.4rem;
   margin-left: 1.2rem;
-  color: #d8ddde;
+  color: var(--n80-color);
 
   svg {
     fill: currentColor;
