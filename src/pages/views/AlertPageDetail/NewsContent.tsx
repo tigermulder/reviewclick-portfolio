@@ -151,12 +151,12 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   color: ${({ isClicked }) =>
-    isClicked ? "var(--n100-color)" : "var(--n300-color)"};
+    isClicked ? "var(--n200-color)" : "var(--n300-color)"};
 
   svg {
     width: 1.6rem;
     color: ${({ isClicked }) =>
-      isClicked ? "var(--n100-color)" : "var(--revu-color)"};
+      isClicked ? "var(--n200-color)" : "var(--revu-color)"};
   }
 `
 
@@ -167,7 +167,7 @@ const NotifyMessage = styled.p<{ isClicked: boolean }>`
   line-height: var(--font-h5-line-height);
   letter-spacing: var(--font-h5-letter-spacing);
   color: ${({ isClicked }) =>
-    isClicked ? "var(--n100-color)" : "var(--primary-color)"};
+    isClicked ? "var(--n200-color)" : "var(--primary-color)"};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
