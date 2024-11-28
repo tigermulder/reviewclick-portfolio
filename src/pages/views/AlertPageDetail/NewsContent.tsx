@@ -14,14 +14,14 @@ const NewsContent = () => {
   const [clickedNotifications, setClickedNotifications] = useState<number[]>(
     () => {
       // 컴포넌트 마운트 시 LocalStorage에서 데이터 불러오기
-      const savedData = localStorage.getItem("clickedNotifications")
+      const savedData = sessionStorage.getItem("clickedNotifications")
       return savedData ? JSON.parse(savedData) : []
     }
   )
   const navigate = useNavigate()
   // ** 클릭된 알림 ID를 LocalStorage에 저장 */
   useEffect(() => {
-    localStorage.setItem(
+    sessionStorage.setItem(
       "clickedNotifications",
       JSON.stringify(clickedNotifications)
     )
