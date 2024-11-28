@@ -58,7 +58,7 @@ export default FooterButtons
 
 const FooterContainer = styled.div`
   max-width: 768px;
-  min-width: 375px;
+  min-width: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
