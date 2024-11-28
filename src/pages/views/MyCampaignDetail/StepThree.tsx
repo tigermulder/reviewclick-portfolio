@@ -242,7 +242,7 @@ const StepThree = ({
             동의합니다.
           </StepItemReviewText>
           <Button $variant="pink" onClick={handleNavigate}>
-            리뷰 등록하러가기(자동복사)
+            리뷰 등록하러가기 <Purple>(자동복사)</Purple>
           </Button>
         </StepItem>
         <StepItem>
@@ -410,4 +410,8 @@ const StepNotice = styled.span`
     height: 1.4rem;
     background: url("${IconNotice}") no-repeat center / 100%;
   }
+`
+
+const Purple = styled.em`
+  color: var(--purple);
 `
