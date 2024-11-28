@@ -101,14 +101,15 @@ const Container = styled.div`
 `
 
 const AlertLogo = styled.div`
-  width: 3rem;
-  height: 3rem;
+  width: 2.6rem;
+  height: 2.6rem;
   flex-shrink: 0;
-  margin-top: 1.8rem;
+  margin-top: 2.2rem;
 
   svg {
     width: 100%;
     height: 100%;
+    color: var(--revu-color);
   }
 `
 
