@@ -35,7 +35,7 @@ const CheckIconContainer = styled.div<SuccessIconType>`
   justify-content: center;
   border-radius: 50%;
   svg {
-    width: 70%;
+    width: 80%;
     color: var(--white);
   }
 `
