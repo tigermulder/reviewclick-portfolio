@@ -21,7 +21,7 @@ import GuideDetail from "./CampaignDetail/GuideDetail"
 import OnboardingPopup from "@/components/OnboardingPopup"
 import styled from "styled-components"
 
-// React Query 키
+// React Query Key
 const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
   "campaign",
   campaignCode,
@@ -324,9 +324,9 @@ const CampaignDetailPage = () => {
   return (
     <>
       {/* 온보딩팝업 */}
-      {/* {showOnboarding && (
+      {showOnboarding && (
         <OnboardingPopup onClose={() => setShowOnboarding(false)} />
-      )} */}
+      )}
       {/* 캐시워크때문에 주석처리 */}
       {/* <CampaignDetailBackButton />
       <CampaignDetailShareButton /> */}
