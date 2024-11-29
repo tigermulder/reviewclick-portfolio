@@ -147,7 +147,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 0.6rem 0 var(--snowwhite);
+          box-shadow: 0 0 0.6rem 0 var(--whitesmoke);
           gap: 0.4rem;
           span {
             margin-left: 0.4rem;
@@ -167,7 +167,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           letter-spacing: var(--font-bodyM-letter-spacing);
           border: 1px solid var(--n80-color);
           color: var(--primary-color);
-          box-shadow: 0 0 0.6rem 0 var(--snowwhite);
+          box-shadow: 0 0 0.6rem 0 var(--whitesmoke);
           gap: 0.4rem;
           display: flex;
           align-items: center;
