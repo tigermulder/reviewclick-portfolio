@@ -35,7 +35,7 @@ const BangIconContainer = styled.div<FailedIconType>`
   justify-content: center;
   border-radius: 50%;
   svg {
-    width: 33%;
+    width: 22%;
     height: auto;
     color: var(--white);
   }
