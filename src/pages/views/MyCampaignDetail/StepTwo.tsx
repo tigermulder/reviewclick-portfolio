@@ -379,7 +379,7 @@ const GuideHeader = styled.button`
   width: 100%;
   background: none;
   border: none;
-  padding: 1rem;
+  padding: 1rem 0;
   cursor: pointer;
   font-size: 1rem;
 
@@ -403,7 +403,6 @@ const GuideContent = styled.div`
   margin-top: 1.5rem;
 
   .guide-list {
-    padding: 0 1rem;
     font-size: 1.4rem;
     line-height: 1.4;
     background: var(--whitewood);
