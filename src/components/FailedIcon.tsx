@@ -23,8 +23,8 @@ const FailedIcon = ({
 export default FailedIcon
 
 const BangIconContainer = styled.div<FailedIconType>`
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: ${({ backgroundColor }) => backgroundColor};
   filter: ${({ filter, filterColor }) => {
     if (!filter || !filterColor) return "none"
