@@ -353,7 +353,7 @@ const CardDate = styled.span`
 const ReviewTestContainer = styled.div`
   position: relative;
   min-height: 100vh;
-  padding: 2.3rem 0 0;
+  padding: 1rem 0 0;
   background: var(--whitewood);
 
   &:before {
@@ -369,7 +369,7 @@ const ReviewTestContainer = styled.div`
 `
 
 const GuideContainer = styled.div`
-  margin: 2rem 0;
+  margin: 1rem 0;
 `
 
 const GuideHeader = styled.button`
