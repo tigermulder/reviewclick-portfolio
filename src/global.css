@@ -373,7 +373,7 @@ input:focus::placeholder {
 /** 모바일 작은해상도 */
 @media (max-width: 374px) {
   html {
-    font-size: 55%;
+    font-size: 53%;
   }
 }
 
