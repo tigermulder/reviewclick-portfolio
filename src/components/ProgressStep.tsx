@@ -73,33 +73,31 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
           const showTooltip = index + 1 === currentStep
           return (
             <StepBox key={step.key} $status={stepStatus}>
-              <Circle>
-                {stepStatus === "done" ? (
-                  <IcoDone />
-                ) : stepStatus === "active" ? (
-                  isFourthStep ? (
-                    isMissionFailed ? (
-                      <FailedIcon
-                        backgroundColor="var(--primary-color)"
-                        filter={false}
-                      />
-                    ) : (
-                      <SuccessIcon
-                        backgroundColor="var(--revu-color)"
-                        filter={true}
-                        filterColor="rgba(245, 46, 54, 0.3)"
-                      />
-                    )
+              {stepStatus === "done" ? (
+                <IcoDone />
+              ) : stepStatus === "active" ? (
+                isFourthStep ? (
+                  isMissionFailed ? (
+                    <FailedIcon
+                      backgroundColor="var(--primary-color)"
+                      filter={false}
+                    />
                   ) : (
-                    <IcoActive>
-                      <div></div>
-                      <div></div>
-                    </IcoActive>
+                    <SuccessIcon
+                      backgroundColor="var(--revu-color)"
+                      filter={true}
+                      filterColor="rgba(245, 46, 54, 0.3)"
+                    />
                   )
                 ) : (
-                  <IcoDefault />
-                )}
-              </Circle>
+                  <IcoActive>
+                    <div></div>
+                    <div></div>
+                  </IcoActive>
+                )
+              ) : (
+                <IcoDefault />
+              )}
               <ProgressName>{step.name}</ProgressName>
               {showTooltip && step.tooltip && (
                 <Tooltip>
@@ -169,15 +167,6 @@ const StepBox = styled.div<StepBoxProps>`
   &:last-child::after {
     content: none;
   }
-`
-
-const Circle = styled.div`
-  position: relative;
-  width: 1.3rem;
-  height: 1.3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 const IcoDefault = styled.div`
