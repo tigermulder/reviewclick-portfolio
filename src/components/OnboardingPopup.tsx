@@ -70,7 +70,6 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           {/* 첫 번째 슬라이드 */}
           <SwiperSlide>
             <SlideContent>
-              <CloseButton onClick={handleClose} $color="var(--n500-color)" />
               {/* 첫 번째 슬라이드 내용 */}
               <FirstPageTitle>
                 스마트한 쇼핑 생활 <br />
@@ -86,7 +85,6 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           {Array.from({ length: 6 }).map((_, index) => (
             <SwiperSlide key={index}>
               <SlideContent>
-                <CloseButton onClick={handleClose} $color="var(--white)" />
                 {/* 각 슬라이드 내용 */}
                 <Title>
                   {index + 1 === 6 ? "미션 성공!" : `STEP ${index + 1}`}
@@ -95,6 +93,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               </SlideContent>
             </SwiperSlide>
           ))}
+          <CloseButton onClick={handleClose} $color="var(--n500-color)" />
         </CustomSwiper>
         {/* 커스텀 페이지네이션 */}
         <PaginationContainer>
