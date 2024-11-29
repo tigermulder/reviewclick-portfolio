@@ -109,7 +109,11 @@ const StyledLink = styled(Link)`
 `
 
 const NoNoticeContainer = styled.div`
-  height: 100vh;
+  height: 70vh;
+  display: flex;;
+  justify-content: center;
+  align-items: center;
+}
 `
 
 const NoNoticeMessage = styled.p`
