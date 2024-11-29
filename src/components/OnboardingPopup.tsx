@@ -6,14 +6,16 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import styled from "styled-components"
+import { Swiper as SwiperCore } from "swiper" // SwiperCore 타입 임포트
 
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [showPopup, setShowPopup] = useState(true)
-  const [swiperInstance, setSwiperInstance] = useState<any>(null)
+  const [swiperInstance, setSwiperInstance] = useState<SwiperCore | null>(null)
   const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태
   const [doNotShowAgainChecked, setDoNotShowAgainChecked] = useState(false) // 체크박스 상태 추가
   const totalSlides = 7
 
+  // ** LocalStorage에서 "오늘 하루 보지 않기" 상태 확인
   useEffect(() => {
     const doNotShowAgain = localStorage.getItem("doNotShowOnboardingToday")
     if (doNotShowAgain === "true") {
@@ -21,7 +23,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [])
 
-  //** 스크롤 방지 */
+  // ** 스크롤 방지 */
   useEffect(() => {
     if (showPopup) {
       // 모달이 열리면 body 스크롤을 막음
@@ -35,13 +37,14 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [showPopup])
 
-  //** 체크박스 상태 변경 핸들러 */
+  // ** 체크박스 상태 변경 핸들러 */
   const handleDoNotShowAgainChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDoNotShowAgainChecked(e.target.checked)
   }
 
+  // ** 닫기 버튼 핸들러 */
   const handleClose = () => {
     if (doNotShowAgainChecked) {
       localStorage.setItem("doNotShowOnboardingToday", "true")
@@ -59,7 +62,6 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
         <CustomSwiper
           slidesPerView={1}
           allowTouchMove={true}
-          // Swiper의 기본 페이지네이션은 이미 제거됨
           onSwiper={(swiper) => {
             setSwiperInstance(swiper)
             swiper.on("slideChange", () => {
@@ -76,7 +78,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                 리워드 플랫폼
               </FirstPageTitle>
               <p>여기에 첫 번째 페이지 내용을 작성하세요.</p>
-              <StartButton onClick={() => swiperInstance.slideNext()}>
+              <StartButton onClick={() => swiperInstance?.slideNext()}>
                 캠페인 참여방법 확인하기
               </StartButton>
             </SlideContent>
@@ -93,7 +95,12 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               </SlideContent>
             </SwiperSlide>
           ))}
-          <CloseButton onClick={handleClose} $color="var(--n500-color)" />
+          {/* 닫기 버튼의 색상을 activeIndex에 따라 동적으로 설정 */}
+          <CloseButton
+            onClick={handleClose}
+            $color={activeIndex === 0 ? "var(--n500-color)" : "#fff"}
+            aria-label="닫기"
+          />
         </CustomSwiper>
         {/* 커스텀 페이지네이션 */}
         <PaginationContainer>
@@ -101,7 +108,8 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
             <PaginationBullet
               key={index}
               active={index === activeIndex}
-              onClick={() => swiperInstance.slideTo(index)}
+              onClick={() => swiperInstance?.slideTo(index)}
+              aria-label={`슬라이드 ${index + 1}`}
             />
           ))}
         </PaginationContainer>
@@ -123,6 +131,8 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
 
 export default OnboardingPopup
 
+// ** Styled Components **
+
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -141,8 +151,9 @@ const Dimmed = styled.div`
 
 const DoNotShowAgain = styled.div`
   position: absolute;
-  top: -3rem;
-  left: 0%;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   color: var(--n80-color);
   background: transparent;
   border: none;
@@ -169,6 +180,7 @@ const PopupContainer = styled.div`
   transform: translateY(-50%);
   background: white;
   border-radius: 10px;
+  padding-bottom: 4rem; /* 체크박스 공간 확보 */
 `
 
 const SlideContent = styled.div`
@@ -176,6 +188,7 @@ const SlideContent = styled.div`
   width: 100%;
   height: 100%;
   padding: 2.5rem;
+  text-align: center;
 `
 
 const CustomSwiper = styled(Swiper)`
@@ -191,6 +204,7 @@ const CloseButton = styled.button<CloseButtonProps>`
   width: 24px;
   height: 24px;
   cursor: pointer;
+  z-index: 11;
 
   &::before,
   &::after {
@@ -228,11 +242,23 @@ const Title = styled.h2`
 
 const StartButton = styled.button`
   margin-top: 20px;
+  padding: 0.8rem 1.6rem;
+  background-color: var(--prim-L300);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--prim-L400);
+  }
 `
 
 const PaginationContainer = styled.div`
   position: absolute;
-  bottom: -2.4rem;
+  bottom: 2.4rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
