@@ -170,8 +170,8 @@ const StepBox = styled.div<StepBoxProps>`
 `
 
 const IcoDefault = styled.div`
-  width: 1rem;
-  height: 1rem;
+  width: 0.8rem;
+  height: 0.8rem;
   background: var(--lightsilver);
   border-radius: 50%;
 `
@@ -204,8 +204,8 @@ const IcoActive = styled.div`
 `
 
 const IcoDone = styled.div`
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.2rem;
+  height: 1.2rem;
   background: url("${StepDone}") #fff no-repeat center / 100%;
 `
 
