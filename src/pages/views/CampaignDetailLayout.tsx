@@ -324,9 +324,9 @@ const CampaignDetailPage = () => {
   return (
     <>
       {/* 온보딩팝업 */}
-      {showOnboarding && (
+      {/* {showOnboarding && (
         <OnboardingPopup onClose={() => setShowOnboarding(false)} />
-      )}
+      )} */}
       {/* 캐시워크때문에 주석처리 */}
       {/* <CampaignDetailBackButton />
       <CampaignDetailShareButton /> */}
