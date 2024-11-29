@@ -89,7 +89,6 @@ const NoticeBox = styled.ul`
   background: var(--whitewood);
   color: var(--gray-01);
   font-size: 1.4rem;
-  line-height: 1.4;
 
   li {
     position: relative;
@@ -101,7 +100,7 @@ const NoticeBox = styled.ul`
     content: "";
     display: block;
     position: absolute;
-    top: 20%;
+    top: 24%;
     right: 100%;
     transform: translateY(-50%);
     margin-right: 1rem;

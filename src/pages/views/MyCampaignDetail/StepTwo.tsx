@@ -360,8 +360,8 @@ const ReviewTestContainer = styled.div`
     content: "";
     position: absolute;
     top: 0;
-    left: -1.5rem; /* 부모의 좌측 패딩 값 */
-    width: calc(100% + 3rem); /* 좌우 패딩의 합 */
+    left: -1.5rem;
+    width: calc(100% + 3rem);
     height: 100%;
     background-color: var(--n20-color);
     z-index: -1;
