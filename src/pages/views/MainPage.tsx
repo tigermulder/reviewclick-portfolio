@@ -15,6 +15,8 @@ import CategoryMenu from "components/CategoryMenu"
 import dummyImage from "assets/dummy-image.png"
 import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
+import SuccessIcon from "@/components/SuccessIcon"
+import FailedIcon from "@/components/FailedIcon"
 
 const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)

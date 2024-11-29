@@ -237,7 +237,6 @@ const IconMoreStyled = styled(IconMore)`
   object-fit: contain;
 `
 
-// 카카오톡 아이콘 배경 설정
 const IconKaKaoBackground = styled.div`
   width: 5rem;
   height: 5rem;

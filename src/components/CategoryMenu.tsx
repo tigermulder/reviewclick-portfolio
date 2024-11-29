@@ -54,14 +54,14 @@ const CategoryItem = styled.div`
 const IconWrapper = styled.div<{ $isActive?: boolean }>`
   width: 60px;
   height: 60px;
-  margin-bottom: 8px; /* 아이콘과 텍스트 사이의 간격 */
+  margin-bottom: 8px;
   background: ${({ $isActive }) => ($isActive ? "#E9EBEC" : "transparent")};
   border-radius: 18px;
   border: ${({ $isActive }) => ($isActive ? "none" : "1.04px solid #F4F5F5")};
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer; /* 클릭 가능한 커서 표시 */
+  cursor: pointer;
 `
 
 const CategoryText = styled.div`

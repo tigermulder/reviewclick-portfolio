@@ -18,7 +18,6 @@ const CampaignDetailBackButton = () => {
 
 export default CampaignDetailBackButton
 
-// 스타일 정의
 const StyledBackButton = styled.button`
   position: fixed;
   top: 15px;

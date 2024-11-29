@@ -5,9 +5,10 @@ import {
   StepBoxProps,
   IcoCustomProps,
 } from "@/types/component-types/progress-type"
+// StepSuccess와 StepFailed 임포트 제거
 import StepDone from "assets/ico_step_done.svg?url"
-import StepSuccess from "assets/ico_step_success.svg"
-import StepFailed from "assets/ico_step_failed.svg"
+import SuccessIcon from "./SuccessIcon"
+import FailedIcon from "./FailedIcon"
 import IconCoin from "assets/ico_coin.svg"
 
 const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
@@ -15,8 +16,6 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
   let isMissionFailed = false
   let isReviewFailed = false
   let fourthStepName = "지급완료"
-  let threeStepName = "리뷰등록"
-  let fourthStepIcon = StepSuccess
 
   if (status === "upload") {
     if (uploadComplete === 1) {
@@ -24,16 +23,15 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     } else {
       adjustedStatus = "timeout"
       fourthStepName = "지급대기"
-      fourthStepIcon = StepSuccess
       isMissionFailed = false
     }
-  } else if (status === "giveup" || status === "timeout") {
+  } else if (status === "giveup" || adjustedStatus === "timeout") {
     isMissionFailed = true
     fourthStepName = "미션중단"
-    fourthStepIcon = StepFailed
   } else if (status === "confirm") {
     isReviewFailed = true
   }
+
   const steps = [
     {
       name: "상품구매",
@@ -46,7 +44,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
       tooltip: "리뷰 작성하고 AI검수를 통해 긍정적인 리뷰인지 확인받으세요!",
     },
     {
-      name: threeStepName,
+      name: "리뷰등록",
       key: "confirm",
       tooltip: "리뷰를 등록하고 캡쳐본을 업로드하면 미션 완료!",
       icon: IconCoin,
@@ -54,7 +52,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     { name: fourthStepName, key: "reward" },
   ]
 
-  const currentStep = statusToStepMap[status] || 1
+  const currentStep = statusToStepMap[adjustedStatus] || 1
 
   return (
     <ProgressContainer>
@@ -79,11 +77,19 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                 {stepStatus === "done" ? (
                   <IcoDone />
                 ) : stepStatus === "active" ? (
-                  index === 3 ? (
-                    <IcoCustom
-                      $icon={fourthStepIcon}
-                      $isMissionFailed={isMissionFailed && isFourthStep}
-                    />
+                  isFourthStep ? (
+                    isMissionFailed ? (
+                      <FailedIcon
+                        backgroundColor="var(--primary-color)"
+                        filter={false}
+                      />
+                    ) : (
+                      <SuccessIcon
+                        backgroundColor="var(--revu-color)"
+                        filter={true}
+                        filterColor="rgba(245, 46, 54, 0.3)"
+                      />
+                    )
                   ) : (
                     <IcoActive>
                       <div></div>
@@ -212,12 +218,6 @@ const IcoDone = styled.div`
   width: 1.3rem;
   height: 1.3rem;
   background: url("${StepDone}") #fff no-repeat center / 100%;
-`
-
-const IcoCustom = styled.div<IcoCustomProps>`
-  width: 1.3rem;
-  height: 1.3rem;
-  background: url("${(props) => props.$icon}") no-repeat center / 100%;
 `
 
 const ProgressName = styled.span`

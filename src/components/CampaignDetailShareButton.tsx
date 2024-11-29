@@ -21,7 +21,6 @@ const ShareButton = () => {
 
 export default ShareButton
 
-// 스타일 정의
 const StyledShareButton = styled.button`
   position: fixed;
   top: 15px;
