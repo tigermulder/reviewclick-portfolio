@@ -338,7 +338,7 @@ const CampaignDetailPage = () => {
         <PopUp $offsetY={popUpOffsetY}>
           🎉 신청을 서두르세요! 신청인원 {displayJoins}/{campaignDetail.quota}
         </PopUp>
-        <Dday>{`D-${dDay}`}</Dday>
+        <Dday>{dDay < 0 ? "신청마감" : `D-${dDay}`}</Dday>
         <Title>{campaignDetail.title}</Title>
         <CampaignDetails
           campaign={campaignDetail}
