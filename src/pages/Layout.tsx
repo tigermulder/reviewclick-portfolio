@@ -13,6 +13,7 @@ const Layout = () => {
   const isLoginPage = location.pathname === RoutePath.Login // 로그인 페이지
   const isJoinPage = location.pathname === RoutePath.Join // 인증 페이지 1-1
   const isJoinVerifyPage = location.pathname === RoutePath.JoinVerify // 인증 페이지 1-2
+  const isJoinPhoneVerifyPage = location.pathname === RoutePath.JoinPhoneVerify // 인증 페이지 1-3
   const isFindIdPage = location.pathname === RoutePath.FindId // 아이디찾기 페이지
   const isFindPassWordPage = location.pathname === RoutePath.FindPassword // 아이디찾기 페이지
   const isMyCartPage = location.pathname === RoutePath.MyCart // 장바구니 페이지
@@ -33,7 +34,8 @@ const Layout = () => {
     isFindIdPage ||
     isJoinPage ||
     isJoinVerifyPage ||
-    isFindPassWordPage
+    isFindPassWordPage ||
+    isJoinPhoneVerifyPage
 
   return (
     <>

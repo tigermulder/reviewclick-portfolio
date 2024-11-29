@@ -3,6 +3,7 @@ export const RoutePath = {
   Login: "/login",
   Join: "/join",
   JoinVerify: "/join/verify",
+  JoinPhoneVerify: "/join/verify/phone",
   FindId: "/find_id",
   FindPassword: "/find_password",
   ResetPassword: "/reset_password",
