@@ -23,26 +23,19 @@ const FaqContent = () => {
   const faqList = faqData?.list
 
   return (
-    <Container>
-      <section>
-        <ListContainer>
-          {faqList?.map((faqItem) => {
-            return <FaqItem key={faqItem.faqId} faqItem={faqItem} />
-          })}
-        </ListContainer>
-      </section>
-    </Container>
+    <section>
+      <ListContainer>
+        {faqList?.map((faqItem) => {
+          return <FaqItem key={faqItem.faqId} faqItem={faqItem} />
+        })}
+      </ListContainer>
+    </section>
   )
 }
 
 export default FaqContent
 
-const Container = styled.div`
-  margin-top: 4rem;
-`
-
 const ListContainer = styled.ul`
-  margin-top: 0.8rem;
   li {
     padding: 2.2rem 0;
     display: flex;

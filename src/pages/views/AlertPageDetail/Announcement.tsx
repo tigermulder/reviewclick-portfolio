@@ -26,34 +26,26 @@ const Announcement = () => {
   const noticeList = noticeData?.list
 
   return (
-    <Container>
-      <NoticeSection>
-        <ListContainer>
-          {noticeList?.map((noticeItem) => {
-            return (
-              <li key={noticeItem.noticeId}>
-                <StyledLink
-                  to={RoutePath.NoticeDetail(`${noticeItem.noticeId}`)}
-                >
-                  <NotifyMessage>
-                    <IconNew />
-                    {noticeItem.title}
-                  </NotifyMessage>
-                </StyledLink>
-              </li>
-            )
-          })}
-        </ListContainer>
-      </NoticeSection>
-    </Container>
+    <NoticeSection>
+      <ListContainer>
+        {noticeList?.map((noticeItem) => {
+          return (
+            <li key={noticeItem.noticeId}>
+              <StyledLink to={RoutePath.NoticeDetail(`${noticeItem.noticeId}`)}>
+                <NotifyMessage>
+                  <IconNew />
+                  {noticeItem.title}
+                </NotifyMessage>
+              </StyledLink>
+            </li>
+          )
+        })}
+      </ListContainer>
+    </NoticeSection>
   )
 }
 
 export default Announcement
-
-const Container = styled.div`
-  margin-top: 4rem;
-`
 
 const NoticeSection = styled.section`
   margin-bottom: 4rem;
@@ -71,7 +63,6 @@ const NoticeSection = styled.section`
 `
 
 const ListContainer = styled.ul`
-  margin-top: 0.8rem;
   li {
     padding: 2.2rem 0;
     display: flex;
