@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import IconArrowGo from "assets/ico_arr_go.svg?url"
-import IconSuccess from "assets/ico_step_success.svg?url"
-import IconFailed from "assets/ico_step_failed.svg?url"
+import SuccessIcon from "./SuccessIcon"
+import FailedIcon from "./FailedIcon"
 import IconCopy from "assets/ico-copy.svg"
 
 import {
@@ -23,6 +23,17 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick={onClick}
       $marginTop={$marginTop}
     >
+      {/* success와 failed일 경우 아이콘 렌더링 */}
+      {$variant === "success" && (
+        <SuccessIcon
+          backgroundColor="var(--revu-color)"
+          filter={true}
+          filterColor="rgba(245, 46, 54, 0.3)"
+        />
+      )}
+      {$variant === "failed" && (
+        <FailedIcon backgroundColor="var(--primary-color)" filter={false} />
+      )}
       {$variant !== "spinner" && children}
     </StyledButton>
   )
@@ -131,25 +142,19 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           font-weight: var(--font-bodyM-weight);
           line-height: var(--font-bodyM-line-height);
           letter-spacing: var(--font-bodyM-letter-spacing);
-          color: var(--success-color);
-          border: 1px solid var(--success-color);
+          color: var(--revu-color);
+          border: 1px solid var(--n80-color);
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 0 0.8rem 0 var(--dimgray);
+          gap: 0.4rem;
           span {
             margin-left: 0.4rem;
             font-size: var(--font-callout-small-size);
             font-weight: var(--font-callout-small-weight);
             line-height: var(--font-callout-small-line-height);
             letter-spacing: var(--font-callout-small-letter-spacing);
-          }
-          &::before {
-            content: "";
-            display: block;
-            background: url("${IconSuccess}") no-repeat center / 100%;
-            width: 1.7rem;
-            height: 1.7rem;
-            margin-right: 0.4rem;
           }
         `
       case "failed":
@@ -162,6 +167,8 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           letter-spacing: var(--font-bodyM-letter-spacing);
           border: 1px solid var(--n80-color);
           color: var(--primary-color);
+          box-shadow: 0 0 0.8rem 0 var(--dimgray);
+          gap: 0.4rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -171,14 +178,6 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
             font-weight: var(--font-callout-small-weight);
             line-height: var(--font-callout-small-line-height);
             letter-spacing: var(--font-callout-small-letter-spacing);
-          }
-          &::before {
-            content: "";
-            display: block;
-            background: url("${IconFailed}") no-repeat center / 100%;
-            width: 1.7rem;
-            height: 1.7rem;
-            margin-right: 0.4rem;
           }
         `
       case "copy":
