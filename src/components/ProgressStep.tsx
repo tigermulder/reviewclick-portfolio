@@ -153,10 +153,9 @@ const StepBox = styled.div<StepBoxProps>`
   &::after {
     content: "";
     position: absolute;
-    top: 50%;
     left: 50%;
     width: 100%;
-    height: 1.5px;
+    height: 0.15rem;
     background: ${({ $status }) =>
       $status === "done"
         ? "linear-gradient(to right, var(--revu-color) 5%, transparent 5% 10%, var(--revu-color) 10% 15%, transparent 15% 20%, var(--revu-color) 20% 25%, transparent 25% 30%, var(--revu-color) 30% 35%, transparent 35% 40%, var(--revu-color) 40% 45%, transparent 45% 50%, var(--revu-color) 50% 55%, transparent 55% 60%, var(--revu-color) 60% 65%, transparent 65% 70%, var(--revu-color) 70% 75%, transparent 75% 80%, var(--revu-color) 80% 85%, transparent 85% 90%, var(--revu-color) 90% 95%, transparent 95% 100%)"
