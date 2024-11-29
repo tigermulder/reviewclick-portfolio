@@ -40,7 +40,9 @@ const Announcement = () => {
             </li>
           ))
         ) : (
-          <NoNoticeMessage>공지사항이 없습니다.</NoNoticeMessage>
+          <NoNoticeContainer>
+            <NoNoticeMessage>공지사항이 없습니다.</NoNoticeMessage>
+          </NoNoticeContainer>
         )}
       </ListContainer>
     </NoticeSection>
@@ -104,6 +106,10 @@ const StyledLink = styled(Link)`
   position: relative;
   display: block;
   width: 100%;
+`
+
+const NoNoticeContainer = styled.div`
+  height: 100vh;
 `
 
 const NoNoticeMessage = styled.p`
