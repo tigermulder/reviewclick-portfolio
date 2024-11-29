@@ -279,11 +279,11 @@ const StepTwo = ({
 export default StepTwo
 
 const CartTest = styled.div`
-  padding: 6rem 0 10rem;
+  padding: 4.4rem 0 10rem;
 `
 const CampaignStatus = styled.div`
   position: relative;
-  padding: 2rem 1.6rem 2.3rem 2.3rem;
+  padding: 2rem 0 2.3rem 0;
 `
 const CampaignTitle = styled.p`
   margin-bottom: 1.2rem;
@@ -445,7 +445,7 @@ const ReviewContent = styled.div`
 `
 
 const ReviewHeader = styled.p`
-  padding: 1.2rem 1rem;
+  padding: 1.2rem 0;
   font-weight: var(--font-weight-bold);
   font-size: 1.6rem;
   letter-spacing: -1px;
@@ -455,8 +455,8 @@ const ReviewTextBox = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
-  height: 23rem;
-  padding: 1.4rem 1.4rem 4.7rem;
+  height: 20rem;
+  padding: 1.4rem 1.4rem 4rem;
   border-radius: 1rem;
   background-color: #fff;
 
@@ -478,7 +478,7 @@ const ReviewTextBox = styled.div`
 
 const BottomButtonContainer = styled.div`
   max-width: 768px;
-  min-width: 375px;
+  min-width: 280px;
   position: fixed;
   bottom: 0;
   left: 0;

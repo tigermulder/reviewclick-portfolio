@@ -280,7 +280,7 @@ const CartTitle = styled.div`
   background: var(--white);
 
   p {
-    padding: 5.4rem 1.5rem 2rem;
+    padding: 3rem 1.5rem 2rem;
     font-size: var(--font-h2-size);
     font-weight: var(--font-h2-weight);
     letter-spacing: var(--font-h2-letter-spacing);
@@ -290,7 +290,7 @@ const CartTitle = styled.div`
 
 const CartStepContainer = styled.ul`
   margin: 0 -1.5rem;
-  padding: 4rem 1.5rem 10rem 2.6rem;
+  padding: 3rem 1.5rem 10rem 2.6rem;
   min-height: 100vh;
   background: var(--whitewood);
 
