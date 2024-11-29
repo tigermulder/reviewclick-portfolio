@@ -430,7 +430,7 @@ const GuideContent = styled.div`
     content: "";
     position: absolute;
     left: 0;
-    margin-top: 0.85rem;
+    margin-top: 0.8rem;
     width: 0.3rem;
     height: 0.3rem;
     border-radius: 50%;

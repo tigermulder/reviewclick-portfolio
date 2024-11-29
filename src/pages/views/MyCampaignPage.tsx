@@ -176,15 +176,7 @@ const MyCampaignPage = () => {
               ? "0"
               : reviewJoin}
           </Result>
-          <Total>
-            /
-            {reviewMax === 0 ||
-            reviewMax === undefined ||
-            reviewMax === null ||
-            !reviewMax
-              ? "3"
-              : reviewMax}
-          </Total>
+          <Total>/{reviewList.length}</Total>
         </p>
       </CartCardDesc>
       {/* hasItems prop 추가 */}
