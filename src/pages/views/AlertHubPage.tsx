@@ -2,6 +2,7 @@ import SinglePageHeader from "@/components/SinglePageHeader"
 import ContentTab from "@/components/Tab"
 import FaqButton from "@/components/FaqButton"
 import NewsContent from "./AlertPageDetail/NewsContent"
+import Announcement from "./AlertPageDetail/Announcement"
 import FaqContent from "./AlertPageDetail/FaqContent"
 import { useRecoilState } from "recoil"
 import { alertSelectedTabState } from "@/store/alerttap-recoil"
@@ -12,7 +13,8 @@ const AlertHubPage = () => {
   //** 탭 설정 */
   const singleTab = [
     { label: "새소식", value: "news" },
-    { label: "공지사항/FAQ", value: "faq" },
+    { label: "FAQ", value: "faq" },
+    { label: "공지사항", value: "announcement" },
   ]
   const handleTabSelect = (tabValue: string) => {
     setSelectedTab(tabValue)
@@ -32,6 +34,7 @@ const AlertHubPage = () => {
       <TabContent>
         {selectedTab === "news" && <NewsContent />}
         {selectedTab === "faq" && <FaqContent />}
+        {selectedTab === "announcement" && <Announcement />}
       </TabContent>
       <FaqButton />
     </>

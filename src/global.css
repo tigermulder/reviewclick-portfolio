@@ -370,7 +370,7 @@ input:focus::placeholder {
   clip: rect(0, 0, 0, 0);
 }
 
-/** 갤럭시 폴드 */
+/** 모바일 작은해상도 */
 @media (max-width: 374px) {
   html {
     font-size: 55%;
