@@ -28,8 +28,8 @@ const Announcement = () => {
   return (
     <NoticeSection>
       <ListContainer>
-        {noticeList?.map((noticeItem) => {
-          return (
+        {noticeList && noticeList.length > 0 ? (
+          noticeList.map((noticeItem) => (
             <li key={noticeItem.noticeId}>
               <StyledLink to={RoutePath.NoticeDetail(`${noticeItem.noticeId}`)}>
                 <NotifyMessage>
@@ -38,8 +38,10 @@ const Announcement = () => {
                 </NotifyMessage>
               </StyledLink>
             </li>
-          )
-        })}
+          ))
+        ) : (
+          <NoNoticeMessage>공지사항이 없습니다.</NoNoticeMessage>
+        )}
       </ListContainer>
     </NoticeSection>
   )
@@ -102,4 +104,12 @@ const StyledLink = styled(Link)`
   position: relative;
   display: block;
   width: 100%;
+`
+
+const NoNoticeMessage = styled.p`
+  padding: 2.2rem 0;
+  text-align: center;
+  color: var(--n400-color);
+  font-size: var(--font-bodyM-size);
+  font-weight: var(--font-bodyM-weight);
 `
