@@ -234,7 +234,6 @@ export default ContactSupport
 
 const NoticeBox = styled.div`
   p {
-    padding-left: 1rem;
     margin-bottom: 0.4rem;
     font-size: 1.2rem;
     letter-spacing: -1px;
@@ -252,7 +251,7 @@ const NoticeBox = styled.div`
   }
   ul li {
     position: relative;
-    padding-left: 3rem;
+    padding-left: 1.5rem;
     font-size: 1.2rem;
     line-height: 1.4;
     font-weight: var(--font-weight-medium);
@@ -264,7 +263,7 @@ const NoticeBox = styled.div`
     &::before {
       content: "";
       position: absolute;
-      left: 2rem;
+      left: 0.5rem;
       margin-top: 0.7rem;
       width: 0.3rem;
       height: 0.3rem;
