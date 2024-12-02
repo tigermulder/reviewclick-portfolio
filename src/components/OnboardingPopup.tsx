@@ -46,6 +46,7 @@ const slidesData: SlideData[] = [
     imageSrc: Onboarding02,
     imageTitle: Title01,
     handIcon: HandIcon01,
+    animationButton: <Button $variant="red">스크롤 내리기</Button>,
   },
   {
     description: (

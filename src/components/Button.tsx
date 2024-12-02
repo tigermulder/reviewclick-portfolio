@@ -55,7 +55,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
     switch ($variant) {
       case "red":
         return css`
-          background-color: ${disabled ? "#FCC0C2" : "#ff0000"};
+          background-color: ${disabled ? "#FCC0C2" : "var(--revu-color)"};
           color: white;
           border: none;
         `
@@ -235,6 +235,15 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
               transform: rotate(360deg);
             }
           }
+        `
+      case "onboarding01":
+        return css`
+          height: 3.1rem;
+          font-size: 1.2rem;
+          background-color: var(--revu-color);
+          box-shadow: 0px 0px 12px 0px rgba(255, 165, 169, 0.6);
+          color: white;
+          border: none;
         `
       default:
         return ""
