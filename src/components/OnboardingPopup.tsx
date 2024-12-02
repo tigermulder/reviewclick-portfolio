@@ -113,14 +113,15 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
         />
         {/* 오늘 하루 보지 않기 체크박스 */}
         <DoNotShowAgain>
-          <label>
-            <Checkbox
+          <CheckboxLabel>
+            <input
               type="checkbox"
               checked={doNotShowAgainChecked}
               onChange={handleDoNotShowAgainChange}
             />
+            <IconCheck />
             <span>오늘 하루 보지 않기</span>
-          </label>
+          </CheckboxLabel>
         </DoNotShowAgain>
       </PopupContainer>
     </Overlay>
@@ -159,11 +160,32 @@ const DoNotShowAgain = styled.div`
     align-items: center;
   }
 `
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 
-const Checkbox = styled.input`
-  margin-right: 0.5rem;
-  width: 1.6rem;
-  height: 1.6rem;
+  /* Hide the native checkbox */
+  input {
+    display: none;
+  }
+
+  svg {
+    color: var(--n80-color);
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 0.5rem;
+    transition: color 0.3s;
+  }
+
+  input:checked + svg {
+    color: var(--prim-L300);
+  }
+
+  input:focus + svg {
+    outline: 2px solid var(--prim-L300);
+    outline-offset: 2px;
+  }
 `
 
 const PopupContainer = styled.div`
