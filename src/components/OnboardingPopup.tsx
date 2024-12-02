@@ -115,7 +115,6 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null)
   const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태
   const [doNotShowAgainChecked, setDoNotShowAgainChecked] = useState(false) // 체크박스 상태 추가
-  const [isTransitioning, setIsTransitioning] = useState(false)
   const totalSlides = 7
 
   useEffect(() => {
@@ -167,12 +166,8 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           loop={false}
           onSwiper={(swiper) => {
             setSwiperInstance(swiper)
-            swiper.on("slideChangeTransitionStart", () => {
-              setIsTransitioning(true)
-            })
-            swiper.on("slideChangeTransitionEnd", () => {
+            swiper.on("slideChange", () => {
               setActiveIndex(swiper.activeIndex)
-              setIsTransitioning(false)
             })
           }}
           allowSlideNext={activeIndex < totalSlides - 1}
@@ -468,11 +463,11 @@ const LastButton = styled.button`
   border-radius: 2.8rem;
 `
 
-const AnimationBox = styled.div<SlideHeightProvider>`
+const AnimationBox = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: ${(props) => (props.$height ? "3.3rem" : "1.3rem")};
+  bottom: 3.3rem;
   width: 100%;
   padding: 0 3rem;
 `

@@ -23,7 +23,3 @@ export interface InfoAreaTitleProps {
 export interface IcoHandProps {
   $animate: boolean
 }
-
-export interface SlideHeightProvider {
-  $height: boolean
-}
