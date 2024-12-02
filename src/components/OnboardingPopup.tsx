@@ -482,7 +482,7 @@ const handAnimation = keyframes`
 
 const IcoHand = styled.img<IcoHandProps>`
   position: absolute;
-  top: ${(props) => (props.$animate ? "-4.3rem" : "2.6rem")};
+  top: ${(props) => (props.$animate ? "-4.3rem" : "0.6rem")};
   right: ${(props) => (props.$animate ? "2.3rem" : "2.8rem")};
   width: 6rem;
   animation: ${(props) =>
