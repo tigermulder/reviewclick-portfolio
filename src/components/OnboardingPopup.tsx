@@ -285,6 +285,7 @@ const Title = styled.h2`
 `
 
 const StartButton = styled.button`
+  width: 100%;
   display: flex;
   gap: 0.6rem;
   position: absolute;
@@ -292,7 +293,10 @@ const StartButton = styled.button`
   left: 50%;
   transform: translateX(-50%);
   font-size: var(--font-h3-size);
+  font-weight: var(--font-weight-medium);
   color: var(--white);
+  justify-content: center;
+  align-items: center;
 `
 
 const PaginationContainer = styled.div`
