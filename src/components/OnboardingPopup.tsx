@@ -27,6 +27,7 @@ import RevuIcon from "assets/main-logo-img.svg?url"
 import NaverIcon from "assets/ico-naver.svg?url"
 import HandIcon01 from "assets/onboarding-hand-01.png"
 import HandIcon02 from "assets/onboarding-hand-02.png"
+import IconStar from "assets/onboarding-07-ico.svg?url"
 import Button from "@/components/Button"
 import styled, { keyframes, css } from "styled-components"
 
@@ -492,6 +493,23 @@ const LastButton = styled.button`
   font-weight: var(--font-callout-weight);
   letter-spacing: var(--font-callout-letter-spacing);
   border-radius: 2.8rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 2rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("${IconStar}") no-repeat center / 100%;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    right: 2rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("${IconStar}") no-repeat center / 100%;
+  }
 `
 
 const AnimationBox = styled.div`
