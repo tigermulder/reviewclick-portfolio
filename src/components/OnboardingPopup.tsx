@@ -6,7 +6,52 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import IconCheck from "assets/ico_onboarding_check.svg?react"
+import IconArrow from "assets/ico_onboard_arrow.svg?react"
+import Onboarding01 from "assets/onboarding-01.png"
+import Onboarding02 from "assets/onboarding-02.png"
+import Onboarding03 from "assets/onboarding-03.png"
+import Onboarding04 from "assets/onboarding-04.png"
+import Onboarding05 from "assets/onboarding-05.png"
+import Onboarding06 from "assets/onboarding-06.png"
+import Onboarding07 from "assets/onboarding-07.png"
 import styled from "styled-components"
+
+const slidesData = [
+  {
+    buttonText: "캠페인 참여방법 확인하기",
+    backgroundImage: `url("${Onboarding01}")`,
+  },
+  {
+    title: "STEP 2",
+    description: "이것은 페이지 2의 내용입니다.",
+    backgroundImage: `url(${Onboarding02})`,
+  },
+  {
+    title: "STEP 3",
+    description: "이것은 페이지 3의 내용입니다.",
+    backgroundImage: `url(${Onboarding03})`,
+  },
+  {
+    title: "STEP 4",
+    description: "이것은 페이지 4의 내용입니다.",
+    backgroundImage: `url(${Onboarding04})`,
+  },
+  {
+    title: "STEP 5",
+    description: "이것은 페이지 5의 내용입니다.",
+    backgroundImage: `url(${Onboarding05})`,
+  },
+  {
+    title: "STEP 6",
+    description: "이것은 페이지 6의 내용입니다.",
+    backgroundImage: `url(${Onboarding06})`,
+  },
+  {
+    title: "미션 성공!",
+    description: "이것은 페이지 7의 내용입니다.",
+    backgroundImage: `url(${Onboarding07})`,
+  },
+]
 
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [showPopup, setShowPopup] = useState(true)
@@ -69,29 +114,25 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           }}
         >
           {/* 첫 번째 슬라이드 */}
-          <SwiperSlide>
-            <SlideContent>
-              {/* 첫 번째 슬라이드 내용 */}
-              <FirstPageTitle>
-                스마트한 쇼핑 생활 <br />
-                리워드 플랫폼
-              </FirstPageTitle>
-              <p>여기에 첫 번째 페이지 내용을 작성하세요.</p>
-              <StartButton onClick={() => swiperInstance.slideNext()}>
-                캠페인 참여방법 확인하기
-              </StartButton>
-            </SlideContent>
-          </SwiperSlide>
-          {/* 나머지 슬라이드 */}
-          {Array.from({ length: 6 }).map((_, index) => (
+          {/* 슬라이드 데이터를 기반으로 슬라이드 생성 */}
+          {slidesData.map((slide, index) => (
             <SwiperSlide key={index}>
-              <SlideContent>
-                {/* 각 슬라이드 내용 */}
-                <Title>
-                  {index + 1 === 6 ? "미션 성공!" : `STEP ${index + 1}`}
-                </Title>
-                <p>{`이것은 페이지 ${index + 1}의 내용입니다.`}</p>
+              <SlideContent backgroundImage={slide.backgroundImage}>
+                <p>{slide.description}</p>
+                {slide.buttonText && (
+                  <StartButton onClick={() => swiperInstance.slideNext()}>
+                    {slide.buttonText}
+                  </StartButton>
+                )}
               </SlideContent>
+            </SwiperSlide>
+          ))}
+          {/* 나머지 슬라이드 */}
+          {slidesData.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <SlideContent
+                backgroundImage={slide.backgroundImage}
+              ></SlideContent>
             </SwiperSlide>
           ))}
         </CustomSwiper>
@@ -189,11 +230,15 @@ const PopupContainer = styled.div`
   border-radius: 2.8rem;
 `
 
-const SlideContent = styled.div`
+const SlideContent = styled.div<{ backgroundImage: string }>`
   position: relative;
   width: 100%;
   height: 70vh;
   padding: 2.5rem;
+  background-image: ${(props) => props.backgroundImage};
+  background-size: cover; /* 배경 이미지 크기 조절 */
+  background-position: center; /* 배경 이미지 위치 조절 */
+  background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
 `
 
 const CustomSwiper = styled(Swiper)`
@@ -228,13 +273,6 @@ const CloseButton = styled.button<CloseButtonProps>`
   &::after {
     transform: rotate(-45deg);
   }
-`
-
-const FirstPageTitle = styled.h2`
-  font-size: 2.4rem;
-  color: #33373a;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: -0.48px;
 `
 
 const Title = styled.h2`
