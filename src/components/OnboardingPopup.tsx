@@ -122,6 +122,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                 {slide.buttonText && (
                   <StartButton onClick={() => swiperInstance.slideNext()}>
                     {slide.buttonText}
+                    <IconArrow />
                   </StartButton>
                 )}
               </SlideContent>
@@ -283,7 +284,11 @@ const Title = styled.h2`
 `
 
 const StartButton = styled.button`
-  margin-top: 20px;
+  position: absolute;
+  bottom: 3.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--white);
 `
 
 const PaginationContainer = styled.div`
