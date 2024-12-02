@@ -114,6 +114,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null)
   const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태
   const [doNotShowAgainChecked, setDoNotShowAgainChecked] = useState(false) // 체크박스 상태 추가
+  const [buttonChanged, setButtonChanged] = useState(false) // 추가된 상태
   const totalSlides = 7
 
   useEffect(() => {
@@ -152,6 +153,26 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     onClose()
   }
 
+  // ** 슬라이드 전환 시 버튼 변경 타이머 설정
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null
+
+    if (activeIndex === 1) {
+      // 특정 슬라이드 인덱스
+      timer = setTimeout(() => {
+        setButtonChanged(true)
+      }, 1500) // 1.5초 후에 실행
+    } else {
+      setButtonChanged(false) // 다른 슬라이드로 이동 시 상태 초기화
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    }
+  }, [activeIndex])
+
   if (!showPopup) return null
 
   return (
@@ -182,7 +203,18 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     alt={`Onboarding Slide ${index + 1}`}
                   />
                   <AnimationBox>
-                    {slide.animationButton && slide.animationButton}
+                    {slide.animationButton &&
+                      (index === 1 && activeIndex === 1 ? (
+                        buttonChanged ? (
+                          <Button $variant="onboarding01">
+                            캠페인 신청하기
+                          </Button>
+                        ) : (
+                          <Button $variant="onboarding01">스크롤 내리기</Button>
+                        )
+                      ) : (
+                        slide.animationButton
+                      ))}
                     {slide.handIcon && (
                       <IcoHand
                         src={slide.handIcon}
@@ -396,7 +428,7 @@ const ThumbArea = styled.div`
 
 const InfoArea = styled.div`
   position: relative;
-  height: 15.3rem;
+  height: 17.3rem;
   background: var(--snowwhite);
   display: flex;
   gap: 0.8rem;
