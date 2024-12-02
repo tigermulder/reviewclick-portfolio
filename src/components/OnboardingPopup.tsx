@@ -93,11 +93,6 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               </SlideContent>
             </SwiperSlide>
           ))}
-          <CloseButton
-            onClick={handleClose}
-            $color={activeIndex === 0 ? "var(--n500-color)" : "var(--white)"}
-            aria-label="닫기"
-          />
         </CustomSwiper>
         {/* 커스텀 페이지네이션 */}
         <PaginationContainer>
@@ -109,6 +104,12 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
             />
           ))}
         </PaginationContainer>
+        {/* 닫기버튼 */}
+        <CloseButton
+          onClick={handleClose}
+          $color={"var(--white)"}
+          aria-label="닫기"
+        />
         {/* 오늘 하루 보지 않기 체크박스 */}
         <DoNotShowAgain>
           <label>
