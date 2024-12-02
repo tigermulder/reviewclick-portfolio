@@ -373,6 +373,10 @@ const InfoArea = styled.div`
   align-items: center;
   justify-content: center;
 
+  &last-child img {
+    height: 2.8rem;
+  }
+
   p {
     text-align: center;
     font-size: 1.7rem;
@@ -428,5 +432,5 @@ const LastButton = styled.button`
   font-size: var(--font-callout-size);
   font-weight: var(--font-callout-weight);
   letter-spacing: var(--font-callout-letter-spacing);
-  border-radius: 3rem;
+  border-radius: 2.8rem;
 `
