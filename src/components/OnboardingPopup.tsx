@@ -148,7 +148,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
 
   const handleClose = () => {
     if (doNotShowAgainChecked) {
-      localStorage.setItem("doNotShowOnboardingToday", "true")
+      sessionStorage.setItem("doNotShowOnboardingToday", "true")
     }
     setShowPopup(false)
     onClose()

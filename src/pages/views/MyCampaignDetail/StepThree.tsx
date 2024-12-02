@@ -237,9 +237,7 @@ const StepThree = ({
             </StepItemReviewBox>
           </StepItemReviewContainer>
           <StepItemReviewText>
-            ‘등록하러가기’ 클릭 시 검수 완료된 리뷰와 경제적 이해관계를 명시하는
-            &lt;협찬&gt; 문구가 자동 입력 및 복사되며, ‘리뷰어’는 이에
-            동의합니다.
+            ‘등록하러가기’ 클릭 시 검수 완료된 리뷰가 자동으로 복사됩니다.
           </StepItemReviewText>
           <Button $variant="pink" onClick={handleNavigate}>
             리뷰 등록하러가기 (<Purple>자동복사</Purple>)
