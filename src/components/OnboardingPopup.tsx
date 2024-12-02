@@ -203,6 +203,7 @@ const CloseButton = styled.button<CloseButtonProps>`
   &::after {
     content: "";
     position: absolute;
+    top: 0;
     width: 0.1rem;
     height: 1.8rem;
     background-color: ${(props) => props.$color};
