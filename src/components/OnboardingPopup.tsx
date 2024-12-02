@@ -234,8 +234,6 @@ const PopupContainer = styled.div`
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
-  border-radius: 2.8rem;
-  overflow: hidden;
 `
 
 const SlideContent = styled.div`
