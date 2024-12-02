@@ -234,7 +234,6 @@ const PopupContainer = styled.div`
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
-  background: white;
   border-radius: 2.8rem;
   overflow: hidden;
 `
@@ -242,6 +241,9 @@ const PopupContainer = styled.div`
 const SlideContent = styled.div`
   position: relative;
   width: 100%;
+  border-radius: 2.8rem;
+  overflow: hidden;
+  background: white;
 `
 
 const CustomSwiper = styled(Swiper)`
