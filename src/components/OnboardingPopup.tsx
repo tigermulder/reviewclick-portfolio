@@ -229,6 +229,7 @@ const PopupContainer = styled.div`
   transform: translateY(-50%);
   background: white;
   border-radius: 2.8rem;
+  overflow: hidden;
 `
 
 const SlideContent = styled.div<{ backgroundImage: string }>`
@@ -290,6 +291,7 @@ const StartButton = styled.button`
   bottom: 3.5rem;
   left: 50%;
   transform: translateX(-50%);
+  font-size: var(--font-h3-size);
   color: var(--white);
 `
 
