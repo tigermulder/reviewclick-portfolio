@@ -242,7 +242,6 @@ const PopupContainer = styled.div`
 const SlideContent = styled.div`
   position: relative;
   width: 100%;
-  padding: 2.5rem;
 `
 
 const CustomSwiper = styled(Swiper)`
