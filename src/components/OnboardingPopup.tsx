@@ -339,8 +339,8 @@ const CheckboxLabel = styled.label`
 
 const PopupContainer = styled.div`
   position: relative;
-  width: 90%;
-  max-width: 400px;
+  width: 100%;
+  max-width: 32rem;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
@@ -431,7 +431,7 @@ const ThumbArea = styled.div`
 
 const InfoArea = styled.div`
   position: relative;
-  height: 17rem;
+  height: 15.3rem;
   background: var(--snowwhite);
   display: flex;
   gap: 0.8rem;
