@@ -5,7 +5,7 @@ import {
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
-import IconCheck from "assets/ico_check_custom.svg?react"
+import IconCheck from "assets/ico_onboarding_check.svg?react"
 import styled from "styled-components"
 
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
@@ -165,16 +165,15 @@ const CheckboxLabel = styled.label`
   align-items: center;
   cursor: pointer;
 
-  /* Hide the native checkbox */
   input {
     display: none;
   }
 
   svg {
     color: var(--n80-color);
-    width: 1.6rem;
-    height: 1.6rem;
-    margin-right: 0.5rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 0.4rem;
     transition: color 0.3s;
   }
 
