@@ -19,3 +19,7 @@ export interface SlideData {
 export interface InfoAreaTitleProps {
   isLast: boolean
 }
+
+export interface IcoHandProps {
+  animate: boolean
+}

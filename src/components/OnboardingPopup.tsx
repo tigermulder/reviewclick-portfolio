@@ -3,6 +3,7 @@ import {
   OnboardingPopupProps,
   CloseButtonProps,
   InfoAreaTitleProps,
+  IcoHandProps,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
@@ -27,7 +28,7 @@ import NaverIcon from "assets/ico-naver.svg?url"
 import HandIcon01 from "assets/onboarding-hand-01.png"
 import HandIcon02 from "assets/onboarding-hand-02.png"
 import Button from "@/components/Button"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 const slidesData: SlideData[] = [
   {
@@ -175,7 +176,11 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                   />
                   <AnimationBox>
                     {slide.handIcon && (
-                      <IcoHand src={slide.handIcon} alt="handIcon" />
+                      <IcoHand
+                        src={slide.handIcon}
+                        alt="handIcon"
+                        animate={index === 1 && activeIndex === 1}
+                      />
                     )}
                   </AnimationBox>
                 </ThumbArea>
@@ -455,9 +460,21 @@ const AnimationBox = styled.div`
   padding: 0 3rem;
 `
 
-const IcoHand = styled.img`
+const handAnimation = keyframes`
+  0% { transform: scale(1); }
+  20% { transform: scale(1.4); }
+  25% { transform: scale(1.3); }
+  40% { transform: scale(1.4); }
+  55% { transform: scale(1.3); }
+  100% { transform: scale(1.3); }
+`
+
+const IcoHand = styled.img<IcoHandProps>`
   position: absolute;
   top: -3.8rem;
   right: 2rem;
   width: 7rem;
+  animation: ${(props) =>
+    props.animate ? `${handAnimation} 1.8s linear forwards` : "none"};
+  transition: transform 0.3s ease;
 `
