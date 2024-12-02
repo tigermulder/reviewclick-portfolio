@@ -239,7 +239,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
       case "onboarding01":
         return css`
           width: 93%;
-          height: 3.1rem;
+          height: 3.4rem;
           margin: 0 auto;
           font-size: 1.2rem;
           background-color: var(--revu-color);
@@ -249,6 +249,14 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           display: flex;
           align-items: center;
           justify-content: center;
+        `
+      case "onboarding02":
+        return css`
+          width: 93%;
+          background-color: var(--prim-L20);
+          color: var(--prim-L400);
+          box-shadow: 0px 0px 12px 0px rgba(255, 119, 125, 0.6);
+          border: none;
         `
       default:
         return ""

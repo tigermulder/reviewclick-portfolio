@@ -58,6 +58,9 @@ const slidesData: SlideData[] = [
     imageSrc: Onboarding03,
     imageTitle: Title02,
     handIcon: HandIcon02,
+    animationButton: (
+      <Button $variant="onboarding02">2. 구매영수증 업로드</Button>
+    ),
   },
   {
     description: (
@@ -94,6 +97,9 @@ const slidesData: SlideData[] = [
     imageSrc: Onboarding06,
     imageTitle: Title05,
     handIcon: HandIcon02,
+    animationButton: (
+      <Button $variant="onboarding02">등록 리뷰 켑처 업로드</Button>
+    ),
   },
   {
     description: <p>지금 바로 시작해볼까요?</p>,
@@ -476,9 +482,9 @@ const handAnimation = keyframes`
 
 const IcoHand = styled.img<IcoHandProps>`
   position: absolute;
-  top: ${(props) => (props.$animate ? "1rem" : "-3.8rem")};
-  right: 2rem;
-  width: 7rem;
+  top: ${(props) => (props.$animate ? "1.7rem" : "-3.8rem")};
+  right: 2.3rem;
+  width: 6rem;
   animation: ${(props) =>
     props.$animate
       ? css`

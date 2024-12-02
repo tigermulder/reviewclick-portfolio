@@ -15,6 +15,7 @@ export interface ButtonProps {
     | "spinner"
     | "disable"
     | "onboarding01"
+    | "onboarding02"
   type?: "button" | "submit" | "reset"
   $marginTop?: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
@@ -35,6 +36,7 @@ export interface StyledButtonProps {
     | "spinner"
     | "disable"
     | "onboarding01"
+    | "onboarding02"
   $marginTop?: string
   disabled?: boolean
 }
