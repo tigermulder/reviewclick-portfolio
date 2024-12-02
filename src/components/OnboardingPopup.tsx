@@ -154,15 +154,11 @@ const DoNotShowAgain = styled.div`
   background: transparent;
   border: none;
   font-size: 1.4rem;
-
-  label {
-    display: flex;
-    align-items: center;
-  }
 `
 const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
+  font-weight: var(--font-bodyM-weight);
   cursor: pointer;
 
   input {
@@ -170,11 +166,11 @@ const CheckboxLabel = styled.label`
   }
 
   svg {
-    color: var(--n400-color);
+    color: rgba(243, 245, 247, 0.2);
     width: 1.8rem;
     height: 1.8rem;
-    margin-right: 0.6rem;
-    transition: color 0.2s;
+    margin-right: 0.5rem;
+    transition: color 0.1s;
   }
 
   input:checked + svg {
@@ -270,5 +266,4 @@ const PaginationBullet = styled.button<{ active: boolean }>`
   margin: 0 0.5rem;
   border: none;
   cursor: pointer;
-  transition: width 0.06s ease;
 `
