@@ -28,7 +28,7 @@ import NaverIcon from "assets/ico-naver.svg?url"
 import HandIcon01 from "assets/onboarding-hand-01.png"
 import HandIcon02 from "assets/onboarding-hand-02.png"
 import Button from "@/components/Button"
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes, css } from "styled-components"
 
 const slidesData: SlideData[] = [
   {
@@ -478,6 +478,10 @@ const IcoHand = styled.img<IcoHandProps>`
   right: 2rem;
   width: 7rem;
   animation: ${(props) =>
-    props.$animate ? `${handAnimation} 1.8s linear forwards` : "none"};
+    props.$animate
+      ? css`
+          ${handAnimation} 1.8s linear forwards
+        `
+      : "none"};
   transition: transform 0.3s ease;
 `
