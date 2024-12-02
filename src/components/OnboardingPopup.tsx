@@ -284,6 +284,8 @@ const Title = styled.h2`
 `
 
 const StartButton = styled.button`
+  display: flex;
+  gap: 0.6rem;
   position: absolute;
   bottom: 3.5rem;
   left: 50%;
