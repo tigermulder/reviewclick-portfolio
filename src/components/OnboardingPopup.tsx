@@ -170,20 +170,15 @@ const CheckboxLabel = styled.label`
   }
 
   svg {
-    color: var(--n80-color);
-    width: 2.4rem;
-    height: 2.4rem;
-    margin-right: 0.4rem;
-    transition: color 0.3s;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 0.6rem;
+    transition: color 0.2s;
   }
 
   input:checked + svg {
     color: var(--prim-L300);
-  }
-
-  input:focus + svg {
-    outline: 2px solid var(--prim-L300);
-    outline-offset: 2px;
+    stoke-opacity: 1;
   }
 `
 
