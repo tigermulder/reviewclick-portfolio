@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import {
   OnboardingPopupProps,
   CloseButtonProps,
   InfoAreaTitleProps,
   IcoHandProps,
+  SlideHeightProvider,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
@@ -112,10 +113,13 @@ const slidesData: SlideData[] = [
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [showPopup, setShowPopup] = useState(true)
   const [swiperInstance, setSwiperInstance] = useState<any>(null)
-  const [activeIndex, setActiveIndex] = useState(0) // 현재 슬라이드 인덱스 상태
-  const [doNotShowAgainChecked, setDoNotShowAgainChecked] = useState(false) // 체크박스 상태 추가
-  const [buttonChanged, setButtonChanged] = useState(false) // 추가된 상태
-  const totalSlides = 7
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [doNotShowAgainChecked, setDoNotShowAgainChecked] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [buttonChanged, setButtonChanged] = useState(false)
+  const [popupHeight, setPopupHeight] = useState<number | null>(null)
+  const firstSlideRef = useRef<HTMLDivElement>(null)
+  const totalSlides = slidesData.length
 
   useEffect(() => {
     const doNotShowAgain = localStorage.getItem("doNotShowOnboardingToday")
@@ -124,13 +128,11 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [])
 
-  //** 스크롤 방지 */
+  // ** 스크롤 방지
   useEffect(() => {
     if (showPopup) {
-      // 모달이 열리면 body 스크롤을 막음
       document.body.style.overflow = "hidden"
     } else {
-      // 모달이 닫히면 body 스크롤을 다시 활성화
       document.body.style.overflow = "auto"
     }
     return () => {
@@ -138,7 +140,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [showPopup])
 
-  //** 체크박스 상태 변경 핸들러 */
+  // ** 체크박스 상태 변경 핸들러
   const handleDoNotShowAgainChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -173,12 +175,20 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
     }
   }, [activeIndex])
 
+  // ** 첫 번째 슬라이드의 높이를 측정하고 팝업 높이를 설정
+  useEffect(() => {
+    if (firstSlideRef.current) {
+      const height = firstSlideRef.current.offsetHeight
+      setPopupHeight(height)
+    }
+  }, [])
+
   if (!showPopup) return null
 
   return (
     <Overlay>
       <Dimmed />
-      <PopupContainer>
+      <PopupContainer height={popupHeight}>
         <CustomSwiper
           slidesPerView={1}
           allowTouchMove={true}
@@ -186,29 +196,33 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           loop={false}
           onSwiper={(swiper) => {
             setSwiperInstance(swiper)
-            swiper.on("slideChange", () => {
+            swiper.on("slideChangeTransitionStart", () => {
+              setIsTransitioning(true)
+            })
+            swiper.on("slideChangeTransitionEnd", () => {
               setActiveIndex(swiper.activeIndex)
+              setIsTransitioning(false)
             })
           }}
-          allowSlideNext={activeIndex < totalSlides - 1}
+          speed={500}
         >
-          {/* 첫 번째 슬라이드 */}
-          {/* 슬라이드 데이터를 기반으로 슬라이드 생성 */}
           {slidesData.map((slide, index) => (
             <SwiperSlide key={index}>
-              <SlideContent>
+              <SlideContent ref={index === 0 ? firstSlideRef : null}>
                 <ThumbArea>
                   <img
                     src={slide.imageSrc}
                     alt={`Onboarding Slide ${index + 1}`}
                   />
-                  <AnimationBox>
+                  <AnimationBox
+                    $height={
+                      index === 1 && activeIndex === 1 && !isTransitioning
+                    }
+                  >
                     {slide.animationButton &&
                       (index === 1 && activeIndex === 1 ? (
                         buttonChanged ? (
-                          <Button $variant="onboarding01">
-                            캠페인 신청하기
-                          </Button>
+                          <Button $variant="onboarding02">버튼 변경됨</Button> // 변경할 버튼
                         ) : (
                           <Button $variant="onboarding01">스크롤 내리기</Button>
                         )
@@ -219,25 +233,30 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                       <IcoHand
                         src={slide.handIcon}
                         alt="handIcon"
-                        $animate={index === 1 && activeIndex === 1}
+                        $animate={
+                          index === 1 && activeIndex === 1 && !isTransitioning
+                        }
                       />
                     )}
                   </AnimationBox>
                 </ThumbArea>
 
-                {slide.description && (
-                  <InfoArea>
-                    <InfoAreaTitle
-                      src={slide.imageTitle}
-                      alt={`Onboarding Slide Title ${index + 1}`}
-                      isLast={index === totalSlides - 1}
-                    />
-                    {slide.description}
-                    {slide.LastButtonText && (
-                      <LastButton>{slide.LastButtonText}</LastButton>
-                    )}
-                  </InfoArea>
-                )}
+                <InfoArea>
+                  {slide.description && (
+                    <>
+                      <InfoAreaTitle
+                        src={slide.imageTitle}
+                        alt={`Onboarding Slide Title ${index + 1}`}
+                        isLast={index === totalSlides - 1}
+                      />
+                      {slide.description}
+                      {slide.LastButtonText && (
+                        <LastButton>{slide.LastButtonText}</LastButton>
+                      )}
+                    </>
+                  )}
+                </InfoArea>
+
                 {slide.buttonText && (
                   <StartButton
                     onClick={() => swiperInstance.slideNext()}
@@ -286,6 +305,8 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
 
 export default OnboardingPopup
 
+// Styled Components
+
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -311,6 +332,7 @@ const DoNotShowAgain = styled.div`
   border: none;
   font-size: 1.4rem;
 `
+
 const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
@@ -332,15 +354,24 @@ const CheckboxLabel = styled.label`
   input:checked + svg {
     color: var(--white);
   }
+
+  span {
+    margin-left: 0.5rem;
+  }
 `
 
-const PopupContainer = styled.div`
+const PopupContainer = styled.div<{ height: number | null }>`
   position: relative;
   width: 90%;
   max-width: 400px;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: ${(props) => (props.height ? `${props.height}px` : "auto")};
+  overflow: hidden; /* 높이를 고정했으므로 overflow를 숨깁니다 */
 `
 
 const SlideContent = styled.div`
@@ -349,9 +380,14 @@ const SlideContent = styled.div`
   border-radius: 2.8rem;
   overflow: hidden;
   background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%; /* 부모 컨테이너의 높이에 맞춤 */
 `
 
 const CustomSwiper = styled(Swiper)`
+  width: 100%;
   height: 100%;
 `
 
@@ -424,11 +460,17 @@ const PaginationBullet = styled.button<{ active: boolean }>`
 const ThumbArea = styled.div`
   position: relative;
   z-index: 10;
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 20rem; /* 이미지의 최대 높이를 설정 */
+    object-fit: cover;
+  }
 `
 
 const InfoArea = styled.div`
   position: relative;
-  height: 17.3rem;
+  min-height: 15.3rem; /* 최소 높이 설정 */
   background: var(--snowwhite);
   display: flex;
   gap: 0.8rem;
@@ -494,13 +536,14 @@ const LastButton = styled.button`
   border-radius: 2.8rem;
 `
 
-const AnimationBox = styled.div`
+const AnimationBox = styled.div<SlideHeightProvider>`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 1.3rem;
+  bottom: ${(props) => (props.$height ? "3.3rem" : "1.3rem")};
   width: 100%;
   padding: 0 3rem;
+  transition: bottom 0.3s ease; /* 트랜지션 추가 */
 `
 
 const handAnimation = keyframes`
@@ -514,7 +557,7 @@ const handAnimation = keyframes`
 
 const IcoHand = styled.img<IcoHandProps>`
   position: absolute;
-  top: ${(props) => (props.$animate ? "-4.3rem" : "0.6rem")};
+  top: ${(props) => (props.$animate ? "1.7rem" : "0.6rem")};
   right: ${(props) => (props.$animate ? "2.3rem" : "2.8rem")};
   width: 6rem;
   animation: ${(props) =>
