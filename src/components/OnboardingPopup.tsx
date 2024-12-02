@@ -44,8 +44,8 @@ const slidesData: SlideData[] = [
   {
     description: (
       <p>
-        네이버에서 상품구매 후 <br />
-        리뷰클릭에서 영수증인증하기
+        네이버에서 <em>상품구매</em> 후 <br />
+        리뷰클릭에서 <em>영수증인증</em>하기
       </p>
     ),
     imageSrc: Onboarding03,
@@ -56,9 +56,9 @@ const slidesData: SlideData[] = [
       <p>
         상품을 수령하면
         <br />
-        네이버에서 구매확정하고
+        네이버에서 <em>구매확정</em>하고
         <br />
-        리뷰클릭에서 리뷰검수받기
+        리뷰클릭에서 <em>리뷰검수</em>받기
       </p>
     ),
     imageSrc: Onboarding04,
@@ -67,10 +67,10 @@ const slidesData: SlideData[] = [
   {
     description: (
       <p>
-        리뷰 등록하러가기 클릭 후<br />
+        <em>리뷰 등록하러가기</em> 클릭 후<br />
         네이버에서 구매한 상품에
         <br />
-        리뷰클릭에서 검수한 리뷰등록하기
+        리뷰클릭에서 검수한 <em>리뷰등록</em>하기
       </p>
     ),
     imageSrc: Onboarding05,
@@ -80,7 +80,7 @@ const slidesData: SlideData[] = [
     description: (
       <p>
         네이버에 등록된 리뷰를 캡처 후<br />
-        리뷰클릭에서 리뷰인증하기
+        리뷰클릭에서 <em>리뷰인증</em>하기
       </p>
     ),
     imageSrc: Onboarding06,
@@ -90,6 +90,7 @@ const slidesData: SlideData[] = [
     description: <p>지금 바로 시작해볼까요?</p>,
     imageSrc: Onboarding07,
     imageTitle: Title06,
+    LastButtonText: "캠페인 참여하러 가기",
   },
 ]
 
@@ -170,7 +171,10 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                       src={slide.imageTitle}
                       alt={`Onboarding Slide Title ${index + 1}`}
                     />
-                    <p>{slide.description}</p>
+                    {slide.description}
+                    {slide.LastButtonText && (
+                      <LastButton>{slide.LastButtonText}</LastButton>
+                    )}
                   </InfoArea>
                 )}
                 {slide.buttonText && (
@@ -404,4 +408,24 @@ const InfoArea = styled.div`
 
 const InfoAreaTitle = styled.img`
   height: 2rem;
+`
+
+const LastButton = styled.button`
+  padding: 0.7rem 0;
+  margin-top: 1.9rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    90deg,
+    rgba(117, 125, 130, 1) 19.929147191072637%,
+    rgba(117, 125, 130, 1) 20.929153302577156%,
+    rgba(229, 11, 20, 1) 79.92951388134382%
+  );
+  color: var(--white);
+  font-size: var(--font-callout-size);
+  font-weight: var(--font-callout-weight);
+  letter-spacing: var(--font-callout-letter-spacing);
+  border-radius: 3rem;
 `

@@ -11,4 +11,5 @@ export interface SlideData {
   buttonText?: string
   imageSrc?: string
   imageTitle?: string
+  LastButtonText?: string
 }
