@@ -332,13 +332,14 @@ const PaginationBullet = styled.button<{ active: boolean }>`
 const InfoArea = styled.div`
   position: relative;
   height: 15.3rem;
-  background: var(--white);
-  border-radius: 0 0 2.8rem 2.8rem;
+  background: var(--snowwhite);
   display: flex;
+  gap: 0.8rem;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
   p {
-    margin-top: 0.8rem;
     text-align: center;
     font-size: 1.7rem;
     font-weight: var(--font-weight-medium);
