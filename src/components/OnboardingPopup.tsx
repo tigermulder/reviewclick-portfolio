@@ -19,37 +19,37 @@ import styled from "styled-components"
 const slidesData = [
   {
     buttonText: "캠페인 참여방법 확인하기",
-    imageSrc: `url("${Onboarding01}")`,
+    imageSrc: Onboarding01,
   },
   {
     title: "STEP 2",
     description: "이것은 페이지 2의 내용입니다.",
-    imageSrc: `url(${Onboarding02})`,
+    imageSrc: Onboarding02,
   },
   {
     title: "STEP 3",
     description: "이것은 페이지 3의 내용입니다.",
-    imageSrc: `url(${Onboarding03})`,
+    imageSrc: Onboarding03,
   },
   {
     title: "STEP 4",
     description: "이것은 페이지 4의 내용입니다.",
-    imageSrc: `url(${Onboarding04})`,
+    imageSrc: Onboarding04,
   },
   {
     title: "STEP 5",
     description: "이것은 페이지 5의 내용입니다.",
-    imageSrc: `url(${Onboarding05})`,
+    imageSrc: Onboarding05,
   },
   {
     title: "STEP 6",
     description: "이것은 페이지 6의 내용입니다.",
-    imageSrc: `url(${Onboarding06})`,
+    imageSrc: Onboarding06,
   },
   {
     title: "미션 성공!",
     description: "이것은 페이지 7의 내용입니다.",
-    imageSrc: `url(${Onboarding07})`,
+    imageSrc: Onboarding07,
   },
 ]
 
