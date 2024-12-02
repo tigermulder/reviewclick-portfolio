@@ -30,7 +30,7 @@ const slidesData = [
     imageSrc: Onboarding01,
   },
   {
-    description: "네이버 계정으로 인증하고\n캠페인 참여하기",
+    description: "캠페인 신청하고\n네이버 계정 인증하기(최초1회)",
     imageSrc: Onboarding02,
     imageTitle: Title01,
   },
@@ -136,12 +136,10 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                 />
                 {slide.description && (
                   <InfoArea>
-                    <InfoAreaTitle>
-                      <img
-                        src={slide.imageTitle}
-                        alt={`Onboarding Slide Title ${index + 1}`}
-                      />
-                    </InfoAreaTitle>
+                    <InfoAreaTitle
+                      src={slide.imageTitle}
+                      alt={`Onboarding Slide Title ${index + 1}`}
+                    />
                     <p>{slide.description}</p>
                   </InfoArea>
                 )}
@@ -373,6 +371,6 @@ const InfoArea = styled.div`
   }
 `
 
-const InfoAreaTitle = styled.div`
+const InfoAreaTitle = styled.img`
   height: 2rem;
 `
