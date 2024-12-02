@@ -13,3 +13,7 @@ export interface SlideData {
   imageTitle?: string
   LastButtonText?: string
 }
+
+export interface InfoAreaTitleProps {
+  isLast: boolean
+}

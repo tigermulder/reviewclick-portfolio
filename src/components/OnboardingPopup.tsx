@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import {
   OnboardingPopupProps,
   CloseButtonProps,
+  InfoAreaTitleProps,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
@@ -170,6 +171,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     <InfoAreaTitle
                       src={slide.imageTitle}
                       alt={`Onboarding Slide Title ${index + 1}`}
+                      isLast={index === totalSlides - 1}
                     />
                     {slide.description}
                     {slide.LastButtonText && (
@@ -373,10 +375,6 @@ const InfoArea = styled.div`
   align-items: center;
   justify-content: center;
 
-  &last-child img {
-    height: 2.8rem;
-  }
-
   p {
     text-align: center;
     font-size: 1.7rem;
@@ -410,8 +408,8 @@ const InfoArea = styled.div`
   }
 `
 
-const InfoAreaTitle = styled.img`
-  height: 2rem;
+const InfoAreaTitle = styled.img<InfoAreaTitleProps>`
+  height: ${(props) => (props.isLast ? "2.8rem" : "2rem")};
 `
 
 const LastButton = styled.button`
