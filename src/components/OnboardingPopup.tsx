@@ -24,6 +24,9 @@ import Title05 from "assets/onboarding-06-txt.png"
 import Title06 from "assets/onboarding-07-txt.png"
 import RevuIcon from "assets/revu_icon.svg?url"
 import NaverIcon from "assets/ico-naver.svg?url"
+import HandIcon01 from "assets/onboarding-hand-01.png"
+import HandIcon02 from "assets/onboarding-hand-02.png"
+import Button from "@/components/Button"
 import styled from "styled-components"
 
 const slidesData: SlideData[] = [
@@ -41,6 +44,7 @@ const slidesData: SlideData[] = [
     ),
     imageSrc: Onboarding02,
     imageTitle: Title01,
+    handIcon: HandIcon01,
   },
   {
     description: (
@@ -51,6 +55,7 @@ const slidesData: SlideData[] = [
     ),
     imageSrc: Onboarding03,
     imageTitle: Title02,
+    handIcon: HandIcon02,
   },
   {
     description: (
@@ -86,6 +91,7 @@ const slidesData: SlideData[] = [
     ),
     imageSrc: Onboarding06,
     imageTitle: Title05,
+    handIcon: HandIcon02,
   },
   {
     description: <p>지금 바로 시작해볼까요?</p>,
@@ -162,10 +168,16 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           {slidesData.map((slide, index) => (
             <SwiperSlide key={index}>
               <SlideContent>
-                <img
-                  src={slide.imageSrc}
-                  alt={`Onboarding Slide ${index + 1}`}
-                />
+                <ThumbArea>
+                  <img
+                    src={slide.imageSrc}
+                    alt={`Onboarding Slide ${index + 1}`}
+                  />
+                  <AnimationBox>
+                    <IcoHand src={slide.handIcon} alt="handIcon" />
+                  </AnimationBox>
+                </ThumbArea>
+
                 {slide.description && (
                   <InfoArea>
                     <InfoAreaTitle
@@ -323,13 +335,6 @@ const CloseButton = styled.button<CloseButtonProps>`
   }
 `
 
-const Title = styled.h2`
-  color: var(--white);
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: -0.36px;
-`
-
 const StartButton = styled.button`
   width: 100%;
   display: flex;
@@ -363,6 +368,11 @@ const PaginationBullet = styled.button<{ active: boolean }>`
   margin: 0 0.5rem;
   border: none;
   cursor: pointer;
+`
+
+const ThumbArea = styled.div`
+  position: relative;
+  z-index: 10;
 `
 
 const InfoArea = styled.div`
@@ -431,4 +441,20 @@ const LastButton = styled.button`
   font-weight: var(--font-callout-weight);
   letter-spacing: var(--font-callout-letter-spacing);
   border-radius: 2.8rem;
+`
+
+const AnimationBox = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3.3rem;
+  width: 100%;
+  padding: 0 3rem;
+`
+
+const IcoHand = styled.img`
+  position: absolute;
+  top: 1.5rem;
+  right: 1.8rem;
+  width: 5.5rem;
 `
