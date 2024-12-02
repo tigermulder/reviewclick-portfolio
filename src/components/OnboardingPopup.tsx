@@ -253,5 +253,5 @@ const PaginationBullet = styled.button<{ active: boolean }>`
   margin: 0 0.5rem;
   border: none;
   cursor: pointer;
-  transition: width 0.1s ease;
+  transition: width 0.06s ease;
 `
