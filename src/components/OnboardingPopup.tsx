@@ -4,6 +4,7 @@ import {
   CloseButtonProps,
   InfoAreaTitleProps,
   IcoHandProps,
+  SlideHeightProvider,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
@@ -98,7 +99,7 @@ const slidesData: SlideData[] = [
     imageTitle: Title05,
     handIcon: HandIcon02,
     animationButton: (
-      <Button $variant="onboarding02">등록 리뷰 켑처 업로드</Button>
+      <Button $variant="onboarding02">등록 리뷰 캡처 업로드</Button>
     ),
   },
   {
@@ -181,7 +182,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     src={slide.imageSrc}
                     alt={`Onboarding Slide ${index + 1}`}
                   />
-                  <AnimationBox>
+                  <AnimationBox $height={index === 1 && activeIndex === 1}>
                     {slide.animationButton && slide.animationButton}
                     {slide.handIcon && (
                       <IcoHand
@@ -462,11 +463,11 @@ const LastButton = styled.button`
   border-radius: 2.8rem;
 `
 
-const AnimationBox = styled.div`
+const AnimationBox = styled.div<SlideHeightProvider>`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 3.3rem;
+  bottom: ${(props) => (props.$height ? "3.3rem" : "1.3rem")};
   width: 100%;
   padding: 0 3rem;
 `
@@ -482,8 +483,8 @@ const handAnimation = keyframes`
 
 const IcoHand = styled.img<IcoHandProps>`
   position: absolute;
-  top: ${(props) => (props.$animate ? "1.7rem" : "-3.8rem")};
-  right: 2.3rem;
+  top: ${(props) => (props.$animate ? "1.7rem" : "0.6rem")};
+  right: ${(props) => (props.$animate ? "2.3rem" : "2.8rem")};
   width: 6rem;
   animation: ${(props) =>
     props.$animate
