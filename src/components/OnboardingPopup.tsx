@@ -186,7 +186,7 @@ const PopupContainer = styled.div`
   top: 50%;
   transform: translateY(-50%);
   background: white;
-  border-radius: 10px;
+  border-radius: 2.8rem;
 `
 
 const SlideContent = styled.div`
