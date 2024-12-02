@@ -350,6 +350,7 @@ const StartButton = styled.button`
   color: var(--white);
   justify-content: center;
   align-items: center;
+  z-index: 10;
 `
 
 const PaginationContainer = styled.div`
@@ -456,7 +457,7 @@ const AnimationBox = styled.div`
 
 const IcoHand = styled.img`
   position: absolute;
-  top: 1.5rem;
-  right: 1.8rem;
-  width: 5.5rem;
+  top: -3.8rem;
+  right: 2rem;
+  width: 7rem;
 `
