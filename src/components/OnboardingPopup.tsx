@@ -19,37 +19,37 @@ import styled from "styled-components"
 const slidesData = [
   {
     buttonText: "캠페인 참여방법 확인하기",
-    backgroundImage: `url("${Onboarding01}")`,
+    imageSrc: `url("${Onboarding01}")`,
   },
   {
     title: "STEP 2",
     description: "이것은 페이지 2의 내용입니다.",
-    backgroundImage: `url(${Onboarding02})`,
+    imageSrc: `url(${Onboarding02})`,
   },
   {
     title: "STEP 3",
     description: "이것은 페이지 3의 내용입니다.",
-    backgroundImage: `url(${Onboarding03})`,
+    imageSrc: `url(${Onboarding03})`,
   },
   {
     title: "STEP 4",
     description: "이것은 페이지 4의 내용입니다.",
-    backgroundImage: `url(${Onboarding04})`,
+    imageSrc: `url(${Onboarding04})`,
   },
   {
     title: "STEP 5",
     description: "이것은 페이지 5의 내용입니다.",
-    backgroundImage: `url(${Onboarding05})`,
+    imageSrc: `url(${Onboarding05})`,
   },
   {
     title: "STEP 6",
     description: "이것은 페이지 6의 내용입니다.",
-    backgroundImage: `url(${Onboarding06})`,
+    imageSrc: `url(${Onboarding06})`,
   },
   {
     title: "미션 성공!",
     description: "이것은 페이지 7의 내용입니다.",
-    backgroundImage: `url(${Onboarding07})`,
+    imageSrc: `url(${Onboarding07})`,
   },
 ]
 
@@ -117,7 +117,11 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           {/* 슬라이드 데이터를 기반으로 슬라이드 생성 */}
           {slidesData.map((slide, index) => (
             <SwiperSlide key={index}>
-              <SlideContent backgroundImage={slide.backgroundImage}>
+              <SlideContent>
+                <img
+                  src={slide.imageSrc}
+                  alt={`Onboarding Slide ${index + 1}`}
+                />
                 <p>{slide.description}</p>
                 {slide.buttonText && (
                   <StartButton onClick={() => swiperInstance.slideNext()}>
@@ -131,9 +135,12 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           {/* 나머지 슬라이드 */}
           {slidesData.map((slide, index) => (
             <SwiperSlide key={index}>
-              <SlideContent
-                backgroundImage={slide.backgroundImage}
-              ></SlideContent>
+              <SlideContent>
+                <img
+                  src={slide.imageSrc}
+                  alt={`Onboarding Slide ${index + 1}`}
+                />
+              </SlideContent>
             </SwiperSlide>
           ))}
         </CustomSwiper>
@@ -232,15 +239,10 @@ const PopupContainer = styled.div`
   overflow: hidden;
 `
 
-const SlideContent = styled.div<{ backgroundImage: string }>`
+const SlideContent = styled.div`
   position: relative;
   width: 100%;
-  height: 70vh;
   padding: 2.5rem;
-  background-image: ${(props) => props.backgroundImage};
-  background-size: cover; /* 배경 이미지 크기 조절 */
-  background-position: center; /* 배경 이미지 위치 조절 */
-  background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
 `
 
 const CustomSwiper = styled(Swiper)`
@@ -292,7 +294,7 @@ const StartButton = styled.button`
   bottom: 3.5rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: var(--font-h3-size);
+  font-size: 1.9rem;
   font-weight: var(--font-weight-medium);
   color: var(--white);
   justify-content: center;
