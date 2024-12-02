@@ -177,8 +177,8 @@ const CheckboxLabel = styled.label`
   }
 
   input:checked + svg {
-    color: var(--prim-L300);
-    stoke-opacity: 1;
+    color: var(--white);
+    stroke-opacity: 1;
   }
 `
 
