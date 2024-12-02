@@ -178,7 +178,6 @@ const CheckboxLabel = styled.label`
 
   input:checked + svg {
     color: var(--white);
-    stroke-opacity: 1;
   }
 `
 
