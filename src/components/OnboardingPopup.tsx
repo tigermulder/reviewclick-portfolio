@@ -235,7 +235,9 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     />
                     {slide.description}
                     {slide.LastButtonText && (
-                      <LastButton>{slide.LastButtonText}</LastButton>
+                      <LastButton onClick={handleClose} aria-label="닫기">
+                        {slide.LastButtonText}
+                      </LastButton>
                     )}
                   </InfoArea>
                 )}
