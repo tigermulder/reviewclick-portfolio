@@ -240,7 +240,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
         return css`
           width: 93%;
           height: 3.4rem;
-          margin: 0 auto;
+          margin: -6rem auto 0;
           font-size: 1.2rem;
           background-color: var(--revu-color);
           box-shadow: 0px 0px 12px 0px rgba(255, 165, 169, 0.6);

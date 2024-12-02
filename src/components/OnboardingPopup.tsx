@@ -4,7 +4,6 @@ import {
   CloseButtonProps,
   InfoAreaTitleProps,
   IcoHandProps,
-  SlideHeightProvider,
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
@@ -182,7 +181,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     src={slide.imageSrc}
                     alt={`Onboarding Slide ${index + 1}`}
                   />
-                  <AnimationBox $height={index === 1 && activeIndex === 1}>
+                  <AnimationBox>
                     {slide.animationButton && slide.animationButton}
                     {slide.handIcon && (
                       <IcoHand
@@ -467,7 +466,7 @@ const AnimationBox = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 3.3rem;
+  bottom: 1.3rem;
   width: 100%;
   padding: 0 3rem;
 `
@@ -483,7 +482,7 @@ const handAnimation = keyframes`
 
 const IcoHand = styled.img<IcoHandProps>`
   position: absolute;
-  top: ${(props) => (props.$animate ? "1.7rem" : "0.6rem")};
+  top: ${(props) => (props.$animate ? "-4.3rem" : "2.6rem")};
   right: ${(props) => (props.$animate ? "2.3rem" : "2.8rem")};
   width: 6rem;
   animation: ${(props) =>
