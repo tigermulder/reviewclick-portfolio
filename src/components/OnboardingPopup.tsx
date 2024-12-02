@@ -167,10 +167,10 @@ const CheckboxLabel = styled.label`
 
   svg {
     color: rgba(243, 245, 247, 0.2);
-    width: 1.8rem;
-    height: 1.8rem;
-    margin-right: 0.5rem;
-    transition: color 0.1s;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 0.6rem;
+    transition: color 0.2s;
   }
 
   input:checked + svg {
