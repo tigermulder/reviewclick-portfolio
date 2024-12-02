@@ -5,6 +5,7 @@ import {
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
+import IconCheck from "assets/ico_check_custom.svg?react"
 import styled from "styled-components"
 
 const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
@@ -141,7 +142,7 @@ const Dimmed = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
 `
 
 const DoNotShowAgain = styled.div`
@@ -193,8 +194,8 @@ const CloseButton = styled.button<CloseButtonProps>`
   right: 1.5rem;
   background: transparent;
   border: none;
-  width: 24px;
-  height: 24px;
+  width: 2rem;
+  height: 2rem;
   cursor: pointer;
   z-index: 11;
 
@@ -202,11 +203,9 @@ const CloseButton = styled.button<CloseButtonProps>`
   &::after {
     content: "";
     position: absolute;
-    width: 0.2rem;
+    width: 0.1rem;
     height: 1.8rem;
     background-color: ${(props) => props.$color};
-    top: 0.3rem;
-    left: 1.2rem;
   }
 
   &::before {
@@ -254,5 +253,5 @@ const PaginationBullet = styled.button<{ active: boolean }>`
   margin: 0 0.5rem;
   border: none;
   cursor: pointer;
-  transition: width 0.3s ease;
+  transition: width 0.1s ease;
 `
