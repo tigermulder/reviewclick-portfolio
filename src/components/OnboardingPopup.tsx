@@ -106,6 +106,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           slidesPerView={1}
           allowTouchMove={true}
           spaceBetween={60}
+          loop={false}
           onSwiper={(swiper) => {
             setSwiperInstance(swiper)
             swiper.on("slideChange", () => {
