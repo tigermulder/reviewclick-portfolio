@@ -411,8 +411,9 @@ const InfoAreaTitle = styled.img`
 `
 
 const LastButton = styled.button`
-  padding: 0.7rem 0;
-  margin-top: 1.9rem;
+  width: 82%;
+  margin-top: 1.1rem;
+  padding: 0.8rem 0;
   position: relative;
   display: flex;
   justify-content: center;
