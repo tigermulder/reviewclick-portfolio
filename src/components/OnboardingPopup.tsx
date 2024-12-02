@@ -174,7 +174,9 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     alt={`Onboarding Slide ${index + 1}`}
                   />
                   <AnimationBox>
-                    <IcoHand src={slide.handIcon} alt="handIcon" />
+                    {slide.handIcon && (
+                      <IcoHand src={slide.handIcon} alt="handIcon" />
+                    )}
                   </AnimationBox>
                 </ThumbArea>
 
