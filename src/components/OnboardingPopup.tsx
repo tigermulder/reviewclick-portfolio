@@ -147,7 +147,7 @@ const Dimmed = styled.div`
 const DoNotShowAgain = styled.div`
   position: absolute;
   top: -3rem;
-  left: 0%;
+  left: 1.5rem;
   color: var(--n80-color);
   background: transparent;
   border: none;
@@ -189,8 +189,8 @@ const CustomSwiper = styled(Swiper)`
 
 const CloseButton = styled.button<CloseButtonProps>`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: -3rem;
+  right: 1.5rem;
   background: transparent;
   border: none;
   width: 24px;
