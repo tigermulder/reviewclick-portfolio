@@ -4,3 +4,11 @@ export interface OnboardingPopupProps {
 export interface CloseButtonProps {
   $color: string
 }
+
+export interface SlideData {
+  title?: string
+  description?: React.ReactNode
+  buttonText?: string
+  imageSrc?: string
+  imageTitle?: string
+}

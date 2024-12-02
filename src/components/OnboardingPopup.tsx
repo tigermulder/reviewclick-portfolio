@@ -5,6 +5,7 @@ import {
 } from "@/types/component-types/onboarding-popup"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
+import { SlideData } from "@/types/component-types/onboarding-popup"
 import IconCheck from "assets/ico_onboarding_check.svg?react"
 import IconArrow from "assets/ico_onboard_arrow.svg?react"
 import Onboarding01 from "assets/onboarding-01.png"
@@ -24,40 +25,69 @@ import RevuIcon from "assets/revu_icon.svg?url"
 import NaverIcon from "assets/ico-naver.svg?url"
 import styled from "styled-components"
 
-const slidesData = [
+const slidesData: SlideData[] = [
   {
     buttonText: "캠페인 참여방법 확인하기",
     imageSrc: Onboarding01,
   },
   {
-    description: "캠페인 신청하고\n네이버 계정 인증하기(최초1회)",
+    description: (
+      <p>
+        캠페인 신청하고
+        <br />
+        네이버 계정 인증하기(최초1회)
+      </p>
+    ),
     imageSrc: Onboarding02,
     imageTitle: Title01,
   },
   {
-    description: "네이버에서 상품구매 후\n리뷰클릭에서 영수증인증하기",
+    description: (
+      <p>
+        네이버에서 상품구매 후 <br />
+        리뷰클릭에서 영수증인증하기
+      </p>
+    ),
     imageSrc: Onboarding03,
     imageTitle: Title02,
   },
   {
-    description:
-      "상품을 수령하면\n 네이버에서 구매확정하고\n 리뷰클릭에서 리뷰검수받기",
+    description: (
+      <p>
+        상품을 수령하면
+        <br />
+        네이버에서 구매확정하고
+        <br />
+        리뷰클릭에서 리뷰검수받기
+      </p>
+    ),
     imageSrc: Onboarding04,
     imageTitle: Title03,
   },
   {
-    description:
-      "리뷰 등록하러가기 클릭 후\n네이버에서 구매한 상품에\n 리뷰클릭에서 검수한 리뷰등록하기",
+    description: (
+      <p>
+        리뷰 등록하러가기 클릭 후<br />
+        네이버에서 구매한 상품에
+        <br />
+        리뷰클릭에서 검수한 리뷰등록하기
+      </p>
+    ),
     imageSrc: Onboarding05,
     imageTitle: Title04,
   },
   {
-    description: "네이버에 등록된 리뷰를 캡처 후\n리뷰클릭에서 리뷰인증하기",
+    description: (
+      <p>
+        네이버에 등록된 리뷰를 캡처 후<br />
+        리뷰클릭에서 리뷰인증하기
+      </p>
+    ),
     imageSrc: Onboarding06,
     imageTitle: Title05,
   },
   {
-    description: "지금 바로 시작해볼까요?",
+    description: <p>지금 바로 시작해볼까요?</p>,
     imageSrc: Onboarding07,
     imageTitle: Title06,
   },
