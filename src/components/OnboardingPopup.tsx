@@ -199,7 +199,10 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                   </InfoArea>
                 )}
                 {slide.buttonText && (
-                  <StartButton onClick={() => swiperInstance.slideNext()}>
+                  <StartButton
+                    onClick={() => swiperInstance.slideNext()}
+                    aria-label="다음 슬라이드로 이동"
+                  >
                     {slide.buttonText}
                     <IconArrow />
                   </StartButton>
@@ -476,5 +479,4 @@ const IcoHand = styled.img<IcoHandProps>`
   width: 7rem;
   animation: ${(props) =>
     props.animate ? `${handAnimation} 1.8s linear forwards` : "none"};
-  transition: transform 0.3s ease;
 `
