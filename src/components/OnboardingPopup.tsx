@@ -428,7 +428,7 @@ const ThumbArea = styled.div`
 
 const InfoArea = styled.div`
   position: relative;
-  height: 17.3rem;
+  height: 17rem;
   background: var(--snowwhite);
   display: flex;
   gap: 0.8rem;
