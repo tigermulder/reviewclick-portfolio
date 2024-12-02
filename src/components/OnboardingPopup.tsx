@@ -46,7 +46,7 @@ const slidesData: SlideData[] = [
     imageSrc: Onboarding02,
     imageTitle: Title01,
     handIcon: HandIcon01,
-    animationButton: <Button $variant="red">스크롤 내리기</Button>,
+    animationButton: <Button $variant="onboarding01">스크롤 내리기</Button>,
   },
   {
     description: (
@@ -176,6 +176,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     alt={`Onboarding Slide ${index + 1}`}
                   />
                   <AnimationBox>
+                    {slide.animationButton && slide.animationButton}
                     {slide.handIcon && (
                       <IcoHand
                         src={slide.handIcon}
