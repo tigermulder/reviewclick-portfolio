@@ -105,7 +105,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
         <CustomSwiper
           slidesPerView={1}
           allowTouchMove={true}
-          // Swiper의 기본 페이지네이션은 이미 제거됨
+          spaceBetween={60}
           onSwiper={(swiper) => {
             setSwiperInstance(swiper)
             swiper.on("slideChange", () => {
