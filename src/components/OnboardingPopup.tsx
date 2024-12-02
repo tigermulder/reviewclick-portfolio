@@ -113,6 +113,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               setActiveIndex(swiper.activeIndex)
             })
           }}
+          allowSlideNext={activeIndex < totalSlides - 1}
         >
           {/* 첫 번째 슬라이드 */}
           {/* 슬라이드 데이터를 기반으로 슬라이드 생성 */}
