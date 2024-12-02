@@ -14,6 +14,14 @@ import Onboarding04 from "assets/onboarding-04.png"
 import Onboarding05 from "assets/onboarding-05.png"
 import Onboarding06 from "assets/onboarding-06.png"
 import Onboarding07 from "assets/onboarding-07.png"
+import Title01 from "assets/onboarding-02-txt.png"
+import Title02 from "assets/onboarding-03-txt.png"
+import Title03 from "assets/onboarding-04-txt.png"
+import Title04 from "assets/onboarding-05-txt.png"
+import Title05 from "assets/onboarding-06-txt.png"
+import Title06 from "assets/onboarding-07-txt.png"
+import RevuIcon from "assets/revu_icon.svg?url"
+import NaverIcon from "assets/ico-naver.svg?url"
 import styled from "styled-components"
 
 const slidesData = [
@@ -22,34 +30,36 @@ const slidesData = [
     imageSrc: Onboarding01,
   },
   {
-    title: "STEP 2",
-    description: "이것은 페이지 2의 내용입니다.",
+    description: "네이버 계정으로 인증하고\n캠페인 참여하기",
     imageSrc: Onboarding02,
+    imageTitle: Title01,
   },
   {
-    title: "STEP 3",
-    description: "이것은 페이지 3의 내용입니다.",
+    description: "네이버에서 상품구매 후\n리뷰클릭에서 영수증인증하기",
     imageSrc: Onboarding03,
+    imageTitle: Title02,
   },
   {
-    title: "STEP 4",
-    description: "이것은 페이지 4의 내용입니다.",
+    description:
+      "상품을 수령하면\n 네이버에서 구매확정하고\n 리뷰클릭에서 리뷰검수받기",
     imageSrc: Onboarding04,
+    imageTitle: Title03,
   },
   {
-    title: "STEP 5",
-    description: "이것은 페이지 5의 내용입니다.",
+    description:
+      "리뷰 등록하러가기 클릭 후\n네이버에서 구매한 상품에\n 리뷰클릭에서 검수한 리뷰등록하기",
     imageSrc: Onboarding05,
+    imageTitle: Title04,
   },
   {
-    title: "STEP 6",
-    description: "이것은 페이지 6의 내용입니다.",
+    description: "네이버에 등록된 리뷰를 캡처 후\n리뷰클릭에서 리뷰인증하기",
     imageSrc: Onboarding06,
+    imageTitle: Title05,
   },
   {
-    title: "미션 성공!",
-    description: "이것은 페이지 7의 내용입니다.",
+    description: "지금 바로 시작해볼까요?",
     imageSrc: Onboarding07,
+    imageTitle: Title06,
   },
 ]
 
@@ -124,24 +134,23 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                   src={slide.imageSrc}
                   alt={`Onboarding Slide ${index + 1}`}
                 />
-                <p>{slide.description}</p>
+                {slide.description && (
+                  <InfoArea>
+                    <InfoAreaTitle>
+                      <img
+                        src={slide.imageTitle}
+                        alt={`Onboarding Slide Title ${index + 1}`}
+                      />
+                    </InfoAreaTitle>
+                    <p>{slide.description}</p>
+                  </InfoArea>
+                )}
                 {slide.buttonText && (
                   <StartButton onClick={() => swiperInstance.slideNext()}>
                     {slide.buttonText}
                     <IconArrow />
                   </StartButton>
                 )}
-              </SlideContent>
-            </SwiperSlide>
-          ))}
-          {/* 나머지 슬라이드 */}
-          {slidesData.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <SlideContent>
-                <img
-                  src={slide.imageSrc}
-                  alt={`Onboarding Slide ${index + 1}`}
-                />
               </SlideContent>
             </SwiperSlide>
           ))}
@@ -320,4 +329,50 @@ const PaginationBullet = styled.button<{ active: boolean }>`
   margin: 0 0.5rem;
   border: none;
   cursor: pointer;
+`
+
+const InfoArea = styled.div`
+  position: relative;
+  height: 15.3rem;
+  background: var(--white);
+  border-radius: 0 0 2.8rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.3;
+    letter-spacing: calc(1.7rem * (-0.02 / 100));
+    color: var(--n500-color);
+  }
+  p em {
+    font-weight: var(--font-weight-bold);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &::before {
+      content: "";
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+    &:nth-of-type(1) {
+      color: var(--success-color);
+      &::before {
+        background: url("${NaverIcon}") no-repeat center / 100%;
+      }
+    }
+    &:nth-of-type(2) {
+      color: var(--revu-color);
+      &::before {
+        background: url("${RevuIcon}") no-repeat center / 0.8rem 0.8rem;
+      }
+    }
+  }
+`
+
+const InfoAreaTitle = styled.div`
+  height: 2rem;
 `
