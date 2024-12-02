@@ -59,7 +59,7 @@ const CampaignDetailPage = () => {
   }, [campaignCode])
   // ** 온보딩팝업 */
   useEffect(() => {
-    const savedDate = localStorage.getItem("doNotShowOnboardingToday")
+    const savedDate = sessionStorage.getItem("doNotShowOnboardingToday")
     const today = new Date().toDateString()
 
     if (savedDate !== today) {

@@ -119,7 +119,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const totalSlides = 7
 
   useEffect(() => {
-    const doNotShowAgain = localStorage.getItem("doNotShowOnboardingToday")
+    const doNotShowAgain = sessionStorage.getItem("doNotShowOnboardingToday")
     if (doNotShowAgain === "true") {
       setShowPopup(false)
     }
