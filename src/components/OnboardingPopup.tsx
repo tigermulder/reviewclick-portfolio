@@ -192,7 +192,7 @@ const PopupContainer = styled.div`
 const SlideContent = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 70vh;
   padding: 2.5rem;
 `
 
