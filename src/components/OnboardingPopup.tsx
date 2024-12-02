@@ -179,7 +179,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                       <IcoHand
                         src={slide.handIcon}
                         alt="handIcon"
-                        animate={index === 1 && activeIndex === 1}
+                        $animate={index === 1 && activeIndex === 1}
                       />
                     )}
                   </AnimationBox>
@@ -477,9 +477,7 @@ const IcoHand = styled.img<IcoHandProps>`
   top: -3.8rem;
   right: 2rem;
   width: 7rem;
-  ${(props) =>
-    props.animate &&
-    `
-   animation: ${handAnimation}1.8s linear forwards;
-  `}
+  animation: ${(props) =>
+    props.$animate ? `${handAnimation} 1.8s linear forwards` : "none"};
+  transition: transform 0.3s ease;
 `

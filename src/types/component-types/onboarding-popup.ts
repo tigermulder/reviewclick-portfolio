@@ -21,5 +21,5 @@ export interface InfoAreaTitleProps {
 }
 
 export interface IcoHandProps {
-  animate: boolean
+  $animate: boolean
 }
