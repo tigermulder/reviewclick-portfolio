@@ -477,6 +477,4 @@ const IcoHand = styled.img<IcoHandProps>`
   top: -3.8rem;
   right: 2rem;
   width: 7rem;
-  animation: ${(props) =>
-    props.animate ? `${handAnimation} 1.8s linear forwards` : "none"};
 `
