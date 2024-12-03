@@ -19,7 +19,7 @@ import FooterButtons from "./CampaignDetail/FooterButtons"
 import useScrollAnimation from "@/hooks/useScrollAnimation"
 import GuideDetail from "./CampaignDetail/GuideDetail"
 import OnboardingPopup from "@/components/OnboardingPopup"
-import { phoneVerify } from "@/services/join"
+import { phoneVerify, phoneSendCode } from "@/services/join"
 import styled from "styled-components"
 
 // React Query Key
@@ -59,9 +59,9 @@ const CampaignDetailPage = () => {
     phoneNumber: string
   }) => {
     const requestData = {
-      code: phoneNumber,
+      phone: phoneNumber,
     }
-    const response = await phoneVerify(requestData)
+    const response = await phoneSendCode(requestData)
     return response
   }
 

@@ -73,6 +73,16 @@ export interface ResetPassWordResponse {
   error: string
 }
 
+//** User Phone SendCode 휴대폰 인증 코드전송 */
+export interface PhoneSendCodeRequest {
+  phone: string
+}
+export interface PhoneSendCodeResponse {
+  statusCode: number
+  errorCode: number
+  error: string
+}
+
 //** User Phone Verify 휴대폰 인증 코드확인 */
 export interface PhoneVerifyRequest {
   code: string

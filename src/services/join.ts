@@ -16,6 +16,8 @@ import {
   ResetPassWordResponse,
   PhoneVerifyRequest,
   PhoneVerifyResponse,
+  PhoneSendCodeRequest,
+  PhoneSendCodeResponse,
 } from "types/api-types/signup-type"
 
 //** 이메일 체크 API */
@@ -83,6 +85,17 @@ export const resetPassword = async (
 ): Promise<ResetPassWordResponse> => {
   const response = await axiosInstance.post<ResetPassWordResponse>(
     "/user/password/reset",
+    data
+  )
+  return response.data
+}
+
+//** 휴대폰 인증 코드전송 */
+export const phoneSendCode = async (
+  data: PhoneSendCodeRequest
+): Promise<PhoneSendCodeResponse> => {
+  const response = await axiosInstance.post<PhoneSendCodeResponse>(
+    "/join/phone/sendcode",
     data
   )
   return response.data
