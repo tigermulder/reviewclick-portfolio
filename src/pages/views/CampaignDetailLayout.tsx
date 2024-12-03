@@ -60,7 +60,7 @@ const CampaignDetailPage = () => {
   }, [campaignCode])
   // ** 온보딩팝업 */
   useEffect(() => {
-    const savedDate = sessionStorage.getItem("doNotShowOnboardingToday")
+    const savedDate = localStorage.getItem("doNotShowOnboardingToday")
     const today = new Date().toDateString()
 
     if (savedDate !== today) {
@@ -327,6 +327,7 @@ const CampaignDetailPage = () => {
     if (dDay < 0) {
       setDeadline(true)
     }
+    console.log(dDay)
   }, [dDay])
 
   return (
