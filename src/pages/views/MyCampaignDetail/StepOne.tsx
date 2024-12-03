@@ -354,6 +354,7 @@ const StepItemInfoTextBox = styled.div`
 `
 
 const StepNotice = styled.span`
+  margin-bottom: 1rem;
   font-size: var(--font-callout-small-size);
   font-weight: var(--font-callout-small-weight);
   line-height: var(--base-line-height);
@@ -365,8 +366,8 @@ const StepNotice = styled.span`
 
   &::before {
     content: "";
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.9rem;
+    height: 1.5rem;
     background: url("${IconNotice}") no-repeat center / 100%;
   }
 `
