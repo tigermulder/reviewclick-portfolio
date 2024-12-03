@@ -538,10 +538,10 @@ const DetailBody = styled.div`
 `
 
 const Dday = styled.span`
-  border-radius: 30px;
+  border-radius: 3rem;
   display: inline-block;
-  padding: 0.3rem 0.8rem;
-  font-size: var(--font-callout-small-size);
+  padding: 0.4rem 1rem;
+  font-size: 1.1rem;
   font-weight: var(--font-callout-small-weight);
   line-height: var(--font-callout-small-line-height);
   letter-spacing: var(--font-callout-small-letter-spacing);
