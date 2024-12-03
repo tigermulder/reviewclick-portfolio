@@ -155,6 +155,14 @@ const CampaignDetailPage = () => {
   const endDate = new Date(campaignDetail.joinEndAt)
   const diffTime = endDate.getTime() - today.getTime()
   const dDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+  let dDayText = ""
+  if (dDay === 0) {
+    dDayText = "D-Day"
+  } else if (dDay < 0) {
+    dDayText = "신청마감"
+  } else {
+    dDayText = `D-${dDay}`
+  }
 
   //** 캠페인신청 모달 열기 [1-1] */
   const handleApply = () => {
@@ -321,8 +329,8 @@ const CampaignDetailPage = () => {
     }
   }
 
-  //** 디데이 0일시 join 채우기 */
-  const displayJoins = dDay > 0 ? campaignDetail.joins : campaignDetail.quota
+  //** 디데이 -일시 join 채우기 */
+  const displayJoins = dDay >= 0 ? campaignDetail.joins : campaignDetail.quota
 
   //** 인원 마감시 버튼에 상태 */
   useEffect(() => {
@@ -348,7 +356,7 @@ const CampaignDetailPage = () => {
         <PopUp $offsetY={popUpOffsetY}>
           🎉 신청을 서두르세요! 신청인원 {displayJoins}/{campaignDetail.quota}
         </PopUp>
-        <Dday>{dDay < 0 ? "신청마감" : `D-${dDay}`}</Dday>
+        <Dday>{dDayText}</Dday>
         <Title>{campaignDetail.title}</Title>
         <CampaignDetails
           campaign={campaignDetail}
