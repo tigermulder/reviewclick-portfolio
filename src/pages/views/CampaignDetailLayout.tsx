@@ -40,7 +40,7 @@ const CampaignDetailPage = () => {
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
   // const [isProductViewed, setIsProductViewed] = useState(false)
-  const [showOnboarding, setShowOnboarding] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false) // 온보딩팝업 상태
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
   //** 모달 상태 관리 */
   const [isRimitModalOpen, setRimitModalOpen] = useState(false)
@@ -63,7 +63,9 @@ const CampaignDetailPage = () => {
     const savedDate = localStorage.getItem("doNotShowOnboardingToday")
     const today = new Date().toDateString()
 
-    if (savedDate !== today) {
+    if (savedDate === today) {
+      setShowOnboarding(false)
+    } else {
       setShowOnboarding(true)
     }
   }, [])

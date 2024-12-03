@@ -119,13 +119,6 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
   const [buttonChanged, setButtonChanged] = useState(false) // 추가된 상태
   const totalSlides = 7
 
-  useEffect(() => {
-    const doNotShowAgain = localStorage.getItem("doNotShowOnboardingToday")
-    if (doNotShowAgain === "true") {
-      setShowPopup(false)
-    }
-  }, [])
-
   //** 스크롤 방지 */
   useEffect(() => {
     if (showPopup) {
@@ -149,7 +142,8 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
 
   const handleClose = () => {
     if (doNotShowAgainChecked) {
-      localStorage.setItem("doNotShowOnboardingToday", "true")
+      const today = new Date().toDateString()
+      localStorage.setItem("doNotShowOnboardingToday", today)
     }
     setShowPopup(false)
     onClose()
