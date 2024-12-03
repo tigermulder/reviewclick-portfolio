@@ -392,6 +392,11 @@ const CloseButton = styled.button<CloseButtonProps>`
   }
 `
 
+const arrowAnimation = keyframes`
+  0% { left:0; }
+  100% { left:1.2rem; }
+`
+
 const StartButton = styled.button`
   width: 100%;
   display: flex;
@@ -406,6 +411,10 @@ const StartButton = styled.button`
   justify-content: center;
   align-items: center;
   z-index: 10;
+
+  svg {
+    animation: ${arrowAnimation} 1s infinite;
+  }
 `
 
 const PaginationContainer = styled.div`
