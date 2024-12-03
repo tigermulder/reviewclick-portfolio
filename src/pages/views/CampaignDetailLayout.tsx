@@ -53,6 +53,24 @@ const CampaignDetailPage = () => {
   )
   const [deadline, setDeadline] = useState(false)
 
+  const userGetPhoneverify = async ({
+    phoneNumber,
+  }: {
+    phoneNumber: string
+  }) => {
+    const requestData = {
+      code: phoneNumber,
+    }
+    const response = await phoneVerify(requestData)
+    return response
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await userGetPhoneverify({ phoneNumber: "01050141096" })
+    }
+    fetchData()
+  }, [])
   //** 캠페인상세 path set */
   useEffect(() => {
     if (campaignCode) {
