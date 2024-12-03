@@ -59,6 +59,7 @@ const slidesData: SlideData[] = [
     imageSrc: Onboarding03,
     imageTitle: Title02,
     handIcon: HandIcon02,
+    fixedButton: <Button $variant="onboarding02">1. 상품 구매하러가기</Button>,
     animationButton: (
       <Button $variant="onboarding02">2. 구매영수증 업로드</Button>
     ),
@@ -203,6 +204,9 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     src={slide.imageSrc}
                     alt={`Onboarding Slide ${index + 1}`}
                   />
+                  {slide.fixedButton && (
+                    <ButtonBox>{slide.fixedButton}</ButtonBox>
+                  )}
                 </ThumbArea>
                 <AnimationBox>
                   {slide.animationButton &&
@@ -341,6 +345,10 @@ const PopupContainer = styled.div`
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
+
+  @media (min-width: 680px) {
+    max-width: 30rem;
+  }
 `
 
 const SlideContent = styled.div`
@@ -348,7 +356,6 @@ const SlideContent = styled.div`
   width: 100%;
   border-radius: 2.8rem;
   overflow: hidden;
-  background: white;
 `
 
 const CustomSwiper = styled(Swiper)`
@@ -390,7 +397,7 @@ const StartButton = styled.button`
   display: flex;
   gap: 0.6rem;
   position: absolute;
-  bottom: 3.5rem;
+  bottom: 3.4rem;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.9rem;
@@ -437,6 +444,7 @@ const InfoArea = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 
   p {
     text-align: center;
@@ -476,9 +484,9 @@ const InfoAreaTitle = styled.img<InfoAreaTitleProps>`
 `
 
 const LastButton = styled.button`
-  width: 82%;
-  margin-top: 1.1rem;
-  padding: 0.8rem 0;
+  width: 84%;
+  margin-top: 1rem;
+  padding: 0.9rem 0;
   position: relative;
   display: flex;
   justify-content: center;
@@ -513,6 +521,16 @@ const LastButton = styled.button`
   }
 `
 
+const ButtonBox = styled.div`
+  position: absolute;
+  bottom: 31.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 0 3rem;
+  z-index: 11;
+`
+
 const AnimationBox = styled.div`
   position: absolute;
   left: 50%;
@@ -520,6 +538,7 @@ const AnimationBox = styled.div`
   bottom: 16.8rem;
   width: 100%;
   padding: 0 3rem;
+  z-index: 11;
 `
 
 const handAnimation = keyframes`

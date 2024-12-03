@@ -14,6 +14,7 @@ export interface SlideData {
   imageSrc?: string
   imageTitle?: string
   LastButtonText?: string
+  fixedButton?: React.ReactNode
 }
 
 export interface InfoAreaTitleProps {
