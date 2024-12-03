@@ -54,11 +54,7 @@ const StepThree = ({
       setLoadingModalOpen(true)
 
       try {
-        // const response = await uploadReview(formData)
-
-        const response = {
-          statusCode: 0,
-        }
+        const response = await uploadReview(formData)
 
         // 로딩 모달 닫기
         setLoadingModalOpen(false)
@@ -71,7 +67,13 @@ const StepThree = ({
                 리뷰 확인이 불가할 경우 이전 단계로 돌아가며, 문의 사항이
                 있으시면 고객센터로 연락해주시기 바랍니다.
               </p>
-              <p style={{ marginTop: "0.6rem", fontWeight: "500" }}>
+              <p
+                style={{
+                  marginTop: "0.6rem",
+                  fontWeight: "700",
+                  color: "#202020",
+                }}
+              >
                 고객센터: <a href="tel:02-3472-9229">02-3472-9229</a>
               </p>
             </>
