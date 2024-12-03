@@ -25,7 +25,7 @@ const Layout = () => {
   const ContactAddPage = location.pathname === RoutePath.ContactAdd // 문의등록 페이지
   const UserAccountDeletionPage =
     location.pathname === RoutePath.UserAccountDeletion // 회원탈퇴 페이지
-  const isNotFound = location.pathname === RoutePath.NotFound
+  const isNotFound = location.pathname === RoutePath.NotFound // 404페이지
   const isSpecialPage =
     isLoginPage ||
     isCampaignDetail ||

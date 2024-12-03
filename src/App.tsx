@@ -15,6 +15,7 @@ function App() {
   // useUserStatus()
   const { campaignCode } = useParams()
   const { addToast } = useToast()
+
   //** 로그인정보 */
   useEffect(() => {
     const checkLoginStatus = async () => {

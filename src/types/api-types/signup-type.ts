@@ -65,10 +65,19 @@ export interface ResetPassWordEmailResponse {
 
 //** User Password Reset 패스워드 초기화 */
 export interface ResetPassWordRequest {
-  token: string | null
   password: string
 }
 export interface ResetPassWordResponse {
+  statusCode: number
+  errorCode: number
+  error: string
+}
+
+//** User Phone Verify 휴대폰 인증 코드확인 */
+export interface PhoneVerifyRequest {
+  code: string
+}
+export interface PhoneVerifyResponse {
   statusCode: number
   errorCode: number
   error: string

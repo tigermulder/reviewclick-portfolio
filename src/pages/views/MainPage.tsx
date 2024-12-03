@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query"
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query"
 import { useSetRecoilState, useRecoilValue } from "recoil"
 import {
   campaignListState,
@@ -27,6 +27,7 @@ const MainPage = (): JSX.Element => {
 
   //** Fetch campaign list */
   const fetchCampaigns = async ({ pageParam = 1 }) => {
+    // await new Promise((resolve) => setTimeout(resolve, 200000))
     const requestData = {
       pageSize: 10,
       pageIndex: pageParam,
@@ -41,31 +42,24 @@ const MainPage = (): JSX.Element => {
   // }, [campaignLikes])
 
   //** 리액트쿼리 */
-  const {
-    data,
-    isLoading,
-    isError,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["campaigns"],
-    queryFn: fetchCampaigns,
-    getNextPageParam: (lastPage) => {
-      if (lastPage.pageIndex < lastPage.totalPages) {
-        return lastPage.pageIndex + 1
-      }
-      return undefined
-    },
-    initialPageParam: 1,
-    refetchInterval: 10 * 60 * 1000, // 10분 마다 리패치
-    staleTime: 10 * 60 * 1000, // 10분 동안 데이터가 신선함
-    gcTime: 11 * 60 * 1000, // 20분 동안 캐시 유지
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-    placeholderData: keepPreviousData, // 이전 데이터를 유지
-  })
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useSuspenseInfiniteQuery({
+      queryKey: ["campaigns"],
+      queryFn: fetchCampaigns,
+      getNextPageParam: (lastPage) => {
+        if (lastPage.pageIndex < lastPage.totalPages) {
+          return lastPage.pageIndex + 1
+        }
+        return undefined
+      },
+      initialPageParam: 1,
+      refetchInterval: 10 * 60 * 1000, // 10분 마다 리패치
+      staleTime: 10 * 60 * 1000, // 10분 동안 데이터가 신선함
+      gcTime: 11 * 60 * 1000, // 20분 동안 캐시 유지
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    })
 
   //** 캠페인 데이터를 Recoil 상태로 업데이트 */
   useEffect(() => {
