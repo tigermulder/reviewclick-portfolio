@@ -200,7 +200,7 @@ const StepTwo = ({
             <ReviewHeader>리뷰 작성</ReviewHeader>
             <ReviewTextBox>
               <textarea
-                placeholder="상품과 연관이 없거나 성의없는 리뷰 작성 시 미션진행이 어려울 수 있습니다."
+                placeholder="글자수는 최소 100자 이상 작성해주세요."
                 value={reviewText}
                 onChange={handleReviewChange}
               />

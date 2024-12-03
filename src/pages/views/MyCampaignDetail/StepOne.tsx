@@ -5,7 +5,7 @@ import { StepOneProps } from "@/types/component-types/my-campaigndetail-type"
 import { useState, useRef } from "react"
 import { authReview } from "@/services/review"
 import Modal from "@/components/Modal"
-import SampleReviewImage from "assets/pro-sample-review.png"
+import SampleReviewImage from "assets/pro-sample.png"
 import { useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 
@@ -190,13 +190,14 @@ const StepOne = ({
         </StepItem>
         <StepItem>
           <StepItemHeader>STEP2. 구매 영수증 인증</StepItemHeader>
-          <StepNotice>
-            구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야
-            해요!
-          </StepNotice>
           <figure>
             <img src={SampleReviewImage} alt={"기본 영수증 이미지"} />
           </figure>
+          <StepNotice>
+            [네이버 앱/웹] &gt; ‘pay’ 아이콘 &gt; 하단 ‘결제’ 아이콘 &gt; 결제한
+            상품의 ‘주문상세' 혹은 ‘결제상세' &gt; ‘영수증' &gt; ‘구매영수증'
+            캡쳐
+          </StepNotice>
           <Button $variant="pink" onClick={handleButtonClick}>
             구매 영수증 업로드
           </Button>
@@ -357,7 +358,7 @@ const StepNotice = styled.span`
   font-weight: var(--font-callout-small-weight);
   line-height: var(--base-line-height);
   letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--prim-L300);
+  color: var(--n200-color);
   display: flex;
   align-items: start;
   gap: 0.3rem;
