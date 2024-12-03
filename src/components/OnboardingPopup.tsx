@@ -393,8 +393,9 @@ const CloseButton = styled.button<CloseButtonProps>`
 `
 
 const arrowAnimation = keyframes`
-  0% { left:0; }
-  100% { left:1.2rem; }
+  0% { transform: translateX(0); }
+  50% { transform: translateX(0.6rem); }
+  100% { transform: translateX(1.2rem); }
 `
 
 const StartButton = styled.button`
@@ -413,7 +414,7 @@ const StartButton = styled.button`
   z-index: 10;
 
   svg {
-    animation: ${arrowAnimation} 1s infinite;
+    animation: ${arrowAnimation} 1s infinite alternate;
   }
 `
 
