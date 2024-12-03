@@ -236,8 +236,7 @@ const StepTwo = ({
                   <li>
                     <p>
                       경제적 이해관계(대가성 여부)를 명시하기 위해 본문 첫 줄에
-                      자동으로 <em>&lt;협찬&gt;</em> 문구를 입력해주시기
-                      바랍니다.
+                      <em>&lt;협찬&gt;</em> 문구를 입력해주시기 바랍니다.
                     </p>
                   </li>
                   <li>
@@ -248,9 +247,6 @@ const StepTwo = ({
                       계정에 지급된 포인트는 회수될 수 있으며, 캠페인 참여가
                       영구 중단될 수 있습니다.
                     </p>
-                  </li>
-                  <li>
-                    <p>작성한 리뷰는 6개월간 유지해주셔야 합니다.</p>
                   </li>
                 </ul>
               </GuideContent>
@@ -412,7 +408,7 @@ const GuideContent = styled.div`
   .guide-list li {
     position: relative;
     padding-left: 1rem;
-    font-size: var(--font-bodyM-size);
+    font-size: 1.3rem;
     line-height: var(--font-bodyL-line-height);
     letter-spacing: var(--font-bodyM-letter-spacing);
     display: flex;
