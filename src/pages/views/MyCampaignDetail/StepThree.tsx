@@ -379,6 +379,7 @@ const StepItemReviewBox = styled.div`
 `
 
 const StepNotice = styled.span`
+  margin-bottom: 1rem;
   font-size: var(--font-callout-small-size);
   font-weight: var(--font-callout-small-weight);
   line-height: var(--base-line-height);
