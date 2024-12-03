@@ -4,4 +4,5 @@ export interface FooterButtonsProps {
   handleCancelOpen: () => void
   isScrolledToBottom: boolean
   handleButtonClick: () => void
+  deadlineStatus: boolean
 }

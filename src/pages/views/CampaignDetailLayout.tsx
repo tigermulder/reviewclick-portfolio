@@ -50,6 +50,7 @@ const CampaignDetailPage = () => {
   const [modalCancelText, setModalCancelText] = useState<string | undefined>(
     undefined
   )
+  const [deadline, setDeadline] = useState(false)
 
   //** 캠페인상세 path set */
   useEffect(() => {
@@ -321,6 +322,13 @@ const CampaignDetailPage = () => {
   //** 디데이 0일시 join 채우기 */
   const displayJoins = dDay > 0 ? campaignDetail.joins : campaignDetail.quota
 
+  //** 인원 마감시 버튼에 상태 */
+  useEffect(() => {
+    if (dDay < 0) {
+      setDeadline(true)
+    }
+  }, [dDay])
+
   return (
     <>
       {/* 온보딩팝업 */}
@@ -363,6 +371,7 @@ const CampaignDetailPage = () => {
           handleCancelOpen={handleCancelOpen}
           isScrolledToBottom={isScrolledToBottom}
           handleButtonClick={handleButtonClick}
+          deadlineStatus={deadline}
         />
       </DetailBody>
       {/* 신청, 신청완료 모달 */}

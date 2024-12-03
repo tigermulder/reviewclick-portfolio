@@ -8,13 +8,18 @@ function FooterButtons({
   handleCancelOpen,
   isScrolledToBottom,
   handleButtonClick,
+  deadlineStatus,
 }: FooterButtonsProps) {
   const renderButton = () => {
     const campaignStatus = campaignDetail.status
     const quota = campaignDetail.quota
     const joins = campaignDetail.joins
 
-    if (campaignStatus === "closed" || campaignStatus === "pause") {
+    if (
+      campaignStatus === "closed" ||
+      campaignStatus === "pause" ||
+      deadlineStatus
+    ) {
       return <Button $variant="disable">캠페인 신청 불가</Button>
     }
 
