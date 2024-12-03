@@ -253,9 +253,9 @@ const StepThree = ({
             구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야
             해요!
           </StepNotice>
-          <CustomButton $variant="pink" onClick={handleButtonClick}>
+          <Button $variant="pink" onClick={handleButtonClick}>
             이미지업로드
-          </CustomButton>
+          </Button>
           {/* 숨겨진 파일 입력 */}
           <input
             id="fileInput"
@@ -398,8 +398,4 @@ const StepNotice = styled.span`
 
 const Purple = styled.em`
   color: var(--purple);
-`
-
-const CustomButton = styled(Button)`
-  margin-top: 1rem;
 `
