@@ -203,29 +203,26 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     src={slide.imageSrc}
                     alt={`Onboarding Slide ${index + 1}`}
                   />
-                  <AnimationBox>
-                    {slide.animationButton &&
-                      (index === 1 && activeIndex === 1 ? (
-                        buttonChanged ? (
-                          <Button $variant="onboarding01">
-                            캠페인 신청하기
-                          </Button>
-                        ) : (
-                          <Button $variant="onboarding01">스크롤 내리기</Button>
-                        )
-                      ) : (
-                        slide.animationButton
-                      ))}
-                    {slide.handIcon && (
-                      <IcoHand
-                        src={slide.handIcon}
-                        alt="handIcon"
-                        $animate={index === 1 && activeIndex === 1}
-                      />
-                    )}
-                  </AnimationBox>
                 </ThumbArea>
-
+                <AnimationBox>
+                  {slide.animationButton &&
+                    (index === 1 && activeIndex === 1 ? (
+                      buttonChanged ? (
+                        <Button $variant="onboarding01">캠페인 신청하기</Button>
+                      ) : (
+                        <Button $variant="onboarding01">스크롤 내리기</Button>
+                      )
+                    ) : (
+                      slide.animationButton
+                    ))}
+                  {slide.handIcon && (
+                    <IcoHand
+                      src={slide.handIcon}
+                      alt="handIcon"
+                      $animate={index === 1 && activeIndex === 1}
+                    />
+                  )}
+                </AnimationBox>
                 {slide.description && (
                   <InfoArea>
                     <InfoAreaTitle
@@ -430,7 +427,9 @@ const ThumbArea = styled.div`
 `
 
 const InfoArea = styled.div`
-  position: relative;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
   height: 15.3rem;
   background: var(--snowwhite);
   display: flex;
@@ -518,7 +517,7 @@ const AnimationBox = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 1.3rem;
+  bottom: 16.8rem;
   width: 100%;
   padding: 0 3rem;
 `
