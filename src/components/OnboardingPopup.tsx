@@ -394,7 +394,7 @@ const CloseButton = styled.button<CloseButtonProps>`
 
 const arrowAnimation = keyframes`
   0% { transform: translateX(0); }
-  100% { transform: translateX(0.2rem); }
+  100% { transform: translateX(0.22rem); }
 `
 
 const StartButton = styled.button`
