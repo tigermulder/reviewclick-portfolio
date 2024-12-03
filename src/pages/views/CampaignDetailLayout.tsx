@@ -327,7 +327,6 @@ const CampaignDetailPage = () => {
     if (dDay === -0) {
       setDeadline(true)
     }
-    console.log(typeof dDay)
   }, [dDay])
 
   return (

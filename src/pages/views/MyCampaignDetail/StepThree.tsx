@@ -236,26 +236,26 @@ const StepThree = ({
               {validatedReviewText}
             </StepItemReviewBox>
           </StepItemReviewContainer>
-          <StepItemReviewText>
+          <StepNotice>
             ‘등록하러가기’ 클릭 시 검수 완료된 리뷰가 자동으로 복사됩니다.
-          </StepItemReviewText>
+          </StepNotice>
           <Button $variant="pink" onClick={handleNavigate}>
             리뷰 등록하러가기 (<Purple>자동복사</Purple>)
           </Button>
         </StepItem>
         <StepItem>
           <StepItemHeader>STEP2. 실제 리뷰 확인</StepItemHeader>
-          <StepNotice>
-            구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야
-            해요!
-          </StepNotice>
           <figure>
             {/* 동적 배경 이미지 적용 */}
             <img src={SampleReviewImage} alt={"기본 영수증 이미지"} />
           </figure>
-          <Button $variant="pink" onClick={handleButtonClick}>
+          <StepNotice>
+            구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야
+            해요!
+          </StepNotice>
+          <CustomButton $variant="pink" onClick={handleButtonClick}>
             이미지업로드
-          </Button>
+          </CustomButton>
           {/* 숨겨진 파일 입력 */}
           <input
             id="fileInput"
@@ -352,7 +352,7 @@ const StepItem = styled.li`
 `
 
 const StepItemHeader = styled.p`
-  margin-bottom: 2.2rem;
+  margin-bottom: 2rem;
   font-size: var(--font-h5-size);
   font-weight: var(--font-h5-weight);
   line-height: var(--font-h5-line-height);
@@ -366,24 +366,10 @@ const StepItemReviewContainer = styled.div`
   border-radius: 1rem;
 `
 
-const StepItemReviewText = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 1.8rem;
-  margin-bottom: 1rem;
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-callout-small-weight);
-  line-height: 1.4;
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--n200-color);
-  background: url("${IconNotice}") no-repeat left 0px / 1.5rem 1.5rem;
-`
-
 const StepItemReviewBox = styled.div`
   display: block;
   width: 100%;
-  height: 7rem;
+  height: 5rem;
   overflow-y: scroll;
   color: var(--n200-color);
   font-size: var(--font-bodyL-size);
@@ -397,7 +383,7 @@ const StepNotice = styled.span`
   font-weight: var(--font-callout-small-weight);
   line-height: var(--base-line-height);
   letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--prim-L300);
+  color: var(--n200-color);
   display: flex;
   align-items: start;
   gap: 0.3rem;
@@ -412,4 +398,8 @@ const StepNotice = styled.span`
 
 const Purple = styled.em`
   color: var(--purple);
+`
+
+const CustomButton = styled(Button)`
+  margin-top: 1rem;
 `
