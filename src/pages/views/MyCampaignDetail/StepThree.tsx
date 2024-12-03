@@ -250,8 +250,8 @@ const StepThree = ({
             <img src={SampleReviewImage} alt={"기본 영수증 이미지"} />
           </figure>
           <StepNotice>
-            구매 영수증 내 캠페인 상품과 동일한 상품명, 금액이 표시돼 있어야
-            해요!
+            검수가 완료된 내용과 동일한 상품의 리뷰와 사진이 보이도록 캡처하여
+            업로드해주세요!
           </StepNotice>
           <Button $variant="pink" onClick={handleButtonClick}>
             이미지업로드
