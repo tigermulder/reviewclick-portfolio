@@ -490,13 +490,13 @@ const BottomButtonContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 1.5rem;
+    padding-left: 1.6rem;
     margin-bottom: 1rem;
     font-size: var(--font-callout-small-size);
-    font-weight: var(--font-callout-small-weight);
+    font-weight: var(--font-weight-medium);
     letter-spacing: var(--font-callout-small-letter-spacing);
     color: var(--n200-color);
-    background: url("${IconNotice}") no-repeat left center / 1rem 1rem;
+    background: url("${IconNotice}") no-repeat left center / 1.2rem 1.2rem;
   }
 `
 
