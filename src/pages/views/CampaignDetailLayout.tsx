@@ -66,9 +66,11 @@ const CampaignDetailPage = () => {
   }
 
   useEffect(() => {
-    userGetPhoneverify({ phoneNumber: "01050141096" })
+    const fetchData = async () => {
+      await userGetPhoneverify({ phoneNumber: "01050141096" })
+    }
+    fetchData()
   }, [])
-
   //** 캠페인상세 path set */
   useEffect(() => {
     if (campaignCode) {
