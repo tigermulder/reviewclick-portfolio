@@ -326,10 +326,10 @@ const CampaignDetailPage = () => {
 
   //** 인원 마감시 버튼에 상태 */
   useEffect(() => {
-    if (dDay === 0) {
+    if (dDay === 0 || displayJoins === campaignDetail.quota) {
       setDeadline(true)
     }
-  }, [dDay])
+  }, [dDay, displayJoins])
 
   return (
     <>
