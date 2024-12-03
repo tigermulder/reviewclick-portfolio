@@ -19,7 +19,6 @@ import FooterButtons from "./CampaignDetail/FooterButtons"
 import useScrollAnimation from "@/hooks/useScrollAnimation"
 import GuideDetail from "./CampaignDetail/GuideDetail"
 import OnboardingPopup from "@/components/OnboardingPopup"
-import { phoneVerify, phoneSendCode } from "@/services/join"
 import styled from "styled-components"
 
 // React Query Key
@@ -53,24 +52,6 @@ const CampaignDetailPage = () => {
   )
   const [deadline, setDeadline] = useState(false)
 
-  const userGetPhoneverify = async ({
-    phoneNumber,
-  }: {
-    phoneNumber: string
-  }) => {
-    const requestData = {
-      phone: phoneNumber,
-    }
-    const response = await phoneSendCode(requestData)
-    return response
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await userGetPhoneverify({ phoneNumber: "01050141096" })
-    }
-    fetchData()
-  }, [])
   //** 캠페인상세 path set */
   useEffect(() => {
     if (campaignCode) {
