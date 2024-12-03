@@ -523,7 +523,7 @@ const LastButton = styled.button`
 
 const ButtonBox = styled.div`
   position: absolute;
-  bottom: 31.8rem;
+  bottom: 33.9rem;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
