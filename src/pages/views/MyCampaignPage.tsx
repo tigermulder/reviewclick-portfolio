@@ -71,15 +71,14 @@ const MyCampaignPage = () => {
   const { data, refetch } = useSuspenseQuery({
     queryKey: ["reviewList"],
     queryFn: fetchCampaignList,
-    refetchOnMount: true,
     staleTime: 0,
+    gcTime: 0, // 데이터 캐시 즉시 제거
     retry: 1, // 재요청 횟수
   })
 
   // ** 현재 신청한캠페인 */
   const reviewList = data?.list
   const reviewJoin = data?.n_review_join
-  const reviewMax = data?.n_max_review_join
 
   // ** 나의리뷰리스트 데이터를 Recoil 상태로 업데이트  */
   useEffect(() => {

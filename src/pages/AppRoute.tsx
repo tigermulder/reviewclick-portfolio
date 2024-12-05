@@ -5,6 +5,9 @@ import Layout from "./Layout"
 const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/AgreementPage"))
 const JoinVerifyPage = lazy(() => import("./views/AccountVerificationPage"))
+const PhoneVerificationPage = lazy(
+  () => import("./views/PhoneVerificationPage")
+)
 const MainPage = lazy(() => import("./views/MainPage"))
 const CampaignDetailPage = lazy(() => import("./views/CampaignDetailLayout"))
 const CampaignCart = lazy(() => import("./views/CampaingnCart"))
@@ -57,6 +60,11 @@ export const AppRoute = () => {
         <Route path={RoutePath.Join} element={<JoinPage />} />
         {/* 인증 페이지 1-2 */}
         <Route path={RoutePath.JoinVerify} element={<JoinVerifyPage />} />
+        {/* 인증 페이지 1-3 */}
+        <Route
+          path={RoutePath.JoinPhoneVerify}
+          element={<PhoneVerificationPage />}
+        />
         {/* 아이디찾기 페이지 */}
         <Route path={RoutePath.FindId} element={<FindIdPage />} />
         {/* 비밀번호찾기 페이지 */}

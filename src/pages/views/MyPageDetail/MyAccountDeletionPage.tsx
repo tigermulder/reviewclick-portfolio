@@ -41,7 +41,7 @@ const MyAccountDeletionPage: React.FC = () => {
       //   statusCode: 0,
       // }
       if (response.statusCode === 0) {
-        addToast("계정이 탈퇴처리 되었습니다.", "info", 1000, "QuitUser")
+        addToast("계정이 탈퇴처리 되었습니다.", "info", 3000, "QuitUser")
         // Recoil 로그인상태 업데이트
         setAuth({
           isLoggedIn: false,
@@ -64,7 +64,7 @@ const MyAccountDeletionPage: React.FC = () => {
       addToast(
         "회원 탈퇴에 실패했습니다. 다시 시도해주세요.",
         "warning",
-        1000,
+        3000,
         "QuitUser"
       )
     }

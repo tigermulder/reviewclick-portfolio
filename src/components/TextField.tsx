@@ -55,12 +55,18 @@ const InputWrapper = styled.div<{ $isError?: boolean; $disabled?: boolean }>`
   align-items: center;
   border: 1px solid
     ${({ $isError, $disabled }) =>
-      $isError ? "red" : $disabled ? "var(--silver)" : "#ddd"};
+      $isError ? "red" : $disabled ? "var(--n40-color)" : "#ddd"};
   background: ${({ $isError, $disabled }) =>
-    $isError ? "var(--prim-L20)" : $disabled ? "var(--whitesmoke)" : "inherit"};
+    $isError ? "var(--prim-L20)" : $disabled ? "inherit" : "inherit"};
   border-radius: 5px;
   transition: border-color 0.2s ease;
   overflow: hidden;
+  color: ${({ $isError, $disabled }) =>
+    $isError
+      ? "var(--primary-color)"
+      : $disabled
+        ? "var(--n200-color)"
+        : "var(--primary-color)"};
 `
 
 const StyledInput = styled.input<{ $isError?: boolean }>`

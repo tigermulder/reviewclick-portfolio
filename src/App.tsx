@@ -1,5 +1,5 @@
 import { AppRoute } from "pages/AppRoute"
-import { useLocation, useMatch, useParams } from "react-router-dom"
+import { useLocation, useMatch, useParams, useNavigate } from "react-router-dom"
 import AppBar from "components/AppBar"
 import Navbar from "./components/Navbar"
 import Footer from "components/Footer"
@@ -14,6 +14,7 @@ import useToast from "./hooks/useToast"
 function App() {
   // useUserStatus()
   const { campaignCode } = useParams()
+  const navigate = useNavigate()
   const { addToast } = useToast()
 
   //** 로그인정보 */
@@ -22,10 +23,19 @@ function App() {
       try {
         const data = await logincheck()
         if (data.logined === 1) {
-          localStorage.setItem("email", data.email)
-          sessionStorage.setItem("authToken", data.token)
-          sessionStorage.setItem("spaceName", data.spaceName)
-          sessionStorage.setItem("penalty", data.penalty)
+          if (
+            data.phone === null ||
+            data.phone === undefined ||
+            data.phone === ""
+          ) {
+            navigate(RoutePath.JoinPhoneVerify)
+          } else {
+            localStorage.setItem("email", data.email)
+            localStorage.setItem("userPhoneNumber", data.phone)
+            sessionStorage.setItem("authToken", data.token)
+            sessionStorage.setItem("spaceName", data.spaceName)
+            sessionStorage.setItem("penalty", data.penalty)
+          }
         }
       } catch (error) {
         console.error(error)
@@ -53,6 +63,7 @@ function App() {
     location.pathname === RoutePath.MyCart ||
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.JoinVerify ||
+    location.pathname === RoutePath.JoinPhoneVerify ||
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.UserPointLog ||
@@ -77,6 +88,7 @@ function App() {
     location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.JoinVerify ||
+    location.pathname === RoutePath.JoinPhoneVerify ||
     location.pathname === RoutePath.FindId ||
     location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.ResetPassword ||
@@ -98,6 +110,9 @@ function App() {
       location.pathname !== RoutePath.Alert &&
       location.pathname !== RoutePath.UserPointLog &&
       location.pathname !== RoutePath.UserServiceGuide &&
+      location.pathname !== RoutePath.Join &&
+      location.pathname !== RoutePath.JoinPhoneVerify &&
+      location.pathname !== RoutePath.JoinVerify &&
       location.pathname !== RoutePath.ContactAdd &&
       location.pathname !== RoutePath.TermsOfService &&
       location.pathname !== RoutePath.PrivacyPolicy &&

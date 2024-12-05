@@ -8,15 +8,73 @@ import {
   ButtonProps,
   StyledButtonProps,
 } from "@/types/component-types/button-type"
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
+// Spinner 스타일
+const fade = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`
+const Spinner = styled.div`
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+`
+const Dot = styled.div`
+  position: absolute;
+  top: -0.3rem;
+  left: 50%;
+  width: 0.2rem;
+  height: 0.7rem;
+  background-color: var(--prim-L100);
+  border-radius: 0.15rem;
+  transform-origin: center 1.1rem;
+  animation: ${fade} 1s linear infinite;
+
+  &:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: 0s;
+  }
+  &:nth-child(2) {
+    transform: rotate(45deg);
+    animation-delay: -0.875s;
+  }
+  &:nth-child(3) {
+    transform: rotate(90deg);
+    animation-delay: -0.75s;
+  }
+  &:nth-child(4) {
+    transform: rotate(135deg);
+    animation-delay: -0.625s;
+  }
+  &:nth-child(5) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+  &:nth-child(6) {
+    transform: rotate(225deg);
+    animation-delay: -0.375s;
+  }
+  &:nth-child(7) {
+    transform: rotate(270deg);
+    animation-delay: -0.25s;
+  }
+  &:nth-child(8) {
+    transform: rotate(315deg);
+    animation-delay: -0.125s;
+  }
+`
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { children, disabled, $variant, type = "button", $marginTop, onClick },
     ref
   ) => (
     <StyledButton
-      ref={ref} // Pass the ref to StyledButton
+      ref={ref}
       disabled={disabled || $variant === "spinner"}
       $variant={$variant}
       type={type}
@@ -34,7 +92,21 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       {$variant === "failed" && (
         <FailedIcon backgroundColor="var(--primary-color)" filter={false} />
       )}
-      {$variant !== "spinner" && children}
+      {/* spinner 변형일 경우 Spinner 렌더링 */}
+      {$variant === "spinner" ? (
+        <Spinner>
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+        </Spinner>
+      ) : (
+        children
+      )}
     </StyledButton>
   )
 )
@@ -70,6 +142,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           background-color: var(--white);
           color: ${disabled ? "var(--n200-color)" : "var(--primary-color)"};
           border: 1px solid var(--n80-color);
+          font-weight: 500;
         `
       case "arrow":
         return css`
@@ -212,29 +285,12 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
       case "spinner":
         return css`
           background-color: var(--prim-L20);
-          color: var(--prim-L400);
           border: none;
           display: flex;
           align-items: center;
           justify-content: center;
-
-          &::after {
-            content: "";
-            width: 1.5rem;
-            height: 1.5rem;
-            border: 3px solid var(--prim-L400);
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-          }
-          @keyframes spin {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
-          }
+          ${Spinner}
+          ${Dot}
         `
       case "onboarding01":
         return css`

@@ -21,15 +21,12 @@ const NoticeDetail = () => {
     return response
   }
 
-  const { data, isFetching, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["noticeDetail", noticeId],
     queryFn: fetchNoticeDetail,
     enabled: !!noticeId,
     staleTime: 0,
   })
-  if (error && isFetching) {
-    throw error
-  }
   const noticeDetail = data?.notice
 
   return (

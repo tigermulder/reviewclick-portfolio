@@ -29,6 +29,11 @@ export const checkEmail = async (
     data
   )
   return response.data
+  // return {
+  //   statusCode: 0,
+  //   errorCode: 0,
+  //   error: "",
+  // }
 }
 
 //** 이메일 인증 코드 전송 API */
@@ -40,6 +45,11 @@ export const sendEmailCode = async (
     data
   )
   return response.data
+  // return {
+  //   statusCode: 0,
+  //   errorCode: 0,
+  //   error: "",
+  // }
 }
 
 //** 이메일 인증 코드 확인 API */
@@ -51,6 +61,11 @@ export const verifyEmailCode = async (
     data
   )
   return response.data
+  // return {
+  //   statusCode: 0,
+  //   errorCode: 0,
+  //   error: "",
+  // }
 }
 
 //** 회원가입 처리 API */
@@ -99,6 +114,11 @@ export const phoneSendCode = async (
     data
   )
   return response.data
+  // return {
+  //   statusCode: 0,
+  //   errorCode: 0,
+  //   error: "",
+  // }
 }
 
 //** 휴대폰 인증 코드확인 */
@@ -110,4 +130,9 @@ export const phoneVerify = async (
     data
   )
   return response.data
+  // return {
+  //   statusCode: 0,
+  //   errorCode: 0,
+  //   error: "",
+  // }
 }

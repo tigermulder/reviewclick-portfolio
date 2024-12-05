@@ -1,9 +1,5 @@
+import { DetailHeaderProps } from "@/types/component-types/detail-header-type"
 import styled from "styled-components"
-
-interface DetailHeaderProps {
-  imageUrl: string
-  scale: number
-}
 
 function DetailHeader({ imageUrl, scale }: DetailHeaderProps) {
   return (

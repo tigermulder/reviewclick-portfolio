@@ -65,7 +65,6 @@ const NewsContent = () => {
         return undefined
       },
       initialPageParam: 1,
-      refetchOnMount: true,
       staleTime: 0,
     })
 

@@ -130,7 +130,7 @@ const CampaignDetailPage = () => {
   }
 
   //** 캠페인 상세ITEM */
-  const { data, error, isFetching, refetch } = useSuspenseQuery({
+  const { data, refetch } = useSuspenseQuery({
     queryKey: CAMPAIGN_ITEM_QUERY_KEY(campaignCode),
     queryFn: () =>
       getCampaignItem({
@@ -138,14 +138,8 @@ const CampaignDetailPage = () => {
       }),
     staleTime: 0, // 데이터 즉시 신선하지 않게 설정
     gcTime: 0, // 데이터 캐시 즉시 제거
-    retry: 0, // 재요청 횟수
-    refetchOnMount: true, // 컴포넌트 마운트 시마다 데이터 재요청
-    refetchOnWindowFocus: true, // 창 포커스 시 데이터 재요청
-    refetchOnReconnect: true, // 네트워크 재연결 시 데이터 재요청
+    refetchOnMount: false,
   })
-  if (error && isFetching) {
-    throw error
-  }
 
   const campaignDetail = data.campaign
   const reviewStatus = data.review_status

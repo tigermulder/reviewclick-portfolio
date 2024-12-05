@@ -20,5 +20,4 @@ export type Agreements = {
   essential2: boolean
   essential3: boolean
   optionalAll: boolean
-  optional1: boolean
 }

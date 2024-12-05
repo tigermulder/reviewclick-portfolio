@@ -30,7 +30,7 @@ const AccountVerificationPage = () => {
     mutationFn: checkEmail,
     onSuccess: (data) => {
       if (data.statusCode === 0) {
-        setEmailCheckMessage("가입이 가능한 네이버 아이디입니다.")
+        setEmailCheckMessage("인증 가능한 아이디입니다.")
         const email = `${id}@naver.com`
         const sendCodeData = { email }
         sendEmailCodeMutation.mutate(sendCodeData)
@@ -39,20 +39,28 @@ const AccountVerificationPage = () => {
         }, 500)
       } else {
         setEmailCheckMessage("")
-        addToast("이미 인증한 계정입니다.", "warning", 1000, "email")
+        addToast("이미 인증한 계정입니다.", "warning", 3000, "verify")
       }
     },
     onError: (error: CustomError) => {
       const errorCode = error.response?.data?.errorCode
       setEmailCheckMessage("")
-      if (errorCode === 1) {
-        addToast("매체사로 접속해주세요", "warning", 3000, "email")
-      } else {
-        addToast("네트워크 에러입니다", "warning", 3000, "email")
+      switch (errorCode) {
+        case 1:
+          addToast("매체사로 접속해주세요", "warning", 3000, "verify")
+          break
+        case 3:
+          addToast("이미 인증한 이메일입니다", "warning", 3000, "verify")
+          break
+        case 4:
+          addToast("이미 사용중인 이메일입니다.", "warning", 3000, "verify")
+          break
+        default:
+          addToast("네트워크 에러입니다", "warning", 3000, "verify")
+          break
       }
     },
   })
-
   // ** 이메일 인증 코드 전송 mutation */
   const sendEmailCodeMutation = useMutation({
     mutationFn: sendEmailCode,
@@ -60,21 +68,23 @@ const AccountVerificationPage = () => {
       if (data.statusCode === 0) {
         setEmailSent(true)
         startEmailTimer()
-        addToast("인증코드가 이메일로 전송됐어요", "warning", 3000, "email")
+        addToast("인증코드가 이메일로 전송됐어요", "warning", 3000, "verify")
       } else {
-        addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "email")
+        addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "verify")
       }
     },
-    onError: () => {
-      addToast(
-        "인증 코드 요청 중 오류가 발생했습니다.",
-        "warning",
-        1000,
-        "email"
-      )
+    onError: (error: CustomError) => {
+      const errorCode = error.response?.data?.errorCode
+      switch (errorCode) {
+        case 2:
+          addToast("이메일체크를 먼저 해주세요", "warning", 3000, "verify")
+          break
+        default:
+          addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "verify")
+          break
+      }
     },
   })
-
   // ** 이메일 인증 코드 확인 mutation */
   const verifyEmailCodeMutation = useMutation({
     mutationFn: verifyEmailCode,
@@ -83,25 +93,22 @@ const AccountVerificationPage = () => {
         localStorage.setItem("email", id)
         setEmailConfirmed(true)
         resetEmailTimer()
-        addToast("계정인증이 완료되었습니다.", "check", 3000, "email")
-
-        const redirect = sessionStorage.getItem("redirectPath")
-        if (redirect) {
-          navigate(redirect)
-        } else {
-          navigate(RoutePath.MyCampaign)
-        }
+        addToast("이메일 인증이 완료되었습니다.", "check", 3000, "verify")
+        navigate(RoutePath.JoinPhoneVerify)
       } else {
-        addToast("인증 코드가 올바르지 않습니다.", "warning", 3000, "email")
+        addToast("인증 코드가 올바르지 않습니다.", "warning", 3000, "verify")
       }
     },
-    onError: () => {
-      addToast(
-        "인증 코드 확인 중 오류가 발생했습니다.",
-        "warning",
-        1000,
-        "email"
-      )
+    onError: (error: CustomError) => {
+      const errorCode = error.response?.data?.errorCode
+      switch (errorCode) {
+        case 2:
+          addToast("인증 코드가 일치하지 않습니다.", "warning", 3000, "verify")
+          break
+        default:
+          addToast("인증 코드가 올바르지 않습니다.", "warning", 3000, "verify")
+          break
+      }
     },
   })
 
@@ -120,7 +127,6 @@ const AccountVerificationPage = () => {
       })
     }, 1000)
   }
-
   // ** 이메일 인증 타이머 초기화 */
   const resetEmailTimer = () => {
     if (emailTimerRef.current) clearInterval(emailTimerRef.current)
@@ -142,8 +148,8 @@ const AccountVerificationPage = () => {
       addToast(
         "올바른 네이버 아이디 형식이 아닙니다.",
         "warning",
-        1000,
-        "email"
+        3000,
+        "verify"
       )
       return
     }
@@ -156,16 +162,41 @@ const AccountVerificationPage = () => {
   const handleResendEmailCode = () => {
     const email = `${id}@naver.com`
     const sendCodeData = { email }
-    sendEmailCodeMutation.mutate(sendCodeData)
-    startEmailTimer()
-    addToast("인증 코드를 재전송했습니다.", "warning", 1000, "email")
+    sendEmailCodeMutation.mutate(sendCodeData, {
+      onSuccess: (data) => {
+        if (data.statusCode === 0) {
+          setEmailSent(true)
+          startEmailTimer()
+          setEmailAuthCode("")
+          addToast("인증 코드를 재전송했습니다.", "warning", 3000, "verify")
+        } else {
+          addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "verify")
+        }
+      },
+      onError: (error: CustomError) => {
+        const errorCode = error.response?.data?.errorCode
+        switch (errorCode) {
+          case 2:
+            addToast("이메일체크를 먼저 해주세요", "warning", 3000, "verify")
+            break
+          default:
+            addToast(
+              "인증 코드 전송에 실패했습니다.",
+              "warning",
+              3000,
+              "verify"
+            )
+            break
+        }
+      },
+    })
   }
 
   // ** 컴포넌트 언마운트 시 타이머 정리 */
   useEffect(() => {
     if (isLoggedIn) {
       if (isLoggedIn !== "null") {
-        addToast("이미 인증되었습니다", "warning", 1000, "Join")
+        addToast("이미 인증되었습니다", "warning", 3000, "verify")
         if (redirect) {
           navigate(redirect)
         }
@@ -208,24 +239,12 @@ const AccountVerificationPage = () => {
                   ? "올바른 형식의 계정이 아닙니다."
                   : undefined
               }
-              $suffixWidth="25.5%"
+              $suffixWidth="27%"
               successMessage={emailCheckMessage}
               disabled={emailSent || emailConfirmed}
             />
           </TextFieldWrapper>
-          <ButtonWrapper>
-            <Button
-              type="button"
-              $variant="join"
-              onClick={handleEmailAuth}
-              disabled={!validateEmail(id) || emailConfirmed || emailSent}
-              $marginTop="0"
-            >
-              {emailSent ? "전송완료" : "인증메일 받기"}
-            </Button>
-          </ButtonWrapper>
         </Row>
-
         {emailSent && (
           <Row>
             <TextFieldWrapper>
@@ -238,28 +257,29 @@ const AccountVerificationPage = () => {
                   onChange={(e) => setEmailAuthCode(e.target.value)}
                   $isError={emailAuthCode !== "" && emailAuthCode.length !== 6}
                   $marginBottom="0"
-                  $marginTop="3.2rem"
+                  $marginTop="0.8rem"
                   errorMessage={
                     emailAuthCode !== "" && emailAuthCode.length !== 6
-                      ? "인증 코드를 입력해 주세요."
+                      ? "인증 코드를 다시 입력해주세요."
                       : undefined
                   }
                 />
                 <TimerText>{formatTime(emailTimer)}</TimerText>
               </div>
             </TextFieldWrapper>
-            <ButtonWrapper>
-              <Button
-                type="button"
-                $variant="red"
-                onClick={handleResendEmailCode}
-                disabled={!validateEmail(id) || emailConfirmed}
-              >
-                재발송
-              </Button>
-            </ButtonWrapper>
           </Row>
         )}
+
+        <ButtonWrapper $visible={validateEmail(id)}>
+          <Button
+            type="button"
+            $variant="red"
+            onClick={emailSent ? handleResendEmailCode : handleEmailAuth}
+            disabled={emailConfirmed}
+          >
+            {emailSent ? "인증코드 다시받기" : "인증메일 발송"}
+          </Button>
+        </ButtonWrapper>
       </FormGroup>
     </VerificationContainer>
   )
@@ -268,7 +288,8 @@ const AccountVerificationPage = () => {
 export default AccountVerificationPage
 
 const VerificationContainer = styled.div`
-  padding: 6rem 0 10rem;
+  padding: 4.4rem 0 0;
+  height: 100vh;
 `
 
 const FormGroup = styled.div`
@@ -282,7 +303,7 @@ const Row = styled.div`
 `
 
 const AccountVerifyTitle = styled.h2`
-  margin-top: 2.8rem;
+  margin-top: 2.4rem;
   font-size: var(--font-h2-size);
   font-weight: var(--font-h2-weight);
   letter-spacing: var(--font-h2-letter-spacing);
@@ -293,7 +314,7 @@ const AccountVerifyTitle = styled.h2`
 `
 
 const AccountVerifyText = styled.p`
-  margin: 1.4rem 0 3.4rem;
+  margin: 1.2rem 0 2.4rem;
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);
@@ -305,15 +326,27 @@ const TextFieldWrapper = styled.div`
   position: relative;
 `
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div<{ $visible: boolean }>`
+  position: fixed;
+  padding: 1.5rem;
   width: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  transform: ${({ $visible }) =>
+    $visible ? "translateY(0)" : "translateY(100%)"};
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transition:
+    transform 0.3s ease-out,
+    opacity 0.2s ease-out;
+  z-index: 100;
 `
 
 const TimerText = styled.span`
   position: absolute;
-  right: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 1.4rem;
+  top: 1.5rem;
   font-size: 1.2rem;
   font-weight: var(--font-weight-medium);
   color: var(--revu-color);

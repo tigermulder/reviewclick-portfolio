@@ -17,6 +17,8 @@ import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
 import SuccessIcon from "@/components/SuccessIcon"
 import FailedIcon from "@/components/FailedIcon"
+import Button from "@/components/Button"
+import { calculateRemainingTime } from "@/utils/util"
 
 const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
@@ -27,7 +29,7 @@ const MainPage = (): JSX.Element => {
 
   //** Fetch campaign list */
   const fetchCampaigns = async ({ pageParam = 1 }) => {
-    // await new Promise((resolve) => setTimeout(resolve, 200000))
+    // await new Promise((resolve) => setTimeout(resolve, 2000000))
     const requestData = {
       pageSize: 10,
       pageIndex: pageParam,
@@ -56,9 +58,7 @@ const MainPage = (): JSX.Element => {
       refetchInterval: 10 * 60 * 1000, // 10분 마다 리패치
       staleTime: 10 * 60 * 1000, // 10분 동안 데이터가 신선함
       gcTime: 11 * 60 * 1000, // 20분 동안 캐시 유지
-      refetchOnWindowFocus: false,
       refetchOnMount: false,
-      refetchOnReconnect: true,
     })
 
   //** 캠페인 데이터를 Recoil 상태로 업데이트 */
@@ -100,23 +100,8 @@ const MainPage = (): JSX.Element => {
       <FilterBar />
       <CampaignList>
         {filteredCampaigns?.map((campaign) => {
-          // 남은 시간 계산
           const endTime = campaign.endAt
-            ? new Date(campaign.endAt).getTime()
-            : 0
-          const now = Date.now()
-          const diffInMs = endTime - now
-          const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
-          let remainingTime
-          if (diffInDays > 1) {
-            remainingTime = `D-${Math.ceil(diffInDays)}일`
-          } else if (diffInDays > 0) {
-            const diffInHours = diffInMs / (1000 * 60 * 60)
-            remainingTime = `T-${Math.ceil(diffInHours)}시간`
-          } else {
-            remainingTime = "캠페인 종료"
-          }
-          const isEnded = remainingTime === "캠페인 종료"
+          const { remainingTime, isEnded } = calculateRemainingTime(endTime)
           const thumbnailUrl = campaign.thumbnailUrl || dummyImage
           return (
             <CampaignCard

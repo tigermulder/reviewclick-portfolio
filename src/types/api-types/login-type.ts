@@ -26,4 +26,5 @@ export interface LoginCheckResponseData {
   uid: number
   email: string
   penalty: string
+  phone: string
 }

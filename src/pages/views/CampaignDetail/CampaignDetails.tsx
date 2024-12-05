@@ -3,13 +3,8 @@ import IconStar from "assets/ico-star1.svg?url"
 import Button from "@/components/Button"
 import { forwardRef } from "react"
 import { formatDate } from "@/utils/util"
-import { Campaign } from "@/types/api-types/campaign-type"
-interface CampaignDetailsProps {
-  campaign: Campaign
-  handleViewProduct: () => void
-}
+import { CampaignDetailsProps } from "@/types/component-types/campaign-detail-type"
 
-// `forwardRef`를 사용하여 컴포넌트를 감쌉니다.
 const CampaignDetails = forwardRef<HTMLButtonElement, CampaignDetailsProps>(
   ({ campaign, handleViewProduct }, ref) => {
     return (

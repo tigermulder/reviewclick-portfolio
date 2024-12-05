@@ -7,7 +7,7 @@ import {
 import { LogoutResponse } from "types/api-types/logout-type"
 import { HangResponse } from "types/api-types/hang-type"
 
-//** 로그인 처리 API */
+//** User 정보요청 API */
 export const logincheck = async (): Promise<LoginCheckResponseData> => {
   const response =
     await axiosInstance.get<LoginCheckResponseData>("/login/check")

@@ -33,9 +33,6 @@ const MyPage = () => {
 
       {/* 하단 링크 */}
       <Links>
-        {/* <li>
-          <StyledLink to={RoutePath.UserEditProfile}>내 정보 수정</StyledLink>
-        </li> */}
         <li>
           <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>
         </li>
@@ -43,6 +40,9 @@ const MyPage = () => {
           <StyledLink to={RoutePath.UserServiceGuide}>
             서비스 이용가이드
           </StyledLink>
+        </li>
+        <li>
+          <StyledLink to={RoutePath.UserEditProfile}>내 정보 수정</StyledLink>
         </li>
         <li>
           <NoticeContainer>
@@ -123,7 +123,7 @@ const TitleSection = styled.div`
 `
 
 const Links = styled.ul`
-  padding-bottom: 5rem;
+  padding-bottom: 0;
 
   > li {
     position: relative;
@@ -212,6 +212,7 @@ const NoticeContent = styled.div`
   overflow: hidden;
 
   ul {
+    margin-bottom: 1.5rem;
     padding: 1.6rem;
     font-size: 1.4rem;
     color: var(--gray-01);

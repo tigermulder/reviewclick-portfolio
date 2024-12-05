@@ -23,7 +23,6 @@ const MyPointPage = () => {
   const { data } = useSuspenseQuery({
     queryKey: ["RewardList"],
     queryFn: fetchMyRewardList,
-    refetchOnMount: true,
     staleTime: 0,
     retry: 0, // 재요청 횟수
   })

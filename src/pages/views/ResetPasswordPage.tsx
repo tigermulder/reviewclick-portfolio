@@ -40,7 +40,6 @@ const ResetPasswordPage = () => {
   const handleResetPassword = async () => {
     try {
       const response = await resetPassword({
-        token,
         password: password1,
       })
 

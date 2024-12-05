@@ -17,13 +17,12 @@ const Announcement = () => {
     const response = await getNoticeList(requestData)
     return response
   }
-  const { data: noticeData } = useSuspenseQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["noticeList"],
     queryFn: fetchNoticeList,
-    refetchOnMount: true,
     staleTime: 0,
   })
-  const noticeList = noticeData?.list
+  const noticeList = data?.list
 
   return (
     <NoticeSection>

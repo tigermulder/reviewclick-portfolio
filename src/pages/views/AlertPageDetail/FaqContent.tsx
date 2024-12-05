@@ -14,13 +14,13 @@ const FaqContent = () => {
     const response = await getFaqList(requestData)
     return response
   }
-  const { data: faqData } = useSuspenseQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["faqList"],
     queryFn: fetchFaqList,
     refetchOnMount: true,
     staleTime: 0,
   })
-  const faqList = faqData?.list
+  const faqList = data?.list
 
   return (
     <section>

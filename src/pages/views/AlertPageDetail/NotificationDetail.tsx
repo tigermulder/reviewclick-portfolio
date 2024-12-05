@@ -24,15 +24,12 @@ const NotificationDetail = () => {
     return response
   }
 
-  const { data, isFetching, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["noticeDetail", notificationId],
     queryFn: fetchNotifyDetail,
     enabled: !!notificationId,
     staleTime: 0,
   })
-  if (error && isFetching) {
-    throw error
-  }
 
   const notifyData = data?.notification
   const thumbnailUrl = notifyData?.cardInfoReview?.thumbnailUrl || dummyImage
