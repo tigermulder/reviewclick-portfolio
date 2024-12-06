@@ -194,6 +194,17 @@ const CampaignDetailPage = () => {
       const isPhoneVerify = localStorage.getItem("userPhoneNumber")
       if (isLoggedIn === "null" || isLoggedIn === "") {
         setIsAuthModalOpen(true)
+        setModalTitle("계정인증을 하시겠습니까?")
+        setModalContent(
+          <>
+            <p>
+              캠페인은 계정 인증 후 신청이 가능합니다. <br /> 계정 인증을 하러
+              가시겠습니까?
+            </p>
+          </>
+        )
+        setModalConfirmText("계정인증")
+        setModalCancelText("아니요")
       } else {
         if (
           isPhoneVerify === null ||
@@ -201,7 +212,19 @@ const CampaignDetailPage = () => {
           isPhoneVerify === "" ||
           isPhoneVerify === "null"
         ) {
-          navigate(RoutePath.JoinPhoneVerify)
+          setIsAuthModalOpen(true)
+          setModalTitle("휴대폰번호 인증을 해주세요.")
+          setModalContent(
+            <>
+              <p>리뷰클릭 서비스를 이용하시려면 휴대폰 인증이 필요합니다.</p>
+              <p>
+                인증이 완료 후에는 캠페인 진행 상황과 1:1 문의에 대한 카카오
+                알림톡을 받아보실 수 있습니다.
+              </p>
+            </>
+          )
+          setModalConfirmText("휴대폰 인증")
+          setModalCancelText("아니요")
         } else {
           setIsModalOpen(true)
         }
@@ -212,7 +235,11 @@ const CampaignDetailPage = () => {
   //** 계정 인증 모달 확인 버튼 핸들러 */
   const handleAuthModalConfirm = () => {
     setIsAuthModalOpen(false)
-    navigate(RoutePath.Join)
+    if (modalConfirmText === "계정인증") {
+      navigate(RoutePath.Join)
+    } else {
+      navigate(RoutePath.JoinPhoneVerify)
+    }
   }
   // ** 모달에서 캠페인 신청핸들러 [1-2] */
   const handleConfirm = async () => {
@@ -446,17 +473,10 @@ const CampaignDetailPage = () => {
         isOpen={isAuthModalOpen}
         onConfirm={handleAuthModalConfirm}
         onCancel={() => setIsAuthModalOpen(false)}
-        title="계정인증을 하시겠습니까?"
-        content={
-          <>
-            <p>
-              캠페인은 계정 인증 후 신청이 가능합니다. <br /> 계정 인증을 하러
-              가시겠습니까?
-            </p>
-          </>
-        }
-        confirmText="계정인증"
-        cancelText="아니요"
+        title={modalTitle}
+        content={modalContent}
+        confirmText={modalConfirmText}
+        cancelText={modalCancelText}
       />
       {/* 신청취소 모달 */}
       <Modal
