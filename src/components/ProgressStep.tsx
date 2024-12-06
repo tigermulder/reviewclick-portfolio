@@ -107,10 +107,10 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                       <Icon src={step.icon} alt={`${step.name} 아이콘`} />
                     )}
                   </TooltipText>
-                  <Pagination>
+                  {/* <Pagination>
                     <em>{index + 1}</em>
                     {`/${steps.length - 1}`}
-                  </Pagination>
+                  </Pagination> */}
                 </Tooltip>
               )}
             </StepBox>

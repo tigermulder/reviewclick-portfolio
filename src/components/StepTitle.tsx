@@ -54,7 +54,7 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Step className="active">상품구매</Step>
       <Step>2</Step>
       <Step>3</Step>
-      <Step>4</Step>
+      {/* <Step>4</Step> */}
     </StepContainer>
   ),
   purchase: (
@@ -62,7 +62,7 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Step className="active">상품구매</Step>
       <Step>2</Step>
       <Step>3</Step>
-      <Step>4</Step>
+      {/* <Step>4</Step> */}
     </StepContainer>
   ),
   confirm: (
@@ -70,7 +70,7 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Check />
       <Step className="active">리뷰검수</Step>
       <Step>3</Step>
-      <Step>4</Step>
+      {/* <Step>4</Step> */}
     </StepContainer>
   ),
   upload: (
@@ -78,7 +78,7 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Check />
       <Check />
       <Step className="active">리뷰등록</Step>
-      <Step>4</Step>
+      {/* <Step>4</Step> */}
     </StepContainer>
   ),
 }
