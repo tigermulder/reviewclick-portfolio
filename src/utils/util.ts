@@ -257,9 +257,9 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
       wordHash[word]++
     }
     if (wordHash[word] >= threshold) {
-      return false
+      return true
     }
   }
 
-  return true
+  return false
 }
