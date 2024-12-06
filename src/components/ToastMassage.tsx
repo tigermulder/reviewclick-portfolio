@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react"
 import { useRecoilState } from "recoil"
 import { toastListState } from "store/toast-recoil"
 import { Toast, ToastItemProps } from "types/component-types/toast-type"
-import IconCopy from "assets/ico-copy.svg?react"
 import styled, { keyframes } from "styled-components"
 
 const toastIcons: Record<Toast["type"], React.ReactNode> = {
@@ -10,7 +9,7 @@ const toastIcons: Record<Toast["type"], React.ReactNode> = {
   uncheck: <span role="img" aria-label="uncheck"></span>,
   info: <span role="img" aria-label="info"></span>,
   warning: <span role="img" aria-label="warning"></span>,
-  copy: <IconCopy />,
+  copy: <span role="img" aria-label="copy"></span>,
 }
 
 const ToastMassage = (): JSX.Element => {

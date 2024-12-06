@@ -50,7 +50,7 @@ const StepTwo = ({
     if (text.length <= maxChars) {
       setReviewText(text)
     } else {
-      setReviewText(text.slice(0, maxChars)) // 최대 문자 수 초과 시 자르기
+      setReviewText(text.slice(0, maxChars))
     }
   }
 
