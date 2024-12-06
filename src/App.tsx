@@ -23,19 +23,11 @@ function App() {
       try {
         const data = await logincheck()
         if (data.logined === 1) {
-          if (
-            data.phone === null ||
-            data.phone === undefined ||
-            data.phone === ""
-          ) {
-            navigate(RoutePath.JoinPhoneVerify)
-          } else {
-            localStorage.setItem("email", data.email)
-            localStorage.setItem("userPhoneNumber", data.phone)
-            sessionStorage.setItem("authToken", data.token)
-            sessionStorage.setItem("spaceName", data.spaceName)
-            sessionStorage.setItem("penalty", data.penalty)
-          }
+          localStorage.setItem("email", data.email)
+          localStorage.setItem("userPhoneNumber", data.phone)
+          sessionStorage.setItem("authToken", data.token)
+          sessionStorage.setItem("spaceName", data.spaceName)
+          sessionStorage.setItem("penalty", data.penalty)
         }
       } catch (error) {
         console.error(error)

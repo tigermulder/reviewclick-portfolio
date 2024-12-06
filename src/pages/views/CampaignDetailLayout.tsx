@@ -191,10 +191,20 @@ const CampaignDetailPage = () => {
       setModalCancelText("확인")
     } else {
       const isLoggedIn = localStorage.getItem("email")
+      const isPhoneVerify = localStorage.getItem("userPhoneNumber")
       if (isLoggedIn === "null" || isLoggedIn === "") {
         setIsAuthModalOpen(true)
       } else {
-        setIsModalOpen(true)
+        if (
+          isPhoneVerify === null ||
+          isPhoneVerify === undefined ||
+          isPhoneVerify === "" ||
+          isPhoneVerify === "null"
+        ) {
+          navigate(RoutePath.JoinPhoneVerify)
+        } else {
+          setIsModalOpen(true)
+        }
       }
     }
   }
@@ -396,7 +406,7 @@ const CampaignDetailPage = () => {
           isApplySuccess ? (
             <>
               <p>
-                <em>3시간</em> 안에 상품구매와
+                <em>1시간</em> 안에 상품구매와
               </p>
               <p>구매 영수증 인증을 진행해주세요.</p>
             </>
