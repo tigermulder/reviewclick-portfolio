@@ -178,8 +178,7 @@ const PhoneVerificationPage = () => {
           <em>휴대폰 번호 인증</em>을 해주세요
         </AccountVerifyTitle>
         <AccountVerifyText>
-          캠페인 진행 및 1:1 문의 안내에 대한 알림톡을 받아볼 수 있어요. <br />
-          알림톡 수신에 동의하지 않을 경우 캠페인 신청이 어려워요.
+          캠페인 진행 및 1:1 문의 안내에 대한 알림톡을 받아볼 수 있어요.
         </AccountVerifyText>
 
         <TextFieldWrapper>
