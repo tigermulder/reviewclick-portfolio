@@ -221,7 +221,8 @@ const AccountVerificationPage = () => {
           <em>계정인증</em>을 해주세요
         </AccountVerifyTitle>
         <AccountVerifyText>
-          리뷰클릭 캠페인은 네이버 계정으로만 참여 가능해요.
+          리뷰클릭 서비스는 네이버 아이디로만 인증 가능하며, 인증된 네이버
+          계정과 캠페인 참여 계정이 동일해야 합니다.
         </AccountVerifyText>
         <Row>
           <TextFieldWrapper>
