@@ -209,7 +209,7 @@ const PhoneVerificationPage = () => {
                 onChange={(e) => setAuthCode(e.target.value)}
                 $isError={authCode !== "" && authCode.length !== 6}
                 $marginBottom="0"
-                $marginTop="1.2rem"
+                $marginTop="0.8rem"
                 errorMessage={
                   authCode !== "" && authCode.length !== 6
                     ? "인증번호가 올바르지 않습니다. 다시 확인해 주세요."
