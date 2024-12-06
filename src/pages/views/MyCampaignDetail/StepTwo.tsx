@@ -56,8 +56,7 @@ const StepTwo = ({
 
   //** 리뷰검수 OCR */
   const handleReviewOcrSave = async () => {
-    console.log(typeof reviewText)
-    if (ocrFilterWord(reviewText, 4)) {
+    if (ocrFilterWord(reviewText, 3)) {
       addToast("반복된텍스트가 감지되었습니다", "copy", 3000, "copy")
       return
     }

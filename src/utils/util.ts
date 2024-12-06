@@ -248,7 +248,7 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
     .toLowerCase()
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
   const words = flattening.split(/\s+/).filter((word) => word.length > 0)
-
+  console.log(words)
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     if (wordHash[word] === undefined) {
