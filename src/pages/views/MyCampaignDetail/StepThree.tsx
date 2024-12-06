@@ -56,7 +56,7 @@ const StepThree = ({
       try {
         // const response = await uploadReview(formData)
         const response = {
-          statusCode: 0,
+          statusCode: -1,
         }
 
         // 로딩 모달 닫기
