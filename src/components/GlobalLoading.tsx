@@ -52,10 +52,10 @@ const Dot = styled.div`
   top: 0;
   left: 50%;
   width: 0.2rem;
-  height: 0.8rem;
+  height: 0.7rem;
   background-color: var(--prim-L100);
   border-radius: 0.3rem;
-  transform-origin: center 1.3rem;
+  transform-origin: center 1.1rem;
   animation: ${fade} 1s linear infinite;
 
   &:nth-child(1) {
