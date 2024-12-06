@@ -26,6 +26,7 @@ const NoticeDetail = () => {
     queryFn: fetchNoticeDetail,
     enabled: !!noticeId,
     staleTime: 0,
+    refetchOnMount: false,
   })
   const noticeDetail = data?.notice
 

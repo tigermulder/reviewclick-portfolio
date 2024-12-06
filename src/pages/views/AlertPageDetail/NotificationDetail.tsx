@@ -29,6 +29,7 @@ const NotificationDetail = () => {
     queryFn: fetchNotifyDetail,
     enabled: !!notificationId,
     staleTime: 0,
+    refetchOnMount: false,
   })
 
   const notifyData = data?.notification

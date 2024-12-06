@@ -17,7 +17,7 @@ const FaqContent = () => {
   const { data } = useSuspenseQuery({
     queryKey: ["faqList"],
     queryFn: fetchFaqList,
-    refetchOnMount: true,
+    refetchOnMount: false,
     staleTime: 0,
   })
   const faqList = data?.list

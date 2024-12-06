@@ -21,6 +21,7 @@ const Announcement = () => {
     queryKey: ["noticeList"],
     queryFn: fetchNoticeList,
     staleTime: 0,
+    refetchOnMount: false,
   })
   const noticeList = data?.list
 
