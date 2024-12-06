@@ -232,15 +232,11 @@ const Tooltip = styled.div`
   left: 50%;
   background: rgba(33, 37, 41, 0.94);
   padding: 0.7rem 1rem;
-  max-width: 15rem;
+  max-width: 14.5rem;
   border-radius: 0.8rem;
   font-size: 1rem;
   white-space: normal;
   animation: ${tooltipAnimation} 0.65s ease-out infinite alternate;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 0.8rem;
   z-index: 10;
 
   &::before {
