@@ -11,6 +11,7 @@ import { ReviewConfirmRequest } from "@/types/api-types/review-type"
 import Modal from "@/components/Modal"
 import { useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
+import { ocrFilterWord } from "@/utils/util"
 
 const StepTwo = ({
   reviewIdKey,
@@ -55,8 +56,8 @@ const StepTwo = ({
 
   //** 리뷰검수 OCR */
   const handleReviewOcrSave = async () => {
-    if (reviewText.trim().length < minChars) {
-      addToast("100자 이상 입력해주세요", "copy", 3000, "copy")
+    if (ocrFilterWord(reviewText, 4)) {
+      addToast("반복된텍스트가 감지되었습니다", "copy", 3000, "copy")
       return
     }
     const data: ReviewConfirmRequest = {

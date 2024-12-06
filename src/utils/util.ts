@@ -240,3 +240,26 @@ export const formatTalkDate = (isoTimestamp: string): string => {
   // "YYYY년 MM월 DD일" 형식으로 변환
   return `${year}년 ${month}월 ${day}일`
 }
+
+//** OCR필터링 알고리즘 */
+export function ocrFilterWord(text: string, threshold: number): boolean {
+  // 공백 기준으로 배열
+  const flattening = text
+    .toLowerCase()
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+  const words = flattening.split(/\s+/).filter((word) => word.length > 0)
+
+  const wordHash: Record<string, number> = {}
+  for (const word of words) {
+    if (wordHash[word] === undefined) {
+      wordHash[word] = 1
+    } else {
+      wordHash[word]++
+    }
+    if (wordHash[word] >= threshold) {
+      return false
+    }
+  }
+
+  return true
+}

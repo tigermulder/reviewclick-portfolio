@@ -18,7 +18,7 @@ import styled from "styled-components"
 import SuccessIcon from "@/components/SuccessIcon"
 import FailedIcon from "@/components/FailedIcon"
 import Button from "@/components/Button"
-import { calculateRemainingTime } from "@/utils/util"
+import { calculateRemainingTime, ocrFilterWord } from "@/utils/util"
 
 const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
@@ -38,10 +38,12 @@ const MainPage = (): JSX.Element => {
     return response
   }
 
-  //* 찜장바구니 상태값 확인
-  // useEffect(() => {
-  //   console.log("현재 찜목록상태:", campaignLikes)
-  // }, [campaignLikes])
+  //* 콘솔
+  useEffect(() => {
+    console.log(
+      ocrFilterWord("안녕하세요 안녕하세요 누가 안녕하세요 내가 안녕하세요", 3)
+    )
+  }, [])
 
   //** 리액트쿼리 */
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
