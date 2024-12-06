@@ -233,6 +233,7 @@ const Tooltip = styled.div`
   background: rgba(33, 37, 41, 0.94);
   padding: 0.7rem 1rem;
   max-width: 14.5rem;
+  width: max-content;
   border-radius: 0.8rem;
   font-size: 1rem;
   white-space: normal;
@@ -251,8 +252,6 @@ const Tooltip = styled.div`
 `
 
 const TooltipText = styled.p`
-  display: inline-block;
-  width: 13.5rem;
   font-size: var(--font-callout-small-size);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--font-callout-small-letter-spacing);
