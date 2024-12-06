@@ -41,9 +41,9 @@ const MyPage = () => {
             서비스 이용가이드
           </StyledLink>
         </li>
-        <li>
+        {/* <li>
           <StyledLink to={RoutePath.UserEditProfile}>내 정보 수정</StyledLink>
-        </li>
+        </li> */}
         <li>
           <NoticeContainer>
             <NoticeHeader onClick={toggleNotice}>
