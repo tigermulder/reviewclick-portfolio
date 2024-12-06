@@ -72,6 +72,24 @@ const StepOne = ({
           setModalConfirmText("나의 캠페인 내역")
           setModalCancelText("닫기")
           setResultModalOpen(true)
+        } else {
+          // 로딩 모달 닫기
+          setLoadingModalOpen(false)
+          setModalTitle("⛔ 인증 실패")
+          setModalContent(
+            <>
+              <p>
+                예시 사진 및 아래 내용을 참고하여 <br />
+                다시 업로드 해주세요.
+              </p>
+              <p>영수증의 일부가 잘리지 않도록 전체를 캡쳐해 주세요.</p>
+              <p>사진이 흐리거나 어두운 경우, 잘 보이도록 다시 캡쳐해주세요.</p>
+            </>
+          )
+          setModalConfirmText("재인증")
+          setModalCancelText("닫기")
+          setResultModalOpen(true)
+          setShowLinkRouter(true)
         }
       } catch (error) {
         // 로딩 모달 닫기

@@ -101,6 +101,21 @@ const StepTwo = ({
         setModalConfirmText("등록하러가기")
         setModalCancelText("아니요")
         setResultModalOpen(true)
+      } else {
+        // 로딩 모달 닫기
+        setLoadingModalOpen(false)
+        setModalTitle("️⛔ 앗, 잠깐!")
+        setModalContent(
+          <p>
+            단순 텍스트를 반복하거나 연관성 없는 리뷰를 작성하는 등 상품에
+            부정적인 리뷰는 포인트 적립에 영향을 줄 수 있으니, 긍정적인 사용
+            경험을 중심으로 작성해 주세요.
+          </p>
+        )
+        setModalConfirmText("재검수하기")
+        setModalCancelText("닫기")
+        setResultModalOpen(true)
+        setShowLinkRouter(true)
       }
     } catch (error) {
       // 로딩 모달 닫기
