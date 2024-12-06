@@ -86,6 +86,23 @@ const StepThree = ({
           setResultModalOpen(true)
           // 로컬스토리지 복사텍스트 삭제
           localStorage.removeItem(LOCAL_STORAGE_KEY)
+        } else {
+          setModalTitle("⛔ 앗, 잠깐!")
+          setModalContent(
+            <>
+              <p>
+                등록한 실리뷰를 확인할 수 없어요.
+                <br />
+                검수 완료된 리뷰의 내용과
+                <br />
+                동일하게 리뷰를 등록한 후 다시 요청해주세요.
+              </p>
+            </>
+          )
+          setModalConfirmText("다시시도")
+          setModalCancelText("나의 캠페인 내역")
+          setResultModalOpen(true)
+          setShowLinkRouter(true)
         }
       } catch (error) {
         setModalTitle("⛔ 앗, 잠깐!")
