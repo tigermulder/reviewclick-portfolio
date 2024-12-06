@@ -54,7 +54,10 @@ const StepThree = ({
       setLoadingModalOpen(true)
 
       try {
-        const response = await uploadReview(formData)
+        // const response = await uploadReview(formData)
+        const response = {
+          statusCode: 0,
+        }
 
         // 로딩 모달 닫기
         setLoadingModalOpen(false)
