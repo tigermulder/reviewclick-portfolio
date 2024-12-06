@@ -35,12 +35,13 @@ const AgreementPage = () => {
         ...prev,
         [name]: checked,
       }
-      // 모든 체크박스가 체크되었는지 확인 (전체 체크박스 업데이트)
-      const allChecked = Object.keys(updatedAgreements).every((key) => {
-        if (key === "all") return true // 'all'은 제외
-        return updatedAgreements[key as keyof Agreements]
-      })
+      // 모든 필수 및 선택항목이 체크되었는지 확인
+      const allChecked =
+        updatedAgreements.essential1 &&
+        updatedAgreements.essential2 &&
+        updatedAgreements.essential3
       updatedAgreements.all = allChecked
+
       return updatedAgreements
     })
   }
