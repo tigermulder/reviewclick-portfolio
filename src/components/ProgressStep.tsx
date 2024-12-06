@@ -232,7 +232,7 @@ const Tooltip = styled.div`
   left: 50%;
   background: rgba(33, 37, 41, 0.94);
   padding: 0.7rem 1rem;
-  max-width: 14.5rem;
+  max-width: 15rem;
   width: max-content;
   border-radius: 0.8rem;
   font-size: 1rem;
