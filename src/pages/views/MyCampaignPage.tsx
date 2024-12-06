@@ -72,8 +72,8 @@ const MyCampaignPage = () => {
     queryKey: ["reviewList"],
     queryFn: fetchCampaignList,
     staleTime: 0,
-    gcTime: 0, // 데이터 캐시 즉시 제거
-    retry: 1, // 재요청 횟수
+    gcTime: 0,
+    refetchOnMount: false,
   })
 
   // ** 현재 신청한캠페인 */
