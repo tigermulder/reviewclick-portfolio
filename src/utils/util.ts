@@ -259,12 +259,51 @@ function findRepeatedPattern(str: string): { unit: string; count: number } {
   return { unit: str, count: 1 }
 }
 
+const adjectiveList = [
+  "예쁜",
+  "아름다운",
+  "깔끔한",
+  "세련된",
+  "화려한",
+  "심플한",
+  "좋은",
+  "좋아",
+  "나쁜",
+  "나빠",
+  "빠른",
+  "느린",
+  "높은",
+  "낮은",
+  "맛있는",
+  "행복한",
+  "즐거운",
+  "우아한",
+  "만족",
+  "고급진",
+  "튼튼한",
+  "비싼",
+  "저렴한",
+  "합리적인",
+  "가성비",
+  "신뢰할",
+]
+
+function filterOnlyAdjectives(words: string[]): string[] {
+  return words.filter((word) => adjectiveList.includes(word))
+}
+
 export function ocrFilterWord(text: string, threshold: number): boolean {
   const flattening = text
     .toLowerCase()
     .replace(/[.,\/#!$%\^&\*;:{}=\-'_~()]/g, "")
     .replace(/\u200B|\u200C|\u200D|\uFEFF/g, "")
-  const words = flattening.split(/\s+/).filter((word) => word.length > 0)
+
+  // 공백으로 단어 분리
+  let words = flattening.split(/\s+/).filter((word) => word.length > 0)
+
+  // 형용사만 필터링
+  words = filterOnlyAdjectives(words)
+
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
