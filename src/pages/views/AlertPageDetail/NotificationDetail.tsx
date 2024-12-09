@@ -241,6 +241,7 @@ const AnswerTitle = styled.p`
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   color: var(--n500-color);
+  white-space: pre-line;
 `
 
 const Separator = styled.span`
