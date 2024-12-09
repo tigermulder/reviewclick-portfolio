@@ -261,6 +261,7 @@ function findRepeatedPattern(str: string): { unit: string; count: number } {
 const adjectiveList = [
   "예쁜",
   "아름",
+  "안녕",
   "큰",
   "작은",
   "좋은",
