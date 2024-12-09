@@ -239,7 +239,7 @@ const QnAContainer = styled.div`
 const AnswerTitle = styled.p`
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
-  line-height: 0.6;
+  line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   color: var(--n500-color);
   white-space: pre-line;
