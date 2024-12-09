@@ -104,9 +104,8 @@ const Navbar = () => {
               as={IconAlerts}
               $active={activeTab === "alerts"}
               $tabName="alerts"
-            >
-              <Circle />
-            </StyledIcon>
+            />
+            <Circle />
             <NavText $active={activeTab === "alerts"}>알림</NavText>
           </NavItemContent>
         </StyledLink>
@@ -203,6 +202,7 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
 `
 
 const NavItemContent = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -225,7 +225,6 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
   }};
   margin-bottom: 0.4rem;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
-  position: relative;
 `
 
 const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
