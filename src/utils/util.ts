@@ -358,3 +358,8 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
 
   return false
 }
+
+//** br태그 개행문자열로 변환 */
+export function convertBrToNewline(text: string): string {
+  return text.replace(/<br\s*\/?>/gi, "\n")
+}

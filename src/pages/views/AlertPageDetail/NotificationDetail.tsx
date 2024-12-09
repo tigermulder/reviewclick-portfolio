@@ -8,7 +8,11 @@ import { useQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 import { parseTitle } from "@/utils/util"
-import { formatTalkTime, formatTalkDate } from "@/utils/util"
+import {
+  formatTalkTime,
+  formatTalkDate,
+  convertBrToNewline,
+} from "@/utils/util"
 
 const NotificationDetail = () => {
   const { notificationId } = useParams()
@@ -70,7 +74,9 @@ const NotificationDetail = () => {
 
         {notifyData?.cardInfoQnaAnswer ? (
           <QnAContainer>
-            <AnswerTitle>A. {notifyData.cardInfoQnaAnswer.answer}</AnswerTitle>
+            <AnswerTitle>
+              A. {convertBrToNewline(notifyData.cardInfoQnaAnswer.answer)}
+            </AnswerTitle>
             <Separator />
             <AnswerContent>
               Q. {notifyData.cardInfoQnaAnswer.question}
