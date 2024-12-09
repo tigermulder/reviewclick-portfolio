@@ -23,7 +23,11 @@ const FaqItem = ({ faqItem }: any) => {
           />
         </NotifyMessage>
       </Button>
-      {isOpen && <NoticeContent>{faqItem.content}</NoticeContent>}
+      {isOpen && (
+        <NoticeContent>
+          <p>{faqItem.content}</p>
+        </NoticeContent>
+      )}
     </FAQListItem>
   )
 }
@@ -77,12 +81,16 @@ const ArrowIcon = styled.img`
 
 const NoticeContent = styled.div`
   padding: 1.6rem;
-  font-size: 1.4rem;
-  color: var(--gray-01);
   background: var(--whitewood);
   border-radius: 1rem;
   margin-top: 2rem;
   animation: fadeIn 0.1s ease-in-out;
+
+  p {
+    font-size: 1.4rem;
+    color: var(--gray-01);
+    white-space: pre-line;
+  }
 
   @keyframes fadeIn {
     from {
