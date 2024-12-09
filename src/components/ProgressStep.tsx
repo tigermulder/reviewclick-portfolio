@@ -258,7 +258,8 @@ const Tooltip = styled.div`
   &::before {
     content: "";
     position: absolute;
-
+    left: 50%;
+    transform: translateX(-50%);
     bottom: -0.7rem;
     border-left: 0.7rem solid transparent;
     border-right: 0.7rem solid transparent;
