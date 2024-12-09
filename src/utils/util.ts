@@ -258,7 +258,7 @@ function findRepeatedPattern(str: string): { unit: string; count: number } {
   return { unit: str, count: 1 }
 }
 
-// 간단한 형용사 사전
+// 간단한 형용사
 const adjectiveList = [
   "예쁜",
   "아름다운",
@@ -281,10 +281,12 @@ const adjectiveList = [
 ]
 
 function filterOnlyAdjectives(words: string[]): string[] {
-  return words.filter(
-    (word) => adjectiveList.includes(word),
-    console.log(words)
+  // 부분 일치 필터링: 단어에 형용사가 포함되어 있는지 검사
+  const filtered = words.filter((word) =>
+    adjectiveList.some((adj) => word.includes(adj))
   )
+  console.log("Filtering Words:", words, "=>", filtered)
+  return filtered
 }
 
 export function ocrFilterWord(text: string, threshold: number): boolean {
@@ -293,11 +295,11 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
     .replace(/[.,\/#!$%\^&\*;:{}=\-'_~()]/g, "")
     .replace(/\u200B|\u200C|\u200D|\uFEFF/g, "")
   let words = flattening.split(/\s+/).filter((word) => word.length > 0)
-  console.log("Original Words:", words)
+  console.log("원본 문자열:", words)
 
   // 형용사만 남김
   words = filterOnlyAdjectives(words)
-  console.log("Filtered Adjectives:", words)
+  console.log("필터링된 형용사", words)
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
