@@ -290,14 +290,14 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
 
   // 공백으로 split하되, 공백이 없으면 전체 문자열이 하나의 "단어"로 인식
   let words = flattening.split(/\s+/).filter((word) => word.length > 0)
-
+  console.log("Original Words:", words)
   // 형용사만 남김
   words = filterOnlyAdjectives(words)
-
+  console.log("Filtered Adjectives:", words)
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
-
+    console.log(`Processing word: ${word}, unit: ${unit}, count: ${count}`)
     // 해당 단어(또는 문자열)가 반복 단위로 threshold 이상 반복된다면 true
     if (count >= threshold) {
       return true
@@ -310,6 +310,7 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
       wordHash[unit] += count
     }
 
+    console.log(`wordHash[${unit}] = ${wordHash[unit]}`)
     if (wordHash[unit] >= threshold) {
       return true
     }
