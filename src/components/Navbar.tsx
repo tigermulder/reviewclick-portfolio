@@ -104,7 +104,9 @@ const Navbar = () => {
               as={IconAlerts}
               $active={activeTab === "alerts"}
               $tabName="alerts"
-            />
+            >
+              <Circle />
+            </StyledIcon>
             <NavText $active={activeTab === "alerts"}>알림</NavText>
           </NavItemContent>
         </StyledLink>
@@ -232,4 +234,14 @@ const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
   font-weight: 600;
   letter-spacing: -0.5px;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
+`
+
+const Circle = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 2px;
+  background: #000;
+  border-radius: 50%;
 `
