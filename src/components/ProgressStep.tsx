@@ -36,17 +36,32 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     {
       name: "상품구매",
       key: "join",
-      tooltip: `상품을 구매하고 구매 \n 영수증을 인증해주세요!`,
+      tooltip: (
+        <>
+          상품을 구매하고 구매 <br />
+          영수증을 인증해주세요!
+        </>
+      ),
     },
     {
       name: "리뷰검수",
       key: "purchase",
-      tooltip: "리뷰 작성하고 AI검수를 통해 긍정적인 리뷰인지 확인받으세요!",
+      tooltip: (
+        <>
+          리뷰 작성하고 AI검수를 통해 <br />
+          긍정적인 리뷰인지 확인받으세요!
+        </>
+      ),
     },
     {
       name: "리뷰등록",
       key: "confirm",
-      tooltip: "리뷰를 등록하고 캡쳐본을 업로드하면 미션 완료!",
+      tooltip: (
+        <>
+          상품 사이트에 등록한 리뷰 <br />
+          캡쳐본을 업로드하면 미션 완료!
+        </>
+      ),
       icon: IconCoin,
     },
     { name: fourthStepName, key: "reward" },
@@ -232,7 +247,6 @@ const Tooltip = styled.div`
   left: 50%;
   background: rgba(33, 37, 41, 0.92);
   padding: 0.9rem 1rem;
-  max-width: 15rem;
   width: max-content;
   border-radius: 0.8rem;
   font-size: 1rem;
