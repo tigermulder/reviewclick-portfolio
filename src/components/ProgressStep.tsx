@@ -36,7 +36,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     {
       name: "상품구매",
       key: "join",
-      tooltip: `상품을 구매하고 구매 \n\ 영수증을 인증해주세요!`,
+      tooltip: `상품을 구매하고 구매 \n 영수증을 인증해주세요!`,
     },
     {
       name: "리뷰검수",
