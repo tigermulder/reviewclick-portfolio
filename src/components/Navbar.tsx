@@ -240,9 +240,10 @@ const Circle = styled.span`
   position: absolute;
   top: 0;
   right: 0;
-  width: 0.4rem;
-  height: 0.4rem;
+  width: 0.45rem;
+  height: 0.45rem;
   background: var(--prim-L400);
-  border: 0.25rem solid #fff;
+  border: 0.15rem solid #fff;
   border-radius: 50%;
+  box-sizing: initial;
 `
