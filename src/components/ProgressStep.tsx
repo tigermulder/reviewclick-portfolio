@@ -244,7 +244,7 @@ const tooltipAnimation = keyframes`
 const Tooltip = styled.div`
   position: absolute;
   bottom: 6.45rem;
-  left: 50%;
+
   background: rgba(33, 37, 41, 0.92);
   padding: 0.9rem 1rem;
   width: max-content;
@@ -258,7 +258,7 @@ const Tooltip = styled.div`
   &::before {
     content: "";
     position: absolute;
-    left: 6.8rem;
+
     bottom: -0.7rem;
     border-left: 0.7rem solid transparent;
     border-right: 0.7rem solid transparent;
