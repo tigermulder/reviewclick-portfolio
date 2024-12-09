@@ -254,7 +254,8 @@ const Separator = styled.span`
 const AnswerContent = styled.p`
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
+  line-height: 0.6;
   letter-spacing: var(--font-bodyM-letter-spacing);
+  white-space: pre-line;
   color: var(--n100-color);
 `
