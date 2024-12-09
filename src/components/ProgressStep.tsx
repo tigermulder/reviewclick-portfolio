@@ -36,7 +36,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
     {
       name: "상품구매",
       key: "join",
-      tooltip: "상품을 구매하고 구매 영수증을 인증해주세요!",
+      tooltip: `상품을 구매하고 구매 \n\ 영수증을 인증해주세요!`,
     },
     {
       name: "리뷰검수",
@@ -230,13 +230,14 @@ const Tooltip = styled.div`
   position: absolute;
   bottom: 6.45rem;
   left: 50%;
-  background: rgba(33, 37, 41, 0.94);
-  padding: 0.7rem 1rem;
+  background: rgba(33, 37, 41, 0.92);
+  padding: 0.9rem 1rem;
   max-width: 15rem;
   width: max-content;
   border-radius: 0.8rem;
   font-size: 1rem;
   white-space: normal;
+  text-align: center;
   animation: ${tooltipAnimation} 0.65s ease-out infinite alternate;
   z-index: 10;
 
@@ -247,7 +248,7 @@ const Tooltip = styled.div`
     bottom: -0.7rem;
     border-left: 0.7rem solid transparent;
     border-right: 0.7rem solid transparent;
-    border-top: 0.8rem solid rgba(33, 37, 41, 0.94);
+    border-top: 0.8rem solid rgba(33, 37, 41, 0.92);
   }
 `
 
