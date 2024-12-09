@@ -225,6 +225,7 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
   }};
   margin-bottom: 0.4rem;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
+  position: relative;
 `
 
 const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
