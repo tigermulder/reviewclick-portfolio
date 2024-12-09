@@ -245,7 +245,6 @@ export const formatTalkDate = (isoTimestamp: string): string => {
 function findRepeatedPattern(str: string): { unit: string; count: number } {
   const n = str.length
 
-  // 문자열 길이의 약수를 이용해 가장 작은 반복 단위 찾기
   for (let i = 1; i <= n; i++) {
     if (n % i === 0) {
       const unit = str.substring(0, i)
@@ -259,17 +258,14 @@ function findRepeatedPattern(str: string): { unit: string; count: number } {
   return { unit: str, count: 1 }
 }
 
+// 간단한 형용사 사전
 const adjectiveList = [
   "예쁜",
   "아름다운",
-  "깔끔한",
-  "세련된",
-  "화려한",
-  "심플한",
+  "큰",
+  "작은",
   "좋은",
-  "좋아",
   "나쁜",
-  "나빠",
   "빠른",
   "느린",
   "높은",
@@ -278,15 +274,6 @@ const adjectiveList = [
   "행복한",
   "즐거운",
   "우아한",
-  "만족",
-  "고급진",
-  "튼튼한",
-  "비싼",
-  "저렴한",
-  "합리적인",
-  "가성비",
-  "신뢰할",
-  "최신의",
 ]
 
 function filterOnlyAdjectives(words: string[]): string[] {
@@ -299,20 +286,22 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
     .replace(/[.,\/#!$%\^&\*;:{}=\-'_~()]/g, "")
     .replace(/\u200B|\u200C|\u200D|\uFEFF/g, "")
 
-  // 공백으로 단어 분리
+  // 공백으로 split하되, 공백이 없으면 전체 문자열이 하나의 "단어"로 인식
   let words = flattening.split(/\s+/).filter((word) => word.length > 0)
 
-  // 형용사만 필터링
+  // 형용사만 남김
   words = filterOnlyAdjectives(words)
 
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
 
+    // 해당 단어(또는 문자열)가 반복 단위로 threshold 이상 반복된다면 true
     if (count >= threshold) {
       return true
     }
 
+    // 반복 단위가 threshold 미만일 경우 누적하여 관리
     if (wordHash[unit] === undefined) {
       wordHash[unit] = count
     } else {
