@@ -202,7 +202,8 @@ const InfoArea = styled.div`
 const FooterText = styled.p`
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
+  line-height: 0.6;
+  white-space: pre-line;
   letter-spacing: var(--font-bodyM-letter-spacing);
   color: var(--n500-color);
 `
@@ -254,8 +255,7 @@ const Separator = styled.span`
 const AnswerContent = styled.p`
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
-  line-height: 0.6;
+  line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
-  white-space: pre-line;
   color: var(--n100-color);
 `
