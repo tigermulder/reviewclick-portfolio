@@ -256,21 +256,16 @@ function findRepeatedPattern(str: string): { unit: string; count: number } {
     }
   }
 
-  // 완전히 반복되는 패턴이 없으면 자기 자신을 단위로 1회 반복
   return { unit: str, count: 1 }
 }
 
 export function ocrFilterWord(text: string, threshold: number): boolean {
-  // 전처리: 특수문자 제거 및 소문자 변환
   const flattening = text
     .toLowerCase()
-    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
-
-  // 공백으로 단어 분리
+    .replace(/[.,\/#!$%\^&\*;:{}=\-'_~()]/g, "")
+    .replace(/\u200B|\u200C|\u200D|\uFEFF/g, "")
   const words = flattening.split(/\s+/).filter((word) => word.length > 0)
-
   const wordHash: Record<string, number> = {}
-
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
 
