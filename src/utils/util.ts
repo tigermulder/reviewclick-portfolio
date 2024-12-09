@@ -242,21 +242,49 @@ export const formatTalkDate = (isoTimestamp: string): string => {
 }
 
 //** OCR필터링 알고리즘 */
+function findRepeatedPattern(str: string): { unit: string; count: number } {
+  const n = str.length
+
+  // 문자열 길이의 약수를 이용해 가장 작은 반복 단위 찾기
+  for (let i = 1; i <= n; i++) {
+    if (n % i === 0) {
+      const unit = str.substring(0, i)
+      const repeatCount = n / i
+      if (unit.repeat(repeatCount) === str) {
+        return { unit, count: repeatCount }
+      }
+    }
+  }
+
+  // 완전히 반복되는 패턴이 없으면 자기 자신을 단위로 1회 반복
+  return { unit: str, count: 1 }
+}
+
 export function ocrFilterWord(text: string, threshold: number): boolean {
-  // 공백 기준으로 배열
+  // 전처리: 특수문자 제거 및 소문자 변환
   const flattening = text
     .toLowerCase()
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+
+  // 공백으로 단어 분리
   const words = flattening.split(/\s+/).filter((word) => word.length > 0)
-  console.log(words)
+
   const wordHash: Record<string, number> = {}
+
   for (const word of words) {
-    if (wordHash[word] === undefined) {
-      wordHash[word] = 1
-    } else {
-      wordHash[word]++
+    const { unit, count } = findRepeatedPattern(word)
+
+    if (count >= threshold) {
+      return true
     }
-    if (wordHash[word] >= threshold) {
+
+    if (wordHash[unit] === undefined) {
+      wordHash[unit] = count
+    } else {
+      wordHash[unit] += count
+    }
+
+    if (wordHash[unit] >= threshold) {
       return true
     }
   }
