@@ -286,6 +286,7 @@ const adjectiveList = [
   "합리적인",
   "가성비",
   "신뢰할",
+  "최신의",
 ]
 
 function filterOnlyAdjectives(words: string[]): string[] {
