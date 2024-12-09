@@ -266,8 +266,10 @@ const adjectiveList = [
   "작은",
   "좋은",
   "좋아요",
+  "좋아",
   "나빠요",
   "나쁜",
+  "나빠",
   "빠른",
   "느린",
   "높은",
@@ -279,7 +281,10 @@ const adjectiveList = [
 ]
 
 function filterOnlyAdjectives(words: string[]): string[] {
-  return words.filter((word) => adjectiveList.includes(word))
+  return words.filter(
+    (word) => adjectiveList.includes(word),
+    console.log(words)
+  )
 }
 
 export function ocrFilterWord(text: string, threshold: number): boolean {
@@ -287,10 +292,9 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
     .toLowerCase()
     .replace(/[.,\/#!$%\^&\*;:{}=\-'_~()]/g, "")
     .replace(/\u200B|\u200C|\u200D|\uFEFF/g, "")
-
-  // 공백으로 split하되, 공백이 없으면 전체 문자열이 하나의 "단어"로 인식
   let words = flattening.split(/\s+/).filter((word) => word.length > 0)
   console.log("Original Words:", words)
+
   // 형용사만 남김
   words = filterOnlyAdjectives(words)
   console.log("Filtered Adjectives:", words)
