@@ -244,7 +244,6 @@ export const formatTalkDate = (isoTimestamp: string): string => {
 //** OCR필터링 알고리즘 */
 function findRepeatedPattern(str: string): { unit: string; count: number } {
   const n = str.length
-
   for (let i = 1; i <= n; i++) {
     if (n % i === 0) {
       const unit = str.substring(0, i)
@@ -261,31 +260,62 @@ function findRepeatedPattern(str: string): { unit: string; count: number } {
 // 간단한 형용사
 const adjectiveList = [
   "예쁜",
-  "아름다운",
+  "아름",
   "큰",
   "작은",
   "좋은",
-  "좋아요",
   "좋아",
-  "나빠요",
+  "좋아",
+  "나빠",
   "나쁜",
   "나빠",
+  "구려",
+  "촌스",
+  "긍정",
+  "부정",
   "빠른",
   "느린",
   "높은",
   "낮은",
-  "맛있는",
-  "행복한",
-  "즐거운",
-  "우아한",
+  "맛있",
+  "행복",
+  "즐거",
+  "우아",
+  "시끄",
+  "조용",
+  "달콤",
+  "쓴",
+  "매운",
+  "차가운",
+  "따뜻",
+  "건강",
+  "슬픈",
+  "화난",
+  "지루",
+  "재미",
+  "귀여",
+  "못생",
+  "멋진",
+  "불친",
+  "친절",
+  "엄격",
+  "유연",
+  "강한",
+  "약한",
+  "밝은",
+  "어두",
+  "시원",
+  "화사",
+  "행운",
+  "고급",
+  "저급",
 ]
 
+// ** 형용사 부분일치 필터링 */
 function filterOnlyAdjectives(words: string[]): string[] {
-  // 부분 일치 필터링: 단어에 형용사가 포함되어 있는지 검사
   const filtered = words.filter((word) =>
     adjectiveList.some((adj) => word.includes(adj))
   )
-  console.log("Filtering Words:", words, "=>", filtered)
   return filtered
 }
 
@@ -295,28 +325,28 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
     .replace(/[.,\/#!$%\^&\*;:{}=\-'_~()]/g, "")
     .replace(/\u200B|\u200C|\u200D|\uFEFF/g, "")
   let words = flattening.split(/\s+/).filter((word) => word.length > 0)
-  console.log("원본 문자열:", words)
 
   // 형용사만 남김
   words = filterOnlyAdjectives(words)
+  // 형용사가 아예없을때
+  if (words.length === 0) {
+    return false
+  }
   console.log("필터링된 형용사", words)
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
-    console.log(`Processing word: ${word}, unit: ${unit}, count: ${count}`)
-    // 해당 단어(또는 문자열)가 반복 단위로 threshold 이상 반복된다면 true
     if (count >= threshold) {
       return true
     }
 
-    // 반복 단위가 threshold 미만일 경우 누적하여 관리
+    // 반복 단위가 threshold 미만일 경우 누적
     if (wordHash[unit] === undefined) {
       wordHash[unit] = count
     } else {
       wordHash[unit] += count
     }
 
-    console.log(`wordHash[${unit}] = ${wordHash[unit]}`)
     if (wordHash[unit] >= threshold) {
       return true
     }
