@@ -251,7 +251,6 @@ const adjectiveList = [
   "작은",
   "좋은",
   "좋아",
-  "좋아",
   "나빠",
   "나쁜",
   "나빠",
@@ -338,6 +337,9 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
+
+    console.log("문자열 :", word, "단어 :", unit, "카운트 :", count)
+
     if (count >= threshold) {
       return true
     }
