@@ -242,21 +242,6 @@ export const formatTalkDate = (isoTimestamp: string): string => {
 }
 
 //** OCR필터링 알고리즘 */
-function findRepeatedPattern(str: string): { unit: string; count: number } {
-  const n = str.length
-  for (let i = 1; i <= n; i++) {
-    if (n % i === 0) {
-      const unit = str.substring(0, i)
-      const repeatCount = n / i
-      if (unit.repeat(repeatCount) === str) {
-        return { unit, count: repeatCount }
-      }
-    }
-  }
-
-  return { unit: str, count: 1 }
-}
-
 // 간단한 형용사
 const adjectiveList = [
   "예쁜",
@@ -320,6 +305,23 @@ function filterOnlyAdjectives(words: string[]): string[] {
   return filtered
 }
 
+// ** 반복단어 카운트 */
+function findRepeatedPattern(str: string): { unit: string; count: number } {
+  const n = str.length
+  for (let i = 1; i <= n; i++) {
+    if (n % i === 0) {
+      const unit = str.substring(0, i)
+      const repeatCount = n / i
+      if (unit.repeat(repeatCount) === str) {
+        return { unit, count: repeatCount }
+      }
+    }
+  }
+
+  return { unit: str, count: 1 }
+}
+
+//** OCR API 요청전 리뷰 작성 텍스트 검수 */
 export function ocrFilterWord(text: string, threshold: number): boolean {
   const flattening = text
     .toLowerCase()
@@ -333,7 +335,6 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
   if (words.length === 0) {
     return false
   }
-  console.log("필터링된 형용사", words)
   const wordHash: Record<string, number> = {}
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
