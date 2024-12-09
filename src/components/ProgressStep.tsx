@@ -234,10 +234,10 @@ const ProgressName = styled.span`
 
 const tooltipAnimation = keyframes`
   from {
-      transform: translate(-7.45rem, 25%);
+      transform: translate(0, 25%);
   }
   to {
-      transform: translate(-7.45rem, 15%);
+      transform: translate(0, 15%);
   }
 `
 
