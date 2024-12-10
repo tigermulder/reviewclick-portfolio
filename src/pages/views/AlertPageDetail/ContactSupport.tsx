@@ -282,13 +282,14 @@ const TitleAreaContainer = styled.div`
 
   textarea {
     display: block;
-    padding: 1.1rem 1.4rem 1.4rem;
+    padding: 1.1rem 1.4rem;
     width: 100%;
     height: 100%;
     overflow: hidden;
     outline: 0;
     border: 0.1rem solid var(--n60-color);
     border-radius: 1rem 1rem 0 0;
+    resize: none;
     &::placeholder {
       font-size: var(--font-bodyM-size);
       letter-spacing: var(--font-bodyM-letter-spacing);
