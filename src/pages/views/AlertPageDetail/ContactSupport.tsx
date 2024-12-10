@@ -252,21 +252,21 @@ const NoticeBox = styled.div`
   ul li {
     position: relative;
     padding-left: 1.5rem;
-    font-size: 1.2rem;
-    line-height: 1.4;
+    font-size: var(--font-caption-size);
     font-weight: var(--font-weight-medium);
     letter-spacing: -0.25px;
+    line-height: 1.25;
     display: flex;
     align-items: flex-start;
-    color: var(--n400-color);
+    color: var(--gray-01);
 
     &::before {
       content: "";
       position: absolute;
       left: 0.5rem;
-      margin-top: 0.7rem;
-      width: 0.3rem;
-      height: 0.3rem;
+      top: 6px;
+      width: 0.25rem;
+      height: 0.25rem;
       border-radius: 50%;
       background: var(--gray-01);
       flex-shrink: 0;
