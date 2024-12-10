@@ -222,7 +222,7 @@ const NoticeContent = styled.div`
 
   li {
     position: relative;
-    padding-left: 1rem;
+    padding-left: 0.8rem;
     font-size: var(--font-caption-size);
     font-weight: var(--font-caption-weight);
     letter-spacing: var(--font-caption-small-letter-spacing);

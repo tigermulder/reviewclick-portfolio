@@ -95,7 +95,7 @@ const NoticeBox = styled.ul`
 
   li {
     position: relative;
-    padding-left: 1rem;
+    padding-left: 0.8rem;
   }
   li:not(:last-child) {
     margin-bottom: 0.6rem;
