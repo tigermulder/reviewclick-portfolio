@@ -261,7 +261,7 @@ const StepCont = styled.div`
       color: var(--prim-L300);
     }
   }
-  span {
+  ~ span {
     margin-top: 3rem;
     font-size: var(--font-caption-size);
     font-weight: var(--font-caption-weight);
