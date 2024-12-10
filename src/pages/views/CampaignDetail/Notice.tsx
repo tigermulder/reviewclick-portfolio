@@ -91,7 +91,7 @@ const NoticeBox = styled.ul`
   font-size: var(--font-caption-size);
   font-weight: var(--font-caption-weight);
   letter-spacing: var(--font-caption-small-letter-spacing);
-  line-height: 1.2;
+  line-height: 1.25;
 
   li {
     position: relative;
@@ -104,7 +104,7 @@ const NoticeBox = styled.ul`
     content: "";
     display: block;
     position: absolute;
-    top: 5.5px;
+    top: 6px;
     left: 0;
     width: 0.25rem;
     height: 0.25rem;

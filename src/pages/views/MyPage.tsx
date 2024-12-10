@@ -228,14 +228,14 @@ const NoticeContent = styled.div`
     letter-spacing: var(--font-caption-small-letter-spacing);
     display: flex;
     align-items: flex-start;
-    line-height: 1.2;
+    line-height: 1.25;
     color: var(--gray-01);
 
     &::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 5.5px;
+      top: 6px;
       width: 0.25rem;
       height: 0.25rem;
       border-radius: 50%;
