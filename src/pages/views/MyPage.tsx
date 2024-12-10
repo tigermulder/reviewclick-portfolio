@@ -235,7 +235,7 @@ const NoticeContent = styled.div`
       content: "";
       position: absolute;
       left: 0;
-      top: 0.49rem;
+      top: 0.69rem;
       width: 0.25rem;
       height: 0.25rem;
       border-radius: 50%;

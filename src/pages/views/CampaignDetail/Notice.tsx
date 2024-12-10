@@ -103,7 +103,7 @@ const NoticeBox = styled.ul`
     content: "";
     display: block;
     position: absolute;
-    top: 0.65rem;
+    top: 0.69rem;
     left: 0;
     width: 0.25rem;
     height: 0.25rem;
