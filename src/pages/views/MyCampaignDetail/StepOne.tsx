@@ -294,7 +294,7 @@ const CartStepContainer = styled.ul`
 `
 
 const StepItem = styled.li`
-  padding: 1.3rem 1.6rem 1.3rem 1.6rem;
+  padding: 1.5rem;
   background: var(--white);
   border-radius: 1.2rem;
 
@@ -314,7 +314,7 @@ const StepItem = styled.li`
 `
 
 const StepItemHeader = styled.p`
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.5rem;
   font-size: var(--font-h5-size);
   font-weight: var(--font-h5-weight);
   line-height: var(--font-h5-line-height);
@@ -323,7 +323,7 @@ const StepItemHeader = styled.p`
 
 const StepItemInfo = styled.div`
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.8rem;
   overflow: hidden;
   display: flex;
@@ -333,8 +333,8 @@ const StepItemInfo = styled.div`
 
 const StepItemInfoThumb = styled.div`
   position: relative;
-  width: 8.1rem;
-  height: 8.1rem;
+  width: 8rem;
+  height: 8rem;
   overflow: hidden;
   border-radius: 1rem;
   flex-shrink: 0;
