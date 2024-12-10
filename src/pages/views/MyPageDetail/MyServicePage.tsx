@@ -116,9 +116,9 @@ const MyServicePage = () => {
                   ※ 리뷰 등록 시 첫 줄에 &lt;협찬&gt; 문구를 입력해주세요.
                 </em>
               </p>
-              <span>
+              <Desc>
                 긍정적인 경험을 바탕으로 작성해주세요.(100~180자 이내)
-              </span>
+              </Desc>
               <ImgBox src={guideTab02_01} alt="STEP1. 리뷰 작성" />
             </StepCont>
             <StepCont>
@@ -261,13 +261,14 @@ const StepCont = styled.div`
       color: var(--prim-L300);
     }
   }
-  ~ span {
-    margin-top: 3rem;
-    font-size: var(--font-caption-size);
-    font-weight: var(--font-caption-weight);
-    letter-spacing: var(--font-caption-letter-spacing);
-    color: var(--n300-color);
-  }
+`
+
+const Desc = styled.p`
+  margin-top: 3rem;
+  font-size: var(--font-caption-size);
+  font-weight: var(--font-caption-weight);
+  letter-spacing: var(--font-caption-letter-spacing);
+  color: var(--n300-color);
 `
 
 const ImgBox = styled.img`
