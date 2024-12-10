@@ -114,7 +114,7 @@ const DropdownButton = styled.div<{
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   display: inline-flex;
   cursor: pointer;
 
@@ -131,14 +131,14 @@ const DropdownButton = styled.div<{
 const DropDownContainer = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width};
   height: auto;
-  padding: 1rem 0.8rem;
+  padding: 0.75rem;
   background: white;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
+  border-radius: 0.8rem;
   border: 1px solid #e2e4e4;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.4rem;
   position: absolute;
   top: calc(100% + 6px);
   z-index: 99;

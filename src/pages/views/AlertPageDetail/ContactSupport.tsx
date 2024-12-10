@@ -247,6 +247,7 @@ const NoticeBox = styled.div`
       width: 1.4rem;
       height: 1.4rem;
       background: url("${IconNotice}") no-repeat center / 100%;
+      filter: invert(50%) sepia(100%) saturate(200%) hue-rotate(180deg);
     }
   }
   ul li {
@@ -315,6 +316,7 @@ const TextAreaContainer = styled.div`
     border: 0.1rem solid var(--n60-color);
     border-radius: 0 0 1rem 1rem;
     border-top: none;
+    resize: none;
     &::placeholder {
       font-size: var(--font-bodyM-size);
       color: var(--n200-color);
