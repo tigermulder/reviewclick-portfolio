@@ -213,7 +213,7 @@ const NoticeContent = styled.div`
 
   ul {
     margin-bottom: 1.5rem;
-    padding: 1.6rem;
+    padding: 1.5rem;
     font-size: 1.4rem;
     color: var(--gray-01);
     background: var(--whitewood);

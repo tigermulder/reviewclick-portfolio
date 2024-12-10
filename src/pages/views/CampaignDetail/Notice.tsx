@@ -89,6 +89,8 @@ const NoticeBox = styled.ul`
   background: var(--whitewood);
   color: var(--gray-01);
   font-size: var(--font-caption-size);
+  font-weight: var(--font-caption-weight);
+  letter-spacing: var(--font-caption-small-letter-spacing);
 
   li {
     position: relative;
