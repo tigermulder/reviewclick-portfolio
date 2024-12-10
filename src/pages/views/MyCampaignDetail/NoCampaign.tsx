@@ -34,7 +34,7 @@ const NoCampaignContainer = styled.div`
 
   h3 {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     margin: 12rem 0 2rem;
     font-size: var(--font-h5-size);
     font-weight: var(--font-h5-weight);
@@ -60,7 +60,7 @@ const NoCampaignTitle = styled.h2`
 `
 
 const NoCampaignIcon = styled.div`
-  width: 48%;
+  width: 40%;
 `
 
 const NoCampaignList = styled.div`

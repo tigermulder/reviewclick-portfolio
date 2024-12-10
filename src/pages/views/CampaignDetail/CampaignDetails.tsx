@@ -97,7 +97,7 @@ const DetailContainer = styled.div`
     left: 0;
     height: 53%;
     width: 0.2rem;
-    border-left: 0.15rem dashed var(--n40-color);
+    border-left: 1.5px dashed var(--n40-color);
   }
 `
 
@@ -121,10 +121,10 @@ const DetailsList = styled.ul`
       content: "";
       position: absolute;
       top: 50%;
-      left: -1.76rem;
+      left: -1.72rem;
       transform: translateY(-50%);
-      width: 0.5rem;
-      height: 0.5rem;
+      width: 0.4rem;
+      height: 0.4rem;
       background: var(--n80-color);
       border-radius: 50%;
     }
@@ -135,7 +135,7 @@ const DetailsList = styled.ul`
       left: -2.1rem;
       transform: translateY(-50%);
       width: 1.1rem;
-      height: 1.2rem;
+      height: 1.1rem;
       background: url("${IconStar}") no-repeat center / 100%;
     }
   }

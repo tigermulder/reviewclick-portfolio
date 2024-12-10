@@ -68,7 +68,7 @@ const MyPointPage = () => {
 export default MyPointPage
 
 const MyPointContainer = styled.div`
-  padding: 8rem 0;
+  padding: 4.4rem 0 8rem;
 `
 
 const MyPointListContainer = styled.ul`
