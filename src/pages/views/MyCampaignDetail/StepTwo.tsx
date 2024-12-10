@@ -414,8 +414,6 @@ const GuideContent = styled.div`
   margin-top: 1.5rem;
 
   .guide-list {
-    font-size: 1.4rem;
-    line-height: 1.4;
     background: var(--whitewood);
     color: var(--gray-01);
   }
@@ -423,12 +421,12 @@ const GuideContent = styled.div`
   .guide-list li {
     position: relative;
     padding-left: 1rem;
-    font-size: 1.3rem;
-    line-height: var(--font-bodyL-line-height);
-    letter-spacing: var(--font-bodyM-letter-spacing);
     display: flex;
     align-items: flex-start;
-    color: var(--n400-color);
+    font-size: var(--font-caption-size);
+    font-weight: var(--font-caption-weight);
+    letter-spacing: var(--font-caption-small-letter-spacing);
+    line-height: 1.25;
     p em {
       font-weight: var(--font-bodyM-weight);
       color: var(--purple);
@@ -441,9 +439,9 @@ const GuideContent = styled.div`
     content: "";
     position: absolute;
     left: 0;
-    margin-top: 0.8rem;
-    width: 0.3rem;
-    height: 0.3rem;
+    top: 6px;
+    width: 0.25rem;
+    height: 0.25rem;
     border-radius: 50%;
     background: var(--gray-01);
     flex-shrink: 0;
