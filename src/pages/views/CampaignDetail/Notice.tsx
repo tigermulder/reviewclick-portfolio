@@ -98,7 +98,7 @@ const NoticeBox = styled.ul`
     padding-left: 1rem;
   }
   li:not(:last-child) {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
   }
   li:before {
     content: "";
