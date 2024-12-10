@@ -229,7 +229,7 @@ const NoticeContent = styled.div`
     display: flex;
     align-items: flex-start;
     line-height: 1.2;
-    color: var(--n500-color);
+    color: var(--gray-01);
 
     &::before {
       content: "";
