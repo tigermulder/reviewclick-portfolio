@@ -104,8 +104,8 @@ const NoticeBox = styled.ul`
     right: 100%;
     transform: translateY(-50%);
     margin-right: 0.7rem;
-    width: 0.3rem;
-    height: 0.3rem;
+    width: 0.25rem;
+    height: 0.25rem;
     border-radius: 50%;
     background: var(--gray-01);
   }
