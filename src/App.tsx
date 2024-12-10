@@ -85,6 +85,7 @@ function App() {
     location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.ResetPassword ||
     location.pathname === RoutePath.TermsOfService ||
+    location.pathname === RoutePath.UserServiceGuide ||
     location.pathname === RoutePath.PrivacyPolicy ||
     location.pathname === RoutePath.UserEditProfile ||
     location.pathname === RoutePath.UserAccountSetting ||
