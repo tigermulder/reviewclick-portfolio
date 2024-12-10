@@ -6,6 +6,10 @@ import styled from "styled-components"
 const Footer = () => {
   return (
     <FooterComponent>
+      <FooterLogoContainer>
+        <FooterLogo aria-label="Revuclick Logo" />
+      </FooterLogoContainer>
+
       <LinkContainer>
         <LinkText to={RoutePath.TermsOfService}>이용약관</LinkText>
         <LinkText to={RoutePath.PrivacyPolicy}>개인정보처리방침</LinkText>
@@ -28,11 +32,6 @@ const Footer = () => {
         <br />
         Copyright © Revuclick Corporation. All Rights Reserved.
       </CompanyInfo>
-
-      {/* FooterLogo 컴포넌트를 사용해 color 적용 */}
-      <FooterLogoContainer>
-        <FooterLogo aria-label="Revuclick Logo" />
-      </FooterLogoContainer>
     </FooterComponent>
   )
 }
@@ -41,15 +40,15 @@ export default Footer
 
 const FooterComponent = styled.div`
   width: 100%;
-  height: 34rem;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   background: #fafafa;
+  padding: 3.6rem 1.5rem 14rem;
 `
 
 const LinkContainer = styled.div`
-  position: absolute;
-  left: 1.6rem;
-  top: 9.2rem;
+  margin-top: 3rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -64,12 +63,10 @@ const LinkText = styled(Link)`
 `
 
 const CompanyInfo = styled.div`
-  position: absolute;
-  left: 1.6rem;
-  top: 12.6rem;
   color: var(--n200-color);
   font-size: 1.1rem;
   line-height: 1.6;
+  margin-top: 0.8rem;
   word-wrap: break-word;
 `
 
@@ -78,11 +75,7 @@ const EmailSpan = styled.a`
 `
 
 const FooterLogoContainer = styled.div`
-  position: absolute;
-  width: 9.3rem;
-  height: 2rem;
-  left: 1.6rem;
-  top: 3.6rem;
+  width: 9.4rem;
   color: var(--n200-color);
 
   svg {
