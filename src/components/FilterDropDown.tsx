@@ -107,7 +107,7 @@ const DropdownButton = styled.div<{
   height: ${({ $height }) => $height};
   border: 1px solid
     ${({ $isOpen }) => ($isOpen ? "var(--prim-L400)" : "var(--n200-color)")};
-  box-shadow: 0px 0px 0px 3px ${({ $isOpen }) => ($isOpen ? "#FDD8D9" : "none")};
+  box-shadow: 0px 0px 0px 2px ${({ $isOpen }) => ($isOpen ? "#FDD8D9" : "none")};
   padding: 0 0.8rem;
   background: white;
   border-radius: 0.8rem;
@@ -117,6 +117,9 @@ const DropdownButton = styled.div<{
   gap: 1rem;
   display: inline-flex;
   cursor: pointer;
+  transition:
+    border 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
 
   span {
     font-size: 1.4rem;

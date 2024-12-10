@@ -247,7 +247,8 @@ const NoticeBox = styled.div`
       width: 1.4rem;
       height: 1.4rem;
       background: url("${IconNotice}") no-repeat center / 100%;
-      filter: invert(50%) sepia(100%) saturate(200%) hue-rotate(180deg);
+      filter: invert(47%) sepia(85%) saturate(1338%) hue-rotate(324deg)
+        brightness(97%) contrast(101%);
     }
   }
   ul li {
