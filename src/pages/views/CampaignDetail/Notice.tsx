@@ -83,6 +83,7 @@ const StyledIconNoticeArrow = styled(IconNoticeArrow)`
 `
 
 const NoticeBox = styled.ul`
+  animation: fadeIn 0.1s ease-in-out;
   padding: 1.5rem;
   margin-top: 2.4rem;
   border-radius: 0.8rem;
@@ -110,5 +111,13 @@ const NoticeBox = styled.ul`
     height: 0.25rem;
     border-radius: 50%;
     background: var(--gray-01);
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `

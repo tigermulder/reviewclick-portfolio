@@ -199,7 +199,7 @@ const NoticeHeader = styled.div`
     transform: translateY(-50%);
     width: 2.4rem;
     height: 2.4rem;
-    transition: transform 0.15s ease-in;
+    transition: transform 0.1s ease-in-out;
   }
 
   img.active {
@@ -208,7 +208,7 @@ const NoticeHeader = styled.div`
 `
 
 const NoticeContent = styled.div`
-  transition: max-height 0.2s ease-out;
+  animation: fadeIn 0.1s ease-in-out;
   overflow: hidden;
 
   ul {
@@ -242,6 +242,14 @@ const NoticeContent = styled.div`
 
     & + li {
       margin-top: 0.8rem;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 `
