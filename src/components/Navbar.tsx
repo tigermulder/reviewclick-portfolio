@@ -147,7 +147,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       display: flex;
       justify-content: center;
       a {
-        margin-left: -2rem;
+        margin-left: -1.9rem;
       }
     `}
 
@@ -173,7 +173,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       display: flex;
       justify-content: center;
       a {
-        margin-left: 2rem;
+        margin-left: 1.9rem;
       }
     `}
 `
