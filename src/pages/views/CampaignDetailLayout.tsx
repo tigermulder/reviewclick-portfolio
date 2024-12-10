@@ -542,7 +542,7 @@ const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
   justify-content: start;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 1.8rem;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   border: 1px solid var(--white);
   color: var(--purple);
   font-size: var(--font-h5-size);
@@ -557,7 +557,7 @@ const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
 const DetailBody = styled.div`
   position: relative;
   top: -9.9rem;
-  padding: 1.9rem 1.5rem 3.6rem;
+  padding: 1.5rem 1.5rem 3rem;
   background: #fff;
 `
 
@@ -573,9 +573,9 @@ const Dday = styled.span`
   color: var(--revu-color);
 `
 
-const Title = styled.p`
+const Title = styled.h4`
   margin-top: 1rem;
-  font-size: 1.6rem;
+  font-size: var(--font-h4-size);
   font-weight: var(--font-weight-medium);
   letter-spacing: calc(1.6rem * (-0.3 / 100));
 `
