@@ -111,7 +111,7 @@ const MyServicePage = () => {
             <StepCont>
               <h4>STEP1. 리뷰 작성</h4>
               <p>
-                &#91;나의 캠페인&#93; &gt;
+                &#91;나의 캠페인&#93; &gt; '리뷰검수'
                 <em>
                   ※ 리뷰 등록 시 첫 줄에 &lt;협찬&gt; 문구를 입력해주세요.
                 </em>
@@ -212,6 +212,7 @@ const TabItem = styled.li`
   letter-spacing: var(--font-title-letter-spacing);
   background-color: var(--whitesmoke);
   border-radius: 2.2rem 2.2rem 0 0;
+  font-size: var(--font-title-size);
   font-weight: var(--font-weight-medium);
   color: var(--silver);
 
