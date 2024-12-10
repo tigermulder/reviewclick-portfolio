@@ -97,15 +97,15 @@ const NoticeBox = styled.ul`
   }
   li:not(:last-child) {
     margin-bottom: 0.2rem;
+    padding-left: 1rem;
   }
   li:before {
     content: "";
     display: block;
     position: absolute;
-    top: 24%;
-    right: 100%;
+    top: 0.49rem;
+    left: 0;
     transform: translateY(-50%);
-    margin-right: 0.7rem;
     width: 0.25rem;
     height: 0.25rem;
     border-radius: 50%;
