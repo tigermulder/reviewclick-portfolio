@@ -263,7 +263,7 @@ const StepCont = styled.div`
   }
 `
 
-const Desc = styled.p`
+const Desc = styled.span`
   margin-top: 3rem;
   font-size: var(--font-caption-size);
   font-weight: var(--font-caption-weight);
