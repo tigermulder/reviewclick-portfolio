@@ -239,7 +239,7 @@ const NoticeContent = styled.div`
       width: 0.25rem;
       height: 0.25rem;
       border-radius: 50%;
-      background: var(--n500-color);
+      background: var(--gray-01);
     }
 
     & + li {
