@@ -177,7 +177,6 @@ const GuideWrap = styled.div`
   position: relative;
   padding: 1.5rem 1.5rem 12rem;
   top: -8rem;
-  background: var(--n80-color);
 `
 
 const GuideCont = styled.div`
