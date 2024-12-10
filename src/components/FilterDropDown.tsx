@@ -145,6 +145,16 @@ const DropDownContainer = styled.div<{ $width: string }>`
   position: absolute;
   top: calc(100% + 6px);
   z-index: 99;
+  animation: fadeIn 0.1s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const DropDownItem = styled.div<{ $highlighted?: boolean; $height: string }>`
