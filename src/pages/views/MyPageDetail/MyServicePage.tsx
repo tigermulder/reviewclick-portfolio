@@ -65,7 +65,7 @@ const MyServicePage = () => {
             <StepCont>
               <h4>STEP1. 캠페인 신청</h4>
               <p>
-                캠페인 신청 후<span>1시간 이내</span>
+                캠페인 신청 후 <span>1시간 이내</span>
                 <br /> 구매 및 영수증인증을 완료해주셔야 합니다.
               </p>
               <ImgBox src={guideTab01_01} alt="STEP1. 캠페인 신청" />
