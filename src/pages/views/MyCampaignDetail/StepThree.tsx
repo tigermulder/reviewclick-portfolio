@@ -262,7 +262,7 @@ const StepThree = ({
             ‘등록하러가기’ 클릭 시 검수 완료된 리뷰가 자동으로 복사됩니다.
           </StepNotice>
           <Button $variant="pink" onClick={handleNavigate}>
-            리뷰 등록하러가기 (<Purple>자동복사</Purple>)
+            리뷰 등록하러가기 &#40;<Purple>자동복사</Purple>&#41;
           </Button>
         </StepItem>
         <StepItem>

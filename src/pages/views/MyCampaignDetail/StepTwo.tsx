@@ -250,17 +250,18 @@ const StepTwo = ({
                   </li>
                   <li>
                     <p>
-                      경제적 이해관계(대가성 여부)를 명시하기 위해 본문 첫 줄에
-                      <em>&lt;협찬&gt;</em> 문구를 입력해주시기 바랍니다.
+                      경제적 이해관계 &#40;대가성 여부&#41; 를 명시하기 위해
+                      본문 첫 줄에 <em>&lt;협찬&gt;</em> 문구를 입력해주시기
+                      바랍니다.
                     </p>
                   </li>
                   <li>
                     <p>
                       긍정 리뷰 인증은 리뷰 품질은 보장하지 않습니다.다만, 리뷰
-                      인증을 무력화하는 시도 및 부적절한 리뷰(텍스트 반복, 타인
-                      리뷰 복사, 관련 없는 상품 리뷰 등)가 확인될 경우 해당
-                      계정에 지급된 포인트는 회수될 수 있으며, 캠페인 참여가
-                      영구 중단될 수 있습니다.
+                      인증을 무력화하는 시도 및 부적절한 리뷰 &#40;텍스트 반복,
+                      타인 리뷰 복사, 관련 없는 상품 리뷰 등&#41; 가 확인될 경우
+                      해당 계정에 지급된 포인트는 회수될 수 있으며, 캠페인
+                      참여가 영구 중단될 수 있습니다.
                     </p>
                   </li>
                 </ul>
@@ -424,9 +425,7 @@ const GuideContent = styled.div`
     display: flex;
     align-items: flex-start;
     font-size: var(--font-caption-size);
-    font-weight: var(--font-caption-weight);
     letter-spacing: var(--font-caption-small-letter-spacing);
-    line-height: 1.25;
     p em {
       font-weight: var(--font-bodyM-weight);
       color: var(--purple);

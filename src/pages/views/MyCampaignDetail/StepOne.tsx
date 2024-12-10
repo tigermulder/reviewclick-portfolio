@@ -212,9 +212,9 @@ const StepOne = ({
             <img src={SampleReviewImage} alt={"기본 영수증 이미지"} />
           </figure>
           <StepNotice>
-            [네이버 앱/웹] &gt; ‘pay’ 아이콘 &gt; 하단 ‘결제’ 아이콘 &gt; 결제한
-            상품의 ‘주문상세' 혹은 ‘결제상세' &gt; ‘영수증' &gt; ‘구매영수증'
-            캡쳐
+            &#91;네이버 앱/웹&#93; &gt; ‘pay’ 아이콘 &gt; 하단 ‘결제’ 아이콘
+            &gt; 결제한 상품의 ‘주문상세' 혹은 ‘결제상세' &gt; ‘영수증' &gt;
+            ‘구매영수증' 캡쳐
           </StepNotice>
           <Button $variant="pink" onClick={handleButtonClick}>
             구매 영수증 업로드
