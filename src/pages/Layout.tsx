@@ -84,8 +84,8 @@ const Content = styled.main<ContentProps>`
     if ($isMyCampaignPage) {
       return `
         min-height: 100vh; 
-        margin: 9.8rem auto 0;
-        padding: 2.4rem 1.5rem 8rem;
+        margin: 10.3rem auto 0;
+        padding: 1.5rem 1.5rem 8rem;
         background: var(--whitewood);
       `
     } else if ($isSpecialPage) {

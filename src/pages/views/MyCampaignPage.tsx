@@ -269,8 +269,7 @@ const MyCampaignPage = () => {
 export default MyCampaignPage
 
 const CartCardDesc = styled.div`
-  margin-bottom: 1.2rem;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem;
   font-size: var(--font-h5-size);
   font-weight: var(--font-h5-weight);
   letter-spacing: var(--font-h5-letter-spacing);
