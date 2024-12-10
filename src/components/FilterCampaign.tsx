@@ -53,7 +53,7 @@ const FilterChipBarStyled = styled.ul`
   background: var(--white);
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
   overflow-x: scroll;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -62,7 +62,7 @@ const FilterChipBarStyled = styled.ul`
 `
 
 const Chip = styled.li<{ selected: boolean }>`
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   font-size: var(--font-bodyM-size);
   font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);
