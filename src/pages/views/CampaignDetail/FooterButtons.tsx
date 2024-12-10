@@ -69,10 +69,10 @@ const FooterContainer = styled.div`
   justify-content: center;
   gap: 20px;
   position: fixed;
-  bottom: 4.1rem;
+  bottom: 4.2rem;
   left: 0;
   width: 100%;
-  background: #fff;
+  background: var(var(--white);
   z-index: 19;
   padding: 1.5rem 1.5rem 3rem;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.06);

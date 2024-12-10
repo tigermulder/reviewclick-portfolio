@@ -536,13 +536,12 @@ const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
   width: calc(100% - 30px);
   position: absolute;
   left: 50%;
-  height: 3.8rem;
   display: flex;
   align-items: center;
   justify-content: start;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 1.8rem;
-  padding: 0 1.5rem;
+  padding: 0.75rem 1.5rem;
   border: 1px solid var(--white);
   color: var(--purple);
   font-size: var(--font-h5-size);
