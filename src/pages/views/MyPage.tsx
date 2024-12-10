@@ -217,7 +217,7 @@ const NoticeContent = styled.div`
     font-size: 1.4rem;
     color: var(--gray-01);
     background: var(--whitewood);
-    border-radius: 1rem;
+    border-radius: 0.8rem;
   }
 
   li {
@@ -235,7 +235,7 @@ const NoticeContent = styled.div`
       content: "";
       position: absolute;
       left: 0;
-      top: 0.69rem;
+      top: 0.66rem;
       width: 0.25rem;
       height: 0.25rem;
       border-radius: 50%;

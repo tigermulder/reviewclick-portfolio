@@ -85,25 +85,26 @@ const StyledIconNoticeArrow = styled(IconNoticeArrow)`
 const NoticeBox = styled.ul`
   padding: 1.5rem;
   margin-top: 2.4rem;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   background: var(--whitewood);
   color: var(--gray-01);
   font-size: var(--font-caption-size);
   font-weight: var(--font-caption-weight);
   letter-spacing: var(--font-caption-small-letter-spacing);
+  line-height: 1.2;
 
   li {
     position: relative;
+    padding-left: 1rem;
   }
   li:not(:last-child) {
-    margin-bottom: 0.2rem;
-    padding-left: 1rem;
+    margin-bottom: 0.4rem;
   }
   li:before {
     content: "";
     display: block;
     position: absolute;
-    top: 0.69rem;
+    top: 0.66rem;
     left: 0;
     width: 0.25rem;
     height: 0.25rem;
