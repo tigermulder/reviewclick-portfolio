@@ -327,7 +327,6 @@ const ContactSupport = () => {
         confirmText={modalConfirmText}
         cancelText={modalCancelText}
         onCancel={handleModalConfirm}
-        showRouteLink={true}
       />
 
       {/* 로딩 모달 */}
