@@ -60,7 +60,8 @@ const GuideDetail = () => {
               ★ 긍정적인 경험을 바탕으로 작성해주세요.(100~180자 이내)
             </strong>
             <br />★ 리뷰 본문 첫 줄에 경제적 이해 관계(대가성 유무)를 명시하는{" "}
-            <Purple>&lt;협찬&gt;</Purple> <strong>문구 기재 필수</strong>
+            <Purple>&#91;포인트적립&#93;</Purple>{" "}
+            <strong>문구 기재 필수</strong>
           </p>
         </li>
         <li>
