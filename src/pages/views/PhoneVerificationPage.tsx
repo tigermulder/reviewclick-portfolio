@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 import { useMutation } from "@tanstack/react-query"
 import { phoneSendCode, phoneVerify } from "@/services/join"
+import useScrollToTop from "@/hooks/useScrollToTop"
 import TextField from "@/components/TextField"
 import Button from "@/components/Button"
 import ReuseHeader from "@/components/ReuseHeader"
@@ -23,6 +24,9 @@ const PhoneVerificationPage = () => {
 
   const redirect = sessionStorage.getItem("redirectPath")
   const isPhoneVerify = localStorage.getItem("userPhoneNumber")
+
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
 
   // ** 휴대폰 인증 코드 전송 mutation */
   const sendPhoneCodeMutation = useMutation({

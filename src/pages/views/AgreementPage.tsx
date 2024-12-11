@@ -6,8 +6,11 @@ import ReuseHeader from "@/components/ReuseHeader"
 import { Agreements } from "@/types/component-types/check-box-type"
 import Button from "@/components/Button"
 import { RoutePath } from "@/types/route-path"
+import useScrollToTop from "@/hooks/useScrollToTop"
 
 const AgreementPage = () => {
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
   const navigate = useNavigate()
   const [agreements, setAgreements] = useState<Agreements>({
     all: false,

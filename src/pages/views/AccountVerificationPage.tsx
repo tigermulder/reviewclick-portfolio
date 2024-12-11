@@ -9,9 +9,12 @@ import Button from "@/components/Button"
 import ReuseHeader from "@/components/ReuseHeader"
 import useToast from "@/hooks/useToast"
 import { validateEmail, formatTime } from "@/utils/util"
+import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 
 const AccountVerificationPage = () => {
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
   const navigate = useNavigate()
   const [id, setId] = useState("")
   const [emailSent, setEmailSent] = useState(false)
