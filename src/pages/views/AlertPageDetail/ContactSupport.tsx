@@ -410,6 +410,7 @@ const TextAreaContainer = styled.div`
   margin: 0.8rem 0 2rem;
   overflow: hidden;
   outline: 0;
+  background: white;
   border: 0.1rem solid var(--n60-color);
   border-radius: 1rem;
   padding: 1.5rem;
