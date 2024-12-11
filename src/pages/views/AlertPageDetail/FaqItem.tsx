@@ -57,7 +57,6 @@ const NotifyMessage = styled.div`
   position: relative;
   width: 100%;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
   line-height: var(--font-h5-line-height);
   letter-spacing: var(--font-h5-letter-spacing);
   white-space: nowrap;

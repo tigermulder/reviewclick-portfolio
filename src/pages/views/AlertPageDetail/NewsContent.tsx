@@ -163,7 +163,6 @@ const NotifyMessage = styled.p<{ isClicked: boolean }>`
   margin-top: 0.6rem;
   font-size: var(--font-h5-size);
   font-weight: var(--font-h5-weight);
-  line-height: var(--font-h5-line-height);
   letter-spacing: var(--font-h5-letter-spacing);
   color: ${({ isClicked }) =>
     isClicked ? "var(--n200-color)" : "var(--primary-color)"};

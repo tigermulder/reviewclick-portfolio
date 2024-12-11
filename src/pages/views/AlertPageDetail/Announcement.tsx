@@ -80,7 +80,6 @@ const NotifyMessage = styled.p`
   gap: 0.6rem;
   margin-top: 0.4rem;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
   line-height: var(--font-h5-line-height);
   letter-spacing: var(--font-h5-letter-spacing);
   white-space: nowrap;
