@@ -41,6 +41,10 @@ export default defineConfig(({ mode }) => {
       sourcemap: false,
       rollupOptions: {
         output: {
+          manualChunks: {
+            vendor: ["react", "react-router-dom", "react-dom"],
+            // 'vendor'라는 이름으로 react, react-router-dom, react-dom을 별도 청크로 분리
+          },
           assetFileNames: (assetInfo) => {
             let extType: string = assetInfo?.name?.split(".").at(1) || "misc"
             if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
