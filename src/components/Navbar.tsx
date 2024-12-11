@@ -142,7 +142,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       padding: 0.3rem 0;
       background: var(--white);
       border-top-right-radius: 30px;
-      border-top: 0.1rem solid var(--n80-color);
+      border-top: 0.5px solid var(--n80-color);
       flex: 1;
       display: flex;
       justify-content: center;
@@ -168,7 +168,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       padding: 0.3rem 0;
       border-top-left-radius: 30px;
       background: var(--white);
-      border-top: 0.1rem solid var(--n80-color);
+      border-top: 0.5px solid var(--n80-color);
       flex: 1;
       display: flex;
       justify-content: center;

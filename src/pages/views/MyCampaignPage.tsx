@@ -328,6 +328,7 @@ const ReviewCardThumb = styled.div`
   width: 8.1rem;
   height: 8.1rem;
   overflow: hidden;
+  border: 0.5px solid #f5f6f8;
   border-radius: 1rem;
   flex-shrink: 0;
 
