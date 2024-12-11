@@ -31,6 +31,8 @@ const ContactSupport = () => {
   )
   const { addToast } = useToast()
 
+  //** 모달 상태 관리 */
+  const [isLoadingModalOpen, setLoadingModalOpen] = useState(false)
   const [isResultModalOpen, setResultModalOpen] = useState(false)
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
@@ -174,6 +176,9 @@ const ContactSupport = () => {
       useWebWorker: true,
     }
 
+    // 로딩 모달 표시
+    setLoadingModalOpen(true)
+
     try {
       const compressedFiles = await Promise.all(
         filesToUpload.map(async (file) => {
@@ -200,6 +205,9 @@ const ContactSupport = () => {
     } catch (error) {
       console.error("이미지 압축 오류:", error)
       addToast("이미지 압축 중 오류가 발생했습니다.", "warning", 3000, "qna")
+    } finally {
+      // 압축 및 상태 업데이트 완료 후 로딩 모달 닫기
+      setLoadingModalOpen(false)
     }
 
     e.target.value = ""
@@ -320,6 +328,27 @@ const ContactSupport = () => {
         cancelText={modalCancelText}
         onCancel={handleModalConfirm}
         showRouteLink={true}
+      />
+
+      {/* 로딩 모달 */}
+      <Modal
+        isOpen={isLoadingModalOpen}
+        isLoading={true}
+        onConfirm={function (): void {
+          throw new Error("Function not implemented.")
+        }}
+        onCancel={function (): void {
+          throw new Error("Function not implemented.")
+        }}
+        title={"이미지 최적화중입니다"}
+        content={
+          <>
+            <p>
+              조금만 기다려주세요.
+              <br /> 처리가 곧 끝나요!
+            </p>
+          </>
+        }
       />
     </>
   )
