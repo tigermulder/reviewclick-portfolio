@@ -146,7 +146,6 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
   align-items: center;
   gap: 0.8rem;
   font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   color: ${({ isClicked }) =>
@@ -163,6 +162,7 @@ const NotifyMessage = styled.p<{ isClicked: boolean }>`
   margin-top: 0.6rem;
   font-size: var(--font-h5-size);
   font-weight: var(--font-h5-weight);
+  font-weight: 500;
   letter-spacing: var(--font-h5-letter-spacing);
   color: ${({ isClicked }) =>
     isClicked ? "var(--n200-color)" : "var(--primary-color)"};
