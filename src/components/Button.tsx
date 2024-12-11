@@ -3,6 +3,7 @@ import IconArrowGo from "assets/ico_arr_go.svg?url"
 import SuccessIcon from "./SuccessIcon"
 import FailedIcon from "./FailedIcon"
 import IconCopy from "assets/ico-copy.svg"
+import IconUpload from "assets/ico_upload.svg"
 
 import {
   ButtonProps,
@@ -10,7 +11,7 @@ import {
 } from "@/types/component-types/button-type"
 import styled, { css, keyframes } from "styled-components"
 
-// Spinner 스타일
+// Spinner css
 const fade = keyframes`
   0% {
     opacity: 1;
@@ -320,6 +321,27 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           font-size: 1.5rem;
           color: var(--prim-L400);
           font-weight: var(--font-weight-medium);
+        `
+      case "uploadImage":
+        return css`
+          background: var(--white);
+          color: ${disabled ? "var(--n80-color)" : "var(--n600-color)"};
+          font-size: 1.4rem;
+          font-weight: var(--font-weight-medium);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &::before {
+            content: "";
+            display: block;
+            background: url("${IconUpload}") no-repeat center / 100%;
+            filter: ${disabled
+              ? "invert(100%) sepia(0%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(100%);"
+              : "invert(8%) sepia(0%) saturate(0%) hue-rotate(163deg) brightness(100%) contrast(100%)"};
+            width: 2.1rem;
+            height: 2.1rem;
+            margin-right: 0.2rem;
+          }
         `
       default:
         return ""

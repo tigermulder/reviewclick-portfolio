@@ -25,7 +25,7 @@ export const getQnaItem = async (
 }
 
 //** QnA 추가 API */
-export const addQna = async (data: QnaAddRequest): Promise<QnaAddResponse> => {
+export const addQna = async (data: FormData): Promise<QnaAddResponse> => {
   const response = await axiosInstance.post<QnaAddResponse>("/qna/add", data)
   return response.data
 }

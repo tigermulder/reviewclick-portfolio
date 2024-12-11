@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import FilterDropDown from "@/components/FilterDropDown"
 import { contactOptions } from "@/types/component-types/dropdown-type"
 import ReuseHeader from "@/components/ReuseHeader"
@@ -16,9 +16,11 @@ import styled from "styled-components"
 import { ReviewItem } from "@/types/api-types/review-type"
 import { FilterOption } from "@/types/component-types/filter-dropdown-type"
 
+const MAX_IMAGES = 2
+
 const ContactSupport = () => {
   const navigate = useNavigate()
-  const [reviewTitle, setReviewTitle] = useState<string>("")
+  // const [reviewTitle, setReviewTitle] = useState<string>("")
   const [reviewText, setReviewText] = useState<string>("")
   const [selectedFilter, setSelectedFilter] = useRecoilState(
     selectedContactFilterState
@@ -28,7 +30,7 @@ const ContactSupport = () => {
     null
   )
   const { addToast } = useToast()
-  //** 모달 상태 관리 */
+
   const [isResultModalOpen, setResultModalOpen] = useState(false)
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
@@ -38,7 +40,14 @@ const ContactSupport = () => {
   )
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
-  //** selectedFilter가 변경될 때 캠페인 리스트 가져오기 */
+  // 이미지 업로드 상태 관리
+  const [uploadedImages, setUploadedImages] = useState<
+    { file: File; previewUrl: string }[]
+  >([])
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+
+  // 캠페인 리스트 가져오기
   const fetchCampaignList = async () => {
     try {
       const requestData = {
@@ -51,6 +60,7 @@ const ContactSupport = () => {
       return []
     }
   }
+
   useEffect(() => {
     const loadCampaignList = async () => {
       if (
@@ -68,20 +78,19 @@ const ContactSupport = () => {
     loadCampaignList()
   }, [selectedFilter])
 
-  //** 리뷰 타이틀 변경 핸들러 */
-  const maxTitleChars = 32
-  const minTitleChars = 2
-  const handleTitleContactChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const text = e.target.value
-    if (text.length <= maxTitleChars) {
-      setReviewTitle(text)
-    } else {
-      setReviewTitle(text.slice(0, maxTitleChars))
-    }
-  }
-  //** 리뷰 텍스트 변경 핸들러 */
+  // const maxTitleChars = 32
+  // const minTitleChars = 2
+  // const handleTitleContactChange = (
+  //   e: React.ChangeEvent<HTMLTextAreaElement>
+  // ) => {
+  //   const text = e.target.value
+  //   if (text.length <= maxTitleChars) {
+  //     setReviewTitle(text)
+  //   } else {
+  //     setReviewTitle(text.slice(0, maxTitleChars))
+  //   }
+  // }
+
   const maxChars = 1000
   const minChars = 10
   const handleContactChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -93,19 +102,15 @@ const ContactSupport = () => {
     }
   }
 
-  //** 버튼 활성화 조건 */
   const isButtonEnabled =
     selectedFilter &&
-    reviewTitle.length >= minTitleChars &&
     reviewText.length >= minChars &&
     (selectedFilter.value !== "campaign" || selectedCampaign)
 
-  //** 문의 등록 핸들러 */
   const handleSubmit = async () => {
     try {
       const requestData: any = {
         qnaCategory: selectedFilter.value,
-        title: reviewTitle,
         question: reviewText,
       }
 
@@ -113,36 +118,95 @@ const ContactSupport = () => {
       if (selectedCampaign) {
         requestData.reviewId = selectedCampaign.value
       }
-      const response = await addQna(requestData)
-      if (response.statusCode === 0) {
-        setModalTitle("👏 문의 등록 완료!")
-        setModalContent(
-          <>
-            문의가 정상적으로 접수됐어요.
-            <br />
-            답변은 가입한 계정 이메일로 발송되며,
-            <br />
-            영업일 기준 3-5일 정도 소요됩니다.
-          </>
-        )
-        setModalConfirmText("확인")
-        setModalCancelText("확인")
-        setResultModalOpen(true)
+
+      if (uploadedImages.length > 0) {
+        const formData = new FormData()
+        formData.append("qnaCategory", requestData.qnaCategory)
+        formData.append("question", requestData.question)
+        if (requestData.reviewId) {
+          formData.append("reviewId", requestData.reviewId)
+        }
+        uploadedImages.forEach((img, idx) => {
+          const fieldName = `file_img${idx + 1}`
+          formData.append(fieldName, img.file)
+        })
+
+        const response = await addQna(formData)
+        if (response.statusCode === 0) {
+          showSuccessModal()
+        } else {
+          throw new Error()
+        }
       } else {
-        throw new Error()
+        const response = await addQna(requestData)
+        if (response.statusCode === 0) {
+          showSuccessModal()
+        } else {
+          throw new Error()
+        }
       }
     } catch (error) {
-      addToast("다시 시도해주세요.", "warning", 1000, "qna")
+      addToast("다시 시도해주세요.", "warning", 3000, "qna")
     }
   }
 
-  //** 모달 확인 버튼 핸들러 */
+  const showSuccessModal = () => {
+    setModalTitle("👏 문의 등록 완료!")
+    setModalContent(
+      <>
+        문의가 정상적으로 접수됐어요.
+        <br />
+        답변은 가입한 계정 이메일로 발송되며,
+        <br />
+        영업일 기준 3-5일 정도 소요됩니다.
+      </>
+    )
+    setModalConfirmText("확인")
+    setModalCancelText("확인")
+    setResultModalOpen(true)
+  }
+
   const handleModalConfirm = () => {
     setResultModalOpen(false)
     if (modalCancelText === "확인") {
       navigate(RoutePath.Alert)
     }
   }
+
+  //** 이미지 업로드 함수 */
+  const handleUploadClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (!files) return
+
+    const selectedFiles = Array.from(files)
+    const remainingSlots = MAX_IMAGES - uploadedImages.length
+    const filesToUpload = selectedFiles.slice(0, remainingSlots)
+
+    const newUploaded = filesToUpload.map((file) => {
+      return {
+        file,
+        previewUrl: URL.createObjectURL(file),
+      }
+    })
+
+    setUploadedImages((prev) => [...prev, ...newUploaded])
+
+    // 파일 입력 초기화
+    e.target.value = ""
+  }
+
+  const handleRemoveImage = (index: number) => {
+    setUploadedImages((prev) => {
+      const updated = [...prev]
+      updated.splice(index, 1)
+      return updated
+    })
+  }
+
   return (
     <>
       <ReuseHeader title="문의등록" onBack={() => navigate(RoutePath.Alert)} />
@@ -159,7 +223,6 @@ const ContactSupport = () => {
         openDropdown={openDropdown}
         setOpenDropdown={setOpenDropdown}
       />
-      {/* 캠페인 리스트가 있을 경우 추가적인 FilterDropDown 표시 */}
       {campaignList.length > 0 && (
         <FilterDropDown
           id="campaign"
@@ -191,22 +254,56 @@ const ContactSupport = () => {
           </li>
         </ul>
       </NoticeBox>
-      <TitleAreaContainer>
+      <Heading>문의내용</Heading>
+      {/* <TitleAreaContainer>
         <textarea
           placeholder="제목을 입력해주세요."
           value={reviewTitle}
           onChange={handleTitleContactChange}
         />
-      </TitleAreaContainer>
+      </TitleAreaContainer> */}
       <TextAreaContainer>
-        <textarea
-          placeholder="문의하실 내용을 입력하세요."
-          value={reviewText}
-          onChange={handleContactChange}
-        />
+        <TextAreaSection>
+          <textarea
+            placeholder="문의하실 내용을 입력하세요."
+            value={reviewText}
+            onChange={handleContactChange}
+          />
+        </TextAreaSection>
         <Count>
-          <span>{reviewText.length}</span>&nbsp;/1000
+          <span>{reviewText.length}</span>&nbsp;/&nbsp;
+          {Number(1000).toLocaleString()}
         </Count>
+        <ImageUploadBox>
+          <Button
+            $variant="uploadImage"
+            onClick={handleUploadClick}
+            disabled={uploadedImages.length >= MAX_IMAGES}
+          >
+            이미지 첨부하기 ({uploadedImages.length}/{MAX_IMAGES})
+          </Button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            accept="image/*"
+            multiple
+            onChange={handleFileChange}
+          />
+          <ImageSection>
+            {uploadedImages.map((img, idx) => (
+              <ImageItem key={idx}>
+                <div>
+                  <img
+                    src={img.previewUrl}
+                    alt={`업로드이미지 썸네일-${idx}`}
+                  />
+                </div>
+                <DeleteButton onClick={() => handleRemoveImage(idx)} />
+              </ImageItem>
+            ))}
+          </ImageSection>
+        </ImageUploadBox>
       </TextAreaContainer>
       <Button
         type="button"
@@ -216,7 +313,6 @@ const ContactSupport = () => {
       >
         등록하기
       </Button>
-      {/* 결과 모달 */}
       <Modal
         isOpen={isResultModalOpen}
         title={modalTitle}
@@ -276,6 +372,13 @@ const NoticeBox = styled.div`
   }
 `
 
+const Heading = styled.h5`
+  margin-top: 2rem;
+  font-size: var(--font-h5-size);
+  font-weight: 500;
+  color: var(--n500-color);
+`
+
 const TitleAreaContainer = styled.div`
   height: 4.4rem;
   margin-top: 3.2rem;
@@ -304,20 +407,21 @@ const TextAreaContainer = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
-  height: 23.9rem;
-  margin: 0 0 2rem;
+  margin: 0.8rem 0 2rem;
   overflow: hidden;
+  outline: 0;
+  border: 0.1rem solid var(--n60-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
 
   textarea {
     display: block;
-    padding: 1.4rem;
     width: 100%;
     height: 100%;
-    outline: 0;
-    border: 0.1rem solid var(--n60-color);
-    border-radius: 0 0 1rem 1rem;
-    border-top: none;
     resize: none;
+    outline: 0;
+    border: none;
+    border-radius: 0 0 1rem 1rem;
     &::placeholder {
       font-size: var(--font-bodyM-size);
       color: var(--n200-color);
@@ -325,15 +429,88 @@ const TextAreaContainer = styled.div`
   }
 `
 
+const TextAreaSection = styled.div`
+  height: 10.9rem;
+`
+
 const Count = styled.div`
-  position: absolute;
-  right: 1.5rem;
-  bottom: 1.4rem;
+  margin: 1rem 0;
+  text-align: right;
   font-size: 1.4rem;
   color: var(--n200-color);
 
   span {
     font-weight: var(--font-weight-bold);
     color: var(--primary-color);
+  }
+`
+
+const ImageUploadBox = styled.div`
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background: var(--n40-color);
+`
+
+const ImageSection = styled.ul`
+  display: flex;
+  gap: 1.4rem;
+  list-style: none;
+  padding: 0;
+`
+
+const ImageItem = styled.li`
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 0.6rem;
+  border: 1.5px solid var(--n300-color);
+  margin-top: 2rem;
+  overflow: visible;
+
+  div {
+    border-radius: 0.6rem;
+    height: -webkit-fill-available;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+
+const DeleteButton = styled.button`
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: rgba(0, 0, 0, 0.65);
+  border: none;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.7rem;
+    height: 0.15rem;
+    background: white;
+    transform-origin: center;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 `

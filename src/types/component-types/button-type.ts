@@ -16,6 +16,7 @@ export interface ButtonProps {
     | "disable"
     | "onboarding01"
     | "onboarding02"
+    | "uploadImage"
   type?: "button" | "submit" | "reset"
   $marginTop?: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
@@ -37,6 +38,7 @@ export interface StyledButtonProps {
     | "disable"
     | "onboarding01"
     | "onboarding02"
+    | "uploadImage"
   $marginTop?: string
   disabled?: boolean
 }
