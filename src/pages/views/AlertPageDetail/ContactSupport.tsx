@@ -15,12 +15,12 @@ import useToast from "@/hooks/useToast"
 import styled from "styled-components"
 import { ReviewItem } from "@/types/api-types/review-type"
 import { FilterOption } from "@/types/component-types/filter-dropdown-type"
+import imageCompression from "browser-image-compression"
 
 const MAX_IMAGES = 2
 
 const ContactSupport = () => {
   const navigate = useNavigate()
-  // const [reviewTitle, setReviewTitle] = useState<string>("")
   const [reviewText, setReviewText] = useState<string>("")
   const [selectedFilter, setSelectedFilter] = useRecoilState(
     selectedContactFilterState
@@ -40,14 +40,12 @@ const ContactSupport = () => {
   )
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
-  // 이미지 업로드 상태 관리
   const [uploadedImages, setUploadedImages] = useState<
     { file: File; previewUrl: string }[]
   >([])
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
-  // 캠페인 리스트 가져오기
   const fetchCampaignList = async () => {
     try {
       const requestData = {
@@ -74,22 +72,8 @@ const ContactSupport = () => {
         setSelectedCampaign(null)
       }
     }
-
     loadCampaignList()
   }, [selectedFilter])
-
-  // const maxTitleChars = 32
-  // const minTitleChars = 2
-  // const handleTitleContactChange = (
-  //   e: React.ChangeEvent<HTMLTextAreaElement>
-  // ) => {
-  //   const text = e.target.value
-  //   if (text.length <= maxTitleChars) {
-  //     setReviewTitle(text)
-  //   } else {
-  //     setReviewTitle(text.slice(0, maxTitleChars))
-  //   }
-  // }
 
   const maxChars = 1000
   const minChars = 10
@@ -114,7 +98,6 @@ const ContactSupport = () => {
         question: reviewText,
       }
 
-      // 선택된 캠페인이 있을 경우 추가
       if (selectedCampaign) {
         requestData.reviewId = selectedCampaign.value
       }
@@ -173,12 +156,11 @@ const ContactSupport = () => {
     }
   }
 
-  //** 이미지 업로드 함수 */
   const handleUploadClick = () => {
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (!files) return
 
@@ -186,16 +168,31 @@ const ContactSupport = () => {
     const remainingSlots = MAX_IMAGES - uploadedImages.length
     const filesToUpload = selectedFiles.slice(0, remainingSlots)
 
-    const newUploaded = filesToUpload.map((file) => {
-      return {
-        file,
-        previewUrl: URL.createObjectURL(file),
-      }
-    })
+    // 압축 옵션 설정 (maxSizeMB: 0.4MB)
+    const options = {
+      maxSizeMB: 0.3,
+      maxWidthOrHeight: 1920, // 필요시 조정
+      useWebWorker: true,
+    }
 
-    setUploadedImages((prev) => [...prev, ...newUploaded])
+    try {
+      const compressedFiles = await Promise.all(
+        filesToUpload.map((file) => imageCompression(file, options))
+      )
 
-    // 파일 입력 초기화
+      const newUploaded = compressedFiles.map((file) => {
+        return {
+          file,
+          previewUrl: URL.createObjectURL(file),
+        }
+      })
+
+      setUploadedImages((prev) => [...prev, ...newUploaded])
+    } catch (error) {
+      console.error("이미지 압축 오류:", error)
+      addToast("이미지 압축 중 오류가 발생했습니다.", "warning", 3000, "qna")
+    }
+
     e.target.value = ""
   }
 
@@ -255,13 +252,6 @@ const ContactSupport = () => {
         </ul>
       </NoticeBox>
       <Heading>문의내용</Heading>
-      {/* <TitleAreaContainer>
-        <textarea
-          placeholder="제목을 입력해주세요."
-          value={reviewTitle}
-          onChange={handleTitleContactChange}
-        />
-      </TitleAreaContainer> */}
       <TextAreaContainer>
         <TextAreaSection>
           <textarea
