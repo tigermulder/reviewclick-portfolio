@@ -335,7 +335,7 @@ const CheckboxLabel = styled.label`
 const PopupContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 32rem;
+  max-width: 31rem;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
