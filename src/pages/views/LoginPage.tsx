@@ -6,7 +6,6 @@ import { RoutePath } from "@/types/route-path"
 import { useMutation } from "@tanstack/react-query"
 import { useRecoilState } from "recoil"
 import useToast from "@/hooks/useToast"
-import RevuLogoIcon from "assets/revu_icon.svg?react"
 import RevuTextIcon from "assets/revu_logo.svg?react"
 import TextField from "@/components/TextField"
 import Button from "@/components/Button"
@@ -110,7 +109,7 @@ const LoginPage = () => {
   return (
     <Container>
       <Title>
-        <RevuClickLogo aria-label="RevuClick Logo" />
+        {/* <RevuClickLogo aria-label="RevuClick Logo" /> */}
         <RevuClickText aria-label="RevuClick Text" />
         <MainText>
           리뷰로
@@ -190,10 +189,10 @@ const Title = styled.div`
   justify-content: center;
 `
 
-const RevuClickLogo = styled(RevuLogoIcon)`
-  width: 3.5rem;
-  color: var(--revu-color);
-`
+// const RevuClickLogo = styled(RevuLogoIcon)`
+//   width: 3.5rem;
+//   color: var(--revu-color);
+// `
 
 const RevuClickText = styled(RevuTextIcon)`
   width: 8.4rem;
