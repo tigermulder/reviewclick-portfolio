@@ -168,16 +168,25 @@ const ContactSupport = () => {
     const remainingSlots = MAX_IMAGES - uploadedImages.length
     const filesToUpload = selectedFiles.slice(0, remainingSlots)
 
-    // 압축 옵션 설정 (maxSizeMB: 0.4MB)
     const options = {
-      maxSizeMB: 0.3,
-      maxWidthOrHeight: 1920, // 필요시 조정
+      maxSizeMB: 0.4,
+      maxWidthOrHeight: 1920,
       useWebWorker: true,
     }
 
     try {
       const compressedFiles = await Promise.all(
-        filesToUpload.map((file) => imageCompression(file, options))
+        filesToUpload.map(async (file) => {
+          // 압축 전 파일 크기 로그
+          console.log("압축 전 파일 크기:", file.size, "bytes")
+
+          const compressedFile = await imageCompression(file, options)
+
+          // 압축 후 파일 크기 로그
+          console.log("압축 후 파일 크기:", compressedFile.size, "bytes")
+
+          return compressedFile
+        })
       )
 
       const newUploaded = compressedFiles.map((file) => {
