@@ -43,7 +43,7 @@ const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
     pointerEvents: disabled ? "none" : "auto",
   },
 }))<{ disabled: boolean }>`
-  padding: 2.1rem 0px 0.85rem;
+  padding: 1.5rem 0px 0.75rem;
   font-size: 1.8rem;
   line-height: var(--base-line-height);
   color: var(--n200-color);
