@@ -171,8 +171,8 @@ const ContactSupport = () => {
     const filesToUpload = selectedFiles.slice(0, remainingSlots)
 
     const options = {
-      maxSizeMB: 0.5,
-      maxWidthOrHeight: 600,
+      maxSizeMB: 0.6,
+      maxWidthOrHeight: 500,
       useWebWorker: true,
     }
 
