@@ -58,16 +58,18 @@ const LinkContainer = styled.div`
 const LinkText = styled(Link)`
   color: var(--n300-color);
   font-size: 1.2rem;
-  line-height: 1.6;
-  word-wrap: break-word;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.5px;
 `
 
 const CompanyInfo = styled.div`
   color: var(--n200-color);
   font-size: 1.1rem;
+  font-weight: var(--font-weight-medium);
   line-height: 1.6;
   margin-top: 0.8rem;
   word-wrap: break-word;
+  letter-spacing: -0.5px;
 `
 
 const EmailSpan = styled.a`

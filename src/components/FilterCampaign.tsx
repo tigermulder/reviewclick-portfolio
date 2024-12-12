@@ -39,7 +39,7 @@ const FilterChipWrap = styled.div`
   width: 100%;
   top: 4.4rem;
   left: 0;
-  padding: 1.5rem 1.5rem 0.75rem;
+  padding: 1.2rem 1.5rem;
   background: var(--white);
   display: flex;
   align-items: center;
@@ -51,7 +51,7 @@ const FilterChipWrap = styled.div`
 const FilterChipBarStyled = styled.ul`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
   overflow-x: scroll;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
