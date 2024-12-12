@@ -139,7 +139,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
     $tabName === "campaign" &&
     css`
       width: 50%;
-      padding: 0.3rem 0;
+      padding: 0.4rem 0 0.8rem;
       background: var(--white);
       border-top-right-radius: 30px;
       border-top: 0.5px solid var(--n100-color);
@@ -148,10 +148,6 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       justify-content: center;
       a {
         margin-left: -1.9rem;
-      }
-      &:active {
-        transform: scale(0.998);
-        background-color: var(--n20-color);
       }
     `}
 
@@ -163,10 +159,6 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       left: 50%;
       transform: translate(-50%, -50%);
       margin-top: -0.3rem;
-      &:active {
-        transform: scale(0.998);
-        background-color: var(--n20-color);
-      }
     `}
 
   ${({ $tabName }) =>
@@ -182,10 +174,6 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       justify-content: center;
       a {
         margin-left: 1.9rem;
-      }
-      &:active {
-        transform: scale(0.998);
-        background-color: var(--n20-color);
       }
     `}
 `
