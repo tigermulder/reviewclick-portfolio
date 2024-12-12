@@ -150,8 +150,8 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
         margin-left: -1.9rem;
       }
       &:active {
-        transform: scale(0.98);
-        transition: transform 0.5s ease-in-out;
+        transform: scale(0.998);
+        background-color: var(--n20-color);
       }
     `}
 
@@ -164,8 +164,8 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       transform: translate(-50%, -50%);
       margin-top: -0.3rem;
       &:active {
-        transform: scale(0.98);
-        transition: transform 0.5s ease-in-out;
+        transform: scale(0.998);
+        background-color: var(--n20-color);
       }
     `}
 
@@ -184,8 +184,8 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
         margin-left: 1.9rem;
       }
       &:active {
-        transform: scale(0.98);
-        transition: transform 0.5s ease-in-out;
+        transform: scale(0.998);
+        background-color: var(--n20-color);
       }
     `}
 `
@@ -200,7 +200,6 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
   align-items: center;
   justify-content: center;
 
-  /* $tabName이 "user"일 때 스타일 적용 */
   ${({ $tabName }) =>
     $tabName === "user" &&
     css`
@@ -243,7 +242,7 @@ const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
   "aria-current": $active ? "page" : undefined,
 }))<{ $active: boolean }>`
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.5px;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
 `
