@@ -147,7 +147,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       display: flex;
       justify-content: center;
       a {
-        margin-left: -1.9rem;
+        margin-left: -1rem;
       }
     `}
 
@@ -173,7 +173,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       display: flex;
       justify-content: center;
       a {
-        margin-left: 1.9rem;
+        margin-left: 1rem;
       }
     `}
 `
@@ -192,8 +192,8 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
     $tabName === "user" &&
     css`
       position: absolute;
-      width: 4.65rem;
-      height: 4.65rem;
+      width: 4.7rem;
+      height: 4.7rem;
       top: -2.7rem;
       left: 50%;
       transform: translateX(-50%);
