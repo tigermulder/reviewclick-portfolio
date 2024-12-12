@@ -3,7 +3,7 @@ import {
   FilterDropDownProps,
   FilterOption,
 } from "@/types/component-types/filter-dropdown-type"
-import IconDropDown from "assets/ico-dropdown-arrow.svg?react"
+import IconDropDown from "assets/ico_onboard_arrow.svg?react"
 import styled from "styled-components"
 
 const FilterDropDown = ({
