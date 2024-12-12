@@ -48,7 +48,7 @@ function Notice() {
 export default Notice
 
 const Details = styled.details`
-  margin: 2rem 0;
+  margin: 2rem 0 5rem;
   cursor: pointer;
 `
 

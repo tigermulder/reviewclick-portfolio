@@ -139,7 +139,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
     $tabName === "campaign" &&
     css`
       width: 50%;
-      padding: 0 0 1.4rem;
+      padding: 0.5rem 0px 2.6rem;
       background: var(--white);
       border-top-right-radius: 30px;
       border-top: 0.5px solid var(--n100-color);
@@ -165,7 +165,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
     $tabName === "alerts" &&
     css`
       width: 50%;
-      padding: 0 0 1.4rem;
+      padding: 0.5rem 0px 2.6rem;
       border-top-left-radius: 30px;
       background: var(--white);
       border-top: 0.5px solid var(--n100-color);
@@ -194,7 +194,7 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
       position: absolute;
       width: 4.7rem;
       height: 4.7rem;
-      top: -2.7rem;
+      top: -3.6rem;
       left: 50%;
       transform: translateX(-50%);
     `}
