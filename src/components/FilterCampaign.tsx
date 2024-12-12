@@ -9,30 +9,46 @@ const FilterCampaign = ({
 }: FilterCampaignBar) => {
   return (
     <FilterChipWrap>
-      {chips.map((chip: ChipType) => (
-        <Chip
-          key={chip}
-          selected={chip === selectedChip}
-          onClick={() => onSelect(chip)}
-          aria-pressed={chip === selectedChip}
-          role="button"
-          tabIndex={0}
-          onKeyPress={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              onSelect(chip)
-            }
-          }}
-        >
-          {chip}
-        </Chip>
-      ))}
+      <FilterChipBarStyled>
+        {chips.map((chip: ChipType) => (
+          <Chip
+            key={chip}
+            selected={chip === selectedChip}
+            onClick={() => onSelect(chip)}
+            aria-pressed={chip === selectedChip}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                onSelect(chip)
+              }
+            }}
+          >
+            {chip}
+          </Chip>
+        ))}
+      </FilterChipBarStyled>
     </FilterChipWrap>
   )
 }
 
 export default FilterCampaign
 
-const FilterChipWrap = styled.ul`
+const FilterChipWrap = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 4.4rem;
+  left: 0;
+  padding: 1.5rem 1.5rem 0.75rem;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--n60-color);
+  z-index: 10;
+`
+
+const FilterChipBarStyled = styled.ul`
   position: fixed;
   width: 100%;
   top: 4.4rem;
@@ -52,7 +68,8 @@ const FilterChipWrap = styled.ul`
 const Chip = styled.li<{ selected: boolean }>`
   padding: 0.6rem 1.2rem;
   font-size: var(--font-bodyM-size);
-  font-weight: ${({ selected }) => (selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)")}
+  font-weight: ${({ selected }) =>
+    selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)"};
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   white-space: nowrap;
