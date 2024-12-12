@@ -106,7 +106,7 @@ const DropdownButton = styled.div<{
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
   border: 1px solid
-    ${({ $isOpen }) => ($isOpen ? "var(--prim-L400)" : "var(--n200-color)")};
+    ${({ $isOpen }) => ($isOpen ? "var(--revu-color)" : "var(--n200-color)")};
   box-shadow: 0px 0px 0px 2px ${({ $isOpen }) => ($isOpen ? "#FDD8D9" : "none")};
   padding: 0 0.8rem;
   background: white;

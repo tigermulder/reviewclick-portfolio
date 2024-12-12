@@ -84,7 +84,7 @@ const Content = styled.main<ContentProps>`
     if ($isMyCampaignPage) {
       return `
         min-height: 100vh; 
-        margin: 9rem auto 0;
+        margin: 10rem auto 0;
         padding: 1.5rem 1.5rem 8rem;
         background: var(--whitewood);
       `
