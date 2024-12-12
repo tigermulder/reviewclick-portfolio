@@ -49,11 +49,6 @@ const FilterChipWrap = styled.div`
 `
 
 const FilterChipBarStyled = styled.ul`
-  position: fixed;
-  width: 100%;
-  top: 4.4rem;
-  padding: 1.5rem 1.5rem 0.75rem;
-  background: var(--white);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -62,14 +57,12 @@ const FilterChipBarStyled = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
-  z-index: 10;
 `
 
 const Chip = styled.li<{ selected: boolean }>`
   padding: 0.6rem 1.2rem;
   font-size: var(--font-bodyM-size);
-  font-weight: ${({ selected }) =>
-    selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)"};
+  font-weight: ${({ selected }) => (selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)")}
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   white-space: nowrap;
