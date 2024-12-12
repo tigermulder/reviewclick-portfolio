@@ -222,7 +222,7 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
     else if ($tabName === "alerts") return "1.5rem"
     else return "1.7rem"
   }};
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
   color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
 `
 
