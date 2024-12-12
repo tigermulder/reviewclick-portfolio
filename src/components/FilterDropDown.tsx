@@ -108,7 +108,10 @@ const DropdownButton = styled.div<{
   border: 1px solid
     ${({ $isOpen }) => ($isOpen ? "var(--revu-color)" : "var(--n200-color)")};
   box-shadow: 0px 0px 0px 2px ${({ $isOpen }) => ($isOpen ? "#FDD8D9" : "none")};
-  transform: rotate(${({ $isOpen }) => ($isOpen ? "180deg" : "0")});
+  svg {
+    transform: rotate(${({ $isOpen }) => ($isOpen ? "180deg" : "0")});
+  }
+
   padding: 0 0.8rem;
   background: white;
   border-radius: 0.8rem;
