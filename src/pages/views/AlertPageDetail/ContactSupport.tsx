@@ -172,7 +172,7 @@ const ContactSupport = () => {
 
     const options = {
       maxSizeMB: 0.6,
-      maxWidthOrHeight: 500,
+      maxWidthOrHeight: 600,
       useWebWorker: true,
     }
 
