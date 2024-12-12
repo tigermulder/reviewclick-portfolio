@@ -272,7 +272,7 @@ const ContactSupport = () => {
       <TextAreaContainer>
         <TextAreaSection>
           <textarea
-            placeholder="문의하실 내용을 입력하세요."
+            placeholder="문의하실 내용을 입력하세요. (10글자 이상 입력하세요)"
             value={reviewText}
             onChange={handleContactChange}
           />
