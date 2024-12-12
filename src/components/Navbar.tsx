@@ -165,7 +165,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
     $tabName === "alerts" &&
     css`
       width: 50%;
-      padding: 0.3rem 0;
+      padding: 0.4rem 0 0.8rem;
       border-top-left-radius: 30px;
       background: var(--white);
       border-top: 0.5px solid var(--n100-color);
@@ -192,9 +192,9 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
     $tabName === "user" &&
     css`
       position: absolute;
-      width: 4.6rem;
-      height: 4.6rem;
-      top: -2.35rem;
+      width: 4.65rem;
+      height: 4.65rem;
+      top: -2.7rem;
       left: 50%;
       transform: translateX(-50%);
     `}
