@@ -109,6 +109,7 @@ function App() {
       location.pathname !== RoutePath.ContactAdd &&
       location.pathname !== RoutePath.TermsOfService &&
       location.pathname !== RoutePath.PrivacyPolicy &&
+      !isNotificationDetail &&
       !isReviewDetail) ||
     location.pathname === RoutePath.UserProfile ||
     location.pathname === RoutePath.Home
