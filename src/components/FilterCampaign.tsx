@@ -77,6 +77,7 @@ const Chip = styled.li<{ selected: boolean }>`
     background 0.1s ease-in-out,
     color 0.1s ease-in-out;
   &:hover {
+   font-weight: ${({ selected }) => (selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)")}
     background: ${({ selected }) =>
       selected ? "var(--revu-color)" : "var(--whitesmoke)"};
   }
