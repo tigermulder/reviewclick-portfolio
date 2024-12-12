@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const useScrollAnimation = () => {
-  const [popUpOffsetY, setPopUpOffsetY] = useState(-62)
+  const [popUpOffsetY, setPopUpOffsetY] = useState(-61)
   const [scale, setScale] = useState(1)
 
   useEffect(() => {
@@ -13,9 +13,9 @@ const useScrollAnimation = () => {
         0,
         Math.min(scrollPosition, maxScroll)
       )
-      let newOffsetY = -64
+      let newOffsetY = -61
       if (clampedScrollPosition <= 100) {
-        newOffsetY = -64 + (clampedScrollPosition / 100) * 64
+        newOffsetY = -61 + (clampedScrollPosition / 100) * 61
       } else {
         newOffsetY = 0
       }
