@@ -533,7 +533,7 @@ const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
     transform: `translate(-50%, ${$offsetY}px)`,
   },
 }))<{ $offsetY: number }>`
-  width: calc(100% - 30px);
+  width: 92.775%;
   position: absolute;
   left: 50%;
   display: flex;

@@ -294,7 +294,7 @@ a {
 body,
 .app-bar,
 .bottom-tab-bar {
-  max-width: 480px;
+  max-width: 768px;
   min-width: 280px;
   font-family: var(--font-family-suit);
   font-weight: var(--font-weight-light);
