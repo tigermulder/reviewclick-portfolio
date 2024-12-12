@@ -374,7 +374,7 @@ const StepItemInfoTextBox = styled.div`
 const StepNotice = styled.span`
   margin-bottom: 1rem;
   font-size: var(--font-callout-small-size);
-  font-weight: var(--font-callout-small-weight);
+  font-weight: var(--font-weight-medium);
   line-height: var(--base-line-height);
   letter-spacing: var(--font-callout-small-letter-spacing);
   color: var(--n200-color);
