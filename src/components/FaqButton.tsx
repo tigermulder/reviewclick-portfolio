@@ -22,8 +22,8 @@ export default FaqButton
 
 const FaqContainer = styled.button`
   position: fixed;
-  right: 2.5rem;
-  bottom: 7.6rem;
+  right: 2rem;
+  bottom: 9.5rem;
   z-index: 10;
   width: 6rem;
   height: 6rem;
