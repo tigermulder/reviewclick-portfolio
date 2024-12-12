@@ -62,7 +62,8 @@ const FilterChipBarStyled = styled.ul`
 const Chip = styled.li<{ selected: boolean }>`
   padding: 0.6rem 1.2rem;
   font-size: var(--font-bodyM-size);
-  font-weight: ${({ selected }) => (selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)")}
+  font-weight: ${({ selected }) =>
+    selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)"};
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   white-space: nowrap;
