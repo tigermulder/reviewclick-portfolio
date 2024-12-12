@@ -172,8 +172,6 @@ a {
   -moz-tab-size: 4;
   tab-size: 4;
 
-  --parent-padding: 1.5rem;
-
   /* 색상관련 */
   --primary-color: #202020;
   --revu-color: #f52e36;
@@ -189,21 +187,23 @@ a {
   --dimgray: #747474;
   --whitegray: #e4e4e4;
   --puregray: #e2e2e2;
+  --lightgray: #eaedf3;
   --darkred: #a1080e;
   --gray: #606060;
   --gray-01: #555555;
   --purple: #570be5;
+  --lightpurple: #f8f4ff;
 
-  --n20-color: #f4f5f5;
-  --n40-color: #e9ebec;
-  --n60-color: #e2e4e4;
-  --n80-color: #d8ddde;
-  --n100-color: #bbc6c9;
-  --n200-color: #a0acb1;
-  --n300-color: #788991;
-  --n400-color: #5a6a72;
-  --n500-color: #32373a;
-  --n600-color: #29363d;
+  --n20-color: #f3f5f7;
+  --n40-color: #e9ecef;
+  --n60-color: #dee2e6;
+  --n80-color: #ced4da;
+  --n100-color: #b1b8bd;
+  --n200-color: #939a9f;
+  --n300-color: #757d82;
+  --n400-color: #596065;
+  --n500-color: #3c4348;
+  --n600-color: #212529;
   --prim-L20: #fef0f1;
   --prim-L40: #fcc0c2;
   --prim-L60: #fba7ab;
@@ -211,8 +211,8 @@ a {
   --prim-L100: #f9777d;
   --prim-L200: #f65f66;
   --prim-L300: #f6464e;
-  --prim-L400: #f52e36;
   --prim-L500: #f4151f;
+  --prim-L600: #e50b14;
 
   /* 폰트관련 */
   --base-line-height: 1.4;
@@ -225,45 +225,38 @@ a {
 
   /* 폰트계층 */
   /* H1 */
-  --font-h1-size: 3rem;
+  --font-h1-size: 2.6rem;
   --font-h1-weight: var(--font-weight-extrabold);
-  --font-h1-line-height: 1.2;
-  --font-h1-letter-spacing: calc(var(--font-h1-size) * (-2 / 100));
+  --font-h1-letter-spacing: calc(var(--font-h1-size) * (-0.4 / 100));
 
-  /* H2 */
+  /* h2 */
   --font-h2-size: 2rem;
   --font-h2-weight: var(--font-weight-extrabold);
-  --font-h2-line-height: 1.4;
   --font-h2-letter-spacing: calc(var(--font-h2-size) * (-0.3 / 100));
 
   /* H3 */
   --font-h3-size: 1.8rem;
   --font-h3-weight: var(--font-weight-bold);
-  --font-h3-line-height: 1.4;
   --font-h3-letter-spacing: calc(var(--font-h3-size) * (-0.5 / 100));
 
   /* H4 */
   --font-h4-size: 1.6rem;
   --font-h4-weight: var(--font-weight-extrabold);
-  --font-h4-line-height: 1.4;
   --font-h4-letter-spacing: calc(var(--font-h4-size) * (-2 / 100));
 
   /* H5 */
   --font-h5-size: 1.5rem;
   --font-h5-weight: var(--font-weight-bold);
-  --font-h5-line-height: 1.4;
   --font-h5-letter-spacing: calc(var(--font-h5-size) * (-0.3 / 100));
 
   /* title */
   --font-title-size: 1.4rem;
   --font-title-weight: var(--font-weight-bold);
-  --font-title-line-height: 1.4;
   --font-title-letter-spacing: calc(var(--font-title-size) * (-0.5 / 100));
 
   /* bodyL */
   --font-bodyL-size: 1.4rem;
   --font-bodyL-weight: var(--font-weight-medium);
-  --font-bodyL-line-height: 1.4;
   --font-bodyL-letter-spacing: calc(var(--font-bodyL-size) * (-0.3 / 100));
 
   /* bodyM */
@@ -275,13 +268,11 @@ a {
   /* Callout */
   --font-callout-size: 1.4rem;
   --font-callout-weight: var(--font-weight-bold);
-  --font-callout-line-height: 1.4;
   --font-callout-letter-spacing: calc(var(--font-callout-size) * (-0.5 / 100));
 
   /* Callout Small */
   --font-callout-small-size: 1rem;
   --font-callout-small-weight: var(--font-weight-bold);
-  --font-callout-small-line-height: 1.4;
   --font-callout-small-letter-spacing: calc(
     var(--font-callout-small-size) * (-2 / 100)
   );
@@ -289,13 +280,11 @@ a {
   /* Caption */
   --font-caption-size: 1.2rem;
   --font-caption-weight: var(--font-weight-medium);
-  --font-caption-line-height: 1.4;
   --font-caption-letter-spacing: calc(var(--font-caption-size) * (-0.5 / 100));
 
   /* Caption small */
   --font-caption-small-size: 1rem;
   --font-caption-small-weight: var(--font-weight-bold);
-  --font-caption-small-line-height: 1.4;
   --font-caption-small-letter-spacing: calc(
     var(--font-caption-small-size) * (-2 / 100)
   );
@@ -305,15 +294,14 @@ a {
 body,
 .app-bar,
 .bottom-tab-bar {
-  max-width: 768px;
+  max-width: 480px;
   min-width: 280px;
   font-family: var(--font-family-suit);
   font-weight: var(--font-weight-light);
   color: var(--primary-color);
   font-size: var(--base-font-size);
+  line-height: var(--base-line-height);
   word-break: break-all;
-  overflow: hidden;
-  line-height: 1.4;
 }
 @font-face {
   font-family: "SUIT";
@@ -342,8 +330,6 @@ body,
 
 button {
   font-size: var(--font-callout-size);
-  font-weight: var(--font-callout-weight);
-  line-height: var(--font-callout-line-height);
   letter-spacing: var(--font-callout-letter-spacing);
 }
 input::placeholder {

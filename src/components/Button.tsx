@@ -2,7 +2,6 @@ import { forwardRef } from "react"
 import IconArrowGo from "assets/ico_arr_go.svg?url"
 import SuccessIcon from "./SuccessIcon"
 import FailedIcon from "./FailedIcon"
-import IconCopy from "assets/ico-copy.svg"
 import IconUpload from "assets/ico_upload.svg"
 
 import {
@@ -29,11 +28,11 @@ const Dot = styled.div`
   position: absolute;
   top: -0.3rem;
   left: 50%;
-  width: 0.2rem;
-  height: 0.7rem;
+  width: 0.15rem;
+  height: 0.6rem;
   background-color: var(--prim-L100);
   border-radius: 0.15rem;
-  transform-origin: center 1.1rem;
+  transform-origin: center 0.95rem;
   animation: ${fade} 1s linear infinite;
 
   &:nth-child(1) {
@@ -120,7 +119,8 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
 }))<StyledButtonProps>`
   width: 100%;
   padding: 1.2rem;
-  border-radius: 8px;
+  border-radius: 0.8rem;
+  font-weight: var(--font-weight-bold);
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   ${({ $marginTop }) => $marginTop && `margin-top: ${$marginTop};`}
 
@@ -128,9 +128,16 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
     switch ($variant) {
       case "red":
         return css`
-          background-color: ${disabled ? "#FCC0C2" : "var(--revu-color)"};
-          color: white;
+          background-color: ${disabled
+            ? "var(--n40-color)"
+            : "var(--revu-color)"};
+          color: ${disabled ? "var(--n100-color)" : "var(--white)"};
           border: none;
+          &:active {
+            background-color: var(--darkred);
+            color: rgba(255, 255, 255, 0.7);
+            transform: scale(0.998);
+          }
         `
       case "outlined":
         return css`
@@ -183,7 +190,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
       case "pink":
         return css`
           background-color: var(--prim-L20);
-          color: var(--prim-L400);
+          color: var(--prim-L500);
           border: none;
         `
       case "default":
@@ -254,35 +261,6 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
             letter-spacing: var(--font-callout-small-letter-spacing);
           }
         `
-      case "copy":
-        return css`
-          padding: 0;
-          height: 3.3rem;
-          font-size: var(--font-bodyM-size);
-          font-weight: var(--font-bodyM-weight);
-          line-height: var(--font-bodyM-line-height);
-          letter-spacing: var(--font-bodyM-letter-spacing);
-          background-color: var(--n40-color);
-          color: var(--n500-color);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          span {
-            margin-left: 0.4rem;
-            font-size: var(--font-callout-small-size);
-            font-weight: var(--font-callout-small-weight);
-            line-height: var(--font-callout-small-line-height);
-            letter-spacing: var(--font-callout-small-letter-spacing);
-          }
-          &::before {
-            content: "";
-            display: block;
-            background: url("${IconCopy}") no-repeat center / 100%;
-            width: 1.3rem;
-            height: 1.3rem;
-            margin-right: 0.2rem;
-          }
-        `
       case "spinner":
         return css`
           background-color: var(--prim-L20);
@@ -319,7 +297,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           align-items: center;
           justify-content: center;
           font-size: 1.5rem;
-          color: var(--prim-L400);
+          color: var(--prim-L500);
           font-weight: var(--font-weight-medium);
         `
       case "uploadImage":

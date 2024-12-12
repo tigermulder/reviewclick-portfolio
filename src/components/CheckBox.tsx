@@ -38,21 +38,21 @@ const CheckboxLabel = styled.label<{ $isTitle?: boolean; checked: boolean }>`
     $isTitle &&
     `
     padding: 1.1rem 1.5rem;
-    border: 1px solid ${checked ? "var(--primary-color)" : "var(--n40-color)"};
+    border: 1px solid ${checked ? "var(--revu-color)" : "var(--n80-color)"};
     border-radius: 0.5rem;
     background-color: ${
       checked ? "var(--light-primary-color)" : "var(--white)"
     };
     color: ${checked ? "var(--primary-color)" : "var(--n600-color)"};
-    transition: border-color 0.2s ease;
+    transition: border-color 0.14s ease-in-out;
 
     &:hover {
-      border-color: ${checked ? "var(--prim-L400)" : "var(--n40-color)"};
+      border-color: ${checked ? "var(--revu-color)" : "var(--n80-color)"};
     }
     ${
       checked &&
       `
-      border-color: var(--prim-L400);
+      border-color: var(--revu-color);
     `
     }
   `}
@@ -80,11 +80,13 @@ const CheckboxCustom = styled.span<CheckboxCustomProps>`
   svg {
     width: 2rem;
     height: 2rem;
+
     color: ${({ checked }) =>
       checked ? "var(--primary-color)" : "var(--whitesmoke)"};
     .all-check {
       color: ${({ checked }) =>
-        checked ? "var(--prim-L400)" : "var(--n100-color)"};
+        checked ? "var(--revu-color)" : "var(--n100-color)"};
+      transition: color 0.14s ease-in-out;
     }
     .check-fill {
       color: ${({ checked }) => (checked ? "var(--white)" : "var(--silver)")};
@@ -104,7 +106,8 @@ const CheckboxText = styled.span<Partial<CheckboxTextProps>>`
   color: ${({ $isTitle, checked }) =>
     $isTitle
       ? checked
-        ? "var(--prim-L400)"
+        ? "var(--revu-color)"
         : "var(--n100-color)"
       : "var(--n600-color)"};
+  transition: color 0.14s ease-in-out;
 `

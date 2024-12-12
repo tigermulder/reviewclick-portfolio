@@ -61,9 +61,9 @@ const FilterChipBarStyled = styled.ul`
 `
 
 const Chip = styled.li<{ selected: boolean }>`
-  padding: 0.55rem 1.1rem;
-  font-size: 1.3rem;
-  font-weight: var(--font-bodyM-weight);
+  padding: 0.6rem 1.2rem;
+  font-size: var(--font-bodyM-size);
+  font-weight: ${({ selected }) => (selected ? "font-weight: var(--font-weight-bold)" : "var(--font-bodyM-weight)")}
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
   white-space: nowrap;
@@ -72,10 +72,10 @@ const Chip = styled.li<{ selected: boolean }>`
     selected ? "var(--revu-color)" : "transparent"};
   border: 0.1rem solid var(--whitesmoke);
   border-radius: 99.9rem;
-  cursor: pointer;
+
   transition:
-    background 0.1s,
-    color 0.1s;
+    background 0.1s ease-in-out,
+    color 0.1s ease-in-out;
   &:hover {
     background: ${({ selected }) =>
       selected ? "var(--revu-color)" : "var(--whitesmoke)"};

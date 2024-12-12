@@ -288,8 +288,8 @@ const ButtonWrapper = styled.div<{ $visible: boolean }>`
     $visible ? "translateY(0)" : "translateY(100%)"};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition:
-    transform 0.3s ease-out,
-    opacity 0.2s ease-out;
+    transform 0.2s ease-in-out,
+    opacity 0.1s ease-in-out;
   z-index: 100;
 `
 

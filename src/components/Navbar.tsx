@@ -242,7 +242,7 @@ const Circle = styled.span`
   right: 0;
   width: 0.45rem;
   height: 0.45rem;
-  background: var(--prim-L400);
+  background: var(--prim-L500);
   border: 0.15rem solid #fff;
   border-radius: 50%;
   box-sizing: initial;
