@@ -9,46 +9,34 @@ const FilterCampaign = ({
 }: FilterCampaignBar) => {
   return (
     <FilterChipWrap>
-      <FilterChipBarStyled>
-        {chips.map((chip: ChipType) => (
-          <Chip
-            key={chip}
-            selected={chip === selectedChip}
-            onClick={() => onSelect(chip)}
-            aria-pressed={chip === selectedChip}
-            role="button"
-            tabIndex={0}
-            onKeyPress={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                onSelect(chip)
-              }
-            }}
-          >
-            {chip}
-          </Chip>
-        ))}
-      </FilterChipBarStyled>
+      {chips.map((chip: ChipType) => (
+        <Chip
+          key={chip}
+          selected={chip === selectedChip}
+          onClick={() => onSelect(chip)}
+          aria-pressed={chip === selectedChip}
+          role="button"
+          tabIndex={0}
+          onKeyPress={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              onSelect(chip)
+            }
+          }}
+        >
+          {chip}
+        </Chip>
+      ))}
     </FilterChipWrap>
   )
 }
 
 export default FilterCampaign
 
-const FilterChipWrap = styled.div`
+const FilterChipWrap = styled.ul`
   position: fixed;
   width: 100%;
   top: 4.4rem;
-  left: 0;
   padding: 1.5rem 1.5rem 0.75rem;
-  background: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--n60-color);
-  z-index: 10;
-`
-
-const FilterChipBarStyled = styled.ul`
   background: var(--white);
   display: flex;
   align-items: center;
@@ -58,6 +46,7 @@ const FilterChipBarStyled = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
+  z-index: 10;
 `
 
 const Chip = styled.li<{ selected: boolean }>`
@@ -77,7 +66,6 @@ const Chip = styled.li<{ selected: boolean }>`
     background 0.1s ease-in-out,
     color 0.1s ease-in-out;
   &:hover {
-   font-weight: ${({ selected }) => (selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)")}
     background: ${({ selected }) =>
       selected ? "var(--revu-color)" : "var(--whitesmoke)"};
   }
