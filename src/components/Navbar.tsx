@@ -149,6 +149,10 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       a {
         margin-left: -1.9rem;
       }
+      &:active {
+        transform: scale(0.98);
+        transition: transform 0.5s ease-in-out;
+      }
     `}
 
   ${({ $tabName }) =>
@@ -159,6 +163,10 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       left: 50%;
       transform: translate(-50%, -50%);
       margin-top: -0.3rem;
+      &:active {
+        transform: scale(0.98);
+        transition: transform 0.5s ease-in-out;
+      }
     `}
 
   ${({ $tabName }) =>
@@ -174,6 +182,10 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       justify-content: center;
       a {
         margin-left: 1.9rem;
+      }
+      &:active {
+        transform: scale(0.98);
+        transition: transform 0.5s ease-in-out;
       }
     `}
 `
