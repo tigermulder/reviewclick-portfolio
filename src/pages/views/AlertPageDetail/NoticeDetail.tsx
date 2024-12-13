@@ -52,11 +52,13 @@ const Container = styled.div`
     font-weight: var(--font-h3-weight);
     letter-spacing: var(--font-h3-letter-spacing);
     text-align: center;
+    white-space: pre-line;
   }
   p {
     margin-top: 3.6rem;
     font-size: 1.4rem;
     font-weight: var(--font-weight-medium);
     color: var(--n400-color);
+    white-space: pre-line;
   }
 `
