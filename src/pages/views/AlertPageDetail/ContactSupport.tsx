@@ -180,19 +180,22 @@ const ContactSupport = () => {
     setLoadingModalOpen(true)
 
     try {
-      const compressedFiles = await Promise.all(
-        filesToUpload.map(async (file) => {
-          // 압축 전 파일 크기 로그
-          console.log("압축 전 파일 크기:", file.size, "bytes")
+      // const compressedFiles = await Promise.all(
+      //   filesToUpload.map(async (file) => {
+      //     console.log("압축 전 파일 크기:", file.size, "bytes")
 
-          const compressedFile = await imageCompression(file, options)
+      //     const compressedFile = await imageCompression(file, options)
 
-          // 압축 후 파일 크기 로그
-          console.log("압축 후 파일 크기:", compressedFile.size, "bytes")
+      //     console.log("압축 후 파일 크기:", compressedFile.size, "bytes")
 
-          return compressedFile
-        })
-      )
+      //     return compressedFile
+      //   })
+      // )
+
+      // 압축 없이 원본 파일 그대로 사용
+      const compressedFiles = filesToUpload.map((file) => {
+        return file
+      })
 
       const newUploaded = compressedFiles.map((file) => {
         return {
