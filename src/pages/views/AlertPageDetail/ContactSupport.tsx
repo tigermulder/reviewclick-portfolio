@@ -95,6 +95,7 @@ const ContactSupport = () => {
 
   const handleSubmit = async () => {
     try {
+      setLoadingModalOpen(true) // 요청 시작 시 로딩 모달 표시
       const requestData: any = {
         qnaCategory: selectedFilter.value,
         question: reviewText,
@@ -104,6 +105,7 @@ const ContactSupport = () => {
         requestData.reviewId = selectedCampaign.value
       }
 
+      let response
       if (uploadedImages.length > 0) {
         const formData = new FormData()
         formData.append("qnaCategory", requestData.qnaCategory)
@@ -116,25 +118,20 @@ const ContactSupport = () => {
           formData.append(fieldName, img.file)
         })
 
-        const response = await addQna(formData)
-        setLoadingModalOpen(true)
-        if (response.statusCode === 0) {
-          setLoadingModalOpen(false)
-          showSuccessModal()
-        } else {
-          throw new Error()
-        }
+        response = await addQna(formData)
       } else {
-        const response = await addQna(requestData)
-        setLoadingModalOpen(true)
-        if (response.statusCode === 0) {
-          setLoadingModalOpen(false)
-          showSuccessModal()
-        } else {
-          throw new Error()
-        }
+        response = await addQna(requestData)
+      }
+
+      if (response.statusCode === 0) {
+        // 성공적으로 응답을 받으면 로딩 모달 닫고 결과 모달 표시
+        setLoadingModalOpen(false)
+        showSuccessModal()
+      } else {
+        throw new Error()
       }
     } catch (error) {
+      // 에러 발생 시 로딩 모달 닫고 토스트
       setLoadingModalOpen(false)
       addToast("다시 시도해주세요.", "warning", 3000, "qna")
     }
