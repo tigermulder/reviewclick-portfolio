@@ -117,20 +117,25 @@ const ContactSupport = () => {
         })
 
         const response = await addQna(formData)
+        setLoadingModalOpen(true)
         if (response.statusCode === 0) {
+          setLoadingModalOpen(false)
           showSuccessModal()
         } else {
           throw new Error()
         }
       } else {
         const response = await addQna(requestData)
+        setLoadingModalOpen(true)
         if (response.statusCode === 0) {
+          setLoadingModalOpen(false)
           showSuccessModal()
         } else {
           throw new Error()
         }
       }
     } catch (error) {
+      setLoadingModalOpen(false)
       addToast("다시 시도해주세요.", "warning", 3000, "qna")
     }
   }
@@ -342,7 +347,7 @@ const ContactSupport = () => {
         onCancel={function (): void {
           throw new Error("Function not implemented.")
         }}
-        title={"이미지 최적화중입니다"}
+        title={"1:1문의 등록중입니다"}
         content={
           <>
             <p>
