@@ -313,6 +313,7 @@ const CartStepContainer = styled.ul`
 
   li {
     position: relative;
+    background-color: white;
     &::before {
       content: "";
       position: absolute;
