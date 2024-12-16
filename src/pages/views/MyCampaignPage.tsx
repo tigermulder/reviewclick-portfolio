@@ -282,6 +282,7 @@ const Result = styled.span`
 
 const Total = styled.span`
   font-size: var(--caption-small-size);
+  margin-left: 0.14rem;
 `
 
 const MyReviewContainer = styled.ul<{ $hasItems: boolean }>`

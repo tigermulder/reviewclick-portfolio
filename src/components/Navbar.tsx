@@ -223,7 +223,7 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
     else return "1.7rem"
   }};
   margin-bottom: 0.25rem;
-  color: ${({ $active }) => ($active ? "var(--L600)" : "var(--Silver)")};
+  color: ${({ $active }) => ($active ? "var(--L500)" : "var(--Silver)")};
 `
 
 const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
@@ -231,7 +231,7 @@ const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
 }))<{ $active: boolean }>`
   font-size: 1rem;
   font-weight: 500;
-  color: ${({ $active }) => ($active ? "var(--L600)" : "var(--Silver)")};
+  color: ${({ $active }) => ($active ? "var(--L500)" : "var(--Silver)")};
 `
 
 const Circle = styled.span`

@@ -401,7 +401,7 @@ const GuideContent = styled.div`
   margin-top: 1.5rem;
 
   .guide-list {
-    background: var(--WWood);
+    background-color: var(--WWood);
     color: var(--Gray02);
   }
 
@@ -424,7 +424,7 @@ const GuideContent = styled.div`
     content: "";
     position: absolute;
     left: 0;
-    top: 8px;
+    top: 7px;
     width: 0.25rem;
     height: 0.25rem;
     border-radius: 50%;
