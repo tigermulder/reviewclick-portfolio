@@ -96,7 +96,6 @@ const DetailContainer = styled.div`
     height: 15px;
     width: 0.2rem;
     border-left: 2px dashed var(--N40);
-    z-index: 1;
   }
 `
 
