@@ -120,7 +120,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   width: 100%;
   padding: 1.2rem;
   border-radius: 0.8rem;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-bold);
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   ${({ $marginTop }) => $marginTop && `margin-top: ${$marginTop};`}
 
@@ -253,7 +253,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           width: 93%;
           height: 3.6rem;
           margin: -6rem auto 0;
-          font-size: 1.2rem;
+          font-size: var(--caption-size);
           background-color: var(--L600);
           box-shadow: 0px 0px 12px 0px rgba(255, 165, 169, 0.6);
           color: white;

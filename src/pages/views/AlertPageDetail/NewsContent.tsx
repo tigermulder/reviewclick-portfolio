@@ -147,6 +147,7 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
   gap: 0.8rem;
   font-size: var(--font-body-size);
   color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--N300)")};
+  font-weight: var(--font-light);
 
   svg {
     width: 1.3rem;
@@ -155,7 +156,7 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
 `
 
 const NotifyMessage = styled.p<{ isClicked: boolean }>`
-  margin-top: 0.6rem;
+  margin-top: 0.4rem;
   font-size: var(--font-h5-size);
   font-weight: var(--font-medium);
   color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--RevBlack)")};
