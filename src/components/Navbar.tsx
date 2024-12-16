@@ -224,7 +224,6 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
       border-radius: 50%;
     `}
 
-  // pressed 상태일 때 스타일
   &.pressed {
     ${({ $tabName }) =>
       $tabName === "user"
@@ -235,7 +234,7 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
         : css`
             background-color: var(--N40);
           `}
-    transition: none; // 즉각 반응하게 transition 제거
+    transition: none;
   }
 `
 

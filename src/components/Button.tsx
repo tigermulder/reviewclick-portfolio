@@ -130,7 +130,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           background-color: ${disabled ? "var(--N40)" : "var(--L400)"};
           color: ${disabled ? "var(--N100)" : "white"};
           border: none;
-          &:active {
+          &:not(:disabled):active {
             background-color: var(--Darkred);
             color: rgba(255, 255, 255, 0.7);
             transform: scale(0.998);

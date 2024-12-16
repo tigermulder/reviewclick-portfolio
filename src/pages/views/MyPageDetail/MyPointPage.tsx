@@ -90,31 +90,31 @@ const MyPointWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.4rem;
 `
 
 const ReviewCardThumb = styled.div`
   position: relative;
-  width: 8.1rem;
-  height: 8.1rem;
+  width: 8.2rem;
+  height: 8.2rem;
+  border: 0.5px solid var(--WWood);
   overflow: hidden;
   border-radius: 1rem;
-  border: 0.5px solid var(--WWood);
   flex-shrink: 0;
 
   img {
-    width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
   }
 `
 
 const ReviewCardInfo = styled.div`
-  margin-left: 1.4rem;
   flex-grow: 1;
   min-width: 0;
 `
 
-const CardDate = styled.p`
-  font-size: var(--caption-size);
+const CardDate = styled.span`
+  font-size: var(--caption-size) !important;
+  font-weight: var(--font-light);
   color: var(--QSilver);
 `
 
