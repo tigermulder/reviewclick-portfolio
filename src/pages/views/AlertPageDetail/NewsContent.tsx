@@ -150,7 +150,7 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
   font-weight: var(--font-light);
 
   svg {
-    width: 1.2rem;
+    width: 1rem;
     color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--L600)")};
   }
 `

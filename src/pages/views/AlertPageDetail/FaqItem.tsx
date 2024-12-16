@@ -50,7 +50,7 @@ const NotifyMessage = styled.div`
   height: 1.9rem;
 
   svg {
-    width: 1.2rem;
+    width: 1rem;
   }
   img {
     margin-left: auto;

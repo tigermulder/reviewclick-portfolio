@@ -82,6 +82,9 @@ const NotifyMessage = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 
+  svg {
+    width: 1rem;
+  }
   img {
     position: absolute;
     right: 0;
