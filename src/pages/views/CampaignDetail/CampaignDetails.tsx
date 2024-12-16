@@ -93,7 +93,7 @@ const DetailContainer = styled.div`
     position: absolute;
     top: 1.1rem;
     left: 0;
-    height: 53%;
+    height: 15px;
     width: 0.2rem;
     border-left: 1.5px dashed var(--N40);
   }
