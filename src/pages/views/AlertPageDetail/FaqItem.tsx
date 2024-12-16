@@ -12,7 +12,7 @@ const FaqItem = ({ faqItem }: any) => {
 
   return (
     <FAQListItem>
-      <Button onClick={toggleOpen}>
+      <button onClick={toggleOpen}>
         <NotifyMessage>
           <IconNew />
           <p>{faqItem.title}</p>
@@ -22,7 +22,7 @@ const FaqItem = ({ faqItem }: any) => {
             alt="Toggle FAQ"
           />
         </NotifyMessage>
-      </Button>
+      </button>
       {isOpen && (
         <NoticeContent>
           <p>{faqItem.content}</p>
@@ -40,25 +40,14 @@ const FAQListItem = styled.li`
   width: 100%;
 `
 
-const Button = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  position: relative;
-`
-
 const NotifyMessage = styled.div`
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  position: relative;
-  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  height: 1.9rem;
 
   img {
     margin-left: auto;
