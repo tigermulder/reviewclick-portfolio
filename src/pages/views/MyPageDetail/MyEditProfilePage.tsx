@@ -38,20 +38,20 @@ const MyEditProfilePage = () => {
       })
 
       if (response.statusCode === 0) {
-        addToast("내 정보가 수정됐어요.", "info", 1000, "EditProfile")
+        addToast("내 정보가 수정됐어요.", "info", 3000, "EditProfile")
         navigate(RoutePath.UserProfile)
       } else {
         throw new Error()
       }
     } catch (err) {
-      addToast("다시시도해주세요", "warning", 1000, "EditProfile")
+      addToast("다시시도해주세요", "info", 3000, "EditProfile")
     }
   }
 
   return (
     <Container>
       <ReuseHeader
-        title="내 정보 수정"
+        title="내 정보"
         onBack={() => navigate(RoutePath.UserProfile)}
       />
       <Label>새 비밀번호</Label>
