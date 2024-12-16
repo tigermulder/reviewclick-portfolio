@@ -330,6 +330,10 @@ input:focus::placeholder {
   outline: none;
 }
 
+textarea {
+  font-weight: var(--font-light);
+}
+
 .blind {
   position: absolute;
   width: 1px;
