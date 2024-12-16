@@ -203,11 +203,14 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
       position: absolute;
       width: 5rem;
       height: 5rem;
-      top: -4rem;
+      top: -3.8rem;
       left: 50%;
       transform: translateX(-50%);
+      transition: transform 0.1s ease-in-out;
+
       &:active {
-        background-color: none;
+        transform: translateX(-50%) scale(0.9);
+        background-color: var(--N20);
       }
     `}
 `
