@@ -15,6 +15,15 @@ const Navbar = () => {
 
   const [activeTab, setActiveTab] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null)
+  const [pressedTab, setPressedTab] = useState<string | null>(null)
+
+  const handleTouchStart = (tabName: string) => {
+    setPressedTab(tabName)
+  }
+
+  const handleTouchEnd = () => {
+    setPressedTab(null)
+  }
 
   useEffect(() => {
     const email = localStorage.getItem("email")
@@ -68,6 +77,9 @@ const Navbar = () => {
           onClick={(e) =>
             handleTabClick("campaign", true, RoutePath.MyCampaign, e)
           }
+          onTouchStart={() => handleTouchStart("campaign")}
+          onTouchEnd={handleTouchEnd}
+          className={pressedTab === "campaign" ? "pressed" : ""}
         >
           <NavItemContent>
             <StyledIcon as={IconCampaign} $active={activeTab === "campaign"} />
@@ -82,7 +94,10 @@ const Navbar = () => {
           onClick={(e) =>
             handleTabClick("user", true, RoutePath.UserProfile, e)
           }
+          onTouchStart={() => handleTouchStart("user")}
+          onTouchEnd={handleTouchEnd}
           $tabName="user"
+          className={pressedTab === "user" ? "pressed" : ""}
         >
           <NavItemContent>
             <StyledIcon
@@ -98,6 +113,9 @@ const Navbar = () => {
         <StyledLink
           to={RoutePath.Alert}
           onClick={(e) => handleTabClick("alerts", true, RoutePath.Alert, e)}
+          onTouchStart={() => handleTouchStart("alerts")}
+          onTouchEnd={handleTouchEnd}
+          className={pressedTab === "alerts" ? "pressed" : ""}
         >
           <NavItemContent>
             <StyledIcon
@@ -189,15 +207,11 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
   justify-content: center;
   border-radius: 1.2rem;
   cursor: pointer;
+  transition:
+    background-color 0.1s ease-in-out,
+    transform 0.1s ease-in-out;
 
-  ${({ $tabName }) =>
-    $tabName !== "user" &&
-    css`
-      &:active {
-        transition: background-color 0.1s ease-in-out;
-        background-color: var(--N40);
-      }
-    `}
+  // user 탭의 경우 원형으로, 터치 시 scale 변화
   ${({ $tabName }) =>
     $tabName === "user" &&
     css`
@@ -207,13 +221,22 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
       top: -3.8rem;
       left: 50%;
       transform: translateX(-50%);
-      transition: transform 0.1s ease-in-out;
-
-      &:active {
-        transform: translateX(-50%) scale(0.9);
-        background-color: var(--N20);
-      }
+      border-radius: 50%;
     `}
+
+  // pressed 상태일 때 스타일
+  &.pressed {
+    ${({ $tabName }) =>
+      $tabName === "user"
+        ? css`
+            transform: translateX(-50%) scale(0.9);
+            background-color: var(--N20);
+          `
+        : css`
+            background-color: var(--N40);
+          `}
+    transition: none; // 즉각 반응하게 transition 제거
+  }
 `
 
 const NavItemContent = styled.div`
@@ -224,9 +247,7 @@ const NavItemContent = styled.div`
 `
 
 const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
-  ({ $active }) => ({
-    "aria-hidden": true,
-  })
+  {}
 )<{ $active: boolean; $tabName?: string }>`
   width: ${({ $tabName }) => {
     if ($tabName === "user") return "5.6rem"
