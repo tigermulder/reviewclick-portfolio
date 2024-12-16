@@ -228,12 +228,12 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
   })
 )<{ $active: boolean; $tabName?: string }>`
   width: ${({ $tabName }) => {
-    if ($tabName === "user") return "5rem"
+    if ($tabName === "user") return "5.6rem"
     else if ($tabName === "alerts") return "1.5rem"
     else return "1.7rem"
   }};
   height: ${({ $tabName }) => {
-    if ($tabName === "user") return "5rem"
+    if ($tabName === "user") return "5.6rem"
     else if ($tabName === "alerts") return "1.5rem"
     else return "1.7rem"
   }};
