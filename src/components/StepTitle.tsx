@@ -25,7 +25,7 @@ const Step = styled.span`
     padding: 0.2rem 1.4rem;
     width: auto;
     height: auto;
-    border: 0.15rem solid var(--L200);
+    border: 0.2rem solid var(--L200);
     border-radius: 5rem;
     font-size: var(--font-body-size);
     font-weight: var(--font-medium);
