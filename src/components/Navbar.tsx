@@ -165,7 +165,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
     $tabName === "alerts" &&
     css`
       width: 50%;
-      padding: 0.5rem 0px 2.6rem;
+      padding: 0.5rem 0px 2rem;
       border-top-left-radius: 30px;
       background-color: white;
       border-top: 0.5px solid var(--N100);
@@ -181,12 +181,18 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
 const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
   $tabName?: string
 }>`
-  width: 4.8rem;
-  height: 5rem;
+  width: 6rem;
+  height: 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 1.2rem;
+  cursor: pointer;
+
+  &:active {
+    background-color: var(--N20);
+  }
 
   ${({ $tabName }) =>
     $tabName === "user" &&
