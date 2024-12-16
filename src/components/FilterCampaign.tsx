@@ -67,7 +67,7 @@ const Chip = styled.li<{ selected: boolean }>`
   white-space: nowrap;
   color: ${({ selected }) => (selected ? "white" : "var(--N300)")};
   background-color: ${({ selected }) =>
-    selected ? "var(--L600)" : "transparent"};
+    selected ? "var(--L400)" : "transparent"};
   border: 0.1rem solid var(--WSmoke);
   border-radius: 99.9rem;
 
@@ -76,6 +76,6 @@ const Chip = styled.li<{ selected: boolean }>`
     color 0.1s ease-in-out;
   &:hover {
     background: ${({ selected }) =>
-      selected ? "var(--L600)" : "var(--WSmoke)"};
+      selected ? "var(--L400)" : "var(--WSmoke)"};
   }
 `
