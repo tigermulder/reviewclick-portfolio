@@ -199,8 +199,8 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
 const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
   $tabName?: string
 }>`
-  width: 5.8rem;
-  height: 5.8rem;
+  width: 5.4rem;
+  height: 5.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -267,6 +267,7 @@ const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
   font-size: var(--caption-small-size);
   font-weight: var(--font-medium);
   color: ${({ $active }) => ($active ? "var(--L400)" : "var(--Silver)")};
+  margin-top: 0.2rem;
 `
 
 const Circle = styled.span`
