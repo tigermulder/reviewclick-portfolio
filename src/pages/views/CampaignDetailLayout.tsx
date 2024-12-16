@@ -564,7 +564,7 @@ const Dday = styled.span`
   padding: 0.4rem 1rem;
   font-size: 1.1rem;
   background-color: var(--L20);
-  color: var(--L600);
+  color: var(--L300);
 `
 
 const Title = styled.h4`
