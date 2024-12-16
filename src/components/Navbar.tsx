@@ -200,9 +200,12 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
       position: absolute;
       width: 5rem;
       height: 5rem;
-      top: -3.6rem;
+      top: -4rem;
       left: 50%;
       transform: translateX(-50%);
+      &:active {
+        background-color: none;
+      }
     `}
 `
 
@@ -219,24 +222,23 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
   })
 )<{ $active: boolean; $tabName?: string }>`
   width: ${({ $tabName }) => {
-    if ($tabName === "user") return "4.9rem"
+    if ($tabName === "user") return "5rem"
     else if ($tabName === "alerts") return "1.5rem"
     else return "1.7rem"
   }};
   height: ${({ $tabName }) => {
-    if ($tabName === "user") return "4.9rem"
+    if ($tabName === "user") return "5rem"
     else if ($tabName === "alerts") return "1.5rem"
     else return "1.7rem"
   }};
-  margin-bottom: 0.25rem;
   color: ${({ $active }) => ($active ? "var(--L400)" : "var(--Silver)")};
 `
 
 const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
   "aria-current": $active ? "page" : undefined,
 }))<{ $active: boolean }>`
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: var(--caption-small-size);
+  font-weight: var(--font-medium);
   color: ${({ $active }) => ($active ? "var(--L400)" : "var(--Silver)")};
 `
 
