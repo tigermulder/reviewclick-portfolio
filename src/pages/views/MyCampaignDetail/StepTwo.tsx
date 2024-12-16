@@ -292,7 +292,7 @@ const CartTest = styled.div`
 `
 const CampaignStatus = styled.div`
   position: relative;
-  padding: 2rem 0 2.3rem 0;
+  padding: 2rem 1.5rem 2.3rem;
 `
 const CampaignTitle = styled.p`
   margin-bottom: 1.2rem;
@@ -305,12 +305,13 @@ const CampaignStatusCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.4rem;
 `
 
 const CampaignStatusCardThumb = styled.div`
   position: relative;
-  width: 8.1rem;
-  height: 8.1rem;
+  width: 8.9rem;
+  height: 8.9rem;
   overflow: hidden;
   border-radius: 1rem;
   flex-shrink: 0;
@@ -322,7 +323,6 @@ const CampaignStatusCardThumb = styled.div`
 `
 
 const StepItemInfoTextBox = styled.div`
-  margin-left: 1.4rem;
   flex-grow: 1;
   min-width: 0;
 
@@ -338,13 +338,15 @@ const StepItemInfoTextBox = styled.div`
     white-space: normal;
   }
   p {
-    margin-top: 0.6rem;
-    font-size: var(--font-h4-size);
+    margin-top: 0.4rem;
+    font-size: var(--font-h3-size);
+    font-weight: var(--font-bold);
   }
 `
 
 const CardDate = styled.span`
   font-size: var(--caption-size);
+  font-weight: var(--font-light);
   color: var(--QSilver);
 `
 
@@ -383,9 +385,8 @@ const GuideHeader = styled.button`
 
   .title {
     margin-top: 0;
-    font-weight: var(--font-bold);
-    font-size: 1.6rem;
-    letter-spacing: -1px;
+    font-size: var(--font-h4-size);
+    letter-spacing: var(--L-spacing-M);
   }
 
   .ico_arr {
@@ -439,7 +440,6 @@ const ReviewContent = styled.div`
 
 const ReviewHeader = styled.p`
   padding: 1.2rem 0;
-  font-weight: var(--font-bold);
   font-size: var(--font-h4-size);
 `
 
