@@ -25,9 +25,8 @@ const MyPage = () => {
         <h2>
           안녕하세요,
           <br />
-          <span>{extractUsername(userEmail)}</span> 회원님!
+          {extractUsername(userEmail)} 회원님!
         </h2>
-        <span>ID : {extractUsername(userEmail)}</span>
       </TitleSection>
       {/* /// 타이틀 */}
 
@@ -109,14 +108,6 @@ const TitleSection = styled.div`
     font-size: 2.4rem;
     font-weight: var(--font-bold);
     letter-spacing: var(--L-spacing-M);
-  }
-
-  > span {
-    display: block;
-    margin-top: 0.6rem;
-    font-weight: var(--font-bold);
-    color: var(--L300);
-    letter-spacing: unset;
   }
 `
 

@@ -85,7 +85,7 @@ const Content = styled.main<ContentProps>`
       return `
         min-height: 100vh; 
         margin: 10rem auto 0;
-        padding: 1.5rem 1.5rem 8rem;
+        padding: 1.5rem 1.5rem 10rem;
         background: var(--WWood);
       `
     } else if ($isSpecialPage) {
