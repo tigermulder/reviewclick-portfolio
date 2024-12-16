@@ -127,7 +127,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
     switch ($variant) {
       case "red":
         return css`
-          background-color: ${disabled ? "var(--N40)" : "var(--L600)"};
+          background-color: ${disabled ? "var(--N40)" : "var(--L400)"};
           color: ${disabled ? "var(--N100)" : "white"};
           border: none;
           &:active {
@@ -208,7 +208,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           padding: 0;
           height: 3.7rem;
           font-size: var(--font-body-size);
-          color: var(--L600);
+          color: var(--L500);
           border: 1px solid var(--N80);
           display: flex;
           align-items: center;

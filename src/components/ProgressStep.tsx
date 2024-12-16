@@ -95,7 +95,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                     />
                   ) : (
                     <SuccessIcon
-                      backgroundColor="var(--L600)"
+                      backgroundColor="var(--L500)"
                       filter={true}
                       filterColor="rgba(245, 46, 54, 0.3)"
                     />
@@ -160,7 +160,7 @@ const StepBox = styled.div<StepBoxProps>`
     height: 0.15rem;
     background: ${({ $status }) =>
       $status === "done"
-        ? "linear-gradient(to right, var(--L600) 5%, transparent 5% 10%, var(--L600) 10% 15%, transparent 15% 20%, var(--L600) 20% 25%, transparent 25% 30%, var(--L600) 30% 35%, transparent 35% 40%, var(--L600) 40% 45%, transparent 45% 50%, var(--L600) 50% 55%, transparent 55% 60%, var(--L600) 60% 65%, transparent 65% 70%, var(--L600) 70% 75%, transparent 75% 80%, var(--L600) 80% 85%, transparent 85% 90%, var(--L600) 90% 95%, transparent 95% 100%)"
+        ? "linear-gradient(to right, var(--L500) 5%, transparent 5% 10%, var(--L500) 10% 15%, transparent 15% 20%, var(--L500) 20% 25%, transparent 25% 30%, var(--L500) 30% 35%, transparent 35% 40%, var(--L500) 40% 45%, transparent 45% 50%, var(--L500) 50% 55%, transparent 55% 60%, var(--L500) 60% 65%, transparent 65% 70%, var(--L500) 70% 75%, transparent 75% 80%, var(--L500) 80% 85%, transparent 85% 90%, var(--L500) 90% 95%, transparent 95% 100%)"
         : "var(--N40)"};
     z-index: -1;
   }
@@ -189,7 +189,7 @@ const IcoActive = styled.div`
     background: white;
     box-shadow: 0px 0px 10px rgba(245, 70, 78, 0.3);
     border-radius: 50%;
-    border: 1px solid var(--L600);
+    border: 1px solid var(--L500);
   }
 
   & > div:nth-child(2) {
@@ -199,7 +199,7 @@ const IcoActive = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--L600);
+    background-color: var(--L500);
     border-radius: 50%;
   }
 `
