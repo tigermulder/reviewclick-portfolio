@@ -178,13 +178,18 @@ const ThumbArea = styled.div`
   border-radius: 0.8rem;
   overflow: hidden;
   flex-shrink: 0;
+
+  img {
+    aspect-ratio: 10 / 10;
+  }
 `
 
 const InfoArea = styled.div`
   padding: 0 1.4rem !important;
-  margin-left: 0.8rem;
+
   p {
     font-size: var(--font-body-size);
+    line-height: 1.3;
     color: var(--N500);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -194,7 +199,7 @@ const InfoArea = styled.div`
   }
   span {
     font-size: var(--font-h2-size);
-    font-weight: var(--font-medium);
+    font-weight: var(--font-bold);
   }
 `
 
