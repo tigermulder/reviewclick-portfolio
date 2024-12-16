@@ -10,7 +10,6 @@ import {
 } from "@/types/component-types/button-type"
 import styled, { css, keyframes } from "styled-components"
 
-// Spinner css
 const fade = keyframes`
   0% {
     opacity: 1;
@@ -28,9 +27,9 @@ const Dot = styled.div`
   position: absolute;
   top: -0.3rem;
   left: 50%;
-  width: 0.15rem;
+  width: 0.16rem;
   height: 0.6rem;
-  background-color: var(--prim-L100);
+  background-color: var(--L100);
   border-radius: 0.15rem;
   transform-origin: center 0.95rem;
   animation: ${fade} 1s linear infinite;
