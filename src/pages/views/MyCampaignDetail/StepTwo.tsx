@@ -410,7 +410,9 @@ const GuideContent = styled.div`
     padding-left: 1rem;
     display: flex;
     align-items: flex-start;
-    font-size: var(--caption-size);
+    p {
+      font-size: var(--caption-size);
+    }
     p em {
       color: var(--Purple);
     }
