@@ -195,7 +195,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           font-size: var(--font-body-size);
           box-shadow: 0px 0px 10px rgba(246.44, 95.26, 102.39, 0.3);
           border: 1px solid var(--L60);
-          color: var(--L600);
+          color: var(--L500);
           display: flex;
           align-items: center;
           justify-content: center;
