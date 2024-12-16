@@ -345,7 +345,7 @@ const StepItemInfoTextBox = styled.div`
 `
 
 const CardDate = styled.span`
-  font-size: var(--caption-size);
+  font-size: var(--caption-size) !important;
   font-weight: var(--font-light);
   color: var(--QSilver);
 `

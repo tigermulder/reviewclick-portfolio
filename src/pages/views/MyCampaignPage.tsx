@@ -340,8 +340,9 @@ const ReviewCardInfo = styled.div`
   min-width: 0;
 `
 
-const CardDate = styled.p`
-  font-size: var(--caption-size);
+const CardDate = styled.span`
+  font-size: var(--caption-size) !important;
+  font-weight: var(--font-light);
   color: var(--QSilver);
 `
 
