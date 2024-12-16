@@ -21,13 +21,13 @@ const MyPage = () => {
       <SinglePageHeader title="마이페이지" showRouteToggle={false} />
 
       {/* 타이틀 */}
-      <TitleSection>
+      {/* <TitleSection>
         <h2>
           안녕하세요,
           <br />
           {extractUsername(userEmail)} 회원님!
         </h2>
-      </TitleSection>
+      </TitleSection> */}
       {/* /// 타이틀 */}
 
       {/* 하단 링크 */}

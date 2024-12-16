@@ -21,7 +21,6 @@ import GuideDetail from "./CampaignDetail/GuideDetail"
 import OnboardingPopup from "@/components/OnboardingPopup"
 import styled from "styled-components"
 
-// React Query Key
 const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
   "campaign",
   campaignCode,
