@@ -139,7 +139,7 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
     $tabName === "campaign" &&
     css`
       width: 50%;
-      padding: 0.5rem 0px 2.6rem;
+      padding: 0.5rem 0px 2rem;
       background-color: white;
       border-top-right-radius: 30px;
       border-top: 0.5px solid var(--N100);
