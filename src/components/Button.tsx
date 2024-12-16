@@ -117,7 +117,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   disabled: props.disabled,
 }))<StyledButtonProps>`
   width: 100%;
-  padding: 1.2rem;
+  padding: 1.1rem;
   border-radius: 0.8rem;
   font-weight: var(--font-bold);
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
@@ -253,7 +253,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           height: 3.6rem;
           margin: -6rem auto 0;
           font-size: var(--caption-size);
-          background-color: var(--L600);
+          background-color: var(--L500);
           box-shadow: 0px 0px 12px 0px rgba(255, 165, 169, 0.6);
           color: white;
           border: none;
