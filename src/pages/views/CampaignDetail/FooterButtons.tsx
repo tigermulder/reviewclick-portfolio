@@ -72,7 +72,7 @@ const FooterContainer = styled.div`
   bottom: 6.5rem;
   left: 0;
   width: 100%;
-  background: var(--white);
+  background-color: white;
   z-index: 19;
   padding: 1.5rem 1.5rem 3rem;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.06);

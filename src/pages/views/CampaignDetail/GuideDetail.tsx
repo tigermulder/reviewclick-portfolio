@@ -112,7 +112,7 @@ const GuideImg = styled.img`
 const Divider = styled.div`
   width: 100%;
   height: 0.1rem;
-  background: var(--N80);
+  background-color: var(--N80);
 `
 
 const GuideList = styled.ul`

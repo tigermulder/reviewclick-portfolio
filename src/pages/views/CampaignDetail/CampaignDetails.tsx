@@ -121,7 +121,7 @@ const DetailsList = styled.ul`
       transform: translateY(-50%);
       width: 0.4rem;
       height: 0.4rem;
-      background: var(--N80);
+      background-color: var(--N80);
       border-radius: 50%;
     }
     &:nth-child(1)::before {
