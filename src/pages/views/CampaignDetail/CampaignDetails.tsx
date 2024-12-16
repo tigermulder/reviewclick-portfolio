@@ -95,7 +95,8 @@ const DetailContainer = styled.div`
     left: 0;
     height: 15px;
     width: 0.2rem;
-    border-left: 1.5px dashed var(--N40);
+    border-left: 2px dashed var(--N40);
+    z-index: 1;
   }
 `
 
