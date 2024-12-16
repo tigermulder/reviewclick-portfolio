@@ -38,19 +38,18 @@ const CheckboxLabel = styled.label<{ $isTitle?: boolean; checked: boolean }>`
     $isTitle &&
     `
     padding: 1.1rem 1.5rem;
-    border: 1px solid ${checked ? "var(--L600)" : "var(--N80)"};
+    border: 1px solid ${checked ? "var(--L400)" : "var(--N80)"};
     border-radius: 0.5rem;
-    background-color: ${checked ? "var(--N500)" : "white"};
-    color: ${checked ? "var(--RevBlack)" : "var(--N600)"};
+    color: ${checked ? "var(--RevBlack)" : "var(--N400)"};
     transition: border-color 0.14s ease-in-out;
 
     &:hover {
-      border-color: ${checked ? "var(--L600)" : "var(--N80)"};
+      border-color: ${checked ? "var(--L400)" : "var(--N80)"};
     }
     ${
       checked &&
       `
-      border-color: var(--L600);
+      border-color: var(--L400);
     `
     }
   `}
@@ -81,7 +80,7 @@ const CheckboxCustom = styled.span<CheckboxCustomProps>`
 
     color: ${({ checked }) => (checked ? "var(--RevBlack)" : "var(--WSmoke)")};
     .all-check {
-      color: ${({ checked }) => (checked ? "var(--L600)" : "var(--N100)")};
+      color: ${({ checked }) => (checked ? "var(--L400)" : "var(--N100)")};
       transition: color 0.14s ease-in-out;
     }
     .check-fill {
@@ -96,6 +95,6 @@ const CheckboxText = styled.span<Partial<CheckboxTextProps>>`
   font-weight: ${({ $isTitle }) =>
     $isTitle ? "var(--font-medium)" : "normal"};
   color: ${({ $isTitle, checked }) =>
-    $isTitle ? (checked ? "var(--L600)" : "var(--N100)") : "var(--N600)"};
+    $isTitle ? (checked ? "var(--L600)" : "var(--N100)") : "var(--N400)"};
   transition: color 0.14s ease-in-out;
 `
