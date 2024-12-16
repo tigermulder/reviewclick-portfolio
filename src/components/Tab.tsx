@@ -27,7 +27,7 @@ const TabsContainer = styled.ul`
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 2.5rem;
+  gap: 2rem;
   overflow-x: auto;
   border-bottom: 1px solid var(--N80);
   margin-top: 1.2rem;
@@ -44,27 +44,27 @@ const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
   },
 }))<{ disabled: boolean }>`
   padding: 1.5rem 0px 0.75rem;
-  font-size: 1.8rem;
+  font-size: var(--font-h3-size);
   color: var(--N200);
   font-weight: var(--font-medium);
   white-space: nowrap;
 
   &.selected {
     position: relative;
-    color: var(--L600);
+    color: var(--L400);
 
     &:after {
       content: "";
       position: absolute;
       bottom: 0;
       left: 0;
-      background-color: var(--L600);
+      background-color: var(--L400);
       width: 100%;
       height: 2px;
     }
   }
 
   &:hover {
-    color: ${({ disabled }) => (disabled ? "var(--N200)" : "var(--L600)")};
+    color: ${({ disabled }) => (disabled ? "var(--N200)" : "var(--L400)")};
   }
 `
