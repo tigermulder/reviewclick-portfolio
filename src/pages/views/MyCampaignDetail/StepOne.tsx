@@ -325,8 +325,9 @@ const StepItemInfo = styled.div`
 
 const StepItemInfoThumb = styled.div`
   position: relative;
-  width: 8.9rem;
-  height: 8.9rem;
+  width: 8.4rem;
+  height: 8.4rem;
+  border: 0.5px solid var(--WWood);
   overflow: hidden;
   border-radius: 1rem;
   flex-shrink: 0;
@@ -344,7 +345,7 @@ const ReviewCardInfo = styled.div`
     padding-right: 1rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;

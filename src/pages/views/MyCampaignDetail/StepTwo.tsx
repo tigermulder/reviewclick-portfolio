@@ -202,11 +202,11 @@ const StepTwo = ({
             <CampaignStatusCardThumb>
               <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
             </CampaignStatusCardThumb>
-            <StepItemInfoTextBox>
+            <ReviewCardInfo>
               <CardDate>{formatDate(createTime)}</CardDate>
               <span>{campaignTitle}</span>
               <p>{reward?.toLocaleString()}P</p>
-            </StepItemInfoTextBox>
+            </ReviewCardInfo>
           </CampaignStatusCard>
         </CampaignStatus>
         {/* 리뷰가이드 및 리뷰작성 */}
@@ -310,19 +310,19 @@ const CampaignStatusCard = styled.div`
 
 const CampaignStatusCardThumb = styled.div`
   position: relative;
-  width: 8.9rem;
-  height: 8.9rem;
+  width: 8.4rem;
+  height: 8.4rem;
+  border: 0.5px solid var(--WWood);
   overflow: hidden;
   border-radius: 1rem;
   flex-shrink: 0;
 
   img {
-    width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
   }
 `
 
-const StepItemInfoTextBox = styled.div`
+const ReviewCardInfo = styled.div`
   flex-grow: 1;
   min-width: 0;
 
@@ -332,7 +332,7 @@ const StepItemInfoTextBox = styled.div`
     font-size: var(--font-body-size);
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;

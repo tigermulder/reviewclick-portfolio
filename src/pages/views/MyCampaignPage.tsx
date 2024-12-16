@@ -322,16 +322,15 @@ const ReviewCardHeader = styled(Link)`
 
 const ReviewCardThumb = styled.div`
   position: relative;
-  width: 8.9rem;
-  height: 8.9rem;
+  width: 8.4rem;
+  height: 8.4rem;
   overflow: hidden;
   border: 0.5px solid var(--WWood);
   border-radius: 1rem;
   flex-shrink: 0;
 
   img {
-    width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
   }
 `
 

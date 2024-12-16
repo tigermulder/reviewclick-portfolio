@@ -308,7 +308,7 @@ const CartStepContainer = styled.ul`
   margin: 0 -1.5rem;
   padding: 3rem 1.5rem 10rem 2.6rem;
   min-height: 100vh;
-  background: var(--WWood);
+  background-color: var(--WWood);
 
   li {
     position: relative;
@@ -322,7 +322,7 @@ const CartStepContainer = styled.ul`
       width: 1.3rem;
       height: 1.3rem;
       border-radius: 50%;
-      background: var(--N40);
+      background-color: var(--N40);
     }
   }
   > li:nth-child(1)::after {
@@ -334,7 +334,7 @@ const CartStepContainer = styled.ul`
     margin-right: 1.15rem;
     width: 0.3rem;
     height: 50%;
-    background: var(--N40);
+    background-color: var(--N40);
   }
   > li:nth-child(2)::after {
     content: "";
@@ -346,13 +346,13 @@ const CartStepContainer = styled.ul`
     margin-top: -0.5rem;
     width: 0.3rem;
     height: 60%;
-    background: var(--N40);
+    background-color: var(--N40);
   }
 `
 
 const StepItem = styled.li`
   padding: 1.5rem;
-  background-color: --white;
+  background-color: white;
   border-radius: 1.2rem;
 
   &:nth-of-type(2) {
