@@ -364,7 +364,7 @@ const NoticeBox = styled.div`
   p {
     margin-bottom: 0.4rem;
     font-size: 1.2rem;
-    letter-spacing: -1px;
+    letter-spacing: var(--L-spacing-M);
     font-weight: var(--font-medium);
     color: var(--L300);
     display: flex;
@@ -397,7 +397,7 @@ const NoticeBox = styled.div`
       width: 0.25rem;
       height: 0.25rem;
       border-radius: 50%;
-      background: var(--Gray02);
+      background-color: var(--Gray02);
       flex-shrink: 0;
     }
   }
@@ -442,7 +442,7 @@ const TextAreaSection = styled.div`
 const Count = styled.div`
   margin: 1rem 0;
   text-align: right;
-  font-size: 1.4rem;
+  font-size: var(--font-body-size);
   color: var(--N200);
 
   span {
@@ -454,7 +454,7 @@ const Count = styled.div`
 const ImageUploadBox = styled.div`
   padding: 0.75rem;
   border-radius: 1rem;
-  background: var(--N40);
+  background-color: var(--N40);
 `
 
 const ImageSection = styled.ul`

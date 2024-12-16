@@ -87,7 +87,7 @@ const NoticeBox = styled.ul`
   padding: 1.5rem;
   margin-top: 2.4rem;
   border-radius: 0.8rem;
-  background: var(--WWood);
+  background-color: var(--WWood);
   color: var(--Gray02);
   font-size: var(--caption-size);
   line-height: 1.25;
@@ -108,7 +108,7 @@ const NoticeBox = styled.ul`
     width: 0.25rem;
     height: 0.25rem;
     border-radius: 50%;
-    background: var(--Gray02);
+    background-color: var(--Gray02);
   }
   @keyframes fadeIn {
     from {

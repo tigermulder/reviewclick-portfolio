@@ -43,7 +43,7 @@ export default NoticeDetail
 
 const Container = styled.div`
   padding: 1.5rem;
-  background: var(--white);
+  background-color: white;
   min-height: 80vh;
   border-radius: 1rem;
 

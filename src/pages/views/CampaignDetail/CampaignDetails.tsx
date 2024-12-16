@@ -77,13 +77,13 @@ const ButtonContainer = styled.div`
 const Divider = styled.div`
   margin-top: 1.6rem;
   height: 0.1rem;
-  background: var(--N20);
+  background-color: var(--N20);
 `
 
 const DetailContainer = styled.div`
   position: relative;
   width: 100%;
-  background-color: #fff;
+  background-color: white;
   border-radius: 1rem;
   height: 4rem;
   margin: 2rem auto 0;

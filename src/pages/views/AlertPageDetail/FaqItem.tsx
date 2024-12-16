@@ -79,14 +79,14 @@ const ArrowIcon = styled.img`
 
 const NoticeContent = styled.div`
   padding: 1.6rem;
-  background: var(--WWood);
+  background-color: var(--WWood);
   border-radius: 1rem;
   margin-top: 2rem;
   animation: fadeIn 0.1s ease-in-out;
 
   p {
     font-size: 1.4rem;
-    color: var--Gray02);
+    color: var(--Gray02);
     white-space: pre-line;
   }
 
