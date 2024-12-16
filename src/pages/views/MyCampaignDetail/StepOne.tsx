@@ -197,11 +197,11 @@ const StepOne = ({
                 {isEnded ? "종료" : remainingTime}
               </RemainingDays> */}
             </StepItemInfoThumb>
-            <StepItemInfoTextBox>
+            <ReviewCardInfo>
               <CardDate>{formatDate(createTime)}</CardDate>
               <span>{campaignTitle}</span>
               <p>{reward?.toLocaleString()}P</p>
-            </StepItemInfoTextBox>
+            </ReviewCardInfo>
           </StepItemInfo>
           <Button $variant="pink" onClick={handleNavigate}>
             상품 구매하러가기
@@ -320,24 +320,23 @@ const StepItemInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.4rem;
 `
 
 const StepItemInfoThumb = styled.div`
   position: relative;
-  width: 8rem;
-  height: 8rem;
+  width: 8.9rem;
+  height: 8.9rem;
   overflow: hidden;
   border-radius: 1rem;
   flex-shrink: 0;
 
   img {
-    width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
   }
 `
 
-const StepItemInfoTextBox = styled.div`
-  margin-left: 1.4rem;
+const ReviewCardInfo = styled.div`
   flex-grow: 1;
   min-width: 0;
   span {
@@ -351,8 +350,9 @@ const StepItemInfoTextBox = styled.div`
     white-space: normal;
   }
   p {
-    margin-top: 0.6rem;
+    margin-top: 0.4rem;
     font-size: var(--font-h2-size);
+    font-weight: var(--font-bold);
   }
 `
 
