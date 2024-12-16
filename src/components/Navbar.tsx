@@ -181,8 +181,8 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
 const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
   $tabName?: string
 }>`
-  width: 6rem;
-  height: 6rem;
+  width: 5.8rem;
+  height: 5.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,10 +190,13 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
   border-radius: 1.2rem;
   cursor: pointer;
 
-  &:active {
-    background-color: var(--N20);
-  }
-
+  ${({ $tabName }) =>
+    $tabName !== "user" &&
+    css`
+      &:active {
+        background-color: var(--N40);
+      }
+    `}
   ${({ $tabName }) =>
     $tabName === "user" &&
     css`
