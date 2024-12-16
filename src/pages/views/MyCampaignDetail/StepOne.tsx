@@ -180,11 +180,11 @@ const StepOne = ({
         showRouteLink={showLinkRouter}
       />
       <CartTitle>
-        <p>
+        <h2>
           1시간 내에 상품 구매하고
           <br />
           온라인 영수증 인증하기
-        </p>
+        </h2>
       </CartTitle>
       <CartStepContainer>
         <StepItem>
@@ -237,12 +237,8 @@ const StepOne = ({
 export default StepOne
 
 const CartTitle = styled.div`
+  padding: 7rem 1.5rem 2rem;
   background-color: white;
-
-  p {
-    padding: 7rem 1.5rem 2rem;
-    font-size: var(--font-h2-size);
-  }
 `
 
 const CartStepContainer = styled.ul`
