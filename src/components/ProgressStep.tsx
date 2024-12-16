@@ -128,7 +128,7 @@ export default ProgressStep
 const ProgressContainer = styled.div`
   position: relative;
   height: 7rem;
-  margin: 2rem 0;
+  margin: 0 0 2rem;
 `
 
 const ProgressStepWrapper = styled.div`

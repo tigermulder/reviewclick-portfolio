@@ -317,12 +317,13 @@ const ReviewCardHeader = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.4rem;
 `
 
 const ReviewCardThumb = styled.div`
   position: relative;
-  width: 8.1rem;
-  height: 8.1rem;
+  width: 8.9rem;
+  height: 8.9rem;
   overflow: hidden;
   border: 0.5px solid var(--WWood);
   border-radius: 1rem;
@@ -335,7 +336,6 @@ const ReviewCardThumb = styled.div`
 `
 
 const ReviewCardInfo = styled.div`
-  margin-left: 1.4rem;
   flex-grow: 1;
   min-width: 0;
 `
@@ -357,6 +357,6 @@ const CardTitle = styled.span`
 `
 
 const CardPoint = styled.p`
-  margin-top: 0.2rem;
-  font-size: var(--font-h4-size);
+  margin-top: 0.4rem;
+  font-size: var(--font-h3-size);
 `
