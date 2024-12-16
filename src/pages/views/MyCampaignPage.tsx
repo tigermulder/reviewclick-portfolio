@@ -359,4 +359,5 @@ const CardTitle = styled.span`
 const CardPoint = styled.p`
   margin-top: 0.4rem;
   font-size: var(--font-h3-size);
+  font-weight: var(--font-bold);
 `
