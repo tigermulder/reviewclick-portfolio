@@ -83,7 +83,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       {/* success와 failed일 경우 아이콘 렌더링 */}
       {$variant === "success" && (
         <SuccessIcon
-          backgroundColor="var(--revu-color)"
+          backgroundColor="var(--L500)"
           filter={true}
           filterColor="rgba(245, 46, 54, 0.3)"
         />
