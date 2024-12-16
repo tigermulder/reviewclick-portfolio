@@ -231,7 +231,7 @@ const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
 }))<{ $active: boolean }>`
   font-size: 1rem;
   font-weight: 500;
-  color: ${({ $active }) => ($active ? "var(--L500)" : "var(--Silver)")};
+  color: ${({ $active }) => ($active ? "var(--L600)" : "var(--Silver)")};
 `
 
 const Circle = styled.span`
