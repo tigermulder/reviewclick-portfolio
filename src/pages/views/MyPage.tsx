@@ -19,19 +19,7 @@ const MyPage = () => {
     <>
       {/* 마이페이지 헤더 타이틀 */}
       <SinglePageHeader title="마이페이지" showRouteToggle={false} />
-
-      {/* 타이틀 */}
-      {/* <TitleSection>
-        <h2>
-          안녕하세요,
-          <br />
-          {extractUsername(userEmail)} 회원님!
-        </h2>
-      </TitleSection> */}
-      {/* /// 타이틀 */}
-
-      {/* 하단 링크 */}
-      <Links>
+      <MyPageListContainer>
         <li>
           <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>
         </li>
@@ -40,9 +28,9 @@ const MyPage = () => {
             서비스 이용가이드
           </StyledLink>
         </li>
-        {/* <li>
-          <StyledLink to={RoutePath.UserEditProfile}>내 정보 수정</StyledLink>
-        </li> */}
+        <li>
+          <StyledLink to={RoutePath.UserEditProfile}>내 정보</StyledLink>
+        </li>
         <li>
           <NoticeContainer>
             <NoticeHeader onClick={toggleNotice}>
@@ -92,7 +80,7 @@ const MyPage = () => {
             )}
           </NoticeContainer>
         </li>
-      </Links>
+      </MyPageListContainer>
       {/* 하단 링크 */}
     </>
   )
@@ -100,18 +88,7 @@ const MyPage = () => {
 
 export default MyPage
 
-const TitleSection = styled.div`
-  padding: 4.4rem 0 7.7rem;
-  text-align: center;
-
-  h2 {
-    font-size: 2.4rem;
-    font-weight: var(--font-bold);
-    letter-spacing: var(--L-spacing-M);
-  }
-`
-
-const Links = styled.ul`
+const MyPageListContainer = styled.ul`
   padding-bottom: 0;
 
   > li {
@@ -197,7 +174,7 @@ const NoticeContent = styled.div`
   ul {
     margin-bottom: 1.5rem;
     padding: 1.5rem;
-    background: var(--WWood);
+    background-color: var(--WWood);
     border-radius: 0.6rem;
   }
 
