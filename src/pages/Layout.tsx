@@ -106,7 +106,7 @@ const Content = styled.main<ContentProps>`
         background-color: var(--N20);
         min-height: 100vh; 
         margin: 0;
-        padding: 0 1.5rem;
+        padding: 5.9rem 1.5rem 0 ;
       `
     } else if ($UserServiceGuidePage) {
       return `

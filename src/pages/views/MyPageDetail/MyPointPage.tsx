@@ -29,7 +29,7 @@ const MyPointPage = () => {
   const rewardList = data?.list
 
   return (
-    <MyPointContainer>
+    <>
       <ReuseHeader title="포인트 적립 내역" onBack={() => navigate(-1)} />
       <MyPointListContainer>
         {rewardList && rewardList.length > 0 ? (
@@ -61,15 +61,11 @@ const MyPointPage = () => {
           <NoRewards /> // 리워드 리스트가 없을 때
         )}
       </MyPointListContainer>
-    </MyPointContainer>
+    </>
   )
 }
 
 export default MyPointPage
-
-const MyPointContainer = styled.div`
-  padding: 4.4rem 0 8rem;
-`
 
 const MyPointListContainer = styled.ul`
   width: 100%;
