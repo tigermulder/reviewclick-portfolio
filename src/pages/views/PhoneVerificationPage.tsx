@@ -275,7 +275,7 @@ const TextFieldWrapper = styled.div`
 
 const ButtonWrapper = styled.div<{ $visible: boolean }>`
   position: fixed;
-  padding: 1.5rem;
+  padding: 1.6rem 1.5rem 4.1rem;
   width: 100%;
   bottom: 0;
   left: 0;
