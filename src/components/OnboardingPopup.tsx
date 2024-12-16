@@ -260,11 +260,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
           ))}
         </PaginationContainer>
         {/* 닫기버튼 */}
-        <CloseButton
-          onClick={handleClose}
-          $color={"var(--white)"}
-          aria-label="닫기"
-        />
+        <CloseButton onClick={handleClose} $color={"white"} aria-label="닫기" />
         {/* 오늘 하루 보지 않기 체크박스 */}
         <DoNotShowAgain>
           <CheckboxLabel>
