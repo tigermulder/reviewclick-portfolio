@@ -13,12 +13,13 @@ const Step = styled.span`
   width: 2.4rem;
   height: 2.4rem;
   font-size: var(--font-body-size);
-  background: var(--L20);
+  background-color: var(--L20);
   color: var(--L300);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  font-weight: var(--font-light);
 
   &.active {
     padding: 0.2rem 1.4rem;
@@ -27,6 +28,7 @@ const Step = styled.span`
     border: 0.15rem solid var(--L200);
     border-radius: 5rem;
     font-size: var(--font-body-size);
+    font-weight: var(--font-medium);
     background-color: transparent;
   }
 `

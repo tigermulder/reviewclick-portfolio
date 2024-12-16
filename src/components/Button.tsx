@@ -253,7 +253,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           height: 3.6rem;
           margin: -6rem auto 0;
           font-size: var(--caption-size);
-          background-color: var(--L500);
+          background-color: var(--L400);
           box-shadow: 0px 0px 12px 0px rgba(255, 165, 169, 0.6);
           color: white;
           border: none;
