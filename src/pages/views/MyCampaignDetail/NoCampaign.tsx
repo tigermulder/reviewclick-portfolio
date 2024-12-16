@@ -42,6 +42,7 @@ const NoCampaignContainer = styled.div`
   p {
     margin-top: 1.2rem;
     color: var(--N300);
+    text-align: center;
   }
 `
 
