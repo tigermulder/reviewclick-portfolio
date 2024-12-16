@@ -145,12 +145,12 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-size: var(--font-body-size);
+  font-size: var(--caption-size);
   color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--N300)")};
   font-weight: var(--font-light);
 
   svg {
-    width: 1.3rem;
+    width: 1.2rem;
     color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--L600)")};
   }
 `
