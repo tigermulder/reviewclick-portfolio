@@ -78,7 +78,6 @@ const NotifyMessage = styled.p`
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 0.4rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
