@@ -49,6 +49,9 @@ const NotifyMessage = styled.div`
   text-overflow: ellipsis;
   height: 1.9rem;
 
+  svg {
+    width: 1.2rem;
+  }
   img {
     margin-left: auto;
     transition: transform 0.1s ease-in-out;
