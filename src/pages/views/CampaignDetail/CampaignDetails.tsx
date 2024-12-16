@@ -88,7 +88,7 @@ const DetailContainer = styled.div`
   height: 4rem;
   margin: 2rem auto 0;
   padding: 0 0 0 1.6rem;
-  &::before {
+  &:before {
     content: "";
     position: absolute;
     top: 1.1rem;
@@ -113,7 +113,7 @@ const DetailsList = styled.ul`
     font-size: var(--font-body-size);
     color: var(--N300);
 
-    &::before {
+    &:before {
       content: "";
       position: absolute;
       top: 50%;
