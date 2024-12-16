@@ -180,7 +180,7 @@ const ThumbArea = styled.div`
 `
 
 const InfoArea = styled.div`
-  padding: 0 1.4rem;
+  padding: 0 1.4rem !important;
   margin-left: 0.8rem;
   p {
     font-size: var(--font-body-size);
