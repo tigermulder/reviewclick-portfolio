@@ -194,6 +194,7 @@ const StyledLink = styled(Link).attrs<{ $tabName?: string }>({})<{
     $tabName !== "user" &&
     css`
       &:active {
+        transition: background-color 0.05s ease-in-out;
         background-color: var(--N40);
       }
     `}
