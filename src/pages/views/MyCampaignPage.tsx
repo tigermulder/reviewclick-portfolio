@@ -322,8 +322,8 @@ const ReviewCardHeader = styled(Link)`
 
 const ReviewCardThumb = styled.div`
   position: relative;
-  width: 8.4rem;
-  height: 8.4rem;
+  width: 8.2rem;
+  height: 8.2rem;
   overflow: hidden;
   border: 0.5px solid var(--WWood);
   border-radius: 1rem;

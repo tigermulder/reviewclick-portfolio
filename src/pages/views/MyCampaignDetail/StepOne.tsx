@@ -325,8 +325,8 @@ const StepItemInfo = styled.div`
 
 const StepItemInfoThumb = styled.div`
   position: relative;
-  width: 8.4rem;
-  height: 8.4rem;
+  width: 8.2rem;
+  height: 8.2rem;
   border: 0.5px solid var(--WWood);
   overflow: hidden;
   border-radius: 1rem;
