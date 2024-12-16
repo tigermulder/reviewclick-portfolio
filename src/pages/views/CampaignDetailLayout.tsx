@@ -524,7 +524,7 @@ const Line = styled.div`
     left: -1.5rem;
     width: calc(100% + 3rem);
     height: 0.4rem;
-    background-color: var(--n20-color);
+    background-color: var(--N20);
   }
 `
 
@@ -542,14 +542,12 @@ const PopUp = styled.div.attrs<{ $offsetY: number }>(({ $offsetY }) => ({
   background: rgba(255, 255, 255, 0.8);
   border-radius: 1.8rem;
   padding: 0.75rem 1.5rem;
-  border: 1px solid var(--white);
-  color: var(--purple);
+  border: 1px solid white;
+  color: var(--Purple);
   font-size: var(--font-h5-size);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--font-bodyL-line-height);
-  letter-spacing: var(--font-bodyL-letter-spacing);
+  font-weight: var(--font-bold);
   will-change: transform;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-in-out;
   z-index: -1;
 `
 
@@ -557,7 +555,7 @@ const DetailBody = styled.div`
   position: relative;
   top: -9.9rem;
   padding: 1.5rem 1.5rem 3rem;
-  background: #fff;
+  background-color: white;
 `
 
 const Dday = styled.span`
@@ -565,16 +563,12 @@ const Dday = styled.span`
   display: inline-block;
   padding: 0.4rem 1rem;
   font-size: 1.1rem;
-  font-weight: var(--font-callout-small-weight);
-  line-height: var(--font-callout-small-line-height);
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  background: var(--prim-L20);
-  color: var(--revu-color);
+  background-color: var(--L20);
+  color: var(--L600);
 `
 
 const Title = styled.h4`
   margin-top: 1rem;
-  font-size: var(--font-h4-size);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   letter-spacing: calc(1.6rem * (-0.3 / 100));
 `

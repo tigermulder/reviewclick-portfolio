@@ -86,7 +86,7 @@ const Content = styled.main<ContentProps>`
         min-height: 100vh; 
         margin: 10rem auto 0;
         padding: 1.5rem 1.5rem 8rem;
-        background: var(--whitewood);
+        background: var(--WWood);
       `
     } else if ($isSpecialPage) {
       if ($isCampaignDetail) {
@@ -103,7 +103,7 @@ const Content = styled.main<ContentProps>`
       }
     } else if ($isUserPointLogPage) {
       return `
-        background-color: var(--n20-color);
+        background-color: var(--N20);
         min-height: 100vh; 
         margin: 0;
         padding: 0 1.5rem;
@@ -111,29 +111,29 @@ const Content = styled.main<ContentProps>`
     } else if ($UserServiceGuidePage) {
       return `
         padding: 4.4rem 0 0;
-        background-color: var(--n80-color);
+        background-color: var(--N80);
       `
     } else if ($PrivacyPolicyPage || $TermsOfServicePage) {
       return `
         padding: 7rem 1.5rem 4rem;
-        background-color: var(--whitewood);
+        background-color: var(--WWood);
       `
     } else if ($UserAccountDeletionPage) {
       return `
         min-height: 100vh; 
         padding: 4.4rem 1.5rem 4rem;
-        background-color: var(--n20-color);
+        background-color: var(--N20);
       `
     } else if ($ContactAddPage || $isNoticeDetail || $isNotificationDetail) {
       return `
         min-height: 100vh; 
         padding: 7rem 1.5rem 4rem;
-        background-color: var(--n20-color);
+        background-color: var(--N20);
       `
     } else if ($isIntroducePage) {
       return `
         min-height: 100vh; 
-        background-color: #212529;
+        background-color: var(--N600);
       `
     } else if ($isNotFound) {
       return `

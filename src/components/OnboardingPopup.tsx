@@ -304,15 +304,15 @@ const DoNotShowAgain = styled.div`
   position: absolute;
   top: -3rem;
   left: 1.5rem;
-  color: var(--n80-color);
-  background: transparent;
+  color: var(--N80);
+  background-color: transparent;
   border: none;
   font-size: 1.4rem;
 `
 const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
-  font-weight: var(--font-bodyM-weight);
+  font-weight: var(--font-medium);
   cursor: pointer;
 
   input {
@@ -328,7 +328,7 @@ const CheckboxLabel = styled.label`
   }
 
   input:checked + svg {
-    color: var(--white);
+    color: white;
   }
 `
 
@@ -360,7 +360,7 @@ const CloseButton = styled.button<CloseButtonProps>`
   position: absolute;
   top: -3rem;
   right: 1.5rem;
-  background: transparent;
+  background-color: transparent;
   border: none;
   width: 2rem;
   height: 2rem;
@@ -400,8 +400,8 @@ const StartButton = styled.button`
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.9rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--white);
+  font-weight: var(--font-medium);
+  color: white;
   justify-content: center;
   align-items: center;
   z-index: 10;
@@ -422,8 +422,7 @@ const PaginationContainer = styled.div`
 
 const PaginationBullet = styled.button<{ active: boolean }>`
   border-radius: ${(props) => (props.active ? "0.5rem" : "50%")};
-  background-color: ${(props) =>
-    props.active ? "var(--prim-L300)" : "var(--n80-color)"};
+  background-color: ${(props) => (props.active ? "var(--L300)" : "var(--N80)")};
   width: ${(props) => (props.active ? "2.4rem" : "0.7rem")};
   height: 0.7rem;
   margin: 0 0.5rem;
@@ -441,7 +440,7 @@ const InfoArea = styled.div`
   width: 100%;
   bottom: 0;
   height: 15.3rem;
-  background: var(--snowwhite);
+  background: var(--SWhite);
   display: flex;
   gap: 0.8rem;
   flex-direction: column;
@@ -451,14 +450,12 @@ const InfoArea = styled.div`
 
   p {
     text-align: center;
-    font-size: 1.7rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.3;
+    font-weight: var(--font-medium);
     letter-spacing: calc(1.7rem * (-0.02 / 100));
-    color: var(--n500-color);
+    color: var(--N500);
   }
   p em {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-bold);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -468,13 +465,13 @@ const InfoArea = styled.div`
       height: 1.2rem;
     }
     &:nth-of-type(1) {
-      color: var(--success-color);
+      color: var(--Success);
       &::before {
         background: url("${NaverIcon}") no-repeat center / 100%;
       }
     }
     &:nth-of-type(2) {
-      color: var(--revu-color);
+      color: var(--L600);
       &::before {
         background: url("${RevuIcon}") no-repeat center / 0.8rem 0.8rem;
       }
@@ -500,10 +497,8 @@ const LastButton = styled.button`
     rgba(117, 125, 130, 1) 20.929153302577156%,
     rgba(229, 11, 20, 1) 79.92951388134382%
   );
-  color: var(--white);
-  font-size: var(--font-callout-size);
-  font-weight: var(--font-callout-weight);
-  letter-spacing: var(--font-callout-letter-spacing);
+  color: white;
+  font-size: var(--caption-size);
   border-radius: 2.8rem;
 
   &::before {
@@ -564,5 +559,5 @@ const IcoHand = styled.img<IcoHandProps>`
           ${handAnimation} 1.8s linear forwards
         `
       : "none"};
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
 `

@@ -7,7 +7,7 @@ import styled from "styled-components"
 const SinglePageHeader = ({ title, showRouteToggle = false }: SingleHeader) => {
   return (
     <HeaderContainer>
-      <Title>{title}</Title>
+      <h2>{title}</h2>
       {showRouteToggle && (
         <RouteLink to={RoutePath.UserAccountSetting}>
           <IconToggle />
@@ -30,13 +30,8 @@ const HeaderContainer = styled.div`
   z-index: 3;
   width: 100%;
   padding: 1.5rem;
-  background: var(--white);
+  background-color: --white;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-`
-
-const Title = styled.h3`
-  font-size: var(--font-h2-size);
-  font-weight: var(--font-weight-bold);
 `
 
 const RouteLink = styled(Link)`

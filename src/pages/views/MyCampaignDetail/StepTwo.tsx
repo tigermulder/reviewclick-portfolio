@@ -297,9 +297,6 @@ const CampaignStatus = styled.div`
 const CampaignTitle = styled.p`
   margin-bottom: 1.2rem;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  line-height: var(--font-h5-line-height);
-  letter-spacing: var(--font-h5-letter-spacing);
 `
 
 const CampaignStatusCard = styled.div`
@@ -332,10 +329,7 @@ const StepItemInfoTextBox = styled.div`
   span {
     width: 100%;
     padding-right: 1rem;
-    font-size: var(--font-bodyM-size);
-    font-weight: var(--font-bodyM-weight);
-    line-height: var(--font-bodyM-line-height);
-    letter-spacing: var(--font-bodyM-letter-spacing);
+    font-size: var(--font-body-size);
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -346,24 +340,19 @@ const StepItemInfoTextBox = styled.div`
   p {
     margin-top: 0.6rem;
     font-size: var(--font-h4-size);
-    font-weight: var(--font-h4-weight);
-    letter-spacing: var(--font-h4-letter-spacing);
   }
 `
 
 const CardDate = styled.span`
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  line-height: var(--font-caption-line-height);
-  letter-spacing: var(--font-caption-letter-spacing);
-  color: var(--quicksilver);
+  font-size: var(--caption-size);
+  color: var(--QSilver);
 `
 
 const ReviewTestContainer = styled.div`
   position: relative;
   min-height: 100vh;
   padding: 1rem 0 0;
-  background: var(--whitewood);
+  background: var(--WWood);
 
   &:before {
     content: "";
@@ -372,7 +361,7 @@ const ReviewTestContainer = styled.div`
     left: -1.5rem;
     width: calc(100% + 3rem);
     height: 100%;
-    background-color: var(--n20-color);
+    background-color: var(--N20);
     z-index: -1;
   }
 `
@@ -394,13 +383,13 @@ const GuideHeader = styled.button`
 
   .title {
     margin-top: 0;
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-bold);
     font-size: 1.6rem;
     letter-spacing: -1px;
   }
 
   .ico_arr {
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease-in-out;
   }
 
   .ico_arr.active {
@@ -412,8 +401,8 @@ const GuideContent = styled.div`
   margin-top: 1.5rem;
 
   .guide-list {
-    background: var(--whitewood);
-    color: var(--gray-01);
+    background: var(--WWood);
+    color: var(--Gray02);
   }
 
   .guide-list li {
@@ -421,11 +410,9 @@ const GuideContent = styled.div`
     padding-left: 1rem;
     display: flex;
     align-items: flex-start;
-    font-size: var(--font-caption-size);
-    letter-spacing: var(--font-caption-small-letter-spacing);
+    font-size: var(--caption-size);
     p em {
-      font-weight: var(--font-bodyM-weight);
-      color: var(--purple);
+      color: var(--Purple);
     }
   }
   .guide-list li:not(:last-of-type) {
@@ -439,7 +426,7 @@ const GuideContent = styled.div`
     width: 0.25rem;
     height: 0.25rem;
     border-radius: 50%;
-    background: var(--gray-01);
+    background-color: var(--Gray02);
     flex-shrink: 0;
   }
 `
@@ -450,9 +437,8 @@ const ReviewContent = styled.div`
 
 const ReviewHeader = styled.p`
   padding: 1.2rem 0;
-  font-weight: var(--font-weight-bold);
-  font-size: 1.6rem;
-  letter-spacing: -1px;
+  font-weight: var(--font-bold);
+  font-size: var(--font-h4-size);
 `
 
 const ReviewTextBox = styled.div`
@@ -462,7 +448,7 @@ const ReviewTextBox = styled.div`
   height: 20rem;
   padding: 1.4rem 1.4rem 4rem;
   border-radius: 1rem;
-  background-color: #fff;
+  background-color: white;
 
   textarea {
     display: block;
@@ -472,10 +458,8 @@ const ReviewTextBox = styled.div`
     outline: 0;
     border: none;
     &::placeholder {
-      font-size: var(--font-bodyL-size);
-      line-height: 1.4;
-      letter-spacing: var(--font-bodyL-letter-spacing);
-      color: var(--n200-color);
+      font-size: var(--font-body-size);
+      color: var(--N200);
     }
   }
 `
@@ -492,8 +476,8 @@ const BottomButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--white);
-  border-top: 0.1rem solid var(--n40-color);
+  background-color: white;
+  border-top: 0.1rem solid var(--N40);
 
   p {
     display: flex;
@@ -501,10 +485,8 @@ const BottomButtonContainer = styled.div`
     justify-content: center;
     padding-left: 1.6rem;
     margin-bottom: 1rem;
-    font-size: var(--font-callout-small-size);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--font-callout-small-letter-spacing);
-    color: var(--n200-color);
+    font-size: var(--caption-small-size);
+    color: var(--N200);
     background: url("${IconNotice}") no-repeat left center / 1.2rem 1.2rem;
   }
 `
@@ -514,10 +496,10 @@ const Count = styled.div`
   right: 1.6rem;
   bottom: 1.6rem;
   font-size: 1.4rem;
-  color: var(--n200-color);
+  color: var(--N200);
 
   span {
-    font-weight: var(--font-weight-bold);
-    color: var(--primary-color);
+    font-weight: var(--font-bold);
+    color: var(--RevBlack);
   }
 `

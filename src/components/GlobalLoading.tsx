@@ -53,7 +53,7 @@ const Dot = styled.div`
   left: 50%;
   width: 0.2rem;
   height: 0.7rem;
-  background-color: var(--prim-L100);
+  background-color: var(--L100);
   border-radius: 0.3rem;
   transform-origin: center 1.1rem;
   animation: ${fade} 1s linear infinite;

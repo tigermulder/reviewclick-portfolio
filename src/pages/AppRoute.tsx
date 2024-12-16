@@ -2,7 +2,6 @@ import { lazy } from "react"
 import { Route, Routes as ReviewClickRoutes, Navigate } from "react-router-dom"
 import { RoutePath } from "types/route-path"
 import Layout from "./Layout"
-const LoginPage = lazy(() => import("./views/LoginPage"))
 const JoinPage = lazy(() => import("./views/AgreementPage"))
 const JoinVerifyPage = lazy(() => import("./views/AccountVerificationPage"))
 const PhoneVerificationPage = lazy(
@@ -54,8 +53,6 @@ export const AppRoute = () => {
         <Route path={RoutePath.Home} element={<MainPage />} />
         {/* 캠페인상세 페이지 */}
         <Route path="campaign/:campaignCode" element={<CampaignDetailPage />} />
-        {/* 로그인 페이지 */}
-        <Route path={RoutePath.Login} element={<LoginPage />} />
         {/* 인증 페이지 1-1 */}
         <Route path={RoutePath.Join} element={<JoinPage />} />
         {/* 인증 페이지 1-2 */}

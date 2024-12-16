@@ -320,13 +320,13 @@ a {
 input::placeholder {
   font-weight: var(--font-weight-light);
   letter-spacing: 0;
-  color: var(--n200-color);
+  color: var(--N200);
 }
 input:focus::placeholder {
   opacity: 0;
 }
 .textfield input:focus {
-  border: 0.1rem solid var(--n600-color);
+  border: 0.1rem solid var(--N600);
   outline: none;
 }
 

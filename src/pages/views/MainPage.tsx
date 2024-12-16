@@ -11,7 +11,6 @@ import BannerSlider from "components/Banner"
 import LikeButton from "components/LikeButton"
 import { FilterBar } from "components/FilterBar"
 import { useRouter } from "@/hooks/useRouting"
-import CategoryMenu from "components/CategoryMenu"
 import dummyImage from "assets/dummy-image.png"
 import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
@@ -176,7 +175,7 @@ const CampaignImage = styled.div`
   position: relative;
   border-radius: 0.4rem;
   overflow: hidden;
-  background: var(--white);
+  background-color: white;
   img {
     width: 100%;
     height: 17.8rem;
@@ -205,8 +204,8 @@ const RemainingDays = styled.span.attrs<RemainingDaysProps>((props) => ({
   color: white;
   padding: 0.5rem 0.6rem;
   border-radius: 0.2rem;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-bold);
   z-index: 2;
 `
 
@@ -226,13 +225,11 @@ const CampaignCardInfo = styled.div`
 `
 
 const Price = styled.p`
-  font-size: 1.6rem;
-  font-weight: 800;
-  line-height: var(--base-line-height);
+  font-size: var(--font-h4-size);
+  font-weight: var(--font-extrabold);
 `
 
 const Title = styled.p`
-  line-height: var(--font-h1-line-height);
   font-size: 1.3rem;
   font-weight: 500;
   margin: 0.4rem 0 0;
@@ -246,10 +243,10 @@ const Title = styled.p`
 const Participants = styled.p`
   margin: 1rem 0 0.8rem;
   font-size: 1.2rem;
-  color: var(--n200-color);
+  color: var(--N200);
   em {
-    color: var(--primary-color);
-    font-weight: 500;
+    color: var(--RevBlack);
+    font-weight: var(--font-medium);
   }
 `
 

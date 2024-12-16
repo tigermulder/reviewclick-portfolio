@@ -142,10 +142,8 @@ const TitleContainer = styled.div`
   padding: 2.8rem 0 4.2rem;
 `
 
-const Title = styled.h4`
-  color: var(--primary-color);
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-weight-bold);
+const Title = styled.h3`
+  color: var(--RevBlack);
   line-height: 2.5rem;
 `
 
@@ -159,16 +157,15 @@ const ResultContainer = styled.div`
 
 const ResultInfo = styled.p`
   padding: 8.3rem 0;
-  color: var(--primary-color);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.4;
-  font-size: 1.8rem;
+  color: var(--RevBlack);
+  font-weight: var(--font-medium);
+  font-size: var(--font-h3-size);
   text-align: center;
   em {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-bold);
   }
   span {
-    color: var(--revu-color);
+    color: var(--L600);
   }
 `
 

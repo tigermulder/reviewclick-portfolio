@@ -145,7 +145,7 @@ const Container = styled.div`
 
 const Label = styled.p`
   margin: 0 0 0.8rem 0.4rem;
-  color: var(--primary-color);
-  font-size: var(--font-bodyL-size);
-  font-weight: var(--font-weight-medium);
+  color: var(--RevBlack);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-medium);
 `

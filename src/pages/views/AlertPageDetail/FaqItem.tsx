@@ -57,9 +57,7 @@ const NotifyMessage = styled.div`
   position: relative;
   width: 100%;
   font-size: var(--font-h5-size);
-  font-weight: 500;
-  line-height: var(--font-h5-line-height);
-  letter-spacing: var(--font-h5-letter-spacing);
+  font-weight: var(--font-medium);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,14 +79,14 @@ const ArrowIcon = styled.img`
 
 const NoticeContent = styled.div`
   padding: 1.6rem;
-  background: var(--whitewood);
+  background: var(--WWood);
   border-radius: 1rem;
   margin-top: 2rem;
   animation: fadeIn 0.1s ease-in-out;
 
   p {
     font-size: 1.4rem;
-    color: var(--gray-01);
+    color: var--Gray02);
     white-space: pre-line;
   }
 

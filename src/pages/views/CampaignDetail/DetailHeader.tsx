@@ -33,5 +33,5 @@ const Background = styled.div<{
   aspect-ratio: 78 / 95;
   z-index: -10;
   transform: scale(${(props) => props.$scale});
-  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-in-out;
 `

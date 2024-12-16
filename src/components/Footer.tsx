@@ -21,9 +21,7 @@ const Footer = () => {
         소재지 : 서울특별시 서초구 서초대로60길 18, 7층 (정인빌딩)
         <br />
         문의 :{" "}
-        <EmailSpan href="mailto:revuclick@jamonglab.com">
-          revuclick@jamonglab.com
-        </EmailSpan>
+        <a href="mailto:revuclick@jamonglab.com">revuclick@jamonglab.com</a>
         <br />
         고객센터 : <a href="tel:0234729229">02-3472-9229</a>
         <br />
@@ -43,7 +41,7 @@ const FooterComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background: #fafafa;
+  background-color: var(--SWhite);
   padding: 3.6rem 1.5rem 14rem;
 `
 
@@ -56,33 +54,28 @@ const LinkContainer = styled.div`
 `
 
 const LinkText = styled(Link)`
-  color: var(--n300-color);
+  color: var(--N300);
   font-size: 1.2rem;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: -0.5px;
+  font-weight: var(--font-medium);
+  letter-spacing: var(--L-spacing-L);
 `
 
 const CompanyInfo = styled.div`
-  color: var(--n200-color);
+  color: var(--N200);
   font-size: 1.1rem;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   line-height: 1.6;
   margin-top: 0.8rem;
   word-wrap: break-word;
-  letter-spacing: -0.5px;
-`
-
-const EmailSpan = styled.a`
-  color: #a0acb1;
+  letter-spacing: var(--L-spacing-L);
 `
 
 const FooterLogoContainer = styled.div`
   width: 9.4rem;
-  color: var(--n200-color);
+  color: var(--N200);
 
   svg {
     width: 100%;
     height: auto;
-    fill: currentColor;
   }
 `

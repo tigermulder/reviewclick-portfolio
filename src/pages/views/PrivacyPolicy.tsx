@@ -260,7 +260,7 @@ export default PrivacyPolicy
 
 const TextBox = styled.div`
   padding: 2rem 1rem;
-  background: var(--white);
+  background-color: white;
   border-radius: 1rem;
 `
 
@@ -271,17 +271,14 @@ const Section = styled.div`
 `
 
 const Title = styled.p`
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--font-caption-letter-spacing);
-  color: var(--n500-color);
+  font-size: var(--caption-size);
+  font-weight: var(--font-bold);
+  color: var(--N500);
 `
 
 const Content = styled.p`
   margin-top: 0.5rem;
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  letter-spacing: var(--font-caption-letter-spacing);
-  color: var(--n500-color);
+  font-size: var(--caption-size);
+  color: var(--N500);
   line-height: 1.5;
 `

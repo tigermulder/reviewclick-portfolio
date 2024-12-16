@@ -164,26 +164,21 @@ const MyAccountDeletionPage: React.FC = () => {
 
 export default MyAccountDeletionPage
 
-// Styled Components
-
 const Container = styled.div`
   padding: 4.4rem 0;
 `
 
 const UserTitle = styled.h2`
-  font-size: 1.8rem;
-  font-weight: var(--font-weight-bold);
-  line-height: var(--font-h2-line-height);
+  font-size: var(--font-h3-size);
+  font-weight: var(--font-bold);
 `
 
 const StepReasonList = styled.ul`
   margin-top: 1.9rem;
 
   li {
-    font-size: var(--font-bodyM-size);
-    font-weight: var(--font-bodyM-weight);
-    line-height: var(--font-bodyM-line-height);
-    color: var(--n400-color);
+    font-size: var(--font-body-size);
+    color: var(--N400);
     display: flex;
     align-items: flex-start;
     gap: 0.9rem;
@@ -216,16 +211,15 @@ const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: var(--font-bodyM-size);
-  color: var(--n400-color);
+  font-size: var(--font-body-size);
+  color: var(--N400);
 `
 
 const Icon = styled(IconChecking)<{ checked: boolean }>`
   width: 1.6rem;
   height: 1.6rem;
   margin-right: 0.9rem;
-  color: ${({ checked }) =>
-    checked ? "var(--success-color)" : "var(--n100-color)"};
+  color: ${({ checked }) => (checked ? "var(--Success)" : "var(--N100)")};
 `
 
 const StepReason = styled.div`
@@ -235,7 +229,7 @@ const StepReason = styled.div`
 const Label = styled.h2`
   margin-bottom: 0.65rem;
   font-size: 1.8rem;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-bold);
 `
 
 const TextArea = styled.textarea`
@@ -245,20 +239,20 @@ const TextArea = styled.textarea`
   width: 100%;
   height: 19.8rem;
   border-radius: 1rem;
-  border: 1px solid var(--whitesmoke);
-  font-size: var(--font-bodyM-size);
+  border: 1px solid var(--WSmoke);
+  font-size: var(--font-body-size);
   line-height: 1.5;
   resize: none;
 
   &::placeholder {
-    font-size: var(--font-caption-size);
+    font-size: var(--caption-size);
     line-height: 1.5;
-    color: var(--n300-color);
+    color: var(--N300);
   }
 `
 
 const ModalContent = styled.p`
   padding: 1rem;
-  font-size: var(--font-bodyM-size);
+  font-size: var(--font-body-size);
   text-align: center;
 `

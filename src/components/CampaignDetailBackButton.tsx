@@ -28,7 +28,7 @@ const StyledBackButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: white;
   opacity: 0.7;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   z-index: 999;

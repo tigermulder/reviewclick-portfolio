@@ -365,8 +365,8 @@ const NoticeBox = styled.div`
     margin-bottom: 0.4rem;
     font-size: 1.2rem;
     letter-spacing: -1px;
-    font-weight: var(--font-weight-medium);
-    color: var(--prim-L300);
+    font-weight: var(--font-medium);
+    color: var(--L300);
     display: flex;
     align-items: center;
     gap: 0.2rem;
@@ -382,13 +382,12 @@ const NoticeBox = styled.div`
   ul li {
     position: relative;
     padding-left: 1.5rem;
-    font-size: var(--font-caption-size);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: -0.25px;
+    font-size: var(--caption-size);
+    font-weight: var(--font-medium);
     line-height: 1.25;
     display: flex;
     align-items: flex-start;
-    color: var(--gray-01);
+    color: var(--Gray02);
 
     &::before {
       content: "";
@@ -398,7 +397,7 @@ const NoticeBox = styled.div`
       width: 0.25rem;
       height: 0.25rem;
       border-radius: 50%;
-      background: var(--gray-01);
+      background: var(--Gray02);
       flex-shrink: 0;
     }
   }
@@ -406,33 +405,7 @@ const NoticeBox = styled.div`
 
 const Heading = styled.h5`
   margin-top: 2rem;
-  font-size: var(--font-h5-size);
-  font-weight: 500;
-  color: var(--n500-color);
-`
-
-const TitleAreaContainer = styled.div`
-  height: 4.4rem;
-  margin-top: 3.2rem;
-  border-radius: 1rem 1rem 0 0;
-  overflow: hidden;
-
-  textarea {
-    display: block;
-    padding: 1.1rem 1.4rem;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    outline: 0;
-    border: 0.1rem solid var(--n60-color);
-    border-radius: 1rem 1rem 0 0;
-    resize: none;
-    &::placeholder {
-      font-size: var(--font-bodyM-size);
-      letter-spacing: var(--font-bodyM-letter-spacing);
-      color: var(--n200-color);
-    }
-  }
+  color: var(--N500);
 `
 
 const TextAreaContainer = styled.div`
@@ -442,8 +415,8 @@ const TextAreaContainer = styled.div`
   margin: 0.8rem 0 2rem;
   overflow: hidden;
   outline: 0;
-  background: white;
-  border: 0.1rem solid var(--n60-color);
+  background-color: white;
+  border: 0.1rem solid var(--N60);
   border-radius: 1rem;
   padding: 1.5rem;
 
@@ -456,8 +429,8 @@ const TextAreaContainer = styled.div`
     border: none;
     border-radius: 0 0 1rem 1rem;
     &::placeholder {
-      font-size: var(--font-bodyM-size);
-      color: var(--n200-color);
+      font-size: var(--font-body-size);
+      color: var(--N200);
     }
   }
 `
@@ -470,18 +443,18 @@ const Count = styled.div`
   margin: 1rem 0;
   text-align: right;
   font-size: 1.4rem;
-  color: var(--n200-color);
+  color: var(--N200);
 
   span {
-    font-weight: var(--font-weight-bold);
-    color: var(--primary-color);
+    font-weight: var(--font-bold);
+    color: var(--RevBlack);
   }
 `
 
 const ImageUploadBox = styled.div`
   padding: 0.75rem;
   border-radius: 1rem;
-  background: var(--n40-color);
+  background: var(--N40);
 `
 
 const ImageSection = styled.ul`
@@ -496,7 +469,7 @@ const ImageItem = styled.li`
   width: 6rem;
   height: 6rem;
   border-radius: 0.6rem;
-  border: 1.5px solid var(--n300-color);
+  border: 1.5px solid var(--N300);
   margin-top: 2rem;
   overflow: visible;
 

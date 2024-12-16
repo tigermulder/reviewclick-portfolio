@@ -39,6 +39,6 @@ const ListContainer = styled.ul`
   li {
     padding: 2.2rem 0;
     display: flex;
-    border-bottom: 0.1rem solid var(--whitesmoke);
+    border-bottom: 0.1rem solid var(--WSmoke);
   }
 `

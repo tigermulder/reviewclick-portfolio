@@ -297,14 +297,11 @@ export default StepThree
 
 const CartTitle = styled.div`
   margin-top: 3.5rem;
-  background: var(--white);
+  background-color: white;
 
   p {
     padding: 3rem 1.5rem 2rem;
     font-size: var(--font-h2-size);
-    font-weight: var(--font-h2-weight);
-    letter-spacing: var(--font-h2-letter-spacing);
-    line-height: var(--base-line-height);
   }
 `
 
@@ -312,7 +309,7 @@ const CartStepContainer = styled.ul`
   margin: 0 -1.5rem;
   padding: 3rem 1.5rem 10rem 2.6rem;
   min-height: 100vh;
-  background: var(--whitewood);
+  background: var(--WWood);
 
   li {
     position: relative;
@@ -325,7 +322,7 @@ const CartStepContainer = styled.ul`
       width: 1.3rem;
       height: 1.3rem;
       border-radius: 50%;
-      background: var(--n40-color);
+      background: var(--N40);
     }
   }
   > li:nth-child(1)::after {
@@ -337,7 +334,7 @@ const CartStepContainer = styled.ul`
     margin-right: 1.15rem;
     width: 0.3rem;
     height: 50%;
-    background: var(--n40-color);
+    background: var(--N40);
   }
   > li:nth-child(2)::after {
     content: "";
@@ -349,13 +346,13 @@ const CartStepContainer = styled.ul`
     margin-top: -0.5rem;
     width: 0.3rem;
     height: 60%;
-    background: var(--n40-color);
+    background: var(--N40);
   }
 `
 
 const StepItem = styled.li`
   padding: 1.5rem;
-  background: var(--white);
+  background-color: --white;
   border-radius: 1.2rem;
 
   &:nth-of-type(2) {
@@ -376,15 +373,12 @@ const StepItem = styled.li`
 const StepItemHeader = styled.p`
   margin-bottom: 1.5rem;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  line-height: var(--font-h5-line-height);
-  letter-spacing: var(--font-h5-letter-spacing);
 `
 
 const StepItemReviewContainer = styled.div`
   margin-bottom: 1rem;
   padding: 1rem 1.5rem;
-  border: 0.1rem solid var(--n60-color);
+  border: 0.1rem solid var(--N60);
   border-radius: 1rem;
 `
 
@@ -393,20 +387,15 @@ const StepItemReviewBox = styled.div`
   width: 100%;
   height: 5rem;
   overflow-y: scroll;
-  color: var(--n200-color);
-  font-size: var(--font-bodyL-size);
-  font-weight: var(--font-bodyL-weight);
-  letter-spacing: var(--font-bodyL-letter-spacing);
+  color: var(--N200);
+  font-size: var(--font-body-size);
   outline: 0;
 `
 
 const StepNotice = styled.span`
   margin-bottom: 1rem;
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--base-line-height);
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--n200-color);
+  font-size: var(--caption-small-size);
+  color: var(--N200);
   display: flex;
   align-items: start;
   gap: 0.3rem;
@@ -420,5 +409,5 @@ const StepNotice = styled.span`
 `
 
 const Purple = styled.em`
-  color: var(--purple);
+  color: var(--Purple);
 `

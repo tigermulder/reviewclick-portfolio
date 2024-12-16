@@ -137,7 +137,7 @@ const NoticeContainer = styled.ul`
     position: relative;
     padding: 1.8rem 0;
     display: flex;
-    border-bottom: 0.1rem solid var(--whitesmoke);
+    border-bottom: 0.1rem solid var(--WSmoke);
   }
 `
 
@@ -148,24 +148,19 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
   font-size: var(--font-bodyM-size);
   line-height: var(--font-bodyM-line-height);
   letter-spacing: var(--font-bodyM-letter-spacing);
-  color: ${({ isClicked }) =>
-    isClicked ? "var(--n200-color)" : "var(--n300-color)"};
+  color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--N300)")};
 
   svg {
     width: 1.3rem;
-    color: ${({ isClicked }) =>
-      isClicked ? "var(--n200-color)" : "var(--revu-color)"};
+    color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--L600)")};
   }
 `
 
 const NotifyMessage = styled.p<{ isClicked: boolean }>`
   margin-top: 0.6rem;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  font-weight: 500;
-  letter-spacing: var(--font-h5-letter-spacing);
-  color: ${({ isClicked }) =>
-    isClicked ? "var(--n200-color)" : "var(--primary-color)"};
+  font-weight: var(--font-medium);
+  color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--RevBlack)")};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -180,6 +175,6 @@ const StyledLink = styled(Link)`
 const Loading = styled.div`
   padding: 1rem;
   text-align: center;
-  font-size: var(--font-bodyM-size);
-  color: var(--n300-color);
+  font-size: var(--font-body-size);
+  color: var(--N300);
 `

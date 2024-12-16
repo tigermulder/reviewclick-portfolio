@@ -31,15 +31,12 @@ const NoRewardsContainer = styled.div`
   text-align: center;
 `
 
-const NoRewardsMessage = styled.p`
+const NoRewardsMessage = styled.h5`
   margin-top: 2rem;
-  font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  color: var(--n400-color);
+  color: var(--N400);
 `
 
 const NoRewardsSubMessage = styled.p`
   margin: 1rem 0 6.4rem;
-  font-size: var(--font-bodyM-size);
-  color: var(--n200-color);
+  color: var(--N200);
 `

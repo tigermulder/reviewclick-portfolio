@@ -90,7 +90,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         />
       )}
       {$variant === "failed" && (
-        <FailedIcon backgroundColor="var(--primary-color)" filter={false} />
+        <FailedIcon backgroundColor="var(--RevBlack)" filter={false} />
       )}
       {/* spinner 변형일 경우 Spinner 렌더링 */}
       {$variant === "spinner" ? (
@@ -128,13 +128,11 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
     switch ($variant) {
       case "red":
         return css`
-          background-color: ${disabled
-            ? "var(--n40-color)"
-            : "var(--revu-color)"};
-          color: ${disabled ? "var(--n100-color)" : "var(--white)"};
+          background-color: ${disabled ? "var(--N40)" : "var(--L600)"};
+          color: ${disabled ? "var(--N100)" : "white"};
           border: none;
           &:active {
-            background-color: var(--darkred);
+            background-color: var(--Darkred);
             color: rgba(255, 255, 255, 0.7);
             transform: scale(0.998);
           }
@@ -142,31 +140,28 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
       case "outlined":
         return css`
           background-color: transparent;
-          color: var(--primary-color);
-          border: 1px solid var(--n80-color);
+          color: var(--RevBlack);
+          border: 1px solid var(--N80);
         `
       case "join":
         return css`
-          background-color: var(--white);
-          color: ${disabled ? "var(--n200-color)" : "var(--primary-color)"};
-          border: 1px solid var(--n80-color);
-          font-weight: 500;
+          background-color: white;
+          color: ${disabled ? "var(--N200)" : "var(--RevBlack)"};
+          border: 1px solid var(--N80);
+          font-weight: var(--font-medium);
         `
       case "arrow":
         return css`
-          background-color: var(--white);
-          color: var(--prim-L100);
-          border: 0.1rem solid var(--prim-L100);
+          background-color: white;
+          color: var(--L100);
+          border: 0.1rem solid var(--L100);
           height: 3.8rem;
-          font-size: var(--font-title-size);
-          font-weight: var(--font-title-weight);
-          line-height: var(--font-title-line-height);
-          letter-spacing: var(--font-title-letter-spacing);
+          font-size: var(--font-body-size);
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 0.2rem;
-          color: var(--prim-L100);
+          color: var(--L100);
 
           &::after {
             content: "";
@@ -177,93 +172,75 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
         `
       case "grey":
         return css`
-          background-color: var(--n40-color);
-          color: var(--n400-color);
+          background-color: var(--N40);
+          color: var(--N400);
           border: none;
         `
       case "disable":
         return css`
-          background-color: var(--white);
-          color: var(--prim-L40);
-          border: 1px solid var(--prim-L40);
+          background-color: white;
+          color: var(--L40);
+          border: 1px solid var(--L40);
         `
       case "pink":
         return css`
-          background-color: var(--prim-L20);
-          color: var(--prim-L500);
+          background-color: var(--L20);
+          color: var(--L500);
           border: none;
         `
       case "default":
         return css`
           padding: 0;
           height: 3.7rem;
-          font-size: var(--font-bodyM-size);
-          font-weight: var(--font-bodyM-weight);
-          line-height: var(--font-bodyM-line-height);
-          letter-spacing: var(--font-bodyM-letter-spacing);
+          font-size: var(--font-body-size);
           box-shadow: 0px 0px 10px rgba(246.44, 95.26, 102.39, 0.3);
-          border: 1px solid var(--prim-L60);
-          color: var(--revu-color);
+          border: 1px solid var(--L60);
+          color: var(--L60);
           display: flex;
           align-items: center;
           justify-content: center;
           span {
             margin-left: 0.4rem;
-            font-size: var(--font-callout-small-size);
-            font-weight: var(--font-callout-small-weight);
-            line-height: var(--font-callout-small-line-height);
-            letter-spacing: var(--font-callout-small-letter-spacing);
+            font-size: var(--caption-small-size);
           }
         `
       case "success":
         return css`
           padding: 0;
           height: 3.7rem;
-          font-size: var(--font-bodyM-size);
-          font-weight: var(--font-bodyM-weight);
-          line-height: var(--font-bodyM-line-height);
-          letter-spacing: var(--font-bodyM-letter-spacing);
-          color: var(--revu-color);
-          border: 1px solid var(--n80-color);
+          font-size: var(--font-body-size);
+          color: var(--L600);
+          border: 1px solid var(--N80);
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 0.6rem 0 var(--whitesmoke);
+          box-shadow: 0 0 0.6rem 0 var(--WSmoke);
           gap: 0.4rem;
           span {
             margin-left: 0.4rem;
-            font-size: var(--font-callout-small-size);
-            font-weight: var(--font-callout-small-weight);
-            line-height: var(--font-callout-small-line-height);
-            letter-spacing: var(--font-callout-small-letter-spacing);
+            font-size: var(--caption-small-size);
           }
         `
       case "failed":
         return css`
           padding: 0;
           height: 3.7rem;
-          font-size: var(--font-bodyM-size);
-          font-weight: var(--font-bodyM-weight);
-          line-height: var(--font-bodyM-line-height);
-          letter-spacing: var(--font-bodyM-letter-spacing);
-          border: 1px solid var(--n80-color);
-          color: var(--primary-color);
-          box-shadow: 0 0 0.6rem 0 var(--whitesmoke);
+          font-size: var(--font-body-size);
+          border: 1px solid var(--N80);
+          color: var(--RevBlack);
+          box-shadow: 0 0 0.6rem 0 var(--WSmoke);
           gap: 0.4rem;
           display: flex;
           align-items: center;
           justify-content: center;
           span {
             margin-left: 0.4rem;
-            font-size: var(--font-callout-small-size);
-            font-weight: var(--font-callout-small-weight);
-            line-height: var(--font-callout-small-line-height);
-            letter-spacing: var(--font-callout-small-letter-spacing);
+            font-size: var(--caption-small-size);
           }
         `
       case "spinner":
         return css`
-          background-color: var(--prim-L20);
+          background-color: var(--L20);
           border: none;
           display: flex;
           align-items: center;
@@ -277,7 +254,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           height: 3.6rem;
           margin: -6rem auto 0;
           font-size: 1.2rem;
-          background-color: var(--revu-color);
+          background-color: var(--L600);
           box-shadow: 0px 0px 12px 0px rgba(255, 165, 169, 0.6);
           color: white;
           border: none;
@@ -290,22 +267,21 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           width: 85%;
           height: 3.6rem;
           margin: 0 auto;
-          background-color: var(--prim-L20);
+          background-color: var(--L20);
           box-shadow: 0px 0px 12px 0px rgba(255, 119, 125, 0.6);
           border: none;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.5rem;
-          color: var(--prim-L500);
-          font-weight: var(--font-weight-medium);
+          font-size: var(--font-h5-size);
+          color: var(--L500);
+          font-weight: var(--font-medium);
         `
       case "uploadImage":
         return css`
-          background: var(--white);
-          color: ${disabled ? "var(--n80-color)" : "var(--n600-color)"};
-          font-size: 1.4rem;
-          font-weight: var(--font-weight-medium);
+          background-color: white;
+          color: ${disabled ? "var(--N80)" : "var(--N600)"};
+          font-weight: var(--font-medium);
           display: flex;
           align-items: center;
           justify-content: center;

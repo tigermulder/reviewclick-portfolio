@@ -27,7 +27,7 @@ const FaqContainer = styled.button`
   z-index: 10;
   width: 6rem;
   height: 6rem;
-  background-color: var(--prim-L200);
+  background-color: var(--L200);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -41,9 +41,9 @@ const FaqContainer = styled.button`
     justify-content: center;
     gap: 0.1rem;
     p {
-      color: var(--white);
+      color: white;
       font-size: 0.9rem;
-      font-weight: var(--font-weight-medium);
+      font-weight: var(--font-medium);
     }
   }
 `

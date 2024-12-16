@@ -3,8 +3,6 @@ import useToast from "@/hooks/useToast"
 import { LikeButtonProps } from "types/component-types/likebutton-type"
 import IcoHeart from "assets/ico-main-heart.svg?react"
 import IcoCampaignHeart from "assets/ico-campaign-detail-heart.svg?react"
-import { useRouter } from "hooks/useRouting"
-import { RoutePath } from "types/route-path"
 import { useMatch } from "react-router-dom"
 import styled from "styled-components"
 
@@ -25,7 +23,6 @@ const LikeButton = ({
     unlikeCampaign,
   } = useLikeCampaign(campaignId, categoryId)
   const { addToast } = useToast()
-  const router = useRouter()
 
   const handleLike = (event: React.MouseEvent): void => {
     event.stopPropagation()
@@ -40,10 +37,10 @@ const LikeButton = ({
     } else {
       if (defaultIsLiked()) {
         unlikeCampaign()
-        addToast("찜한 목록에서 해제했어요.", "uncheck", 3000, "like")
+        addToast("찜한 목록에서 해제했어요", "uncheck", 3000, "like")
       } else {
         likeCampaign()
-        addToast("찜한 목록에 추가했어요.", "check", 3000, "like")
+        addToast("찜한 목록에 추가했어요", "check", 3000, "like")
       }
     }
   }
@@ -80,7 +77,6 @@ const LikeButton = ({
 
 export default LikeButton
 
-// 스타일 정의
 const Button = styled.button`
   background: transparent;
   border: none;
@@ -91,15 +87,14 @@ const Button = styled.button`
 const StyledHeartIcon = styled(IcoHeart)<{ $isLiked: boolean }>`
   width: 2.4rem;
   height: auto;
-  color: ${({ $isLiked }) =>
-    $isLiked ? "var(--revu-color)" : "var(--n40-color)"};
-  transition: transform 0.1s ease;
+  color: ${({ $isLiked }) => ($isLiked ? "var(--L600)" : "var(--N40)")};
+  transition: transform 0.1s ease-in-out;
 `
 
 const StyledIcoCampaignHeart = styled(IcoCampaignHeart)<{ $isLiked: boolean }>`
   width: 2.4rem;
   height: auto;
-  color: ${({ $isLiked }) => ($isLiked ? "var(--revu-color)" : "#fff")};
+  color: ${({ $isLiked }) => ($isLiked ? "var(--L600)" : "white")};
 `
 
 const CampaignHeart = styled.div<{ $isLiked: boolean }>`
@@ -114,8 +109,8 @@ const CampaignHeart = styled.div<{ $isLiked: boolean }>`
 
 const HeartText = styled.div`
   text-align: center;
-  color: var(--revu-color);
+  color: var(--L600);
   font-size: 0.7rem;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   word-wrap: break-word;
 `

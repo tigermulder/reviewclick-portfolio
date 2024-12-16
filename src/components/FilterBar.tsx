@@ -53,23 +53,22 @@ const ButtonContainer = styled.div`
 const StyledButton = styled.button.attrs<{ $isActive: boolean }>(
   ({ $isActive }) => ({
     style: {
-      backgroundColor: $isActive ? "var(--revu-color)" : "white",
-      color: $isActive ? "white" : "var(--n300-color)",
+      backgroundColor: $isActive ? "var(--L600)" : "white",
+      color: $isActive ? "white" : "var(--N300)",
     },
   })
 )<{ $isActive: boolean }>`
   padding: 0.5rem 1.1rem;
   border-radius: 999px;
-  border: 1px solid #eeeeee;
-  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--WSmoke);
+  font-weight: var(--font-medium);
   cursor: pointer;
 
   &:hover {
     background-color: ${({ $isActive }) =>
-      $isActive ? "var(--revu-color)" : "#f5f5f5"};
-    border-color: ${({ $isActive }) =>
-      $isActive ? "var(--revu-color)" : "#eeeeee"};
+      $isActive ? "var(--L600)" : "#f5f5f5"};
+    border-color: ${({ $isActive }) => ($isActive ? "var(--L600)" : "#eeeeee")};
     font-weight: ${({ $isActive }) =>
-      $isActive ? "var(--font-weight-bold)" : "var(--font-weight-medium)"};
+      $isActive ? "var(--font-bold)" : "var(--font-medium)"};
   }
 `

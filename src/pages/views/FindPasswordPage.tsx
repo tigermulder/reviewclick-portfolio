@@ -126,10 +126,8 @@ const TitleContainer = styled.div`
   padding: 2.8rem 0 4.2rem;
 `
 
-const Title = styled.h4`
-  color: var(--primary-color);
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-weight-bold);
+const Title = styled.h3`
+  color: var(--RevBlack);
   line-height: 2.5rem;
 `
 
@@ -152,16 +150,13 @@ const ResultInfo = styled.div`
     width: 12rem;
   }
   p {
-    font-size: 1.4rem;
-    font-weight: var(--font-weight-light);
-    line-height: 1.45;
-    color: var(--n400-color);
+    color: var(--N400);
   }
 `
 
 const ResultInfoTitle = styled.h3`
   margin: 3rem 0 1.6rem;
-  color: var(--primary-color);
+  color: var(--RevBlack);
   font-size: var(--font-h3-size);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 `

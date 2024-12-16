@@ -107,17 +107,15 @@ const TitleSection = styled.div`
 
   h2 {
     font-size: 2.4rem;
-    font-weight: var(--font-weight-bold);
-    line-height: 1.4;
-    letter-spacing: -1px;
+    font-weight: var(--font-bold);
+    letter-spacing: var(--L-spacing-M);
   }
 
   > span {
     display: block;
     margin-top: 0.6rem;
-    font-size: 1.4rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--prim-L300);
+    font-weight: var(--font-bold);
+    color: var(--L300);
     letter-spacing: unset;
   }
 `
@@ -129,7 +127,7 @@ const Links = styled.ul`
     position: relative;
 
     & + li {
-      border-top: 0.1rem solid var(--whitesmoke);
+      border-top: 0.1rem solid var(--WSmoke);
     }
 
     a::after {
@@ -164,15 +162,12 @@ const StyledLink = styled(Link)`
   display: block;
   padding: 2.2rem 0;
   width: 100%;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
   text-decoration: none;
   color: inherit;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: var(--WWood);
   }
 `
 
@@ -183,10 +178,7 @@ const NoticeContainer = styled.div`
 const NoticeHeader = styled.div`
   position: relative;
   padding: 2.2rem 0;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -214,20 +206,18 @@ const NoticeContent = styled.div`
   ul {
     margin-bottom: 1.5rem;
     padding: 1.5rem;
-    background: var(--whitewood);
+    background: var(--WWood);
     border-radius: 0.6rem;
   }
 
   li {
     position: relative;
     padding-left: 0.8rem;
-    font-size: var(--font-caption-size);
-    font-weight: var(--font-caption-weight);
-    letter-spacing: var(--font-caption-small-letter-spacing);
+    font-size: var(--caption-size);
     display: flex;
     align-items: flex-start;
     line-height: 1.25;
-    color: var(--gray-01);
+    color: var(--Gray02);
 
     &::before {
       content: "";
@@ -237,7 +227,7 @@ const NoticeContent = styled.div`
       width: 0.25rem;
       height: 0.25rem;
       border-radius: 50%;
-      background: var(--gray-01);
+      background-color: var(--Gray02);
     }
 
     & + li {

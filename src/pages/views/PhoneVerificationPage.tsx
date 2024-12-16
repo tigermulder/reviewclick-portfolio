@@ -265,10 +265,7 @@ const AccountVerifyTitle = styled.h2`
 
 const AccountVerifyText = styled.p`
   margin: 1.2rem 0 2.4rem;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
 `
 
 const TextFieldWrapper = styled.div`
@@ -282,7 +279,7 @@ const ButtonWrapper = styled.div<{ $visible: boolean }>`
   width: 100%;
   bottom: 0;
   left: 0;
-  background-color: #fff;
+  background-color: white;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
   transform: ${({ $visible }) =>
     $visible ? "translateY(0)" : "translateY(100%)"};
@@ -297,7 +294,7 @@ const TimerText = styled.span`
   position: absolute;
   right: 1.4rem;
   top: 1.5rem;
-  font-size: 1.2rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--revu-color);
+  font-size: var(--caption-size);
+  font-weight: var(--font-medium);
+  color: var(--L600);
 `

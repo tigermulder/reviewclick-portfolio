@@ -94,27 +94,23 @@ const Links = styled.ul`
 const TitleWrapper = styled.li`
   width: 100%;
   padding: 2.2rem 0;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-bold);
 `
 
 const TextWrapper = styled.li`
   width: 100%;
   padding: 2.2rem 0;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
-  border-bottom: 0.1rem solid var(--whitesmoke);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-medium);
+  border-bottom: 0.1rem solid var(--WSmoke);
 
   span {
     position: absolute;
     top: 50%;
     right: 3rem;
     transform: translateY(-50%);
-    color: var(--n300-color);
+    color: var(--N300);
 
     em {
       margin-right: 0.4rem;
@@ -137,15 +133,13 @@ const StyledLink = styled(Link)`
   display: block;
   width: 100%;
   padding: 2.2rem 0;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
-  border-bottom: 0.1rem solid var(--whitesmoke);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-medium);
+  border-bottom: 0.1rem solid var(--WSmoke);
   color: inherit;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: var(--WWood);
   }
 `
 
@@ -154,22 +148,19 @@ const LogoutButton = styled.button`
   display: block;
   width: 100%;
   padding: 2.2rem 0;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-medium);
   border: none;
   background: none;
   text-align: left;
   cursor: pointer;
-  border-bottom: 0.1rem solid var(--whitesmoke);
+  border-bottom: 0.1rem solid var(--WSmoke);
   color: inherit;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: var(--WWood);
   }
 
-  /* 아이콘 적용 */
   &::after {
     content: "";
     position: absolute;

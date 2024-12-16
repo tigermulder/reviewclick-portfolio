@@ -33,7 +33,7 @@ const ReuseHeader = ({
           <BackIcon />
         </BackButton>
       )}
-      <Title>{title}</Title>
+      <h3>{title}</h3>
       {/* 스텝이 존재하는 경우 */}
       {steps && steps.length > 0 && (
         <StepsContainer>
@@ -63,7 +63,7 @@ const HeaderContainer = styled.header`
   z-index: 3;
   width: 100%;
   height: 4.4rem;
-  background: var(--white);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,13 +80,6 @@ const BackButton = styled.button`
   cursor: pointer;
 `
 
-const Title = styled.h1`
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-h3-weight);
-  line-height: var(--font-h3-line-height);
-  letter-spacing: var(--font-h3-letter-spacing);
-`
-
 const StepsContainer = styled.div`
   display: flex;
   position: absolute;
@@ -97,12 +90,11 @@ const StepsContainer = styled.div`
 
 const StepButton = styled.button<{ isActive: boolean }>`
   background: ${({ isActive }) =>
-    isActive ? "var(--primary-color)" : "var(--n10-color)"};
-  color: ${({ isActive }) => (isActive ? "var(--white)" : "var(--n100-color)")};
+    isActive ? "var(--RevBlack)" : "var(--N20)"};
+  color: ${({ isActive }) => (isActive ? "white" : "var(--N100)")};
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 0.4rem;
   cursor: pointer;
   font-size: var(--font-body-size);
-  font-weight: var(--font-body-weight);
 `

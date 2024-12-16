@@ -37,13 +37,13 @@ const MyPointPage = () => {
             const thumbnailUrl = rewardItem.campaignThumbnailUrl || dummyImage
             return (
               <li key={rewardItem.reviewId}>
-                <MyPointCard>
+                <h5>
                   {rewardItem.status === "reward"
                     ? "지급 완료"
                     : rewardItem.uploadComplete === 1
                       ? "지급 완료"
                       : "지급 대기"}
-                </MyPointCard>
+                </h5>
                 <MyPointWrapper>
                   <ReviewCardThumb>
                     <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
@@ -78,18 +78,11 @@ const MyPointListContainer = styled.ul`
   gap: 1.4rem;
 
   li {
-    background: var(--white);
+    background-color: white;
     padding: 1.3rem 2.3rem 1.8rem;
     border-radius: 1.2rem;
     overflow: hidden;
   }
-`
-
-const MyPointCard = styled.p`
-  font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  line-height: var(--font-h5-line-height);
-  letter-spacing: var(--font-h5-letter-spacing);
 `
 
 const MyPointWrapper = styled.div`
@@ -105,7 +98,7 @@ const ReviewCardThumb = styled.div`
   height: 8.1rem;
   overflow: hidden;
   border-radius: 1rem;
-  border: 0.5px solid #f5f6f8;
+  border: 0.5px solid var(--WWood);
   flex-shrink: 0;
 
   img {
@@ -121,11 +114,8 @@ const ReviewCardInfo = styled.div`
 `
 
 const CardDate = styled.p`
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  line-height: var(--font-caption-line-height);
-  letter-spacing: var(--font-caption-letter-spacing);
-  color: var(--quicksilver);
+  font-size: var(--caption-size);
+  color: var(--QSilver);
 `
 
 const CardTitle = styled.span`
@@ -133,18 +123,12 @@ const CardTitle = styled.span`
   width: 100%;
   margin-top: 0.4rem;
   padding-right: 1rem;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `
 
-const CardPoint = styled.p`
+const CardPoint = styled.h4`
   margin-top: 0.2rem;
-  font-size: var(--font-h4-size);
-  font-weight: var(--font-h4-weight);
-  letter-spacing: var(--font-h4-letter-spacing);
 `

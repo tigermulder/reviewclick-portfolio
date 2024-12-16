@@ -12,11 +12,9 @@ const Step = styled.span`
   padding: 0.2rem 0.8rem;
   width: 2.4rem;
   height: 2.4rem;
-  font-size: var(--font-bodyL-size);
-  font-weight: var(--font-bodyL-weight);
-  letter-spacing: var(--font-bodyL-letter-spacing);
-  background: var(--prim-L20);
-  color: var(--prim-L300);
+  font-size: var(--font-body-size);
+  background: var(--L20);
+  color: var(--L300);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,12 +24,10 @@ const Step = styled.span`
     padding: 0.2rem 1.4rem;
     width: auto;
     height: auto;
-    border: 0.15rem solid var(--prim-L200);
+    border: 0.15rem solid var(--L200);
     border-radius: 5rem;
-    font-size: var(--font-callout-size);
-    font-weight: var(--font-callout-weight);
-    letter-spacing: var(--font-callout-letter-spacing);
-    background: transparent;
+    font-size: var(--font-body-size);
+    background-color: transparent;
   }
 `
 
@@ -46,7 +42,6 @@ export const STEP_STATUS_MAP: { [key: number]: HeaderStatusType } = {
   1: "join" || "purchase", // 또는 "purchase"
   2: "confirm",
   3: "upload",
-  // 필요한 경우 추가 스텝과 상태를 정의
 }
 export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
   join: (

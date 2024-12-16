@@ -3,13 +3,10 @@ import {
   statusToStepMap,
   ProgressStepProps,
   StepBoxProps,
-  IcoCustomProps,
 } from "@/types/component-types/progress-type"
-// StepSuccess와 StepFailed 임포트 제거
 import StepDone from "assets/ico_step_done.svg?url"
 import SuccessIcon from "./SuccessIcon"
 import FailedIcon from "./FailedIcon"
-import IconCoin from "assets/ico_coin.svg"
 
 const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
   let adjustedStatus = status
@@ -62,7 +59,6 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
           캡쳐본을 업로드하면 미션 완료!
         </>
       ),
-      icon: IconCoin,
     },
     { name: fourthStepName, key: "reward" },
   ]
@@ -94,12 +90,12 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                 isFourthStep ? (
                   isMissionFailed ? (
                     <FailedIcon
-                      backgroundColor="var(--primary-color)"
+                      backgroundColor="var(--RevBlack)"
                       filter={false}
                     />
                   ) : (
                     <SuccessIcon
-                      backgroundColor="var(--revu-color)"
+                      backgroundColor="var(--L600)"
                       filter={true}
                       filterColor="rgba(245, 46, 54, 0.3)"
                     />
@@ -116,16 +112,7 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
               <ProgressName>{step.name}</ProgressName>
               {showTooltip && step.tooltip && (
                 <Tooltip>
-                  <TooltipText>
-                    {step.tooltip}
-                    {step.icon && (
-                      <Icon src={step.icon} alt={`${step.name} 아이콘`} />
-                    )}
-                  </TooltipText>
-                  {/* <Pagination>
-                    <em>{index + 1}</em>
-                    {`/${steps.length - 1}`}
-                  </Pagination> */}
+                  <TooltipText>{step.tooltip}</TooltipText>
                 </Tooltip>
               )}
             </StepBox>
@@ -173,8 +160,8 @@ const StepBox = styled.div<StepBoxProps>`
     height: 0.15rem;
     background: ${({ $status }) =>
       $status === "done"
-        ? "linear-gradient(to right, var(--revu-color) 5%, transparent 5% 10%, var(--revu-color) 10% 15%, transparent 15% 20%, var(--revu-color) 20% 25%, transparent 25% 30%, var(--revu-color) 30% 35%, transparent 35% 40%, var(--revu-color) 40% 45%, transparent 45% 50%, var(--revu-color) 50% 55%, transparent 55% 60%, var(--revu-color) 60% 65%, transparent 65% 70%, var(--revu-color) 70% 75%, transparent 75% 80%, var(--revu-color) 80% 85%, transparent 85% 90%, var(--revu-color) 90% 95%, transparent 95% 100%)"
-        : "var(--n40-color)"};
+        ? "linear-gradient(to right, var(--L600) 5%, transparent 5% 10%, var(--L600) 10% 15%, transparent 15% 20%, var(--L600) 20% 25%, transparent 25% 30%, var(--L600) 30% 35%, transparent 35% 40%, var(--L600) 40% 45%, transparent 45% 50%, var(--L600) 50% 55%, transparent 55% 60%, var(--L600) 60% 65%, transparent 65% 70%, var(--L600) 70% 75%, transparent 75% 80%, var(--L600) 80% 85%, transparent 85% 90%, var(--L600) 90% 95%, transparent 95% 100%)"
+        : "var(--N40)"};
     z-index: -1;
   }
 
@@ -186,7 +173,7 @@ const StepBox = styled.div<StepBoxProps>`
 const IcoDefault = styled.div`
   width: 0.8rem;
   height: 0.8rem;
-  background: var(--lightsilver);
+  background: var(--LSilver);
   border-radius: 50%;
 `
 
@@ -202,7 +189,7 @@ const IcoActive = styled.div`
     background: white;
     box-shadow: 0px 0px 10px rgba(245, 70, 78, 0.3);
     border-radius: 50%;
-    border: 1px solid var(--revu-color);
+    border: 1px solid var(--L600);
   }
 
   & > div:nth-child(2) {
@@ -212,7 +199,7 @@ const IcoActive = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--revu-color);
+    background-color: var(--L600);
     border-radius: 50%;
   }
 `
@@ -220,16 +207,14 @@ const IcoActive = styled.div`
 const IcoDone = styled.div`
   width: 1.2rem;
   height: 1.2rem;
-  background: url("${StepDone}") #fff no-repeat center / 100%;
+  background: url("${StepDone}") white no-repeat center / 100%;
 `
 
 const ProgressName = styled.span`
   position: absolute;
   bottom: 0.7rem;
-  font-size: 1rem;
-  line-height: var(--base-line-height);
-  font-weight: var(--font-weight-medium);
-  color: var(--n400-color);
+  font-size: var(--caption-small-size);
+  color: var(--N400);
 `
 
 const tooltipAnimation = keyframes`
@@ -249,10 +234,9 @@ const Tooltip = styled.div`
   padding: 0.9rem 1rem;
   width: max-content;
   border-radius: 0.8rem;
-  font-size: 1rem;
+  font-size: var(--caption-small-size);
   white-space: normal;
-  text-align: center;
-  animation: ${tooltipAnimation} 0.65s ease-out infinite alternate;
+  animation: ${tooltipAnimation} 0.65s ease-in-out infinite alternate;
   z-index: 10;
 
   &::before {
@@ -268,22 +252,10 @@ const Tooltip = styled.div`
 `
 
 const TooltipText = styled.p`
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--white);
+  font-size: var(--caption-small-size);
+  font-weight: var(--font-bold);
+  color: white;
   word-break: keep-all;
-`
-
-const Pagination = styled.span`
-  flex-shrink: 0;
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-callout-small-weight);
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  color: rgba(255, 255, 255, 0.3);
-  em {
-    color: var(--white);
-  }
 `
 
 const Icon = styled.img`

@@ -101,10 +101,7 @@ export default GuideDetail
 
 const SectionTitle = styled.h3`
   margin-top: 4.3rem;
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-h3-weight);
-  letter-spacing: var(--font-h3-letter-spacing);
-  color: var(--n600-color);
+  color: var(--N600);
 `
 
 const GuideImg = styled.img`
@@ -115,39 +112,35 @@ const GuideImg = styled.img`
 const Divider = styled.div`
   width: 100%;
   height: 0.1rem;
-  background: var(--n80-color);
+  background: var(--N80);
 `
 
 const GuideList = styled.ul`
   margin: 3.2rem 0 5.3rem;
 
   li strong {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-bold);
   }
 
   li + li {
     margin-top: 2rem;
   }
   li p:nth-child(1) {
-    font-size: var(--font-title-size);
-    font-weight: var(--font-title-weight);
-    letter-spacing: var(--font-title-letter-spacing);
-    color: var(--n600-color);
+    font-size: var(--font-body-size);
+    color: var(--N600);
   }
   li p:nth-child(2) {
     margin-top: 0.4rem;
-    font-size: var(--font-bodyL-size);
-    font-weight: var(--font-bodyL-weight);
-    letter-spacing: var(--font-bodyL-letter-spacing);
+    font-size: var(--font-body-size);
   }
 `
 
 const Red = styled.em`
-  color: var(--prim-L300);
-  font-weight: var(--font-weight-bold);
+  color: var(--L300);
+  font-weight: var(--font-bold);
 `
 
 const Purple = styled.em`
-  color: var(--purple);
-  font-weight: var(--font-weight-bold);
+  color: var(--Purple);
+  font-weight: var(--font-bold);
 `

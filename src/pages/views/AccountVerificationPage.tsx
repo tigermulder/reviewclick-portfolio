@@ -308,21 +308,15 @@ const Row = styled.div`
 
 const AccountVerifyTitle = styled.h2`
   margin-top: 2.4rem;
-  font-size: var(--font-h2-size);
-  font-weight: var(--font-h2-weight);
-  letter-spacing: var(--font-h2-letter-spacing);
-  color: var(--n600-color);
+  color: var(--N600);
   em {
-    color: var(--revu-color);
+    color: var(--L600);
   }
 `
 
 const AccountVerifyText = styled.p`
   margin: 1.2rem 0 2.4rem;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
 `
 
 const TextFieldWrapper = styled.div`
@@ -351,7 +345,7 @@ const TimerText = styled.span`
   position: absolute;
   right: 1.4rem;
   top: 1.5rem;
-  font-size: 1.2rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--revu-color);
+  font-size: var(--caption-size);
+  font-weight: var(--font-medium);
+  color: var(--L600);
 `

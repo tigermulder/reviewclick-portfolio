@@ -33,7 +33,7 @@ const NoticeDetail = () => {
   return (
     <Container>
       <ReuseHeader title="공지사항" onBack={() => navigate(RoutePath.Alert)} />
-      <h2>{noticeDetail?.title}</h2>
+      <h3>{noticeDetail?.title}</h3>
       <p>{noticeDetail?.content}</p>
     </Container>
   )
@@ -47,18 +47,15 @@ const Container = styled.div`
   min-height: 80vh;
   border-radius: 1rem;
 
-  h2 {
-    font-size: var(--font-h3-size);
-    font-weight: var(--font-h3-weight);
-    letter-spacing: var(--font-h3-letter-spacing);
+  h3 {
     text-align: center;
     white-space: pre-line;
   }
   p {
     margin-top: 3.6rem;
     font-size: 1.4rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--n400-color);
+    font-weight: var(--font-medium);
+    color: var(--N400);
     white-space: pre-line;
   }
 `

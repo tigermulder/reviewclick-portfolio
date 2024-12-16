@@ -184,7 +184,7 @@ const GuideCont = styled.div`
   position: relative;
   z-index: 1;
   padding: 1.6rem 1.6rem 4.6rem;
-  background: var(--white);
+  background-color: white;
   border-radius: 1.2rem;
 `
 
@@ -192,8 +192,6 @@ const TabBg = styled.div`
   padding-top: 4rem;
   text-align: center;
   font-size: var(--font-h3-size);
-  font-weight: var(--font-h3-weight);
-  letter-spacing: var(--font-h3-letter-spacing);
   background: url("${guideTopBg}") no-repeat center / cover;
   color: rgba(255, 255, 255, 0.94);
 `
@@ -210,16 +208,15 @@ const TabItem = styled.li`
   padding: 0.9rem 0;
   cursor: pointer;
   text-align: center;
-  letter-spacing: var(--font-title-letter-spacing);
-  background-color: var(--whitesmoke);
+  background-color: var(--WSmoke);
   border-radius: 2.2rem 2.2rem 0 0;
-  font-size: var(--font-title-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--silver);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-medium);
+  color: var(--Silver);
 
   &.on {
-    background-color: #fff;
-    color: var(--primary-color);
+    background-color: white;
+    color: var(--RevBlack);
   }
 `
 
@@ -241,35 +238,29 @@ const StepCont = styled.div`
 
   h4 {
     padding: 0.5rem 1.6rem;
-    font-size: var(--font-title-size);
-    font-weight: var(--font-title-weight);
-    letter-spacing: var(--font-title-letter-spacing);
+    font-size: var(--font-body-size);
     border-radius: 3rem;
-    color: var(--white);
-    background: var(--purple);
+    color: white;
+    background-color: var(--Purple);
   }
   p {
     margin-top: 2rem;
     padding: 0 0.5rem;
-    font-size: var(--font-title-size);
-    font-weight: var(--font-title-weight);
-    letter-spacing: var(--font-title-letter-spacing);
-    color: var(--n600-color);
+    font-size: var(--font-body-size);
+    color: var(--N600);
     em {
-      color: var(--purple);
+      color: var(--Purple);
     }
     span {
-      color: var(--prim-L300);
+      color: var(--L300);
     }
   }
 `
 
 const Desc = styled.span`
   margin-top: 3rem;
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  letter-spacing: var(--font-caption-letter-spacing);
-  color: var(--n300-color);
+  font-size: var(--caption-size);
+  color: var(--N300);
 `
 
 const ImgBox = styled.img`

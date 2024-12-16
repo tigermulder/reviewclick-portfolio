@@ -112,7 +112,7 @@ const AlertLogo = styled.div`
   svg {
     width: 100%;
     height: 100%;
-    color: var(--revu-color);
+    color: var(--L600);
   }
 `
 
@@ -125,7 +125,7 @@ const AlertContainer = styled.div`
   div {
     padding: 1rem 1.4rem;
     border-radius: 1rem;
-    background: var(--white);
+    background-color: white;
   }
 `
 
@@ -139,22 +139,19 @@ const Header = styled.div`
     right: 100%;
     transform: translateY(-50%);
     margin-top: -1rem;
-    border-right: 1.2rem solid #fff;
+    border-right: 1.2rem solid white;
     border-top: 0.2rem solid transparent;
     border-bottom: 0.6rem solid transparent;
     border-top-left-radius: 1rem;
   }
   p {
-    font-size: var(--font-bodyM-size);
-    font-weight: var(--font-bodyM-weight);
-    line-height: var(--font-bodyM-line-height);
-    letter-spacing: var(--font-bodyM-letter-spacing);
-    color: var(--n500-color);
+    font-size: var(--font-body-size);
+    color: var(--N500);
 
     span {
       margin-right: 0.4rem;
-      color: var(--revu-color);
-      font-weight: var(--font-weight-bold);
+      color: var(--L600);
+      font-weight: var(--font-bold);
     }
   }
 `
@@ -165,9 +162,7 @@ const Body = styled.div`
 
 const BodyTitle = styled.p`
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  letter-spacing: var(--font-h5-letter-spacing);
-  color: var(--n600-color);
+  color: var(--N600);
 `
 
 const BodyContainer = styled.div`
@@ -187,11 +182,8 @@ const ThumbArea = styled.div`
 const InfoArea = styled.div`
   margin-left: 0.8rem;
   p {
-    font-size: var(--font-bodyM-size);
-    font-weight: var(--font-bodyM-weight);
-    line-height: var(--font-bodyM-line-height);
-    letter-spacing: var(--font-bodyM-letter-spacing);
-    color: var(--n500-color);
+    font-size: var(--font-body-size);
+    color: var(--N500);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -200,34 +192,26 @@ const InfoArea = styled.div`
   }
   span {
     font-size: var(--font-h2-size);
-    font-weight: var(--font-h2-weight);
-    letter-spacing: var(--font-h2-letter-spacing);
+    font-weight: var(--font-medium);
   }
 `
 
 const FooterText = styled.p`
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
+  font-size: var(--font-body-size);
   white-space: pre-line;
-  letter-spacing: var(--font-bodyM-letter-spacing);
-  color: var(--n500-color);
+  color: var(--N500);
 `
 
 const YearDay = styled.p`
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-callout-small-weight);
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--n100-color);
+  font-size: var(--caption-small-size);
+  color: var(--N100);
   text-align: center;
 `
 
 const Time = styled.span`
   margin-left: 0.6rem;
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-callout-small-weight);
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--n100-color);
+  font-size: var(--caption-small-size);
+  color: var(--N100);
   align-self: flex-end;
   flex-shrink: 0;
 `
@@ -243,11 +227,8 @@ const QnAContainer = styled.div`
 `
 
 const AnswerTitle = styled.p`
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
-  color: var(--n500-color);
+  font-size: var(--font-body-size);
+  color: var(--N500);
   white-space: pre-line;
 `
 
@@ -255,13 +236,10 @@ const Separator = styled.span`
   width: 100%;
   height: 0px;
   margin: 0.4rem 0;
-  border: 1px solid var(--n40-color);
+  border: 1px solid var(--N40);
 `
 
 const AnswerContent = styled.p`
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
-  color: var(--n100-color);
+  font-size: var(--font-body-size);
+  color: var(--N100);
 `

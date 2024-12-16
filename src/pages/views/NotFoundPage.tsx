@@ -18,7 +18,7 @@ const NotFoundPage = () => {
   return (
     <ErrorContainer>
       <img src={Error404Image} alt="에러 이미지" />
-      <ErrorTitle>페이지를 찾을 수 없어요</ErrorTitle>
+      <h2>페이지를 찾을 수 없어요</h2>
       <ErrorMessage>
         입력한 주소가 정확한 지 <br />
         다시 한 번 확인해주세요.
@@ -34,7 +34,6 @@ const NotFoundPage = () => {
 
 export default NotFoundPage
 
-// 스타일드 컴포넌트
 const ErrorContainer = styled.div`
   height: 100vh;
   display: flex;
@@ -50,20 +49,11 @@ const ErrorContainer = styled.div`
   }
 `
 
-const ErrorTitle = styled.h1`
-  font-size: var(--font-h2-size);
-  font-weight: var(--font-h2-weight);
-  letter-spacing: var(--font-h2-letter-spacing);
-`
-
 const ErrorMessage = styled.p`
   margin: 0.8rem 0 4rem;
   text-align: center;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
-  color: var(--n200-color);
+  font-size: var(--font-body-size);
+  color: var(--N200);
 `
 
 const ButtonContainer = styled.div`

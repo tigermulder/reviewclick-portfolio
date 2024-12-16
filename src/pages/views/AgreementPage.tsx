@@ -134,12 +134,9 @@ const AgreementContainer = styled.div`
 
 const AgreementTitle = styled.h2`
   margin-top: 2.4rem;
-  font-size: var(--font-h2-size);
-  font-weight: var(--font-h2-weight);
-  letter-spacing: var(--font-h2-letter-spacing);
-  color: var(--n600-color);
+  color: var(--N600);
   em {
-    color: var(--revu-color);
+    color: var(--L600);
   }
 `
 
@@ -162,10 +159,8 @@ const CheckboxWrapper = styled.div`
 
 const NoticeText = styled.p`
   margin-top: 1.2rem;
-  color: var(--primary-color);
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  letter-spacing: var(--font-caption-letter-spacing);
+  color: var(--RevBlack);
+  font-size: var(--caption-size);
 `
 
 const BottomSubmit = styled.div<{ $visible: boolean }>`

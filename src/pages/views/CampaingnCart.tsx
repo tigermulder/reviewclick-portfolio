@@ -88,9 +88,7 @@ const CampaignCart = () => {
                   </RemainingDays>
                 </CampaignThumb>
                 <CampaignInfo>
-                  <CampaignPoints>
-                    {campaign.price.toLocaleString()}P
-                  </CampaignPoints>
+                  <h4>{campaign.price.toLocaleString()}P</h4>
                   <CampaignTitle>{campaign.title}</CampaignTitle>
                   <CampaignDescription>
                     신청 | <Join>{campaign.joins}</Join>/{campaign.quota}명
@@ -177,13 +175,10 @@ const RemainingDays = styled.span<{ $isEnded: boolean }>`
   left: 0;
   padding: 0.2rem 0.6rem;
   border-radius: 0.2rem;
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  line-height: var(--font-caption-line-height);
-  letter-spacing: var(--font-caption-letter-spacing);
+  font-size: var(--caption-size);
   background: ${({ $isEnded }) =>
-    $isEnded ? "rgba(0,0,0,0.5)" : "var(--primary-color)"};
-  color: var(--white);
+    $isEnded ? "rgba(0,0,0,0.5)" : "var(--RevBlack)"};
+  color: white;
 `
 
 const CampaignInfo = styled.div`
@@ -196,20 +191,10 @@ const CampaignInfo = styled.div`
   justify-content: center;
 `
 
-const CampaignPoints = styled.p`
-  font-size: var(--font-h4-size);
-  font-weight: var(--font-h4-weight);
-  line-height: var(--font-h4-line-height);
-  letter-spacing: var(--font-h4-letter-spacing);
-`
-
 const CampaignTitle = styled.span`
   width: 87%;
   margin-top: 0.5rem;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+  font-size: var(--font-body-size);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -218,13 +203,12 @@ const CampaignTitle = styled.span`
 const CampaignDescription = styled.div`
   margin-top: 0.6rem;
   font-size: 1.2rem;
-  font-weight: var(--font-weight-light);
-  color: var(--n200-color);
+  color: var(--N200);
 `
 
 const Join = styled.span`
-  font-weight: var(--font-weight-medium);
-  color: var(--primary-color);
+  font-weight: var(--font-medium);
+  color: var(--RevBlack);
 `
 
 const NoCampaigns = styled.p`
@@ -232,5 +216,5 @@ const NoCampaigns = styled.p`
   top: 46%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--n200-color);
+  color: var(--N200);
 `

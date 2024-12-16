@@ -140,9 +140,9 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
     css`
       width: 50%;
       padding: 0.5rem 0px 2.6rem;
-      background: var(--white);
+      background-color: white;
       border-top-right-radius: 30px;
-      border-top: 0.5px solid var(--n100-color);
+      border-top: 0.5px solid var(--N100);
       flex: 1;
       display: flex;
       justify-content: center;
@@ -167,8 +167,8 @@ const NavItem = styled.div.attrs<{ $active: boolean; $tabName?: string }>(
       width: 50%;
       padding: 0.5rem 0px 2.6rem;
       border-top-left-radius: 30px;
-      background: var(--white);
-      border-top: 0.5px solid var(--n100-color);
+      background-color: white;
+      border-top: 0.5px solid var(--N100);
       flex: 1;
       display: flex;
       justify-content: center;
@@ -223,7 +223,7 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
     else return "1.7rem"
   }};
   margin-bottom: 0.25rem;
-  color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
+  color: ${({ $active }) => ($active ? "var(--L600)" : "var(--Silver)")};
 `
 
 const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
@@ -231,8 +231,7 @@ const NavText = styled.span.attrs<{ $active: boolean }>(({ $active }) => ({
 }))<{ $active: boolean }>`
   font-size: 1rem;
   font-weight: 500;
-  letter-spacing: -0.5px;
-  color: ${({ $active }) => ($active ? "var(--revu-color)" : "var(--silver)")};
+  color: ${({ $active }) => ($active ? "var(--L600)" : "var(--Silver)")};
 `
 
 const Circle = styled.span`
@@ -241,8 +240,8 @@ const Circle = styled.span`
   right: 0;
   width: 0.45rem;
   height: 0.45rem;
-  background: var(--prim-L500);
-  border: 0.15rem solid #fff;
+  background: var(--L500);
+  border: 0.15rem solid white;
   border-radius: 50%;
   box-sizing: initial;
 `

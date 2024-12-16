@@ -62,14 +62,14 @@ const Summary = styled.summary`
 `
 
 const NoticeTitle = styled.p`
-  font-weight: bold;
-  font-size: 1.4rem;
+  font-weight: var(--font-bold);
+  font-size: var(--font-body-size);
 `
 
 const IconPlaceholder = styled.div`
   width: 24px;
   height: 24px;
-  transition: transform 0.1s ease;
+  transition: transform 0.1s ease-in-out;
   transform: rotate(180deg);
 
   details[open] & {
@@ -87,11 +87,9 @@ const NoticeBox = styled.ul`
   padding: 1.5rem;
   margin-top: 2.4rem;
   border-radius: 0.8rem;
-  background: var(--whitewood);
-  color: var(--gray-01);
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  letter-spacing: var(--font-caption-small-letter-spacing);
+  background: var(--WWood);
+  color: var(--Gray02);
+  font-size: var(--caption-size);
   line-height: 1.25;
 
   li {
@@ -110,7 +108,7 @@ const NoticeBox = styled.ul`
     width: 0.25rem;
     height: 0.25rem;
     border-radius: 50%;
-    background: var(--gray-01);
+    background: var(--Gray02);
   }
   @keyframes fadeIn {
     from {

@@ -111,7 +111,7 @@ const ShareModal = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <ShareHeader>
-              <Title>공유하기</Title>
+              <h3>공유하기</h3>
               <CloseButton onClick={handleClose} aria-label="모달 닫기">
                 <IconClose />
               </CloseButton>
@@ -191,7 +191,7 @@ const ShareHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 0.1rem solid var(--n20-color);
+  border-bottom: 0.1rem solid var(--N20);
   padding: 1.5rem 0;
 `
 
@@ -204,12 +204,6 @@ const CloseButton = styled.button`
   border: none;
   font-size: 24px;
   cursor: pointer;
-`
-
-const Title = styled.h2`
-  font-size: 1.6rem;
-  font-weight: var(--font-h3-weight);
-  letter-spacing: var(--font-h3-letter-spacing);
 `
 
 const IconsWrapper = styled.div`
@@ -248,6 +242,6 @@ const IconKaKaoBackground = styled.div`
 `
 
 const IconText = styled.p`
-  font-size: 1.2rem;
+  font-size: var(--caption-size);
   color: #333;
 `

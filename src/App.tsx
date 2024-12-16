@@ -1,20 +1,17 @@
 import { AppRoute } from "pages/AppRoute"
-import { useLocation, useMatch, useParams, useNavigate } from "react-router-dom"
+import { useLocation, useMatch, useParams } from "react-router-dom"
 import AppBar from "components/AppBar"
 import Navbar from "./components/Navbar"
 import Footer from "components/Footer"
 import ToastMassage from "components/ToastMassage"
-import GlobalCategoryMenu from "components/GlobalCategoryMenu"
 import { RoutePath } from "./types/route-path"
 import { logincheck } from "@/services/login"
-import "./global.css"
+import "./main.css"
 import { useEffect } from "react"
 import useToast from "./hooks/useToast"
 
 function App() {
-  // useUserStatus()
   const { campaignCode } = useParams()
-  const navigate = useNavigate()
   const { addToast } = useToast()
 
   //** 로그인정보 */
@@ -122,8 +119,6 @@ function App() {
       <AppRoute />
       {/* 특정 경로에서만 푸터 렌더링 */}
       {showFooter && <Footer />}
-      {/* GlobalCategoryMenu는 항상 렌더링되어야 함 */}
-      <GlobalCategoryMenu />
       {/* Bottom Tap Bar */}
       {!hideTapBar && <Navbar />}
       {/* ToastMassage */}

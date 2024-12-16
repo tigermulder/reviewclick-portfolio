@@ -29,8 +29,8 @@ const TabsContainer = styled.ul`
   align-items: flex-start;
   gap: 2.5rem;
   overflow-x: auto;
-  border-bottom: 1px solid var(--n80-color);
-  margin-top: 12px;
+  border-bottom: 1px solid var(--N80);
+  margin-top: 1.2rem;
   padding: 0;
   list-style: none;
 `
@@ -45,28 +45,26 @@ const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
 }))<{ disabled: boolean }>`
   padding: 1.5rem 0px 0.75rem;
   font-size: 1.8rem;
-  line-height: var(--base-line-height);
-  color: var(--n200-color);
-  font-weight: var(--font-weight-medium);
+  color: var(--N200);
+  font-weight: var(--font-medium);
   white-space: nowrap;
 
   &.selected {
     position: relative;
-    color: var(--revu-color);
+    color: var(--L600);
 
     &:after {
       content: "";
       position: absolute;
       bottom: 0;
       left: 0;
-      background: var(--revu-color);
+      background-color: var(--L600);
       width: 100%;
       height: 2px;
     }
   }
 
   &:hover {
-    color: ${({ disabled }) =>
-      disabled ? "var(--n200-color)" : "var(--revu-color)"};
+    color: ${({ disabled }) => (disabled ? "var(--N200)" : "var(--L600)")};
   }
 `

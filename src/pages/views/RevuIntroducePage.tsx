@@ -45,14 +45,14 @@ const IntroduceContainer = styled.div`
   p {
     margin-top: 2rem;
     text-align: center;
-    color: #757d82;
+    color: var(--N300);
   }
 `
 
 const Logo = styled.div`
   min-width: 8.5rem;
   margin-top: 4rem;
-  color: var(--revu-color);
+  color: var(--L600);
 `
 
 const ButtonContainer = styled.div`

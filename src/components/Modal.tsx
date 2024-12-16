@@ -76,14 +76,13 @@ const Modal = ({
 
 export default Modal
 
-// 스타일 컴포넌트 정의
 const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,7 +90,7 @@ const Overlay = styled.div`
 `
 
 const ModalContainer = styled.div`
-  background: #fff;
+  background: white;
   border-radius: 1.2rem;
   width: 90%;
   max-width: 400px;
@@ -105,28 +104,22 @@ const TextContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.8rem;
 `
 
-const ModalHeader = styled.h2`
+const ModalHeader = styled.h3`
   align-self: stretch;
-  color: var(--n600-color);
-  font-size: var(--font-h3-size);
-  letter-spacing: var(--font-h3-letter-spacing);
+  color: var(--N600);
   line-height: 2.5rem;
-  font-weight: var(--font-weight-bold);
 `
 
 const ModalBody = styled.div`
   margin-bottom: 2rem;
-  font-size: var(--font-bodyL-size);
-  font-weight: var(--font-bodyL-weight);
-  line-height: var(--font-bodyL-line-height);
-  letter-spacing: var(--font-bodyL-letter-spacing);
-  color: var(--n400-color);
+  font-size: var(--font-body-size);
+  color: var(--N400);
   em,
   span {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-bold);
   }
   ol {
     padding-left: 1.6rem;
@@ -135,7 +128,7 @@ const ModalBody = styled.div`
       margin-bottom: 0.2rem;
     }
     span {
-      color: var(--revu-color);
+      color: var(--L600);
     }
   }
 `
@@ -144,14 +137,14 @@ const ModalFooter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 `
 
 const RouteLink = styled(Link)`
   display: block;
   margin-top: 1.2rem;
   text-align: center;
-  color: var(--n200-color);
-  font-size: var(--font-bodyM-size);
+  color: var(--N200);
+  font-size: var(--font-body-size);
   text-decoration: underline;
 `

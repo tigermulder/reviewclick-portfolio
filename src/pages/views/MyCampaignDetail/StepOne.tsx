@@ -237,14 +237,11 @@ const StepOne = ({
 export default StepOne
 
 const CartTitle = styled.div`
-  background: var(--white);
+  background-color: white;
 
   p {
     padding: 7rem 1.5rem 2rem;
     font-size: var(--font-h2-size);
-    font-weight: var(--font-h2-weight);
-    letter-spacing: var(--font-h2-letter-spacing);
-    line-height: var(--base-line-height);
   }
 `
 
@@ -252,7 +249,7 @@ const CartStepContainer = styled.ul`
   margin: 0 -1.5rem;
   padding: 2rem 1.5rem 10rem 2.6rem;
   min-height: 100vh;
-  background: var(--whitewood);
+  background: var(--WWood);
 
   li {
     position: relative;
@@ -265,7 +262,7 @@ const CartStepContainer = styled.ul`
       width: 1.3rem;
       height: 1.3rem;
       border-radius: 50%;
-      background: var(--n40-color);
+      background-color: var(--N40);
     }
   }
   > li:nth-child(1)::after {
@@ -277,7 +274,7 @@ const CartStepContainer = styled.ul`
     margin-right: 1.15rem;
     width: 0.3rem;
     height: 50%;
-    background: var(--n40-color);
+    background-color: var(--N40);
   }
   > li:nth-child(2)::after {
     content: "";
@@ -289,13 +286,13 @@ const CartStepContainer = styled.ul`
     margin-top: -0.5rem;
     width: 0.3rem;
     height: 60%;
-    background: var(--n40-color);
+    background-color: var(--N40);
   }
 `
 
 const StepItem = styled.li`
   padding: 1.5rem;
-  background: var(--white);
+  background-color: white;
   border-radius: 1.2rem;
 
   &:nth-of-type(2) {
@@ -316,9 +313,6 @@ const StepItem = styled.li`
 const StepItemHeader = styled.p`
   margin-bottom: 1.5rem;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  line-height: var(--font-h5-line-height);
-  letter-spacing: var(--font-h5-letter-spacing);
 `
 
 const StepItemInfo = styled.div`
@@ -352,10 +346,6 @@ const StepItemInfoTextBox = styled.div`
   span {
     width: 100%;
     padding-right: 1rem;
-    font-size: var(--font-bodyM-size);
-    font-weight: var(--font-bodyM-weight);
-    line-height: var(--font-bodyM-line-height);
-    letter-spacing: var(--font-bodyM-letter-spacing);
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -366,18 +356,13 @@ const StepItemInfoTextBox = styled.div`
   p {
     margin-top: 0.6rem;
     font-size: var(--font-h2-size);
-    font-weight: var(--font-h2-weight);
-    letter-spacing: var(--font-h2-letter-spacing);
   }
 `
 
 const StepNotice = styled.span`
   margin-bottom: 1rem;
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--base-line-height);
-  letter-spacing: var(--font-callout-small-letter-spacing);
-  color: var(--n200-color);
+  font-size: var(--caption-small-size);
+  color: var(--N200);
   display: flex;
   align-items: start;
   gap: 0.3rem;

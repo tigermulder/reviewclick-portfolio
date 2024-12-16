@@ -70,7 +70,7 @@ const ListContainer = styled.ul`
   li {
     padding: 2.2rem 0;
     display: flex;
-    border-bottom: 0.1rem solid var(--whitesmoke);
+    border-bottom: 0.1rem solid var(--WSmoke);
   }
 `
 
@@ -79,10 +79,6 @@ const NotifyMessage = styled.p`
   align-items: center;
   gap: 0.6rem;
   margin-top: 0.4rem;
-  font-size: var(--font-h5-size);
-  font-weight: 500;
-  line-height: var(--font-h5-line-height);
-  letter-spacing: var(--font-h5-letter-spacing);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -94,7 +90,7 @@ const NotifyMessage = styled.p`
     transform: translateY(-50%);
     width: 2.4rem;
     height: 2.4rem;
-    transition: transform 0.15s ease-in;
+    transition: transform 0.15s ease-in-out;
   }
 
   img.active {
@@ -119,7 +115,5 @@ const NoNoticeContainer = styled.div`
 const NoNoticeMessage = styled.p`
   padding: 2.2rem 0;
   text-align: center;
-  color: var(--n400-color);
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
+  color: var(--N400);
 `

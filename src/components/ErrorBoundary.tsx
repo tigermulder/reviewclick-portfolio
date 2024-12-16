@@ -104,7 +104,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <ErrorContainer>
           <img src={errorImage} alt="에러 이미지" style={imageStyle} />
-          <ErrorTitle>{errorTitle}</ErrorTitle>
+          <h2>{errorTitle}</h2>
           <ErrorMessage>{this.renderErrorMessage()}</ErrorMessage>
           <ButtonContainer>
             <Button onClick={() => window.location.reload()} $variant="pink">
@@ -121,7 +121,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
 export default ErrorBoundary
 
-// 스타일드 컴포넌트
 const ErrorContainer = styled.div`
   height: 100vh;
   display: flex;
@@ -132,20 +131,11 @@ const ErrorContainer = styled.div`
   text-align: center;
 `
 
-const ErrorTitle = styled.h1`
-  font-size: var(--font-h2-size);
-  font-weight: var(--font-h2-weight);
-  letter-spacing: var(--font-h2-letter-spacing);
-`
-
 const ErrorMessage = styled.p`
   margin: 0.8rem 0 4rem;
   text-align: center;
-  font-size: var(--font-bodyM-size);
-  font-weight: var(--font-bodyM-weight);
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
-  color: var(--n200-color);
+  font-size: var(--font-body-size);
+  color: var(--N200);
 `
 
 const ButtonContainer = styled.div`

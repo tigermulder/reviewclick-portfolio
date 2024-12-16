@@ -85,7 +85,6 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `
 
-// 스타일 컴포넌트 정의
 const ToastWrapper = styled.div`
   position: fixed;
   top: 20px;
@@ -101,16 +100,16 @@ const ToastItem = styled.div<ToastItemProps>`
   justify-content: center;
   padding: 1.2rem 1.5rem;
   border-radius: 1.3rem;
-  background-color: var(--primary-color);
+  background-color: var(--RevBlack);
   color: white;
-  animation: ${fadeIn} 0.18s ease-out;
+  animation: ${fadeIn} 0.18s ease-in-out;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 `
 
 const Icon = styled.span`
   margin-right: 0.4rem;
   align-items: center;
-  font-size: 1.5rem; /* 이모지 크기 조정 */
+  font-size: 1.5rem;
 
   svg {
     width: 1.3rem;

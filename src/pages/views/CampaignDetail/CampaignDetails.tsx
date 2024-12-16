@@ -55,20 +55,18 @@ const InfoBox = styled.div`
     flex: 1;
   }
   & > div span {
-    font-size: var(--font-bodyL-size);
-    font-weight: var(--font-bodyL-weight);
-    letter-spacing: var(--font-bodyL-letter-spacing);
-    color: var(--n200-color);
+    font-size: var(--font-body-size);
+    color: var(--N200);
     em {
       display: inline-block;
       margin-left: 0.3rem;
-      color: var(--n400-color);
+      color: var(--N400);
     }
   }
   & div p {
     font-size: 2.6rem;
     letter-spacing: calc(2.6rem * (-0.4 / 100));
-    font-weight: var(--font-weight-extrabold);
+    font-weight: var(--font-extrabold);
   }
 `
 
@@ -79,7 +77,7 @@ const ButtonContainer = styled.div`
 const Divider = styled.div`
   margin-top: 1.6rem;
   height: 0.1rem;
-  background: var(--n20-color);
+  background: var(--N20);
 `
 
 const DetailContainer = styled.div`
@@ -97,7 +95,7 @@ const DetailContainer = styled.div`
     left: 0;
     height: 53%;
     width: 0.2rem;
-    border-left: 1.5px dashed var(--n40-color);
+    border-left: 1.5px dashed var(--N40);
   }
 `
 
@@ -112,10 +110,8 @@ const DetailsList = styled.ul`
     position: relative;
     display: flex;
     justify-content: space-between;
-    font-size: var(--font-bodyL-size);
-    font-weight: var(--font-bodyL-weight);
-    letter-spacing: var(--font-bodyL-letter-spacing);
-    color: var(--n300-color);
+    font-size: var(--font-body-size);
+    color: var(--N300);
 
     &::before {
       content: "";
@@ -125,7 +121,7 @@ const DetailsList = styled.ul`
       transform: translateY(-50%);
       width: 0.4rem;
       height: 0.4rem;
-      background: var(--n80-color);
+      background: var(--N80);
       border-radius: 50%;
     }
     &:nth-child(1)::before {
@@ -144,10 +140,10 @@ const DetailsList = styled.ul`
 const DetailInfoHeading = styled.span`
   display: block;
   width: 9rem;
-  color: var(--n200-color);
+  color: var(--N200);
   flex-shrink: 0;
 `
 
 const DetailInfo = styled.span`
-  color: var(--n600-color);
+  color: var(--N600);
 `

@@ -15,7 +15,7 @@ const NoCampaign = ({ title }: NoCampaignProps) => {
         캠페인을 신청하고 미션을 시작해보세요! <br /> 여기서 모든 캠페인 진행
         상황을 확인할 수 있어요.
       </p>
-      <h3>캠페인 참여 방법</h3>
+      <h5>캠페인 참여 방법</h5>
       <NoCampaignList>
         <img src={EmptyList} alt="캠페인 참여방법" />
       </NoCampaignList>
@@ -32,31 +32,22 @@ const NoCampaignContainer = styled.div`
   justify-content: center;
   padding: 6rem 0 8rem;
 
-  h3 {
+  h5 {
     width: 100%;
     padding: 0 1.5rem;
     margin: 12rem 0 2rem;
-    font-size: var(--font-h5-size);
-    font-weight: var(--font-h5-weight);
-    letter-spacing: var(--font-h5-letter-spacing);
-    color: var(--n500-color);
+    color: var(--N500);
     text-align: left;
   }
   p {
     margin-top: 1.2rem;
-    font-size: var(--font-bodyL-size);
-    font-weight: var(--font-bodyL-weight);
-    letter-spacing: var(--font-bodyL-letter-spacing);
-    color: var(--n300-color);
+    color: var(--N300);
   }
 `
 
-const NoCampaignTitle = styled.h2`
+const NoCampaignTitle = styled.h3`
   margin-top: 0.8rem;
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-h3-weight);
-  letter-spacing: var(--font-h3-letter-spacing);
-  color: var(--n500-color);
+  color: var(--N500);
 `
 
 const NoCampaignIcon = styled.div`

@@ -40,11 +40,11 @@ const FilterChipWrap = styled.div`
   top: 4.4rem;
   left: 0;
   padding: 1.2rem 1.5rem;
-  background: var(--white);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--n60-color);
+  border-bottom: 1px solid var(--N60);
   z-index: 10;
 `
 
@@ -61,16 +61,13 @@ const FilterChipBarStyled = styled.ul`
 
 const Chip = styled.li<{ selected: boolean }>`
   padding: 0.6rem 1.2rem;
-  font-size: var(--font-bodyM-size);
+  font-size: var(--font-body-size);
   font-weight: ${({ selected }) =>
-    selected ? "var(--font-weight-bold)" : "var(--font-bodyM-weight)"};
-  line-height: var(--font-bodyM-line-height);
-  letter-spacing: var(--font-bodyM-letter-spacing);
+    selected ? "var(--font-bold)" : "var(--font-medium)"};
   white-space: nowrap;
-  color: ${({ selected }) => (selected ? "var(--white)" : "var(--n300-color)")};
-  background: ${({ selected }) =>
-    selected ? "var(--revu-color)" : "transparent"};
-  border: 0.1rem solid var(--whitesmoke);
+  color: ${({ selected }) => (selected ? "white" : "var(--N300)")};
+  background: ${({ selected }) => (selected ? "var--L600)" : "transparent")};
+  border: 0.1rem solid var(--WSmoke);
   border-radius: 99.9rem;
 
   transition:
@@ -78,6 +75,6 @@ const Chip = styled.li<{ selected: boolean }>`
     color 0.1s ease-in-out;
   &:hover {
     background: ${({ selected }) =>
-      selected ? "var(--revu-color)" : "var(--whitesmoke)"};
+      selected ? "var(--L600)" : "var(--WSmoke)"};
   }
 `

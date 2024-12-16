@@ -38,21 +38,19 @@ const CheckboxLabel = styled.label<{ $isTitle?: boolean; checked: boolean }>`
     $isTitle &&
     `
     padding: 1.1rem 1.5rem;
-    border: 1px solid ${checked ? "var(--revu-color)" : "var(--n80-color)"};
+    border: 1px solid ${checked ? "var(--L600)" : "var(--N80)"};
     border-radius: 0.5rem;
-    background-color: ${
-      checked ? "var(--light-primary-color)" : "var(--white)"
-    };
-    color: ${checked ? "var(--primary-color)" : "var(--n600-color)"};
+    background-color: ${checked ? "var(--N500)" : "white"};
+    color: ${checked ? "var(--RevBlack)" : "var(--N600)"};
     transition: border-color 0.14s ease-in-out;
 
     &:hover {
-      border-color: ${checked ? "var(--revu-color)" : "var(--n80-color)"};
+      border-color: ${checked ? "var(--L600)" : "var(--N80)"};
     }
     ${
       checked &&
       `
-      border-color: var(--revu-color);
+      border-color: var(--L600);
     `
     }
   `}
@@ -81,33 +79,23 @@ const CheckboxCustom = styled.span<CheckboxCustomProps>`
     width: 2rem;
     height: 2rem;
 
-    color: ${({ checked }) =>
-      checked ? "var(--primary-color)" : "var(--whitesmoke)"};
+    color: ${({ checked }) => (checked ? "var(--RevBlack)" : "var(--WSmoke)")};
     .all-check {
-      color: ${({ checked }) =>
-        checked ? "var(--revu-color)" : "var(--n100-color)"};
+      color: ${({ checked }) => (checked ? "var(--L600)" : "var(--N100)")};
       transition: color 0.14s ease-in-out;
     }
     .check-fill {
-      color: ${({ checked }) => (checked ? "var(--white)" : "var(--silver)")};
+      color: ${({ checked }) => (checked ? "white" : "var(--Silver)")};
     }
   }
 `
 
 const CheckboxText = styled.span<Partial<CheckboxTextProps>>`
   font-size: ${({ $isTitle }) =>
-    $isTitle ? "var(--font-title-size)" : "var(--font-caption-size)"};
+    $isTitle ? "var(--font-body-size)" : "var(--caption-size)"};
   font-weight: ${({ $isTitle }) =>
-    $isTitle ? "var(--font-title-weight)" : "normal"};
-  line-height: ${({ $isTitle }) =>
-    $isTitle ? "var(--font-title-line-height)" : "normal"};
-  letter-spacing: ${({ $isTitle }) =>
-    $isTitle ? "var(--font-title-letter-spacing)" : "normal"};
+    $isTitle ? "var(--font-medium)" : "normal"};
   color: ${({ $isTitle, checked }) =>
-    $isTitle
-      ? checked
-        ? "var(--revu-color)"
-        : "var(--n100-color)"
-      : "var(--n600-color)"};
+    $isTitle ? (checked ? "var(--L600)" : "var(--N100)") : "var(--N600)"};
   transition: color 0.14s ease-in-out;
 `

@@ -55,18 +55,18 @@ const InputWrapper = styled.div<{ $isError?: boolean; $disabled?: boolean }>`
   align-items: center;
   border: 1px solid
     ${({ $isError, $disabled }) =>
-      $isError ? "red" : $disabled ? "var(--n40-color)" : "#ddd"};
+      $isError ? "red" : $disabled ? "var(--N40)" : "var(--Silver)"};
   background: ${({ $isError, $disabled }) =>
-    $isError ? "var(--prim-L20)" : $disabled ? "inherit" : "inherit"};
+    $isError ? "var(--L20)" : $disabled ? "inherit" : "inherit"};
   border-radius: 5px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease-in-out;
   overflow: hidden;
   color: ${({ $isError, $disabled }) =>
     $isError
-      ? "var(--primary-color)"
+      ? "var(--RevBlack)"
       : $disabled
-        ? "var(--n200-color)"
-        : "var(--primary-color)"};
+        ? "var(--N200)"
+        : "var(--RevBlack)"};
 `
 
 const StyledInput = styled.input<{ $isError?: boolean }>`
@@ -74,9 +74,8 @@ const StyledInput = styled.input<{ $isError?: boolean }>`
   flex: 1;
   padding: 1.2rem;
   border: none;
-  font-size: 14px;
   outline: none;
-  background: ${({ $isError }) => ($isError ? "var(--prim-L20)" : "inherit")};
+  background: ${({ $isError }) => ($isError ? "var(--L20)" : "inherit")};
 `
 
 const SuffixContainer = styled.div<{ $width: string }>`
@@ -86,22 +85,21 @@ const SuffixContainer = styled.div<{ $width: string }>`
 `
 
 const Suffix = styled.div`
-  color: #415058;
-  font-size: 1.4rem;
-  font-weight: 500;
+  color: var(--N400);
+  font-weight: var(--font-medium);
   word-wrap: break-word;
 `
 
 const ErrorDescription = styled.p`
   text-align: left;
-  color: var(--revu-color);
+  color: var(--L600);
   font-size: 1.2rem;
   margin-top: 0.5rem;
 `
 
 const SuccessDescription = styled.p`
   text-align: left;
-  color: var(--success-color);
+  color: var(--Success);
   font-size: 1.2rem;
   margin-top: 0.5rem;
 `

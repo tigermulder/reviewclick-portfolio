@@ -70,7 +70,7 @@ const Header = styled.header`
   width: 100%;
   height: 6rem;
   padding: 1.2rem 1.6rem;
-  background: var(--white);
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,7 +79,7 @@ const Header = styled.header`
 
 const Logo = styled.div`
   min-width: 8.5rem;
-  color: var(--revu-color);
+  color: var(--L600);
 
   a {
     display: block;
@@ -107,17 +107,17 @@ const SearchInput = styled.input`
   width: 100%;
   height: 100%;
   padding-left: 1.8rem;
-  background: var(--n20-color);
+  background: var(--N20);
   border-radius: 2.1rem;
   transition: 0.1s;
-  border: 0.1rem solid var(--n20-color);
+  border: 0.1rem solid var(--N20);
 
   &:focus {
     outline: none;
-    border: 0.1rem solid var(--n600-color);
+    border: 0.1rem solid var(--N600);
 
     ~ .ico-search {
-      color: var(--n600-color);
+      color: var(--N600);
     }
   }
 
@@ -134,7 +134,7 @@ const SearchIcon = styled.div`
   top: 50%;
   right: 1.1rem;
   transform: translateY(-50%);
-  color: var(--n200-color);
+  color: var(--N200);
   transition: color 0.1s ease;
 
   svg {
@@ -146,7 +146,7 @@ const SearchIcon = styled.div`
 const HeartIcon = styled.div`
   width: 2.4rem;
   margin-left: 1.2rem;
-  color: var(--n80-color);
+  color: var(--N80);
 
   svg {
     fill: currentColor;
@@ -158,11 +158,9 @@ const HeartIcon = styled.div`
 const SignUpLink = styled.div`
   margin-left: 1.6rem;
   font-size: 1.3rem;
-  letter-spacing: -0.5px;
-  font-weight: var(--font-weight-medium);
-  color: var(--silver);
+  color: var(--Silver);
   flex-shrink: 0;
-  border-bottom: 1px solid var(--silver);
+  border-bottom: 1px solid var(--Silver);
 
   a {
     text-decoration: none;
@@ -173,7 +171,7 @@ const SignUpLink = styled.div`
 const HeartText = styled.div`
   margin-top: 0.2rem;
   text-align: center;
-  color: var(--silver);
+  color: var(--Silver);
   font-size: 0.8rem;
   word-wrap: break-word;
 `

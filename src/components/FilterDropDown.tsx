@@ -106,8 +106,9 @@ const DropdownButton = styled.div<{
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
   border: 1px solid
-    ${({ $isOpen }) => ($isOpen ? "var(--revu-color)" : "var(--n200-color)")};
-  box-shadow: 0px 0px 0px 2px ${({ $isOpen }) => ($isOpen ? "#FDD8D9" : "none")};
+    ${({ $isOpen }) => ($isOpen ? "var(--L600)" : "var(--N200)")};
+  box-shadow: 0px 0px 0px 2px
+    ${({ $isOpen }) => ($isOpen ? "var(--L40)" : "none")};
   svg {
     transform: rotate(${({ $isOpen }) => ($isOpen ? "180deg" : "0")});
     transition: transform 0.05s ease-in-out;
@@ -128,7 +129,7 @@ const DropdownButton = styled.div<{
 
   span {
     font-size: 1.4rem;
-    color: var(--gray);
+    color: var(--Gray01);
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -143,7 +144,7 @@ const DropDownContainer = styled.div<{ $width: string }>`
   background: white;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.05);
   border-radius: 0.8rem;
-  border: 1px solid #e2e4e4;
+  border: 1px solid var(--WGray);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -170,17 +171,17 @@ const DropDownItem = styled.div<{ $highlighted?: boolean; $height: string }>`
   display: flex;
   align-items: center;
   padding-left: 1rem;
-  background: ${({ $highlighted }) => ($highlighted ? "#F4F5F5" : "white")};
+  background: ${({ $highlighted }) =>
+    $highlighted ? "var(--WWood)" : "white"};
   border: ${({ $highlighted }) =>
     $highlighted ? "none" : "1px solid transparent"};
   cursor: pointer;
   &:hover {
-    background-color: #e2e4e4;
+    background-color: var(--WGray);
   }
   p {
-    font-size: var(--font-bodyM-size);
-    font-weight: var(--font-weight-medium);
-    color: var(--n300-color);
+    font-size: var(--font-body-size);
+    color: var(--N300);
     width: 100%;
     white-space: nowrap;
     overflow: hidden;

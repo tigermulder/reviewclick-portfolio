@@ -271,27 +271,22 @@ export default MyCampaignPage
 const CartCardDesc = styled.div`
   padding: 1.5rem;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  letter-spacing: var(--font-h5-letter-spacing);
   border-radius: 1.2rem;
-  background: var(--white);
+  background-color: white;
 `
 
 const Result = styled.span`
   margin-left: 0.5rem;
-  color: var(--success-color);
+  color: var(--Success);
 `
 
 const Total = styled.span`
-  font-size: var(--font-callout-small-size);
-  font-weight: var(--font-callout-small-weight);
-  letter-spacing: var(--font-callout-small-letter-spacing);
+  font-size: var(--caption-small-size);
 `
 
 const MyReviewContainer = styled.ul<{ $hasItems: boolean }>`
   margin-top: 1.2rem;
-  background: ${({ $hasItems }) =>
-    $hasItems ? "var(--white)" : "transparent"};
+  background: ${({ $hasItems }) => ($hasItems ? "white" : "transparent")};
   border-radius: 1.2rem;
 
   li {
@@ -310,7 +305,7 @@ const MyReviewContainer = styled.ul<{ $hasItems: boolean }>`
     left: 0;
     width: 100%;
     height: 0.1rem;
-    background: var(--n40-color);
+    background: var(--N40);
   }
 `
 
@@ -328,7 +323,7 @@ const ReviewCardThumb = styled.div`
   width: 8.1rem;
   height: 8.1rem;
   overflow: hidden;
-  border: 0.5px solid #f5f6f8;
+  border: 0.5px solid var(--WWood);
   border-radius: 1rem;
   flex-shrink: 0;
 
@@ -345,11 +340,8 @@ const ReviewCardInfo = styled.div`
 `
 
 const CardDate = styled.p`
-  font-size: var(--font-caption-size);
-  font-weight: var(--font-caption-weight);
-  line-height: var(--font-caption-line-height);
-  letter-spacing: var(--font-caption-letter-spacing);
-  color: var(--quicksilver);
+  font-size: var(--caption-size);
+  color: var(--QSilver);
 `
 
 const CardTitle = styled.span`
@@ -358,9 +350,6 @@ const CardTitle = styled.span`
   margin-top: 0.4rem;
   padding-right: 1rem;
   font-size: var(--font-h5-size);
-  font-weight: var(--font-h5-weight);
-  line-height: var(--font-h5-line-height);
-  letter-spacing: var(--font-h5-letter-spacing);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -369,6 +358,4 @@ const CardTitle = styled.span`
 const CardPoint = styled.p`
   margin-top: 0.2rem;
   font-size: var(--font-h4-size);
-  font-weight: var(--font-h4-weight);
-  letter-spacing: var(--font-h4-letter-spacing);
 `
