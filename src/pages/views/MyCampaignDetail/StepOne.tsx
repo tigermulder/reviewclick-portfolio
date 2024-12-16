@@ -8,14 +8,14 @@ import Modal from "@/components/Modal"
 import SampleReviewImage from "assets/pro-sample.png"
 import { useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
+import { formatDate } from "@/utils/util"
 
 const StepOne = ({
   reviewIdKey,
   thumbnailUrl,
   campaignTitle,
   reward,
-  isEnded,
-  remainingTime,
+  createTime,
   campaignsUrl,
   goToNextStep,
   refetchData,
@@ -198,6 +198,7 @@ const StepOne = ({
               </RemainingDays> */}
             </StepItemInfoThumb>
             <StepItemInfoTextBox>
+              <CardDate>{formatDate(createTime)}</CardDate>
               <span>{campaignTitle}</span>
               <p>{reward?.toLocaleString()}P</p>
             </StepItemInfoTextBox>
@@ -353,6 +354,12 @@ const StepItemInfoTextBox = styled.div`
     margin-top: 0.6rem;
     font-size: var(--font-h2-size);
   }
+`
+
+const CardDate = styled.span`
+  font-size: var(--caption-size) !important;
+  font-weight: var(--font-light);
+  color: var(--QSilver);
 `
 
 const StepNotice = styled.span`

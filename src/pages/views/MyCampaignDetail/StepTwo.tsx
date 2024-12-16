@@ -18,7 +18,7 @@ const StepTwo = ({
   thumbnailUrl,
   campaignTitle,
   reward,
-  creatTime,
+  createTime,
   goToNextStep,
   refetchData,
   setValidatedReviewText,
@@ -203,7 +203,7 @@ const StepTwo = ({
               <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
             </CampaignStatusCardThumb>
             <StepItemInfoTextBox>
-              <CardDate>{formatDate(creatTime)}</CardDate>
+              <CardDate>{formatDate(createTime)}</CardDate>
               <span>{campaignTitle}</span>
               <p>{reward?.toLocaleString()}P</p>
             </StepItemInfoTextBox>

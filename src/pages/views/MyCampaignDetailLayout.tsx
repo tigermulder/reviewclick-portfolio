@@ -5,7 +5,6 @@ import { getReviewItem } from "@/services/review"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import ReuseHeader from "@/components/ReuseHeader"
 import dummyImage from "assets/dummy-image.png"
-import { calculateRemainingTime } from "@/utils/util"
 import {
   HeaderStatusType,
   HEADER_TITLES,
@@ -23,7 +22,6 @@ const MyCampaignDetailLayout = () => {
   const navigate = useNavigate()
 
   const LOCAL_STORAGE_KEY = `validatedReviewText_${reviewId}`
-  // 초기값을 로컬 스토리지에서 가져오기
   const [validatedReviewText, setValidatedReviewText] = useState<string>(() => {
     const storedText = localStorage.getItem(LOCAL_STORAGE_KEY)
     return storedText || ""
@@ -65,8 +63,7 @@ const MyCampaignDetailLayout = () => {
     campaignTitle,
     campaignUrl,
     reward,
-    endAt,
-    creatAt,
+    createAt,
     reviewText,
   } = {
     status: data?.review.status as HeaderStatusType,
@@ -74,12 +71,9 @@ const MyCampaignDetailLayout = () => {
     campaignTitle: data?.campaign.title,
     campaignUrl: data?.campaign.purchaseUrl,
     reward: data?.campaign.reward,
-    endAt: data?.campaign.endAt,
-    creatAt: String(data?.campaign.createdAt),
+    createAt: String(data?.campaign.createdAt),
     reviewText: data?.review_detail.reviewText,
   }
-  //** 남은 시간 계산 */
-  const { remainingTime, isEnded } = calculateRemainingTime(endAt)
   const thumbnailUrl = campaignThumb || dummyImage
 
   //** 상세 스텝 결정 */
@@ -108,8 +102,7 @@ const MyCampaignDetailLayout = () => {
             thumbnailUrl={thumbnailUrl}
             campaignTitle={campaignTitle}
             reward={reward}
-            isEnded={isEnded}
-            remainingTime={remainingTime}
+            createTime={createAt}
             campaignsUrl={campaignUrl}
             goToNextStep={goToNextStep}
             refetchData={refetch}
@@ -122,7 +115,7 @@ const MyCampaignDetailLayout = () => {
             thumbnailUrl={thumbnailUrl}
             campaignTitle={campaignTitle}
             reward={reward}
-            creatTime={creatAt}
+            createTime={createAt}
             goToNextStep={goToNextStep}
             refetchData={refetch}
             setValidatedReviewText={setValidatedReviewText}

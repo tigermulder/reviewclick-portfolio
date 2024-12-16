@@ -49,8 +49,7 @@ export interface StepOneProps {
   thumbnailUrl: string
   campaignTitle: string | undefined
   reward: number | undefined
-  isEnded: boolean
-  remainingTime: string
+  createTime: string
   campaignsUrl: string | undefined
   goToNextStep: () => void
   refetchData: () => void
@@ -61,7 +60,7 @@ export interface StepTwoProps {
   thumbnailUrl: string
   campaignTitle: string | undefined
   reward: number | undefined
-  creatTime: string
+  createTime: string
   goToNextStep: () => void
   refetchData: () => void
   setValidatedReviewText: (text: string) => void
