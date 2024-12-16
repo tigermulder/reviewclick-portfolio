@@ -174,6 +174,7 @@ const BodyContainer = styled.div`
 
 const ThumbArea = styled.div`
   width: 6.5rem;
+  padding: 0 !important;
   border-radius: 0.8rem;
   overflow: hidden;
   flex-shrink: 0;
