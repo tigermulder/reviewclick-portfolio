@@ -144,10 +144,6 @@ const CampaignDetailPage = () => {
   const campaignDetail = data.campaign
   const reviewStatus = data.review_status
 
-  if (!data || !campaignDetail || !campaignDetail.joinEndAt) {
-    return <div>데이터를 불러오는 중이거나 존재하지 않습니다.</div>
-  }
-
   //** D-Day 계산 */
   const today = new Date()
   const endDate = new Date(campaignDetail.joinEndAt)
