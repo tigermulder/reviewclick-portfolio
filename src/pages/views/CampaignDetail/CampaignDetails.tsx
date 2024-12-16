@@ -93,7 +93,7 @@ const DetailContainer = styled.div`
     position: absolute;
     top: 1.1rem;
     left: 0;
-    height: 15px;
+    height: 2.2rem;
     width: 0.2rem;
     border-left: 2px dashed var(--N40);
   }
@@ -104,7 +104,7 @@ const DetailsList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.4px;
+  gap: 0.4rem;
 
   li {
     position: relative;
