@@ -66,8 +66,9 @@ const StyledButton = styled.button.attrs<{ $isActive: boolean }>(
 
   &:hover {
     background-color: ${({ $isActive }) =>
-      $isActive ? "var(--L600)" : "#f5f5f5"};
-    border-color: ${({ $isActive }) => ($isActive ? "var(--L600)" : "#eeeeee")};
+      $isActive ? "var(--L600)" : "var(--WWood)"};
+    border-color: ${({ $isActive }) =>
+      $isActive ? "var(--L600)" : "var(--WSmoke)"};
     font-weight: ${({ $isActive }) =>
       $isActive ? "var(--font-bold)" : "var(--font-medium)"};
   }
