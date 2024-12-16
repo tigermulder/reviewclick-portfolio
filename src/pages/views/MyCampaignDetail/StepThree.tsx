@@ -245,10 +245,10 @@ const StepThree = ({
         showRouteLink={showLinkRouter}
       />
       <CartTitle>
-        <p>
+        <h2>
           리뷰 등록하고 <br />
           실제 리뷰 확인받기
-        </p>
+        </h2>
       </CartTitle>
       <CartStepContainer>
         <StepItem>
@@ -299,9 +299,8 @@ const CartTitle = styled.div`
   margin-top: 3.5rem;
   background-color: white;
 
-  p {
+  h2 {
     padding: 3rem 1.5rem 2rem;
-    font-size: var(--font-h2-size);
   }
 `
 
