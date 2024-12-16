@@ -15,7 +15,7 @@ const FaqItem = ({ faqItem }: any) => {
       <Button onClick={toggleOpen}>
         <NotifyMessage>
           <IconNew />
-          {faqItem.title}
+          <p>{faqItem.title}</p>
           <ArrowIcon
             className={isOpen ? "active" : ""}
             src={IconNoticeArrow}
@@ -56,8 +56,6 @@ const NotifyMessage = styled.div`
   gap: 0.6rem;
   position: relative;
   width: 100%;
-  font-size: var(--font-h5-size);
-  font-weight: var(--font-medium);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
