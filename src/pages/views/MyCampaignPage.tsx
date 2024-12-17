@@ -278,10 +278,12 @@ const CartCardDesc = styled.div`
 const Result = styled.span`
   margin-left: 0.5rem;
   color: var(--Success);
+  font-weight: var(--font-bold);
 `
 
 const Total = styled.span`
   font-size: var(--caption-small-size);
+  font-weight: var(--font-bold);
   margin-left: 0.14rem;
 `
 
