@@ -361,9 +361,11 @@ const ContactSupport = () => {
 export default ContactSupport
 
 const NoticeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
   p {
-    margin-bottom: 0.4rem;
-    font-size: 1.2rem;
+    font-size: var(--caption-size);
     letter-spacing: var(--L-spacing-M);
     font-weight: var(--font-medium);
     color: var(--L300);
@@ -383,15 +385,13 @@ const NoticeBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    list-style: inherit;
+    list-style-type: disc;
+    padding-left: 1.6rem;
+
     li {
-      position: relative;
-      padding-left: 1.6rem;
       font-size: var(--caption-size);
       font-weight: var(--font-medium);
       line-height: 1.25;
-      display: flex;
-      align-items: flex-start;
       color: var(--Gray02);
     }
     li::marker {
