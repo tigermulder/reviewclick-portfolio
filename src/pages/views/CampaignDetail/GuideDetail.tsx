@@ -116,14 +116,14 @@ const Divider = styled.div`
 `
 
 const GuideList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
   margin: 3.2rem 0 5.3rem;
 
   li strong {
     font-weight: var(--font-bold);
-  }
-
-  li + li {
-    margin-top: 2rem;
   }
   li p:nth-child(1) {
     font-size: var(--font-body-size);
