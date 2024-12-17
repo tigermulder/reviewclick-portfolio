@@ -337,6 +337,12 @@ const PopupContainer = styled.div`
   max-width: 400px;
   max-height: 90vh;
   margin: auto;
+
+  @media screen and (width: 691px) and (height: 697px) {
+    .someElement {
+      width: 46%;
+    }
+  }
 `
 
 const SlideContent = styled.div`
