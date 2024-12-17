@@ -93,7 +93,7 @@ const StepTwo = ({
             <p>
               리뷰 검수가 완료됐어요. <br />
             </p>
-            <p style={{ marginTop: "16px" }}>
+            <p style={{ marginTop: "2rem" }}>
               검수 완료된 내용을 상품 사이트에 리뷰로 등록한 후 캡쳐를 해주세요.
               캡쳐한 이미지가 정상적으로 업로드되면 미션이 완료돼요!
             </p>
