@@ -24,8 +24,13 @@ const FilterDropDown = ({
   const [dynamicContainerWidth, setDynamicContainerWidth] =
     useState(containerWidth)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const [initialLoad, setInitialLoad] = useState(true) // 처음에는 플레이스 홀더 강제 노출
 
   const toggleDropdown = () => {
+    if (initialLoad) {
+      // 드롭다운을 처음 연 순간 초기 로드 상태 해제
+      setInitialLoad(false)
+    }
     setOpenDropdown(isOpen ? null : id) // 드롭다운 열림 상태 토글
   }
 
@@ -60,8 +65,11 @@ const FilterDropDown = ({
     }
   }, [buttonWidth, containerWidth])
 
-  // selectedFilter가 없거나 label이 비어있을 경우 placeholder 노출
-  const displayText = selectedFilter?.label || placeholder
+  const displayText = initialLoad
+    ? placeholder
+    : selectedFilter
+      ? selectedFilter.label
+      : placeholder
 
   return (
     <DropdownWrapper ref={wrapperRef} $marginBottom={marginBottom}>
