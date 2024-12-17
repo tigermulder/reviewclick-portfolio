@@ -44,5 +44,5 @@ const AlertHubPage = () => {
 export default AlertHubPage
 
 const TabContent = styled.div`
-  padding-bottom: 14rem;
+  padding-bottom: 16rem;
 `

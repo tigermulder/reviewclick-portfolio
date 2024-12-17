@@ -280,7 +280,6 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
         return css`
           background-color: white;
           color: ${disabled ? "var(--N80)" : "var(--N600)"};
-          font-size: var(--font-body-size);
           font-weight: var(--font-medium);
           display: flex;
           align-items: center;
