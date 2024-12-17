@@ -84,7 +84,7 @@ const StyledIconNoticeArrow = styled(IconNoticeArrow)`
 
 const NoticeBox = styled.ul`
   animation: fadeIn 0.1s ease-in-out;
-  padding: 1.5rem;
+  padding: 1.6rem 1.2rem 1.6rem 2.4rem;
   margin-top: 2.4rem;
   border-radius: 0.8rem;
   background-color: var(--WWood);
@@ -92,9 +92,12 @@ const NoticeBox = styled.ul`
   font-size: var(--caption-size);
   line-height: 1.25;
   list-style: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 
-  li:not(:last-child) {
-    margin-bottom: 0.6rem;
+  li::maker {
+    font-size: 0.8rem;
   }
   @keyframes fadeIn {
     from {
