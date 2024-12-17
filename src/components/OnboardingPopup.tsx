@@ -338,7 +338,13 @@ const PopupContainer = styled.div`
   max-height: 90vh;
   margin: auto;
 
+  @media screen and (width: 590px) and (height: 736px) {
+    width: 53%;
+  }
   @media screen and (width: 691px) and (height: 697px) {
+    width: 45%;
+  }
+  @media screen and (width: 691px) and (height: 829px) {
     width: 46%;
   }
   @media screen and (width: 674px) and (height: 842px) {
