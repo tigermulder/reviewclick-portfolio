@@ -27,8 +27,8 @@ const Dot = styled.div`
   position: absolute;
   top: -0.3rem;
   left: 50%;
-  width: 0.12rem;
-  height: 0.6rem;
+  width: 0.11rem;
+  height: 0.55rem;
   background-color: var(--L100);
   border-radius: 0.15rem;
   transform-origin: center 0.85rem;
