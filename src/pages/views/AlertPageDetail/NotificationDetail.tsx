@@ -88,9 +88,7 @@ const NotificationDetail = () => {
           </div>
         )}
       </AlertContainer>
-      <Time>
-        <p>{formatTalkTime(userTime)}</p>
-      </Time>
+      <Time>{formatTalkTime(userTime)}</Time>
     </Container>
   )
 }
