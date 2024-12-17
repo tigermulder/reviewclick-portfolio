@@ -152,15 +152,15 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
       case "arrow":
         return css`
           background-color: white;
-          color: var(--L200);
-          border: 0.1rem solid var(--L200);
+          color: var(--Purple);
+          border: 0.1rem solid var(--Purple);
           height: 3.8rem;
           font-size: var(--font-body-size);
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 0.2rem;
-          color: var(--L200);
+          color: var(--Purple);
 
           &::after {
             content: "";
