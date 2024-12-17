@@ -417,6 +417,9 @@ const GuideList = styled.ul`
     p em {
       color: var(--Purple);
     }
+    &::marker {
+      font-size: 0.9rem;
+    }
   }
 `
 
