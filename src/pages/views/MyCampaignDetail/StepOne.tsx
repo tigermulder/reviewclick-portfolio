@@ -238,13 +238,13 @@ const StepOne = ({
 export default StepOne
 
 const CartTitle = styled.div`
-  padding: 7rem 1.5rem 2rem;
+  padding: 7rem 1.6rem 2rem;
   background-color: white;
 `
 
 const CartStepContainer = styled.ul`
   margin: 0 -1.5rem;
-  padding: 2rem 1.5rem 10rem 2.6rem;
+  padding: 2rem 1.6rem 10rem 2.6rem;
   min-height: 100vh;
   background: var(--WWood);
 
@@ -288,7 +288,7 @@ const CartStepContainer = styled.ul`
 `
 
 const StepItem = styled.li`
-  padding: 1.5rem;
+  padding: 1.6rem;
   background-color: white;
   border-radius: 1.2rem;
 
@@ -308,13 +308,13 @@ const StepItem = styled.li`
 `
 
 const StepItemHeader = styled.p`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
   font-size: var(--font-h5-size);
 `
 
 const StepItemInfo = styled.div`
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
   border-radius: 0.8rem;
   overflow: hidden;
   display: flex;

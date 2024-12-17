@@ -300,13 +300,13 @@ const CartTitle = styled.div`
   background-color: white;
 
   h2 {
-    padding: 3rem 1.5rem 2rem;
+    padding: 3rem 1.6rem 2rem;
   }
 `
 
 const CartStepContainer = styled.ul`
-  margin: 0 -1.5rem;
-  padding: 3rem 1.5rem 10rem 2.6rem;
+  margin: 0 -1.6rem;
+  padding: 3rem 1.6rem 10rem 2.6rem;
   min-height: 100vh;
   background-color: var(--WWood);
 
@@ -351,7 +351,7 @@ const CartStepContainer = styled.ul`
 `
 
 const StepItem = styled.li`
-  padding: 1.5rem;
+  padding: 1.6rem;
   background-color: white;
   border-radius: 1.2rem;
 
@@ -371,13 +371,13 @@ const StepItem = styled.li`
 `
 
 const StepItemHeader = styled.p`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
   font-size: var(--font-h5-size);
 `
 
 const StepItemReviewContainer = styled.div`
   margin-bottom: 1rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.6rem;
   border: 0.1rem solid var(--N60);
   border-radius: 1rem;
 `

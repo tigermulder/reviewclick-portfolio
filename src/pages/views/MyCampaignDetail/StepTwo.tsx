@@ -292,7 +292,7 @@ const CartTest = styled.div`
 `
 const CampaignStatus = styled.div`
   position: relative;
-  padding: 2rem 1.5rem 2.3rem;
+  padding: 2rem 1.6rem 2.3rem;
 `
 const CampaignTitle = styled.p`
   margin-bottom: 1.2rem;
@@ -360,7 +360,7 @@ const ReviewTestContainer = styled.div`
     content: "";
     position: absolute;
     top: 0;
-    left: -1.5rem;
+    left: -1.6rem;
     width: calc(100% + 3rem);
     height: 100%;
     background-color: var(--N20);
@@ -399,7 +399,7 @@ const GuideHeader = styled.button`
 `
 
 const GuideContent = styled.div`
-  margin-top: 1.5rem;
+  margin-top: 1.6rem;
 
   .guide-list {
     background-color: var(--WWood);
@@ -448,7 +448,7 @@ const ReviewTextBox = styled.div`
   display: inline-block;
   width: 100%;
   height: 20rem;
-  padding: 1.4rem 1.4rem 4rem;
+  padding: 1.4rem 1.6rem 4rem;
   border-radius: 1rem;
   background-color: white;
 
@@ -497,7 +497,7 @@ const Count = styled.div`
   position: absolute;
   right: 1.6rem;
   bottom: 1.6rem;
-  font-size: 1.4rem;
+  font-size: var(--font-body-size);
   color: var(--N200);
 
   span {
