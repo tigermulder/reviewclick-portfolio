@@ -394,7 +394,7 @@ const CampaignDetailPage = () => {
           ref={viewProductRef}
         />
         <Line />
-        <ContentTab
+        <CustomTap
           tabs={singleTab}
           selectedTab={selectedTab}
           onTabSelect={handleTabSelect}
@@ -555,6 +555,10 @@ const DetailBody = styled.div`
   top: -9.9rem;
   padding: 1.5rem 1.5rem 3rem;
   background-color: white;
+`
+
+const CustomTap = styled(ContentTab)`
+  margin-top: 3.2rem;
 `
 
 const Dday = styled.span`
