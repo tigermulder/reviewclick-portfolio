@@ -1,8 +1,8 @@
 // 필터 옵션 객체 배열
 export type FilterOption = {
-  id: number
-  label: string
-  value: string | number
+  id: number | null
+  label: string | null
+  value: string | number | null
 }
 export interface FilterDropDownProps {
   id: string
