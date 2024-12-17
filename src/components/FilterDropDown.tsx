@@ -128,7 +128,7 @@ const DropdownButton = styled.div<{
     transition: transform 0.05s ease-in-out;
   }
 
-  padding: 0 0.8rem;
+  padding: 0 2rem;
   background: white;
   border-radius: 0.8rem;
   overflow: hidden;
@@ -142,7 +142,6 @@ const DropdownButton = styled.div<{
     box-shadow 0.1s ease-in-out;
 
   span {
-    font-size: 1.4rem;
     color: ${({ $isPlaceholder }) =>
       $isPlaceholder ? "var(--N100)" : "var(--Gray01)"};
     width: 100%;
