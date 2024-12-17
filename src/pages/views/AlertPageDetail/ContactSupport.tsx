@@ -386,7 +386,7 @@ const NoticeBox = styled.div`
     flex-direction: column;
     gap: 0.4rem;
     list-style-type: disc;
-    padding-left: 1.6rem;
+    padding-left: 2rem;
 
     li {
       font-size: var(--caption-size);
