@@ -393,9 +393,9 @@ const NoticeBox = styled.div`
       display: flex;
       align-items: flex-start;
       color: var(--Gray02);
-      &::marker {
-        font-size: 0.9rem;
-      }
+    }
+    li::marker {
+      font-size: 0.9rem;
     }
   }
 `
