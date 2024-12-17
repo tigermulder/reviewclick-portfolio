@@ -48,7 +48,7 @@ const Container = styled.div`
   border-radius: 1rem;
 
   h3 {
-    width: 80%;
+    padding: 0 3.2rem;
     margin: 0 auto;
     text-align: center;
     white-space: pre-line;
