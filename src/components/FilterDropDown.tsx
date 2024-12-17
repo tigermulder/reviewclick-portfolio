@@ -11,6 +11,7 @@ const FilterDropDown = ({
   options,
   selectedFilter,
   setSelectedFilter,
+  placeholder = "선택해주세요",
   buttonWidth = "auto",
   buttonHeight = "2.8rem",
   containerWidth = "160px",
@@ -59,6 +60,9 @@ const FilterDropDown = ({
     }
   }, [buttonWidth, containerWidth])
 
+  // selectedFilter가 없거나 label이 비어있을 경우 placeholder 노출
+  const displayText = selectedFilter?.label || placeholder
+
   return (
     <DropdownWrapper ref={wrapperRef} $marginBottom={marginBottom}>
       {/* 드롭다운을 열기 위한 버튼 */}
@@ -68,7 +72,7 @@ const FilterDropDown = ({
         $height={buttonHeight}
         $isOpen={isOpen}
       >
-        <span>{selectedFilter.label}</span>
+        <span>{displayText}</span>
         <IconDropDown />
       </DropdownButton>
 

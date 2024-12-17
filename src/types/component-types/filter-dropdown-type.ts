@@ -17,4 +17,5 @@ export interface FilterDropDownProps {
   marginBottom?: string
   openDropdown: string | null // 현재 열려 있는 드롭다운 ID
   setOpenDropdown: (id: string | null) => void // 열려 있는 드롭다운 ID 설정 함수
+  placeholder?: string
 }

@@ -239,6 +239,7 @@ const ContactSupport = () => {
         containerTop="inherit"
         containerHeight="4rem"
         marginBottom="0.9rem"
+        placeholder="질문 유형을 선택해주세요"
         openDropdown={openDropdown}
         setOpenDropdown={setOpenDropdown}
       />
@@ -259,6 +260,7 @@ const ContactSupport = () => {
           containerTop="inherit"
           containerHeight="4rem"
           marginBottom="0.9rem"
+          placeholder="문의할 캠페인을 선택해주세요"
           openDropdown={openDropdown}
           setOpenDropdown={setOpenDropdown}
         />
