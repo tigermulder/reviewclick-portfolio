@@ -27,7 +27,7 @@ const TabsContainer = styled.ul`
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1.8rem;
   overflow-x: auto;
   border-bottom: 1px solid var(--N80);
   padding: 0;
