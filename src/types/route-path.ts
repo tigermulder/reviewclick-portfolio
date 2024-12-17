@@ -1,12 +1,8 @@
 export const RoutePath = {
   Home: "",
-  Login: "/login",
   Join: "/join",
   JoinVerify: "/join/verify",
   JoinPhoneVerify: "/join/verify/phone",
-  FindId: "/find_id",
-  FindPassword: "/find_password",
-  ResetPassword: "/reset_password",
   MyCart: "/my_cart",
   MyCampaign: "/my_campaign",
   Notification: "/notification",
@@ -45,4 +41,5 @@ export interface ContentProps {
   $isNotificationDetail: boolean
   $isIntroducePage: boolean
   $isNotFound: boolean
+  $isEditProfilePage: boolean
 }

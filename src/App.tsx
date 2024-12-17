@@ -48,18 +48,14 @@ function App() {
 
   const hideAppBar =
     location.pathname === RoutePath.Home ||
-    location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.MyCart ||
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.JoinVerify ||
     location.pathname === RoutePath.JoinPhoneVerify ||
-    location.pathname === RoutePath.FindId ||
-    location.pathname === RoutePath.FindPassword ||
     location.pathname === RoutePath.UserPointLog ||
     location.pathname === RoutePath.UserProfile ||
     location.pathname === RoutePath.MyCampaign ||
     location.pathname === RoutePath.UserServiceGuide ||
-    location.pathname === RoutePath.ResetPassword ||
     location.pathname === RoutePath.UserEditProfile ||
     location.pathname === RoutePath.UserAccountSetting ||
     location.pathname === RoutePath.UserAccountDeletion ||
@@ -74,13 +70,9 @@ function App() {
     isNotificationDetail ||
     isNotFound
   const hideTapBar =
-    location.pathname === RoutePath.Login ||
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.JoinVerify ||
     location.pathname === RoutePath.JoinPhoneVerify ||
-    location.pathname === RoutePath.FindId ||
-    location.pathname === RoutePath.FindPassword ||
-    location.pathname === RoutePath.ResetPassword ||
     location.pathname === RoutePath.TermsOfService ||
     location.pathname === RoutePath.UserServiceGuide ||
     location.pathname === RoutePath.PrivacyPolicy ||
@@ -106,6 +98,7 @@ function App() {
       location.pathname !== RoutePath.ContactAdd &&
       location.pathname !== RoutePath.TermsOfService &&
       location.pathname !== RoutePath.PrivacyPolicy &&
+      location.pathname !== RoutePath.UserEditProfile &&
       !isNotificationDetail &&
       !isNoticeDetail &&
       !isReviewDetail) ||

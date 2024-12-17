@@ -10,8 +10,6 @@ const PhoneVerificationPage = lazy(
 const MainPage = lazy(() => import("./views/MainPage"))
 const CampaignDetailPage = lazy(() => import("./views/CampaignDetailLayout"))
 const CampaignCart = lazy(() => import("./views/CampaingnCart"))
-const FindIdPage = lazy(() => import("./views/FindIdPage"))
-const FindPasswordPage = lazy(() => import("./views/FindPasswordPage"))
 const MyCampaignPage = lazy(() => import("./views/MyCampaignPage"))
 const MyCampaignDetailLayout = lazy(
   () => import("./views/MyCampaignDetailLayout")
@@ -27,7 +25,6 @@ const MyEditProfilePage = lazy(
   () => import("./views/MyPageDetail/MyEditProfilePage")
 )
 const MySettingPage = lazy(() => import("./views/MyPageDetail/MySettingPage"))
-const ResetPasswordPage = lazy(() => import("./views/ResetPasswordPage"))
 const MyAccountDeletionPage = lazy(
   () => import("./views/MyPageDetail/MyAccountDeletionPage")
 )
@@ -62,12 +59,6 @@ export const AppRoute = () => {
           path={RoutePath.JoinPhoneVerify}
           element={<PhoneVerificationPage />}
         />
-        {/* 아이디찾기 페이지 */}
-        <Route path={RoutePath.FindId} element={<FindIdPage />} />
-        {/* 비밀번호찾기 페이지 */}
-        <Route path={RoutePath.FindPassword} element={<FindPasswordPage />} />
-        {/* 비밀번호리셋 페이지 */}
-        <Route path={RoutePath.ResetPassword} element={<ResetPasswordPage />} />
         {/* 장바구니 페이지 */}
         <Route path={RoutePath.MyCart} element={<CampaignCart />} />
         {/* 나의 캠페인 페이지 */}

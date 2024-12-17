@@ -10,12 +10,10 @@ const Layout = () => {
   const isNotificationDetail = !!useMatch("/alert/notification/:notificationId") // 새소식 상세 경로
   const isNoticeDetail = !!useMatch("/alert/notice/:noticeId") // 공지사항 상세 경로
   const isIntroducePage = location.pathname === RoutePath.Introduce // 소개페이지
-  const isLoginPage = location.pathname === RoutePath.Login // 로그인 페이지
   const isJoinPage = location.pathname === RoutePath.Join // 인증 페이지 1-1
   const isJoinVerifyPage = location.pathname === RoutePath.JoinVerify // 인증 페이지 1-2
   const isJoinPhoneVerifyPage = location.pathname === RoutePath.JoinPhoneVerify // 인증 페이지 1-3
-  const isFindIdPage = location.pathname === RoutePath.FindId // 아이디찾기 페이지
-  const isFindPassWordPage = location.pathname === RoutePath.FindPassword // 아이디찾기 페이지
+  const isEditProfilePage = location.pathname === RoutePath.UserEditProfile // 나의 정보 페이지
   const isMyCartPage = location.pathname === RoutePath.MyCart // 장바구니 페이지
   const isMyCampaignPage = location.pathname === RoutePath.MyCampaign // 나의 캠페인 페이지
   const isUserPointLogPage = location.pathname === RoutePath.UserPointLog // 나의 포인트내역 페이지
@@ -27,14 +25,11 @@ const Layout = () => {
     location.pathname === RoutePath.UserAccountDeletion // 회원탈퇴 페이지
   const isNotFound = location.pathname === RoutePath.NotFound // 404페이지
   const isSpecialPage =
-    isLoginPage ||
     isCampaignDetail ||
     isReviewDetail ||
     isMyCartPage ||
-    isFindIdPage ||
     isJoinPage ||
     isJoinVerifyPage ||
-    isFindPassWordPage ||
     isJoinPhoneVerifyPage
 
   return (
@@ -53,6 +48,7 @@ const Layout = () => {
         $isNotificationDetail={isNotificationDetail}
         $isIntroducePage={isIntroducePage}
         $isNotFound={isNotFound}
+        $isEditProfilePage={isEditProfilePage}
       >
         {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
         <Outlet />
@@ -80,6 +76,7 @@ const Content = styled.main<ContentProps>`
     $isNotificationDetail,
     $isIntroducePage,
     $isNotFound,
+    $isEditProfilePage,
   }) => {
     if ($isMyCampaignPage) {
       return `
@@ -140,6 +137,10 @@ const Content = styled.main<ContentProps>`
       margin: 0;
       padding: 0 1.5rem;
     `
+    } else if ($isEditProfilePage) {
+      return `
+      padding: 4.4rem 1.5rem;
+      `
     } else {
       return `
         margin: 60px auto 0;
