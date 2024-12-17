@@ -379,9 +379,14 @@ const NoticeBox = styled.div`
         brightness(97%) contrast(101%);
     }
   }
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
   ul li {
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 1.6rem;
     font-size: var(--caption-size);
     font-weight: var(--font-medium);
     line-height: 1.25;
@@ -404,7 +409,7 @@ const NoticeBox = styled.div`
 `
 
 const Heading = styled.h5`
-  margin-top: 2rem;
+  margin-top: 2.4rem;
   color: var(--N500);
 `
 
