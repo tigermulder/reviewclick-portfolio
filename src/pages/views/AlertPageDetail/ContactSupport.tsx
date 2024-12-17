@@ -4,13 +4,11 @@ import { useRecoilState } from "recoil"
 import styled from "styled-components"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import imageCompression from "browser-image-compression"
-
 import FilterDropDown from "@/components/FilterDropDown"
 import ReuseHeader from "@/components/ReuseHeader"
 import Button from "@/components/Button"
 import Modal from "@/components/Modal"
 import useToast from "@/hooks/useToast"
-
 import { selectedContactFilterState } from "@/store/dropdown-recoil"
 import { contactOptions } from "@/types/component-types/dropdown-type"
 import { RoutePath } from "@/types/route-path"
@@ -18,22 +16,8 @@ import { ReviewItem } from "@/types/api-types/review-type"
 import { FilterOption } from "@/types/component-types/filter-dropdown-type"
 import { getReviewList } from "@/services/review"
 import { addQna } from "@/services/qna"
-
 import IconNotice from "assets/ico_notice.svg?url"
 
-const MAX_IMAGES = 2
-
-// 비동기 함수: 캠페인 리스트 가져오기
-async function fetchCampaignList() {
-  const requestData = {
-    pageSize: 20,
-    pageIndex: 1,
-  }
-  const response = await getReviewList(requestData)
-  return response.list && response.list.length > 0 ? response.list : []
-}
-
-// Suspense를 사용하는 내부 컴포넌트
 const ContactSupportInner = () => {
   const navigate = useNavigate()
   const [reviewText, setReviewText] = useState<string>("")
@@ -44,7 +28,6 @@ const ContactSupportInner = () => {
     null
   )
   const { addToast } = useToast()
-
   const [isLoadingModalOpen, setLoadingModalOpen] = useState(false)
   const [isResultModalOpen, setResultModalOpen] = useState(false)
   const [modalTitle, setModalTitle] = useState<string>("")
@@ -54,12 +37,20 @@ const ContactSupportInner = () => {
     undefined
   )
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-
   const [uploadedImages, setUploadedImages] = useState<
     { file: File; previewUrl: string }[]
   >([])
-
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+
+  const MAX_IMAGES = 2
+  const fetchCampaignList = async () => {
+    const requestData = {
+      pageSize: 20,
+      pageIndex: 1,
+    }
+    const response = await getReviewList(requestData)
+    return response.list && response.list.length > 0 ? response.list : []
+  }
 
   const { data: campaignList } = useSuspenseQuery({
     queryKey: ["campaignList", selectedFilter.value],
@@ -73,7 +64,6 @@ const ContactSupportInner = () => {
         return []
       }
     },
-    // selectedFilter 값에 따라 비동기 요청 실행: 여기서는 suspense가 적용되어 로딩 중 fallback 표시
   })
 
   const maxChars = 1000
