@@ -137,7 +137,6 @@ const StepOne = ({
   // 모달 취소 버튼 핸들러
   const handleModalCancel = () => {
     setResultModalOpen(false)
-    navigate(RoutePath.MyCampaign)
   }
 
   // 새 창으로 이동하는 핸들러
