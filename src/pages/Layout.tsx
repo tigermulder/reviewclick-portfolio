@@ -61,7 +61,7 @@ export default Layout
 
 const Content = styled.main<ContentProps>`
   width: 100%;
-
+  margin: 0 auto;
   ${({
     $isMyCampaignPage,
     $isSpecialPage,
@@ -81,29 +81,25 @@ const Content = styled.main<ContentProps>`
     if ($isMyCampaignPage) {
       return `
         min-height: 100vh; 
-        margin: 10rem auto 0;
-        padding: 1.5rem 1.5rem 10rem;
+        padding: 11.5rem 1.6rem 10rem;
         background: var(--WWood);
       `
     } else if ($isSpecialPage) {
       if ($isCampaignDetail) {
         return `
           min-height: 100vh; 
-          margin: 0;
         `
       } else {
         return `
           min-height: 100vh; 
-          margin: 0;
-          padding: 0 1.5rem;
+          padding: 0 1.6rem;
         `
       }
     } else if ($isUserPointLogPage) {
       return `
         background-color: var(--N20);
         min-height: 100vh; 
-        margin: 0;
-        padding: 5.9rem 1.5rem 0 ;
+        padding: 5.9rem 1.6rem 0 ;
       `
     } else if ($UserServiceGuidePage) {
       return `
@@ -112,19 +108,19 @@ const Content = styled.main<ContentProps>`
       `
     } else if ($PrivacyPolicyPage || $TermsOfServicePage) {
       return `
-        padding: 7rem 1.5rem 4rem;
+        padding: 7rem 1.6rem 4rem;
         background-color: var(--WWood);
       `
     } else if ($UserAccountDeletionPage) {
       return `
         min-height: 100vh; 
-        padding: 4.4rem 1.5rem 4rem;
+        padding: 4.4rem 1.6rem 4rem;
         background-color: var(--N20);
       `
     } else if ($ContactAddPage || $isNoticeDetail || $isNotificationDetail) {
       return `
         min-height: 100vh; 
-        padding: 7rem 1.5rem 4rem;
+        padding: 7rem 1.6rem 4rem;
         background-color: var(--N20);
       `
     } else if ($isIntroducePage) {
@@ -134,17 +130,15 @@ const Content = styled.main<ContentProps>`
       `
     } else if ($isNotFound) {
       return `
-      margin: 0;
       padding: 0 1.5rem;
     `
     } else if ($isEditProfilePage) {
       return `
-      padding: 7.6rem 1.5rem;
+      padding: 7.6rem 1.6rem;
       `
     } else {
       return `
-        margin: 60px auto 0;
-        padding: 0 1.5rem;
+        padding: 6rem 6rem 0;
       `
     }
   }}
