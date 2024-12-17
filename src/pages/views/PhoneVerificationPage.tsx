@@ -35,19 +35,19 @@ const PhoneVerificationPage = () => {
       if (data.statusCode === 0) {
         setCodeSent(true)
         startTimer()
-        addToast("인증번호가 발송되었습니다.", "check", 3000, "verify")
+        addToast("인증번호가 발송되었습니다.", 3000, "verify")
       } else {
-        addToast("인증번호 전송에 실패했습니다.", "warning", 3000, "verify")
+        addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
       }
     },
     onError: (error: CustomError) => {
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
-          addToast("이메일인증을 먼저해주세요.", "warning", 3000, "verify")
+          addToast("이메일인증을 먼저해주세요.", 3000, "verify")
           break
         default:
-          addToast("인증번호 전송에 실패했습니다.", "warning", 3000, "verify")
+          addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
           break
       }
     },
@@ -61,7 +61,7 @@ const PhoneVerificationPage = () => {
         localStorage.setItem("userPhoneNumber", phone)
         setPhoneConfirmed(true)
         resetTimer()
-        addToast("계정인증이 완료되었습니다", "check", 3000, "verify")
+        addToast("계정인증이 완료되었습니다", 3000, "verify")
 
         if (redirect) {
           navigate(redirect)
@@ -69,17 +69,17 @@ const PhoneVerificationPage = () => {
           navigate(RoutePath.MyCampaign)
         }
       } else {
-        addToast("인증번호가 올바르지 않습니다.", "warning", 3000, "verify")
+        addToast("인증번호가 올바르지 않습니다.", 3000, "verify")
       }
     },
     onError: (error: CustomError) => {
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
-          addToast("인증번호가 일치하지않습니다", "warning", 3000, "verify")
+          addToast("인증번호가 일치하지않습니다", 3000, "verify")
           break
         default:
-          addToast("인증번호가 올바르지 않습니다.", "warning", 3000, "verify")
+          addToast("인증번호가 올바르지 않습니다.", 3000, "verify")
           break
       }
     },
@@ -130,24 +130,19 @@ const PhoneVerificationPage = () => {
           if (data.statusCode === 0) {
             startTimer()
             setAuthCode("")
-            addToast("인증번호가 재발송되었습니다.", "warning", 3000, "verify")
+            addToast("인증번호가 재발송되었습니다.", 3000, "verify")
           } else {
-            addToast("인증번호 전송에 실패했습니다.", "warning", 3000, "verify")
+            addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
           }
         },
         onError: (error: CustomError) => {
           const errorCode = error.response?.data?.errorCode
           switch (errorCode) {
             case 2:
-              addToast("이메일인증을 먼저해주세요.", "warning", 3000, "verify")
+              addToast("이메일인증을 먼저해주세요.", 3000, "verify")
               break
             default:
-              addToast(
-                "인증번호 전송에 실패했습니다.",
-                "warning",
-                3000,
-                "verify"
-              )
+              addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
               break
           }
         },
@@ -158,7 +153,7 @@ const PhoneVerificationPage = () => {
   // ** 컴포넌트 언마운트 시 타이머 정리 */
   useEffect(() => {
     if (isPhoneVerify && isPhoneVerify !== "null") {
-      addToast("이미 인증되었습니다", "warning", 3000, "verify")
+      addToast("이미 인증되었습니다", 3000, "verify")
       if (redirect) {
         navigate(redirect)
       }
@@ -254,12 +249,9 @@ const FormGroup = styled.div`
 
 const AccountVerifyTitle = styled.h2`
   margin-top: 2.4rem;
-  font-size: var(--font-h2-size);
-  font-weight: var(--font-h2-weight);
-  letter-spacing: var(--font-h2-letter-spacing);
-  color: var(--n600-color);
+  color: var(--N600);
   em {
-    color: var(--revu-color);
+    color: var(--L400);
   }
 `
 

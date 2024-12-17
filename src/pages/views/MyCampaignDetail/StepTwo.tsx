@@ -57,7 +57,7 @@ const StepTwo = ({
   //** 리뷰검수 OCR */
   const handleReviewOcrSave = async () => {
     if (ocrFilterWord(reviewText, 3)) {
-      addToast("반복된텍스트가 감지되었습니다", "copy", 3000, "copy")
+      addToast("반복된텍스트가 감지되었습니다", 3000, "copy")
       return
     }
     const data: ReviewConfirmRequest = {
@@ -81,7 +81,7 @@ const StepTwo = ({
         navigator.clipboard
           .writeText(reviewText)
           .then(() => {
-            addToast("내용이 복사됐어요.", "copy", 3000, "copy")
+            addToast("내용이 복사됐어요.", 3000, "copy")
           })
           .catch((err) => {
             console.error("copy되지 않았습니다.: ", err)

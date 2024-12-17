@@ -28,7 +28,7 @@ function App() {
         }
       } catch (error) {
         console.error(error)
-        addToast("로그인 체크 중 오류 발생", "warning", 3000, "Join")
+        addToast("로그인 체크 중 오류 발생", 3000, "Join")
       }
     }
     checkLoginStatus()

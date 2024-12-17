@@ -42,7 +42,7 @@ const AccountVerificationPage = () => {
         }, 500)
       } else {
         setEmailCheckMessage("")
-        addToast("이미 인증한 계정입니다.", "warning", 3000, "verify")
+        addToast("이미 인증한 계정입니다.", 3000, "verify")
       }
     },
     onError: (error: CustomError) => {
@@ -50,16 +50,16 @@ const AccountVerificationPage = () => {
       setEmailCheckMessage("")
       switch (errorCode) {
         case 1:
-          addToast("매체사로 접속해주세요", "warning", 3000, "verify")
+          addToast("매체사로 접속해주세요", 3000, "verify")
           break
         case 3:
-          addToast("이미 인증한 이메일입니다", "warning", 3000, "verify")
+          addToast("이미 인증한 이메일입니다", 3000, "verify")
           break
         case 4:
-          addToast("이미 사용중인 이메일입니다.", "warning", 3000, "verify")
+          addToast("이미 사용중인 이메일입니다.", 3000, "verify")
           break
         default:
-          addToast("네트워크 에러입니다", "warning", 3000, "verify")
+          addToast("네트워크 에러입니다", 3000, "verify")
           break
       }
     },
@@ -71,19 +71,19 @@ const AccountVerificationPage = () => {
       if (data.statusCode === 0) {
         setEmailSent(true)
         startEmailTimer()
-        addToast("인증코드가 이메일로 전송됐어요", "warning", 3000, "verify")
+        addToast("인증코드가 이메일로 전송됐어요", 3000, "verify")
       } else {
-        addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "verify")
+        addToast("인증 코드 전송에 실패했습니다.", 3000, "verify")
       }
     },
     onError: (error: CustomError) => {
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
-          addToast("이메일체크를 먼저 해주세요", "warning", 3000, "verify")
+          addToast("이메일체크를 먼저 해주세요", 3000, "verify")
           break
         default:
-          addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "verify")
+          addToast("인증 코드 전송에 실패했습니다.", 3000, "verify")
           break
       }
     },
@@ -96,20 +96,20 @@ const AccountVerificationPage = () => {
         localStorage.setItem("email", id)
         setEmailConfirmed(true)
         resetEmailTimer()
-        addToast("이메일 인증이 완료되었습니다.", "check", 3000, "verify")
+        addToast("이메일 인증이 완료되었습니다", 3000, "verify")
         navigate(RoutePath.JoinPhoneVerify)
       } else {
-        addToast("인증 코드가 올바르지 않습니다.", "warning", 3000, "verify")
+        addToast("인증 코드가 올바르지 않습니다", 3000, "verify")
       }
     },
     onError: (error: CustomError) => {
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
-          addToast("인증 코드가 일치하지 않습니다.", "warning", 3000, "verify")
+          addToast("인증 코드가 일치하지 않습니다", 3000, "verify")
           break
         default:
-          addToast("인증 코드가 올바르지 않습니다.", "warning", 3000, "verify")
+          addToast("인증 코드가 올바르지 않습니다", 3000, "verify")
           break
       }
     },
@@ -148,12 +148,7 @@ const AccountVerificationPage = () => {
   // ** 이메일 체크 및 인증 코드 전송 함수 */
   const handleEmailAuth = () => {
     if (!validateEmail(id)) {
-      addToast(
-        "올바른 네이버 아이디 형식이 아닙니다.",
-        "warning",
-        3000,
-        "verify"
-      )
+      addToast("올바른 네이버 아이디 형식이 아닙니다", 3000, "verify")
       return
     }
     const email = `${id}@naver.com`
@@ -171,24 +166,19 @@ const AccountVerificationPage = () => {
           setEmailSent(true)
           startEmailTimer()
           setEmailAuthCode("")
-          addToast("인증 코드를 재전송했습니다.", "warning", 3000, "verify")
+          addToast("인증 코드를 재전송했습니다", 3000, "verify")
         } else {
-          addToast("인증 코드 전송에 실패했습니다.", "warning", 3000, "verify")
+          addToast("인증 코드 전송에 실패했습니다", 3000, "verify")
         }
       },
       onError: (error: CustomError) => {
         const errorCode = error.response?.data?.errorCode
         switch (errorCode) {
           case 2:
-            addToast("이메일체크를 먼저 해주세요", "warning", 3000, "verify")
+            addToast("이메일체크를 먼저 해주세요", 3000, "verify")
             break
           default:
-            addToast(
-              "인증 코드 전송에 실패했습니다.",
-              "warning",
-              3000,
-              "verify"
-            )
+            addToast("인증 코드 전송에 실패했습니다", 3000, "verify")
             break
         }
       },
@@ -199,7 +189,7 @@ const AccountVerificationPage = () => {
   useEffect(() => {
     if (isLoggedIn) {
       if (isLoggedIn !== "null") {
-        addToast("이미 인증되었습니다", "warning", 3000, "verify")
+        addToast("이미 인증되었습니다", 3000, "verify")
         if (redirect) {
           navigate(redirect)
         }
@@ -310,7 +300,7 @@ const AccountVerifyTitle = styled.h2`
   margin-top: 2.4rem;
   color: var(--N600);
   em {
-    color: var(--L600);
+    color: var(--L400);
   }
 `
 

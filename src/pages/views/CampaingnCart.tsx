@@ -16,11 +16,11 @@ import { cartOptions } from "@/types/component-types/dropdown-type"
 import styled from "styled-components"
 
 const CampaignCart = () => {
-  const campaignList = useRecoilValue(campaignListState)
+  // const campaignList = useRecoilValue(campaignListState)
   const [likedCampaigns, setLikedCampaigns] = useRecoilState(campaignLikeState)
   const filteredCampaigns = useRecoilValue(filteredCampaignsSelector)
-  const [selectedFilter, setSelectedFilter] =
-    useRecoilState(selectedFilterState)
+  // const [selectedFilter, setSelectedFilter] =
+  //   useRecoilState(selectedFilterState)
   const navigate = useNavigate()
   const { addToast } = useToast()
 
@@ -34,7 +34,7 @@ const CampaignCart = () => {
       delete updatedLikes[categoryId]
     }
     setLikedCampaigns(updatedLikes)
-    addToast("찜한 목록에서 해제했어요.", "uncheck", 1000, "like")
+    addToast("찜한 목록에서 해제했어요.", 3000, "like")
   }
 
   return (

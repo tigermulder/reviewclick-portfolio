@@ -345,14 +345,13 @@ const CampaignDetailPage = () => {
       if (response.statusCode === 0) {
         // 신청 취소 성공 시 처리
         refetch()
-        addToast("캠페인 신청이 취소되었습니다.", "check", 3000, "campaign")
+        addToast("캠페인 신청이 취소되었습니다.", 3000, "campaign")
         setIsApplySuccess(false) // 신청 성공 상태를 초기화
         setIsCancelModalOpen(false) // 모달 닫기
       }
     } catch (error) {
       addToast(
         "캠페인 신청 취소에 실패했습니다. 다시 시도해주세요.",
-        "warning",
         3000,
         "campaign"
       )

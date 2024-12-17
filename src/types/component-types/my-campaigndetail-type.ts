@@ -51,8 +51,6 @@ export interface StepOneProps {
   reward: number | undefined
   createTime: string
   campaignsUrl: string | undefined
-  goToNextStep: () => void
-  refetchData: () => void
 }
 // ** 스텝 2번 */
 export interface StepTwoProps {

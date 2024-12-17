@@ -23,7 +23,7 @@ const MySettingPage = () => {
       //   statusCode: 0,
       // }
       if (response.statusCode === 0) {
-        addToast("계정이 로그아웃 되었습니다", "info", 1000, "LogOut")
+        addToast("계정이 로그아웃 되었습니다", 1000, "LogOut")
         // Recoil 로그인상태 업데이트
         setAuth({
           isLoggedIn: false,
@@ -36,13 +36,13 @@ const MySettingPage = () => {
         if (redirect) {
           navigate(redirect)
         } else {
-          navigate(RoutePath.Login)
+          navigate(RoutePath.Home)
         }
       } else {
         throw new Error()
       }
     } catch (err) {
-      addToast("다시시도해주세요", "warning", 1000, "LogOut")
+      addToast("다시시도해주세요", 1000, "LogOut")
     }
   }
   return (

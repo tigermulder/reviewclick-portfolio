@@ -133,7 +133,7 @@ const ContactSupport = () => {
     } catch (error) {
       // 에러 발생 시 로딩 모달 닫고 토스트
       setLoadingModalOpen(false)
-      addToast("다시 시도해주세요.", "warning", 3000, "qna")
+      addToast("다시 시도해주세요.", 3000, "qna")
     }
   }
 
@@ -209,7 +209,7 @@ const ContactSupport = () => {
       setUploadedImages((prev) => [...prev, ...newUploaded])
     } catch (error) {
       console.error("이미지 압축 오류:", error)
-      addToast("이미지 압축 중 오류가 발생했습니다.", "warning", 3000, "qna")
+      addToast("이미지 압축 중 오류가 발생했습니다.", 3000, "qna")
     } finally {
       // 압축 및 상태 업데이트 완료 후 로딩 모달 닫기
       setLoadingModalOpen(false)

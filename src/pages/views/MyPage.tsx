@@ -18,7 +18,7 @@ const MyPage = () => {
   return (
     <>
       {/* 마이페이지 헤더 타이틀 */}
-      <SinglePageHeader title="마이페이지" showRouteToggle={false} />
+      <SinglePageHeader title="마이페이지" />
       <MyPageListContainer>
         <li>
           <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>

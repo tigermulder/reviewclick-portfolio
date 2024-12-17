@@ -9,13 +9,11 @@ const useToast = () => {
   /**
    * 토스트 메시지를 추가하거나 업데이트합니다.
    * @param message - 토스트 메시지 내용
-   * @param type - 토스트 유형
    * @param duration - 지속 시간 (밀리초 단위)
    * @param key - 토스트를 식별하기 위한 고유 키 (선택 사항)
    */
   const addToast = (
     message: string,
-    type: ToastType = "info",
     duration: number = 1000,
     key?: string
   ): void => {
@@ -30,7 +28,6 @@ const useToast = () => {
           updatedToasts[existingToastIndex] = {
             ...updatedToasts[existingToastIndex],
             message,
-            type,
             duration,
           }
           return updatedToasts
@@ -38,7 +35,7 @@ const useToast = () => {
       }
       // 새로운 토스트 메시지 추가
       const id = uuidv4() // 고유 ID 생성
-      const newToast: Toast = { id, message, type, duration, key }
+      const newToast: Toast = { id, message, duration, key }
       return [...currentToasts, newToast]
     })
   }

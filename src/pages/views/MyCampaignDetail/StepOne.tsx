@@ -17,8 +17,6 @@ const StepOne = ({
   reward,
   createTime,
   campaignsUrl,
-  goToNextStep,
-  refetchData,
 }: StepOneProps): JSX.Element => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [files, setFile] = useState<File | null>(null)
@@ -136,11 +134,7 @@ const StepOne = ({
     if (modalConfirmText === "영수증 재인증하기") {
       handleButtonClick()
     } else if (modalConfirmText === "나의 캠페인 내역") {
-      // 데이터 다시 가져오기
-      // await refetchData()
       navigate(RoutePath.MyCampaign)
-      // 다음 스텝으로 이동
-      // goToNextStep()
     }
   }
 

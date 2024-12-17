@@ -1,18 +1,10 @@
 import { useEffect, useRef } from "react"
 import { useRecoilState } from "recoil"
 import { toastListState } from "store/toast-recoil"
-import { Toast, ToastItemProps } from "types/component-types/toast-type"
+import { Toast } from "types/component-types/toast-type"
 import styled, { keyframes } from "styled-components"
 
-const toastIcons: Record<Toast["type"], React.ReactNode> = {
-  check: <span role="img" aria-label="check"></span>,
-  uncheck: <span role="img" aria-label="uncheck"></span>,
-  info: <span role="img" aria-label="info"></span>,
-  warning: <span role="img" aria-label="warning"></span>,
-  copy: <span role="img" aria-label="copy"></span>,
-}
-
-const ToastMassage = (): JSX.Element => {
+const ToastMassage = () => {
   const [toasts, setToasts] = useRecoilState(toastListState)
   const timersRef = useRef<{ [id: string]: NodeJS.Timeout }>({})
 
@@ -65,12 +57,7 @@ const ToastMassage = (): JSX.Element => {
   return (
     <ToastWrapper>
       {toasts.map((toast) => (
-        <ToastItem
-          key={toast.id}
-          type={toast.type}
-          onClick={() => handleClose(toast.id)}
-        >
-          <Icon>{toastIcons[toast.type]}</Icon>
+        <ToastItem key={toast.id} onClick={() => handleClose(toast.id)}>
           <span>{toast.message}</span>
         </ToastItem>
       ))}
@@ -87,13 +74,13 @@ const fadeIn = keyframes`
 
 const ToastWrapper = styled.div`
   position: fixed;
-  top: 20px;
-  right: 15px;
-  left: 15px;
+  top: 3.2rem;
+  right: 1.6rem;
+  left: 1.6rem;
   z-index: 9999;
 `
 
-const ToastItem = styled.div<ToastItemProps>`
+const ToastItem = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -104,16 +91,4 @@ const ToastItem = styled.div<ToastItemProps>`
   color: white;
   animation: ${fadeIn} 0.18s ease-in-out;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-`
-
-const Icon = styled.span`
-  margin-right: 0.4rem;
-  align-items: center;
-  font-size: 1.5rem;
-
-  svg {
-    width: 1.3rem;
-    height: 1.3rem;
-    fill: currentColor;
-  }
 `
