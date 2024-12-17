@@ -63,11 +63,13 @@ const LinkText = styled(Link)`
 const CompanyInfo = styled.div`
   color: var(--N200);
   font-size: 1.1rem;
-  font-weight: var(--font-medium) !important;
   line-height: 1.6;
   margin-top: 0.8rem;
   word-wrap: break-word;
   letter-spacing: var(--L-spacing-L);
+  a {
+    font-weight: var(--font-medium) !important;
+  }
 `
 
 const FooterLogoContainer = styled.div`
