@@ -55,7 +55,7 @@ const LinkContainer = styled.div`
 
 const LinkText = styled(Link)`
   color: var(--N300);
-  font-size: 1.2rem;
+  font-size: var(--caption-size);
   font-weight: var(--font-medium);
   letter-spacing: var(--L-spacing-L);
 `
@@ -63,7 +63,7 @@ const LinkText = styled(Link)`
 const CompanyInfo = styled.div`
   color: var(--N200);
   font-size: 1.1rem;
-  font-weight: var(--font-medium);
+  font-weight: var(--font-medium) !important;
   line-height: 1.6;
   margin-top: 0.8rem;
   word-wrap: break-word;

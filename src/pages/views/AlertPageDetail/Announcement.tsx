@@ -77,7 +77,7 @@ const ListContainer = styled.ul`
 const NotifyMessage = styled.p`
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.8rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
