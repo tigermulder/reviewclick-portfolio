@@ -20,35 +20,29 @@ const MyEditProfilePage = () => {
       <GroupWrap>
         {/* 이름 */}
         {/* <Group>
-          <div>
+          <p>
             이름
             <IconCheck />
-          </div>
-          <div>
-            <ValueTxt>{userName}</ValueTxt>
-          </div>
+          </p>
+          <ValueTxt>{userName}</ValueTxt>
         </Group> */}
 
         {/* 인증 계정 */}
         <Group>
-          <div>
+          <p>
             인증 계정
             <IconCheck />
-          </div>
-          <div>
-            <ValueTxt>{userEmail}</ValueTxt>
-          </div>
+          </p>
+          <ValueTxt>{userEmail}</ValueTxt>
         </Group>
 
         {/* 휴대폰 번호 */}
         <Group>
-          <div>
+          <p>
             휴대폰 번호
             <IconCheck />
-          </div>
-          <div>
-            <ValueTxt>{userPhone}</ValueTxt>
-          </div>
+          </p>
+          <ValueTxt>{userPhone}</ValueTxt>
         </Group>
       </GroupWrap>
     </Container>
@@ -74,7 +68,7 @@ const GroupWrap = styled.div`
 const Group = styled.div`
   font-size: var(--font-body-size);
 
-  > div:nth-child(1) {
+  p {
     margin-bottom: 0.8rem;
     color: var(--N600);
     display: flex;
