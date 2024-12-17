@@ -312,7 +312,8 @@ h5 {
 /** ------ 본문요소 스타일 ------ */
 p,
 span,
-a {
+a,
+button {
   font-size: var(--font-body-size);
   letter-spacing: var(--L-spacing-S);
 }
