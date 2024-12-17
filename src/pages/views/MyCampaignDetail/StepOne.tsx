@@ -101,7 +101,13 @@ const StepOne = ({
               예시 사진 및 아래 내용을 참고하여 <br />
               다시 업로드 해주세요.
             </p>
-            <ul style={{ marginTop: "1rem" }}>
+            <ul
+              style={{
+                marginTop: "1rem",
+                listStyle: "inherit",
+                paddingLeft: "1.6rem",
+              }}
+            >
               <li>영수증의 일부가 잘리지 않도록 전체를 캡쳐해 주세요.</li>
               <li>
                 사진이 흐리거나 어두운 경우, 잘 보이도록 다시 캡쳐해주세요.
