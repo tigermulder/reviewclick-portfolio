@@ -47,6 +47,7 @@ const Modal = ({
             <Button $variant="spinner" disabled children={undefined} />
           ) : cancelText === "확인" ||
             cancelText === "작성한 리뷰 수정하기" ||
+            cancelText === "영수증 재인증하기" ||
             cancelText === "로그인" ? (
             <Button onClick={onCancel} $variant="red">
               {cancelText}

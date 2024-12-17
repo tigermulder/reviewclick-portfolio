@@ -86,8 +86,8 @@ const StepOne = ({
               <p>사진이 흐리거나 어두운 경우, 잘 보이도록 다시 캡쳐해주세요.</p>
             </>
           )
-          setModalConfirmText("재인증")
-          setModalCancelText("닫기")
+          setModalConfirmText("영수증 재인증하기")
+          setModalCancelText("영수증 재인증하기")
           setResultModalOpen(true)
           setShowLinkRouter(true)
         }
@@ -105,8 +105,8 @@ const StepOne = ({
             <p>사진이 흐리거나 어두운 경우, 잘 보이도록 다시 캡쳐해주세요.</p>
           </>
         )
-        setModalConfirmText("재인증")
-        setModalCancelText("닫기")
+        setModalConfirmText("영수증 재인증하기")
+        setModalCancelText("영수증 재인증하기")
         setResultModalOpen(true)
         setShowLinkRouter(true)
       } finally {
@@ -123,7 +123,7 @@ const StepOne = ({
   // 모달 확인 버튼 핸들러
   const handleModalConfirm = async () => {
     setResultModalOpen(false)
-    if (modalConfirmText === "재인증") {
+    if (modalConfirmText === "영수증 재인증하기") {
       handleButtonClick()
     } else if (modalConfirmText === "나의 캠페인 내역") {
       // 데이터 다시 가져오기
