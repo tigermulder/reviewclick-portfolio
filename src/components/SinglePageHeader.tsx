@@ -1,18 +1,12 @@
 import { SingleHeader } from "@/types/component-types/single-page-header-type"
 import { RoutePath } from "@/types/route-path"
-import IconToggle from "assets/ico_toggle.svg?react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-const SinglePageHeader = ({ title, showRouteToggle = false }: SingleHeader) => {
+const SinglePageHeader = ({ title }: SingleHeader) => {
   return (
     <HeaderContainer>
       <h2>{title}</h2>
-      {showRouteToggle && (
-        <RouteLink to={RoutePath.UserAccountSetting}>
-          <IconToggle />
-        </RouteLink>
-      )}
     </HeaderContainer>
   )
 }
