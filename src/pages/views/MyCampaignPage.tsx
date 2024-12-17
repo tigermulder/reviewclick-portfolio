@@ -339,6 +339,10 @@ const ReviewCardThumb = styled.div`
 const ReviewCardInfo = styled.div`
   flex-grow: 1;
   min-width: 0;
+  height: 8.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `
 
 const CardDate = styled.span`
@@ -350,7 +354,6 @@ const CardDate = styled.span`
 const CardTitle = styled.span`
   display: block;
   width: 100%;
-  margin-top: 0.4rem;
   padding-right: 1rem;
   font-size: var(--font-h5-size);
   white-space: nowrap;
@@ -359,7 +362,6 @@ const CardTitle = styled.span`
 `
 
 const CardPoint = styled.p`
-  margin-top: 0.4rem;
-  font-size: var(--font-h3-size);
-  font-weight: var(--font-bold);
+  font-size: var(--font-h2-size);
+  font-weight: var(--font-extrabold);
 `

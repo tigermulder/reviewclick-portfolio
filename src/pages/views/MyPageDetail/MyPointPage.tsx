@@ -128,6 +128,7 @@ const CardTitle = styled.span`
   text-overflow: ellipsis;
 `
 
-const CardPoint = styled.h4`
-  font-size: var(--font-h3-size);
+const CardPoint = styled.p`
+  font-size: var(--font-h2-size);
+  font-weight: var(--font-extrabold);
 `

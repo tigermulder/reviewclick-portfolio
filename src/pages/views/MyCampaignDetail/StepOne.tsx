@@ -343,6 +343,11 @@ const StepItemInfoThumb = styled.div`
 const ReviewCardInfo = styled.div`
   flex-grow: 1;
   min-width: 0;
+  height: 8.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
   span {
     width: 100%;
     padding-right: 1rem;
@@ -354,9 +359,8 @@ const ReviewCardInfo = styled.div`
     white-space: normal;
   }
   p {
-    margin-top: 0.4rem;
     font-size: var(--font-h2-size);
-    font-weight: var(--font-bold);
+    font-weight: var(--font-extrabold);
   }
 `
 
