@@ -96,7 +96,7 @@ const NoticeBox = styled.ul`
   flex-direction: column;
   gap: 0.6rem;
 
-  li::maker {
+  li::marker {
     font-size: 0.8rem;
   }
   @keyframes fadeIn {
