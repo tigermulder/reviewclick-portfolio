@@ -128,7 +128,7 @@ const AgreementPage = () => {
 export default AgreementPage
 
 const AgreementContainer = styled.div`
-  padding: 4.4rem 0 0;
+  padding: 5.2rem 0 0;
   height: 100vh;
 `
 

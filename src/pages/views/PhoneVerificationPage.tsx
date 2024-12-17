@@ -244,7 +244,7 @@ const PhoneVerificationPage = () => {
 export default PhoneVerificationPage
 
 const VerificationContainer = styled.div`
-  padding: 4.4rem 0 0;
+  padding: 5.2rem 0 0;
   height: 100vh;
 `
 

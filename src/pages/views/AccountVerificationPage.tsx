@@ -243,7 +243,7 @@ const AccountVerificationPage = () => {
                   ? "올바른 형식의 계정이 아닙니다."
                   : undefined
               }
-              $suffixWidth="27%"
+              $suffixWidth="28%"
               successMessage={emailCheckMessage}
               disabled={emailSent || emailConfirmed}
             />
@@ -292,7 +292,7 @@ const AccountVerificationPage = () => {
 export default AccountVerificationPage
 
 const VerificationContainer = styled.div`
-  padding: 4.4rem 0 0;
+  padding: 5.2rem 0 0;
   height: 100vh;
 `
 

@@ -103,7 +103,7 @@ const Content = styled.main<ContentProps>`
       `
     } else if ($UserServiceGuidePage) {
       return `
-        padding: 4.4rem 0 0;
+        padding: 5.2rem 0 0;
         background-color: var(--N80);
       `
     } else if ($PrivacyPolicyPage || $TermsOfServicePage) {
@@ -114,7 +114,7 @@ const Content = styled.main<ContentProps>`
     } else if ($UserAccountDeletionPage) {
       return `
         min-height: 100vh; 
-        padding: 4.4rem 1.6rem 4rem;
+        padding: 5.2rem 1.6rem 4rem;
         background-color: var(--N20);
       `
     } else if ($ContactAddPage || $isNoticeDetail || $isNotificationDetail) {
