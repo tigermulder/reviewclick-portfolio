@@ -91,24 +91,10 @@ const NoticeBox = styled.ul`
   color: var(--Gray02);
   font-size: var(--caption-size);
   line-height: 1.25;
+  list-style: inherit;
 
-  li {
-    position: relative;
-    padding-left: 0.8rem;
-  }
   li:not(:last-child) {
     margin-bottom: 0.6rem;
-  }
-  li:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 6px;
-    left: 0;
-    width: 0.25rem;
-    height: 0.25rem;
-    border-radius: 50%;
-    background-color: var(--Gray02);
   }
   @keyframes fadeIn {
     from {
