@@ -204,8 +204,8 @@ const StepTwo = ({
             </CampaignStatusCardThumb>
             <ReviewCardInfo>
               <CardDate>{formatDate(createTime)}</CardDate>
-              <span>{campaignTitle}</span>
-              <p>{reward?.toLocaleString()}P</p>
+              <CardTitle>{campaignTitle}</CardTitle>
+              <CardPoint>{reward?.toLocaleString()}P</CardPoint>
             </ReviewCardInfo>
           </CampaignStatusCard>
         </CampaignStatus>
@@ -329,22 +329,21 @@ const ReviewCardInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+`
 
-  span {
-    width: 100%;
-    padding-right: 1rem;
-    font-size: var(--font-body-size);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-  }
-  p {
-    font-size: var(--font-h2-size);
-    font-weight: var(--font-extrabold);
-  }
+const CardTitle = styled.span`
+  display: block;
+  width: 100%;
+  padding-right: 1rem;
+  font-size: var(--font-h5-size);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const CardPoint = styled.p`
+  font-size: var(--font-h2-size);
+  font-weight: var(--font-extrabold);
 `
 
 const CardDate = styled.span`
