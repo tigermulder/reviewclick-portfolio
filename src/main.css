@@ -248,7 +248,7 @@ body {
   color: var(--primary-color);
   font-size: 1.6rem;
   line-height: 1.4;
-  word-break: break-all;
+  word-break: normal;
 }
 .app-bar,
 .bottom-tab-bar {
