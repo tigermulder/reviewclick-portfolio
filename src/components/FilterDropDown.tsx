@@ -11,7 +11,7 @@ const FilterDropDown = ({
   options,
   selectedFilter,
   setSelectedFilter,
-  placeholder = "선택해주세요",
+  placeholder = "",
   buttonWidth = "auto",
   buttonHeight = "2.8rem",
   containerWidth = "160px",
