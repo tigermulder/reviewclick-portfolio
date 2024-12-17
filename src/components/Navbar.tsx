@@ -58,12 +58,12 @@ const Navbar = () => {
     setActiveTab(tabName)
 
     if (isLoggedIn === false || isLoggedIn === null) {
-      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 3000, "Join")
+      addToast("계정 인증 완료 후 이용 가능해요.", 3000, "Join")
       return
     }
 
     if (requiresAuth && !isLoggedIn) {
-      addToast("계정 인증 완료 후 이용 가능해요.", "warning", 3000, "Join")
+      addToast("계정 인증 완료 후 이용 가능해요.", 3000, "Join")
     } else {
       navigate(path, { replace: true })
     }
@@ -251,12 +251,12 @@ const StyledIcon = styled.svg.attrs<{ $active: boolean; $tabName?: string }>(
   width: ${({ $tabName }) => {
     if ($tabName === "user") return "5.6rem"
     else if ($tabName === "alerts") return "1.5rem"
-    else return "1.7rem"
+    else return "2rem"
   }};
   height: ${({ $tabName }) => {
     if ($tabName === "user") return "5.6rem"
     else if ($tabName === "alerts") return "1.5rem"
-    else return "1.7rem"
+    else return "2rem"
   }};
   color: ${({ $active }) => ($active ? "var(--L400)" : "var(--Silver)")};
 `

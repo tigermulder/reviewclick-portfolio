@@ -467,6 +467,7 @@ const ImageItem = styled.li`
   height: 6rem;
   border-radius: 0.6rem;
   border: 1.5px solid var(--N300);
+  box-shadow: 2px 2px 12px 0px rgba(33, 37, 41, 0.16);
   margin-top: 2rem;
   overflow: visible;
 
