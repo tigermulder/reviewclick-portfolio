@@ -13,7 +13,7 @@ export default DetailHeader
 
 const HeaderContainer = styled.div`
   position: relative;
-  aspect-ratio: 107 / 100;
+  aspect-ratio: 115 / 100;
 `
 
 const Background = styled.div<{
@@ -30,7 +30,7 @@ const Background = styled.div<{
   background-position: center;
   background-size: cover;
   width: 100%;
-  aspect-ratio: 132 / 93;
+  aspect-ratio: 144 / 93;
   z-index: -10;
   transform: scale(${(props) => props.$scale});
   transition: transform 0.2s ease-in-out;
