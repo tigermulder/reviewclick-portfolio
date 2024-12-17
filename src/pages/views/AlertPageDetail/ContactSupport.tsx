@@ -1,41 +1,54 @@
-import { useState, useEffect, useRef } from "react"
-import FilterDropDown from "@/components/FilterDropDown"
-import { contactOptions } from "@/types/component-types/dropdown-type"
-import ReuseHeader from "@/components/ReuseHeader"
-import { RoutePath } from "@/types/route-path"
+import { useState, useRef, Suspense, ReactNode } from "react"
 import { useNavigate } from "react-router-dom"
 import { useRecoilState } from "recoil"
-import { selectedContactFilterState } from "@/store/dropdown-recoil"
-import IconNotice from "assets/ico_notice.svg?url"
+import styled from "styled-components"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import imageCompression from "browser-image-compression"
+
+import FilterDropDown from "@/components/FilterDropDown"
+import ReuseHeader from "@/components/ReuseHeader"
 import Button from "@/components/Button"
-import { addQna } from "@/services/qna"
-import { getReviewList } from "@/services/review"
 import Modal from "@/components/Modal"
 import useToast from "@/hooks/useToast"
-import styled from "styled-components"
+
+import { selectedContactFilterState } from "@/store/dropdown-recoil"
+import { contactOptions } from "@/types/component-types/dropdown-type"
+import { RoutePath } from "@/types/route-path"
 import { ReviewItem } from "@/types/api-types/review-type"
 import { FilterOption } from "@/types/component-types/filter-dropdown-type"
-import imageCompression from "browser-image-compression"
+import { getReviewList } from "@/services/review"
+import { addQna } from "@/services/qna"
+
+import IconNotice from "assets/ico_notice.svg?url"
 
 const MAX_IMAGES = 2
 
-const ContactSupport = () => {
+// 비동기 함수: 캠페인 리스트 가져오기
+async function fetchCampaignList() {
+  const requestData = {
+    pageSize: 20,
+    pageIndex: 1,
+  }
+  const response = await getReviewList(requestData)
+  return response.list && response.list.length > 0 ? response.list : []
+}
+
+// Suspense를 사용하는 내부 컴포넌트
+const ContactSupportInner = () => {
   const navigate = useNavigate()
   const [reviewText, setReviewText] = useState<string>("")
   const [selectedFilter, setSelectedFilter] = useRecoilState(
     selectedContactFilterState
   )
-  const [campaignList, setCampaignList] = useState<ReviewItem[]>([])
   const [selectedCampaign, setSelectedCampaign] = useState<FilterOption | null>(
     null
   )
   const { addToast } = useToast()
 
-  //** 모달 상태 관리 */
   const [isLoadingModalOpen, setLoadingModalOpen] = useState(false)
   const [isResultModalOpen, setResultModalOpen] = useState(false)
   const [modalTitle, setModalTitle] = useState<string>("")
-  const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
+  const [modalContent, setModalContent] = useState<string | ReactNode>("")
   const [modalConfirmText, setModalConfirmText] = useState<string>("확인")
   const [modalCancelText, setModalCancelText] = useState<string | undefined>(
     undefined
@@ -48,34 +61,20 @@ const ContactSupport = () => {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
-  const fetchCampaignList = async () => {
-    try {
-      const requestData = {
-        pageSize: 20,
-        pageIndex: 1,
-      }
-      const response = await getReviewList(requestData)
-      return response.list && response.list.length > 0 ? response.list : []
-    } catch (error) {
-      return []
-    }
-  }
-
-  useEffect(() => {
-    const loadCampaignList = async () => {
+  const { data: campaignList } = useSuspenseQuery({
+    queryKey: ["campaignList", selectedFilter.value],
+    queryFn: async () => {
       if (
         selectedFilter.value === "campaign" ||
         selectedFilter.value === "point"
       ) {
-        const list = await fetchCampaignList()
-        setCampaignList(list)
+        return await fetchCampaignList()
       } else {
-        setCampaignList([])
-        setSelectedCampaign(null)
+        return []
       }
-    }
-    loadCampaignList()
-  }, [selectedFilter])
+    },
+    // selectedFilter 값에 따라 비동기 요청 실행: 여기서는 suspense가 적용되어 로딩 중 fallback 표시
+  })
 
   const maxChars = 1000
   const minChars = 10
@@ -95,7 +94,7 @@ const ContactSupport = () => {
 
   const handleSubmit = async () => {
     try {
-      setLoadingModalOpen(true) // 요청 시작 시 로딩 모달 표시
+      setLoadingModalOpen(true)
       const requestData: any = {
         qnaCategory: selectedFilter.value,
         question: reviewText,
@@ -124,14 +123,12 @@ const ContactSupport = () => {
       }
 
       if (response.statusCode === 0) {
-        // 성공적으로 응답을 받으면 로딩 모달 닫고 결과 모달 표시
         setLoadingModalOpen(false)
         showSuccessModal()
       } else {
         throw new Error()
       }
     } catch (error) {
-      // 에러 발생 시 로딩 모달 닫고 토스트
       setLoadingModalOpen(false)
       addToast("다시 시도해주세요.", 3000, "qna")
     }
@@ -178,26 +175,17 @@ const ContactSupport = () => {
       useWebWorker: true,
     }
 
-    // 로딩 모달 표시
     setLoadingModalOpen(true)
 
     try {
+      // 압축 없이 바로 사용 (필요시 주석 제거 후 압축 로직 사용)
       // const compressedFiles = await Promise.all(
       //   filesToUpload.map(async (file) => {
-      //     console.log("압축 전 파일 크기:", file.size, "bytes")
-
       //     const compressedFile = await imageCompression(file, options)
-
-      //     console.log("압축 후 파일 크기:", compressedFile.size, "bytes")
-
       //     return compressedFile
       //   })
       // )
-
-      // 압축 없이 원본 파일 그대로 사용
-      const compressedFiles = filesToUpload.map((file) => {
-        return file
-      })
+      const compressedFiles = filesToUpload.map((file) => file)
 
       const newUploaded = compressedFiles.map((file) => {
         return {
@@ -211,7 +199,6 @@ const ContactSupport = () => {
       console.error("이미지 압축 오류:", error)
       addToast("이미지 압축 중 오류가 발생했습니다.", 3000, "qna")
     } finally {
-      // 압축 및 상태 업데이트 완료 후 로딩 모달 닫기
       setLoadingModalOpen(false)
     }
 
@@ -243,10 +230,10 @@ const ContactSupport = () => {
         openDropdown={openDropdown}
         setOpenDropdown={setOpenDropdown}
       />
-      {campaignList.length > 0 && (
+      {campaignList && campaignList.length > 0 && (
         <FilterDropDown
           id="campaign"
-          options={campaignList.map((campaign, idx) => ({
+          options={campaignList.map((campaign: ReviewItem, idx: number) => ({
             id: idx,
             label: campaign.title,
             value: campaign.reviewId,
@@ -339,8 +326,6 @@ const ContactSupport = () => {
         cancelText={modalCancelText}
         onCancel={handleModalConfirm}
       />
-
-      {/* 로딩 모달 */}
       <Modal
         isOpen={isLoadingModalOpen}
         isLoading={true}
@@ -361,6 +346,15 @@ const ContactSupport = () => {
         }
       />
     </>
+  )
+}
+
+// Suspense로 감싼 상위 컴포넌트
+const ContactSupport = () => {
+  return (
+    <Suspense fallback={<div>로딩 중...</div>}>
+      <ContactSupportInner />
+    </Suspense>
   )
 }
 
