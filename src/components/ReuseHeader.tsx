@@ -62,7 +62,7 @@ const HeaderContainer = styled.header`
   left: 0;
   z-index: 3;
   width: 100%;
-  height: 4.4rem;
+  height: 5.2rem;
   background-color: white;
   display: flex;
   align-items: center;
@@ -72,9 +72,9 @@ const HeaderContainer = styled.header`
 
 const BackButton = styled.button`
   position: absolute;
-  width: 2rem;
-  height: 2rem;
-  left: 1.5rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  left: 1.6rem;
   background: none;
   border: none;
   cursor: pointer;

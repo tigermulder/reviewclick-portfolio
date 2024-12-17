@@ -37,9 +37,9 @@ export default FilterCampaign
 const FilterChipWrap = styled.div`
   position: fixed;
   width: 100%;
-  top: 4.4rem;
+  top: 5.2rem;
   left: 0;
-  padding: 1.2rem 1.5rem;
+  padding: 1.2rem 1.6rem;
   background-color: white;
   display: flex;
   align-items: center;

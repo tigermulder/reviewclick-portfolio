@@ -106,7 +106,7 @@ const DropdownButton = styled.div<{
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
   border: 1px solid
-    ${({ $isOpen }) => ($isOpen ? "var(--L600)" : "var(--N200)")};
+    ${({ $isOpen }) => ($isOpen ? "var(--L500)" : "var(--N200)")};
   box-shadow: 0px 0px 0px 2px
     ${({ $isOpen }) => ($isOpen ? "var(--L40)" : "none")};
   svg {
@@ -141,7 +141,7 @@ const DropDownContainer = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width};
   height: auto;
   padding: 0.75rem;
-  background: white;
+  background-color: white;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.05);
   border-radius: 0.8rem;
   border: 1px solid var(--WGray);
