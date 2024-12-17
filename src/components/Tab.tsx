@@ -30,7 +30,6 @@ const TabsContainer = styled.ul`
   gap: 2rem;
   overflow-x: auto;
   border-bottom: 1px solid var(--N80);
-  margin-top: 3.2rem;
   padding: 0;
   list-style: none;
 `
