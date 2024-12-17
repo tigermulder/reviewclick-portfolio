@@ -42,19 +42,19 @@ const NoticeDetail = () => {
 export default NoticeDetail
 
 const Container = styled.div`
-  padding: 1.5rem;
+  padding: 1.6rem;
   background-color: white;
   min-height: 80vh;
   border-radius: 1rem;
 
   h3 {
+    width: 80%;
+    margin: 0 auto;
     text-align: center;
     white-space: pre-line;
   }
   p {
     margin-top: 3.6rem;
-    font-size: 1.4rem;
-    font-weight: var(--font-medium);
     color: var(--N400);
     white-space: pre-line;
   }
