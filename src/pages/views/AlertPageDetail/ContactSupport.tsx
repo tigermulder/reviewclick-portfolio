@@ -252,7 +252,11 @@ const ContactSupport = () => {
             value: campaign.reviewId,
           }))}
           selectedFilter={
-            selectedCampaign || { id: 0, label: "선택해주세요", value: 0 }
+            selectedCampaign || {
+              id: 0,
+              label: "문의할 캠페인을 선택해주세요",
+              value: 0,
+            }
           }
           setSelectedFilter={setSelectedCampaign}
           buttonWidth="100%"
@@ -260,7 +264,6 @@ const ContactSupport = () => {
           containerTop="inherit"
           containerHeight="4rem"
           marginBottom="0.9rem"
-          placeholder="문의할 캠페인을 선택해주세요"
           openDropdown={openDropdown}
           setOpenDropdown={setOpenDropdown}
         />
