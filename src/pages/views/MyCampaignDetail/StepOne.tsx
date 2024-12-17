@@ -238,7 +238,7 @@ const StepOne = ({
 export default StepOne
 
 const CartTitle = styled.div`
-  padding: 7rem 1.6rem 2rem;
+  padding: 7.8rem 1.6rem 2rem;
   background-color: white;
 `
 

@@ -296,12 +296,8 @@ const StepThree = ({
 export default StepThree
 
 const CartTitle = styled.div`
-  margin-top: 3.5rem;
+  padding: 7.8rem 1.6rem 2rem;
   background-color: white;
-
-  h2 {
-    padding: 3rem 1.6rem 2rem;
-  }
 `
 
 const CartStepContainer = styled.ul`
