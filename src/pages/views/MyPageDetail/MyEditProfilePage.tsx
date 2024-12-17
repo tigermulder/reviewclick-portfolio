@@ -52,7 +52,6 @@ const MyEditProfilePage = () => {
 export default MyEditProfilePage
 
 const Container = styled.div`
-  padding: 3.2rem 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

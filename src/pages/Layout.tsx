@@ -139,7 +139,7 @@ const Content = styled.main<ContentProps>`
     `
     } else if ($isEditProfilePage) {
       return `
-      padding: 4.4rem 1.5rem;
+      padding: 7.6rem 1.5rem;
       `
     } else {
       return `
