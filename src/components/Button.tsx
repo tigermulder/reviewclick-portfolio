@@ -25,7 +25,7 @@ const Spinner = styled.div`
 `
 const Dot = styled.div`
   position: absolute;
-  top: -0.3rem;
+  top: -0.2rem;
   left: 50%;
   width: 0.11rem;
   height: 0.55rem;

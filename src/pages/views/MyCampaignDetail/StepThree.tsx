@@ -56,7 +56,7 @@ const StepThree = ({
       try {
         const response = await uploadReview(formData)
         // 로딩 모달 닫기
-        // setLoadingModalOpen(false)
+        setLoadingModalOpen(false)
         if (response.statusCode === 0) {
           setModalTitle("📝 최종 AI 심사중!")
           setModalContent(
