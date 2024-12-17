@@ -339,9 +339,16 @@ const PopupContainer = styled.div`
   margin: auto;
 
   @media screen and (width: 691px) and (height: 697px) {
-    .someElement {
-      width: 46%;
-    }
+    width: 46%;
+  }
+  @media screen and (width: 674px) and (height: 842px) {
+    width: 47%;
+  }
+  @media screen and (width: 884px) and (height: 1104px) {
+    width: 43%;
+  }
+  @media screen and (width: 768px) and (height: 1076px) {
+    width: 42%;
   }
 `
 
