@@ -31,7 +31,7 @@ const Dot = styled.div`
   height: 0.52rem;
   background-color: var(--L100);
   border-radius: 0.15rem;
-  transform-origin: center 0.86rem;
+  transform-origin: center 0.85rem;
   animation: ${fade} 1s linear infinite;
 
   &:nth-child(1) {
