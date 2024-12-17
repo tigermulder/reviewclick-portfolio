@@ -30,7 +30,7 @@ const TabsContainer = styled.ul`
   gap: 2rem;
   overflow-x: auto;
   border-bottom: 1px solid var(--N80);
-  margin-top: 1.2rem;
+  margin-top: 3.2rem;
   padding: 0;
   list-style: none;
 `
@@ -43,7 +43,7 @@ const TabItem = styled.li.attrs<{ disabled: boolean }>(({ disabled }) => ({
     pointerEvents: disabled ? "none" : "auto",
   },
 }))<{ disabled: boolean }>`
-  padding: 1.5rem 0px 0.75rem;
+  padding: 1.35rem 0px;
   font-size: var(--font-h3-size);
   color: var(--N200);
   font-weight: var(--font-medium);
