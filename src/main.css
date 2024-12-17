@@ -323,7 +323,7 @@ li::marker {
 }
 input::placeholder {
   font-size: var(--font-body-size);
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-light);
   letter-spacing: 0;
   color: var(--N200);
 }

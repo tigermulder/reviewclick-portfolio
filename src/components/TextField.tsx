@@ -76,7 +76,7 @@ const StyledInput = styled.input<{ $isError?: boolean }>`
   border: none;
   outline: none;
   background: ${({ $isError }) => ($isError ? "var(--L20)" : "inherit")};
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-light);
 `
 
 const SuffixContainer = styled.div<{ $width: string }>`
