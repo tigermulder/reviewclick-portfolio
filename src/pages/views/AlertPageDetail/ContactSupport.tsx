@@ -383,27 +383,19 @@ const NoticeBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-  }
-  ul li {
-    position: relative;
-    padding-left: 1.6rem;
-    font-size: var(--caption-size);
-    font-weight: var(--font-medium);
-    line-height: 1.25;
-    display: flex;
-    align-items: flex-start;
-    color: var(--Gray02);
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0.5rem;
-      top: 6px;
-      width: 0.25rem;
-      height: 0.25rem;
-      border-radius: 50%;
-      background-color: var(--Gray02);
-      flex-shrink: 0;
+    list-style: inherit;
+    li {
+      position: relative;
+      padding-left: 1.6rem;
+      font-size: var(--caption-size);
+      font-weight: var(--font-medium);
+      line-height: 1.25;
+      display: flex;
+      align-items: flex-start;
+      color: var(--Gray02);
+      &::marker {
+        font-size: 0.9rem;
+      }
     }
   }
 `

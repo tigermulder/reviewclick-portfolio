@@ -97,7 +97,7 @@ const NoticeBox = styled.ul`
   gap: 0.6rem;
 
   li::marker {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   @keyframes fadeIn {
     from {
