@@ -369,7 +369,7 @@ const ReviewTestContainer = styled.div`
 `
 
 const GuideContainer = styled.div`
-  margin: 1rem 0;
+  margin: 1.6rem 0 0;
 `
 
 const GuideHeader = styled.button`
@@ -399,7 +399,7 @@ const GuideHeader = styled.button`
 `
 
 const GuideContent = styled.div`
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
 `
 
 const GuideList = styled.ul`
