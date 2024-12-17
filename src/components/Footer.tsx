@@ -68,7 +68,7 @@ const CompanyInfo = styled.div`
   word-wrap: break-word;
   letter-spacing: var(--L-spacing-L);
   a {
-    font-weight: var(--font-medium) !important;
+    font-weight: var(--font-light) !important;
   }
 `
 
