@@ -86,20 +86,21 @@ const SuffixContainer = styled.div<{ $width: string }>`
 
 const Suffix = styled.div`
   color: var(--N400);
-  font-weight: var(--font-medium);
+  font-size: var(--font-body-size);
+  font-weight: var(--font-light);
   word-wrap: break-word;
 `
 
 const ErrorDescription = styled.p`
   text-align: left;
   color: var(--L600);
-  font-size: 1.2rem;
+  font-size: var(--caption-size);
   margin-top: 0.5rem;
 `
 
 const SuccessDescription = styled.p`
   text-align: left;
   color: var(--Success);
-  font-size: 1.2rem;
+  font-size: var(--caption-size);
   margin-top: 0.5rem;
 `
