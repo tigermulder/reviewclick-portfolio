@@ -176,7 +176,7 @@ const GuideTop = styled.div`
 
 const GuideWrap = styled.div`
   position: relative;
-  padding: 1.5rem 1.5rem 4rem;
+  padding: 1.6rem 1.6rem 4rem;
   top: -8rem;
 `
 
