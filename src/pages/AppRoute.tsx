@@ -25,9 +25,6 @@ const MyEditProfilePage = lazy(
   () => import("./views/MyPageDetail/MyEditProfilePage")
 )
 const MySettingPage = lazy(() => import("./views/MyPageDetail/MySettingPage"))
-const MyAccountDeletionPage = lazy(
-  () => import("./views/MyPageDetail/MyAccountDeletionPage")
-)
 const AlertHubPage = lazy(() => import("./views/AlertHubPage"))
 const ContactSupport = lazy(
   () => import("./views/AlertPageDetail/ContactSupport")
@@ -86,11 +83,6 @@ export const AppRoute = () => {
         <Route
           path={RoutePath.UserAccountSetting}
           element={<MySettingPage />}
-        />
-        {/* 회원탈퇴 */}
-        <Route
-          path={RoutePath.UserAccountDeletion}
-          element={<MyAccountDeletionPage />}
         />
         {/* 알림허브페이지 */}
         <Route path={RoutePath.Alert} element={<AlertHubPage />} />
