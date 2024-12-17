@@ -238,7 +238,7 @@ const StepTwo = ({
             </GuideHeader>
             {isGuideOpen && (
               <GuideContent>
-                <ul className="guide-list">
+                <GuideList>
                   <li>
                     <p>
                       작성한 리뷰는 6개월간 유지해주셔야하며, 임의로 삭제 및
@@ -261,7 +261,7 @@ const StepTwo = ({
                       바랍니다.
                     </p>
                   </li>
-                </ul>
+                </GuideList>
               </GuideContent>
             )}
           </GuideContainer>
@@ -400,37 +400,23 @@ const GuideHeader = styled.button`
 
 const GuideContent = styled.div`
   margin-top: 1.6rem;
+`
 
-  .guide-list {
-    background-color: var(--WWood);
+const GuideList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  list-style-type: disc;
+  padding-left: 1.6rem;
+
+  li {
     color: var(--Gray02);
-  }
-
-  .guide-list li {
-    position: relative;
-    padding-left: 1rem;
-    display: flex;
-    align-items: flex-start;
     p {
       font-size: var(--caption-size);
     }
     p em {
       color: var(--Purple);
     }
-  }
-  .guide-list li:not(:last-of-type) {
-    margin-bottom: 0.6rem;
-  }
-  .guide-list > li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 7px;
-    width: 0.25rem;
-    height: 0.25rem;
-    border-radius: 50%;
-    background-color: var(--Gray02);
-    flex-shrink: 0;
   }
 `
 
