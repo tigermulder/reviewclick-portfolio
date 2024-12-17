@@ -299,7 +299,7 @@ const Dimmed = styled.div`
 const DoNotShowAgain = styled.div`
   position: absolute;
   top: -3rem;
-  left: 1.5rem;
+  left: 1.6rem;
   color: var(--N80);
   background-color: transparent;
   border: none;
@@ -330,8 +330,8 @@ const CheckboxLabel = styled.label`
 
 const PopupContainer = styled.div`
   position: relative;
-  width: 100%;
-  max-width: 31rem;
+  width: 80%;
+  max-width: 400px;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
