@@ -13,7 +13,7 @@ const MyEditProfilePage = () => {
   return (
     <Container>
       <ReuseHeader
-        title="내 정보 수정"
+        title="내 정보"
         onBack={() => navigate(RoutePath.UserProfile)}
       />
 
@@ -55,7 +55,6 @@ const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: white;
 `
 
 const GroupWrap = styled.div`
