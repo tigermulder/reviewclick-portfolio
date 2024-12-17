@@ -11,6 +11,7 @@ const FilterDropDown = ({
   options,
   selectedFilter,
   setSelectedFilter,
+  placeholder = "선택해주세요",
   buttonWidth = "auto",
   buttonHeight = "2.8rem",
   containerWidth = "160px",
@@ -23,8 +24,13 @@ const FilterDropDown = ({
   const [dynamicContainerWidth, setDynamicContainerWidth] =
     useState(containerWidth)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const [initialLoad, setInitialLoad] = useState(true) // 처음에는 플레이스 홀더 강제 노출
 
   const toggleDropdown = () => {
+    if (initialLoad) {
+      // 드롭다운을 처음 연 순간 초기 로드 상태 해제
+      setInitialLoad(false)
+    }
     setOpenDropdown(isOpen ? null : id) // 드롭다운 열림 상태 토글
   }
 
@@ -59,6 +65,12 @@ const FilterDropDown = ({
     }
   }, [buttonWidth, containerWidth])
 
+  const displayText = initialLoad
+    ? placeholder
+    : selectedFilter
+      ? selectedFilter.label
+      : placeholder
+  const isPlaceholder = initialLoad || !selectedFilter
   return (
     <DropdownWrapper ref={wrapperRef} $marginBottom={marginBottom}>
       {/* 드롭다운을 열기 위한 버튼 */}
@@ -67,8 +79,9 @@ const FilterDropDown = ({
         $width={buttonWidth}
         $height={buttonHeight}
         $isOpen={isOpen}
+        $isPlaceholder={isPlaceholder}
       >
-        <span>{selectedFilter.label}</span>
+        <span>{displayText}</span>
         <IconDropDown />
       </DropdownButton>
 
@@ -102,6 +115,7 @@ const DropdownButton = styled.div<{
   $width: string
   $height: string
   $isOpen: boolean
+  $isPlaceholder: boolean
 }>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
@@ -129,7 +143,8 @@ const DropdownButton = styled.div<{
 
   span {
     font-size: 1.4rem;
-    color: var(--Gray01);
+    color: ${({ $isPlaceholder }) =>
+      $isPlaceholder ? "var(--N100)" : "var(--Gray01)"};
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
