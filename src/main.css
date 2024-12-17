@@ -318,7 +318,7 @@ button {
   letter-spacing: var(--L-spacing-S);
 }
 
-li::marker {
+ul li::marker {
   font-size: var(--caption-small-size);
 }
 input::placeholder {
