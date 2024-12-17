@@ -123,7 +123,7 @@ const AlertContainer = styled.div`
   margin-left: 1.6rem;
 
   div {
-    padding: 1rem 1.4rem;
+    padding: 1rem 1.6rem;
     border-radius: 1rem;
     background-color: white;
   }
@@ -150,14 +150,14 @@ const Header = styled.div`
 
     span {
       margin-right: 0.4rem;
-      color: var(--L600);
+      color: var(--L400);
       font-weight: var(--font-bold);
     }
   }
 `
 
 const Body = styled.div`
-  padding: 1rem 1.4rem 1.4rem;
+  padding: 1rem 1.6rem 1.6rem;
 `
 
 const BodyTitle = styled.p`
@@ -185,7 +185,7 @@ const ThumbArea = styled.div`
 `
 
 const InfoArea = styled.div`
-  padding: 0 1.4rem !important;
+  padding: 0 1.6rem !important;
 
   p {
     font-size: var(--font-body-size);
@@ -224,8 +224,8 @@ const Time = styled.span`
 `
 
 const QnAContainer = styled.div`
-  background: white;
-  border-radius: 10px;
+  background-color: white;
+  border-radius: 1rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -234,7 +234,6 @@ const QnAContainer = styled.div`
 `
 
 const AnswerTitle = styled.p`
-  font-size: var(--font-body-size);
   color: var(--N500);
   white-space: pre-line;
 `
@@ -247,6 +246,5 @@ const Separator = styled.span`
 `
 
 const AnswerContent = styled.p`
-  font-size: var(--font-body-size);
   color: var(--N100);
 `

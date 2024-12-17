@@ -75,7 +75,6 @@ const NoticeContent = styled.div`
   animation: fadeIn 0.1s ease-in-out;
 
   p {
-    font-size: 1.4rem;
     color: var(--Gray02);
     white-space: pre-line;
   }
