@@ -559,7 +559,7 @@ const DetailBody = styled.div`
 `
 
 const CustomTap = styled.div`
-  margin-top: 3.2rem;
+  margin-top: 3.6rem;
 `
 
 const Dday = styled.span`
