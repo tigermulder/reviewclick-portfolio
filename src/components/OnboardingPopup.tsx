@@ -337,11 +337,6 @@ const PopupContainer = styled.div`
   max-width: 400px;
   max-height: 90vh;
   margin: auto;
-  top: 50%;
-
-  @media (min-width: 680px) {
-    max-width: 30rem;
-  }
 `
 
 const SlideContent = styled.div`
