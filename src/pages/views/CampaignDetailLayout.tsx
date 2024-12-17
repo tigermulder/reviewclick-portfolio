@@ -394,12 +394,13 @@ const CampaignDetailPage = () => {
           ref={viewProductRef}
         />
         <Line />
-        <CustomTap
-          tabs={singleTab}
-          selectedTab={selectedTab}
-          onTabSelect={handleTabSelect}
-        />
-
+        <CustomTap>
+          <ContentTab
+            tabs={singleTab}
+            selectedTab={selectedTab}
+            onTabSelect={handleTabSelect}
+          />
+        </CustomTap>
         {/* GuideDetail 이용가이드 */}
         <GuideDetail />
         {/* 유의사항 */}
@@ -557,7 +558,7 @@ const DetailBody = styled.div`
   background-color: white;
 `
 
-const CustomTap = styled(ContentTab)`
+const CustomTap = styled.div`
   margin-top: 3.2rem;
 `
 
