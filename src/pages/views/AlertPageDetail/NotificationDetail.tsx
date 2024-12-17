@@ -4,7 +4,7 @@ import { RoutePath } from "@/types/route-path"
 import IconNotify from "assets/ico-notify.svg?react"
 import dummyImage from "assets/dummy-image.png"
 import { getNotificationItem } from "@/services/notification"
-import { useQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 import { parseTitle } from "@/utils/util"
@@ -28,10 +28,9 @@ const NotificationDetail = () => {
     return response
   }
 
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["noticeDetail", notificationId],
     queryFn: fetchNotifyDetail,
-    enabled: !!notificationId,
     staleTime: 0,
     refetchOnMount: false,
   })
