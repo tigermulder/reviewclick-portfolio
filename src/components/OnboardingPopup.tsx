@@ -282,6 +282,9 @@ export default OnboardingPopup
 
 const Overlay = styled.div`
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -332,9 +335,9 @@ const PopupContainer = styled.div`
   position: relative;
   width: 80%;
   max-width: 400px;
+  max-height: 90vh;
   margin: auto;
   top: 50%;
-  transform: translateY(-50%);
 
   @media (min-width: 680px) {
     max-width: 30rem;
