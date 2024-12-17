@@ -292,7 +292,7 @@ const MyReviewContainer = styled.ul<{ $hasItems: boolean }>`
 
   li {
     position: relative;
-    padding: 2rem 1.5rem;
+    padding: 2.7rem 2.9rem 2.4rem;
 
     em {
       margin-left: 0.4rem;
