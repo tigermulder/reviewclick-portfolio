@@ -104,6 +104,7 @@ html {
   height: 100%;
 }
 body {
+  font-family: "SUIT", sans-serif;
   line-height: 1;
   overscroll-behavior: contain;
   height: 100%;
@@ -252,31 +253,6 @@ body {
 .bottom-tab-bar {
   max-width: 768px;
   min-width: 280px;
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 300;
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Light.woff2")
-    format("woff2");
-}
-@font-face {
-  font-family: "SUIT";
-  font-weight: 500;
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2")
-    format("woff2");
-}
-@font-face {
-  font-family: "SUIT";
-  font-weight: 700;
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Bold.woff2")
-    format("woff2");
-}
-@font-face {
-  font-family: "SUIT";
-  font-weight: 800;
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-ExtraBold.woff2")
-    format("woff2");
 }
 
 /** ------ 헤딩요소 스타일 ------ */
