@@ -22,7 +22,7 @@ const Step = styled.span`
   font-weight: var(--font-light);
 
   &.active {
-    padding: 0.2rem 1.4rem;
+    padding: 0 1rem;
     width: auto;
     height: auto;
     border: 0.2rem solid var(--L200);
