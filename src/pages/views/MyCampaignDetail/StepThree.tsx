@@ -261,7 +261,7 @@ const StepThree = ({
           <StepNotice>
             ‘등록하러가기’ 클릭 시 검수 완료된 리뷰가 자동으로 복사됩니다.
           </StepNotice>
-          <Button $variant="pink" onClick={handleNavigate}>
+          <Button $variant="pink" $fontSize="1.8rem" onClick={handleNavigate}>
             리뷰 등록하러가기 &#40;자동복사&#41;
           </Button>
         </StepItem>
@@ -275,7 +275,11 @@ const StepThree = ({
             검수가 완료된 내용과 동일한 상품의 리뷰와 사진이 보이도록 캡처하여
             업로드해주세요!
           </StepNotice>
-          <Button $variant="pink" onClick={handleButtonClick}>
+          <Button
+            $variant="pink"
+            $fontSize="1.8rem"
+            onClick={handleButtonClick}
+          >
             이미지업로드
           </Button>
           {/* 숨겨진 파일 입력 */}

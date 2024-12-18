@@ -206,7 +206,7 @@ const StepOne = ({
               <CardPoint>{reward?.toLocaleString()}P</CardPoint>
             </ReviewCardInfo>
           </StepItemInfo>
-          <Button $variant="pink" onClick={handleNavigate}>
+          <Button $variant="pink" $fontSize="1.8rem" onClick={handleNavigate}>
             상품 구매하러가기
           </Button>
         </StepItem>
@@ -220,7 +220,11 @@ const StepOne = ({
             &gt; 결제한 상품의 ‘주문상세' 혹은 ‘결제상세' &gt; ‘영수증' &gt;
             ‘구매영수증' 캡쳐
           </StepNotice>
-          <Button $variant="pink" onClick={handleButtonClick}>
+          <Button
+            $variant="pink"
+            $fontSize="1.8rem"
+            onClick={handleButtonClick}
+          >
             구매 영수증 업로드
           </Button>
           {/* 숨겨진 파일 입력 */}

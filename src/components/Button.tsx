@@ -69,7 +69,15 @@ const Dot = styled.div`
 `
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { children, disabled, $variant, type = "button", $marginTop, onClick },
+    {
+      children,
+      disabled,
+      $variant,
+      type = "button",
+      $marginTop,
+      $fontSize,
+      onClick,
+    },
     ref
   ) => (
     <StyledButton
@@ -79,6 +87,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       type={type}
       onClick={onClick}
       $marginTop={$marginTop}
+      $fontSize={$fontSize}
     >
       {/* success와 failed일 경우 아이콘 렌더링 */}
       {$variant === "success" && (
@@ -122,6 +131,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   font-weight: var(--font-bold);
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   ${({ $marginTop }) => $marginTop && `margin-top: ${$marginTop};`}
+  font-size: ${({ $fontSize }) => $fontSize ?? "var(--font-body-size)"}
 
   ${({ $variant, disabled }) => {
     switch ($variant) {
@@ -184,7 +194,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
       case "pink":
         return css`
           background-color: var(--L20);
-          color: var(--L500);
+          color: var(--L400);
           border: none;
         `
       case "default":
@@ -194,7 +204,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           font-size: var(--font-body-size);
           box-shadow: 0px 0px 10px rgba(246.44, 95.26, 102.39, 0.3);
           border: 1px solid var(--L60);
-          color: var(--L500);
+          color: var(--L400);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -208,7 +218,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           padding: 0;
           height: 3.7rem;
           font-size: var(--font-body-size);
-          color: var(--L500);
+          color: var(--L400);
           border: 1px solid var(--N80);
           display: flex;
           align-items: center;

@@ -19,6 +19,7 @@ export interface ButtonProps {
     | "uploadImage"
   type?: "button" | "submit" | "reset"
   $marginTop?: string
+  $fontSize?: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -40,5 +41,6 @@ export interface StyledButtonProps {
     | "onboarding02"
     | "uploadImage"
   $marginTop?: string
+  $fontSize?: string
   disabled?: boolean
 }
