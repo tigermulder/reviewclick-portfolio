@@ -147,7 +147,6 @@ const NotifyDate = styled.p<{ isClicked: boolean }>`
   gap: 0.8rem;
   font-size: var(--caption-size);
   color: ${({ isClicked }) => (isClicked ? "var(--N200)" : "var(--N300)")};
-  font-weight: var(--font-light);
 
   svg {
     width: 1rem;
