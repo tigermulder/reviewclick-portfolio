@@ -49,7 +49,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ["react", "react-router-dom", "react-dom", "node_modules"],
+            vendor: ["react", "react-router-dom", "react-dom"],
           },
           assetFileNames: (assetInfo) => {
             let extType: string = assetInfo?.name?.split(".").at(1) || "misc"
