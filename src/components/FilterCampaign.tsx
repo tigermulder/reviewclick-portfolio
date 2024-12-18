@@ -72,8 +72,8 @@ const Chip = styled.li<{ selected: boolean }>`
   border-radius: 99.9rem;
 
   transition:
-    background-color 0.08s ease-in-out,
-    color 0.08s ease-in-out;
+    background-color 0.05s ease-in-out,
+    color 0.05s ease-in-out;
   &:hover {
     background: ${({ selected }) =>
       selected ? "var(--L400)" : "var(--WSmoke)"};
