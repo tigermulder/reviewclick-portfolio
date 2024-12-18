@@ -104,7 +104,6 @@ html {
   height: 100%;
 }
 body {
-  font-family: "SUIT", sans-serif;
   line-height: 1;
   overscroll-behavior: contain;
   height: 100%;
@@ -253,6 +252,14 @@ body {
 .bottom-tab-bar {
   max-width: 768px;
   min-width: 280px;
+}
+@font-face {
+  font-family: "SUIT-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 /** ------ 헤딩요소 스타일 ------ */
