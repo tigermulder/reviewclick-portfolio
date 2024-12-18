@@ -48,10 +48,8 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: true,
       rollupOptions: {
         output: {
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              return "vendor"
-            }
+          manualChunks: {
+            vendor: ["react", "react-router-dom", "react-dom", "node_modules"],
           },
           assetFileNames: (assetInfo) => {
             let extType: string = assetInfo?.name?.split(".").at(1) || "misc"
