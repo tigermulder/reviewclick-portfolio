@@ -48,19 +48,8 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: true,
       rollupOptions: {
         output: {
-          manualChunks(id) {
-            // node_modules 폴더 내의 모듈만 처리
-            if (id.includes("node_modules")) {
-              // 특정 vendor 모듈 목록
-              const specificVendors = ["react", "react-router-dom", "react-dom"]
-              // 모듈 이름 추출
-              const moduleName = id.split("node_modules/")[1].split("/")[0]
-              if (specificVendors.includes(moduleName)) {
-                return "vendor"
-              }
-              return `vendor/${moduleName}`
-            }
-            return undefined
+          manualChunks: {
+            vendor: ["react", "react-router-dom", "react-dom"],
           },
           assetFileNames: (assetInfo) => {
             let extType: string = assetInfo?.name?.split(".").at(1) || "misc"
