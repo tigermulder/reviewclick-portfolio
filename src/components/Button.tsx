@@ -131,7 +131,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   font-weight: var(--font-bold);
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   ${({ $marginTop }) => $marginTop && `margin-top: ${$marginTop};`}
-  font-size: ${({ $fontSize }) => $fontSize ?? "var(--font-body-size)"}
+  font-size: ${({ $fontSize }) => $fontSize ?? "var(--font-body-size);"}
 
   ${({ $variant, disabled }) => {
     switch ($variant) {
