@@ -2,16 +2,21 @@ import { defineConfig, loadEnv } from "vite"
 import react from "@vitejs/plugin-react-swc"
 import tsconfigPaths from "vite-tsconfig-paths"
 import svgr from "vite-plugin-svgr"
+import { createHtmlPlugin } from "vite-plugin-html"
 import path from "path"
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // 환경 변수를 로드
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   return {
     base: "/", // 기본 경로 설정
-    plugins: [react(), tsconfigPaths(), svgr()], // Vite 플러그인
+    plugins: [
+      react(),
+      tsconfigPaths(),
+      svgr(),
+      createHtmlPlugin({ minify: true }),
+    ], // Vite 플러그인
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"), // 'src' 폴더를 '@'로 매핑
@@ -37,13 +42,14 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       outDir: "dist",
-      emptyOutDir: true, // 빌드 시 dist 폴더를 비움
+      emptyOutDir: true,
       sourcemap: false,
+      minify: "esbuild",
+      cssCodeSplit: true,
       rollupOptions: {
         output: {
           manualChunks: {
             vendor: ["react", "react-router-dom", "react-dom"],
-            // 'vendor'라는 이름으로 react, react-router-dom, react-dom을 별도 청크로 분리
           },
           assetFileNames: (assetInfo) => {
             let extType: string = assetInfo?.name?.split(".").at(1) || "misc"
