@@ -345,6 +345,7 @@ const StepItemInfoThumb = styled.div`
 `
 
 const ReviewCardInfo = styled.div`
+  padding: 0.4rem 0;
   min-width: 0;
   height: 8.2rem;
   display: flex;
@@ -366,7 +367,7 @@ const CardTitle = styled.span`
 const CardPoint = styled.p`
   flex-grow: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   font-size: var(--font-h2-size);
   font-weight: var(--font-extrabold);
 `
