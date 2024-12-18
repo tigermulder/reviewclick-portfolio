@@ -261,7 +261,7 @@ const StepThree = ({
           <StepNotice>
             ‘등록하러가기’ 클릭 시 검수 완료된 리뷰가 자동으로 복사됩니다.
           </StepNotice>
-          <Button $fontSize="1.8rem" $variant="pink" onClick={handleNavigate}>
+          <Button $fontSize="1.8rem;" $variant="pink" onClick={handleNavigate}>
             리뷰 등록하러가기 &#40;자동복사&#41;
           </Button>
         </StepItem>
@@ -276,7 +276,7 @@ const StepThree = ({
             업로드해주세요!
           </StepNotice>
           <Button
-            $fontSize="1.8rem"
+            $fontSize="1.8rem;"
             $variant="pink"
             onClick={handleButtonClick}
           >
