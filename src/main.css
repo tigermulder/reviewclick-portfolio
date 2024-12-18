@@ -160,6 +160,31 @@ a {
 }
 /** ------ reset css ------ */
 
+@font-face {
+  font-family: "SUIT";
+  font-weight: 300;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Light.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-weight: 500;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-weight: 700;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Bold.woff2")
+    format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-weight: 800;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-ExtraBold.woff2")
+    format("woff2");
+}
+
 /** ------ 전역변수 ------ */
 :root {
   /** Color */
@@ -239,6 +264,12 @@ html {
   tab-size: 4;
 }
 
+.app-bar,
+.bottom-tab-bar {
+  max-width: 768px;
+  min-width: 280px;
+}
+
 body {
   max-width: 768px;
   min-width: 280px;
@@ -247,19 +278,6 @@ body {
   color: var(--primary-color);
   font-size: 1.6rem;
   line-height: 1.4;
-}
-.app-bar,
-.bottom-tab-bar {
-  max-width: 768px;
-  min-width: 280px;
-}
-@font-face {
-  font-family: "SUIT-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
-    format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 /** ------ 헤딩요소 스타일 ------ */
