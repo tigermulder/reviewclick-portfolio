@@ -26,7 +26,7 @@ const MyPage = () => {
       <ReuseHeader
         title="마이페이지"
         onBack={() => {
-          ;-1
+          navigate(-1)
         }}
       />
       <MyPageListContainer>

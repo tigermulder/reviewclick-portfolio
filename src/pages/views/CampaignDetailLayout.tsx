@@ -99,9 +99,9 @@ const CampaignDetailPage = () => {
         behavior: "smooth",
       })
     } else {
-      handleApply()
       if (isProductViewed) {
         // '상품 구경하러가기'를 클릭한 경우 캠페인 신청 진행
+        handleApply()
       } else {
         // '상품 구경하러가기'를 클릭하지 않은 경우 토스트 메시지 표시
         addToast(
