@@ -211,7 +211,7 @@ const AccountVerificationPage = () => {
         <ReuseHeader
           title="계정인증"
           onBack={() => {
-            navigate(-1), { replace: true }
+            ;-1
           }}
         />
         <FormGroup>
