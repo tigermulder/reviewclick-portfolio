@@ -14,7 +14,7 @@ const SuccessIcon = ({
         filter={filter}
         filterColor={filterColor}
       >
-        <CheckIcon />
+        <CheckIcon aria-hidden="true" />
       </CheckIconContainer>
     </>
   )

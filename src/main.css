@@ -264,12 +264,6 @@ html {
   tab-size: 4;
 }
 
-.app-bar,
-.bottom-tab-bar {
-  max-width: 768px;
-  min-width: 280px;
-}
-
 body {
   max-width: 768px;
   min-width: 280px;

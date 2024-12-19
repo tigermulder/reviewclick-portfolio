@@ -5,7 +5,6 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 
-// 모달 컴포넌트
 const Modal = ({
   isOpen,
   onConfirm,
@@ -16,14 +15,11 @@ const Modal = ({
   cancelText,
   isLoading = false,
   showRouteLink = false,
-  children,
 }: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
-      // 모달이 열리면 body 스크롤을 막음
       document.body.style.overflow = "hidden"
     } else {
-      // 모달이 닫히면 body 스크롤을 다시 활성화
       document.body.style.overflow = "auto"
     }
     return () => {
@@ -114,9 +110,8 @@ const ModalHeader = styled.h3`
   line-height: 2.5rem;
 `
 
-const ModalBody = styled.div`
+const ModalBody = styled.p`
   margin-bottom: 2rem;
-  font-size: var(--font-body-size);
   color: var(--N400);
   em,
   span {
@@ -129,7 +124,7 @@ const ModalBody = styled.div`
       margin-bottom: 0.2rem;
     }
     span {
-      color: var(--L600);
+      color: var(--L400);
     }
   }
 `
@@ -146,6 +141,5 @@ const RouteLink = styled(Link)`
   margin-top: 1.2rem;
   text-align: center;
   color: var(--N200);
-  font-size: var(--font-body-size);
   text-decoration: underline;
 `

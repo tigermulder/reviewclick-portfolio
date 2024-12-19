@@ -1,4 +1,3 @@
-// src/hooks/useDebounce.ts
 import { useRef } from "react"
 
 const useDebounce = (fn: (...args: any[]) => void, delay: number) => {

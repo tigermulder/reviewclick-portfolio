@@ -17,7 +17,11 @@ const Checkbox = ({
     <CheckboxLabel $isTitle={$isTitle} checked={checked}>
       <CheckboxInput type="checkbox" checked={checked} onChange={onChange} />
       <CheckboxCustom checked={checked}>
-        {$isTitle ? <IcoChk /> : <IcoChkOff />}
+        {$isTitle ? (
+          <IcoChk aria-hidden="true" />
+        ) : (
+          <IcoChkOff aria-hidden="true" />
+        )}
       </CheckboxCustom>
       <CheckboxText $isTitle={$isTitle} checked={checked}>
         {label}

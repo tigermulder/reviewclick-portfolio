@@ -6,8 +6,8 @@ import styled from "styled-components"
 const Footer = () => {
   return (
     <FooterComponent>
-      <FooterLogoContainer>
-        <FooterLogo aria-label="Revuclick Logo" />
+      <FooterLogoContainer aria-label="Revuclick Logo">
+        <FooterLogo aria-hidden="true" />
       </FooterLogoContainer>
 
       <LinkContainer>

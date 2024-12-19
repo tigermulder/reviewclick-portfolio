@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react"
 import { useRecoilState } from "recoil"
 import { toastListState } from "store/toast-recoil"
-import { Toast } from "types/component-types/toast-type"
 import styled, { keyframes } from "styled-components"
 
 const ToastMassage = () => {
@@ -24,7 +23,7 @@ const ToastMassage = () => {
       }
     })
 
-    // 클린업: 컴포넌트 언마운트 시 모든 타이머 클리어
+    // 컴포넌트 언마운트 시 모든 타이머 클리어
     return () => {
       Object.values(timersRef.current).forEach(clearTimeout)
       timersRef.current = {}

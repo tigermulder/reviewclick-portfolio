@@ -5,27 +5,19 @@ import SeoHelmet from "@/components/SeoHelmet"
 import {
   campaignListState,
   filteredAndSortedCampaignList,
-  campaignLikeState,
 } from "store/mainpage-recoil"
 import { getCampaignList } from "services/campaign"
 import BannerSlider from "components/Banner"
 import LikeButton from "components/LikeButton"
 import { FilterBar } from "components/FilterBar"
-import { useRouter } from "@/hooks/useRouting"
 import dummyImage from "assets/dummy-image.png"
-import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
-import SuccessIcon from "@/components/SuccessIcon"
-import FailedIcon from "@/components/FailedIcon"
-import Button from "@/components/Button"
 import { calculateRemainingTime, ocrFilterWord } from "@/utils/util"
 
 const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
   const filteredCampaigns = useRecoilValue(filteredAndSortedCampaignList)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
-  // const campaignLikes = useRecoilValue(campaignLikeState)
-  // const router = useRouter() // 네비게이션 커스텀훅
 
   //** Fetch campaign list */
   const fetchCampaigns = async ({ pageParam = 1 }) => {
@@ -57,9 +49,9 @@ const MainPage = (): JSX.Element => {
         return undefined
       },
       initialPageParam: 1,
-      refetchInterval: 10 * 60 * 1000, // 10분 마다 리패치
-      staleTime: 10 * 60 * 1000, // 10분 동안 데이터가 신선함
-      gcTime: 11 * 60 * 1000, // 20분 동안 캐시 유지
+      refetchInterval: 10 * 60 * 1000,
+      staleTime: 10 * 60 * 1000,
+      gcTime: 11 * 60 * 1000,
       refetchOnMount: false,
     })
 
@@ -99,8 +91,6 @@ const MainPage = (): JSX.Element => {
         title="리뷰클릭-Main"
         description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
       />
-      {/* 카테고리메뉴 */}
-      {/* <CategoryMenu /> */}
       <BannerSlider />
       {/* 필터칩 */}
       <FilterBar />
@@ -110,18 +100,9 @@ const MainPage = (): JSX.Element => {
           const { remainingTime, isEnded } = calculateRemainingTime(endTime)
           const thumbnailUrl = campaign.thumbnailUrl || dummyImage
           return (
-            <CampaignCard
-              key={campaign.campaignId}
-              $isEnded={isEnded}
-              // onClick={() =>
-              //   router.push(
-              //     RoutePath.CampaignDetail(String(campaign.campaignId))
-              //   )
-              // }
-            >
+            <CampaignCard key={campaign.campaignId} $isEnded={isEnded}>
               <CampaignImage>
                 <img src={thumbnailUrl} alt={campaign.title} />
-                {/* 캠페인 종료 여부에 따라 RemainingDays 위치 변경 */}
                 <RemainingDays $isEnded={isEnded}>
                   {isEnded ? "캠페인 종료" : remainingTime}
                 </RemainingDays>
@@ -135,7 +116,7 @@ const MainPage = (): JSX.Element => {
                 )}
               </CampaignImage>
               <CampaignCardInfo>
-                <Price>{campaign.price.toLocaleString()}P</Price>
+                {/* <Price>{campaign.price.toLocaleString()}P</Price> */}
                 <Title>{campaign.title}</Title>
                 <Participants>
                   신청 | <em>{campaign.joins}</em>/{campaign.quota}명
@@ -145,7 +126,6 @@ const MainPage = (): JSX.Element => {
           )
         })}
       </CampaignList>
-      {/* Infinite scroll */}
       <div ref={loadMoreRef}>{isFetchingNextPage ? <p>더보기</p> : null}</div>
     </>
   )

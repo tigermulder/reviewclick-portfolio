@@ -39,7 +39,7 @@ const CampaignDetailPage = () => {
   const navigate = useNavigate()
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
-  // const [isProductViewed, setIsProductViewed] = useState(false)
+  const [isProductViewed, setIsProductViewed] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false) // 온보딩팝업 상태
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
   //** 모달 상태 관리 */
@@ -100,23 +100,21 @@ const CampaignDetailPage = () => {
       })
     } else {
       handleApply()
-      // if (isProductViewed) {
-      //   // '상품 구경하러가기'를 클릭한 경우 캠페인 신청 진행
-
-      // } else {
-      //   // '상품 구경하러가기'를 클릭하지 않은 경우 토스트 메시지 표시
-      //   addToast(
-      //     "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
-      //     "warning",
-      //     3000,
-      //     "campaign"
-      //   )
-      //   // '상품 구경하러가기' 버튼 위치로 스크롤
-      //   viewProductRef.current?.scrollIntoView({
-      //     behavior: "smooth",
-      //     block: "center",
-      //   })
-      // }
+      if (isProductViewed) {
+        // '상품 구경하러가기'를 클릭한 경우 캠페인 신청 진행
+      } else {
+        // '상품 구경하러가기'를 클릭하지 않은 경우 토스트 메시지 표시
+        addToast(
+          "'상품 구경하러가기' 클릭 후 신청이 가능해요.",
+          3000,
+          "campaign"
+        )
+        // '상품 구경하러가기' 버튼 위치로 스크롤
+        viewProductRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        })
+      }
     }
   }
   //** 탭 설정 */
@@ -136,8 +134,8 @@ const CampaignDetailPage = () => {
       getCampaignItem({
         campaignCode: campaignCode as string,
       }),
-    staleTime: 0, // 데이터 즉시 신선하지 않게 설정
-    gcTime: 0, // 데이터 캐시 즉시 제거
+    staleTime: 0,
+    gcTime: 0,
     refetchOnMount: false,
   })
 
@@ -335,7 +333,7 @@ const CampaignDetailPage = () => {
   const handleViewProduct = () => {
     const url = campaignDetail.snsUrl || "https://naver.com"
     window.open(url, "_blank", "noopener,noreferrer")
-    // setIsProductViewed(true) // 버튼 클릭 여부 업데이트
+    setIsProductViewed(true)
   }
 
   //** 캠페인신청 취소 핸들러 [2-2] */
@@ -381,10 +379,6 @@ const CampaignDetailPage = () => {
       {showOnboarding && (
         <OnboardingPopup onClose={() => setShowOnboarding(false)} />
       )}
-      {/* 캐시워크때문에 주석처리 */}
-      {/* <CampaignDetailBackButton />
-      <CampaignDetailShareButton /> */}
-      {/* 캐시워크때문에 주석처리 */}
       <ShareModal />
       <DetailHeader imageUrl={thumbnailUrl} scale={scale} />
       <DetailBody>

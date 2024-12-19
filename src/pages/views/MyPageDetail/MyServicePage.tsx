@@ -18,11 +18,8 @@ import guideTab02_04 from "assets/guide02-step04.png"
 
 const MyServicePage = () => {
   const navigate = useNavigate()
-
-  // 활성화된 탭 상태
   const [activeTab, setActiveTab] = useState<string>("tab01")
 
-  // 탭 클릭 핸들러
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId)
   }

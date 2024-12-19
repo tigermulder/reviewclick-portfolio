@@ -7,7 +7,7 @@ function Notice() {
       <Summary>
         <NoticeTitle>※ 유의사항 안내</NoticeTitle>
         <IconPlaceholder>
-          <StyledIconNoticeArrow />
+          <StyledIconNoticeArrow aria-hidden="true" />
         </IconPlaceholder>
       </Summary>
       <NoticeBox>

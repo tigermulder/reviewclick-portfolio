@@ -1,6 +1,4 @@
 import { SingleHeader } from "@/types/component-types/single-page-header-type"
-import { RoutePath } from "@/types/route-path"
-import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const SinglePageHeader = ({ title }: SingleHeader) => {
@@ -29,9 +27,4 @@ const HeaderContainer = styled.div`
   h2 {
     font-weight: var(--font-bold);
   }
-`
-
-const RouteLink = styled(Link)`
-  width: 2.4rem;
-  height: auto;
 `

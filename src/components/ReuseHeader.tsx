@@ -30,7 +30,7 @@ const ReuseHeader = ({
     <HeaderContainer>
       {onBack && (
         <BackButton onClick={handleBack}>
-          <BackIcon />
+          <BackIcon aria-hidden="true" />
         </BackButton>
       )}
       <h3>{title}</h3>

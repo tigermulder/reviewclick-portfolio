@@ -138,7 +138,7 @@ const Content = styled.main<ContentProps>`
       `
     } else {
       return `
-        padding: 6rem 1.6rem 0;
+        padding: 5.2rem 1.6rem 0;
       `
     }
   }}

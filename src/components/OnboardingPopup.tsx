@@ -242,7 +242,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
                     aria-label="다음 슬라이드로 이동"
                   >
                     {slide.buttonText}
-                    <IconArrow />
+                    <IconArrow aria-hidden="true" />
                   </StartButton>
                 )}
               </SlideContent>
@@ -269,7 +269,7 @@ const OnboardingPopup = ({ onClose }: OnboardingPopupProps) => {
               checked={doNotShowAgainChecked}
               onChange={handleDoNotShowAgainChange}
             />
-            <IconCheck />
+            <IconCheck aria-hidden="true" />
             <span>오늘 하루 보지 않기</span>
           </CheckboxLabel>
         </DoNotShowAgain>

@@ -1,4 +1,3 @@
-import SinglePageHeader from "@/components/SinglePageHeader"
 import ContentTab from "@/components/Tab"
 import FaqButton from "@/components/FaqButton"
 import SeoHelmet from "@/components/SeoHelmet"
@@ -7,10 +6,13 @@ import Announcement from "./AlertPageDetail/Announcement"
 import FaqContent from "./AlertPageDetail/FaqContent"
 import { useRecoilState } from "recoil"
 import { alertSelectedTabState } from "@/store/alerttap-recoil"
+import { useNavigate } from "react-router-dom"
+import ReuseHeader from "@/components/ReuseHeader"
 import styled from "styled-components"
 
 const AlertHubPage = () => {
   const [selectedTab, setSelectedTab] = useRecoilState(alertSelectedTabState)
+  const navigate = useNavigate()
   //** 탭 설정 */
   const singleTab = [
     { label: "새소식", value: "news" },
@@ -28,7 +30,12 @@ const AlertHubPage = () => {
         description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
       />
       {/* 알림 헤더 타이틀 */}
-      <SinglePageHeader title="알림" />
+      <ReuseHeader
+        title="알림"
+        onBack={() => {
+          navigate(-1)
+        }}
+      />
       <ContentTab
         tabs={singleTab}
         selectedTab={selectedTab}

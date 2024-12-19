@@ -15,7 +15,7 @@ const CampaignCart = () => {
   const navigate = useNavigate()
   const { addToast } = useToast()
 
-  // 찜 해제 시 로컬 스토리지와 상태 업데이트
+  //** 찜 해제 시 로컬 스토리지와 상태 업데이트 */
   const handleUnlike = (campaignId: number, categoryId: number) => {
     const updatedLikes = { ...likedCampaigns }
     updatedLikes[categoryId] = updatedLikes[categoryId].filter(

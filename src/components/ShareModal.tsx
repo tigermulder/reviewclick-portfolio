@@ -20,17 +20,17 @@ const ShareModal = () => {
     setTimeout(() => {
       setIsModalOpen(false)
       setIsClosing(false)
-    }, 150) // 애니메이션 시간과 일치
+    }, 150)
   }
 
   /** 링크 복사 핸들러 */
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href)
-      addToast("링크가 복사되었습니다.", "copy", 1000, "copy")
+      addToast("링크가 복사되었습니다.", 3000, "copy")
     } catch (error) {
       console.error("링크 복사 실패:", error)
-      addToast("링크 복사 실패.", "warning", 1000, "copy")
+      addToast("링크 복사 실패.", 3000, "copy")
     }
   }
 
@@ -76,17 +76,12 @@ const ShareModal = () => {
           text: "리뷰로 결제 금액을 돌려받는 특별한 혜택!",
           url: window.location.href,
         })
-        addToast("공유 성공.", "info", 1000, "link")
+        addToast("공유 성공.", 3000, "link")
       } catch (error) {
-        addToast("공유 실패.", "warning", 1000, "link")
+        addToast("공유 실패.", 3000, "link")
       }
     } else {
-      addToast(
-        "Web Share를 지원하지 않는 브라우저입니다.",
-        "warning",
-        1000,
-        "link"
-      )
+      addToast("Web Share를 지원하지 않는 브라우저입니다.", 3000, "link")
     }
   }
 
@@ -113,20 +108,20 @@ const ShareModal = () => {
             <ShareHeader>
               <h3>공유하기</h3>
               <CloseButton onClick={handleClose} aria-label="모달 닫기">
-                <IconClose />
+                <IconClose aria-hidden="true" />
               </CloseButton>
             </ShareHeader>
             <IconsWrapper>
               <IconItem onClick={handleCopyLink} aria-label="링크 복사">
-                <IconClipStyled />
+                <IconClipStyled aria-hidden="true" />
                 <IconText>링크 복사</IconText>
               </IconItem>
               <IconItem onClick={handleKakaoShare} aria-label="카카오톡">
-                <IconKaKaoBackground />
+                <IconKaKaoBackground aria-hidden="true" />
                 <IconText>카카오톡</IconText>
               </IconItem>
               <IconItem onClick={handleWebShare} aria-label="더보기">
-                <IconMoreStyled />
+                <IconMoreStyled aria-hidden="true" />
                 <IconText>더보기</IconText>
               </IconItem>
             </IconsWrapper>
@@ -192,31 +187,31 @@ const ShareHeader = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: 0.1rem solid var(--N20);
-  padding: 1.5rem 0;
+  padding: 1.6rem 0;
 `
 
 const CloseButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 16px;
+  right: 1.6rem;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 2.4rem;
   cursor: pointer;
 `
 
 const IconsWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  padding: 2.6rem 1.5rem 4rem;
+  padding: 2.6rem 1.6rem 4rem;
 `
 
 const IconItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 `
 
 const IconClipStyled = styled(IconClip)`
@@ -234,7 +229,7 @@ const IconMoreStyled = styled(IconMore)`
 const IconKaKaoBackground = styled.div`
   width: 5rem;
   height: 5rem;
-  background: url(${IconKaKaoURL}) #ffe617 no-repeat center / 50%;
+  background: url("${IconKaKaoURL}") #ffe617 no-repeat center / 50%;
   border-radius: 50%;
   display: flex;
   align-items: center;

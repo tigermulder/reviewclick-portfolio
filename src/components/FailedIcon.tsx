@@ -14,7 +14,7 @@ const FailedIcon = ({
         filter={filter}
         filterColor={filterColor}
       >
-        <BangIcon />
+        <BangIcon aria-hidden="true" />
       </BangIconContainer>
     </>
   )

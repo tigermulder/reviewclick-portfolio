@@ -7,7 +7,7 @@ import IconDropDown from "assets/ico-notice-arrow.svg?react"
 import styled from "styled-components"
 
 const FilterDropDown = ({
-  id, // 드롭다운 식별을 위한 ID 추가
+  id,
   options,
   selectedFilter,
   setSelectedFilter,
@@ -82,7 +82,7 @@ const FilterDropDown = ({
         $isPlaceholder={isPlaceholder}
       >
         <span>{displayText}</span>
-        <IconDropDown />
+        <IconDropDown aria-hidden="true" />
       </DropdownButton>
 
       {/* 드롭다운 메뉴 */}

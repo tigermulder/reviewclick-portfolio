@@ -26,21 +26,16 @@ const LikeButton = ({
 
   const handleLike = (event: React.MouseEvent): void => {
     event.stopPropagation()
-    // const token = sessionStorage.getItem("authToken")
-    // if (!token) {
-    //   addToast("로그인이 필요합니다.", "warning", 1000, "login")
-    //   router.push(RoutePath.Login)
-    //   return
-    // }
+
     if (onLikeToggle) {
       onLikeToggle() // 외부에서 찜하기 로직을 전달받았을 때 실행
     } else {
       if (defaultIsLiked()) {
         unlikeCampaign()
-        addToast("찜한 목록에서 해제했어요", "uncheck", 3000, "like")
+        addToast("찜한 목록에서 해제했어요", 3000, "like")
       } else {
         likeCampaign()
-        addToast("찜한 목록에 추가했어요", "check", 3000, "like")
+        addToast("찜한 목록에 추가했어요", 3000, "like")
       }
     }
   }
@@ -55,9 +50,9 @@ const LikeButton = ({
         onClick={handleLike}
         aria-label={likedState ? "좋아요 취소" : "좋아요"}
         $isLiked={likedState}
-        className={className} // className을 추가
+        className={className}
       >
-        <StyledIcoCampaignHeart $isLiked={likedState} />
+        <StyledIcoCampaignHeart $isLiked={likedState} aria-hidden="true" />
         <HeartText>찜하기</HeartText>
       </CampaignHeart>
     )
@@ -67,9 +62,9 @@ const LikeButton = ({
         onClick={handleLike}
         aria-label={likedState ? "좋아요 취소" : "좋아요"}
         aria-pressed={likedState}
-        className={className} // className을 추가
+        className={className}
       >
-        <StyledHeartIcon $isLiked={likedState} />
+        <StyledHeartIcon $isLiked={likedState} aria-hidden="true" />
       </Button>
     )
   }
@@ -87,14 +82,14 @@ const Button = styled.button`
 const StyledHeartIcon = styled(IcoHeart)<{ $isLiked: boolean }>`
   width: 2.4rem;
   height: auto;
-  color: ${({ $isLiked }) => ($isLiked ? "var(--L600)" : "var(--N40)")};
+  color: ${({ $isLiked }) => ($isLiked ? "var(--L400)" : "var(--N40)")};
   transition: transform 0.1s ease-in-out;
 `
 
 const StyledIcoCampaignHeart = styled(IcoCampaignHeart)<{ $isLiked: boolean }>`
   width: 2.4rem;
   height: auto;
-  color: ${({ $isLiked }) => ($isLiked ? "var(--L600)" : "white")};
+  color: ${({ $isLiked }) => ($isLiked ? "var(--L400)" : "white")};
 `
 
 const CampaignHeart = styled.div<{ $isLiked: boolean }>`
@@ -109,8 +104,7 @@ const CampaignHeart = styled.div<{ $isLiked: boolean }>`
 
 const HeartText = styled.div`
   text-align: center;
-  color: var(--L600);
+  color: var(--L400);
   font-size: 0.7rem;
   font-weight: var(--font-medium);
-  word-wrap: break-word;
 `

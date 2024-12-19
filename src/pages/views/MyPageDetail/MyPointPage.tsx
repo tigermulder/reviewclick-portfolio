@@ -25,7 +25,7 @@ const MyPointPage = () => {
     queryKey: ["RewardList"],
     queryFn: fetchMyRewardList,
     staleTime: 0,
-    retry: 0, // 재요청 횟수
+    retry: 0,
   })
   const rewardList = data?.list
 

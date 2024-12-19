@@ -48,7 +48,7 @@ const BannerWrapper = styled.div`
   width: 100%;
   height: 21rem;
   overflow: hidden;
-  margin: 8rem 0 1.6rem;
+  margin: 1.6rem 0;
   border-radius: 1rem;
 
   @media (max-width: 374px) {
@@ -61,7 +61,7 @@ const BannerWrapper = styled.div`
 const BannerContainer = styled.div<{ $currentIndex: number }>`
   display: flex;
   height: 100%;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease-in-out;
   transform: translateX(-${({ $currentIndex }) => $currentIndex * 100}%);
 `
 
@@ -94,7 +94,7 @@ const Indicator = styled.div`
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 2rem;

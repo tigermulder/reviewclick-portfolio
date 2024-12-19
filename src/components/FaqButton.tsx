@@ -11,7 +11,7 @@ const FaqButton = () => {
   return (
     <FaqContainer onClick={handleClick}>
       <div>
-        <StyledIconFaq />
+        <StyledIconFaq aria-hidden="true" />
         <p>문의등록</p>
       </div>
     </FaqContainer>

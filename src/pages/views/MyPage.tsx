@@ -2,14 +2,16 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import IconArrowRight from "assets/ico_arr_right.svg?url"
 import IconNoticeArrow from "assets/ico-notice-arrow.svg?url"
-import IconNew from "assets/ico-new.svg"
+import IconNew from "assets/ico-new.svg?url"
 import { RoutePath } from "@/types/route-path"
-import SinglePageHeader from "@/components/SinglePageHeader"
+import ReuseHeader from "@/components/ReuseHeader"
 import styled from "styled-components"
 import SeoHelmet from "@/components/SeoHelmet"
+import { useNavigate } from "react-router-dom"
 
 const MyPage = () => {
   const [isNoticeOpen, setIsNoticeOpen] = useState<boolean>(false)
+  const navigate = useNavigate()
   const toggleNotice = () => {
     setIsNoticeOpen((prev) => !prev)
   }
@@ -21,7 +23,12 @@ const MyPage = () => {
         description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
       />
       {/* 마이페이지 헤더 타이틀 */}
-      <SinglePageHeader title="마이페이지" />
+      <ReuseHeader
+        title="마이페이지"
+        onBack={() => {
+          navigate(-1)
+        }}
+      />
       <MyPageListContainer>
         <li>
           <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>

@@ -10,7 +10,7 @@ const PhoneVerificationPage = lazy(
 )
 const MainPage = lazy(() => import("./views/MainPage"))
 const CampaignDetailPage = lazy(() => import("./views/CampaignDetailLayout"))
-const CampaignCart = lazy(() => import("./views/CampaingnCart"))
+const CampaignCart = lazy(() => import("./views/CampaignCart"))
 const MyCampaignPage = lazy(() => import("./views/MyCampaignPage"))
 const MyCampaignDetailLayout = lazy(
   () => import("./views/MyCampaignDetailLayout")

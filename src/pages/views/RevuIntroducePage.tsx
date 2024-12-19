@@ -8,8 +8,8 @@ const RevuIntroducePage = () => {
   return (
     <IntroduceContainer>
       {/* 로고 */}
-      <Logo>
-        <RevuClickLogo aria-label="RevuClick Logo" />
+      <Logo aria-label="RevuClick Logo">
+        <RevuClickLogo aria-hidden="true" />
       </Logo>
 
       <img

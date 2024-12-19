@@ -14,7 +14,7 @@ const FaqItem = ({ faqItem }: any) => {
     <FAQListItem>
       <button onClick={toggleOpen}>
         <NotifyMessage>
-          <IconNew />
+          <IconNew aria-hidden="true" />
           <p>{faqItem.title}</p>
           <ArrowIcon
             className={isOpen ? "active" : ""}

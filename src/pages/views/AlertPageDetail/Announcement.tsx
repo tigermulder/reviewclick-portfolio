@@ -33,7 +33,7 @@ const Announcement = () => {
             <li key={noticeItem.noticeId}>
               <StyledLink to={RoutePath.NoticeDetail(`${noticeItem.noticeId}`)}>
                 <NotifyMessage>
-                  <IconNew />
+                  <IconNew aria-hidden="true" />
                   {noticeItem.title}
                 </NotifyMessage>
               </StyledLink>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import IconBack from "assets/ico-campaign-detail-back.svg?react" // SVG 파일을 React 컴포넌트로 임포트
+import IconBack from "assets/ico-campaign-detail-back.svg?react"
 
 const CampaignDetailBackButton = () => {
   const navigate = useNavigate()
@@ -11,7 +11,7 @@ const CampaignDetailBackButton = () => {
 
   return (
     <StyledBackButton onClick={handleBackClick}>
-      <IconBack /> {/* SVG 아이콘을 React 컴포넌트로 사용 */}
+      <IconBack aria-hidden="true" />
     </StyledBackButton>
   )
 }

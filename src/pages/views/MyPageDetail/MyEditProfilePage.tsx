@@ -22,7 +22,7 @@ const MyEditProfilePage = () => {
         {/* <Group>
           <p>
             이름
-            <IconCheck />
+            <IconCheck aria-hidden="true"/>
           </p>
           <ValueTxt>{userName}</ValueTxt>
         </Group> */}
@@ -31,7 +31,7 @@ const MyEditProfilePage = () => {
         <Group>
           <p>
             인증 계정
-            <IconCheck />
+            <IconCheck aria-hidden="true" />
           </p>
           <ValueTxt>{userEmail}</ValueTxt>
         </Group>
@@ -40,7 +40,7 @@ const MyEditProfilePage = () => {
         <Group>
           <p>
             휴대폰 번호
-            <IconCheck />
+            <IconCheck aria-hidden="true" />
           </p>
           <ValueTxt>{userPhone}</ValueTxt>
         </Group>

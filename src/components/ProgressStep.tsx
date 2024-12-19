@@ -92,12 +92,14 @@ const ProgressStep = ({ status, uploadComplete }: ProgressStepProps) => {
                     <FailedIcon
                       backgroundColor="var(--RevBlack)"
                       filter={false}
+                      aria-hidden="true"
                     />
                   ) : (
                     <SuccessIcon
-                      backgroundColor="var(--L500)"
+                      backgroundColor="var(--L400)"
                       filter={true}
                       filterColor="rgba(245, 46, 54, 0.3)"
+                      aria-hidden="true"
                     />
                   )
                 ) : (
@@ -160,7 +162,7 @@ const StepBox = styled.div<StepBoxProps>`
     height: 0.15rem;
     background: ${({ $status }) =>
       $status === "done"
-        ? "linear-gradient(to right, var(--L500) 5%, transparent 5% 10%, var(--L500) 10% 15%, transparent 15% 20%, var(--L500) 20% 25%, transparent 25% 30%, var(--L500) 30% 35%, transparent 35% 40%, var(--L500) 40% 45%, transparent 45% 50%, var(--L500) 50% 55%, transparent 55% 60%, var(--L500) 60% 65%, transparent 65% 70%, var(--L500) 70% 75%, transparent 75% 80%, var(--L500) 80% 85%, transparent 85% 90%, var(--L500) 90% 95%, transparent 95% 100%)"
+        ? "linear-gradient(to right, var(--L400) 5%, transparent 5% 10%, var(--L400) 10% 15%, transparent 15% 20%, var(--L400) 20% 25%, transparent 25% 30%, var(--L400) 30% 35%, transparent 35% 40%, var(--L400) 40% 45%, transparent 45% 50%, var(--L400) 50% 55%, transparent 55% 60%, var(--L400) 60% 65%, transparent 65% 70%, var(--L400) 70% 75%, transparent 75% 80%, var(--L400) 80% 85%, transparent 85% 90%, var(--L400) 90% 95%, transparent 95% 100%)"
         : "var(--N40)"};
     z-index: -1;
   }
@@ -173,7 +175,7 @@ const StepBox = styled.div<StepBoxProps>`
 const IcoDefault = styled.div`
   width: 0.8rem;
   height: 0.8rem;
-  background: var(--LSilver);
+  background-color: var(--LSilver);
   border-radius: 50%;
 `
 
@@ -189,7 +191,7 @@ const IcoActive = styled.div`
     background: white;
     box-shadow: 0px 0px 10px rgba(245, 70, 78, 0.3);
     border-radius: 50%;
-    border: 1px solid var(--L500);
+    border: 1px solid var(--L400);
   }
 
   & > div:nth-child(2) {
@@ -199,7 +201,7 @@ const IcoActive = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--L500);
+    background-color: var(--L400);
     border-radius: 50%;
   }
 `
@@ -256,12 +258,4 @@ const TooltipText = styled.p`
   font-weight: var(--font-bold);
   color: white;
   word-break: keep-all;
-`
-
-const Icon = styled.img`
-  display: inline-block;
-  vertical-align: -0.15rem;
-  width: 1rem;
-  height: 1rem;
-  margin-left: 0.2rem;
 `

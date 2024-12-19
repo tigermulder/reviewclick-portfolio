@@ -94,7 +94,7 @@ const Suffix = styled.div`
 
 const ErrorDescription = styled.p`
   text-align: left;
-  color: var(--L600);
+  color: var(--L500);
   font-size: var(--caption-size);
   margin-top: 0.5rem;
 `

@@ -55,7 +55,7 @@ const MyCampaignDetailLayout = () => {
   const { data, refetch } = useSuspenseQuery({
     queryKey: ["reviewListItem", reviewId],
     queryFn: () => fetchCampaignListItem(reviewId as string),
-    staleTime: 0, // 데이터가 항상 최신이 아니라고 간주
+    staleTime: 0,
   })
 
   const {
@@ -144,7 +144,6 @@ const MyCampaignDetailLayout = () => {
         title={headerTitle}
         onBack={() => navigate(RoutePath.MyCampaign)}
       />
-      {/* 스텝마다 다른페이지 */}
       {renderStepContent()}
     </>
   )

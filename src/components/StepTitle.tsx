@@ -12,7 +12,6 @@ const Step = styled.span`
   padding: 0.2rem 0.8rem;
   width: 2.4rem;
   height: 2.4rem;
-  font-size: var(--font-body-size);
   background-color: var(--L20);
   color: var(--L300);
   display: flex;
@@ -41,7 +40,7 @@ const Check = styled(IconStepCheck)`
 
 export type HeaderStatusType = "join" | "purchase" | "confirm" | "upload"
 export const STEP_STATUS_MAP: { [key: number]: HeaderStatusType } = {
-  1: "join" || "purchase", // 또는 "purchase"
+  1: "join" || "purchase",
   2: "confirm",
   3: "upload",
 }
@@ -51,7 +50,6 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Step className="active">상품구매</Step>
       <Step>2</Step>
       <Step>3</Step>
-      {/* <Step>4</Step> */}
     </StepContainer>
   ),
   purchase: (
@@ -59,7 +57,6 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Step className="active">상품구매</Step>
       <Step>2</Step>
       <Step>3</Step>
-      {/* <Step>4</Step> */}
     </StepContainer>
   ),
   confirm: (
@@ -67,7 +64,6 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Check />
       <Step className="active">리뷰검수</Step>
       <Step>3</Step>
-      {/* <Step>4</Step> */}
     </StepContainer>
   ),
   upload: (
@@ -75,7 +71,6 @@ export const HEADER_TITLES: Record<HeaderStatusType, React.ReactNode> = {
       <Check />
       <Check />
       <Step className="active">리뷰등록</Step>
-      {/* <Step>4</Step> */}
     </StepContainer>
   ),
 }

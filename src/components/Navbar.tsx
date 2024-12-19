@@ -70,7 +70,7 @@ const Navbar = () => {
   }
 
   return (
-    <Nav className="bottom-tab-bar">
+    <Nav>
       <NavItem $active={activeTab === "campaign"} $tabName="campaign">
         <StyledLink
           to={RoutePath.MyCampaign}
@@ -82,7 +82,11 @@ const Navbar = () => {
           className={pressedTab === "campaign" ? "pressed" : ""}
         >
           <NavItemContent>
-            <StyledIcon as={IconCampaign} $active={activeTab === "campaign"} />
+            <StyledIcon
+              as={IconCampaign}
+              $active={activeTab === "campaign"}
+              aria-hidden="true"
+            />
             <NavText $active={activeTab === "campaign"}>나의 캠페인</NavText>
           </NavItemContent>
         </StyledLink>
@@ -104,6 +108,7 @@ const Navbar = () => {
               as={IconProfile}
               $active={activeTab === "user"}
               $tabName="user"
+              aria-hidden="true"
             />
           </NavItemContent>
         </StyledLink>
@@ -122,6 +127,7 @@ const Navbar = () => {
               as={IconAlerts}
               $active={activeTab === "alerts"}
               $tabName="alerts"
+              aria-hidden="true"
             />
             <Circle />
             <NavText $active={activeTab === "alerts"}>알림</NavText>
@@ -136,11 +142,11 @@ export default Navbar
 
 const Nav = styled.nav`
   position: fixed;
+  max-width: 768px;
+  min-width: 280px;
   bottom: 0;
   left: 0;
   z-index: 20;
-  max-width: 768px;
-  min-width: 280px;
   width: 100%;
   display: flex;
   align-items: center;

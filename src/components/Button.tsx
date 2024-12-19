@@ -1,28 +1,77 @@
 import { forwardRef } from "react"
+import styled, { css, keyframes } from "styled-components"
 import IconArrowGo from "assets/ico_arr_go.svg?url"
+import IconUpload from "assets/ico_upload.svg"
 import SuccessIcon from "./SuccessIcon"
 import FailedIcon from "./FailedIcon"
-import IconUpload from "assets/ico_upload.svg"
-
 import {
   ButtonProps,
   StyledButtonProps,
 } from "@/types/component-types/button-type"
-import styled, { css, keyframes } from "styled-components"
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      disabled,
+      $variant,
+      type = "button",
+      $marginTop,
+      $fontSize,
+      onClick,
+    },
+    ref
+  ) => (
+    <StyledButton
+      ref={ref}
+      disabled={disabled || $variant === "spinner"}
+      $variant={$variant}
+      type={type}
+      onClick={onClick}
+      $marginTop={$marginTop}
+      $fontSize={$fontSize}
+    >
+      {$variant === "success" && (
+        <SuccessIcon
+          backgroundColor="var(--L400)"
+          filter={true}
+          filterColor="rgba(245, 46, 54, 0.3)"
+          aria-hidden="true"
+        />
+      )}
+      {$variant === "failed" && (
+        <FailedIcon
+          backgroundColor="var(--RevBlack)"
+          filter={false}
+          aria-hidden="true"
+        />
+      )}
+      {$variant === "spinner" ? (
+        <Spinner role="status">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <Dot key={i} />
+          ))}
+        </Spinner>
+      ) : (
+        children
+      )}
+    </StyledButton>
+  )
+)
+
+export default Button
 
 const fade = keyframes`
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 `
+
 const Spinner = styled.div`
   position: relative;
   width: 1.5rem;
   height: 1.5rem;
 `
+
 const Dot = styled.div`
   position: absolute;
   top: -0.2rem;
@@ -67,71 +116,20 @@ const Dot = styled.div`
     animation-delay: -0.125s;
   }
 `
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      children,
-      disabled,
-      $variant,
-      type = "button",
-      $marginTop,
-      $fontSize,
-      onClick,
-    },
-    ref
-  ) => (
-    <StyledButton
-      ref={ref}
-      disabled={disabled || $variant === "spinner"}
-      $variant={$variant}
-      type={type}
-      onClick={onClick}
-      $marginTop={$marginTop}
-      $fontSize={$fontSize}
-    >
-      {/* success와 failed일 경우 아이콘 렌더링 */}
-      {$variant === "success" && (
-        <SuccessIcon
-          backgroundColor="var(--L500)"
-          filter={true}
-          filterColor="rgba(245, 46, 54, 0.3)"
-        />
-      )}
-      {$variant === "failed" && (
-        <FailedIcon backgroundColor="var(--RevBlack)" filter={false} />
-      )}
-      {/* spinner 변형일 경우 Spinner 렌더링 */}
-      {$variant === "spinner" ? (
-        <Spinner>
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-        </Spinner>
-      ) : (
-        children
-      )}
-    </StyledButton>
-  )
-)
+const flexCenter = `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
-export default Button
-
-const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
-  "data-variant": props.$variant,
-  disabled: props.disabled,
-}))<StyledButtonProps>`
+const StyledButton = styled.button<StyledButtonProps>`
   width: 100%;
   padding: 1.1rem;
   border-radius: 0.8rem;
   font-weight: var(--font-bold);
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  font-size: ${({ $fontSize }) => $fontSize ?? "var(--font-body-size)"};
   ${({ $marginTop }) => $marginTop && `margin-top: ${$marginTop};`}
-  font-size: ${({ $fontSize }) => $fontSize ?? "var(--font-body-size);"}
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 
   ${({ $variant, disabled }) => {
     switch ($variant) {
@@ -166,11 +164,8 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           border: 0.1rem solid var(--Purple);
           height: 3.8rem;
           font-size: var(--font-body-size);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          ${flexCenter}
           gap: 0.2rem;
-          color: var(--Purple);
 
           &::after {
             content: "";
@@ -201,47 +196,26 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
         return css`
           padding: 0;
           height: 3.7rem;
-          font-size: var(--font-body-size);
           box-shadow: 0px 0px 10px rgba(246.44, 95.26, 102.39, 0.3);
           border: 1px solid var(--L60);
           color: var(--L400);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          ${flexCenter}
           span {
             margin-left: 0.4rem;
             font-size: var(--caption-small-size);
           }
         `
       case "success":
-        return css`
-          padding: 0;
-          height: 3.7rem;
-          font-size: var(--font-body-size);
-          color: var(--L400);
-          border: 1px solid var(--N80);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 0 0.6rem 0 var(--WSmoke);
-          gap: 0.4rem;
-          span {
-            margin-left: 0.4rem;
-            font-size: var(--caption-small-size);
-          }
-        `
       case "failed":
         return css`
           padding: 0;
           height: 3.7rem;
           font-size: var(--font-body-size);
           border: 1px solid var(--N80);
-          color: var(--RevBlack);
           box-shadow: 0 0 0.6rem 0 var(--WSmoke);
+          ${flexCenter}
           gap: 0.4rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          color: ${$variant === "success" ? "var(--L400)" : "var(--RevBlack)"};
           span {
             margin-left: 0.4rem;
             font-size: var(--caption-small-size);
@@ -251,11 +225,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
         return css`
           background-color: var(--L20);
           border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          ${Spinner}
-          ${Dot}
+          ${flexCenter}
         `
       case "onboarding01":
         return css`
@@ -267,9 +237,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           box-shadow: 0px 0px 12px 0px rgba(255, 165, 169, 0.6);
           color: white;
           border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          ${flexCenter}
         `
       case "onboarding02":
         return css`
@@ -279,28 +247,22 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
           background-color: var(--L20);
           box-shadow: 0px 0px 12px 0px rgba(255, 119, 125, 0.6);
           border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           font-size: var(--font-h5-size);
           color: var(--L500);
           font-weight: var(--font-medium);
+          ${flexCenter}
         `
       case "uploadImage":
         return css`
           background-color: white;
           color: ${disabled ? "var(--N80)" : "var(--N600)"};
           font-weight: var(--font-medium);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          ${flexCenter}
           &::before {
             content: "";
             display: block;
             background: url("${IconUpload}") no-repeat center / 100%;
-            filter: ${disabled
-              ? "invert(100%) sepia(0%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(100%);"
-              : "invert(8%) sepia(0%) saturate(0%) hue-rotate(163deg) brightness(100%) contrast(100%)"};
+            filter: ${disabled ? "invert(100%)" : "invert(8%)"};
             width: 2.1rem;
             height: 2.1rem;
             margin-right: 0.2rem;
