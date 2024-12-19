@@ -15,6 +15,15 @@ const MyPage = () => {
   const toggleNotice = () => {
     setIsNoticeOpen((prev) => !prev)
   }
+  // ** 캠페인상세 이동핸들러 */
+  const handleGoBack = () => {
+    const redirectPath = sessionStorage.getItem("redirectPath")
+    if (redirectPath) {
+      navigate(redirectPath)
+    } else {
+      navigate(-1) // 이전 페이지로 돌아감
+    }
+  }
 
   return (
     <>
@@ -23,12 +32,7 @@ const MyPage = () => {
         description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
       />
       {/* 마이페이지 헤더 타이틀 */}
-      <ReuseHeader
-        title="마이페이지"
-        onBack={() => {
-          navigate(-1)
-        }}
-      />
+      <ReuseHeader title="마이페이지" onBack={handleGoBack} />
       <MyPageListContainer>
         <li>
           <StyledLink to={RoutePath.UserPointLog}>포인트 적립 내역</StyledLink>
