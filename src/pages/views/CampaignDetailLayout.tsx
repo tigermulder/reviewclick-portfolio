@@ -95,6 +95,13 @@ const CampaignDetailPage = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  //** 상품을 보고 온 경우 자동으로 페이지 끝으로 스크롤 */
+  useEffect(() => {
+    if (isProductViewed) {
+      window.scrollTo(0, document.body.scrollHeight)
+    }
+  }, [isProductViewed])
+
   const handleButtonClick = () => {
     if (!isScrolledToBottom) {
       // 스크롤 내리기 동작
