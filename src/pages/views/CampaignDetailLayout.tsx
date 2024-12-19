@@ -42,7 +42,7 @@ const CampaignDetailPage = () => {
 
   // 세션스토리지에서 상품보러가기 상태를 가져오도록 초기화
   const [isProductViewed, setIsProductViewed] = useState(() => {
-    const viewed = sessionStorage.getItem("isProductViewed")
+    const viewed = localStorage.getItem("isProductViewed")
     return viewed === "true"
   })
 
@@ -348,7 +348,7 @@ const CampaignDetailPage = () => {
     window.open(url, "_blank", "noopener,noreferrer")
     setIsProductViewed(true)
     // 상품보러가기 상태를 세션스토리지에 저장
-    sessionStorage.setItem("isProductViewed", "true")
+    localStorage.setItem("isProductViewed", "true")
   }
 
   //** 캠페인신청 취소 핸들러 [2-2] */
@@ -366,7 +366,7 @@ const CampaignDetailPage = () => {
         setIsCancelModalOpen(false) // 모달 닫기
         // 상품보러가기 상태도 초기화하고 세션스토리지 업데이트
         setIsProductViewed(false)
-        sessionStorage.setItem("isProductViewed", "false")
+        localStorage.setItem("isProductViewed", "false")
       }
     } catch (error) {
       addToast(
