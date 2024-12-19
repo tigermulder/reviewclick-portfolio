@@ -39,10 +39,15 @@ const CampaignDetailPage = () => {
   const navigate = useNavigate()
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
-  const [isProductViewed, setIsProductViewed] = useState(false)
+
+  // 세션스토리지에서 상품보러가기 상태를 가져오도록 초기화
+  const [isProductViewed, setIsProductViewed] = useState(() => {
+    const viewed = sessionStorage.getItem("isProductViewed")
+    return viewed === "true"
+  })
+
   const [showOnboarding, setShowOnboarding] = useState(false) // 온보딩팝업 상태
-  const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 상태 위치
-  //** 모달 상태 관리 */
+  const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 버튼 위치
   const [isRimitModalOpen, setRimitModalOpen] = useState(false)
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalContent, setModalContent] = useState<string | React.ReactNode>("")
@@ -117,6 +122,7 @@ const CampaignDetailPage = () => {
       }
     }
   }
+
   //** 탭 설정 */
   const singleTab = [{ label: "캠페인 정보", value: "info" }]
   const handleTabSelect = (tabValue: string) => {
@@ -334,6 +340,8 @@ const CampaignDetailPage = () => {
     const url = campaignDetail.snsUrl || "https://naver.com"
     window.open(url, "_blank", "noopener,noreferrer")
     setIsProductViewed(true)
+    // 상품보러가기 상태를 세션스토리지에 저장
+    sessionStorage.setItem("isProductViewed", "true")
   }
 
   //** 캠페인신청 취소 핸들러 [2-2] */
@@ -347,8 +355,11 @@ const CampaignDetailPage = () => {
         // 신청 취소 성공 시 처리
         refetch()
         addToast("캠페인 신청이 취소되었습니다.", 3000, "campaign")
-        setIsApplySuccess(false) // 신청 성공 상태를 초기화
+        setIsApplySuccess(false) // 신청 성공 상태 초기화
         setIsCancelModalOpen(false) // 모달 닫기
+        // 상품보러가기 상태도 초기화하고 세션스토리지 업데이트
+        setIsProductViewed(false)
+        sessionStorage.setItem("isProductViewed", "false")
       }
     } catch (error) {
       addToast(
@@ -382,7 +393,6 @@ const CampaignDetailPage = () => {
       <ShareModal />
       <DetailHeader imageUrl={thumbnailUrl} scale={scale} />
       <DetailBody>
-        {/* PopUp을 DetailBody 내부에 조건부로 렌더링 */}
         <PopUp $offsetY={popUpOffsetY}>
           🎉 신청을 서두르세요! 신청인원 {displayJoins}/{campaignDetail.quota}
         </PopUp>
@@ -401,11 +411,8 @@ const CampaignDetailPage = () => {
             onTabSelect={handleTabSelect}
           />
         </CustomTap>
-        {/* GuideDetail 이용가이드 */}
         <GuideDetail />
-        {/* 유의사항 */}
         <Notice />
-        {/* 상세버튼 */}
         <FooterButtons
           campaignDetail={campaignDetail}
           reviewStatus={reviewStatus}
@@ -415,7 +422,6 @@ const CampaignDetailPage = () => {
           deadlineStatus={deadline}
         />
       </DetailBody>
-      {/* 신청, 신청완료 모달 */}
       <Modal
         isOpen={isModalOpen}
         onConfirm={handleModalConfirm}
@@ -458,7 +464,6 @@ const CampaignDetailPage = () => {
         confirmText={isApplySuccess ? "나의 캠페인 내역" : "신청하기"}
         cancelText={isApplySuccess ? "더 둘러보기" : "취소"}
       />
-      {/* 에러처리 모달 */}
       <Modal
         isOpen={isRimitModalOpen}
         title={modalTitle}
@@ -468,7 +473,6 @@ const CampaignDetailPage = () => {
         onConfirm={() => setRimitModalOpen(false)}
         onCancel={() => setRimitModalOpen(false)}
       />
-      {/* 계정인증 모달 */}
       <Modal
         isOpen={isAuthModalOpen}
         onConfirm={handleAuthModalConfirm}
@@ -478,7 +482,6 @@ const CampaignDetailPage = () => {
         confirmText={modalConfirmText}
         cancelText={modalCancelText}
       />
-      {/* 신청취소 모달 */}
       <Modal
         isOpen={isCancelModalOpen}
         onConfirm={handleConfirmCancel}
@@ -496,7 +499,6 @@ const CampaignDetailPage = () => {
         confirmText="신청 취소하기"
         cancelText="닫기"
       />
-      {/* 계정제한 모달 */}
       <Modal
         isOpen={isRestrictionModalOpen}
         onConfirm={() => setIsRestrictionModalOpen(false)}
