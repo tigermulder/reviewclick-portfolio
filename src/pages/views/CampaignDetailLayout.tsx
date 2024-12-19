@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { getCampaignItem } from "services/campaign"
+import SeoHelmet from "@/components/SeoHelmet"
 import Modal from "@/components/Modal"
 import ShareModal from "@/components/ShareModal"
 import useToast from "@/hooks/useToast"
@@ -372,6 +373,10 @@ const CampaignDetailPage = () => {
 
   return (
     <>
+      <SeoHelmet
+        title="리뷰클릭-Campaign Detail"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
+      />
       {/* 온보딩팝업 */}
       {showOnboarding && (
         <OnboardingPopup onClose={() => setShowOnboarding(false)} />

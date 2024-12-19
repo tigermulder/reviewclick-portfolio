@@ -4,6 +4,7 @@ import styled from "styled-components"
 import Checkbox from "@/components/CheckBox"
 import ReuseHeader from "@/components/ReuseHeader"
 import { Agreements } from "@/types/component-types/check-box-type"
+import SeoHelmet from "@/components/SeoHelmet"
 import Button from "@/components/Button"
 import { RoutePath } from "@/types/route-path"
 import useScrollToTop from "@/hooks/useScrollToTop"
@@ -53,75 +54,81 @@ const AgreementPage = () => {
     agreements.essential1 && agreements.essential2 && agreements.essential3
 
   return (
-    <AgreementContainer>
-      <ReuseHeader
-        title="약관동의"
-        onBack={() => {
-          navigate(-1)
-        }}
+    <>
+      <SeoHelmet
+        title="리뷰클릭-User Authentication"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
       />
-      <AgreementTitle>
-        리뷰클릭 <br />
-        <em>약관 동의</em>가 필요해요
-      </AgreementTitle>
-      <NoticeText>
-        본 서비스를 이용하기 위해서는 이메일과 휴대폰 번호 인증이 필수입니다.
-      </NoticeText>
-      <AgreementSection>
-        <Checkbox
-          label="서비스 이용약관 전체동의"
-          checked={agreements.all}
-          onChange={(e) => handleAgreementAllChange(e.target.checked)}
-          $isTitle={true}
+      <AgreementContainer>
+        <ReuseHeader
+          title="약관동의"
+          onBack={() => {
+            navigate(-1)
+          }}
         />
+        <AgreementTitle>
+          리뷰클릭 <br />
+          <em>약관 동의</em>가 필요해요
+        </AgreementTitle>
+        <NoticeText>
+          본 서비스를 이용하기 위해서는 이메일과 휴대폰 번호 인증이 필수입니다.
+        </NoticeText>
+        <AgreementSection>
+          <Checkbox
+            label="서비스 이용약관 전체동의"
+            checked={agreements.all}
+            onChange={(e) => handleAgreementAllChange(e.target.checked)}
+            $isTitle={true}
+          />
 
-        <AgreementList>
-          <CheckboxItem>
-            <CheckboxWrapper>
-              <Checkbox
-                label="만 14세 이상입니다. (필수)"
-                checked={agreements.essential1}
-                onChange={(e) =>
-                  handleAgreementChange("essential1", e.target.checked)
-                }
-              />
-            </CheckboxWrapper>
-          </CheckboxItem>
-          <CheckboxItem>
-            <CheckboxWrapper>
-              <Checkbox
-                label="서비스 이용 약관에 동의합니다. (필수)"
-                checked={agreements.essential2}
-                onChange={(e) =>
-                  handleAgreementChange("essential2", e.target.checked)
-                }
-              />
-            </CheckboxWrapper>
-          </CheckboxItem>
-          <CheckboxItem>
-            <CheckboxWrapper>
-              <Checkbox
-                label="개인 정보 수집 및 이용에 동의합니다. (필수)"
-                checked={agreements.essential3}
-                onChange={(e) =>
-                  handleAgreementChange("essential3", e.target.checked)
-                }
-              />
-            </CheckboxWrapper>
-          </CheckboxItem>
-        </AgreementList>
-      </AgreementSection>
+          <AgreementList>
+            <CheckboxItem>
+              <CheckboxWrapper>
+                <Checkbox
+                  label="만 14세 이상입니다. (필수)"
+                  checked={agreements.essential1}
+                  onChange={(e) =>
+                    handleAgreementChange("essential1", e.target.checked)
+                  }
+                />
+              </CheckboxWrapper>
+            </CheckboxItem>
+            <CheckboxItem>
+              <CheckboxWrapper>
+                <Checkbox
+                  label="서비스 이용 약관에 동의합니다. (필수)"
+                  checked={agreements.essential2}
+                  onChange={(e) =>
+                    handleAgreementChange("essential2", e.target.checked)
+                  }
+                />
+              </CheckboxWrapper>
+            </CheckboxItem>
+            <CheckboxItem>
+              <CheckboxWrapper>
+                <Checkbox
+                  label="개인 정보 수집 및 이용에 동의합니다. (필수)"
+                  checked={agreements.essential3}
+                  onChange={(e) =>
+                    handleAgreementChange("essential3", e.target.checked)
+                  }
+                />
+              </CheckboxWrapper>
+            </CheckboxItem>
+          </AgreementList>
+        </AgreementSection>
 
-      <BottomSubmit $visible={allEssentialsChecked}>
-        <Button
-          $variant="red"
-          onClick={() => navigate(RoutePath.JoinVerify)}
-          disabled={!allEssentialsChecked}
-        >
-          동의하고 시작하기
-        </Button>
-      </BottomSubmit>
-    </AgreementContainer>
+        <BottomSubmit $visible={allEssentialsChecked}>
+          <Button
+            $variant="red"
+            onClick={() => navigate(RoutePath.JoinVerify)}
+            disabled={!allEssentialsChecked}
+          >
+            동의하고 시작하기
+          </Button>
+        </BottomSubmit>
+      </AgreementContainer>
+    </>
   )
 }
 

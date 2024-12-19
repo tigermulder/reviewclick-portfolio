@@ -5,18 +5,21 @@ import IconNoticeArrow from "assets/ico-notice-arrow.svg?url"
 import IconNew from "assets/ico-new.svg"
 import { RoutePath } from "@/types/route-path"
 import SinglePageHeader from "@/components/SinglePageHeader"
-import { extractUsername } from "@/utils/util"
 import styled from "styled-components"
+import SeoHelmet from "@/components/SeoHelmet"
 
 const MyPage = () => {
   const [isNoticeOpen, setIsNoticeOpen] = useState<boolean>(false)
-  const userEmail = localStorage.getItem("email")
   const toggleNotice = () => {
     setIsNoticeOpen((prev) => !prev)
   }
 
   return (
     <>
+      <SeoHelmet
+        title="리뷰클릭-User Information"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
+      />
       {/* 마이페이지 헤더 타이틀 */}
       <SinglePageHeader title="마이페이지" />
       <MyPageListContainer>

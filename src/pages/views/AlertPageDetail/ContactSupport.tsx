@@ -8,6 +8,7 @@ import FilterDropDown from "@/components/FilterDropDown"
 import ReuseHeader from "@/components/ReuseHeader"
 import Button from "@/components/Button"
 import Modal from "@/components/Modal"
+import SeoHelmet from "@/components/SeoHelmet"
 import useToast from "@/hooks/useToast"
 import { selectedContactFilterState } from "@/store/dropdown-recoil"
 import { contactOptions } from "@/types/component-types/dropdown-type"
@@ -205,6 +206,10 @@ const ContactSupportInner = () => {
 
   return (
     <>
+      <SeoHelmet
+        title="리뷰클릭-Contact Support"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
+      />
       <ReuseHeader title="문의등록" onBack={() => navigate(RoutePath.Alert)} />
       <FilterDropDown
         id="contact"

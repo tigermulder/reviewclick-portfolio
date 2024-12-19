@@ -6,6 +6,7 @@ import { checkEmail, sendEmailCode, verifyEmailCode } from "@/services/join"
 import { CustomError } from "@/types/api-types/signup-type"
 import TextField from "@/components/TextField"
 import Button from "@/components/Button"
+import SeoHelmet from "@/components/SeoHelmet"
 import ReuseHeader from "@/components/ReuseHeader"
 import useToast from "@/hooks/useToast"
 import { validateEmail, formatTime } from "@/utils/util"
@@ -201,81 +202,89 @@ const AccountVerificationPage = () => {
   }, [])
 
   return (
-    <VerificationContainer>
-      <ReuseHeader
-        title="계정인증"
-        onBack={() => {
-          navigate(-1)
-        }}
+    <>
+      <SeoHelmet
+        title="리뷰클릭-User Authentication"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
       />
-      <FormGroup>
-        <AccountVerifyTitle>
-          리뷰클릭 이용을 위해 <br />
-          <em>계정인증</em>을 해주세요
-        </AccountVerifyTitle>
-        <AccountVerifyText>
-          리뷰클릭 서비스는 네이버 아이디로만 인증 가능하며, 인증된 네이버
-          계정과 캠페인 참여 계정이 동일해야 합니다.
-        </AccountVerifyText>
-        <Row>
-          <TextFieldWrapper>
-            <TextField
-              type="text"
-              name="email_id"
-              placeholder="네이버ID"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
-              suffix="@naver.com"
-              $isError={id !== "" && !validateEmail(id)}
-              $marginBottom="0"
-              errorMessage={
-                id !== "" && !validateEmail(id)
-                  ? "올바른 형식의 계정이 아닙니다."
-                  : undefined
-              }
-              $suffixWidth="28%"
-              successMessage={emailCheckMessage}
-              disabled={emailSent || emailConfirmed}
-            />
-          </TextFieldWrapper>
-        </Row>
-        {emailSent && (
+      <VerificationContainer>
+        <ReuseHeader
+          title="계정인증"
+          onBack={() => {
+            navigate(-1)
+          }}
+        />
+        <FormGroup>
+          <AccountVerifyTitle>
+            리뷰클릭 이용을 위해 <br />
+            <em>계정인증</em>을 해주세요
+          </AccountVerifyTitle>
+          <AccountVerifyText>
+            리뷰클릭 서비스는 네이버 아이디로만 인증 가능하며, 인증된 네이버
+            계정과 캠페인 참여 계정이 동일해야 합니다.
+          </AccountVerifyText>
           <Row>
             <TextFieldWrapper>
-              <div style={{ position: "relative" }}>
-                <TextField
-                  type="text"
-                  name="email_auth_code"
-                  placeholder="인증 코드 입력"
-                  value={emailAuthCode}
-                  onChange={(e) => setEmailAuthCode(e.target.value)}
-                  $isError={emailAuthCode !== "" && emailAuthCode.length !== 6}
-                  $marginBottom="0"
-                  $marginTop="0.8rem"
-                  errorMessage={
-                    emailAuthCode !== "" && emailAuthCode.length !== 6
-                      ? "인증 코드를 다시 입력해주세요."
-                      : undefined
-                  }
-                />
-                <TimerText>{formatTime(emailTimer)}</TimerText>
-              </div>
+              <TextField
+                type="text"
+                name="email_id"
+                placeholder="네이버ID"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                suffix="@naver.com"
+                $isError={id !== "" && !validateEmail(id)}
+                $marginBottom="0"
+                errorMessage={
+                  id !== "" && !validateEmail(id)
+                    ? "올바른 형식의 계정이 아닙니다."
+                    : undefined
+                }
+                $suffixWidth="28%"
+                successMessage={emailCheckMessage}
+                disabled={emailSent || emailConfirmed}
+              />
             </TextFieldWrapper>
           </Row>
-        )}
+          {emailSent && (
+            <Row>
+              <TextFieldWrapper>
+                <div style={{ position: "relative" }}>
+                  <TextField
+                    type="text"
+                    name="email_auth_code"
+                    placeholder="인증 코드 입력"
+                    value={emailAuthCode}
+                    onChange={(e) => setEmailAuthCode(e.target.value)}
+                    $isError={
+                      emailAuthCode !== "" && emailAuthCode.length !== 6
+                    }
+                    $marginBottom="0"
+                    $marginTop="0.8rem"
+                    errorMessage={
+                      emailAuthCode !== "" && emailAuthCode.length !== 6
+                        ? "인증 코드를 다시 입력해주세요."
+                        : undefined
+                    }
+                  />
+                  <TimerText>{formatTime(emailTimer)}</TimerText>
+                </div>
+              </TextFieldWrapper>
+            </Row>
+          )}
 
-        <ButtonWrapper $visible={validateEmail(id)}>
-          <Button
-            type="button"
-            $variant="red"
-            onClick={emailSent ? handleResendEmailCode : handleEmailAuth}
-            disabled={emailConfirmed}
-          >
-            {emailSent ? "인증코드 다시받기" : "인증메일 발송"}
-          </Button>
-        </ButtonWrapper>
-      </FormGroup>
-    </VerificationContainer>
+          <ButtonWrapper $visible={validateEmail(id)}>
+            <Button
+              type="button"
+              $variant="red"
+              onClick={emailSent ? handleResendEmailCode : handleEmailAuth}
+              disabled={emailConfirmed}
+            >
+              {emailSent ? "인증코드 다시받기" : "인증메일 발송"}
+            </Button>
+          </ButtonWrapper>
+        </FormGroup>
+      </VerificationContainer>
+    </>
   )
 }
 

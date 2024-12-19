@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query"
 import { phoneSendCode, phoneVerify } from "@/services/join"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import TextField from "@/components/TextField"
+import SeoHelmet from "@/components/SeoHelmet"
 import Button from "@/components/Button"
 import ReuseHeader from "@/components/ReuseHeader"
 import useToast from "@/hooks/useToast"
@@ -164,75 +165,81 @@ const PhoneVerificationPage = () => {
   }, [])
 
   return (
-    <VerificationContainer>
-      <ReuseHeader
-        title="휴대폰 번호 인증"
-        onBack={() => {
-          navigate(-1)
-        }}
+    <>
+      <SeoHelmet
+        title="리뷰클릭-User Authentication"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
       />
-      <FormGroup>
-        <AccountVerifyTitle>
-          리뷰클릭 이용을 위해 <br />
-          <em>휴대폰 번호 인증</em>을 해주세요
-        </AccountVerifyTitle>
-        <AccountVerifyText>
-          캠페인 진행 및 1:1 문의 안내에 대한 알림톡을 받아볼 수 있어요.
-        </AccountVerifyText>
+      <VerificationContainer>
+        <ReuseHeader
+          title="휴대폰 번호 인증"
+          onBack={() => {
+            navigate(-1)
+          }}
+        />
+        <FormGroup>
+          <AccountVerifyTitle>
+            리뷰클릭 이용을 위해 <br />
+            <em>휴대폰 번호 인증</em>을 해주세요
+          </AccountVerifyTitle>
+          <AccountVerifyText>
+            캠페인 진행 및 1:1 문의 안내에 대한 알림톡을 받아볼 수 있어요.
+          </AccountVerifyText>
 
-        <TextFieldWrapper>
-          <TextField
-            type="text"
-            name="phone"
-            placeholder="휴대폰 번호 입력"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            $isError={phone !== "" && !validatePhone(phone)}
-            $marginBottom="0"
-            errorMessage={
-              phone !== "" && !validatePhone(phone)
-                ? " - 없이 11자리 숫자로 입력해 주세요."
-                : undefined
-            }
-            disabled={codeSent || phoneConfirmed}
-          />
-        </TextFieldWrapper>
-        {codeSent && (
           <TextFieldWrapper>
-            <div style={{ position: "relative" }}>
-              <TextField
-                type="text"
-                name="phone_auth_code"
-                placeholder="인증번호 입력"
-                value={authCode}
-                onChange={(e) => setAuthCode(e.target.value)}
-                $isError={authCode !== "" && authCode.length !== 6}
-                $marginBottom="0"
-                $marginTop="0.8rem"
-                errorMessage={
-                  authCode !== "" && authCode.length !== 6
-                    ? "인증번호가 올바르지 않습니다. 다시 확인해 주세요."
-                    : undefined
-                }
-              />
-              <TimerText>{formatTime(timer)}</TimerText>
-            </div>
+            <TextField
+              type="text"
+              name="phone"
+              placeholder="휴대폰 번호 입력"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              $isError={phone !== "" && !validatePhone(phone)}
+              $marginBottom="0"
+              errorMessage={
+                phone !== "" && !validatePhone(phone)
+                  ? " - 없이 11자리 숫자로 입력해 주세요."
+                  : undefined
+              }
+              disabled={codeSent || phoneConfirmed}
+            />
           </TextFieldWrapper>
-        )}
+          {codeSent && (
+            <TextFieldWrapper>
+              <div style={{ position: "relative" }}>
+                <TextField
+                  type="text"
+                  name="phone_auth_code"
+                  placeholder="인증번호 입력"
+                  value={authCode}
+                  onChange={(e) => setAuthCode(e.target.value)}
+                  $isError={authCode !== "" && authCode.length !== 6}
+                  $marginBottom="0"
+                  $marginTop="0.8rem"
+                  errorMessage={
+                    authCode !== "" && authCode.length !== 6
+                      ? "인증번호가 올바르지 않습니다. 다시 확인해 주세요."
+                      : undefined
+                  }
+                />
+                <TimerText>{formatTime(timer)}</TimerText>
+              </div>
+            </TextFieldWrapper>
+          )}
 
-        <ButtonWrapper $visible={validatePhone(phone) && !phoneConfirmed}>
-          <Button
-            type="button"
-            $variant="red"
-            onClick={codeSent ? handleResendCode : handleSendCode}
-            disabled={phoneConfirmed}
-            $marginTop="0"
-          >
-            {codeSent ? "인증번호 다시받기" : "인증번호 받기"}
-          </Button>
-        </ButtonWrapper>
-      </FormGroup>
-    </VerificationContainer>
+          <ButtonWrapper $visible={validatePhone(phone) && !phoneConfirmed}>
+            <Button
+              type="button"
+              $variant="red"
+              onClick={codeSent ? handleResendCode : handleSendCode}
+              disabled={phoneConfirmed}
+              $marginTop="0"
+            >
+              {codeSent ? "인증번호 다시받기" : "인증번호 받기"}
+            </Button>
+          </ButtonWrapper>
+        </FormGroup>
+      </VerificationContainer>
+    </>
   )
 }
 

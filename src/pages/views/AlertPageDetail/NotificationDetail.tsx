@@ -6,6 +6,7 @@ import dummyImage from "assets/dummy-image.png"
 import { getNotificationItem } from "@/services/notification"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import useScrollToTop from "@/hooks/useScrollToTop"
+import SeoHelmet from "@/components/SeoHelmet"
 import styled from "styled-components"
 import { parseTitle } from "@/utils/util"
 import {
@@ -41,54 +42,60 @@ const NotificationDetail = () => {
   const userTime = notifyData?.createdAt as string
 
   return (
-    <Container>
-      <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
-      <AlertLogo>
-        <IconNotify />
-      </AlertLogo>
-      <AlertContainer>
-        <YearDay>{formatTalkDate(userTime)}</YearDay>
-        <Header>
-          <p>
-            <span>{status}</span>
-            {mainText}
-          </p>
-        </Header>
-        {notifyData?.cardInfoReview && (
-          <Body>
-            <BodyTitle>캠페인정보</BodyTitle>
-            <BodyContainer>
-              <ThumbArea>
-                <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
-              </ThumbArea>
-              <InfoArea>
-                <p>{notifyData?.cardInfoReview?.title}</p>
-                <span>
-                  {notifyData?.cardInfoReview?.reward.toLocaleString()}P
-                </span>
-              </InfoArea>
-            </BodyContainer>
-          </Body>
-        )}
+    <>
+      <SeoHelmet
+        title="리뷰클릭-Notification Detail"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
+      />
+      <Container>
+        <ReuseHeader title="새소식" onBack={() => navigate(RoutePath.Alert)} />
+        <AlertLogo>
+          <IconNotify />
+        </AlertLogo>
+        <AlertContainer>
+          <YearDay>{formatTalkDate(userTime)}</YearDay>
+          <Header>
+            <p>
+              <span>{status}</span>
+              {mainText}
+            </p>
+          </Header>
+          {notifyData?.cardInfoReview && (
+            <Body>
+              <BodyTitle>캠페인정보</BodyTitle>
+              <BodyContainer>
+                <ThumbArea>
+                  <img src={thumbnailUrl} alt="나의캠페인 썸네일" />
+                </ThumbArea>
+                <InfoArea>
+                  <p>{notifyData?.cardInfoReview?.title}</p>
+                  <span>
+                    {notifyData?.cardInfoReview?.reward.toLocaleString()}P
+                  </span>
+                </InfoArea>
+              </BodyContainer>
+            </Body>
+          )}
 
-        {notifyData?.cardInfoQnaAnswer ? (
-          <QnAContainer>
-            <AnswerTitle>
-              A. {convertBrToNewline(notifyData.cardInfoQnaAnswer.answer)}
-            </AnswerTitle>
-            <Separator />
-            <AnswerContent>
-              Q. {notifyData.cardInfoQnaAnswer.question}
-            </AnswerContent>
-          </QnAContainer>
-        ) : (
-          <div>
-            <FooterText>{notifyData?.content}</FooterText>
-          </div>
-        )}
-      </AlertContainer>
-      <Time>{formatTalkTime(userTime)}</Time>
-    </Container>
+          {notifyData?.cardInfoQnaAnswer ? (
+            <QnAContainer>
+              <AnswerTitle>
+                A. {convertBrToNewline(notifyData.cardInfoQnaAnswer.answer)}
+              </AnswerTitle>
+              <Separator />
+              <AnswerContent>
+                Q. {notifyData.cardInfoQnaAnswer.question}
+              </AnswerContent>
+            </QnAContainer>
+          ) : (
+            <div>
+              <FooterText>{notifyData?.content}</FooterText>
+            </div>
+          )}
+        </AlertContainer>
+        <Time>{formatTalkTime(userTime)}</Time>
+      </Container>
+    </>
   )
 }
 

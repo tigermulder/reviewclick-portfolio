@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import ReuseHeader from "@/components/ReuseHeader"
 import { RoutePath } from "@/types/route-path"
+import SeoHelmet from "@/components/SeoHelmet"
 import styled from "styled-components"
 
 const PrivacyPolicy = () => {
@@ -8,6 +9,10 @@ const PrivacyPolicy = () => {
 
   return (
     <>
+      <SeoHelmet
+        title="리뷰클릭-PrivacyPolicy"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
+      />
       <ReuseHeader
         title="개인정보처리방침"
         onBack={() => navigate(RoutePath.UserProfile, { replace: true })}

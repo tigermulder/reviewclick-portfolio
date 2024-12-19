@@ -4,6 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import { getReviewItem } from "@/services/review"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import ReuseHeader from "@/components/ReuseHeader"
+import SeoHelmet from "@/components/SeoHelmet"
 import dummyImage from "assets/dummy-image.png"
 import {
   HeaderStatusType,
@@ -104,8 +105,6 @@ const MyCampaignDetailLayout = () => {
             reward={reward}
             createTime={createAt}
             campaignsUrl={campaignUrl}
-            goToNextStep={goToNextStep}
-            refetchData={refetch}
           />
         )
       case 2:
@@ -137,6 +136,10 @@ const MyCampaignDetailLayout = () => {
   }
   return (
     <>
+      <SeoHelmet
+        title="리뷰클릭-MyCampaign Detail"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
+      />
       <ReuseHeader
         title={headerTitle}
         onBack={() => navigate(RoutePath.MyCampaign)}

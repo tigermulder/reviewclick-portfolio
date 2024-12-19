@@ -16,6 +16,7 @@ import { RoutePath } from "@/types/route-path"
 import ReuseHeader from "@/components/ReuseHeader"
 import { currentCalculateRemainingTime } from "@/utils/util"
 import NoCampaign from "./MyCampaignDetail/NoCampaign"
+import SeoHelmet from "@/components/SeoHelmet"
 import styled from "styled-components"
 import { ButtonProps } from "@/types/component-types/button-type"
 import { chips, ChipType } from "@/types/component-types/chip-type"
@@ -157,6 +158,10 @@ const MyCampaignPage = () => {
 
   return (
     <>
+      <SeoHelmet
+        title="리뷰클릭-MyCampaign"
+        description="리뷰클릭은 제품과 서비스 전반에 걸친 다양한 사용자 리뷰를 한곳에서 제공합니다. 믿을 수 있는 평가와 상세한 리뷰로 현명한 소비를 지원합니다."
+      />
       <ReuseHeader title="나의 캠페인" onBack={handleGoBack} />
       <FilterCampaign
         chips={chips}
