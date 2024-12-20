@@ -322,8 +322,6 @@ export function ocrFilterWord(text: string, threshold: number): boolean {
   for (const word of words) {
     const { unit, count } = findRepeatedPattern(word)
 
-    console.log("문자열 :", word, "단어 :", unit, "카운트 :", count)
-
     if (count >= threshold) {
       return true
     }

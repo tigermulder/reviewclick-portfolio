@@ -60,7 +60,7 @@ export const AppRoute = () => {
           <Route path={RoutePath.JoinVerify} element={<JoinVerifyPage />} />
           {/* 인증 페이지 1-2(쿠팡) */}
           <Route
-            path={RoutePath.JoinVerify}
+            path={RoutePath.JoinCoupangVerify}
             element={<CoupangVerificationPage />}
           />
           {/* 인증 페이지 1-3 */}

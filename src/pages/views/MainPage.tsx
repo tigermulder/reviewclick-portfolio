@@ -13,7 +13,7 @@ import { FilterBar } from "components/FilterBar"
 import dummyImage from "assets/dummy-image.png"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
-import { calculateRemainingTime, ocrFilterWord } from "@/utils/util"
+import { calculateRemainingTime } from "@/utils/util"
 
 const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
@@ -35,11 +35,11 @@ const MainPage = (): JSX.Element => {
   }
 
   //* 콘솔
-  useEffect(() => {
-    console.log(
-      ocrFilterWord("안녕하세요 안녕하세요 누가 안녕하세요 내가 안녕하세요", 3)
-    )
-  }, [])
+  // useEffect(() => {
+  //   console.log(
+  //     ocrFilterWord("안녕하세요 안녕하세요 누가 안녕하세요 내가 안녕하세요", 3)
+  //   )
+  // }, [])
 
   //** 리액트쿼리 */
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
