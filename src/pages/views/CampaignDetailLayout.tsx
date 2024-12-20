@@ -45,7 +45,7 @@ const CampaignDetailPage = () => {
     const viewed = localStorage.getItem("isProductViewed")
     return viewed === "true"
   })
-
+  const [shouldAnimateButton, setShouldAnimateButton] = useState(false) // 상품보러가기 버튼 강조 상태
   const [showOnboarding, setShowOnboarding] = useState(false) // 온보딩팝업 상태
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 버튼 위치
   const [isRimitModalOpen, setRimitModalOpen] = useState(false)
@@ -126,6 +126,11 @@ const CampaignDetailPage = () => {
           behavior: "smooth",
           block: "center",
         })
+
+        // 스크롤후 애니메이션 실행
+        setTimeout(() => {
+          setShouldAnimateButton(true)
+        }, 500)
       }
     }
   }
@@ -409,6 +414,7 @@ const CampaignDetailPage = () => {
           campaign={campaignDetail}
           handleViewProduct={handleViewProduct}
           ref={viewProductRef}
+          shouldAnimateButton={shouldAnimateButton}
         />
         <Line />
         <CustomTap>

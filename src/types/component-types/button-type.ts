@@ -1,3 +1,4 @@
+import Keyframes from "styled-components/dist/models/Keyframes"
 export interface ButtonProps {
   children: React.ReactNode
   disabled?: boolean
@@ -20,6 +21,7 @@ export interface ButtonProps {
   type?: "button" | "submit" | "reset"
   $marginTop?: string
   $fontSize?: string
+  $animation?: Keyframes | string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -42,5 +44,6 @@ export interface StyledButtonProps {
     | "uploadImage"
   $marginTop?: string
   $fontSize?: string
+  $animation?: Keyframes | string
   disabled?: boolean
 }

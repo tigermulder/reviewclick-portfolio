@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 import IconStar from "assets/ico-star1.svg?url"
 import Button from "@/components/Button"
 import { forwardRef } from "react"
@@ -6,7 +6,7 @@ import { formatDate } from "@/utils/util"
 import { CampaignDetailsProps } from "@/types/component-types/campaign-detail-type"
 
 const CampaignDetails = forwardRef<HTMLButtonElement, CampaignDetailsProps>(
-  ({ campaign, handleViewProduct }, ref) => {
+  ({ campaign, handleViewProduct, shouldAnimateButton }, ref) => {
     return (
       <Container>
         <InfoBox>
@@ -17,9 +17,12 @@ const CampaignDetails = forwardRef<HTMLButtonElement, CampaignDetailsProps>(
             <p>{campaign.reward.toLocaleString()}P</p>
           </div>
           <ButtonContainer>
-            <Button $variant="arrow" onClick={handleViewProduct} ref={ref}>
-              상품 구경하러가기
-            </Button>
+            {/* 애니메이션 래퍼 사용 */}
+            <AnimatedButtonWrapper $animate={shouldAnimateButton}>
+              <Button $variant="arrow" onClick={handleViewProduct} ref={ref}>
+                상품 구경하러가기
+              </Button>
+            </AnimatedButtonWrapper>
           </ButtonContainer>
         </InfoBox>
         <Divider />
@@ -72,6 +75,21 @@ const InfoBox = styled.div`
 
 const ButtonContainer = styled.div`
   width: 15rem;
+`
+
+const bounce = keyframes`
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+  40% {transform: translateY(-0.5rem);} 
+  60% {transform: translateY(-0.3rem);}
+`
+
+const AnimatedButtonWrapper = styled.div<{ $animate?: boolean }>`
+  display: inline-block;
+  ${({ $animate }) =>
+    $animate &&
+    css`
+      animation: ${bounce} 1s ease-in-out 2;
+    `}
 `
 
 const Divider = styled.div`

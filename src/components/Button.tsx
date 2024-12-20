@@ -18,6 +18,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       type = "button",
       $marginTop,
       $fontSize,
+      $animation,
       onClick,
     },
     ref
@@ -30,6 +31,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick={onClick}
       $marginTop={$marginTop}
       $fontSize={$fontSize}
+      $animation={$animation}
     >
       {$variant === "success" && (
         <SuccessIcon
@@ -130,6 +132,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-size: ${({ $fontSize }) => $fontSize ?? "var(--font-body-size)"};
   ${({ $marginTop }) => $marginTop && `margin-top: ${$marginTop};`}
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  animation: ${({ $animation }) => ($animation ? $animation : "none")};
 
   ${({ $variant, disabled }) => {
     switch ($variant) {
