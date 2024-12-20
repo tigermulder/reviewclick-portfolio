@@ -44,7 +44,7 @@ const CheckboxLabel = styled.label<{ $isTitle?: boolean; checked: boolean }>`
     padding: 1.1rem 1.5rem;
     border: 1px solid ${checked ? "var(--L400)" : "var(--N80)"};
     border-radius: 0.5rem;
-    color: ${checked ? "var(--RevBlack)" : "var(--N400)"};
+    color: ${checked ? "var(--RevBlack)" : "var(--N500)"};
     transition: border-color 0.14s ease-in-out;
 
     &:hover {
@@ -99,6 +99,12 @@ const CheckboxText = styled.span<Partial<CheckboxTextProps>>`
   font-weight: ${({ $isTitle }) =>
     $isTitle ? "var(--font-medium)" : "normal"};
   color: ${({ $isTitle, checked }) =>
-    $isTitle ? (checked ? "var(--L600)" : "var(--N100)") : "var(--N400)"};
+    $isTitle
+      ? checked
+        ? "var(--L400)"
+        : "var(--N100)"
+      : checked
+        ? "var(--N600)"
+        : "var(--N400)"};
   transition: color 0.14s ease-in-out;
 `

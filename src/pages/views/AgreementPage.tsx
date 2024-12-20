@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import styled from "styled-components"
 import Checkbox from "@/components/CheckBox"
 import ReuseHeader from "@/components/ReuseHeader"
@@ -103,6 +103,7 @@ const AgreementPage = () => {
                   }
                 />
               </CheckboxWrapper>
+              <AgreeTerms to={RoutePath.Alert}>자세히보기</AgreeTerms>
             </CheckboxItem>
             <CheckboxItem>
               <CheckboxWrapper>
@@ -114,6 +115,7 @@ const AgreementPage = () => {
                   }
                 />
               </CheckboxWrapper>
+              <AgreeTerms to={RoutePath.Alert}>자세히보기</AgreeTerms>
             </CheckboxItem>
           </AgreementList>
         </AgreementSection>
@@ -143,7 +145,7 @@ const AgreementTitle = styled.h2`
   margin-top: 2.4rem;
   color: var(--N600);
   em {
-    color: var(--L600);
+    color: var(--L400);
   }
 `
 
@@ -156,12 +158,19 @@ const AgreementList = styled.ul`
 `
 
 const CheckboxItem = styled.li`
+  display: flex;
+  justify-content: space-between;
   margin-top: 1.2rem;
 `
 
 const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
+`
+
+const AgreeTerms = styled(Link)`
+  font-size: var(--caption-size);
+  color: var(--N600);
 `
 
 const NoticeText = styled.p`
