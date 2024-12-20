@@ -124,8 +124,12 @@ const CampaignDetailPage = () => {
 
   //** 상품을 보고 온 경우 자동으로 페이지 끝으로 스크롤 */
   useEffect(() => {
-    if (isProductViewed) {
-      window.scrollTo(0, document.body.scrollHeight)
+    const json = localStorage.getItem(storageKey)
+    if (json !== null && json !== undefined) {
+      const ViewedObj = JSON.parse(json)
+      if (ViewedObj.value) {
+        window.scrollTo(0, document.body.scrollHeight)
+      }
     }
   }, [isProductViewed])
 
