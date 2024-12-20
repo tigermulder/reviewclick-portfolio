@@ -26,6 +26,7 @@ const CAMPAIGN_ITEM_QUERY_KEY = (campaignCode: string | string) => [
   "campaign",
   campaignCode,
 ]
+const TTL = 3 * 60 * 60 * 1000 // TTL: 3시간
 
 const CampaignDetailPage = () => {
   const [selectedTab, setSelectedTab] = useState("info") // 기본선택
@@ -39,13 +40,36 @@ const CampaignDetailPage = () => {
   const navigate = useNavigate()
   const { popUpOffsetY, scale } = useScrollAnimation()
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false)
+  const [shouldAnimateButton, setShouldAnimateButton] = useState(false)
 
-  // 세션스토리지에서 상품보러가기 상태를 가져오도록 초기화
-  const [isProductViewed, setIsProductViewed] = useState(() => {
-    const viewed = localStorage.getItem("isProductViewed")
-    return viewed === "true"
-  })
-  const [shouldAnimateButton, setShouldAnimateButton] = useState(false) // 상품보러가기 버튼 강조 상태
+  if (!campaignCode) {
+    return <div>유효하지 않은 캠페인 ID입니다.</div>
+  }
+
+  // campaignCode별 key
+  const storageKey = `isProductViewed_${campaignCode}`
+  const loadIsProductViewed = () => {
+    const item = localStorage.getItem(storageKey)
+    if (!item) return false
+    try {
+      const { value, timestamp } = JSON.parse(item)
+      const now = Date.now()
+      // TTL 만료 확인
+      if (now - timestamp > TTL) {
+        // 만료 시 키 삭제
+        localStorage.removeItem(storageKey)
+        return false
+      }
+      return value === "true"
+    } catch {
+      return false
+    }
+  }
+
+  const [isProductViewed, setIsProductViewed] = useState(() =>
+    loadIsProductViewed()
+  )
+
   const [showOnboarding, setShowOnboarding] = useState(false) // 온보딩팝업 상태
   const viewProductRef = useRef<HTMLButtonElement>(null) // 상품보러가기 버튼 위치
   const [isRimitModalOpen, setRimitModalOpen] = useState(false)
@@ -63,6 +87,7 @@ const CampaignDetailPage = () => {
       sessionStorage.setItem("redirectPath", `/campaign/${campaignCode}`)
     }
   }, [campaignCode])
+
   // ** 온보딩팝업 */
   useEffect(() => {
     const savedDate = localStorage.getItem("doNotShowOnboardingToday")
@@ -74,8 +99,10 @@ const CampaignDetailPage = () => {
       setShowOnboarding(true)
     }
   }, [])
+
   //** 스크롤 0부터시작 */
   useScrollToTop()
+
   //** 스크롤다운기능 */
   useEffect(() => {
     const handleScroll = () => {
@@ -106,7 +133,7 @@ const CampaignDetailPage = () => {
     if (!isScrolledToBottom) {
       // 스크롤 내리기 동작
       window.scrollBy({
-        top: window.innerHeight * 1.2, // 한 번에 스크롤할 양
+        top: window.innerHeight * 1.2,
         left: 0,
         behavior: "smooth",
       })
@@ -127,7 +154,7 @@ const CampaignDetailPage = () => {
           block: "center",
         })
 
-        // 스크롤후 애니메이션 실행
+        // 스크롤 후 약간의 지연시간 뒤에 애니메이션 적용
         setTimeout(() => {
           setShouldAnimateButton(true)
         }, 500)
@@ -139,10 +166,6 @@ const CampaignDetailPage = () => {
   const singleTab = [{ label: "캠페인 정보", value: "info" }]
   const handleTabSelect = (tabValue: string) => {
     setSelectedTab(tabValue)
-  }
-
-  if (!campaignCode) {
-    return <div>유효하지 않은 캠페인 ID입니다.</div>
   }
 
   //** 캠페인 상세ITEM */
@@ -262,10 +285,10 @@ const CampaignDetailPage = () => {
   // ** 모달에서 캠페인 신청핸들러 [1-2] */
   const handleConfirm = async () => {
     try {
-      const data = {
+      const dataObj = {
         campaignId: campaignDetail.campaignId,
       }
-      const response = await joinReview(data)
+      const response = await joinReview(dataObj)
       if (response.statusCode === 0) {
         setIsApplySuccess(true)
         refetch()
@@ -352,8 +375,12 @@ const CampaignDetailPage = () => {
     const url = campaignDetail.snsUrl || "https://naver.com"
     window.open(url, "_blank", "noopener,noreferrer")
     setIsProductViewed(true)
-    // 상품보러가기 상태를 세션스토리지에 저장
-    localStorage.setItem("isProductViewed", "true")
+    const now = Date.now()
+    localStorage.setItem(
+      storageKey,
+      JSON.stringify({ value: "true", timestamp: now })
+    )
+    // 상품보러가기 후에는 애니메이션 해제
     setShouldAnimateButton(false)
   }
 
@@ -370,9 +397,13 @@ const CampaignDetailPage = () => {
         addToast("캠페인 신청이 취소되었습니다.", 3000, "campaign")
         setIsApplySuccess(false) // 신청 성공 상태 초기화
         setIsCancelModalOpen(false) // 모달 닫기
-        // 상품보러가기 상태도 초기화하고 세션스토리지 업데이트
+        // 상품보러가기 상태도 초기화
         setIsProductViewed(false)
-        localStorage.setItem("isProductViewed", "false")
+        const now = Date.now()
+        localStorage.setItem(
+          storageKey,
+          JSON.stringify({ value: "false", timestamp: now })
+        )
       }
     } catch (error) {
       addToast(
@@ -386,12 +417,12 @@ const CampaignDetailPage = () => {
   //** 디데이 -일시 join 채우기 */
   const displayJoins = dDay >= 0 ? campaignDetail.joins : campaignDetail.quota
 
-  //** 인원 마감시 버튼에 상태 */
+  //** 인원 마감시 버튼 상태 */
   useEffect(() => {
     if (displayJoins === campaignDetail.quota) {
       setDeadline(true)
     }
-  }, [displayJoins])
+  }, [displayJoins, campaignDetail.quota])
 
   return (
     <>
