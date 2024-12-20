@@ -11,7 +11,9 @@ const Layout = () => {
   const isNoticeDetail = !!useMatch("/alert/notice/:noticeId") // 공지사항 상세 경로
   const isIntroducePage = location.pathname === RoutePath.Introduce // 소개페이지
   const isJoinPage = location.pathname === RoutePath.Join // 인증 페이지 1-1
-  const isJoinVerifyPage = location.pathname === RoutePath.JoinVerify // 인증 페이지 1-2
+  const isJoinVerifyPage = location.pathname === RoutePath.JoinVerify // 네이버인증 페이지 1-2
+  const isJoinCoupangVerifyPage =
+    location.pathname === RoutePath.JoinCoupangVerify // 쿠팡인증 페이지 1-2
   const isJoinPhoneVerifyPage = location.pathname === RoutePath.JoinPhoneVerify // 인증 페이지 1-3
   const isEditProfilePage = location.pathname === RoutePath.UserEditProfile // 나의 정보 페이지
   const isMyCartPage = location.pathname === RoutePath.MyCart // 장바구니 페이지
@@ -30,6 +32,7 @@ const Layout = () => {
     isMyCartPage ||
     isJoinPage ||
     isJoinVerifyPage ||
+    isJoinCoupangVerifyPage ||
     isJoinPhoneVerifyPage
 
   return (

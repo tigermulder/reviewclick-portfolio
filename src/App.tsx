@@ -51,6 +51,7 @@ function App() {
     location.pathname === RoutePath.MyCart ||
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.JoinVerify ||
+    location.pathname === RoutePath.JoinCoupangVerify ||
     location.pathname === RoutePath.JoinPhoneVerify ||
     location.pathname === RoutePath.UserPointLog ||
     location.pathname === RoutePath.UserProfile ||
@@ -72,6 +73,7 @@ function App() {
   const hideTapBar =
     location.pathname === RoutePath.Join ||
     location.pathname === RoutePath.JoinVerify ||
+    location.pathname === RoutePath.JoinCoupangVerify ||
     location.pathname === RoutePath.JoinPhoneVerify ||
     location.pathname === RoutePath.TermsOfService ||
     location.pathname === RoutePath.UserServiceGuide ||
@@ -93,8 +95,9 @@ function App() {
       location.pathname !== RoutePath.UserPointLog &&
       location.pathname !== RoutePath.UserServiceGuide &&
       location.pathname !== RoutePath.Join &&
-      location.pathname !== RoutePath.JoinPhoneVerify &&
       location.pathname !== RoutePath.JoinVerify &&
+      location.pathname !== RoutePath.JoinCoupangVerify &&
+      location.pathname !== RoutePath.JoinPhoneVerify &&
       location.pathname !== RoutePath.ContactAdd &&
       location.pathname !== RoutePath.TermsOfService &&
       location.pathname !== RoutePath.PrivacyPolicy &&

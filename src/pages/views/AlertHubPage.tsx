@@ -8,11 +8,15 @@ import { useRecoilState } from "recoil"
 import { alertSelectedTabState } from "@/store/alerttap-recoil"
 import { useNavigate } from "react-router-dom"
 import ReuseHeader from "@/components/ReuseHeader"
+import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 
 const AlertHubPage = () => {
   const [selectedTab, setSelectedTab] = useRecoilState(alertSelectedTabState)
   const navigate = useNavigate()
+
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
   //** 탭 설정 */
   const singleTab = [
     { label: "새소식", value: "news" },

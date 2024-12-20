@@ -7,9 +7,13 @@ import styled from "styled-components"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { formatDate } from "@/utils/util"
 import NoRewards from "./NoReward"
+import useScrollToTop from "@/hooks/useScrollToTop"
 
 const MyPointPage = () => {
   const navigate = useNavigate()
+
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
 
   // ** 리액트쿼리 나의 포인트내역리스트 */
   const fetchMyRewardList = async ({ queryKey }: { queryKey: string[] }) => {

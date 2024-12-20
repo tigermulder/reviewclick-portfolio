@@ -34,7 +34,7 @@ const Header = styled.header`
   left: 0;
   z-index: 20;
   width: 100%;
-  height: 6rem;
+  height: 5.2rem;
   padding: 1.2rem 1.6rem;
   background-color: white;
   display: flex;
@@ -45,7 +45,7 @@ const Header = styled.header`
 
 const LogoContainer = styled.h1`
   min-width: 8.5rem;
-  color: var(--L600);
+  color: var(--L500);
 
   a {
     display: block;
@@ -58,19 +58,13 @@ const LogoContainer = styled.h1`
 `
 
 const HeartIcon = styled.div`
-  width: 2.4rem;
-  margin-left: 1.2rem;
-  color: var(--N80);
-
   svg {
-    fill: currentColor;
     width: 100%;
     height: auto;
   }
 `
 
 const HeartText = styled.div`
-  margin-top: 0.2rem;
   text-align: center;
   color: var(--Silver);
   font-size: 0.8rem;

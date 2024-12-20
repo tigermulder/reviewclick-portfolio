@@ -5,6 +5,9 @@ import { HelmetProvider } from "react-helmet-async"
 import Layout from "./Layout"
 const JoinPage = lazy(() => import("./views/AgreementPage"))
 const JoinVerifyPage = lazy(() => import("./views/AccountVerificationPage"))
+const CoupangVerificationPage = lazy(
+  () => import("./views/CoupangVerificationPage")
+)
 const PhoneVerificationPage = lazy(
   () => import("./views/PhoneVerificationPage")
 )
@@ -53,8 +56,13 @@ export const AppRoute = () => {
           />
           {/* 인증 페이지 1-1 */}
           <Route path={RoutePath.Join} element={<JoinPage />} />
-          {/* 인증 페이지 1-2 */}
+          {/* 인증 페이지 1-2(네이버) */}
           <Route path={RoutePath.JoinVerify} element={<JoinVerifyPage />} />
+          {/* 인증 페이지 1-2(쿠팡) */}
+          <Route
+            path={RoutePath.JoinVerify}
+            element={<CoupangVerificationPage />}
+          />
           {/* 인증 페이지 1-3 */}
           <Route
             path={RoutePath.JoinPhoneVerify}

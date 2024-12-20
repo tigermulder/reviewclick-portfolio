@@ -47,13 +47,13 @@ export const Chip = ({
 const ButtonContainer = styled.div`
   display: flex;
   gap: 0.8rem;
-  padding: 1.8rem 0 0.6rem;
+  padding: 0.8rem 0;
 `
 
 const StyledButton = styled.button.attrs<{ $isActive: boolean }>(
   ({ $isActive }) => ({
     style: {
-      backgroundColor: $isActive ? "var(--L600)" : "white",
+      backgroundColor: $isActive ? "var(--L400)" : "white",
       color: $isActive ? "white" : "var(--N300)",
     },
   })
@@ -66,9 +66,9 @@ const StyledButton = styled.button.attrs<{ $isActive: boolean }>(
 
   &:hover {
     background-color: ${({ $isActive }) =>
-      $isActive ? "var(--L600)" : "var(--WWood)"};
+      $isActive ? "var(--L400)" : "var(--WWood)"};
     border-color: ${({ $isActive }) =>
-      $isActive ? "var(--L600)" : "var(--WSmoke)"};
+      $isActive ? "var(--L400)" : "var(--WSmoke)"};
     font-weight: ${({ $isActive }) =>
       $isActive ? "var(--font-bold)" : "var(--font-medium)"};
   }

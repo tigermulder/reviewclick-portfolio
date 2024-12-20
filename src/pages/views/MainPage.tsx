@@ -11,6 +11,7 @@ import BannerSlider from "components/Banner"
 import LikeButton from "components/LikeButton"
 import { FilterBar } from "components/FilterBar"
 import dummyImage from "assets/dummy-image.png"
+import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 import { calculateRemainingTime, ocrFilterWord } from "@/utils/util"
 
@@ -18,6 +19,9 @@ const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
   const filteredCampaigns = useRecoilValue(filteredAndSortedCampaignList)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
+
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
 
   //** Fetch campaign list */
   const fetchCampaigns = async ({ pageParam = 1 }) => {
@@ -116,7 +120,6 @@ const MainPage = (): JSX.Element => {
                 )}
               </CampaignImage>
               <CampaignCardInfo>
-                {/* <Price>{campaign.price.toLocaleString()}P</Price> */}
                 <Title>{campaign.title}</Title>
                 <Participants>
                   신청 | <em>{campaign.joins}</em>/{campaign.quota}명
@@ -138,7 +141,7 @@ const CampaignList = styled.ul`
   grid-template-columns: repeat(2, 1fr);
   gap: 1.4rem;
   list-style-type: none;
-  padding: 2.4rem 0 6.4rem;
+  padding: 1.6rem 0 6.4rem;
   width: 100%;
 `
 
@@ -209,14 +212,8 @@ const CampaignCardInfo = styled.div`
   padding: 1.2rem 0;
 `
 
-const Price = styled.p`
-  font-size: var(--font-h4-size);
-  font-weight: var(--font-extrabold);
-`
-
 const Title = styled.p`
   font-size: 1.3rem;
-  font-weight: 500;
   margin: 0.4rem 0 0;
   overflow: hidden;
   text-overflow: ellipsis;

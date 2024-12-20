@@ -7,11 +7,15 @@ import { RoutePath } from "@/types/route-path"
 import ReuseHeader from "@/components/ReuseHeader"
 import styled from "styled-components"
 import SeoHelmet from "@/components/SeoHelmet"
+import useScrollToTop from "@/hooks/useScrollToTop"
 import { useNavigate } from "react-router-dom"
 
 const MyPage = () => {
   const [isNoticeOpen, setIsNoticeOpen] = useState<boolean>(false)
   const navigate = useNavigate()
+
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
   const toggleNotice = () => {
     setIsNoticeOpen((prev) => !prev)
   }

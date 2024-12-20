@@ -2,6 +2,7 @@ export const RoutePath = {
   Home: "",
   Join: "/join",
   JoinVerify: "/join/verify",
+  JoinCoupangVerify: "/join/coupangVerify",
   JoinPhoneVerify: "/join/verify/phone",
   MyCart: "/my_cart",
   MyCampaign: "/my_campaign",

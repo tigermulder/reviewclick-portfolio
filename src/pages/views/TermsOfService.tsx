@@ -3,9 +3,13 @@ import ReuseHeader from "@/components/ReuseHeader"
 import SeoHelmet from "@/components/SeoHelmet"
 import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
+import useScrollToTop from "@/hooks/useScrollToTop"
 
 const TermsOfService = () => {
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
   const navigate = useNavigate()
+
   return (
     <>
       <SeoHelmet

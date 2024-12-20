@@ -2,9 +2,12 @@ import { useNavigate } from "react-router-dom"
 import ReuseHeader from "@/components/ReuseHeader"
 import { RoutePath } from "@/types/route-path"
 import SeoHelmet from "@/components/SeoHelmet"
+import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
 
 const PrivacyPolicy = () => {
+  //** 스크롤 0부터시작 */
+  useScrollToTop()
   const navigate = useNavigate()
 
   return (
