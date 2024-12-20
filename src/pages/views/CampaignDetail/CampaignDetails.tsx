@@ -69,10 +69,16 @@ const InfoBox = styled.div`
     font-weight: var(--font-extrabold);
   }
 `
-const bounce = keyframes`
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-  40% {transform: translateY(-0.5rem);} 
-  60% {transform: translateY(-0.3rem);}
+const wave = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);  
+  }
 `
 
 const ButtonContainer = styled.div<{ $animate?: boolean }>`
@@ -80,7 +86,7 @@ const ButtonContainer = styled.div<{ $animate?: boolean }>`
   ${({ $animate }) =>
     $animate &&
     css`
-      animation: ${bounce} 1s ease-in-out infinite;
+      animation: ${wave} 1s ease-in-out infinite;
     `}
 `
 
