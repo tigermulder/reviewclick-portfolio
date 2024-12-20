@@ -200,7 +200,6 @@ const CoupangVerificationPage = () => {
 
 export default CoupangVerificationPage
 
-// Styled Components
 const VerificationContainer = styled.div`
   padding: 5.2rem 0;
 `
@@ -229,16 +228,20 @@ const AccountVerifyText = styled.p`
 const ThumbnailWrapper = styled.div`
   margin-top: 2rem;
   width: 100%;
-  margin: 2rem auto 0;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: var(--RevBlack);
+  overflow: hidden;
 
   img {
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 `
-
 const TextFieldWrapper = styled.div<{ $visible: boolean }>`
   position: fixed;
   padding: 1.6rem 1.5rem 4.1rem;
@@ -258,7 +261,7 @@ const TextFieldWrapper = styled.div<{ $visible: boolean }>`
 
 const ButtonContainer = styled.div<{ $visible: boolean }>`
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 1.6rem;
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: ${({ $visible }) =>
     $visible ? "translateY(0)" : "translateY(20px)"};
