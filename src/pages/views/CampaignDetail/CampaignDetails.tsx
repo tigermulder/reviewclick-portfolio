@@ -80,7 +80,7 @@ const ButtonContainer = styled.div<{ $animate?: boolean }>`
   ${({ $animate }) =>
     $animate &&
     css`
-      animation: ${bounce} 1s ease-in-out 2;
+      animation: ${bounce} 1s ease-in-out infinite;
     `}
 `
 
