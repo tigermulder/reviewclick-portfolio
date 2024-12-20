@@ -16,13 +16,10 @@ const CampaignDetails = forwardRef<HTMLButtonElement, CampaignDetailsProps>(
             </span>
             <p>{campaign.reward.toLocaleString()}P</p>
           </div>
-          <ButtonContainer>
-            {/* 애니메이션 래퍼 사용 */}
-            <AnimatedButtonWrapper $animate={shouldAnimateButton}>
-              <Button $variant="arrow" onClick={handleViewProduct} ref={ref}>
-                상품 구경하러가기
-              </Button>
-            </AnimatedButtonWrapper>
+          <ButtonContainer $animate={shouldAnimateButton}>
+            <Button $variant="arrow" onClick={handleViewProduct} ref={ref}>
+              상품 구경하러가기
+            </Button>
           </ButtonContainer>
         </InfoBox>
         <Divider />
@@ -72,19 +69,14 @@ const InfoBox = styled.div`
     font-weight: var(--font-extrabold);
   }
 `
-
-const ButtonContainer = styled.div`
-  width: 15rem;
-`
-
 const bounce = keyframes`
   0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
   40% {transform: translateY(-0.5rem);} 
   60% {transform: translateY(-0.3rem);}
 `
 
-const AnimatedButtonWrapper = styled.div<{ $animate?: boolean }>`
-  display: inline-block;
+const ButtonContainer = styled.div<{ $animate?: boolean }>`
+  width: 15rem;
   ${({ $animate }) =>
     $animate &&
     css`
