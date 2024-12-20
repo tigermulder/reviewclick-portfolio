@@ -354,6 +354,7 @@ const CampaignDetailPage = () => {
     setIsProductViewed(true)
     // 상품보러가기 상태를 세션스토리지에 저장
     localStorage.setItem("isProductViewed", "true")
+    setShouldAnimateButton(false)
   }
 
   //** 캠페인신청 취소 핸들러 [2-2] */
