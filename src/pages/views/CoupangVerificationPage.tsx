@@ -9,6 +9,7 @@ import Button from "@/components/Button"
 import styled from "styled-components"
 import axios from "axios"
 import { validateName } from "@/utils/util"
+import useDebounce from "@/hooks/useDebounce"
 
 const CoupangVerificationPage = () => {
   const redirect = sessionStorage.getItem("redirectPath")
@@ -55,17 +56,20 @@ const CoupangVerificationPage = () => {
     const file = e.target.files?.[0] || null
     if (file) {
       setSelectedImage(file)
-      addToast("이미지 업로드 완료!", 2000, "verify")
       setIsError(false)
       setErrorMessage("")
       setIsNameValid(false)
       setUserName("")
     }
   }
-
-  const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value
-    setUserName(name)
+  const debouncedValidateName = useDebounce((name: string) => {
+    if (name.trim() === "") {
+      // 입력값이 빈 문자열일 때 에러 상태 초기화
+      setIsError(false)
+      setErrorMessage("")
+      setIsNameValid(false)
+      return
+    }
 
     if (validateName(name)) {
       setIsError(false)
@@ -76,6 +80,12 @@ const CoupangVerificationPage = () => {
       setErrorMessage("유효한 이름을 입력해주세요 (2자 이상의 한글)")
       setIsNameValid(false)
     }
+  }, 300) // 300ms 디바운스
+
+  const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value
+    setUserName(name)
+    debouncedValidateName(name)
   }
 
   const handleVerification = async () => {
@@ -85,7 +95,6 @@ const CoupangVerificationPage = () => {
     if (!validateName(userName)) {
       setIsError(true)
       setErrorMessage("유효한 이름을 입력해주세요 (2자 이상의 한글)")
-      addToast("유효한 이름을 입력해주세요 (2자 이상의 한글)", 3000, "error")
       return
     }
 
@@ -228,7 +237,7 @@ const AccountVerifyText = styled.p`
 const ThumbnailWrapper = styled.div`
   margin-top: 2rem;
   width: 100%;
-  height: 30rem;
+  height: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -254,8 +263,8 @@ const TextFieldWrapper = styled.div<{ $visible: boolean }>`
     $visible ? "translateY(0)" : "translateY(100%)"};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition:
-    transform 0.3s ease-in-out,
-    opacity 0.3s ease-in-out;
+    transform 0.2s ease-in-out,
+    opacity 0.1s ease-in-out;
   z-index: 100;
 `
 
@@ -266,8 +275,8 @@ const ButtonContainer = styled.div<{ $visible: boolean }>`
   transform: ${({ $visible }) =>
     $visible ? "translateY(0)" : "translateY(20px)"};
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    opacity 0.2s ease-in-out,
+    transform 0.1s ease-in-out;
   pointer-events: ${({ $visible }) => ($visible ? "auto" : "none")};
   display: flex;
   justify-content: center;

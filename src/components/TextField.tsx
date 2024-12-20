@@ -56,7 +56,7 @@ const InputWrapper = styled.div<{ $isError?: boolean; $disabled?: boolean }>`
   border: 1px solid
     ${({ $isError, $disabled }) =>
       $isError ? "red" : $disabled ? "var(--N40)" : "var(--Silver)"};
-  background: ${({ $isError, $disabled }) =>
+  background-color: ${({ $isError, $disabled }) =>
     $isError ? "var(--L20)" : $disabled ? "inherit" : "inherit"};
   border-radius: 5px;
   transition: border-color 0.2s ease-in-out;
@@ -75,7 +75,7 @@ const StyledInput = styled.input<{ $isError?: boolean }>`
   padding: 1.2rem;
   border: none;
   outline: none;
-  background: ${({ $isError }) => ($isError ? "var(--L20)" : "inherit")};
+  background-color: ${({ $isError }) => ($isError ? "var(--L20)" : "inherit")};
   font-weight: var(--font-light);
 `
 
@@ -96,12 +96,12 @@ const ErrorDescription = styled.p`
   text-align: left;
   color: var(--L500);
   font-size: var(--caption-size);
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
 `
 
 const SuccessDescription = styled.p`
   text-align: left;
   color: var(--Success);
   font-size: var(--caption-size);
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
 `

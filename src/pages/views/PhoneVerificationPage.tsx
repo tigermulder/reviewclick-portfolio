@@ -12,6 +12,7 @@ import useToast from "@/hooks/useToast"
 import { validatePhone, formatTime } from "@/utils/util"
 import { CustomError } from "@/types/api-types/signup-type"
 import styled from "styled-components"
+import useDebounce from "@/hooks/useDebounce"
 
 const PhoneVerificationPage = () => {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ const PhoneVerificationPage = () => {
   const redirect = sessionStorage.getItem("redirectPath")
   const isPhoneVerify = localStorage.getItem("userPhoneNumber")
 
-  //** 스크롤 0부터시작 */
+  // ** 스크롤 0부터 시작 */
   useScrollToTop()
 
   // ** 휴대폰 인증 코드 전송 mutation */
@@ -115,7 +116,7 @@ const PhoneVerificationPage = () => {
       const requestData = { code: authCode }
       verifyPhoneCodeMutation.mutate(requestData)
     }
-  }, [authCode, codeSent, phoneConfirmed])
+  }, [authCode, codeSent, phoneConfirmed, verifyPhoneCodeMutation])
 
   // ** 인증번호 전송 함수 */
   const handleSendCode = () => {
@@ -162,7 +163,40 @@ const PhoneVerificationPage = () => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [])
+  }, [isPhoneVerify, redirect, navigate, addToast])
+
+  // ** 디바운스를 사용한 전화번호 유효성 검사 */
+  const debouncedValidatePhone = useDebounce((currentPhone: string) => {
+    console.log("디바운스된 validatePhone:", currentPhone)
+    if (currentPhone.trim() === "") {
+      return
+    }
+
+    if (!validatePhone(currentPhone)) {
+      console.log("유효하지 않은 전화번호:", currentPhone)
+    }
+  }, 300) // 300ms 디바운스
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPhone = e.target.value
+    setPhone(newPhone)
+    debouncedValidatePhone(newPhone)
+  }
+
+  // ** 디바운스를 사용한 인증 코드 유효성 검사 */
+  const debouncedValidateAuthCode = useDebounce((currentCode: string) => {
+    console.log("Debounced validateAuthCode called with:", currentCode)
+    if (currentCode.length === 6 && codeSent && !phoneConfirmed) {
+      console.log("Auth code is 6 digits. Verifying...")
+      verifyPhoneCodeMutation.mutate({ code: currentCode })
+    }
+  }, 300) // 300ms 디바운스
+
+  const handleAuthCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCode = e.target.value
+    setAuthCode(newCode)
+    debouncedValidateAuthCode(newCode)
+  }
 
   return (
     <>
@@ -188,11 +222,11 @@ const PhoneVerificationPage = () => {
 
           <TextFieldWrapper>
             <TextField
-              type="text"
+              type="tel" // 전화번호 입력용
               name="phone"
               placeholder="휴대폰 번호 입력"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={handlePhoneChange} // 변경된 핸들러 사용
               $isError={phone !== "" && !validatePhone(phone)}
               $marginBottom="0"
               errorMessage={
@@ -211,7 +245,7 @@ const PhoneVerificationPage = () => {
                   name="phone_auth_code"
                   placeholder="인증번호 입력"
                   value={authCode}
-                  onChange={(e) => setAuthCode(e.target.value)}
+                  onChange={handleAuthCodeChange} // 변경된 핸들러 사용
                   $isError={authCode !== "" && authCode.length !== 6}
                   $marginBottom="0"
                   $marginTop="0.8rem"
@@ -245,6 +279,7 @@ const PhoneVerificationPage = () => {
 
 export default PhoneVerificationPage
 
+// Styled Components
 const VerificationContainer = styled.div`
   padding: 5.2rem 0 0;
   height: 100vh;
@@ -295,5 +330,5 @@ const TimerText = styled.span`
   top: 1.5rem;
   font-size: var(--caption-size);
   font-weight: var(--font-medium);
-  color: var(--L600);
+  color: var(--L400);
 `

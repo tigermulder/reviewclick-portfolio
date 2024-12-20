@@ -12,9 +12,10 @@ import useToast from "@/hooks/useToast"
 import { validateEmail, formatTime } from "@/utils/util"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
+import useDebounce from "@/hooks/useDebounce"
 
 const AccountVerificationPage = () => {
-  //** 스크롤 0부터시작 */
+  // ** 스크롤 0부터시작 */
   useScrollToTop()
   const navigate = useNavigate()
   const [id, setId] = useState("")
@@ -34,6 +35,7 @@ const AccountVerificationPage = () => {
     mutationFn: checkEmail,
     onSuccess: (data) => {
       if (data.statusCode === 0) {
+        console.log("Email check successful:", id)
         setEmailCheckMessage("인증 가능한 아이디입니다.")
         const email = `${id}@naver.com`
         const sendCodeData = { email }
@@ -65,6 +67,7 @@ const AccountVerificationPage = () => {
       }
     },
   })
+
   // ** 이메일 인증 코드 전송 mutation */
   const sendEmailCodeMutation = useMutation({
     mutationFn: sendEmailCode,
@@ -89,6 +92,7 @@ const AccountVerificationPage = () => {
       }
     },
   })
+
   // ** 이메일 인증 코드 확인 mutation */
   const verifyEmailCodeMutation = useMutation({
     mutationFn: verifyEmailCode,
@@ -118,6 +122,7 @@ const AccountVerificationPage = () => {
 
   // ** 이메일 인증 타이머 시작 */
   const startEmailTimer = () => {
+    console.log("Email timer started")
     setEmailTimer(300) // 5분
     if (emailTimerRef.current) clearInterval(emailTimerRef.current)
     emailTimerRef.current = setInterval(() => {
@@ -125,26 +130,30 @@ const AccountVerificationPage = () => {
         if (prev <= 1) {
           if (emailTimerRef.current) clearInterval(emailTimerRef.current)
           setEmailSent(false)
+          console.log("Email timer ended")
           return 0
         }
         return prev - 1
       })
     }, 1000)
   }
+
   // ** 이메일 인증 타이머 초기화 */
   const resetEmailTimer = () => {
     if (emailTimerRef.current) clearInterval(emailTimerRef.current)
     setEmailTimer(0)
     setEmailSent(false)
+    console.log("Email timer reset")
   }
 
   // ** 이메일 인증 코드 유효성 검사 */
   useEffect(() => {
     if (emailAuthCode.length === 6 && emailSent && !emailConfirmed) {
       const requestData = { code: emailAuthCode }
+      console.log("Verifying email code:", emailAuthCode)
       verifyEmailCodeMutation.mutate(requestData)
     }
-  }, [emailAuthCode])
+  }, [emailAuthCode, emailSent, emailConfirmed, verifyEmailCodeMutation])
 
   // ** 이메일 체크 및 인증 코드 전송 함수 */
   const handleEmailAuth = () => {
@@ -164,7 +173,6 @@ const AccountVerificationPage = () => {
     sendEmailCodeMutation.mutate(sendCodeData, {
       onSuccess: (data) => {
         if (data.statusCode === 0) {
-          setEmailSent(true)
           startEmailTimer()
           setEmailAuthCode("")
           addToast("인증 코드를 재전송했습니다", 3000, "verify")
@@ -188,18 +196,54 @@ const AccountVerificationPage = () => {
 
   // ** 컴포넌트 언마운트 시 타이머 정리 */
   useEffect(() => {
-    if (isLoggedIn) {
-      if (isLoggedIn !== "null") {
-        addToast("이미 인증되었습니다", 3000, "verify")
-        if (redirect) {
-          navigate(redirect)
-        }
+    if (isLoggedIn && isLoggedIn !== "null") {
+      addToast("이미 인증되었습니다", 3000, "verify")
+      if (redirect) {
+        navigate(redirect)
       }
     }
     return () => {
       if (emailTimerRef.current) clearInterval(emailTimerRef.current)
     }
-  }, [])
+  }, [isLoggedIn, redirect, navigate, addToast])
+
+  // ** 디바운스를 사용한 이메일 유효성 검사 및 체크 */
+  const debouncedValidateEmail = useDebounce((currentId: string) => {
+    console.log("디바운스된 verifyEmail:", currentId)
+    if (currentId.trim() === "") {
+      // 입력값이 빈 문자열일 때 에러 상태 초기화
+      setEmailCheckMessage("")
+      return
+    }
+
+    if (!validateEmail(currentId)) {
+      setEmailCheckMessage("")
+    } else {
+      handleEmailAuth()
+    }
+  }, 300) // 300ms 디바운스
+
+  const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newId = e.target.value
+    setId(newId)
+    debouncedValidateEmail(newId)
+  }
+
+  // ** 디바운스를 사용한 이메일 인증 코드 유효성 검사 */
+  const debouncedValidateEmailAuthCode = useDebounce((currentCode: string) => {
+    console.log("디바운스된 validateEmailAuthCode:", currentCode)
+    if (currentCode.length === 6 && emailSent && !emailConfirmed) {
+      verifyEmailCodeMutation.mutate({ code: currentCode })
+    }
+  }, 300) // 300ms 디바운스
+
+  const handleEmailAuthCodeChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newCode = e.target.value
+    setEmailAuthCode(newCode)
+    debouncedValidateEmailAuthCode(newCode)
+  }
 
   return (
     <>
@@ -230,7 +274,7 @@ const AccountVerificationPage = () => {
                 name="email_id"
                 placeholder="네이버ID"
                 value={id}
-                onChange={(e) => setId(e.target.value)}
+                onChange={handleIdChange} // 변경된 핸들러 사용
                 suffix="@naver.com"
                 $isError={id !== "" && !validateEmail(id)}
                 $marginBottom="0"
@@ -254,7 +298,7 @@ const AccountVerificationPage = () => {
                     name="email_auth_code"
                     placeholder="인증 코드 입력"
                     value={emailAuthCode}
-                    onChange={(e) => setEmailAuthCode(e.target.value)}
+                    onChange={handleEmailAuthCodeChange} // 변경된 핸들러 사용
                     $isError={
                       emailAuthCode !== "" && emailAuthCode.length !== 6
                     }
@@ -272,7 +316,7 @@ const AccountVerificationPage = () => {
             </Row>
           )}
 
-          <ButtonWrapper $visible={validateEmail(id)}>
+          <ButtonWrapper $visible={validateEmail(id) && !emailConfirmed}>
             <Button
               type="button"
               $variant="red"
@@ -345,6 +389,5 @@ const TimerText = styled.span`
   right: 1.4rem;
   top: 1.5rem;
   font-size: var(--caption-size);
-  font-weight: var(--font-medium);
-  color: var(--L600);
+  color: var(--L400);
 `
