@@ -4,7 +4,6 @@ import { PDFDocumentProxy } from "pdfjs-dist"
 import PDFPage from "./PDFPage"
 import GlobalLoading from "./GlobalLoading"
 import { PDFViewerProps } from "@/types/component-types/pdf-viewr-type"
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry?url"
 
 const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [doc, setDoc] = useState<PDFDocumentProxy | null>(null)
