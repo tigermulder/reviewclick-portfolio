@@ -10,6 +10,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [numPages, setNumPages] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const [scale, setScale] = useState<number>(2) // 확대/축소 상태 추가
 
   pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`
 
@@ -36,6 +37,9 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
     }
   }, [pdfPath, loadPDF])
 
+  const zoomIn = () => setScale((prev) => Math.min(prev + 0.5, 5))
+  const zoomOut = () => setScale((prev) => Math.max(prev - 0.5, 0.5))
+
   if (loading) {
     return <GlobalLoading />
   }
@@ -49,14 +53,50 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
       style={{
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         gap: "0.7rem",
         overflowY: "auto",
         padding: "0.7rem",
         backgroundColor: "var(--N40)",
       }}
     >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "0.4rem 0",
+          gap: "0.8rem",
+        }}
+      >
+        <button
+          onClick={zoomOut}
+          style={{
+            backgroundColor: "var(--N600)",
+            color: "white",
+            padding: "0 0.45rem",
+          }}
+        >
+          -
+        </button>
+        <span>Zoom: {scale.toFixed(1)}x</span>
+        <button
+          onClick={zoomIn}
+          style={{
+            backgroundColor: "var(--N600)",
+            color: "white",
+            padding: "0 0.45rem",
+          }}
+        >
+          +
+        </button>
+      </div>
       {Array.from(new Array(numPages), (_, index) => (
-        <PDFPage key={`page_${index + 1}`} doc={doc} pageNumber={index + 1} />
+        <PDFPage
+          key={`page_${index + 1}`}
+          doc={doc}
+          pageNumber={index + 1}
+          scale={scale}
+        />
       ))}
     </div>
   )

@@ -1,107 +1,78 @@
-import { useEffect, useRef, useCallback, useState } from "react"
+import { useEffect, useRef, useCallback } from "react"
 import { useInView } from "react-intersection-observer"
 import { PDFDocumentProxy } from "pdfjs-dist"
 
 type PDFPageProps = {
   doc: PDFDocumentProxy
   pageNumber: number
-  initialScale?: number
+  scale: number
 }
 
-const PDFPage = ({ doc, pageNumber, initialScale = 1.5 }: PDFPageProps) => {
+const PDFPage = ({ doc, pageNumber, scale }: PDFPageProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
-  const [scale, setScale] = useState(initialScale)
+  const renderPage = useCallback(async () => {
+    if (!doc || !canvasRef.current) return
 
-  const renderPage = useCallback(
-    async (scaleValue: number) => {
-      if (!doc || !canvasRef.current) return
+    try {
+      const page = await doc.getPage(pageNumber)
+      const viewport = page.getViewport({ scale })
+      const canvas = canvasRef.current
+      const context = canvas.getContext("2d")
 
-      try {
-        const page = await doc.getPage(pageNumber)
-        const viewport = page.getViewport({ scale: scaleValue })
-        const canvas = canvasRef.current
-        const context = canvas.getContext("2d")
+      if (context) {
+        // 캔버스의 실제 크기를 HTML 속성으로 설정
+        canvas.width = viewport.width
+        canvas.height = viewport.height
 
-        if (context) {
-          canvas.width = viewport.width
-          canvas.height = viewport.height
+        // 캔버스 스타일을 부모 요소 크기에 맞게 설정
+        canvas.style.width = "100%"
+        canvas.style.height = "auto"
 
-          const renderContext = {
-            canvasContext: context,
-            viewport: viewport,
-          }
-
-          await page.render(renderContext).promise
-          console.log(`페이지 ${pageNumber} 렌더링 성공`)
+        // PDF 페이지 렌더링
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport,
         }
-      } catch (error) {
-        console.error(`페이지 ${pageNumber} 렌더링 중 오류 발생:`, error)
+
+        await page.render(renderContext).promise
+        console.log(`페이지 ${pageNumber} 렌더링 성공`)
       }
-    },
-    [doc, pageNumber]
-  )
+    } catch (error) {
+      console.error(`페이지 ${pageNumber} 렌더링 중 오류 발생:`, error)
+    }
+  }, [doc, pageNumber, scale])
 
   useEffect(() => {
     if (inView) {
-      renderPage(scale)
+      renderPage()
     }
-  }, [inView, renderPage, scale])
-
-  const zoomIn = () => setScale((prev) => Math.min(prev + 0.5, 5))
-  const zoomOut = () => setScale((prev) => Math.max(prev - 0.5, 0.5))
+  }, [inView, renderPage])
 
   return (
     <div
       ref={ref}
       style={{
+        width: "100%",
         position: "relative",
+        maxHeight: "486px",
+        minHeight: "486px",
         boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.2)",
       }}
     >
-      {inView && (
-        <>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              padding: "0.4rem 0",
-              gap: "0.8rem",
-            }}
-          >
-            <button
-              onClick={zoomOut}
-              style={{
-                backgroundColor: "var(--N600)",
-                color: "white",
-                padding: "0 0.45rem",
-              }}
-            >
-              -
-            </button>
-            <span>Zoom: {scale.toFixed(1)}x</span>
-            <button
-              onClick={zoomIn}
-              style={{
-                backgroundColor: "var(--N600)",
-                color: "white",
-                padding: "0 0.45rem",
-              }}
-            >
-              +
-            </button>
-          </div>
-          <canvas
-            ref={canvasRef}
-            style={{ display: "block", margin: "0 auto" }}
-          />
-        </>
-      )}
-      {!inView && <div style={{ height: "487px" }}></div>}
+      <canvas
+        ref={canvasRef}
+        style={{
+          display: "block",
+          margin: "0 auto",
+          width: "100%",
+          height: "auto",
+        }}
+      />
     </div>
   )
 }
