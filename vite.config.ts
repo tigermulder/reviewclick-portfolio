@@ -74,6 +74,10 @@ export default defineConfig(({ mode }) => {
               }
               return "vendor"
             }
+            // PDF.js 워커 처리
+            if (id.includes("pdfjs-dist/build/pdf.worker.entry")) {
+              return "pdf-worker"
+            }
             // 페이지 기반 코드 스플리팅
             if (id.includes(path.resolve(__dirname, "src/pages"))) {
               const parts = id.split(path.sep)
@@ -110,6 +114,7 @@ export default defineConfig(({ mode }) => {
           chunkFileNames: "assets/js/[name]-[hash].js",
           entryFileNames: "assets/js/[name]-[hash].js",
         },
+        external: ["pdfjs-dist/build/pdf.worker.entry"],
       },
       assetsInlineLimit: 4096, // 기본값(4KB)
     },
