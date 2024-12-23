@@ -45,4 +45,5 @@ export interface ContentProps {
   $isIntroducePage: boolean
   $isNotFound: boolean
   $isEditProfilePage: boolean
+  $isPolicy: boolean
 }

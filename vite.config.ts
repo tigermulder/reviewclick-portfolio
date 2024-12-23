@@ -53,8 +53,11 @@ export default defineConfig(({ mode }) => {
           // 청크 분할 전략 개선
           manualChunks(id) {
             if (id.includes("node_modules")) {
-              if (id.includes("lodash")) {
-                return "lodash"
+              if (id.includes("styled-components")) {
+                return "styled-components"
+              }
+              if (id.includes("swiper")) {
+                return "swiper"
               }
               if (id.includes("axios")) {
                 return "axios"
@@ -62,7 +65,13 @@ export default defineConfig(({ mode }) => {
               if (id.includes("recoil")) {
                 return "recoil"
               }
-              // 기타 외부 라이브러리
+              if (
+                id.includes("react") ||
+                id.includes("react-dom") ||
+                id.includes("react-router-dom")
+              ) {
+                return "react-vendors"
+              }
               return "vendor"
             }
             // 페이지 기반 코드 스플리팅

@@ -2,7 +2,7 @@ import ReuseHeader from "@/components/ReuseHeader"
 import Button from "@/components/Button"
 import { RoutePath } from "@/types/route-path"
 import { useNavigate } from "react-router-dom"
-import { PdfViewer } from "@naverpay/react-pdf"
+import PDFViewer from "@/components/PdfViewer"
 import styled from "styled-components"
 
 const PersonalTerms = () => {
@@ -16,8 +16,8 @@ const PersonalTerms = () => {
       <ReuseHeader title="개인정보호약관" onBack={handleConfirm} />
 
       <PDFContainer>
-        <PdfViewer
-          pdfUrl={"https://cdn.revuclick.io/docs-public/PersonalTerms.pdf"}
+        <PDFViewer
+          pdfPath={"https://cdn.revuclick.io/docs-public/PersonalTerms.pdf"}
         />
       </PDFContainer>
 
@@ -33,9 +33,7 @@ const PersonalTerms = () => {
 export default PersonalTerms
 
 const PDFContainer = styled.div`
-  width: 100%;
-  height: calc(100vh - 5.2rem - 6rem);
-  margin-top: 5.2rem;
+  padding: 7rem 0 12rem;
 `
 
 const ButtonWrapper = styled.div`

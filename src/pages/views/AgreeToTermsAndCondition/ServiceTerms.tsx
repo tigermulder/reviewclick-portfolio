@@ -2,8 +2,8 @@ import ReuseHeader from "@/components/ReuseHeader"
 import Button from "@/components/Button"
 import { RoutePath } from "@/types/route-path"
 import { useNavigate } from "react-router-dom"
-import { PdfViewer } from "@naverpay/react-pdf"
 import styled from "styled-components"
+import PDFViewer from "@/components/PdfViewer"
 
 const ServiceTerms = () => {
   const navigate = useNavigate()
@@ -14,9 +14,10 @@ const ServiceTerms = () => {
   return (
     <>
       <ReuseHeader title="서비스 이용약관" onBack={handleConfirm} />
+
       <PDFContainer>
-        <PdfViewer
-          pdfUrl={"https://cdn.revuclick.io/docs-public/ServiceTerms.pdf"}
+        <PDFViewer
+          pdfPath={"https://cdn.revuclick.io/docs-public/ServiceTerms.pdf"}
         />
       </PDFContainer>
 

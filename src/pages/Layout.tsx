@@ -35,9 +35,8 @@ const Layout = () => {
     isJoinPage ||
     isJoinVerifyPage ||
     isJoinCoupangVerifyPage ||
-    isJoinPhoneVerifyPage ||
-    isPersonaTerms ||
-    isServiceTerms
+    isJoinPhoneVerifyPage
+  const isPolicy = isPersonaTerms || isServiceTerms
 
   return (
     <>
@@ -56,6 +55,7 @@ const Layout = () => {
         $isIntroducePage={isIntroducePage}
         $isNotFound={isNotFound}
         $isEditProfilePage={isEditProfilePage}
+        $isPolicy={isPolicy}
       >
         {/* 각 페이지별로 다른 콘텐츠를 보여주는 Outlet */}
         <Outlet />
@@ -84,6 +84,7 @@ const Content = styled.main<ContentProps>`
     $isIntroducePage,
     $isNotFound,
     $isEditProfilePage,
+    $isPolicy,
   }) => {
     if ($isMyCampaignPage) {
       return `
@@ -142,6 +143,11 @@ const Content = styled.main<ContentProps>`
     } else if ($isEditProfilePage) {
       return `
       padding: 7.6rem 1.6rem;
+      `
+    } else if ($isPolicy) {
+      return `
+      min-height: 100vh; 
+      padding:0 1.6rem;
       `
     } else {
       return `
