@@ -58,7 +58,7 @@ const PDFPage = ({ doc, pageNumber, scale = 1.5 }: PDFPageProps) => {
           style={{ display: "block", margin: "0 auto" }}
         />
       )}
-      {!inView && <div style={{ height: "487px" }}>로딩 중...</div>}
+      {!inView && <div style={{ height: "487px" }}></div>}
     </div>
   )
 }
