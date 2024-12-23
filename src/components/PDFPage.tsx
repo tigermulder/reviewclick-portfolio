@@ -1,19 +1,21 @@
-import { useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef, useCallback, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { PDFDocumentProxy } from "pdfjs-dist"
 
 type PDFPageProps = {
   doc: PDFDocumentProxy
   pageNumber: number
-  scale?: number
+  initialScale?: number
 }
 
-const PDFPage = ({ doc, pageNumber, scale = 1.5 }: PDFPageProps) => {
+const PDFPage = ({ doc, pageNumber, initialScale = 1.5 }: PDFPageProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
+
+  const [scale, setScale] = useState(initialScale)
 
   const renderPage = useCallback(async () => {
     if (!doc || !canvasRef.current) return
@@ -47,16 +49,39 @@ const PDFPage = ({ doc, pageNumber, scale = 1.5 }: PDFPageProps) => {
     }
   }, [inView, renderPage])
 
+  const zoomIn = () => setScale((prev) => Math.min(prev + 0.5, 5))
+  const zoomOut = () => setScale((prev) => Math.max(prev - 0.5, 0.5))
+
   return (
     <div
       ref={ref}
-      style={{ height: "auto", boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.2)" }}
+      style={{
+        position: "relative",
+        boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.2)",
+      }}
     >
       {inView && (
-        <canvas
-          ref={canvasRef}
-          style={{ display: "block", margin: "0 auto" }}
-        />
+        <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "0.4rem 0",
+            }}
+          >
+            <button onClick={zoomOut} style={{ marginRight: "8px" }}>
+              -
+            </button>
+            <span>Zoom: {scale.toFixed(1)}x</span>
+            <button onClick={zoomIn} style={{ marginLeft: "8px" }}>
+              +
+            </button>
+          </div>
+          <canvas
+            ref={canvasRef}
+            style={{ display: "block", margin: "0 auto" }}
+          />
+        </>
       )}
       {!inView && <div style={{ height: "487px" }}></div>}
     </div>

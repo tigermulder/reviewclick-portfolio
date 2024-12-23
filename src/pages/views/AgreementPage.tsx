@@ -175,6 +175,7 @@ const CheckboxWrapper = styled.div`
 
 const AgreeTerms = styled(Link)`
   font-size: var(--caption-small-size);
+  font-weight: var(--font-medium);
   color: var(--N500);
 `
 
