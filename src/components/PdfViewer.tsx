@@ -11,10 +11,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc = /* @vite-ignore */ new URL(
-    "pdfjs-dist/build/pdf.worker.entry",
-    import.meta.url
-  ).toString()
+  pdfjsLib.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.js")
 
   const loadPDF = useCallback(async (path: string) => {
     setLoading(true)
