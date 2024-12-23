@@ -19,9 +19,6 @@ export default defineConfig(({ mode }) => {
       createHtmlPlugin({ minify: true }),
       visualizer({ open: true, gzipSize: true, brotliSize: true }), // 청크 시각화 도구 추가
     ],
-    define: {
-      "process.env.DISABLE_PDFJS_SCRIPT_MANAGER": "true", // eval 비활성화
-    },
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"), // 'src' 폴더를 '@'로 매핑
