@@ -1,6 +1,11 @@
-import { useEffect, useRef, useCallback } from "react"
-import { useInView } from "react-intersection-observer"
+import { useCallback, useEffect, useRef, useState } from "react"
+import * as pdfjsLib from "pdfjs-dist"
 import { PDFDocumentProxy } from "pdfjs-dist"
+import { useInView } from "react-intersection-observer"
+
+type PDFViewerProps = {
+  pdfPath: string
+}
 
 type PDFPageProps = {
   doc: PDFDocumentProxy
@@ -25,15 +30,11 @@ const PDFPage = ({ doc, pageNumber, scale }: PDFPageProps) => {
       const context = canvas.getContext("2d")
 
       if (context) {
-        // 캔버스의 실제 크기를 HTML 속성으로 설정
         canvas.width = viewport.width
         canvas.height = viewport.height
-
-        // 캔버스 스타일을 부모 요소 크기에 맞게 설정
         canvas.style.width = "100%"
         canvas.style.height = "auto"
 
-        // PDF 페이지 렌더링
         const renderContext = {
           canvasContext: context,
           viewport: viewport,

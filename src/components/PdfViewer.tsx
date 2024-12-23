@@ -10,7 +10,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [numPages, setNumPages] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-  const [scale, setScale] = useState<number>(2) // 확대/축소 상태 추가
+  const [scale, setScale] = useState<number>(2)
 
   pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`
 
@@ -57,7 +57,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
         gap: "0.7rem",
         overflowY: "auto",
         padding: "0.7rem",
-        backgroundColor: "var(--N40)",
+        backgroundColor: "#f0f0f0",
       }}
     >
       <div
@@ -71,7 +71,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
         <button
           onClick={zoomOut}
           style={{
-            backgroundColor: "var(--N600)",
+            backgroundColor: "#333",
             color: "white",
             padding: "0 0.45rem",
           }}
@@ -82,7 +82,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
         <button
           onClick={zoomIn}
           style={{
-            backgroundColor: "var(--N600)",
+            backgroundColor: "#333",
             color: "white",
             padding: "0 0.45rem",
           }}
