@@ -164,6 +164,7 @@ const AgreementList = styled.ul`
 const CheckboxItem = styled.li`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 1.2rem;
 `
 
@@ -173,8 +174,8 @@ const CheckboxWrapper = styled.div`
 `
 
 const AgreeTerms = styled(Link)`
-  font-size: var(--caption-size);
-  color: var(--N600);
+  font-size: var(--caption-small-size);
+  color: var(--N500);
 `
 
 const NoticeText = styled.p`
