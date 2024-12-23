@@ -33,7 +33,9 @@ const PersonalTerms = () => {
 export default PersonalTerms
 
 const PDFContainer = styled.div`
-  padding: 7rem 0 12rem;
+  width: 100%;
+  height: calc(100vh - 5.2rem - 6rem);
+  margin-top: 5.2rem;
 `
 
 const ButtonWrapper = styled.div`

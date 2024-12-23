@@ -4,6 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths"
 import svgr from "vite-plugin-svgr"
 import { createHtmlPlugin } from "vite-plugin-html"
 import path from "path"
+import { visualizer } from "rollup-plugin-visualizer"
 
 export default defineConfig(({ mode }) => {
   // 환경 변수를 로드
@@ -16,26 +17,27 @@ export default defineConfig(({ mode }) => {
       tsconfigPaths(),
       svgr(),
       createHtmlPlugin({ minify: true }),
+      visualizer({ open: true, gzipSize: true, brotliSize: true }), // 청크 시각화 도구 추가
     ], // Vite 플러그인
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"), // 'src' 폴더를 '@'로 매핑
-        pages: path.resolve(__dirname, "./src/pages"), // 'pages' 폴더에 별칭 매핑
-        components: path.resolve(__dirname, "./src/components"), // 'components' 매핑
-        assets: path.resolve(__dirname, "./src/assets"), // 'assets' 매핑
-        store: path.resolve(__dirname, "./src/store"), // store 경로 별칭
-        utils: path.resolve(__dirname, "./src/utils"), // utils 경로 별칭
-        types: path.resolve(__dirname, "./src/types"), // types 경로 별칭
-        services: path.resolve(__dirname, "./src/services"), // services 경로 별칭
-        hooks: path.resolve(__dirname, "./src/hooks"), // hooks 경로 별칭
+        pages: path.resolve(__dirname, "./src/pages"),
+        components: path.resolve(__dirname, "./src/components"),
+        assets: path.resolve(__dirname, "./src/assets"),
+        store: path.resolve(__dirname, "./src/store"),
+        utils: path.resolve(__dirname, "./src/utils"),
+        types: path.resolve(__dirname, "./src/types"),
+        services: path.resolve(__dirname, "./src/services"),
+        hooks: path.resolve(__dirname, "./src/hooks"),
       },
     },
     server: {
       proxy: {
         "/api": {
           target: "https://dev-api.revuclick.io",
-          changeOrigin: true, // 서버의 Origin을 프록시 서버의 Origin으로 변경
-          secure: false, // HTTPS를 사용할 때 인증서 검증을 무시 (개발 환경)
+          changeOrigin: true,
+          secure: false,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
@@ -48,13 +50,51 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: true,
       rollupOptions: {
         output: {
-          manualChunks: {
-            vendor: ["react", "react-router-dom", "react-dom"],
+          // 청크 분할 전략 개선
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (id.includes("lodash")) {
+                return "lodash"
+              }
+              if (id.includes("axios")) {
+                return "axios"
+              }
+              if (id.includes("recoil")) {
+                return "recoil"
+              }
+              // 기타 외부 라이브러리
+              return "vendor"
+            }
+            // 페이지 기반 코드 스플리팅
+            if (id.includes(path.resolve(__dirname, "src/pages"))) {
+              const parts = id.split(path.sep)
+              const pageName = parts[parts.indexOf("pages") + 1]
+              return `page-${pageName}`
+            }
+            // 컴포넌트 공통 청크
+            if (id.includes(path.resolve(__dirname, "src/components"))) {
+              return "components-common"
+            }
+            // 유틸리티, 훅 등 공통 모듈
+            if (
+              id.includes(path.resolve(__dirname, "src/utils")) ||
+              id.includes(path.resolve(__dirname, "src/hooks")) ||
+              id.includes(path.resolve(__dirname, "src/services")) ||
+              id.includes(path.resolve(__dirname, "src/store"))
+            ) {
+              return "common"
+            }
           },
           assetFileNames: (assetInfo) => {
-            let extType: string = assetInfo?.name?.split(".").at(1) || "misc"
+            let extType: string = assetInfo?.name?.split(".").pop() || "misc"
             if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
               extType = "img"
+            } else if (/css|scss|less/i.test(extType)) {
+              extType = "css"
+            } else if (/woff2?|eot|ttf|otf/i.test(extType)) {
+              extType = "fonts"
+            } else {
+              extType = "misc"
             }
             return `assets/${extType}/[name]-[hash][extname]`
           },
