@@ -17,37 +17,40 @@ const PDFPage = ({ doc, pageNumber, initialScale = 1.5 }: PDFPageProps) => {
 
   const [scale, setScale] = useState(initialScale)
 
-  const renderPage = useCallback(async () => {
-    if (!doc || !canvasRef.current) return
+  const renderPage = useCallback(
+    async (scaleValue: number) => {
+      if (!doc || !canvasRef.current) return
 
-    try {
-      const page = await doc.getPage(pageNumber)
-      const viewport = page.getViewport({ scale })
-      const canvas = canvasRef.current
-      const context = canvas.getContext("2d")
+      try {
+        const page = await doc.getPage(pageNumber)
+        const viewport = page.getViewport({ scale: scaleValue })
+        const canvas = canvasRef.current
+        const context = canvas.getContext("2d")
 
-      if (context) {
-        canvas.width = viewport.width
-        canvas.height = viewport.height
+        if (context) {
+          canvas.width = viewport.width
+          canvas.height = viewport.height
 
-        const renderContext = {
-          canvasContext: context,
-          viewport: viewport,
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+          }
+
+          await page.render(renderContext).promise
+          console.log(`페이지 ${pageNumber} 렌더링 성공`)
         }
-
-        await page.render(renderContext).promise
-        console.log(`페이지 ${pageNumber} 렌더링 성공`)
+      } catch (error) {
+        console.error(`페이지 ${pageNumber} 렌더링 중 오류 발생:`, error)
       }
-    } catch (error) {
-      console.error(`페이지 ${pageNumber} 렌더링 중 오류 발생:`, error)
-    }
-  }, [doc, pageNumber, scale])
+    },
+    [doc, pageNumber]
+  )
 
   useEffect(() => {
     if (inView) {
-      renderPage()
+      renderPage(scale)
     }
-  }, [inView, renderPage])
+  }, [inView, renderPage, scale])
 
   const zoomIn = () => setScale((prev) => Math.min(prev + 0.5, 5))
   const zoomOut = () => setScale((prev) => Math.max(prev - 0.5, 0.5))
@@ -67,13 +70,28 @@ const PDFPage = ({ doc, pageNumber, initialScale = 1.5 }: PDFPageProps) => {
               display: "flex",
               justifyContent: "center",
               padding: "0.4rem 0",
+              gap: "0.8rem",
             }}
           >
-            <button onClick={zoomOut} style={{ marginRight: "8px" }}>
+            <button
+              onClick={zoomOut}
+              style={{
+                backgroundColor: "var(--N600)",
+                color: "white",
+                padding: "0 0.45rem",
+              }}
+            >
               -
             </button>
             <span>Zoom: {scale.toFixed(1)}x</span>
-            <button onClick={zoomIn} style={{ marginLeft: "8px" }}>
+            <button
+              onClick={zoomIn}
+              style={{
+                backgroundColor: "var(--N600)",
+                color: "white",
+                padding: "0 0.45rem",
+              }}
+            >
               +
             </button>
           </div>
