@@ -11,7 +11,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+  pdfjsLib.GlobalWorkerOptions.workerSrc = /* @vite-ignore */ new URL(
     "pdfjs-dist/build/pdf.worker.entry",
     import.meta.url
   ).toString()
