@@ -65,6 +65,9 @@ export default defineConfig(({ mode }) => {
               if (id.includes("recoil")) {
                 return "recoil"
               }
+              if (id.includes("pdfjs-dist")) {
+                return "pdfjs-dist"
+              }
               if (
                 id.includes("react") ||
                 id.includes("react-dom") ||
