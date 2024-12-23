@@ -4,8 +4,12 @@ import { RoutePath } from "types/route-path"
 import { HelmetProvider } from "react-helmet-async"
 import Layout from "./Layout"
 const JoinPage = lazy(() => import("./views/AgreementPage"))
-const PersonaTerms = lazy(()=> import("./views/AgreeToTermsAndCondition/PersonaTerms"))
-const ServiceTerms = lazy(()=> import("./views/AgreeToTermsAndCondition/ServiceTerms"))
+const PersonalTerms = lazy(
+  () => import("./views/AgreeToTermsAndCondition/PersonalTerms")
+)
+const ServiceTerms = lazy(
+  () => import("./views/AgreeToTermsAndCondition/ServiceTerms")
+)
 const JoinVerifyPage = lazy(() => import("./views/AccountVerificationPage"))
 const CoupangVerificationPage = lazy(
   () => import("./views/CoupangVerificationPage")
@@ -59,7 +63,10 @@ export const AppRoute = () => {
           {/* 인증 페이지 1-1 */}
           <Route path={RoutePath.Join} element={<JoinPage />} />
           {/* 이용약관 */}
-          <Route path={RoutePath.JoinPersonaTerms} element={<PersonaTerms />} />
+          <Route
+            path={RoutePath.JoinPersonalTerms}
+            element={<PersonalTerms />}
+          />
           {/* 개인정보보호 */}
           <Route path={RoutePath.JoinServiceTerms} element={<ServiceTerms />} />
           {/* 인증 페이지 1-2(네이버) */}

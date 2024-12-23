@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { PdfViewer } from "@naverpay/react-pdf"
 import styled from "styled-components"
 
-const ServiceTerms = () => {
+const PersonalTerms = () => {
   const navigate = useNavigate()
   const handleConfirm = () => {
     navigate(RoutePath.Join)
@@ -13,10 +13,11 @@ const ServiceTerms = () => {
 
   return (
     <>
-      <ReuseHeader title="서비스 이용약관" onBack={handleConfirm} />
+      <ReuseHeader title="개인정보호약관" onBack={handleConfirm} />
+
       <PDFContainer>
         <PdfViewer
-          pdfUrl={"https://cdn.revuclick.io/docs-public/ServiceTerms.pdf"}
+          pdfUrl={"https://cdn.revuclick.io/docs-public/PersonalTerms.pdf"}
         />
       </PDFContainer>
 
@@ -29,7 +30,7 @@ const ServiceTerms = () => {
   )
 }
 
-export default ServiceTerms
+export default PersonalTerms
 
 const PDFContainer = styled.div`
   padding: 7rem 0 12rem;

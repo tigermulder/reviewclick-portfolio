@@ -1,7 +1,7 @@
 export const RoutePath = {
   Home: "",
   Join: "/join",
-  JoinPersonaTerms: "/join/PersonaTerms",
+  JoinPersonalTerms: "/join/PersonalTerms",
   JoinServiceTerms: "/join/ServiceTerms",
   JoinVerify: "/join/verify",
   JoinCoupangVerify: "/join/coupangVerify",

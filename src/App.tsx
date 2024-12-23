@@ -50,6 +50,8 @@ function App() {
     location.pathname === RoutePath.Home ||
     location.pathname === RoutePath.MyCart ||
     location.pathname === RoutePath.Join ||
+    location.pathname === RoutePath.JoinPersonalTerms ||
+    location.pathname === RoutePath.JoinServiceTerms ||
     location.pathname === RoutePath.JoinVerify ||
     location.pathname === RoutePath.JoinCoupangVerify ||
     location.pathname === RoutePath.JoinPhoneVerify ||
@@ -72,6 +74,8 @@ function App() {
     isNotFound
   const hideTapBar =
     location.pathname === RoutePath.Join ||
+    location.pathname === RoutePath.JoinPersonalTerms ||
+    location.pathname === RoutePath.JoinServiceTerms ||
     location.pathname === RoutePath.JoinVerify ||
     location.pathname === RoutePath.JoinCoupangVerify ||
     location.pathname === RoutePath.JoinPhoneVerify ||
@@ -102,6 +106,8 @@ function App() {
       location.pathname !== RoutePath.TermsOfService &&
       location.pathname !== RoutePath.PrivacyPolicy &&
       location.pathname !== RoutePath.UserEditProfile &&
+      location.pathname !== RoutePath.JoinPersonalTerms &&
+      location.pathname !== RoutePath.JoinServiceTerms &&
       !isNotificationDetail &&
       !isNoticeDetail &&
       !isReviewDetail) ||

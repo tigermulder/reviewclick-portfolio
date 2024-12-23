@@ -103,7 +103,9 @@ const AgreementPage = () => {
                   }
                 />
               </CheckboxWrapper>
-              <AgreeTerms to={RoutePath.JoinServiceTerms}>자세히보기</AgreeTerms>
+              <AgreeTerms to={RoutePath.JoinServiceTerms}>
+                자세히보기
+              </AgreeTerms>
             </CheckboxItem>
             <CheckboxItem>
               <CheckboxWrapper>
@@ -115,7 +117,9 @@ const AgreementPage = () => {
                   }
                 />
               </CheckboxWrapper>
-              <AgreeTerms to={RoutePath.JoinPersonaTerms}>자세히보기</AgreeTerms>
+              <AgreeTerms to={RoutePath.JoinPersonalTerms}>
+                자세히보기
+              </AgreeTerms>
             </CheckboxItem>
           </AgreementList>
         </AgreementSection>

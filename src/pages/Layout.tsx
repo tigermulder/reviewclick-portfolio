@@ -11,7 +11,7 @@ const Layout = () => {
   const isNoticeDetail = !!useMatch("/alert/notice/:noticeId") // 공지사항 상세 경로
   const isIntroducePage = location.pathname === RoutePath.Introduce // 소개페이지
   const isJoinPage = location.pathname === RoutePath.Join // 인증 페이지 1-1
-  const isPersonaTerms = location.pathname === RoutePath.JoinPersonaTerms // 이용약관 자세히보기
+  const isPersonaTerms = location.pathname === RoutePath.JoinPersonalTerms // 이용약관 자세히보기
   const isServiceTerms = location.pathname === RoutePath.JoinServiceTerms // 이용약관 자세히보기
   const isJoinVerifyPage = location.pathname === RoutePath.JoinVerify // 네이버인증 페이지 1-2
   const isJoinCoupangVerifyPage =
@@ -35,7 +35,9 @@ const Layout = () => {
     isJoinPage ||
     isJoinVerifyPage ||
     isJoinCoupangVerifyPage ||
-    isJoinPhoneVerifyPage || isPersonaTerms || isServiceTerms
+    isJoinPhoneVerifyPage ||
+    isPersonaTerms ||
+    isServiceTerms
 
   return (
     <>
