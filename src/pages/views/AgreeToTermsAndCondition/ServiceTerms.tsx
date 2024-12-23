@@ -8,7 +8,7 @@ import PDFViewer from "@/components/PdfViewer"
 const ServiceTerms = () => {
   const navigate = useNavigate()
   const handleConfirm = () => {
-    navigate(RoutePath.Join)
+    navigate(RoutePath.Join, { replace: true })
   }
 
   return (

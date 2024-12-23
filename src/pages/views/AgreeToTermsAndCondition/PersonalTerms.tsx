@@ -8,7 +8,7 @@ import styled from "styled-components"
 const PersonalTerms = () => {
   const navigate = useNavigate()
   const handleConfirm = () => {
-    navigate(RoutePath.Join)
+    navigate(RoutePath.Join, { replace: true })
   }
 
   return (
