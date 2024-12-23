@@ -11,7 +11,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js"
 
   const loadPDF = useCallback(async (path: string) => {
     setLoading(true)
