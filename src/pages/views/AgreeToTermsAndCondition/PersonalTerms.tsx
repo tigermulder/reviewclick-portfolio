@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 import PDFViewer from "@/components/PdfViewer"
 import styled from "styled-components"
 import SeoHelmet from "@/components/SeoHelmet"
-import { Helmet } from "react-helmet-async"
 
 const PersonalTerms = () => {
   const navigate = useNavigate()

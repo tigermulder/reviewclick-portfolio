@@ -4,7 +4,7 @@ import { PDFDocumentProxy } from "pdfjs-dist"
 import PDFPage from "./PDFPage"
 import GlobalLoading from "./GlobalLoading"
 import { PDFViewerProps } from "@/types/component-types/pdf-viewr-type"
-import { Helmet } from "react-helmet-async"
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [doc, setDoc] = useState<PDFDocumentProxy | null>(null)
@@ -40,20 +40,6 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
       loadPDF(pdfPath)
     }
   }, [pdfPath, loadPDF])
-  // 마운트 시 user-scalable=yes
-  useEffect(() => {
-    return () => {
-      // 언마운트 시 user-scalable=no 로 복원
-      const head = document.head
-      const metaViewport = head.querySelector('meta[name="viewport"]')
-      if (metaViewport) {
-        metaViewport.setAttribute(
-          "content",
-          "width=device-width, initial-scale=1.0, user-scalable=no"
-        )
-      }
-    }
-  }, [])
 
   if (loading) {
     return <GlobalLoading />
@@ -64,35 +50,30 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   }
 
   return (
-    <>
-      <Helmet>
-        {/* 디폴트 설정을 덮어쓰기 위해 user-scalable=yes 로 */}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=yes"
-        />
-      </Helmet>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.7rem",
-          overflowY: "auto",
-          padding: "0.7rem",
-          backgroundColor: "#f0f0f0",
-        }}
-      >
-        {Array.from(new Array(numPages), (_, index) => (
-          <PDFPage
-            key={`page_${index + 1}`}
-            doc={doc}
-            pageNumber={index + 1}
-            scale={scale}
-          />
-        ))}
-      </div>
-    </>
+    <TransformWrapper initialScale={1} minScale={1} maxScale={4}>
+      <TransformComponent>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.7rem",
+            overflowY: "auto",
+            padding: "0.7rem",
+            backgroundColor: "#f0f0f0",
+          }}
+        >
+          {Array.from(new Array(numPages), (_, index) => (
+            <PDFPage
+              key={`page_${index + 1}`}
+              doc={doc}
+              pageNumber={index + 1}
+              scale={scale}
+            />
+          ))}
+        </div>
+      </TransformComponent>
+    </TransformWrapper>
   )
 }
 
