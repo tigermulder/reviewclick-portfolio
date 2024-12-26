@@ -15,8 +15,11 @@ import "@react-pdf-viewer/page-navigation/lib/styles/index.css"
 import styled from "styled-components"
 import { PDFViewerProps } from "@/types/component-types/pdf-viewr-type"
 import Button from "./Button"
+import GlobalLoading from "./GlobalLoading"
+import { useState } from "react"
 
 const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
+  const [isLoading, setIsLoading] = useState(true)
   // Zoom 플러그인 인스턴스
   const zoomPluginInstance = zoomPlugin()
   const { CurrentScale, ZoomIn, ZoomOut } = zoomPluginInstance
@@ -25,8 +28,15 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
   const pageNavigationPluginInstance = pageNavigationPlugin()
   const { CurrentPageLabel } = pageNavigationPluginInstance
 
+  const handleDocumentLoad = () => {
+    setIsLoading(false)
+  }
+
   return (
     <PDFContainer>
+      {/* 3. 로딩 중일 때 스피너 표시 */}
+      {isLoading && <GlobalLoading />}
+
       <ToolBox>
         {/* 현재 페이지 / 전체 페이지 */}
         <CurrentPageLabel>
@@ -66,6 +76,7 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
         <Viewer
           fileUrl={fileUrl}
           plugins={[zoomPluginInstance, pageNavigationPluginInstance]}
+          onDocumentLoad={handleDocumentLoad}
         />
       </Worker>
     </PDFContainer>
