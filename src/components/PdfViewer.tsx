@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, TouchEvent } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import * as pdfjsLib from "pdfjs-dist"
 import { PDFDocumentProxy } from "pdfjs-dist"
 import PDFPage from "./PDFPage"
@@ -16,8 +16,6 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [numPages, setNumPages] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-
-  // scale을 외부 버튼 + 핀치 제스처로 모두 조절
   const [scale, setScale] = useState<number>(2)
 
   pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`
@@ -45,41 +43,22 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
     }
   }, [pdfPath, loadPDF])
 
-  // ------------------------------------------------------------------
-  // 기존 +, - 버튼으로 zoom
-  // ------------------------------------------------------------------
+  // 확대/축소 버튼
   const zoomIn = () => setScale((prev) => Math.min(prev + 0.5, 5))
   const zoomOut = () => setScale((prev) => Math.max(prev - 0.5, 0.5))
 
-  // ------------------------------------------------------------------
-  // (추가) 터치 이벤트로 핀치 줌
-  // ------------------------------------------------------------------
-  // 현재 활성화된 터치(두 손가락) 정보
+  // ---------------------------
+  // 터치 핸들링
+  // ---------------------------
+  const containerRef = useRef<HTMLDivElement>(null)
   const touchesRef = useRef<TouchData[]>([])
-  // 두 손가락 사이의 이전 거리
   const prevDiffRef = useRef<number>(-1)
 
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  // 기본 브라우저 핀치 줌 방지 (전체화면 확대 막기)
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-
-    // DOM 이벤트 리스너에서 사용하는 콜백
-    function handleTouchMove(e: globalThis.TouchEvent) {
-      if (e.touches.length > 1) {
-        e.preventDefault()
-      }
-    }
-
-    el.addEventListener("touchmove", handleTouchMove, { passive: false })
-    return () => {
-      el.removeEventListener("touchmove", handleTouchMove)
-    }
-  }, [])
-
+  // (참고) touchAction: "auto"로 두고,
+  // onTouchMove()에서 조건부로 preventDefault()를 호출
+  // => 한 손가락 스크롤은 가능, 두 손가락 핀치 시 기본동작 차단
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    // 터치 시작된 손가락들 저장
     const { changedTouches } = e
     for (let i = 0; i < changedTouches.length; i++) {
       const t = changedTouches[i]
@@ -95,6 +74,8 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     const { changedTouches } = e
+
+    // 현재 활성화 중인 터치 업데이트
     for (let i = 0; i < changedTouches.length; i++) {
       const t = changedTouches[i]
       const idx = touchesRef.current.findIndex(
@@ -109,8 +90,17 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
       }
     }
 
-    // 두 손가락이 있을 때만 핀치 계산
+    // === 1. 한 손가락인 경우 -> 스크롤 허용 (기본동작)
+    if (touchesRef.current.length === 1) {
+      // 스크롤하려면 preventDefault()를 호출하지 않는다
+      return
+    }
+
+    // === 2. 두 손가락인 경우 -> 핀치 줌
     if (touchesRef.current.length === 2) {
+      // 브라우저 기본 스크롤/확대 방지
+      e.preventDefault()
+
       const [t1, t2] = touchesRef.current
       const xDiff = t1.clientX - t2.clientX
       const yDiff = t1.clientY - t2.clientY
@@ -118,15 +108,13 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
 
       if (prevDiffRef.current > 0) {
         const zoomDelta = curDiff - prevDiffRef.current
-        // zoomDelta 양수면 확대, 음수면 축소
         const factor = 0.02
-        const direction = zoomDelta > 0 ? 1 : -1
         setScale((prev) => {
-          const newScale = prev + direction * factor
-          // 최소/최대값 제한
-          return Math.max(0.5, Math.min(5, newScale))
+          const next = zoomDelta > 0 ? prev + factor : prev - factor
+          return Math.max(0.5, Math.min(5, next))
         })
       }
+
       prevDiffRef.current = curDiff
     }
   }
@@ -136,7 +124,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
     for (let i = 0; i < changedTouches.length; i++) {
       const endTouch = changedTouches[i]
       touchesRef.current = touchesRef.current.filter(
-        (t) => t.identifier !== endTouch.identifier
+        (x) => x.identifier !== endTouch.identifier
       )
     }
     if (touchesRef.current.length < 2) {
@@ -156,31 +144,26 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
     <div
       ref={containerRef}
       style={{
-        // 스크롤 가능, 터치 핀치를 수신할 컨테이너
+        // 스크롤 가능
+        overflowY: "auto",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         gap: "0.7rem",
-        overflowY: "auto",
         padding: "0.7rem",
         backgroundColor: "#f0f0f0",
-        // 모바일 터치 제스처 제어
-        touchAction: "none",
+        // pan-y: 세로 스크롤 허용, pinch-zoom: 일부 브라우저에서 핀치도 허용
+        // (아직 호환성 이슈가 많으므로, 여기서는 onTouchMove에서 직접 preventDefault() 제어)
+        touchAction: "auto",
+        height: "100vh",
       }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
     >
-      {/* Zoom 버튼 */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "0.4rem 0",
-          gap: "0.8rem",
-        }}
-      >
+      {/* Zoom 버튼 UI */}
+      <div style={{ display: "flex", gap: "0.8rem", justifyContent: "center" }}>
         <button
           onClick={zoomOut}
           style={{
@@ -204,7 +187,7 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
         </button>
       </div>
 
-      {/* PDF 페이지들 */}
+      {/* PDF pages */}
       {Array.from(new Array(numPages), (_, index) => (
         <PDFPage
           key={`page_${index + 1}`}
