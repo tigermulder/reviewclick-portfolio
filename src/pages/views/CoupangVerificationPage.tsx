@@ -40,6 +40,7 @@ const CoupangVerificationPage = () => {
   }, [selectedImage])
 
   useEffect(() => {
+    // 이미 인증된 경우
     if (isLoggedIn && isLoggedIn !== "null") {
       addToast("이미 인증되었습니다", 3000, "verify")
       if (redirect) {
@@ -48,23 +49,9 @@ const CoupangVerificationPage = () => {
     }
   }, [isLoggedIn, redirect, navigate, addToast])
 
-  const handleButtonClick = () => {
-    fileInputRef.current?.click()
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null
-    if (file) {
-      setSelectedImage(file)
-      setIsError(false)
-      setErrorMessage("")
-      setIsNameValid(false)
-      setUserName("")
-    }
-  }
+  // 이름 입력 디바운스 체크
   const debouncedValidateName = useDebounce((name: string) => {
     if (name.trim() === "") {
-      // 입력값이 빈 문자열일 때 에러 상태 초기화
       setIsError(false)
       setErrorMessage("")
       setIsNameValid(false)
@@ -80,7 +67,7 @@ const CoupangVerificationPage = () => {
       setErrorMessage("유효한 이름을 입력해주세요 (2자 이상의 한글)")
       setIsNameValid(false)
     }
-  }, 300) // 300ms 디바운스
+  }, 300)
 
   const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value
@@ -88,16 +75,33 @@ const CoupangVerificationPage = () => {
     debouncedValidateName(name)
   }
 
+  // 이미지 업로드
+  const handleButtonClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null
+    if (file) {
+      setSelectedImage(file)
+      setIsError(false)
+      setErrorMessage("")
+    }
+  }
+
+  // 인증하기
   const handleVerification = async () => {
     setIsError(false)
     setErrorMessage("")
 
+    // 이름 검증
     if (!validateName(userName)) {
       setIsError(true)
       setErrorMessage("유효한 이름을 입력해주세요 (2자 이상의 한글)")
       return
     }
 
+    // 이미지 검증
     if (!selectedImage) {
       setIsError(true)
       setErrorMessage("이미지가 없습니다. 다시 업로드해주세요.")
@@ -163,25 +167,8 @@ const CoupangVerificationPage = () => {
           페이지를 캡쳐 후 업로드해 주세요.
         </AccountVerifyText>
 
-        <ContentContainer>
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-          <Button $variant="uploadImage" onClick={handleButtonClick}>
-            {selectedImage ? "새로운 이미지 업로드" : "이미지 업로드"}
-          </Button>
-        </ContentContainer>
-        {imageURL && (
-          <ThumbnailWrapper>
-            <img src={imageURL} alt="thumbnail" />
-          </ThumbnailWrapper>
-        )}
-
-        <TextFieldWrapper $visible={!!selectedImage}>
+        {/* 1. 이름 입력 영역 */}
+        <TextFieldWrapper>
           <TextField
             type="text"
             name="name"
@@ -192,16 +179,41 @@ const CoupangVerificationPage = () => {
             $marginBottom="1rem"
             errorMessage={errorMessage}
           />
-          <ButtonContainer $visible={isNameValid}>
-            <Button
-              $variant="red"
-              onClick={handleVerification}
-              disabled={isVerifying}
-            >
-              {isVerifying ? "인증 중..." : "인증하기"}
-            </Button>
-          </ButtonContainer>
         </TextFieldWrapper>
+
+        {/* 2. 이름이 유효하면 이미지 업로드 버튼 보이기 */}
+        {isNameValid && (
+          <ContentContainer>
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+            <Button $variant="uploadImage" onClick={handleButtonClick}>
+              {selectedImage ? "새로운 이미지 업로드" : "이미지 업로드"}
+            </Button>
+          </ContentContainer>
+        )}
+
+        {/* 3. 이미지 미리보기 */}
+        {imageURL && (
+          <ThumbnailWrapper>
+            <img src={imageURL} alt="thumbnail" />
+          </ThumbnailWrapper>
+        )}
+
+        {/* 4. 이미지가 업로드되어 있으면 인증하기 버튼 노출 */}
+        <ButtonWrapper $visible={!!(selectedImage && isNameValid)}>
+          <Button
+            $variant="red"
+            onClick={handleVerification}
+            disabled={isVerifying}
+          >
+            {isVerifying ? "인증 중..." : "인증하기"}
+          </Button>
+        </ButtonWrapper>
       </VerificationContainer>
     </>
   )
@@ -234,8 +246,12 @@ const AccountVerifyText = styled.p`
   }
 `
 
+const TextFieldWrapper = styled.div`
+  margin-bottom: 0.8rem;
+`
+
 const ThumbnailWrapper = styled.div`
-  margin-top: 2rem;
+  margin-top: 1.6rem;
   width: 100%;
   height: 20rem;
   display: flex;
@@ -251,13 +267,14 @@ const ThumbnailWrapper = styled.div`
     object-fit: contain;
   }
 `
-const TextFieldWrapper = styled.div<{ $visible: boolean }>`
+
+const ButtonWrapper = styled.div<{ $visible: boolean }>`
   position: fixed;
   padding: 1.6rem 1.5rem 4.1rem;
   width: 100%;
   bottom: 0;
   left: 0;
-  background-color: white;
+  background-color: #fff;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
   transform: ${({ $visible }) =>
     $visible ? "translateY(0)" : "translateY(100%)"};
@@ -266,18 +283,4 @@ const TextFieldWrapper = styled.div<{ $visible: boolean }>`
     transform 0.2s ease-in-out,
     opacity 0.1s ease-in-out;
   z-index: 100;
-`
-
-const ButtonContainer = styled.div<{ $visible: boolean }>`
-  width: 100%;
-  margin-top: 1.6rem;
-  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transform: ${({ $visible }) =>
-    $visible ? "translateY(0)" : "translateY(20px)"};
-  transition:
-    opacity 0.2s ease-in-out,
-    transform 0.1s ease-in-out;
-  pointer-events: ${({ $visible }) => ($visible ? "auto" : "none")};
-  display: flex;
-  justify-content: center;
 `
