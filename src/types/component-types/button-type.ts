@@ -22,6 +22,7 @@ export interface ButtonProps {
   $marginTop?: string
   $fontSize?: string
   $animation?: Keyframes | string
+  $padding?: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -46,4 +47,5 @@ export interface StyledButtonProps {
   $fontSize?: string
   $animation?: Keyframes | string
   disabled?: boolean
+  $padding?: string
 }

@@ -57,14 +57,22 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
           </CurrentScaleBox>
           <ZoomOut>
             {(props: RenderZoomOutProps) => (
-              <Button $variant="outlined" onClick={props.onClick}>
+              <Button
+                $variant="outlined"
+                onClick={props.onClick}
+                $padding="1.4rem"
+              >
                 <ZoomMinusBtn />
               </Button>
             )}
           </ZoomOut>
           <ZoomIn>
             {(props: RenderZoomInProps) => (
-              <Button $variant="outlined" onClick={props.onClick}>
+              <Button
+                $variant="outlined"
+                onClick={props.onClick}
+                $padding="1.4rem"
+              >
                 <ZoomPlusBtn />
               </Button>
             )}
@@ -94,11 +102,10 @@ const ToolBox = styled.div`
   width: 100%;
   top: 5.2rem;
   left: 0;
-  padding: 0.6rem 2.6rem;
+  padding: 1.6rem 2.6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--N40);
   z-index: 999;
 `
 
@@ -113,7 +120,13 @@ const ZoomTool = styled.div`
 `
 
 const PageLabelWrapper = styled.span`
-  color: #333;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.15);
+  width: 5rem;
+  text-align: center;
+  padding: 0.2rem 0;
+  border-radius: 0.4rem;
+  color: var(--RevBlack);
 `
 
 const ZoomMinusBtn = styled.div`

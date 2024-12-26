@@ -20,6 +20,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       $fontSize,
       $animation,
       onClick,
+      $padding,
     },
     ref
   ) => (
@@ -32,6 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       $marginTop={$marginTop}
       $fontSize={$fontSize}
       $animation={$animation}
+      $padding={$padding}
     >
       {$variant === "success" && (
         <SuccessIcon
@@ -126,7 +128,7 @@ const flexCenter = `
 
 const StyledButton = styled.button<StyledButtonProps>`
   width: 100%;
-  padding: 1.1rem;
+  padding: ${({ $padding }) => $padding ?? "1.1rem"};
   border-radius: 0.8rem;
   font-weight: var(--font-bold);
   font-size: ${({ $fontSize }) => $fontSize ?? "var(--font-body-size)"};
@@ -152,6 +154,10 @@ const StyledButton = styled.button<StyledButtonProps>`
           background-color: white;
           color: var(--RevBlack);
           border: 1px solid var(--N80);
+          &:not(:disabled):active {
+            transform: scale(0.96);
+            background-color: var(--WSmoke);
+          }
         `
       case "join":
         return css`
