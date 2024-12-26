@@ -58,14 +58,14 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
           <ZoomOut>
             {(props: RenderZoomOutProps) => (
               <Button $variant="outlined" onClick={props.onClick}>
-                축소
+                <ZoomMinusBtn />
               </Button>
             )}
           </ZoomOut>
           <ZoomIn>
             {(props: RenderZoomInProps) => (
               <Button $variant="outlined" onClick={props.onClick}>
-                확대
+                <ZoomPlusBtn />
               </Button>
             )}
           </ZoomIn>
@@ -86,7 +86,7 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
 export default PDFViewer
 
 const PDFContainer = styled.div`
-  padding: 13.5rem 0;
+  padding: 11rem 0 13rem;
 `
 
 const ToolBox = styled.div`
@@ -103,15 +103,53 @@ const ToolBox = styled.div`
 `
 
 const CurrentScaleBox = styled.div`
-  padding: 0 0.2rem;
+  padding: 0;
 `
 
 const ZoomTool = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1rem;
 `
 
 const PageLabelWrapper = styled.span`
   color: #333;
+`
+
+const ZoomMinusBtn = styled.div`
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background-color: #333;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`
+
+const ZoomPlusBtn = styled.div`
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background-color: #333;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 12px;
+    background-color: #333;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `
