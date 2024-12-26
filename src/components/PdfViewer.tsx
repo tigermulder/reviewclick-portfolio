@@ -4,7 +4,6 @@ import { PDFDocumentProxy } from "pdfjs-dist"
 import PDFPage from "./PDFPage"
 import GlobalLoading from "./GlobalLoading"
 import { PDFViewerProps } from "@/types/component-types/pdf-viewr-type"
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [doc, setDoc] = useState<PDFDocumentProxy | null>(null)
@@ -50,30 +49,26 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   }
 
   return (
-    <TransformWrapper initialScale={1} minScale={1} maxScale={4}>
-      <TransformComponent>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "0.7rem",
-            overflowY: "auto",
-            padding: "0.7rem",
-            backgroundColor: "#f0f0f0",
-          }}
-        >
-          {Array.from(new Array(numPages), (_, index) => (
-            <PDFPage
-              key={`page_${index + 1}`}
-              doc={doc}
-              pageNumber={index + 1}
-              scale={scale}
-            />
-          ))}
-        </div>
-      </TransformComponent>
-    </TransformWrapper>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "0.7rem",
+        overflowY: "auto",
+        padding: "0.7rem",
+        backgroundColor: "#f0f0f0",
+      }}
+    >
+      {Array.from(new Array(numPages), (_, index) => (
+        <PDFPage
+          key={`page_${index + 1}`}
+          doc={doc}
+          pageNumber={index + 1}
+          scale={scale}
+        />
+      ))}
+    </div>
   )
 }
 
