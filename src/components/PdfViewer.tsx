@@ -121,7 +121,7 @@ const ZoomTool = styled.div`
 
 const PageLabelWrapper = styled.span`
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.08);
   width: 5rem;
   text-align: center;
   padding: 0.2rem 0;
