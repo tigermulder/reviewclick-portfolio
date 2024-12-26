@@ -40,6 +40,20 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
       loadPDF(pdfPath)
     }
   }, [pdfPath, loadPDF])
+  // 마운트 시 user-scalable=yes
+  useEffect(() => {
+    return () => {
+      // 언마운트 시 user-scalable=no 로 복원
+      const head = document.head
+      const metaViewport = head.querySelector('meta[name="viewport"]')
+      if (metaViewport) {
+        metaViewport.setAttribute(
+          "content",
+          "width=device-width, initial-scale=1.0, user-scalable=no"
+        )
+      }
+    }
+  }, [])
 
   if (loading) {
     return <GlobalLoading />
