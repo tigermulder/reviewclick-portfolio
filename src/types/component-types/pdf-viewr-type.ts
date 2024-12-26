@@ -1,3 +1,3 @@
 export type PDFViewerProps = {
-  pdfPath: string
+  fileUrl: string
 }

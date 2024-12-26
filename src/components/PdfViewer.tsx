@@ -1,22 +1,24 @@
-import { Viewer, Worker, SpecialZoomLevel } from "@react-pdf-viewer/core"
+import { Viewer, Worker } from "@react-pdf-viewer/core"
 import {
   pageNavigationPlugin,
   RenderCurrentPageLabelProps,
 } from "@react-pdf-viewer/page-navigation"
-import { zoomPlugin } from "@react-pdf-viewer/zoom"
+import {
+  zoomPlugin,
+  RenderZoomInProps,
+  RenderZoomOutProps,
+} from "@react-pdf-viewer/zoom"
 import "@react-pdf-viewer/core/lib/styles/index.css"
 import "@react-pdf-viewer/zoom/lib/styles/index.css"
 import "@react-pdf-viewer/page-navigation/lib/styles/index.css"
 import styled from "styled-components"
-
-interface PDFViewerProps {
-  fileUrl: string
-}
+import { PDFViewerProps } from "@/types/component-types/pdf-viewr-type"
+import Button from "./Button"
 
 const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
   // Zoom 플러그인 인스턴스
   const zoomPluginInstance = zoomPlugin()
-  const { ZoomInButton, ZoomOutButton, ZoomPopover } = zoomPluginInstance
+  const { ZoomIn, ZoomOut, ZoomPopover } = zoomPluginInstance
 
   // 페이지 네비게이션 플러그인 인스턴스
   const pageNavigationPluginInstance = pageNavigationPlugin()
@@ -36,8 +38,20 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
         {/* Zoom 기능 */}
         <ZoomTool>
           <ZoomPopover />
-          <ZoomOutButton />
-          <ZoomInButton />
+          <ZoomOut>
+            {(props: RenderZoomOutProps) => (
+              <Button $variant="outlined" onClick={props.onClick}>
+                축소
+              </Button>
+            )}
+          </ZoomOut>
+          <ZoomIn>
+            {(props: RenderZoomInProps) => (
+              <Button $variant="outlined" onClick={props.onClick}>
+                확대
+              </Button>
+            )}
+          </ZoomIn>
         </ZoomTool>
       </ToolBox>
 
@@ -45,7 +59,6 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
         <Viewer
           fileUrl={fileUrl}
           plugins={[zoomPluginInstance, pageNavigationPluginInstance]}
-          defaultScale={SpecialZoomLevel.PageFit}
         />
       </Worker>
     </PDFContainer>
@@ -54,11 +67,8 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
 
 export default PDFViewer
 
-// ---------------- Styled Components ----------------
-
 const PDFContainer = styled.div`
-  /* 필요 시 스타일 조정 */
-  padding: 11rem 0 13rem;
+  padding: 13rem 0;
 `
 
 const ToolBox = styled.div`
@@ -66,7 +76,7 @@ const ToolBox = styled.div`
   width: 100%;
   top: 5.2rem;
   left: 0;
-  padding: 0.6rem;
+  padding: 0.6rem 2.6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -77,10 +87,9 @@ const ToolBox = styled.div`
 const ZoomTool = styled.div`
   display: flex;
   align-items: center;
+  gap: 0.6rem;
 `
 
 const PageLabelWrapper = styled.span`
-  margin-left: 1rem;
-  font-size: 1.4rem;
   color: #333;
 `

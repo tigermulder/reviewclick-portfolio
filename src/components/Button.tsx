@@ -149,7 +149,7 @@ const StyledButton = styled.button<StyledButtonProps>`
         `
       case "outlined":
         return css`
-          background-color: transparent;
+          background-color: white;
           color: var(--RevBlack);
           border: 1px solid var(--N80);
         `
