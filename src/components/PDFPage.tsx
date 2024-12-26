@@ -1,11 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react"
-import * as pdfjsLib from "pdfjs-dist"
+import { useCallback, useEffect, useRef } from "react"
 import { PDFDocumentProxy } from "pdfjs-dist"
 import { useInView } from "react-intersection-observer"
-
-type PDFViewerProps = {
-  pdfPath: string
-}
 
 type PDFPageProps = {
   doc: PDFDocumentProxy

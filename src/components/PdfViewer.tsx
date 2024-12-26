@@ -4,14 +4,18 @@ import { PDFDocumentProxy } from "pdfjs-dist"
 import PDFPage from "./PDFPage"
 import GlobalLoading from "./GlobalLoading"
 import { PDFViewerProps } from "@/types/component-types/pdf-viewr-type"
+import { Helmet } from "react-helmet-async"
 
 const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   const [doc, setDoc] = useState<PDFDocumentProxy | null>(null)
   const [numPages, setNumPages] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-  const [scale, setScale] = useState<number>(2)
 
+  // 줌 기능을 제거하므로, scale은 기본값으로만 사용
+  const scale = 2
+
+  // 워커 경로 설정
   pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`
 
   const loadPDF = useCallback(async (path: string) => {
@@ -37,9 +41,6 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
     }
   }, [pdfPath, loadPDF])
 
-  const zoomIn = () => setScale((prev) => Math.min(prev + 0.5, 5))
-  const zoomOut = () => setScale((prev) => Math.max(prev - 0.5, 0.5))
-
   if (loading) {
     return <GlobalLoading />
   }
@@ -49,56 +50,35 @@ const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "0.7rem",
-        overflowY: "auto",
-        padding: "0.7rem",
-        backgroundColor: "#f0f0f0",
-      }}
-    >
+    <>
+      <Helmet>
+        {/* 디폴트 설정을 덮어쓰기 위해 user-scalable=yes 로 */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=yes"
+        />
+      </Helmet>
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
-          padding: "0.4rem 0",
-          gap: "0.8rem",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "0.7rem",
+          overflowY: "auto",
+          padding: "0.7rem",
+          backgroundColor: "#f0f0f0",
         }}
       >
-        <button
-          onClick={zoomOut}
-          style={{
-            backgroundColor: "#333",
-            color: "white",
-            padding: "0 0.45rem",
-          }}
-        >
-          -
-        </button>
-        <span>Zoom: {scale.toFixed(1)}x</span>
-        <button
-          onClick={zoomIn}
-          style={{
-            backgroundColor: "#333",
-            color: "white",
-            padding: "0 0.45rem",
-          }}
-        >
-          +
-        </button>
+        {Array.from(new Array(numPages), (_, index) => (
+          <PDFPage
+            key={`page_${index + 1}`}
+            doc={doc}
+            pageNumber={index + 1}
+            scale={scale}
+          />
+        ))}
       </div>
-      {Array.from(new Array(numPages), (_, index) => (
-        <PDFPage
-          key={`page_${index + 1}`}
-          doc={doc}
-          pageNumber={index + 1}
-          scale={scale}
-        />
-      ))}
-    </div>
+    </>
   )
 }
 
