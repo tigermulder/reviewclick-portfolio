@@ -223,6 +223,7 @@ export default CoupangVerificationPage
 
 const VerificationContainer = styled.div`
   padding: 5.2rem 0;
+  height: 100vh;
 `
 
 const ContentContainer = styled.div`
