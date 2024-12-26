@@ -341,6 +341,10 @@ textarea {
   clip: rect(0, 0, 0, 0);
 }
 
+[aria-describedby] {
+  display: flex;
+}
+
 /** 모바일 작은해상도 */
 @media (max-width: 374px) {
   html {

@@ -1,75 +1,86 @@
-import { useCallback, useEffect, useState } from "react"
-import * as pdfjsLib from "pdfjs-dist"
-import { PDFDocumentProxy } from "pdfjs-dist"
-import PDFPage from "./PDFPage"
-import GlobalLoading from "./GlobalLoading"
-import { PDFViewerProps } from "@/types/component-types/pdf-viewr-type"
+import { Viewer, Worker, SpecialZoomLevel } from "@react-pdf-viewer/core"
+import {
+  pageNavigationPlugin,
+  RenderCurrentPageLabelProps,
+} from "@react-pdf-viewer/page-navigation"
+import { zoomPlugin } from "@react-pdf-viewer/zoom"
+import "@react-pdf-viewer/core/lib/styles/index.css"
+import "@react-pdf-viewer/zoom/lib/styles/index.css"
+import "@react-pdf-viewer/page-navigation/lib/styles/index.css"
+import styled from "styled-components"
 
-const PDFViewer = ({ pdfPath }: PDFViewerProps) => {
-  const [doc, setDoc] = useState<PDFDocumentProxy | null>(null)
-  const [numPages, setNumPages] = useState<number>(0)
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
+interface PDFViewerProps {
+  fileUrl: string
+}
 
-  // 줌 기능을 제거하므로, scale은 기본값으로만 사용
-  const scale = 2
+const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
+  // Zoom 플러그인 인스턴스
+  const zoomPluginInstance = zoomPlugin()
+  const { ZoomInButton, ZoomOutButton, ZoomPopover } = zoomPluginInstance
 
-  // 워커 경로 설정
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`
-
-  const loadPDF = useCallback(async (path: string) => {
-    setLoading(true)
-    setError(null)
-    try {
-      const loadingTask = pdfjsLib.getDocument(path)
-      const loadedDoc = await loadingTask.promise
-      setDoc(loadedDoc)
-      setNumPages(loadedDoc.numPages)
-      console.log(`PDF 로드 완료: Total ${loadedDoc.numPages} page`)
-    } catch (err) {
-      console.error("PDF 로드 중 오류 발생:", err)
-      setError("PDF 문서 로드에 실패했습니다.")
-    } finally {
-      setLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (pdfPath) {
-      loadPDF(pdfPath)
-    }
-  }, [pdfPath, loadPDF])
-
-  if (loading) {
-    return <GlobalLoading />
-  }
-
-  if (!doc) {
-    return <div>문서가 로드되지 않았습니다.</div>
-  }
+  // 페이지 네비게이션 플러그인 인스턴스
+  const pageNavigationPluginInstance = pageNavigationPlugin()
+  const { CurrentPageLabel } = pageNavigationPluginInstance
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "0.7rem",
-        overflowY: "auto",
-        padding: "0.7rem",
-        backgroundColor: "#f0f0f0",
-      }}
-    >
-      {Array.from(new Array(numPages), (_, index) => (
-        <PDFPage
-          key={`page_${index + 1}`}
-          doc={doc}
-          pageNumber={index + 1}
-          scale={scale}
+    <PDFContainer>
+      <ToolBox>
+        {/* 현재 페이지 / 전체 페이지 */}
+        <CurrentPageLabel>
+          {(props: RenderCurrentPageLabelProps) => (
+            <PageLabelWrapper>
+              {`${props.currentPage + 1} / ${props.numberOfPages}`}
+            </PageLabelWrapper>
+          )}
+        </CurrentPageLabel>
+        {/* Zoom 기능 */}
+        <ZoomTool>
+          <ZoomPopover />
+          <ZoomOutButton />
+          <ZoomInButton />
+        </ZoomTool>
+      </ToolBox>
+
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.js">
+        <Viewer
+          fileUrl={fileUrl}
+          plugins={[zoomPluginInstance, pageNavigationPluginInstance]}
+          defaultScale={SpecialZoomLevel.PageFit}
         />
-      ))}
-    </div>
+      </Worker>
+    </PDFContainer>
   )
 }
 
 export default PDFViewer
+
+// ---------------- Styled Components ----------------
+
+const PDFContainer = styled.div`
+  /* 필요 시 스타일 조정 */
+  padding: 11rem 0 13rem;
+`
+
+const ToolBox = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 5.2rem;
+  left: 0;
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--N40);
+  z-index: 999;
+`
+
+const ZoomTool = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const PageLabelWrapper = styled.span`
+  margin-left: 1rem;
+  font-size: 1.4rem;
+  color: #333;
+`
