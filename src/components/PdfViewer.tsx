@@ -68,7 +68,7 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
 export default PDFViewer
 
 const PDFContainer = styled.div`
-  padding: 13rem 0;
+  padding: 13.5rem 0;
 `
 
 const ToolBox = styled.div`
