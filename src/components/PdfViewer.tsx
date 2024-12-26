@@ -5,6 +5,7 @@ import {
 } from "@react-pdf-viewer/page-navigation"
 import {
   zoomPlugin,
+  RenderCurrentScaleProps,
   RenderZoomInProps,
   RenderZoomOutProps,
 } from "@react-pdf-viewer/zoom"
@@ -18,7 +19,7 @@ import Button from "./Button"
 const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
   // Zoom 플러그인 인스턴스
   const zoomPluginInstance = zoomPlugin()
-  const { ZoomIn, ZoomOut, ZoomPopover } = zoomPluginInstance
+  const { CurrentScale, ZoomIn, ZoomOut } = zoomPluginInstance
 
   // 페이지 네비게이션 플러그인 인스턴스
   const pageNavigationPluginInstance = pageNavigationPlugin()
@@ -37,7 +38,13 @@ const PDFViewer = ({ fileUrl }: PDFViewerProps) => {
         </CurrentPageLabel>
         {/* Zoom 기능 */}
         <ZoomTool>
-          <ZoomPopover />
+          <CurrentScaleBox>
+            <CurrentScale>
+              {(props: RenderCurrentScaleProps) => (
+                <>{`${Math.round(props.scale * 100)}%`}</>
+              )}
+            </CurrentScale>
+          </CurrentScaleBox>
           <ZoomOut>
             {(props: RenderZoomOutProps) => (
               <Button $variant="outlined" onClick={props.onClick}>
@@ -82,6 +89,10 @@ const ToolBox = styled.div`
   justify-content: space-between;
   background-color: var(--N40);
   z-index: 999;
+`
+
+const CurrentScaleBox = styled.div`
+  padding: 0 0.2rem;
 `
 
 const ZoomTool = styled.div`
