@@ -18,7 +18,6 @@ export const getCampaignListFromB2 = async (
   data: CampaignListRequest
 ): Promise<CampaignListResponse> => {
   try {
-    // 프록시를 통해 호출 (/api로 시작하면 vite가 자동으로 프록시)
     const response = await fetch(
       `/api/b2/ads/${B2_CONFIG.spaceCode}?apikey=${B2_CONFIG.apiKey}&category=${data.category || ''}`,
       {
@@ -38,20 +37,6 @@ export const getCampaignListFromB2 = async (
   } catch (error) {
     console.error('B2 API 호출 실패:', error)
     throw error
-  }
-}
-
-//** B2 API 테스트 함수 */
-export const testB2API = async () => {
-  console.log('B2 API 테스트 시작...')
-  
-  try {
-    const result = await getCampaignListFromB2({ category: '1' })
-    console.log('B2 API 성공:', result)
-    return result
-  } catch (error) {
-    console.error('B2 API 실패:', error)
-    return null
   }
 }
 
