@@ -17,6 +17,56 @@ const B2_CONFIG = {
 const isProduction = window.location.hostname !== 'localhost'
 const isGitHubPages = window.location.hostname.includes('github.io')
 
+//** JSONP 방식으로 B2 API 호출 (CORS 우회) */
+export const getCampaignListViaJSONP = async (
+  data: CampaignListRequest
+): Promise<CampaignListResponse> => {
+  return new Promise((resolve, reject) => {
+    const callbackName = `jsonp_callback_${Date.now()}`
+    const script = document.createElement('script')
+    
+    // 글로벌 콜백 함수 생성
+    (window as any)[callbackName] = (data: any) => {
+      delete (window as any)[callbackName]
+      document.body.removeChild(script)
+      resolve(data)
+    }
+    
+    // 에러 처리
+    script.onerror = () => {
+      delete (window as any)[callbackName]
+      document.body.removeChild(script)
+      reject(new Error('JSONP 요청 실패'))
+    }
+    
+    // 스크립트 태그로 요청
+    script.src = `https://dev-api.revuclick.io/b2/ads/${B2_CONFIG.spaceCode}?apikey=${B2_CONFIG.apiKey}&category=${data.category || ''}&callback=${callbackName}`
+    document.body.appendChild(script)
+  })
+}
+
+//** img 태그를 이용한 픽셀 트래킹 방식 */
+export const getCampaignListViaPixel = async (
+  data: CampaignListRequest
+): Promise<CampaignListResponse> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    
+    img.onload = () => {
+      // 이미지 로딩 성공시 (실제로는 데이터를 받을 수 없지만 요청이 성공했다는 의미)
+      console.log('픽셀 트래킹 성공')
+      resolve(mockCampaignList as CampaignListResponse)
+    }
+    
+    img.onerror = () => {
+      reject(new Error('픽셀 트래킹 실패'))
+    }
+    
+    // 이미지 src에 API URL 설정
+    img.src = `https://dev-api.revuclick.io/b2/ads/${B2_CONFIG.spaceCode}?apikey=${B2_CONFIG.apiKey}&category=${data.category || ''}&_=${Date.now()}`
+  })
+}
+
 //** 개발환경용 B2 API 호출 (Vite 프록시 사용) */
 export const getCampaignListFromB2Dev = async (
   data: CampaignListRequest
@@ -80,7 +130,30 @@ export const getCampaignListViaProxy = async (
   }
 }
 
-
+//** Serverless Functions를 이용한 API 호출 (Vercel/Netlify) */
+export const getCampaignListViaServerless = async (
+  data: CampaignListRequest
+): Promise<CampaignListResponse> => {
+  // 여러 serverless 엔드포인트 시도
+  const endpoints = [
+    'https://api.jsonbin.io/v3/req',
+    'https://httpbin.org/get',
+    'https://jsonplaceholder.typicode.com/posts' // 테스트용
+  ]
+  
+  // 실제 구현에서는 개인 serverless 함수 URL을 사용
+  const targetUrl = `https://dev-api.revuclick.io/b2/ads/${B2_CONFIG.spaceCode}?apikey=${B2_CONFIG.apiKey}&category=${data.category || ''}`
+  
+  try {
+    // 실제로는 서버리스 함수에서 프록시 처리
+    console.log('서버리스 함수 호출 시도...')
+    // 이 부분은 실제 서버리스 함수가 배포되어야 작동
+    throw new Error('서버리스 함수 미구현')
+  } catch (error) {
+    console.warn('서버리스 함수 실패:', error)
+    throw error
+  }
+}
 
 //** B2 API 테스트 함수 */
 export const testB2API = async () => {
