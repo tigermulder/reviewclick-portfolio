@@ -7,7 +7,7 @@ const API = import.meta.env.VITE_SERVER_URL
 
 //** Axios 인스턴스생성 */
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: API,
+  baseURL: baseURL,
   withCredentials: true,
 })
 
