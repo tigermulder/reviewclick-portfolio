@@ -19,7 +19,7 @@ export const getCampaignList = async (
     return response.data
   } catch (e) {
     // 에러 발생 시 mock 데이터 반환
-    return mockCampaignList as CampaignListResponse
+    return mockCampaignList
   }
 }
 

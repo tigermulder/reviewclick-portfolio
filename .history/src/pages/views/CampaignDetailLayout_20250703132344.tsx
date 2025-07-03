@@ -190,7 +190,7 @@ const CampaignDetailPage = () => {
 
   //** D-Day 계산 */
   const today = new Date()
-  const endDate = new Date(campaignDetail.joinEndAt || campaignDetail.endAt)
+  const endDate = new Date(campaignDetail.joinEndAt)
   const diffTime = endDate.getTime() - today.getTime()
   const dDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   let dDayText = ""
