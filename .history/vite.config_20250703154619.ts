@@ -9,11 +9,6 @@ import { visualizer } from "rollup-plugin-visualizer"
 export default defineConfig(({ mode }) => {
   // 환경 변수를 로드
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
-  
-  // 포트폴리오 모드 기본 설정
-  if (!process.env.VITE_PORTFOLIO_MODE) {
-    process.env.VITE_PORTFOLIO_MODE = "true"
-  }
 
   return {
     base: "/", // 포트폴리오 모드: 루트 경로 사용
