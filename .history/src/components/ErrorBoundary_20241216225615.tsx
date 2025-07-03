@@ -55,7 +55,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   // 에러 타이틀 렌더링
   renderErrorTitle(): string {
     if (this.state.error?.message.includes("404")) {
-      return " 찾을 수 없어요"
+      return "페이지를 찾을 수 없어요"
     } else if (this.state.error?.message.includes("401")) {
       return "잘못된 접근이에요"
     } else {
