@@ -80,9 +80,17 @@ const MainPage = (): JSX.Element => {
   }
 
   //** Fetch campaign list */
-  const fetchCampaigns = async () => {
-    // 무조건 mock 데이터만 반환
-    return mockCampaignList
+  const fetchCampaigns = async ({ pageParam = 1 }) => {
+    if (pageParam === 1) {
+      // 첫 페이지는 무조건 mock 데이터 반환
+      return mockCampaignList
+    }
+    const requestData = {
+      pageSize: 10,
+      pageIndex: pageParam,
+    }
+    const response = await getCampaignList(requestData)
+    return response
   }
 
   //* 콘솔

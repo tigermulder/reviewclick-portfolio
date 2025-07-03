@@ -17,7 +17,6 @@ import useScrollToTop from "@/hooks/useScrollToTop"
 import useToast from "@/hooks/useToast"
 import styled from "styled-components"
 import { calculateRemainingTime } from "@/utils/util"
-import mockCampaignList from "services/mock-campaign-list"
 
 const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
@@ -80,9 +79,14 @@ const MainPage = (): JSX.Element => {
   }
 
   //** Fetch campaign list */
-  const fetchCampaigns = async () => {
-    // 무조건 mock 데이터만 반환
-    return mockCampaignList
+  const fetchCampaigns = async ({ pageParam = 1 }) => {
+    // await new Promise((resolve) => setTimeout(resolve, 2000000))
+    const requestData = {
+      pageSize: 10,
+      pageIndex: pageParam,
+    }
+    const response = await getCampaignList(requestData)
+    return response
   }
 
   //* 콘솔
