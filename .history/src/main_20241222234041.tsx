@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")!).render(
   <RecoilRoot>
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<GlobalLoading />}>
-        <Router basename={`/reviewclick-portfolio`}>
+        <Router>
           <ErrorBoundary>
             <App /> {/* // 라우팅 컴포넌트 */}
           </ErrorBoundary>
