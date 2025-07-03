@@ -54,7 +54,6 @@ export const AppRoute = () => {
           {/* Introduce 페이지 */}
           {/* <Route path={RoutePath.Introduce} element={<RevuIntroducePage />} /> */}
           {/* main 페이지 */}
-          <Route index element={<MainPage />} />
           <Route path={RoutePath.Home} element={<MainPage />} />
           {/* 캠페인상세 페이지 */}
           <Route
