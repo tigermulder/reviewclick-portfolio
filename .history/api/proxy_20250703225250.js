@@ -58,7 +58,7 @@ export default async function handler(req, res) {
     // 성공 응답 (요청 URL도 같이 내려줌)
     res.status(200).json({
       ...data,                  // 기존 B2 API 응답
-      debug_finalUrl: apiPath  // 실제 요청한 URL 추가
+      debug_finalUrl: finalUrl  // 실제 요청한 URL 추가
     })
 
   } catch (error) {
