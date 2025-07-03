@@ -123,7 +123,7 @@ export const AppRoute = () => {
           {/* NotFoundPage를 /404 경로에 매핑 */}
           <Route path="/404" element={<NotFoundPage />} />
           {/* 모든 예외 경로를 /404로 리디렉션 */}
-          {/* <Route path="*" element={<Navigate to="/404" replace />} /> */}
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Route>
       </ReviewClickRoutes>
     </HelmetProvider>
