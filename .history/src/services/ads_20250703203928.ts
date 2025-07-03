@@ -28,7 +28,7 @@ export const checkAdAndGetLandingUrl = async (
       uid: data.uid ?? "",
       advId: data.advId ?? "",
     })
-    const url = `/api/proxy?path=b2/ads/${SPACE_CODE}/${data.adCode}/check?${params.toString()}`
+    const url = `/api/proxy?path=b2/ads/${SPACE_CODE}/${data.adCode}/check&${params.toString()}`
     const response = await fetch(url)
     if (!response.ok) throw new Error("프록시 API 호출 실패")
     return await response.json()
