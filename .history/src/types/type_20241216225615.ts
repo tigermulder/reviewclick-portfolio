@@ -21,7 +21,11 @@ export interface AuthType {
 
 export type RoutePathHook =
   | typeof RoutePath.Home
+  | typeof RoutePath.Login
   | typeof RoutePath.Join
+  | typeof RoutePath.FindId
+  | typeof RoutePath.FindPassword
+  | typeof RoutePath.ResetPassword
   | typeof RoutePath.MyCart
   | typeof RoutePath.MyCampaign
   | typeof RoutePath.Notification

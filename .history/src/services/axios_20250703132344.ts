@@ -1,11 +1,13 @@
 import axios, { AxiosInstance } from "axios"
 
-// baseURL을 무조건 로컬로 고정
-const baseURL = "http://localhost:5173/"
+//** 개발환경용 */
+const baseURL = import.meta.env.VITE_BASE_URL || "/api"
+// ** 운영배포용 꼭 baseURL수정해서 올려주세요 */
+const API = import.meta.env.VITE_SERVER_URL
 
 //** Axios 인스턴스생성 */
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL,
+  baseURL: baseURL,
   withCredentials: true,
 })
 

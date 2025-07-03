@@ -1,7 +1,10 @@
 import axios, { AxiosInstance } from "axios"
 
-// baseURL을 무조건 로컬로 고정
-const baseURL = "http://localhost:5173/"
+// 환경에 따라 baseURL 분기
+const baseURL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5173/"
+    : "https://tigermulder.github.io/"
 
 //** Axios 인스턴스생성 */
 const axiosInstance: AxiosInstance = axios.create({
