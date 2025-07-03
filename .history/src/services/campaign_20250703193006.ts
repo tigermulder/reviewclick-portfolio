@@ -255,32 +255,6 @@ export const getCampaignItem = async (
       }
     }
     
-    // 배포환경에서는 Vercel 프록시로 B2 Check API 시도
-    if (isProduction && !isGitHubPages) {
-      try {
-        console.log('배포환경 - Vercel 프록시로 B2 Check API 시도')
-        const response = await fetch(
-          `https://your-vercel-app.vercel.app/api/proxy?path=b2/ads/${B2_CONFIG.spaceCode}/${data.campaignCode}/check&uid=test_user&advId=744`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          }
-        )
-        
-        if (response.ok) {
-          const result = await response.json()
-          console.log('Vercel 프록시 B2 Check API 성공')
-          return result
-        } else {
-          throw new Error(`Vercel 프록시 B2 Check API Error: ${response.status}`)
-        }
-      } catch (vercelError) {
-        console.warn('Vercel 프록시 B2 Check API도 실패:', vercelError)
-      }
-    }
-    
     throw error
   }
 }

@@ -41,51 +41,13 @@ export const getCampaignListFromB2Dev = async (
   return result
 }
 
-//** Vercel 서버리스 함수 프록시 호출 */
-export const getCampaignListViaVercelProxy = async (
-  data: CampaignListRequest,
-  proxyBaseUrl: string = 'https://your-vercel-app.vercel.app'
-): Promise<CampaignListResponse> => {
-  console.log('Vercel 서버리스 프록시 시도')
-  
-  try {
-    const response = await fetch(
-      `${proxyBaseUrl}/api/proxy?path=b2/ads/${B2_CONFIG.spaceCode}&category=${data.category || ''}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
-    
-    if (!response.ok) {
-      throw new Error(`Vercel 프록시 오류: ${response.status}`)
-    }
-    
-    const result = await response.json()
-    console.log('Vercel 프록시 성공!')
-    return result
-  } catch (error) {
-    console.warn('Vercel 프록시 실패:', error)
-    throw error
-  }
-}
-
 //** 배포환경용 외부 프록시 서비스 호출 */
 export const getCampaignListViaProxy = async (
   data: CampaignListRequest
 ): Promise<CampaignListResponse> => {
   console.log('배포환경 - 외부 프록시 서비스 시도')
   
-  // 1순위: Vercel 서버리스 함수 시도
-  try {
-    return await getCampaignListViaVercelProxy(data)
-  } catch (vercelError) {
-    console.warn('Vercel 프록시 실패, AllOrigins 시도:', vercelError)
-  }
-  
-  // 2순위: AllOrigins 프록시 서비스 사용 (백업)
+  // AllOrigins 프록시 서비스 사용 (가장 안정적)
   const targetUrl = `https://dev-api.revuclick.io/b2/ads/${B2_CONFIG.spaceCode}?apikey=${B2_CONFIG.apiKey}&category=${data.category || ''}`
   
   try {
@@ -252,32 +214,6 @@ export const getCampaignItem = async (
         }
       } catch (b2Error) {
         console.warn('B2 Check API도 실패:', b2Error)
-      }
-    }
-    
-    // 배포환경에서는 Vercel 프록시로 B2 Check API 시도
-    if (isProduction && !isGitHubPages) {
-      try {
-        console.log('배포환경 - Vercel 프록시로 B2 Check API 시도')
-        const response = await fetch(
-          `https://your-vercel-app.vercel.app/api/proxy?path=b2/ads/${B2_CONFIG.spaceCode}/${data.campaignCode}/check&uid=test_user&advId=744`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          }
-        )
-        
-        if (response.ok) {
-          const result = await response.json()
-          console.log('Vercel 프록시 B2 Check API 성공')
-          return result
-        } else {
-          throw new Error(`Vercel 프록시 B2 Check API Error: ${response.status}`)
-        }
-      } catch (vercelError) {
-        console.warn('Vercel 프록시 B2 Check API도 실패:', vercelError)
       }
     }
     
