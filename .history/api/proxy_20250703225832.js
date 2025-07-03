@@ -20,14 +20,14 @@ export default async function handler(req, res) {
 
     // URL 생성
     let targetUrl
-    // if (path) {
-    //   // /api/proxy/b2/ads/check/campaignCode 형태
-    //   // const apiPath = path.join('/')
-    //   targetUrl = `${B2_BASE_URL}/${path}`
-    // } else {
+    if (path) {
+      // /api/proxy/b2/ads/check/campaignCode 형태
+      // const apiPath = path.join('/')
+      targetUrl = `${B2_BASE_URL}/${path}`
+    } else {
       // 기본 경로
       targetUrl = `${B2_BASE_URL}/b2/ads/${SPACE_CODE}`
-    // }
+    }
 
     // 쿼리 파라미터 추가
     const urlParams = new URLSearchParams({
