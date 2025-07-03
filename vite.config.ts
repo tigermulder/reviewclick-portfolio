@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    base: "/", // 포트폴리오 모드: 루트 경로 사용
+    base: "/reviewclick-portfolio/", // GitHub Pages 서브경로 사용
     plugins: [
       react(),
       tsconfigPaths(),
