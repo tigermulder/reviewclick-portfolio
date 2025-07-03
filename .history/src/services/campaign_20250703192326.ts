@@ -287,15 +287,10 @@ export const getCampaignList = async (
   console.log('환경:', isProduction ? '배포' : '개발')
   console.log('GitHub Pages:', isGitHubPages)
   
-  // GitHub Pages 환경에서는 새 창 방식 우선 시도
+  // GitHub Pages 환경에서는 Mock 데이터 우선 사용
   if (isGitHubPages) {
-    try {
-      console.log('GitHub Pages 환경 - 새 창 방식 시도')
-      return await getCampaignListViaNewWindow(data)
-    } catch (newWindowError) {
-      console.warn('새 창 방식 실패, Mock 데이터 사용:', newWindowError)
-      return mockCampaignList as CampaignListResponse
-    }
+    console.log('GitHub Pages 환경 - Mock 데이터 사용')
+    return mockCampaignList as CampaignListResponse
   }
   
   // 개발환경에서는 B2 API 우선 시도
@@ -320,13 +315,13 @@ export const getCampaignList = async (
   } catch (originalError) {
     console.warn('기존 API 실패:', originalError)
     
-    // 배포환경에서 기존 API 실패 시 새 창 방식 시도
+    // 배포환경에서 기존 API 실패 시 B2 API 시도
     if (isProduction && !isGitHubPages) {
       try {
-        console.log('배포환경 - 새 창 방식 시도')
-        return await getCampaignListViaNewWindow(data)
-      } catch (newWindowError) {
-        console.warn('새 창 방식도 실패:', newWindowError)
+        console.log('배포환경 - B2 API 최후 시도')
+        return await getCampaignListFromB2(data)
+      } catch (b2Error) {
+        console.warn('B2 API도 실패:', b2Error)
       }
     }
     

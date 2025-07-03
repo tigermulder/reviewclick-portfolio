@@ -320,13 +320,13 @@ export const getCampaignList = async (
   } catch (originalError) {
     console.warn('기존 API 실패:', originalError)
     
-    // 배포환경에서 기존 API 실패 시 새 창 방식 시도
+    // 배포환경에서 기존 API 실패 시 B2 API 시도
     if (isProduction && !isGitHubPages) {
       try {
-        console.log('배포환경 - 새 창 방식 시도')
-        return await getCampaignListViaNewWindow(data)
-      } catch (newWindowError) {
-        console.warn('새 창 방식도 실패:', newWindowError)
+        console.log('배포환경 - B2 API 최후 시도')
+        return await getCampaignListFromB2(data)
+      } catch (b2Error) {
+        console.warn('B2 API도 실패:', b2Error)
       }
     }
     
