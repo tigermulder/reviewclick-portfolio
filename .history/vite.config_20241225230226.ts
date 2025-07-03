@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   return {
-    base: mode === "production" ? "/reviewclick-portfolio/" : "/", // GitHub Pages 배포를 위한 base 경로 설정
+    base: "/", // 기본 경로 설정
     plugins: [
       react(),
       tsconfigPaths(),
