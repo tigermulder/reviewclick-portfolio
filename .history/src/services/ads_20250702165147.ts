@@ -22,16 +22,17 @@ export const checkAdAndGetLandingUrl = async (
   data: AdCheckRequest
 ): Promise<AdCheckResponse> => {
   try {
-    // 프록시 경유 URL 생성
-    const params = new URLSearchParams({
-      apikey: B2_API_KEY,
-      uid: data.uid ?? "",
-      advId: data.advId ?? "",
-    })
-    const url = `/api/proxy?path=b2/ads/${SPACE_CODE}/${data.adCode}/check&${params.toString()}`
-    const response = await fetch(url)
-    if (!response.ok) throw new Error("프록시 API 호출 실패")
-    return await response.json()
+    const response = await axiosInstance.get<AdCheckResponse>(
+      `/b2/ads/${SPACE_CODE}/${data.adCode}/check`,
+      {
+        params: {
+          apikey: B2_API_KEY,
+          uid: data.uid,
+          advId: data.advId,
+        },
+      }
+    )
+    return response.data
   } catch (error) {
     console.error("Ad check API error:", error)
     throw error
