@@ -43,6 +43,7 @@ export interface Campaign {
   createdAt: string
   is_join: number
   is_favorite: number
+  adCode?: string // B2 광고 시스템용 광고 코드
 }
 export interface User {
   uid: number

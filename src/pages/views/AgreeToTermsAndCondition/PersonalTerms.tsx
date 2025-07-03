@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import PDFViewer from "@/components/PdfViewer"
 import styled from "styled-components"
 import SeoHelmet from "@/components/SeoHelmet"
+import privacyPolicyPdf from "@/assets/privacy_policy.pdf"
 
 const PersonalTerms = () => {
   const navigate = useNavigate()
@@ -22,7 +23,7 @@ const PersonalTerms = () => {
       <ReuseHeader title="개인정보호약관" onBack={handleConfirm} />
 
       {/* 여기서 fileUrl만 넣어주면 됩니다 */}
-      <PDFViewer fileUrl="https://cdn.revuclick.io/docs-public/PersonalTerms.pdf" />
+      <PDFViewer fileUrl={privacyPolicyPdf} />
 
       <ButtonWrapper>
         <Button $variant="red" onClick={handleConfirm}>

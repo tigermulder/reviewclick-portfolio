@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { getCampaignItem } from "services/campaign"
+import { checkAdAndGetLandingUrl } from "services/ads"
 import SeoHelmet from "@/components/SeoHelmet"
 import Modal from "@/components/Modal"
 import ShareModal from "@/components/ShareModal"
@@ -375,8 +376,38 @@ const CampaignDetailPage = () => {
   const thumbnailUrl = campaignDetail.thumbnailUrl || dummyImage
 
   //** 상품구경하러가기 버튼 핸들러 */
-  const handleViewProduct = () => {
-    const url = campaignDetail.snsUrl || "https://naver.com"
+  const handleViewProduct = async () => {
+    let url = campaignDetail.snsUrl || "https://naver.com"
+
+    // B2 광고 시스템을 통한 추적 URL 생성
+    if (campaignDetail.adCode) {
+      try {
+        const userUid =
+          localStorage.getItem("email") || sessionStorage.getItem("authToken")
+        const adCheckData = {
+          adCode: campaignDetail.adCode,
+          uid: userUid || undefined,
+          advId: campaignDetail.advertiserId.toString(),
+        }
+
+        const response = await checkAdAndGetLandingUrl(adCheckData)
+        if (response.statusCode === 0 && response.landingUrl) {
+          url = response.landingUrl
+          console.log("B2 추적 URL 생성 성공:", url)
+        } else {
+          console.warn("B2 API 응답 오류, 기본 URL 사용:", response.message)
+        }
+      } catch (error) {
+        console.error("B2 API 호출 실패, 기본 URL 사용:", error)
+        addToast(
+          "상품 링크를 생성하는데 문제가 발생했습니다.",
+          2000,
+          "campaign"
+        )
+      }
+    }
+
+    // URL 열기
     window.open(url, "_blank", "noopener,noreferrer")
     setIsProductViewed(true)
     const now = Date.now()

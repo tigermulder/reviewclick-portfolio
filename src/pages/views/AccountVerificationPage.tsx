@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { RoutePath } from "@/types/route-path"
 import { useMutation } from "@tanstack/react-query"
-import { checkEmail, sendEmailCode, verifyEmailCode } from "@/services/join"
+import { sendEmailCode, verifyEmailCode } from "@/services/join"
 import { CustomError } from "@/types/api-types/signup-type"
 import TextField from "@/components/TextField"
 import Button from "@/components/Button"
@@ -12,7 +12,6 @@ import useToast from "@/hooks/useToast"
 import { validateEmail, formatTime } from "@/utils/util"
 import useScrollToTop from "@/hooks/useScrollToTop"
 import styled from "styled-components"
-import useDebounce from "@/hooks/useDebounce"
 
 const AccountVerificationPage = () => {
   // ** 스크롤 0부터시작 */
@@ -27,46 +26,11 @@ const AccountVerificationPage = () => {
   const { addToast } = useToast()
   const [emailCheckMessage, setEmailCheckMessage] = useState<string>("")
 
+  // ** 포트폴리오 모드 (데모용) */
+  const isPortfolioMode = import.meta.env.VITE_PORTFOLIO_MODE === "true" || true // 포트폴리오 모드 활성화
+
   const redirect = sessionStorage.getItem("redirectPath")
   const isLoggedIn = localStorage.getItem("email")
-
-  // ** 이메일 체크 mutation */
-  const emailCheckMutation = useMutation({
-    mutationFn: checkEmail,
-    onSuccess: (data) => {
-      if (data.statusCode === 0) {
-        console.log("Email check successful:", id)
-        setEmailCheckMessage("인증 가능한 아이디입니다.")
-        const email = `${id}@naver.com`
-        const sendCodeData = { email }
-        sendEmailCodeMutation.mutate(sendCodeData)
-        setTimeout(() => {
-          setEmailCheckMessage("")
-        }, 500)
-      } else {
-        setEmailCheckMessage("")
-        addToast("이미 인증한 계정입니다.", 3000, "verify")
-      }
-    },
-    onError: (error: CustomError) => {
-      const errorCode = error.response?.data?.errorCode
-      setEmailCheckMessage("")
-      switch (errorCode) {
-        case 1:
-          addToast("매체사로 접속해주세요", 3000, "verify")
-          break
-        case 3:
-          addToast("이미 인증한 이메일입니다", 3000, "verify")
-          break
-        case 4:
-          addToast("이미 사용중인 이메일입니다.", 3000, "verify")
-          break
-        default:
-          addToast("네트워크 에러입니다", 3000, "verify")
-          break
-      }
-    },
-  })
 
   // ** 이메일 인증 코드 전송 mutation */
   const sendEmailCodeMutation = useMutation({
@@ -77,10 +41,25 @@ const AccountVerificationPage = () => {
         startEmailTimer()
         addToast("인증코드가 이메일로 전송됐어요", 3000, "verify")
       } else {
-        addToast("인증 코드 전송에 실패했습니다.", 3000, "verify")
+        if (isPortfolioMode) {
+          // 포트폴리오 모드에서는 실패해도 성공 처리
+          setEmailSent(true)
+          startEmailTimer()
+          addToast("인증코드가 이메일로 전송됐어요 (데모)", 3000, "verify")
+        } else {
+          addToast("인증 코드 전송에 실패했습니다.", 3000, "verify")
+        }
       }
     },
     onError: (error: CustomError) => {
+      if (isPortfolioMode) {
+        // 포트폴리오 모드에서는 에러가 발생해도 성공 처리
+        setEmailSent(true)
+        startEmailTimer()
+        addToast("인증코드가 이메일로 전송됐어요 (데모)", 3000, "verify")
+        return
+      }
+
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
@@ -104,10 +83,29 @@ const AccountVerificationPage = () => {
         addToast("이메일 인증이 완료되었습니다", 3000, "verify")
         navigate(RoutePath.JoinPhoneVerify)
       } else {
-        addToast("인증 코드가 올바르지 않습니다", 3000, "verify")
+        if (isPortfolioMode) {
+          // 포트폴리오 모드에서는 실패해도 성공 처리
+          localStorage.setItem("email", id)
+          setEmailConfirmed(true)
+          resetEmailTimer()
+          addToast("이메일 인증이 완료되었습니다 (데모)", 3000, "verify")
+          navigate(RoutePath.JoinPhoneVerify)
+        } else {
+          addToast("인증 코드가 올바르지 않습니다", 3000, "verify")
+        }
       }
     },
     onError: (error: CustomError) => {
+      if (isPortfolioMode) {
+        // 포트폴리오 모드에서는 에러가 발생해도 성공 처리
+        localStorage.setItem("email", id)
+        setEmailConfirmed(true)
+        resetEmailTimer()
+        addToast("이메일 인증이 완료되었습니다 (데모)", 3000, "verify")
+        navigate(RoutePath.JoinPhoneVerify)
+        return
+      }
+
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
@@ -146,24 +144,21 @@ const AccountVerificationPage = () => {
     console.log("Email timer reset")
   }
 
-  // ** 이메일 인증 코드 유효성 검사 */
-  useEffect(() => {
-    if (emailAuthCode.length === 6 && emailSent && !emailConfirmed) {
-      const requestData = { code: emailAuthCode }
-      console.log("Verifying email code:", emailAuthCode)
-      verifyEmailCodeMutation.mutate(requestData)
-    }
-  }, [emailAuthCode, emailSent, emailConfirmed, verifyEmailCodeMutation])
+  // ** 중복 useEffect 제거 - handleEmailAuthCodeChange에서 처리 */
 
-  // ** 이메일 체크 및 인증 코드 전송 함수 */
+  // ** 이메일 인증 코드 전송 함수 */
   const handleEmailAuth = () => {
     if (!validateEmail(id)) {
       addToast("올바른 네이버 아이디 형식이 아닙니다", 3000, "verify")
       return
     }
     const email = `${id}@naver.com`
-    const emailCheckData = { email }
-    emailCheckMutation.mutate(emailCheckData)
+    const sendCodeData = { email }
+    setEmailCheckMessage("인증 가능한 아이디입니다.")
+    sendEmailCodeMutation.mutate(sendCodeData)
+    setTimeout(() => {
+      setEmailCheckMessage("")
+    }, 500)
   }
 
   // ** 재발송 버튼 클릭 시 함수 */
@@ -177,10 +172,25 @@ const AccountVerificationPage = () => {
           setEmailAuthCode("")
           addToast("인증 코드를 재전송했습니다", 3000, "verify")
         } else {
-          addToast("인증 코드 전송에 실패했습니다", 3000, "verify")
+          if (isPortfolioMode) {
+            // 포트폴리오 모드에서는 실패해도 성공 처리
+            startEmailTimer()
+            setEmailAuthCode("")
+            addToast("인증 코드를 재전송했습니다 (데모)", 3000, "verify")
+          } else {
+            addToast("인증 코드 전송에 실패했습니다", 3000, "verify")
+          }
         }
       },
       onError: (error: CustomError) => {
+        if (isPortfolioMode) {
+          // 포트폴리오 모드에서는 에러가 발생해도 성공 처리
+          startEmailTimer()
+          setEmailAuthCode("")
+          addToast("인증 코드를 재전송했습니다 (데모)", 3000, "verify")
+          return
+        }
+
         const errorCode = error.response?.data?.errorCode
         switch (errorCode) {
           case 2:
@@ -195,54 +205,53 @@ const AccountVerificationPage = () => {
   }
 
   // ** 컴포넌트 언마운트 시 타이머 정리 */
-  useEffect(() => {
-    if (isLoggedIn && isLoggedIn !== "null") {
-      addToast("이미 인증되었습니다", 3000, "verify")
-      if (redirect) {
-        navigate(redirect)
-      }
-    }
-    return () => {
-      if (emailTimerRef.current) clearInterval(emailTimerRef.current)
-    }
-  }, [isLoggedIn, redirect, navigate, addToast])
+  // useEffect(() => {
+  //   if (isLoggedIn && isLoggedIn !== "null") {
+  //     addToast("이미 인증되었습니다", 3000, "verify")
+  //     if (redirect) {
+  //       navigate(redirect)
+  //     }
+  //   }
+  //   return () => {
+  //     if (emailTimerRef.current) clearInterval(emailTimerRef.current)
+  //   }
+  // }, [isLoggedIn, redirect, navigate, addToast])
 
-  // ** 디바운스를 사용한 이메일 유효성 검사 및 체크 */
-  const debouncedValidateEmail = useDebounce((currentId: string) => {
-    console.log("디바운스된 verifyEmail:", currentId)
-    if (currentId.trim() === "") {
-      // 입력값이 빈 문자열일 때 에러 상태 초기화
-      setEmailCheckMessage("")
-      return
-    }
-
-    if (!validateEmail(currentId)) {
-      setEmailCheckMessage("")
-    } else {
-      handleEmailAuth()
-    }
-  }, 300) // 300ms 디바운스
-
+  // ** 이메일 입력 필드 변경 핸들러 */
   const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newId = e.target.value
     setId(newId)
-    debouncedValidateEmail(newId)
+
+    // 에러 메시지 초기화만 수행 (API 호출하지 않음)
+    if (newId.trim() === "" || !validateEmail(newId)) {
+      setEmailCheckMessage("")
+    }
   }
 
-  // ** 디바운스를 사용한 이메일 인증 코드 유효성 검사 */
-  const debouncedValidateEmailAuthCode = useDebounce((currentCode: string) => {
-    console.log("디바운스된 validateEmailAuthCode:", currentCode)
-    if (currentCode.length === 6 && emailSent && !emailConfirmed) {
-      verifyEmailCodeMutation.mutate({ code: currentCode })
-    }
-  }, 300) // 300ms 디바운스
-
+  // ** 이메일 인증 코드 입력 핸들러 */
   const handleEmailAuthCodeChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const newCode = e.target.value
-    setEmailAuthCode(newCode)
-    debouncedValidateEmailAuthCode(newCode)
+    // 숫자만 입력 허용하고 6자리로 제한
+    const numbersOnly = newCode.replace(/[^0-9]/g, "")
+    const limitedCode = numbersOnly.slice(0, 6)
+    setEmailAuthCode(limitedCode)
+
+    // 6자리 입력 완료 시 처리
+    if (limitedCode.length === 6 && emailSent && !emailConfirmed) {
+      if (isPortfolioMode) {
+        // 포트폴리오 모드에서는 API 요청 없이 바로 다음 페이지로 이동
+        localStorage.setItem("email", id)
+        setEmailConfirmed(true)
+        resetEmailTimer()
+        addToast("이메일 인증이 완료되었습니다 (데모)", 3000, "verify")
+        navigate(RoutePath.JoinPhoneVerify)
+      } else {
+        // 일반 모드에서는 API 호출
+        verifyEmailCodeMutation.mutate({ code: limitedCode })
+      }
+    }
   }
 
   return (
@@ -255,6 +264,10 @@ const AccountVerificationPage = () => {
         <ReuseHeader
           title="계정인증"
           onBack={() => {
+            // 포트폴리오 모드에서 뒤로가기 시 이메일 인증 정보 삭제
+            if (isPortfolioMode) {
+              localStorage.removeItem("email")
+            }
             navigate(-1)
           }}
         />
@@ -309,6 +322,7 @@ const AccountVerificationPage = () => {
                         ? "인증 코드를 다시 입력해주세요."
                         : undefined
                     }
+                    maxLength={6}
                   />
                   <TimerText>{formatTime(emailTimer)}</TimerText>
                 </div>

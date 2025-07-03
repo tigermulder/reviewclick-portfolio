@@ -12,27 +12,27 @@ import useToast from "./hooks/useToast"
 
 function App() {
   const { campaignCode } = useParams()
-  const { addToast } = useToast()
+  // const { addToast } = useToast()
 
   //** 로그인정보 */
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const data = await logincheck()
-        if (data.logined === 1) {
-          localStorage.setItem("email", data.email)
-          localStorage.setItem("userPhoneNumber", data.phone)
-          sessionStorage.setItem("authToken", data.token)
-          sessionStorage.setItem("spaceName", data.spaceName)
-          sessionStorage.setItem("penalty", data.penalty)
-        }
-      } catch (error) {
-        console.error(error)
-        addToast("로그인 체크 중 오류 발생", 3000, "Join")
-      }
-    }
-    checkLoginStatus()
-  }, [])
+  // useEffect(() => {
+  //   const checkLoginStatus = async () => {
+  //     try {
+  //       const data = await logincheck()
+  //       if (data.logined === 1) {
+  //         // localStorage.setItem("email", data.email)
+  //         // localStorage.setItem("userPhoneNumber", data.phone)
+  //         // sessionStorage.setItem("authToken", data.token)
+  //         // sessionStorage.setItem("spaceName", data.spaceName)
+  //         // sessionStorage.setItem("penalty", data.penalty)
+  //       }
+  //     } catch (error) {
+  //       console.error(error)
+  //       addToast("로그인 체크 중 오류 발생", 3000, "Join")
+  //     }
+  //   }
+  //   checkLoginStatus()
+  // }, [])
 
   useEffect(() => {
     if (campaignCode) {

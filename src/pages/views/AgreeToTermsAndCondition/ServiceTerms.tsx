@@ -6,6 +6,7 @@ import { RoutePath } from "@/types/route-path"
 import styled from "styled-components"
 import SeoHelmet from "@/components/SeoHelmet"
 import PDFViewer from "@/components/PdfViewer"
+import serviceTermsPdf from "@/assets/service_terms.pdf"
 
 const ServiceTerms = () => {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ const ServiceTerms = () => {
       <ReuseHeader title="서비스 이용약관" onBack={handleConfirm} />
 
       {/* 여기서 fileUrl만 넣어주면 됩니다 */}
-      <PDFViewer fileUrl="https://cdn.revuclick.io/docs-public/ServiceTerms.pdf" />
+      <PDFViewer fileUrl={serviceTermsPdf} />
 
       <ButtonWrapper>
         <Button $variant="red" onClick={handleConfirm}>

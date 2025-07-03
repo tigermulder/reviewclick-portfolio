@@ -15,6 +15,7 @@ const TextField = ({
   errorMessage,
   successMessage,
   disabled,
+  maxLength,
 }: TextFieldProps) => (
   <TextFieldContainer $marginBottom={$marginBottom} $marginTop={$marginTop}>
     <InputWrapper $isError={$isError} $disabled={disabled}>
@@ -26,6 +27,7 @@ const TextField = ({
         onChange={onChange}
         $isError={$isError}
         disabled={disabled}
+        maxLength={maxLength}
       />
       {suffix && (
         <SuffixContainer $width={$suffixWidth}>

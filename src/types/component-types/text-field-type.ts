@@ -12,4 +12,5 @@ export interface TextFieldProps {
   errorMessage?: string
   successMessage?: string
   disabled?: boolean
+  maxLength?: number
 }

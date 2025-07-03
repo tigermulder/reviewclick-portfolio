@@ -1,13 +1,13 @@
 import axios, { AxiosInstance } from "axios"
 
 //** 개발환경용 */
-const baseURL = import.meta.env.VITE_BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL || "/api"
 // ** 운영배포용 꼭 baseURL수정해서 올려주세요 */
 const API = import.meta.env.VITE_SERVER_URL
 
 //** Axios 인스턴스생성 */
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: API,
+  baseURL: baseURL,
   withCredentials: true,
 })
 
@@ -55,6 +55,40 @@ axiosInstance.interceptors.request.use(
     return config
   },
   (error) => Promise.reject(error)
+)
+
+// 응답 인터셉터
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // 회원가입/인증 관련 API는 자동 리다이렉트 제외
+      const authRelatedPaths = [
+        '/join/email/sendcode',
+        '/join/email/verifycode', 
+        '/join/phone/sendcode',
+        '/join/phone/verifycode',
+        '/join',
+        '/login/check'
+      ]
+      
+      const requestUrl = error.config?.url || ''
+      const isAuthRelatedAPI = authRelatedPaths.some(path => requestUrl.includes(path))
+      
+      if (!isAuthRelatedAPI) {
+        // 401 에러 시 토큰 제거
+        sessionStorage.removeItem("authToken")
+        
+        // 현재 경로를 저장해서 로그인 후 다시 돌아올 수 있도록
+        const currentPath = window.location.pathname
+        sessionStorage.setItem("redirectPath", currentPath)
+        
+        // 로그인 페이지로 리다이렉트 (window.location 사용)
+        window.location.href = "/join"
+      }
+    }
+    return Promise.reject(error)
+  }
 )
 
 export default axiosInstance

@@ -39,15 +39,15 @@ const CoupangVerificationPage = () => {
     }
   }, [selectedImage])
 
-  useEffect(() => {
-    // 이미 인증된 경우
-    if (isLoggedIn && isLoggedIn !== "null") {
-      addToast("이미 인증되었습니다", 3000, "verify")
-      if (redirect) {
-        navigate(redirect)
-      }
-    }
-  }, [isLoggedIn, redirect, navigate, addToast])
+  // useEffect(() => {
+  //   // 이미 인증된 경우
+  //   if (isLoggedIn && isLoggedIn !== "null") {
+  //     addToast("이미 인증되었습니다", 3000, "verify")
+  //     if (redirect) {
+  //       navigate(redirect)
+  //     }
+  //   }
+  // }, [isLoggedIn, redirect, navigate, addToast])
 
   // 이름 입력 디바운스 체크
   const debouncedValidateName = useDebounce((name: string) => {

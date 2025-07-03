@@ -24,7 +24,21 @@ const PhoneVerificationPage = () => {
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const { addToast } = useToast()
 
+  // ** 포트폴리오 모드 (데모용) */
+  const isPortfolioMode = import.meta.env.VITE_PORTFOLIO_MODE === "true" || true
+
   const redirect = sessionStorage.getItem("redirectPath")
+
+  // 디버깅용 - redirect 값 확인
+  console.log("PhoneVerificationPage - redirect 값:", redirect)
+  console.log("PhoneVerificationPage - isPortfolioMode:", isPortfolioMode)
+
+  // 포트폴리오 모드에서는 redirectPath를 아예 제거하고 redirect를 null로 설정
+  const finalRedirect = isPortfolioMode ? null : redirect
+  if (isPortfolioMode && redirect) {
+    console.log("포트폴리오 모드: redirectPath 제거하고 null로 설정")
+    sessionStorage.removeItem("redirectPath")
+  }
   const isPhoneVerify = localStorage.getItem("userPhoneNumber")
 
   // ** 스크롤 0부터 시작 */
@@ -39,10 +53,25 @@ const PhoneVerificationPage = () => {
         startTimer()
         addToast("인증번호가 발송되었습니다.", 3000, "verify")
       } else {
-        addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
+        if (isPortfolioMode) {
+          // 포트폴리오 모드에서는 실패해도 성공 처리
+          setCodeSent(true)
+          startTimer()
+          addToast("인증번호가 발송되었습니다. (데모)", 3000, "verify")
+        } else {
+          addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
+        }
       }
     },
     onError: (error: CustomError) => {
+      if (isPortfolioMode) {
+        // 포트폴리오 모드에서는 에러가 발생해도 성공 처리
+        setCodeSent(true)
+        startTimer()
+        addToast("인증번호가 발송되었습니다. (데모)", 3000, "verify")
+        return
+      }
+
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
@@ -65,16 +94,44 @@ const PhoneVerificationPage = () => {
         resetTimer()
         addToast("계정인증이 완료되었습니다", 3000, "verify")
 
-        if (redirect) {
-          navigate(redirect)
+        if (finalRedirect) {
+          console.log("redirect로 이동", finalRedirect)
+          navigate(finalRedirect)
         } else {
+          console.log("메인 캠페인으로 이동", RoutePath.MyCampaign)
           navigate(RoutePath.MyCampaign)
         }
       } else {
-        addToast("인증번호가 올바르지 않습니다.", 3000, "verify")
+        if (isPortfolioMode) {
+          // 포트폴리오 모드에서는 실패해도 성공 처리
+          localStorage.setItem("userPhoneNumber", phone)
+          setPhoneConfirmed(true)
+          resetTimer()
+          addToast("계정인증이 완료되었습니다 (데모)", 3000, "verify")
+
+          if (redirect) {
+            navigate(redirect)
+          } else {
+            navigate(RoutePath.MyCampaign)
+          }
+        } else {
+          addToast("인증번호가 올바르지 않습니다.", 3000, "verify")
+        }
       }
     },
     onError: (error: CustomError) => {
+      if (isPortfolioMode) {
+        // 포트폴리오 모드에서는 에러가 발생해도 성공 처리
+        localStorage.setItem("userPhoneNumber", phone)
+        setPhoneConfirmed(true)
+        resetTimer()
+        addToast("계정인증이 완료되었습니다 (데모)", 3000, "verify")
+
+        // 포트폴리오 모드에서는 항상 메인 캠페인 페이지로 이동
+        navigate(RoutePath.MyCampaign)
+        return
+      }
+
       const errorCode = error.response?.data?.errorCode
       switch (errorCode) {
         case 2:
@@ -113,10 +170,30 @@ const PhoneVerificationPage = () => {
   // ** 인증 코드 유효성 검사 */
   useEffect(() => {
     if (authCode.length === 6 && codeSent && !phoneConfirmed) {
-      const requestData = { code: authCode }
-      verifyPhoneCodeMutation.mutate(requestData)
+      if (isPortfolioMode) {
+        // 포트폴리오 모드에서는 API 요청 없이 바로 다음 페이지로 이동
+        localStorage.setItem("userPhoneNumber", phone)
+        setPhoneConfirmed(true)
+        resetTimer()
+        addToast("계정인증이 완료되었습니다 (데모)", 3000, "verify")
+
+        // 포트폴리오 모드에서는 항상 메인 캠페인 페이지로 이동
+        navigate(RoutePath.MyCampaign)
+      } else {
+        // 일반 모드에서는 API 호출
+        const requestData = { code: authCode }
+        verifyPhoneCodeMutation.mutate(requestData)
+      }
     }
-  }, [authCode, codeSent, phoneConfirmed, verifyPhoneCodeMutation])
+  }, [
+    authCode,
+    codeSent,
+    phoneConfirmed,
+    isPortfolioMode,
+    phone,
+    navigate,
+    addToast,
+  ])
 
   // ** 인증번호 전송 함수 */
   const handleSendCode = () => {
@@ -134,10 +211,25 @@ const PhoneVerificationPage = () => {
             setAuthCode("")
             addToast("인증번호가 재발송되었습니다.", 3000, "verify")
           } else {
-            addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
+            if (isPortfolioMode) {
+              // 포트폴리오 모드에서는 실패해도 성공 처리
+              startTimer()
+              setAuthCode("")
+              addToast("인증번호가 재발송되었습니다. (데모)", 3000, "verify")
+            } else {
+              addToast("인증번호 전송에 실패했습니다.", 3000, "verify")
+            }
           }
         },
         onError: (error: CustomError) => {
+          if (isPortfolioMode) {
+            // 포트폴리오 모드에서는 에러가 발생해도 성공 처리
+            startTimer()
+            setAuthCode("")
+            addToast("인증번호가 재발송되었습니다. (데모)", 3000, "verify")
+            return
+          }
+
           const errorCode = error.response?.data?.errorCode
           switch (errorCode) {
             case 2:
@@ -153,17 +245,21 @@ const PhoneVerificationPage = () => {
   }
 
   // ** 컴포넌트 언마운트 시 타이머 정리 */
-  useEffect(() => {
-    if (isPhoneVerify && isPhoneVerify !== "null") {
-      addToast("이미 인증되었습니다", 3000, "verify")
-      if (redirect) {
-        navigate(redirect)
-      }
-    }
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
-    }
-  }, [isPhoneVerify, redirect, navigate, addToast])
+  // useEffect(() => {
+  //   if (isPhoneVerify && isPhoneVerify !== "null") {
+  //     addToast("이미 인증되었습니다", 3000, "verify")
+  //     if (finalRedirect) {
+  //       console.log("이미 인증됨: redirect로 이동", finalRedirect)
+  //       navigate(finalRedirect)
+  //     } else {
+  //       console.log("이미 인증됨: 메인 캠페인으로 이동", RoutePath.MyCampaign)
+  //       navigate(RoutePath.MyCampaign)
+  //     }
+  //   }
+  //   return () => {
+  //     if (timerRef.current) clearInterval(timerRef.current)
+  //   }
+  // }, [isPhoneVerify, finalRedirect, navigate, addToast])
 
   // ** 디바운스를 사용한 전화번호 유효성 검사 */
   const debouncedValidatePhone = useDebounce((currentPhone: string) => {
@@ -179,23 +275,42 @@ const PhoneVerificationPage = () => {
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPhone = e.target.value
-    setPhone(newPhone)
-    debouncedValidatePhone(newPhone)
+    // 숫자만 입력 허용하고 11자리로 제한
+    const numbersOnly = newPhone.replace(/[^0-9]/g, "")
+    const limitedPhone = numbersOnly.slice(0, 11)
+    setPhone(limitedPhone)
+    debouncedValidatePhone(limitedPhone)
   }
 
   // ** 디바운스를 사용한 인증 코드 유효성 검사 */
   const debouncedValidateAuthCode = useDebounce((currentCode: string) => {
     console.log("Debounced validateAuthCode called with:", currentCode)
     if (currentCode.length === 6 && codeSent && !phoneConfirmed) {
-      console.log("Auth code is 6 digits. Verifying...")
-      verifyPhoneCodeMutation.mutate({ code: currentCode })
+      if (isPortfolioMode) {
+        // 포트폴리오 모드에서는 API 요청 없이 바로 다음 페이지로 이동
+        console.log("Portfolio mode: Auto-verifying and navigating...")
+        localStorage.setItem("userPhoneNumber", phone)
+        setPhoneConfirmed(true)
+        resetTimer()
+        addToast("계정인증이 완료되었습니다 (데모)", 3000, "verify")
+
+        // 포트폴리오 모드에서는 항상 메인 캠페인 페이지로 이동
+        navigate(RoutePath.MyCampaign)
+      } else {
+        // 일반 모드에서는 API 호출
+        console.log("Auth code is 6 digits. Verifying...")
+        verifyPhoneCodeMutation.mutate({ code: currentCode })
+      }
     }
   }, 300) // 300ms 디바운스
 
   const handleAuthCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newCode = e.target.value
-    setAuthCode(newCode)
-    debouncedValidateAuthCode(newCode)
+    // 숫자만 입력 허용하고 6자리로 제한
+    const numbersOnly = newCode.replace(/[^0-9]/g, "")
+    const limitedCode = numbersOnly.slice(0, 6)
+    setAuthCode(limitedCode)
+    debouncedValidateAuthCode(limitedCode)
   }
 
   return (
@@ -208,6 +323,10 @@ const PhoneVerificationPage = () => {
         <ReuseHeader
           title="휴대폰 번호 인증"
           onBack={() => {
+            // 포트폴리오 모드에서 뒤로가기 시 휴대폰 인증 정보 삭제
+            if (isPortfolioMode) {
+              localStorage.removeItem("userPhoneNumber")
+            }
             navigate(-1)
           }}
         />
@@ -235,6 +354,7 @@ const PhoneVerificationPage = () => {
                   : undefined
               }
               disabled={codeSent || phoneConfirmed}
+              maxLength={11}
             />
           </TextFieldWrapper>
           {codeSent && (
@@ -254,6 +374,7 @@ const PhoneVerificationPage = () => {
                       ? "인증번호가 올바르지 않습니다. 다시 확인해 주세요."
                       : undefined
                   }
+                  maxLength={6}
                 />
                 <TimerText>{formatTime(timer)}</TimerText>
               </div>

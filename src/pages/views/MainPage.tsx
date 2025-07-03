@@ -1,17 +1,20 @@
 import { useEffect, useRef } from "react"
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query"
 import { useSetRecoilState, useRecoilValue } from "recoil"
+import { useNavigate } from "react-router-dom"
 import SeoHelmet from "@/components/SeoHelmet"
 import {
   campaignListState,
   filteredAndSortedCampaignList,
 } from "store/mainpage-recoil"
 import { getCampaignList } from "services/campaign"
+import { checkAdAndGetLandingUrl } from "services/ads"
 import BannerSlider from "components/Banner"
 import LikeButton from "components/LikeButton"
 import { FilterBar } from "components/FilterBar"
 import dummyImage from "assets/dummy-image.png"
 import useScrollToTop from "@/hooks/useScrollToTop"
+import useToast from "@/hooks/useToast"
 import styled from "styled-components"
 import { calculateRemainingTime } from "@/utils/util"
 
@@ -19,9 +22,61 @@ const MainPage = (): JSX.Element => {
   const setCampaignList = useSetRecoilState(campaignListState)
   const filteredCampaigns = useRecoilValue(filteredAndSortedCampaignList)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
+  const navigate = useNavigate()
+  const { addToast } = useToast()
 
   //** 스크롤 0부터시작 */
   useScrollToTop()
+
+  //** 랜덤 UID 생성 함수 */
+  const generateRandomUid = () => {
+    const randomString = Math.random().toString(36).substring(2, 12)
+    const randomNumber = Math.floor(Math.random() * 9999) + 1
+    return `${randomString}${randomNumber}`
+  }
+
+  //** 랜덤 AdvId 생성 함수 */
+  const generateRandomAdvId = () => {
+    return Math.floor(Math.random() * 999) + 1
+  }
+
+  //** 캠페인 클릭 시 B2 API 호출 */
+  const handleCampaignClick = async (
+    campaignCode: string,
+    isEnded: boolean
+  ) => {
+    if (isEnded) {
+      return
+    }
+
+    try {
+      // 랜덤 uid, advId 생성
+      const randomUid = generateRandomUid()
+      const randomAdvId = generateRandomAdvId()
+
+      // B2 광고 API 호출 (campaignCode를 adCode로 사용)
+      const adCheckData = {
+        adCode: campaignCode, // campaignCode를 adCode로 사용
+        uid: randomUid, // 랜덤 생성된 uid
+        advId: randomAdvId.toString(), // 랜덤 생성된 advId
+      }
+
+      console.log("B2 API 호출 데이터:", adCheckData)
+      const response = await checkAdAndGetLandingUrl(adCheckData)
+
+      if (response.statusCode === 0 && response.landingUrl) {
+        // landingUrl로 현재 창에서 이동
+        window.location.href = response.landingUrl
+        console.log("B2 추적 URL로 이동:", response.landingUrl)
+      } else {
+        console.warn("B2 API 응답 오류:", response.message)
+        addToast("링크를 생성하는데 문제가 발생했습니다.", 2000, "campaign")
+      }
+    } catch (error) {
+      console.error("B2 API 호출 실패:", error)
+      addToast("링크를 생성하는데 문제가 발생했습니다.", 2000, "campaign")
+    }
+  }
 
   //** Fetch campaign list */
   const fetchCampaigns = async ({ pageParam = 1 }) => {
@@ -104,7 +159,13 @@ const MainPage = (): JSX.Element => {
           const { remainingTime, isEnded } = calculateRemainingTime(endTime)
           const thumbnailUrl = campaign.thumbnailUrl || dummyImage
           return (
-            <CampaignCard key={campaign.campaignId} $isEnded={isEnded}>
+            <CampaignCard
+              key={campaign.campaignId}
+              $isEnded={isEnded}
+              onClick={() =>
+                handleCampaignClick(campaign.campaignCode, isEnded)
+              }
+            >
               <CampaignImage>
                 <img src={thumbnailUrl} alt={campaign.title} />
                 <RemainingDays $isEnded={isEnded}>
@@ -112,11 +173,15 @@ const MainPage = (): JSX.Element => {
                 </RemainingDays>
                 {isEnded && <EndedOverlay />}
                 {!isEnded && (
-                  <CustomLikeButton
-                    categoryId={campaign.categoryId}
-                    campaignId={campaign.campaignId}
-                    className="cart-like-button"
-                  />
+                  <LikeButtonWrapper
+                    onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                  >
+                    <CustomLikeButton
+                      categoryId={campaign.categoryId}
+                      campaignId={campaign.campaignId}
+                      className="cart-like-button"
+                    />
+                  </LikeButtonWrapper>
                 )}
               </CampaignImage>
               <CampaignCardInfo>
@@ -232,8 +297,13 @@ const Participants = styled.p`
   }
 `
 
-const CustomLikeButton = styled(LikeButton)`
+const LikeButtonWrapper = styled.div`
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+  z-index: 10;
+`
+
+const CustomLikeButton = styled(LikeButton)`
+  /* 기존 스타일은 wrapper로 이동 */
 `
