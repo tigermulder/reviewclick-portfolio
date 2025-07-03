@@ -37,6 +37,8 @@ export default async function handler(req, res) {
 
     const finalUrl = `${targetUrl}`
 
+    console.log('프록시 요청:', finalUrl)
+
     // B2 API 호출
     const response = await fetch(finalUrl, {
       method: req.method,
